@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# This script reads it's configuration from /etc/sysconfig/raid-check
+# Please use that file to enable/disable this script or to set the
+# type of check you wish performed.
+
+[ -f /etc/sysconfig/raid-check ] || exit 0
+. /etc/sysconfig/raid-check
+
+[ "$ENABLED" != "yes" ] && exit 0
+
+case "$CHECK" in
+    check) ;;
+    repair) ;;
+    *) exit 0;;
+esac
+
+active_list=`grep "^md.*: active" /proc/mdstat | cut -f 1 -d ' '`
+[ -z "$active_list" ] && exit 0
+
+declare -A check
+dev_list=""
+check_list=""
+for dev in $active_list; do
+    echo $SKIP_DEVS | grep -w $dev >/dev/null 2>&1 && continue
+    if [ -f /sys/block/$dev/md/sync_action ]; then
+	# Only perform the checks on idle, healthy arrays, but delay
+	# actually writing the check field until the next loop so we
+	# don't switch currently idle arrays to active, which happens
+	# when two or more arrays are on the same physical disk
+	array_state=`cat /sys/block/$dev/md/array_state`
+	sync_action=`cat /sys/block/$dev/md/sync_action`
+	if [ "$array_state" = clean -a "$sync_action" = idle ]; then
+	    ck=""
+	    echo $REPAIR_DEVS | grep -w $dev >/dev/null 2>&1 && ck="repair"
+	    echo $CHECK_DEVS | grep -w $dev >/dev/null 2>&1 && ck="check"
+	    [ -z "$ck" ] && ck=$CHECK
+	    dev_list="$dev_list $dev"
+	    check[$dev]=$ck
+	    [ "$ck" = "check" ] && check_list="$check_list $dev"
+	fi
+    fi
+done
+[ -z "$dev_list" ] && exit 0
+
+for dev in $dev_list; do
+    echo "${check[$dev]}" > /sys/block/$dev/md/sync_action
+done
+[ -z "$check_list" ] && exit 0
+
+checking=1
+while [ $checking -ne 0 ]
+do
+	sleep 60
+	checking=0
+	for dev in $check_list; do
+	sync_action=`cat /sys/block/$dev/md/sync_action`
+		if [ "$sync_action" != "idle" ]; then
+			checking=1
+		fi
+	done
+done
+for dev in $check_list; do
+	mismatch_cnt=`cat /sys/block/$dev/md/mismatch_cnt`
+	if [ "$mismatch_cnt" -ne 0 ]; then
+		echo "WARNING: mismatch_cnt is not 0 on /dev/$dev"
+	fi
+done
+
