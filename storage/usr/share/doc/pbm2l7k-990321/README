@@ -1,0 +1,196 @@
+
+    $Id: README.me,v 1.9 1999/03/21 15:28:47 henryk Exp $
+
+
+
+
+                     LEXMARK 7000 PRINTER DRIVER FOR LINUX
+                        (AND OTHER OPEN SOURCE SYSTEMS)
+
+
+                            (C) 1999 Henryk Paluch
+                           paluch@bimbo.fjfi.cvut.cz
+                                March 21, 1999
+                            PROGRAM RELEASE: 990321
+
+
+Hi folks!
+
+     This  is  my  fourth  release  of Lexmark 7000 driver for Linux.  The most
+important thing is fixed line overflow, that could occure, when  printing  some
+large pictures (like golfer.ps).
+
+
+Lexmark  does NOT provide protocol specification for third party. They consider
+it "copyrighted". So, this work is completely based on  disassembling  printing
+files  (using  driver for Windows and Print to File capability in programs). It
+does mean, that this program comes WITHOUT ANY WARRANTY! Use  it  on  your  own
+risk only!
+
+
+     This release is not "Plug & Play". Read the instructions carefully.
+
+
+1.  CURRENT FEATURES
+
+
+ o Black/White  printing  600x600 dpi only (if you need 600x300d dpi, use older
+   990207 revision, please)
+ o work as filter PBM -> printer, e. g. easy integration with Ghost-Script
+ o available under GNU GPL license including source code
+ o script for easy integration into RedHat's printing system
+ o support for Lexmark 5700
+ o from 990321 relase should not crash, when printing  large  amount  of  black
+   pixels :-)
+
+
+
+2.  SUPPORTED PRINTERS
+
+     The  table  below  shows  experience of Lexmark users with my driver.  Pay
+attention to column 'WORKS'.
+
+
+Model          Works   Notes
+-----------------------------------------------------------------
+Lexmakr 7200   YES     reported by Dan Davis
+Lexmark 7000   YES     reported by Nigel Lock and myself :-)
+Lexmark 5700   YES     reported by Brian Wainscott and others.
+Lexmark 3200   NO      reported by Chris Davis
+Lexmark 1100   NO      reported by Ben Adler. The protocol seems
+                       to be very different. I'll need tons of
+                       luck to have success
+
+
+
+     I'm curious to see report on Lexmark 5000 and others  that  use  the  same
+12A1970  cartridge.  Any  heros  there? Please report your experience to inform
+other users of that printers.
+
+
+3.  FILES
+
+
+File                  Description
+--------------------------------------------------------------------
+Makefile              project Makefile
+README                this file
+lexmarkprotocol.txt   description of "top secret" protocol
+pbm2l7k.c             the Lexmark 7000 driver (works as filter)
+pr5700.prn            initialization (prologue) for Lexmark 5700
+pr7000.prn            initialization (prologue) for Lexmark 7000
+ps-to-printer.fpi     automatic printing for RedHat 5.x
+psprint               prints postscript file to /dev/lp1 (obsolete)
+stairs.pbm            test bitmap for all 192 ink jets
+stairsb.prn           Black & White stairs for Lexmark 7000
+stairsc.prn           Colour stairs for Lexmark 7000
+
+
+
+4.  INSTALLATION
+
+
+4.1.  Compilation
+
+
+     Simply type
+
+    $ make
+
+
+
+     It should compile pbm2l7k.c into pbm2l7k binary. Works "out of the box" at
+least on RedHat 5.2
+
+
+4.2.  Integration into RedHat's printing system
+
+ (1)   Backup    your    existing   file   /usr/lib/rhs/rhs-printfilters/ps-to-
+       printer.fpi
+
+ (2)   Copy these files into /usr/lib/rhs/rhs-printfilters/
+
+           # cp pbm2l7k pr*.prn ps-to-printer.fpi \
+              /usr/lib/rhs/rhs-printfilters
+
+
+ (3)   Owners of Lexmark 5700 need to add `-m 1' to change driver mode to  Lex-
+       mark 5700 instead of default - Lexmark 7000. See
+
+           # ./pbm2l7k -h
+
+       for  more  information.  It  does  mean that you should manualy add this
+       switch in ps-to-printer.fpi and psprint  script,  if  you  have  Lexmark
+       5700.
+
+
+ (4)   Configure at least one printing entry in /etc/printcap. You may use Red-
+       Hat printing tool. Just select any *NON*  PostScript  printer  you  wish
+       (PCL DeskJet or LaserJet). Printer selection and resolution is overriden
+       to Lexmark in my ps-to-printer.fpi script.  Do *NOT*  check  `Fast  text
+       printing', otherwise text printing will not work.
+
+ (5)   Set correct paper size. Add either `-sPAPERSIZE=a4' or `-sPAPERSIZE=let-
+       ter' to gs command in psprint and ps-to-print.fpi scipts.
+
+ (6)   Cross fingers and try to print some file :-)
+
+
+4.3.  Manual printing of Post-Script files
+
+
+     See psprint script, how to do it.
+
+
+5.  NOTES
+
+
+    As I stated above, this driver is *pre-pre-pre-pre ALPHA* version.  Use
+    it  on  your own risk. I'll gladly appreciate bug reports and bug fixes
+    concerning this driver. I also hope, that Lexmark will change his  "OSS
+    deny" policy soon.
+
+
+
+     The most recent version of this driver should be available on:
+
+    http://bimbo.fjfi.cvut.cz/~paluch/l7kdriver/
+    ftp://sunsite.unc.edu/pub/Linux/hardware/drivers/lexmark7000*.tar.gz
+
+
+
+     I  hope  you will enjoy this "underground" release of Lexmark 7000 printer
+driver
+
+             Henryk Paluch, paluch@bimbo.fjfi.cvut.cz
+
+
+6.  THANKS
+
+
+     I'd like to thanks to many people for feedback and help to make the driver
+to work on additional Lexmark models. The list comes in chronological & chaotic
+order:
+
+7200 series:
+
+Dan Davis - thanks for report, and notice about docs
+
+7000 series:
+
+Nigel Lock - thanks for report, and notice about unclear point in  installation
+docs.
+
+5700 series:
+
+Stephen  Vinall,  Peter Mott, Brian Wainscott, Javier Munoz, Phil Humpherys for
+feedback and help.
+
+
+1100 series:
+
+Ben Adler - thanks for reports and nice test patterns.
+
+
+I apologize if someone is missing. I have little chaos in my mailbox ;-)
+

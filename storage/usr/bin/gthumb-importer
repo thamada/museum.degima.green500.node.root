@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Nautilus passes a POSIX path; see if this is a gvfs gphoto2 mount
+if [[ "$1" =~ "$HOME/.gvfs/.*gphoto2" ]]; then
+    # Hack for multi head cams, nautilus will call us for both heads,
+    # but the second time we are started will fail because the device is in use
+    if ! mkdir $HOME/.gthumb-importer.lock 2> /dev/null; then
+        echo "gthumb-importer is already running!"
+        exit 1
+    fi
+    # Yield for gthumb since it wants to access the device directly
+    gvfs-mount --unmount "$1"
+fi
+
+# Launch gthumb in --import-photos mode - note that this also works
+# for mass storage devices too thanks to the disk:// driver in
+# libgphoto2.
+#
+gthumb --import-photos
+
+rmdir $HOME/.gthumb-importer.lock 2> /dev/null

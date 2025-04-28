@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Installing the ATI Proprietary Linux Driver</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20031216;10043800">
+	<META NAME="CHANGED" CONTENT="20031216;10431200">
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><TABLE bgcolor="#FFFFFF"><TR><TD>
+
+<FONT SIZE=+1>
+<P><B>How can I enable AGP Support in Linux?</B></P>
+</FONT>
+
+<P>AGP support is provided by the &quot;agpgart&quot; kernel module as part of your linux kernel. It is not really part of the ATI display driver. If unsure, please contact your Linux distribution vendor for more information on AGP support for your motherboard.</P>
+
+<P>Several Linux distributions already include their own AGP support. For example:</P>
+<UL>
+	<LI>SuSE as of version 7.0</LI>
+	<LI>RedHat as of version 7.0</LI>
+</UL>
+
+<P>If the ATI kernel module detects the presence of this supplied AGP/GART module, it will try to connect.</P>
+
+<TABLE ALIGN="CENTER" CLASS="readthis"><TR><TD>
+<P>NOTE: agpgart is not required for 2D applications to work properly. If you are not running any 3D applications, then it can be disabled if necessary without affecting functionality.</P>
+</TD></TR></TABLE>
+
+<P>To verify that the AGP module is already loaded, run <tt>lsmod</tt> as root. With the XServer running and the connection established, the usage count of the agpgart module must be greater than zero.</P>
+
+<TABLE CLASS="readthis"><TR><TD>
+<P>NOTE: <a href="xf86_enodev.html">Linux kernel 2.6.x requires an additional agp module</a> to be loaded inaddition to agpgart</P>
+</TD></TR></TABLE>
+
+<P>Current versions of the ATI Proprietary Linux Driver include built-in agp support. Even if your Linux distribution does not provide agpgart, the ATI built-in agpgart module will try to load, but we cannot guarantee that this agp driver will work on all systems.</P>
+
+
+
+<p>INFO-BASE#4483</p>
+
+<P>&nbsp;</P>
+
+</TD></TR></TABLE></P>
+</BODY>
+</HTML>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Networking" lang="nl-NL">
+	<title>Netwerk</title>
+	<remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Networking">https://fedoraproject.org/wiki/Docs/Beats/Networking</ulink></remark>
+	<section id="sect-Release_Notes-Networking-System_wide">
+		<title><application>NetworkManager</application> met systeem-brede verbindingen en verbeterde ondersteuning voor mobiele breedband.</title>
+		<para>
+			<application>NetworkManager</application> kan nu systeem-brede netwerk verbindingen maken en bewerken in <filename>/etc/sysconfig</filename>. <application>NetworkManager</application> is al een tijdje in staat om informatie over systeem-brede netwerk verbindingen te lezen van <filename>/etc/sysconfig</filename>. Nu hebben we volledige lees-schrijf ondersteuning voor systeem verbindingen aangezet. De mogelijkheid om systeem verbindingen te maken of te veranderen zal gecontroleerd worden door <application>PolicyKit</application> richtlijnen. Om te beginnen worden alleen bedrade en draadloze verbindingen ondersteund. Later zullen vpn verbindingen volgen. Verbindingen die geheimen nodig hebben zullen deze opslaan in <filename>.keys</filename> bestanden in <filename>/etc/sysconfig</filename>.
+		</para>
+		<para>
+			Door het aanbieden van een database van voor-gedefinieerde mobiele breedband aanbieders, het ondersteunen van meer hardware, en het toestaan van het scannen van GSM netwerken, maakt <application>NetworkManager</application> het gebruik van mobiele breedband veel eenvoudiger. Je breedband aanbieder zal automatisch herkend worden door <application>NetworkManager</application> en het zal het eenvoudig maken om je USB apparaat gewoon aan te sluiten en je binnen enkele minuten online te krijgen.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-IPv6">
+		<title>Verbeterde IPv6 ondersteuning in <application>NetworkManager</application></title>
+		<para>
+			Voor gebruikers zonder GUI, en zij die <filename>ifcfg</filename> bestanden rechtstreeks gebruiken, moet <application>NetworkManager</application> de interface met IPv6 verbindingen tijdens het opstarten correct instellen. Geen veranderingen in de <filename>ifcfg</filename> bestanden moeten nodig zijn.
+		</para>
+		<para>
+			Voor GUI gebruikers verschijnt een nieuwe IPv6 tab in de verbinding bewerker die controle toestaat van de IPv6 instellingen vergelijkbaar met de controle van de IPv4 instellingen. Na het kiezen van de configuratie methode (<literal>auto</literal> is de standaard, welke router-aankondigen en pogingen om DNS informatie te verkrijgen met de DHCPv6 alleen-informatie mode zal toestaan) en het invoeren van extra instellingen die gebruikt worden, en dan de verbinding opslaan, dan zal daarna het activeren van die verbinding de interface volledig configureren met ipv6 zoals gevraagd door de gebruiker.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Network_Interface_Management">
+		<title>Netwerk interface beheer</title>
+		<para>
+			Het instellen van netwerk interfaces op een machine voor matig gecompliceerde maar veel voorkomende scenario&#39;s is in het algemeen alleen weggelegd voor gevorderde gebruikers, en wordt erg slecht ondersteund door bestaande gereedschappen. Zulke scenario&#39;s zijn onder andere het maken van een brug en een fysieke NIC er vast mee te verbinden, of het samenplakken van twee NIC&#39;s, het toevoegen van een VLAN interface aan de samenplakking en het vast met een brug te verbinden.
+		</para>
+		<para>
+			Gecompliceerde brug opstellingen zijn vaak nodig op virtuele hosts, en moeten vaak uitgevoerd worden op afstand door beheer gereedschappen op een hoger niveau, in plaats van een menselijke gebruiker.
+		</para>
+		<para>
+			Deze kenmerk adresseert deze behoeften door het aanbieden van een algemeen toepasbare netwerk configuratie bibliotheek (<application>netcf</application>) en toevoegingen aan de <application>libvirt</application> API om de locale API van <application>netcf</application> zichtbaar te maken met behulp van de op afstand faciliteiten van <application>libvirt</application>.
+		</para>
+		<para>
+			Met <application>netcf</application>, wordt een logische netwerk interface (bijvoorbeeld, een brug en zijn slaven) beschreven als een unit, en <application>netcf</application> draagt zorg voor het vertalen van die beschrijving naar de juiste <filename>ifcfg-*</filename> bestanden. Om een goede co-existentie te garanderen van <application>netcf</application> met andere netwerk configuratie programma&#39;s, inclusief <application>vi</application>, is <application>netcf</application> bidirectional: het verandert <filename>ifcfg-*</filename> bestanden gebaseerd op een <application>netcf</application> interface beschrijving, maar het leest ook <filename>ifcfg-*</filename> bestanden om zo&#39;n beschrijving aan te maken. Het is daarom mogelijk om <application>netcf</application> te gebruiken naast alle andere methodes voor het veranderen van netwerk configuratie, en veel van de valkuilen van eerdere pogingen om dit te doen &mdash; bijvoorbeeld, de Xen netwerk scripts &mdash; worden vermeden.
+		</para>
+		<para>
+			Het is in de planning om <application>NetworkManager</application> om te schakelen naar <application>netcf</application> als het back-end voor systeem-brede netwerk configuratie in een toekomstige vrijgave; hoewel het geen onderdeel is van deze kenmerk zal het de gebruikers ervaring van de netwerk configuratie verder verenigen. Vergelijkbaar is het in de planning om netwerk configuratie functionaliteit zichtbaar te maken in een toekomstige vrijgave van <application>virt-manager</application>.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Bluetooth">
+		<title>Bluetooth service op bestelling</title>
+		<para>
+			Om Bluetooth apparaten te ondersteunen, werd de Bluetooth achtergrond service standaard gestart in vorige versies van Fedora. In deze vrijgave, wordt de Bluetooth service echter op bestelling gestart wanneer het nodig is en automatisch gestopt na 30 seconden vanaf het laatste gebruik. Dit vermindert de initiële opstarttijd en het hulpbronnen verbruik.
+		</para>
+	</section>
+	
+	<!-- 
+<section id="sect-Release_Notes-Networking-NFS">
+	<title
+>NFS V4 Default</title>
+
+	<para>
+		The latest version of the NFS protocol is version 4, which was first introduced in Fedora&nbsp;Core&nbsp;2 (the first distro to have such support). Previously, the default NFS version was version 3. Therefore, when an simple NFS mount was done (<command
+>mount server:/export /mnt</command
+>) version 3 is the first protocol version that was tried.
+	</para>
+
+	<para>
+		In Fedora&nbsp;12, version 4 is tried first. If the server does not support version 4, the mount then tries version 3.
+	</para
+> 
+</section>
+ -->
+</section>
+
+

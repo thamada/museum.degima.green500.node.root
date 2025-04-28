@@ -1,0 +1,7779 @@
+<summary>
+	Policy modules for system functions from init to multi-user login.
+</summary>
+<module name="application" filename="policy/modules/system/application.if">
+<summary>Policy for user executable applications.</summary>
+<interface name="application_type" lineno="13">
+<summary>
+Send signull to application domains
+</summary>
+<param name="type">
+<summary>
+Type to be used as a domain type.
+</summary>
+</param>
+</interface>
+<interface name="application_executable_file" lineno="36">
+<summary>
+Make the specified type usable for files
+that are exectuables, such as binary programs.
+This does not include shared libraries.
+</summary>
+<param name="type">
+<summary>
+Type to be used for files.
+</summary>
+</param>
+</interface>
+<interface name="application_exec" lineno="56">
+<summary>
+Execute application executables in the caller domain.
+</summary>
+<param name="type">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="application_exec_all" lineno="75">
+<summary>
+Execute all executable files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="application_domain" lineno="99">
+<summary>
+Create a domain which can be started by users
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+</interface>
+<interface name="application_signull" lineno="115">
+<summary>
+Send signull to unprivileged user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="authlogin" filename="policy/modules/system/authlogin.if">
+<summary>Common policy for authentication and user login.</summary>
+<interface name="auth_role" lineno="18">
+<summary>
+Role access for password authentication.
+</summary>
+<param name="role">
+<summary>
+Role allowed access.
+</summary>
+</param>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_use_pam" lineno="43">
+<summary>
+Make the specified domain used for a login program.
+</summary>
+<param name="domain">
+<summary>
+Domain type used for a login program domain.
+</summary>
+</param>
+</interface>
+<interface name="auth_login_pgm_domain" lineno="90">
+<summary>
+Make the specified domain used for a login program.
+</summary>
+<param name="domain">
+<summary>
+Domain type used for a login program domain.
+</summary>
+</param>
+</interface>
+<interface name="auth_login_entry_type" lineno="198">
+<summary>
+Use the login program as an entry point program.
+</summary>
+<param name="domain">
+<summary>
+The type of process using the login program as entry point.
+</summary>
+</param>
+</interface>
+<interface name="auth_domtrans_login_program" lineno="221">
+<summary>
+Execute a login_program in the target domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="target_domain">
+<summary>
+The type of the login_program process.
+</summary>
+</param>
+</interface>
+<interface name="auth_ranged_domtrans_login_program" lineno="251">
+<summary>
+Execute a login_program in the target domain,
+with a range transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="target_domain">
+<summary>
+The type of the login_program process.
+</summary>
+</param>
+<param name="range">
+<summary>
+Range of the login program.
+</summary>
+</param>
+</interface>
+<interface name="auth_search_cache" lineno="277">
+<summary>
+Search authentication cache
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_cache" lineno="295">
+<summary>
+Read authentication cache
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_rw_cache" lineno="313">
+<summary>
+Read/Write authentication cache
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_manage_cache" lineno="331">
+<summary>
+Manage authentication cache
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_var_filetrans_cache" lineno="350">
+<summary>
+Automatic transition from cache_t to cache.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_domtrans_chk_passwd" lineno="368">
+<summary>
+Run unix_chkpwd to check a password.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_domtrans_chkpwd" lineno="419">
+<summary>
+Run unix_chkpwd to check a password.
+Stripped down version to be called within boolean
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_run_chk_passwd" lineno="445">
+<summary>
+Execute chkpwd programs in the chkpwd domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the chkpwd domain.
+</summary>
+</param>
+</interface>
+<interface name="auth_domtrans_upd_passwd" lineno="465">
+<summary>
+Execute a domain transition to run unix_update.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="auth_run_upd_passwd" lineno="490">
+<summary>
+Execute updpwd programs in the updpwd domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the updpwd domain.
+</summary>
+</param>
+</interface>
+<interface name="auth_getattr_shadow" lineno="509">
+<summary>
+Get the attributes of the shadow passwords file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_dontaudit_getattr_shadow" lineno="529">
+<summary>
+Do not audit attempts to get the attributes
+of the shadow passwords file.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_shadow" lineno="551">
+<summary>
+Read the shadow passwords file (/etc/shadow)
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_can_read_shadow_passwords" lineno="575">
+<summary>
+Pass shadow assertion for reading.
+</summary>
+<desc>
+<p>
+Pass shadow assertion for reading.
+This should only be used with
+auth_tunable_read_shadow(), and
+only exists because typeattribute
+does not work in conditionals.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_tunable_read_shadow" lineno="601">
+<summary>
+Read the shadow password file.
+</summary>
+<desc>
+<p>
+Read the shadow password file.  This
+should only be used in a conditional;
+it does not pass the reading shadow
+assertion.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_dontaudit_read_shadow" lineno="621">
+<summary>
+Do not audit attempts to read the shadow
+password file (/etc/shadow).
+</summary>
+<param name="domain">
+<summary>
+The type of the domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="auth_rw_shadow" lineno="639">
+<summary>
+Read and write the shadow password file (/etc/shadow).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_manage_shadow" lineno="661">
+<summary>
+Create, read, write, and delete the shadow
+password file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_etc_filetrans_shadow" lineno="681">
+<summary>
+Automatic transition from etc to shadow.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_relabelto_shadow" lineno="700">
+<summary>
+Relabel to the shadow
+password file type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_relabel_shadow" lineno="722">
+<summary>
+Relabel from and to the shadow
+password file type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_append_faillog" lineno="743">
+<summary>
+Append to the login failure log.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_rw_faillog" lineno="762">
+<summary>
+Read and write the login failure log.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_lastlog" lineno="782">
+<summary>
+Read the last logins log.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="auth_append_lastlog" lineno="801">
+<summary>
+Append only to the last logins log.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_rw_lastlog" lineno="820">
+<summary>
+Read and write to the last logins log.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_domtrans_pam" lineno="839">
+<summary>
+Execute pam programs in the pam domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_signal_pam" lineno="857">
+<summary>
+Send generic signals to pam processes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_run_pam" lineno="880">
+<summary>
+Execute pam programs in the PAM domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the PAM domain.
+</summary>
+</param>
+</interface>
+<interface name="auth_exec_pam" lineno="899">
+<summary>
+Execute the pam program.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_manage_var_auth" lineno="918">
+<summary>
+Manage var auth files. Used by various other applications
+and pam applets etc.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_pam_pid" lineno="939">
+<summary>
+Read PAM PID files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_dontaudit_read_pam_pid" lineno="959">
+<summary>
+Do not audit attemps to read PAM PID files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="auth_delete_pam_pid" lineno="977">
+<summary>
+Delete pam PID files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_manage_pam_pid" lineno="997">
+<summary>
+Manage pam PID files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_domtrans_pam_console" lineno="1017">
+<summary>
+Execute pam_console with a domain transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_search_pam_console_data" lineno="1036">
+<summary>
+Search the contents of the
+pam_console data directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_list_pam_console_data" lineno="1056">
+<summary>
+List the contents of the pam_console
+data directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_pam_console_data" lineno="1075">
+<summary>
+Read pam_console data files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_manage_pam_console_data" lineno="1096">
+<summary>
+Create, read, write, and delete
+pam_console data files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_delete_pam_console_data" lineno="1116">
+<summary>
+Delete pam_console data.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_all_dirs_except_shadow" lineno="1143">
+<summary>
+Read all directories on the filesystem, except
+the shadow passwords and listed exceptions.
+</summary>
+<param name="domain">
+<summary>
+The type of the domain perfoming this action.
+</summary>
+</param>
+<param name="exception_types" optional="true">
+<summary>
+The types to be excluded.  Each type or attribute
+must be negated by the caller.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_all_files_except_shadow" lineno="1169">
+<summary>
+Read all files on the filesystem, except
+the shadow passwords and listed exceptions.
+</summary>
+<param name="domain">
+<summary>
+The type of the domain perfoming this action.
+</summary>
+</param>
+<param name="exception_types" optional="true">
+<summary>
+The types to be excluded.  Each type or attribute
+must be negated by the caller.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="auth_read_all_symlinks_except_shadow" lineno="1194">
+<summary>
+Read all symbolic links on the filesystem, except
+the shadow passwords and listed exceptions.
+</summary>
+<param name="domain">
+<summary>
+The type of the domain perfoming this action.
+</summary>
+</param>
+<param name="exception_types" optional="true">
+<summary>
+The types to be excluded.  Each type or attribute
+must be negated by the caller.
+</summary>
+</param>
+</interface>
+<interface name="auth_relabel_all_files_except_shadow" lineno="1220">
+<summary>
+Relabel all files on the filesystem, except
+the shadow passwords and listed exceptions.
+</summary>
+<param name="domain">
+<summary>
+The type of the domain perfoming this action.
+</summary>
+</param>
+<param name="exception_types" optional="true">
+<summary>
+The types to be excluded.  Each type or attribute
+must be negated by the caller.
+</summary>
+</param>
+</interface>
+<interface name="auth_rw_all_files_except_shadow" lineno="1246">
+<summary>
+rw all files on the filesystem, except
+the shadow passwords and listed exceptions.
+</summary>
+<param name="domain">
+<summary>
+The type of the domain perfoming this action.
+</summary>
+</param>
+<param name="exception_types" optional="true">
+<summary>
+The types to be excluded.  Each type or attribute
+must be negated by the caller.
+</summary>
+</param>
+</interface>
+<interface name="auth_manage_all_files_except_shadow" lineno="1272">
+<summary>
+Manage all files on the filesystem, except
+the shadow passwords and listed exceptions.
+</summary>
+<param name="domain">
+<summary>
+The type of the domain perfoming this action.
+</summary>
+</param>
+<param name="exception_types" optional="true">
+<summary>
+The types to be excluded.  Each type or attribute
+must be negated by the caller.
+</summary>
+</param>
+</interface>
+<interface name="auth_domtrans_utempter" lineno="1290">
+<summary>
+Execute utempter programs in the utempter domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_run_utempter" lineno="1313">
+<summary>
+Execute utempter programs in the utempter domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the utempter domain.
+</summary>
+</param>
+</interface>
+<interface name="auth_dontaudit_exec_utempter" lineno="1332">
+<summary>
+Do not audit attemps to execute utempter executable.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="auth_setattr_login_records" lineno="1350">
+<summary>
+Set the attributes of login record files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_read_login_records" lineno="1370">
+<summary>
+Read login records files (/var/log/wtmp).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="auth_dontaudit_read_login_records" lineno="1390">
+<summary>
+dontaudit read login records files (/var/log/wtmp).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="auth_dontaudit_write_login_records" lineno="1409">
+<summary>
+Do not audit attempts to write to
+login records files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="auth_append_login_records" lineno="1427">
+<summary>
+Append to login records (wtmp).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_write_login_records" lineno="1446">
+<summary>
+Write to login records (wtmp).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_rw_login_records" lineno="1464">
+<summary>
+Read and write login records.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_log_filetrans_login_records" lineno="1484">
+<summary>
+Create a login records in the log directory
+using a type transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_manage_login_records" lineno="1503">
+<summary>
+Create, read, write, and delete login
+records files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_use_nsswitch" lineno="1522">
+<summary>
+Use nsswitch to look up uid-username mappings.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="auth_unconfined" lineno="1595">
+<summary>
+Unconfined access to the authlogin module.
+</summary>
+<desc>
+<p>
+Unconfined access to the authlogin module.
+</p>
+<p>
+Currently, this only allows assertions for
+the shadow passwords file (/etc/shadow) to
+be passed.  No access is granted yet.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="clock" filename="policy/modules/system/clock.if">
+<summary>Policy for reading and setting the hardware clock.</summary>
+<interface name="clock_domtrans" lineno="13">
+<summary>
+Execute hwclock in the clock domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="clock_run" lineno="38">
+<summary>
+Execute hwclock in the clock domain, and
+allow the specified role the hwclock domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the clock domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="clock_exec" lineno="57">
+<summary>
+Execute hwclock in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="clock_dontaudit_write_adjtime" lineno="75">
+<summary>
+Do not audit attempts to write clock drift adjustments.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="clock_rw_adjtime" lineno="93">
+<summary>
+Read and write clock drift adjustments.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="daemontools" filename="policy/modules/system/daemontools.if">
+<summary>Collection of tools for managing UNIX services</summary>
+<desc>
+<p>
+Policy for DJB's daemontools
+</p>
+</desc>
+<interface name="daemontools_ipc_domain" lineno="18">
+<summary>
+An ipc channel between the supervised domain and svc_start_t
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access to svc_start_t.
+</summary>
+</param>
+</interface>
+<interface name="daemontools_service_domain" lineno="44">
+<summary>
+Define a specified domain as a supervised service.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="entrypoint">
+<summary>
+The type associated with the process program.
+</summary>
+</param>
+</interface>
+<interface name="daemontools_domtrans_start" lineno="66">
+<summary>
+Execute in the svc_start_t domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="daemonstools_run_start" lineno="91">
+<summary>
+Execute svc_start in the svc_start domain, and
+allow the specified role the svc_start domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the svc_start domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="daemontools_domtrans_run" lineno="110">
+<summary>
+Execute in the svc_run_t domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="daemontools_domtrans_multilog" lineno="128">
+<summary>
+Execute in the svc_multilog_t domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="daemontools_read_svc" lineno="147">
+<summary>
+Allow a domain to read svc_svc_t files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="daemontools_search_svc_dir" lineno="166">
+<summary>
+Search svc_svc_t  directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="daemontools_manage_svc" lineno="185">
+<summary>
+Allow a domain to create svc_svc_t files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="daemontools_sigchld_run" lineno="206">
+<summary>
+Send a SIGCHLD signal to svc_run domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="fstools" filename="policy/modules/system/fstools.if">
+<summary>Tools for filesystem management, such as mkfs and fsck.</summary>
+<interface name="fstools_domtrans" lineno="13">
+<summary>
+Execute fs tools in the fstools domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="fstools_run" lineno="39">
+<summary>
+Execute fs tools in the fstools domain, and
+allow the specified role the fs tools domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the fs tools domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="fstools_exec" lineno="58">
+<summary>
+Execute fsadm in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="fstools_signal" lineno="76">
+<summary>
+Send signal to fsadm process
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="fstools_read_pipes" lineno="94">
+<summary>
+Read fstools unnamed pipes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="fstools_relabelto_entry_files" lineno="113">
+<summary>
+Relabel a file to the type used by the
+filesystem tools programs.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="fstools_manage_entry_files" lineno="132">
+<summary>
+Create, read, write, and delete a file used by the
+filesystem tools programs.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="fstools_getattr_swap_files" lineno="150">
+<summary>
+Getattr swapfile
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+</module>
+<module name="getty" filename="policy/modules/system/getty.if">
+<summary>Policy for getty.</summary>
+<interface name="getty_domtrans" lineno="13">
+<summary>
+Execute gettys in the getty domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="getty_use_fds" lineno="32">
+<summary>
+Inherit and use getty file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="getty_read_log" lineno="51">
+<summary>
+Allow process to read getty log file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="getty_read_config" lineno="71">
+<summary>
+Allow process to read getty config file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="getty_rw_config" lineno="91">
+<summary>
+Allow process to edit getty config file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="hostname" filename="policy/modules/system/hostname.if">
+<summary>Policy for changing the system host name.</summary>
+<interface name="hostname_domtrans" lineno="13">
+<summary>
+Execute hostname in the hostname domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="hostname_run" lineno="38">
+<summary>
+Execute hostname in the hostname domain, and
+allow the specified role the hostname domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the hostname domain.
+</summary>
+</param>
+</interface>
+<interface name="hostname_exec" lineno="58">
+<summary>
+Execute hostname in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="hotplug" filename="policy/modules/system/hotplug.if">
+<summary>
+Policy for hotplug system, for supporting the
+connection and disconnection of devices at runtime.
+</summary>
+<interface name="hotplug_domtrans" lineno="16">
+<summary>
+Execute hotplug with a domain transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="hotplug_exec" lineno="35">
+<summary>
+Execute hotplug in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="hotplug_use_fds" lineno="54">
+<summary>
+Inherit and use hotplug file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="hotplug_dontaudit_use_fds" lineno="73">
+<summary>
+Do not audit attempts to inherit
+hotplug file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="hotplug_dontaudit_search_config" lineno="92">
+<summary>
+Do not audit attempts to search the
+hotplug configuration directories.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="hotplug_getattr_config_dirs" lineno="110">
+<summary>
+Get the attributes of the hotplug configuration directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="hotplug_search_config" lineno="128">
+<summary>
+Search the hotplug configuration directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="hotplug_read_config" lineno="147">
+<summary>
+Read the configuration files for hotplug.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="hotplug_search_pids" lineno="168">
+<summary>
+Search the hotplug PIDs.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="init" filename="policy/modules/system/init.if">
+<summary>System initialization programs (init and init scripts).</summary>
+<interface name="init_script_file" lineno="20">
+<summary>
+Create a file type used for init scripts.
+</summary>
+<desc>
+<p>
+Create a file type used for init scripts.
+Can not be used in conjunction with
+init_script_domain().
+</p>
+</desc>
+<param name="script_file">
+<summary>
+Type of the script file used as an entry point to this domain.
+</summary>
+</param>
+</interface>
+<interface name="init_script_domain" lineno="55">
+<summary>
+Create a domain used for init scripts.
+</summary>
+<desc>
+<p>
+Create a domain used for init scripts.
+Can not be used in conjunction with
+init_script_file().
+</p>
+</desc>
+<param name="domain">
+<summary>
+Type to be used as an init script domain.
+</summary>
+</param>
+<param name="script_file">
+<summary>
+Type of the script file used as an entry point to this domain.
+</summary>
+</param>
+</interface>
+<interface name="init_domain" lineno="85">
+<summary>
+Create a domain which can be started by init.
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+</interface>
+<interface name="init_ranged_domain" lineno="128">
+<summary>
+Create a domain which can be started by init,
+with a range transition.
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+<param name="range">
+<summary>
+Range for the domain.
+</summary>
+</param>
+</interface>
+<interface name="init_daemon_domain" lineno="161">
+<summary>
+Create a domain for long running processes
+(daemons) which can be started by init scripts.
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+</interface>
+<interface name="init_ranged_daemon_domain" lineno="242">
+<summary>
+Create a domain for long running processes
+(daemons) which can be started by init scripts.
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+<param name="range">
+<summary>
+Range for the domain.
+</summary>
+</param>
+</interface>
+<interface name="init_system_domain" lineno="275">
+<summary>
+Create a domain for short running processes
+which can be started by init scripts.
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+</interface>
+<interface name="init_ranged_system_domain" lineno="352">
+<summary>
+Create a domain for short running processes
+which can be started by init scripts.
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+<param name="range">
+<summary>
+Range for the domain.
+</summary>
+</param>
+</interface>
+<interface name="init_domtrans" lineno="378">
+<summary>
+Execute init (/sbin/init) with a domain transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_exec" lineno="397">
+<summary>
+Execute the init program in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="init_getpgid" lineno="416">
+<summary>
+Get the process group of init.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_signull" lineno="434">
+<summary>
+Send init a null signal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_sigchld" lineno="452">
+<summary>
+Send init a SIGCHLD signal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_use_fds" lineno="470">
+<summary>
+Inherit and use file descriptors from init.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_use_fds" lineno="489">
+<summary>
+Do not audit attempts to inherit file
+descriptors from init.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_udp_send" lineno="507">
+<summary>
+Send UDP network traffic to init.  (Deprecated)
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_getattr_initctl" lineno="521">
+<summary>
+Get the attributes of initctl.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_getattr_initctl" lineno="540">
+<summary>
+Do not audit attempts to get the
+attributes of initctl.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="init_write_initctl" lineno="558">
+<summary>
+Write to initctl.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_telinit" lineno="578">
+<summary>
+Use telinit (Read and write initctl).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="init_rw_initctl" lineno="610">
+<summary>
+Read and write initctl.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_rw_initctl" lineno="630">
+<summary>
+Do not audit attempts to read and
+write initctl.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_script_file_entry_type" lineno="649">
+<summary>
+Make init scripts an entry point for
+the specified domain.
+</summary>
+<param name="domain">
+<summary>
+The domain for which init scripts are an entrypoint.
+</summary>
+</param>
+</interface>
+<interface name="init_spec_domtrans_script" lineno="667">
+<summary>
+Execute init scripts with a specified domain transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_domtrans_script" lineno="695">
+<summary>
+Execute init scripts with an automatic domain transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_bin_domtrans_spec" lineno="724">
+<summary>
+Execute a file in a bin directory
+in the initrc_t domain
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_script_file_domtrans" lineno="757">
+<summary>
+Execute a init script in a specified domain.
+</summary>
+<desc>
+<p>
+Execute a init script in a specified domain.
+</p>
+<p>
+No interprocess communication (signals, pipes,
+etc.) is provided by this interface since
+the domains are not owned by this module.
+</p>
+</desc>
+<param name="source_domain">
+<summary>
+Domain to transition from.
+</summary>
+</param>
+<param name="target_domain">
+<summary>
+Domain to transition to.
+</summary>
+</param>
+</interface>
+<interface name="init_labeled_script_domtrans" lineno="782">
+<summary>
+Transition to the init script domain
+on a specified labeled init script.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="init_script_file">
+<summary>
+Labeled init script file.
+</summary>
+</param>
+</interface>
+<interface name="init_run_daemon" lineno="815">
+<summary>
+Start and stop daemon programs directly.
+</summary>
+<desc>
+<p>
+Start and stop daemon programs directly
+in the traditional "/etc/init.d/daemon start"
+style, and do not require run_init.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be performing this action.
+</summary>
+</param>
+</interface>
+<interface name="init_read_state" lineno="835">
+<summary>
+Read the process state (/proc/pid) of init.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_ptrace" lineno="856">
+<summary>
+Ptrace init
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="init_write_script_pipes" lineno="874">
+<summary>
+Write an init script unnamed pipe.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_getattr_script_files" lineno="892">
+<summary>
+Get the attribute of init script entrypoint files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_read_script_files" lineno="911">
+<summary>
+Read init scripts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_exec_script_files" lineno="930">
+<summary>
+Execute init scripts in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_getattr_all_script_files" lineno="949">
+<summary>
+Get the attribute of all init script entrypoint files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_read_all_script_files" lineno="968">
+<summary>
+Read all init script files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="dontaudit_init_read_all_script_files" lineno="987">
+<summary>
+Dontaudit read all init script files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_exec_all_script_files" lineno="1005">
+<summary>
+Execute all init scripts in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_read_script_state" lineno="1024">
+<summary>
+Read the process state (/proc/pid) of the init scripts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_use_script_fds" lineno="1048">
+<summary>
+Inherit and use init script file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_use_script_fds" lineno="1067">
+<summary>
+Do not audit attempts to inherit
+init script file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_getpgid_script" lineno="1085">
+<summary>
+Get the process group ID of init scripts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_sigchld_script" lineno="1103">
+<summary>
+Send SIGCHLD signals to init scripts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_signal_script" lineno="1121">
+<summary>
+Send generic signals to init scripts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_signull_script" lineno="1139">
+<summary>
+Send null signals to init scripts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_rw_script_pipes" lineno="1157">
+<summary>
+Read and write init script unnamed pipes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_udp_send_script" lineno="1175">
+<summary>
+Send UDP network traffic to init scripts.  (Deprecated)
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_stream_connect_script" lineno="1190">
+<summary>
+Allow the specified domain to connect to
+init scripts with a unix socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_rw_script_stream_sockets" lineno="1209">
+<summary>
+Allow the specified domain to read/write to
+init scripts with a unix domain stream sockets.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_stream_connect_script" lineno="1228">
+<summary>
+Dont audit the specified domain connecting to
+init scripts with a unix domain stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dbus_send_script" lineno="1245">
+<summary>
+Send messages to init scripts over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dbus_chat_script" lineno="1265">
+<summary>
+Send and receive messages from
+init scripts over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_use_script_ptys" lineno="1294">
+<summary>
+Read and write the init script pty.
+</summary>
+<desc>
+<p>
+Read and write the init script pty.  This
+pty is generally opened by the open_init_pty
+portion of the run_init program so that the
+daemon does not require direct access to
+the administrator terminal.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_use_script_ptys" lineno="1314">
+<summary>
+Do not audit attempts to read and
+write the init script pty.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="init_getattr_script_status_files" lineno="1333">
+<summary>
+Get the attributes of init script
+status files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_read_script_status_files" lineno="1352">
+<summary>
+Do not audit attempts to read init script
+status files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_rw_script_tmp_files" lineno="1371">
+<summary>
+Read and write init script temporary data.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_read_script_tmp_files" lineno="1390">
+<summary>
+Read init script temporary data.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_script_tmp_filetrans" lineno="1420">
+<summary>
+Create files in a init script
+temporary data directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="file_type">
+<summary>
+The type of the object to be created
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The object class.
+</summary>
+</param>
+</interface>
+<interface name="init_getattr_utmp" lineno="1439">
+<summary>
+Get the attributes of init script process id files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_read_utmp" lineno="1457">
+<summary>
+Read utmp.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_write_utmp" lineno="1476">
+<summary>
+Do not audit attempts to write utmp.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_write_utmp" lineno="1494">
+<summary>
+Write to utmp.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_lock_utmp" lineno="1514">
+<summary>
+Do not audit attempts to lock
+init script pid files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_rw_utmp" lineno="1532">
+<summary>
+Read and write utmp.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_rw_utmp" lineno="1551">
+<summary>
+Do not audit attempts to read and write utmp.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_manage_utmp" lineno="1569">
+<summary>
+Create, read, write, and delete utmp.
+</summary>
+<param name="domain">
+<summary>
+Domain access allowed.
+</summary>
+</param>
+</interface>
+<interface name="init_pid_filetrans_utmp" lineno="1589">
+<summary>
+Create files in /var/run with the
+utmp file type.
+</summary>
+<param name="domain">
+<summary>
+Domain access allowed.
+</summary>
+</param>
+</interface>
+<interface name="init_tcp_recvfrom_all_daemons" lineno="1607">
+<summary>
+Allow the specified domain to connect to daemon with a tcp socket
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_udp_recvfrom_all_daemons" lineno="1625">
+<summary>
+Allow the specified domain to connect to daemon with a udp socket
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_script_role_transition" lineno="1652">
+<summary>
+Transition to system_r when execute an init script
+</summary>
+<desc>
+<p>
+Execute a init script in a specified role
+</p>
+<p>
+No interprocess communication (signals, pipes,
+etc.) is provided by this interface since
+the domains are not owned by this module.
+</p>
+</desc>
+<param name="source_role">
+<summary>
+Role to transition from.
+</summary>
+</param>
+</interface>
+<interface name="init_chat" lineno="1671">
+<summary>
+Send and receive unix_stream_messages with
+init
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_rw_script_semaphores" lineno="1690">
+<summary>
+RW initrc_t user SysV sempaphores.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="init_dontaudit_script_leaks" lineno="1708">
+<summary>
+Dontaudit read and write an leaked init scrip file descriptors
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<tunable name="init_upstart" dftval="false">
+<desc>
+<p>
+Enable support for upstart as the init program.
+</p>
+</desc>
+</tunable>
+<tunable name="allow_daemons_use_tty" dftval="false">
+<desc>
+<p>
+Allow all daemons the ability to read/write terminals
+</p>
+</desc>
+</tunable>
+<tunable name="allow_daemons_dump_core" dftval="false">
+<desc>
+<p>
+Allow all daemons to write corefiles to /
+</p>
+</desc>
+</tunable>
+</module>
+<module name="ipsec" filename="policy/modules/system/ipsec.if">
+<summary>TCP/IP encryption</summary>
+<interface name="ipsec_domtrans" lineno="13">
+<summary>
+Execute ipsec in the ipsec domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_stream_connect" lineno="31">
+<summary>
+Connect to IPSEC using a unix domain stream socket.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_stream_connect_racoon" lineno="50">
+<summary>
+Connect to racoon using a unix domain stream socket.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_getattr_key_sockets" lineno="70">
+<summary>
+Get the attributes of an IPSEC key socket.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_exec_mgmt" lineno="88">
+<summary>
+Execute the IPSEC management program in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_read_config" lineno="107">
+<summary>
+Read the IPSEC configuration
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="ipsec_match_default_spd" lineno="126">
+<summary>
+Match the default SPD entry.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_setcontext_default_spd" lineno="146">
+<summary>
+Set the context of a SPD entry to
+the default context.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_write_pid" lineno="164">
+<summary>
+write the ipsec_var_run_t files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_manage_pid" lineno="183">
+<summary>
+Create, read, write, and delete the IPSEC pid files.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_domtrans_racoon" lineno="202">
+<summary>
+Execute racoon in the racoon domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_domtrans_setkey" lineno="220">
+<summary>
+Execute setkey in the setkey domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="ipsec_run_setkey" lineno="244">
+<summary>
+Execute setkey and allow the specified role the domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the racoon and setkey domains.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="ipsec_run_racoon" lineno="269">
+<summary>
+Execute racoon and allow the specified role the domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the racoon and racoon domains.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<tunable name="racoon_read_shadow" dftval="false">
+<desc>
+<p>
+Allow racoon to read shadow
+</p>
+</desc>
+</tunable>
+</module>
+<module name="iptables" filename="policy/modules/system/iptables.if">
+<summary>Policy for iptables.</summary>
+<interface name="iptables_domtrans" lineno="13">
+<summary>
+Execute iptables in the iptables domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="iptables_initrc_domtrans" lineno="36">
+<summary>
+Execute iptables in the iptables domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="iptables_run" lineno="61">
+<summary>
+Execute iptables in the iptables domain, and
+allow the specified role the iptables domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the iptables domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="iptables_exec" lineno="92">
+<summary>
+Execute iptables in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="iscsi" filename="policy/modules/system/iscsi.if">
+<summary>Establish connections to iSCSI devices</summary>
+<interface name="iscsid_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run iscsid.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="iscsi_read_lib_files" lineno="31">
+<summary>
+Read iscsi lib files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="iscsi_stream_connect" lineno="51">
+<summary>
+Connect to ISCSI using a unix domain stream socket.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+</module>
+<module name="kdump" filename="policy/modules/system/kdump.if">
+<summary>Kernel crash dumping mechanism</summary>
+<interface name="kdump_domtrans" lineno="13">
+<summary>
+Execute kdump in the kdump domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="kdump_initrc_domtrans" lineno="32">
+<summary>
+Execute kdump in the kdump domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="kdump_read_config" lineno="50">
+<summary>
+Read kdump configuration file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="kdump_manage_config" lineno="69">
+<summary>
+Manage kdump configuration file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="kdump_admin" lineno="95">
+<summary>
+All of the rules required to administrate
+an kdump environment
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed to manage the kdump domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="libraries" filename="policy/modules/system/libraries.if">
+<summary>Policy for system libraries.</summary>
+<interface name="libs_domtrans_ldconfig" lineno="13">
+<summary>
+Execute ldconfig in the ldconfig domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_run_ldconfig" lineno="39">
+<summary>
+Execute ldconfig in the ldconfig domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the ldconfig domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="libs_use_ld_so" lineno="59">
+<summary>
+Use the dynamic link/loader for automatic loading
+of shared libraries.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_legacy_use_ld_so" lineno="84">
+<summary>
+Use the dynamic link/loader for automatic loading
+of shared libraries with legacy support.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_exec_ld_so" lineno="104">
+<summary>
+Execute the dynamic link/loader in the caller's domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_manage_ld_so" lineno="126">
+<summary>
+Create, read, write, and delete the
+dynamic link/loader.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_relabel_ld_so" lineno="146">
+<summary>
+Relabel to and from the type used for
+the dynamic link/loader.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_rw_ld_so_cache" lineno="165">
+<summary>
+Modify the dynamic link/loader's cached listing
+of shared libraries.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_search_lib" lineno="184">
+<summary>
+Search library directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_dontaudit_write_lib_dirs" lineno="209">
+<summary>
+Do not audit attempts to write to library directories.
+</summary>
+<desc>
+<p>
+Do not audit attempts to write to library directories.
+Typically this is used to quiet attempts to recompile
+python byte code.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_manage_lib_dirs" lineno="227">
+<summary>
+Create, read, write, and delete library directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_read_lib_files" lineno="246">
+<summary>
+Read files in the library directories, such
+as static libraries.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_exec_lib_files" lineno="267">
+<summary>
+Execute library scripts in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_use_lib_files" lineno="289">
+<summary>
+Load and execute functions from generic
+lib files as shared libraries.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_manage_lib_files" lineno="306">
+<summary>
+Create, read, write, and delete generic
+files in library directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_relabelto_lib_files" lineno="324">
+<summary>
+Relabel files to the type used in library directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_relabel_lib_files" lineno="344">
+<summary>
+Relabel to and from the type used
+for generic lib files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_delete_lib_symlinks" lineno="363">
+<summary>
+Delete generic symlinks in library directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_manage_shared_libs" lineno="382">
+<summary>
+Create, read, write, and delete shared libraries.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_use_shared_libs" lineno="400">
+<summary>
+Load and execute functions from shared libraries.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_legacy_use_shared_libs" lineno="423">
+<summary>
+Load and execute functions from shared libraries,
+with legacy support.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="libs_relabel_shared_libs" lineno="444">
+<summary>
+Relabel to and from the type used for
+shared libraries.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="lib_filetrans_shared_lib" lineno="468">
+<summary>
+Create an object in lib directories, with
+the shared libraries type using a type transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="object">
+<summary>
+The object class of the object being created.
+</summary>
+</param>
+</interface>
+<interface name="files_lib_filetrans_shared_lib" lineno="497">
+<summary>
+Create an object in lib directories, with
+the shared libraries type using a type transition.  (Deprecated)
+</summary>
+<desc>
+<p>
+Create an object in lib directories, with
+the shared libraries type using a type transition.  (Deprecated)
+</p>
+<p>
+lib_filetrans_shared_lib() should be used instead.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="object">
+<summary>
+The object class of the object being created.
+</summary>
+</param>
+</interface>
+</module>
+<module name="locallogin" filename="policy/modules/system/locallogin.if">
+<summary>Policy for local logins.</summary>
+<interface name="locallogin_domtrans" lineno="13">
+<summary>
+Execute local logins in the local login domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="locallogin_use_fds" lineno="35">
+<summary>
+Allow processes to inherit local login file descriptors.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="locallogin_dontaudit_use_fds" lineno="53">
+<summary>
+Do not audit attempts to inherit local login file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="locallogin_signull" lineno="71">
+<summary>
+Send a null signal to local login processes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="locallogin_search_keys" lineno="89">
+<summary>
+Search for key.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="locallogin_link_keys" lineno="107">
+<summary>
+Allow link to the local_login key ring.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="locallogin_domtrans_sulogin" lineno="125">
+<summary>
+Execute local logins in the local login domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="logging" filename="policy/modules/system/logging.if">
+<summary>Policy for the kernel message logger and system logging daemon.</summary>
+<interface name="logging_log_file" lineno="14">
+<summary>
+Make the specified type a file
+used for logs.
+</summary>
+<param name="file_type">
+<summary>
+Type of the file to be used as a log.
+</summary>
+</param>
+</interface>
+<interface name="logging_send_audit_msgs" lineno="35">
+<summary>
+Send audit messages.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_dontaudit_send_audit_msgs" lineno="50">
+<summary>
+dontaudit attempts to send audit messages.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_set_loginuid" lineno="65">
+<summary>
+Set login uid
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_set_tty_audit" lineno="80">
+<summary>
+Set tty auditing
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_set_audit_parameters" lineno="94">
+<summary>
+Set up audit
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_read_audit_log" lineno="110">
+<summary>
+Read the audit log.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_domtrans_auditctl" lineno="130">
+<summary>
+Execute auditctl in the auditctl domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_run_auditctl" lineno="155">
+<summary>
+Execute auditctl in the auditctl domain, and
+allow the specified role the auditctl domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the auditctl domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_domtrans_auditd" lineno="174">
+<summary>
+Execute auditd in the auditd domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_run_auditd" lineno="198">
+<summary>
+Execute auditd in the auditd domain, and
+allow the specified role the auditd domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the auditd domain.
+</summary>
+</param>
+</interface>
+<interface name="logging_stream_connect_auditd" lineno="217">
+<summary>
+Connect to auditdstored over an unix stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_domtrans_dispatcher" lineno="232">
+<summary>
+Execute a domain transition to run the audit dispatcher.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="logging_signal_dispatcher" lineno="250">
+<summary>
+Signal the audit dispatcher.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="logging_dispatcher_domain" lineno="274">
+<summary>
+Create a domain for processes
+which can be started by the system audit dispatcher
+</summary>
+<param name="domain">
+<summary>
+Type to be used as a domain.
+</summary>
+</param>
+<param name="entry_point">
+<summary>
+Type of the program to be used as an entry point to this domain.
+</summary>
+</param>
+</interface>
+<interface name="logging_stream_connect_dispatcher" lineno="302">
+<summary>
+Connect to the audit dispatcher over an unix stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_manage_audit_config" lineno="322">
+<summary>
+Manage the auditd configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_manage_audit_log" lineno="342">
+<summary>
+Manage the audit log.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_domtrans_klog" lineno="362">
+<summary>
+Execute klogd in the klog domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_check_exec_syslog" lineno="381">
+<summary>
+Check if syslogd is executable.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_domtrans_syslog" lineno="401">
+<summary>
+Execute syslogd in the syslog domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_log_filetrans" lineno="431">
+<summary>
+Create an object in the log directory, with a private
+type using a type transition.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="private type">
+<summary>
+The type of the object to be created.
+</summary>
+</param>
+<param name="object">
+<summary>
+The object class of the object being created.
+</summary>
+</param>
+</interface>
+<interface name="logging_send_syslog_msg" lineno="450">
+<summary>
+Send system log messages.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_read_audit_config" lineno="480">
+<summary>
+Read the auditd configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_dontaudit_search_audit_config" lineno="501">
+<summary>
+dontaudit search of auditd configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_read_syslog_config" lineno="520">
+<summary>
+Read syslog configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_search_logs" lineno="540">
+<summary>
+Allows the domain to open a file in the
+log directory, but does not allow the listing
+of the contents of the log directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_dontaudit_search_logs" lineno="559">
+<summary>
+Do not audit attempts to search the var log directory.
+</summary>
+<param name="domain">
+<summary>
+Domain not to audit.
+</summary>
+</param>
+</interface>
+<interface name="logging_list_logs" lineno="577">
+<summary>
+List the contents of the generic log directory (/var/log).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_rw_generic_log_dirs" lineno="596">
+<summary>
+Read and write the generic log directory (/var/log).
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_dontaudit_getattr_all_logs" lineno="616">
+<summary>
+Do not audit attempts to get the atttributes
+of any log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_append_all_logs" lineno="634">
+<summary>
+Append to all log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_inherit_append_all_logs" lineno="654">
+<summary>
+Append to all log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_read_all_logs" lineno="673">
+<summary>
+Read all log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_exec_all_logs" lineno="695">
+<summary>
+Execute all log files in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_rw_all_logs" lineno="715">
+<summary>
+read/write to all log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_manage_all_logs" lineno="735">
+<summary>
+Create, read, write, and delete all log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_read_generic_logs" lineno="758">
+<summary>
+Read generic log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_write_generic_logs" lineno="778">
+<summary>
+Write generic log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_dontaudit_write_generic_logs" lineno="798">
+<summary>
+Dontaudit Write generic log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_rw_generic_logs" lineno="816">
+<summary>
+Read and write generic log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="logging_manage_generic_logs" lineno="838">
+<summary>
+Create, read, write, and delete
+generic log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_admin_audit" lineno="864">
+<summary>
+All of the rules required to administrate
+the audit environment
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+User role allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_admin_syslog" lineno="908">
+<summary>
+All of the rules required to administrate
+the syslog environment
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+User role allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="logging_admin" lineno="966">
+<summary>
+All of the rules required to administrate
+the logging environment
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+User role allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="lvm" filename="policy/modules/system/lvm.if">
+<summary>Policy for logical volume management programs.</summary>
+<interface name="lvm_domtrans" lineno="13">
+<summary>
+Execute lvm programs in the lvm domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="lvm_exec" lineno="32">
+<summary>
+Execute lvm programs in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="lvm_run" lineno="58">
+<summary>
+Execute lvm programs in the lvm domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the LVM domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="lvm_read_config" lineno="82">
+<summary>
+Read LVM configuration files.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="lvm_manage_config" lineno="103">
+<summary>
+Manage LVM configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="lvm_domtrans_clvmd" lineno="123">
+<summary>
+Execute a domain transition to run clvmd.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+</module>
+<module name="miscfiles" filename="policy/modules/system/miscfiles.if">
+<summary>Miscelaneous files.</summary>
+<interface name="miscfiles_read_certs" lineno="14">
+<summary>
+Read system SSL certificates.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_manage_cert_dirs" lineno="35">
+<summary>
+manange system SSL certificates.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_manage_cert_files" lineno="54">
+<summary>
+manange system SSL certificates.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_read_fonts" lineno="74">
+<summary>
+Read fonts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_setattr_fonts_dirs" lineno="104">
+<summary>
+Set the attributes on a fonts directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_dontaudit_setattr_fonts_dirs" lineno="124">
+<summary>
+Do not audit attempts to set the attributes
+on a fonts directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_dontaudit_write_fonts" lineno="143">
+<summary>
+Do not audit attempts to write fonts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_manage_fonts" lineno="163">
+<summary>
+Create, read, write, and delete fonts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_manage_fonts_cache" lineno="189">
+<summary>
+Create, read, write, and delete fonts cache.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_read_hwdata" lineno="213">
+<summary>
+Read hardware identification data.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_setattr_localization" lineno="233">
+<summary>
+Allow process to setattr localization info
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_read_localization" lineno="253">
+<summary>
+Allow process to read localization info
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_rw_localization" lineno="278">
+<summary>
+Allow process to write localization info
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_relabel_localization" lineno="298">
+<summary>
+Allow process to relabel localization info
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_legacy_read_localization" lineno="317">
+<summary>
+Allow process to read legacy time localization info
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_search_man_pages" lineno="336">
+<summary>
+Search man pages.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_dontaudit_search_man_pages" lineno="355">
+<summary>
+Do not audit attempts to search man pages.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_read_man_pages" lineno="374">
+<summary>
+Read man pages
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_delete_man_pages" lineno="396">
+<summary>
+Delete man pages
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_manage_man_pages" lineno="421">
+<summary>
+Create, read, write, and delete man pages
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_read_public_files" lineno="444">
+<summary>
+Read public files used for file
+transfer services.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_manage_public_files" lineno="466">
+<summary>
+Create, read, write, and delete public files
+and directories used for file transfer services.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_read_tetex_data" lineno="486">
+<summary>
+Read TeX data
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_exec_tetex_data" lineno="510">
+<summary>
+Execute TeX data programs in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_domain_entry_test_files" lineno="535">
+<summary>
+Let test files be an entry point for
+a specified domain.
+</summary>
+<param name="domain">
+<summary>
+Domain to be entered.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_read_test_files" lineno="553">
+<summary>
+Read test files and directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_exec_test_files" lineno="572">
+<summary>
+Execute test files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_etc_filetrans_localization" lineno="591">
+<summary>
+Execute test files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="miscfiles_manage_localization" lineno="611">
+<summary>
+Create, read, write, and delete localization
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_setattr_fonts_cache_dirs" lineno="632">
+<summary>
+Set the attributes on a fonts cache directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="miscfiles_dontaudit_setattr_fonts_cache_dirs" lineno="651">
+<summary>
+Dontaudit attempts to set the attributes on a fonts cache directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="modutils" filename="policy/modules/system/modutils.if">
+<summary>Policy for kernel module utilities</summary>
+<interface name="modutils_getattr_module_deps" lineno="13">
+<summary>
+Getattr the dependencies of kernel modules.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_read_module_deps" lineno="33">
+<summary>
+Read the dependencies of kernel modules.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_read_module_config" lineno="54">
+<summary>
+Read the configuration options used when
+loading modules.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="modutils_rename_module_config" lineno="79">
+<summary>
+Rename a file with the configuration options used when
+loading modules.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_delete_module_config" lineno="98">
+<summary>
+Unlink a file with the configuration options used when
+loading modules.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_manage_module_config" lineno="117">
+<summary>
+Manage files with the configuration options used when
+loading modules.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_domtrans_insmod_uncond" lineno="137">
+<summary>
+Unconditionally execute insmod in the insmod domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_domtrans_insmod" lineno="156">
+<summary>
+Execute insmod in the insmod domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_run_insmod" lineno="185">
+<summary>
+Execute insmod in the insmod domain, and
+allow the specified role the insmod domain,
+and use the caller's terminal.  Has a sigchld
+backchannel.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the insmod domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="modutils_exec_insmod" lineno="204">
+<summary>
+Execute insmod in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_domtrans_depmod" lineno="223">
+<summary>
+Execute depmod in the depmod domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_run_depmod" lineno="248">
+<summary>
+Execute depmod in the depmod domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the depmod domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="modutils_exec_depmod" lineno="267">
+<summary>
+Execute depmod in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_domtrans_update_mods" lineno="286">
+<summary>
+Execute depmod in the depmod domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="modutils_run_update_mods" lineno="311">
+<summary>
+Execute update_modules in the update_modules domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the update_modules domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="modutils_exec_update_mods" lineno="332">
+<summary>
+Execute update_modules in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="mount" filename="policy/modules/system/mount.if">
+<summary>Policy for mount.</summary>
+<interface name="mount_domtrans" lineno="13">
+<summary>
+Execute mount in the mount domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="mount_domtrans_fusermount" lineno="36">
+<summary>
+Execute fusermount in the mount domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="mount_domtrans_showmount" lineno="54">
+<summary>
+Execute a domain transition to run showmount.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="mount_exec_fusermount" lineno="72">
+<summary>
+Execute fusermount.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="mount_dontaudit_exec_fusermount" lineno="90">
+<summary>
+dontaudit Execute fusermount.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="mount_run" lineno="116">
+<summary>
+Execute mount in the mount domain, and
+allow the specified role the mount domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the mount domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="mount_run_fusermount" lineno="154">
+<summary>
+Execute fusermount in the mount domain, and
+allow the specified role the mount domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the mount domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="mount_run_showmount" lineno="181">
+<summary>
+Execute showmount in the showmount domain, and
+allow the specified role the showmount domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the showmount domain.
+</summary>
+</param>
+</interface>
+<interface name="mount_exec" lineno="200">
+<summary>
+Execute mount in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="mount_signal" lineno="222">
+<summary>
+Send a generic signal to mount.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mount_use_fds" lineno="242">
+<summary>
+Use file descriptors for mount.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="mount_send_nfs_client_request" lineno="272">
+<summary>
+Allow the mount domain to send nfs requests for mounting
+network drives
+</summary>
+<desc>
+<p>
+Allow the mount domain to send nfs requests for mounting
+network drives
+</p>
+<p>
+This interface has been deprecated as these rules were
+a side effect of leaked mount file descriptors.  This
+interface has no effect.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mount_domtrans_unconfined" lineno="286">
+<summary>
+Execute mount in the unconfined mount domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mount_run_unconfined" lineno="312">
+<summary>
+Execute mount in the unconfined mount domain, and
+allow the specified role the unconfined mount domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the unconfined mount domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<tunable name="allow_mount_anyfile" dftval="false">
+<desc>
+<p>
+Allow the mount command to mount any directory or file.
+</p>
+</desc>
+</tunable>
+</module>
+<module name="netlabel" filename="policy/modules/system/netlabel.if">
+<summary>NetLabel/CIPSO labeled networking management</summary>
+<interface name="netlabel_domtrans_mgmt" lineno="13">
+<summary>
+Execute netlabel_mgmt in the netlabel_mgmt domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="netlabel_run_mgmt" lineno="39">
+<summary>
+Execute netlabel_mgmt in the netlabel_mgmt domain, and
+allow the specified role the netlabel_mgmt domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the netlabel_mgmt domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="pcmcia" filename="policy/modules/system/pcmcia.if">
+<summary>PCMCIA card management services</summary>
+<interface name="pcmcia_stub" lineno="13">
+<summary>
+PCMCIA stub interface.  No access allowed.
+</summary>
+<param name="domain" unused="true">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="pcmcia_domtrans_cardmgr" lineno="29">
+<summary>
+Execute cardmgr in the cardmgr domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="pcmcia_use_cardmgr_fds" lineno="47">
+<summary>
+Inherit and use file descriptors from cardmgr.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="pcmcia_domtrans_cardctl" lineno="65">
+<summary>
+Execute cardctl in the cardmgr domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="pcmcia_run_cardctl" lineno="90">
+<summary>
+Execute cardmgr in the cardctl domain, and
+allow the specified role the cardmgr domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the cardmgr domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="pcmcia_read_pid" lineno="109">
+<summary>
+Read cardmgr pid files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="pcmcia_manage_pid" lineno="129">
+<summary>
+Create, read, write, and delete
+cardmgr pid files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="pcmcia_manage_pid_chr_files" lineno="149">
+<summary>
+Create, read, write, and delete
+cardmgr runtime character nodes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="raid" filename="policy/modules/system/raid.if">
+<summary>RAID array management tools</summary>
+<interface name="raid_domtrans_mdadm" lineno="13">
+<summary>
+Execute software raid tools in the mdadm domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="raid_manage_mdadm_pid" lineno="40">
+<summary>
+Create, read, write, and delete the mdadm pid files.
+</summary>
+<desc>
+<p>
+Create, read, write, and delete the mdadm pid files.
+</p>
+<p>
+Added for use in the init module.
+</p>
+</desc>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+</module>
+<module name="selinuxutil" filename="policy/modules/system/selinuxutil.if">
+<summary>Policy for SELinux policy and userland applications.</summary>
+<interface name="seutil_domtrans_checkpolicy" lineno="13">
+<summary>
+Execute checkpolicy in the checkpolicy domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_checkpolicy" lineno="41">
+<summary>
+Execute checkpolicy in the checkpolicy domain, and
+allow the specified role the checkpolicy domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the checkpolicy domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_exec_checkpolicy" lineno="61">
+<summary>
+Execute checkpolicy in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_domtrans_loadpolicy" lineno="81">
+<summary>
+Execute load_policy in the load_policy domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_loadpolicy" lineno="108">
+<summary>
+Execute load_policy in the load_policy domain, and
+allow the specified role the load_policy domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the load_policy domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_exec_loadpolicy" lineno="127">
+<summary>
+Execute load_policy in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_read_loadpolicy" lineno="146">
+<summary>
+Read the load_policy program file.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_domtrans_newrole" lineno="165">
+<summary>
+Execute newrole in the newole domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_newrole" lineno="193">
+<summary>
+Execute newrole in the newrole domain, and
+allow the specified role the newrole domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the newrole domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_exec_newrole" lineno="214">
+<summary>
+Execute newrole in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_dontaudit_signal_newrole" lineno="235">
+<summary>
+Do not audit the caller attempts to send
+a signal to newrole.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_sigchld_newrole" lineno="253">
+<summary>
+Send a SIGCHLD signal to newrole.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_use_newrole_fds" lineno="271">
+<summary>
+Inherit and use newrole file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_dontaudit_use_newrole_fds" lineno="290">
+<summary>
+Do not audit attempts to inherit and use
+newrole file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="seutil_domtrans_restorecon" lineno="308">
+<summary>
+Execute restorecon in the restorecon domain.  (Deprecated)
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_restorecon" lineno="331">
+<summary>
+Execute restorecon in the restorecon domain, and
+allow the specified role the restorecon domain,
+and use the caller's terminal.  (Deprecated)
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the restorecon domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_exec_restorecon" lineno="347">
+<summary>
+Execute restorecon in the caller domain.  (Deprecated)
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_exec_restorecond" lineno="363">
+<summary>
+Execute restorecond in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_domtrans_runinit" lineno="383">
+<summary>
+Execute run_init in the run_init domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_init_script_domtrans_runinit" lineno="409">
+<summary>
+Execute init scripts in the run_init domain.
+</summary>
+<desc>
+<p>
+Execute init scripts in the run_init domain.
+This is used for the Gentoo integrated run_init.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_runinit" lineno="439">
+<summary>
+Execute run_init in the run_init domain, and
+allow the specified role the run_init domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the run_init domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_init_script_run_runinit" lineno="479">
+<summary>
+Execute init scripts in the run_init domain, and
+allow the specified role the run_init domain,
+and use the caller's terminal.
+</summary>
+<desc>
+<p>
+Execute init scripts in the run_init domain, and
+allow the specified role the run_init domain,
+and use the caller's terminal.
+</p>
+<p>
+This is used for the Gentoo integrated run_init.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the run_init domain.
+</summary>
+</param>
+</interface>
+<interface name="seutil_use_runinit_fds" lineno="502">
+<summary>
+Inherit and use run_init file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_domtrans_setfiles" lineno="520">
+<summary>
+Execute setfiles in the setfiles domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_setfiles" lineno="552">
+<summary>
+Execute setfiles in the setfiles domain, and
+allow the specified role the setfiles domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the setfiles domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_domtrans_setfiles_mac" lineno="571">
+<summary>
+Execute setfiles in the setfiles domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_setfiles_mac" lineno="599">
+<summary>
+Execute setfiles in the setfiles_mac domain, and
+allow the specified role the setfiles_mac domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the setfiles_mac domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_exec_setfiles" lineno="618">
+<summary>
+Execute setfiles in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_dontaudit_search_config" lineno="639">
+<summary>
+Do not audit attempts to search the SELinux
+configuration directory (/etc/selinux).
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="seutil_dontaudit_read_config" lineno="658">
+<summary>
+Do not audit attempts to read the SELinux
+userland configuration (/etc/selinux).
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="seutil_read_config" lineno="678">
+<summary>
+Read the general SELinux configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_rw_config" lineno="700">
+<summary>
+Read and write the general SELinux configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_manage_selinux_config" lineno="732">
+<summary>
+Create, read, write, and delete
+the general selinux configuration files.  (Deprecated)
+</summary>
+<desc>
+<p>
+Create, read, write, and delete
+the general selinux configuration files.
+</p>
+<p>
+This interface has been deprecated, please
+use the seutil_manage_config() interface instead.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_manage_config" lineno="749">
+<summary>
+Create, read, write, and delete
+the general selinux configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_manage_config_dirs" lineno="772">
+<summary>
+Create, read, write, and delete
+the general selinux configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_search_default_contexts" lineno="791">
+<summary>
+Search the policy directory with default_context files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_read_default_contexts" lineno="811">
+<summary>
+Read the default_contexts files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_manage_default_contexts" lineno="832">
+<summary>
+Create, read, write, and delete the default_contexts files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_read_file_contexts" lineno="853">
+<summary>
+Read the file_contexts files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_dontaudit_read_file_contexts" lineno="874">
+<summary>
+Do not audit attempts to read the file_contexts files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_rw_file_contexts" lineno="893">
+<summary>
+Read and write the file_contexts files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_manage_file_contexts" lineno="914">
+<summary>
+Create, read, write, and delete the file_contexts files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_read_bin_policy" lineno="934">
+<summary>
+Read the SELinux binary policy.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_create_bin_policy" lineno="954">
+<summary>
+Create the SELinux binary policy.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_relabelto_bin_policy" lineno="977">
+<summary>
+Allow the caller to relabel a file to the binary policy type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_manage_bin_policy" lineno="998">
+<summary>
+Create, read, write, and delete the SELinux
+binary policy.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_read_src_policy" lineno="1020">
+<summary>
+Read SELinux policy source files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_manage_src_policy" lineno="1042">
+<summary>
+Create, read, write, and delete SELinux
+policy source files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_domtrans_semanage" lineno="1063">
+<summary>
+Execute a domain transition to run semanage.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="seutil_domtrans_setsebool" lineno="1087">
+<summary>
+Execute a domain transition to run setsebool.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="seutil_run_semanage" lineno="1115">
+<summary>
+Execute semanage in the semanage domain, and
+allow the specified role the semanage domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the semanage domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_run_setsebool" lineno="1144">
+<summary>
+Execute setsebool in the semanage domain, and
+allow the specified role the semanage domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the setsebool domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="seutil_read_module_store" lineno="1164">
+<summary>
+Full management of the semanage
+module store.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_manage_module_store" lineno="1185">
+<summary>
+Full management of the semanage
+module store.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_get_semanage_read_lock" lineno="1206">
+<summary>
+Get read lock on module store
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_get_semanage_trans_lock" lineno="1225">
+<summary>
+Get trans lock on module store
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_libselinux_linked" lineno="1253">
+<summary>
+SELinux-enabled program access for
+libselinux-linked programs.
+</summary>
+<desc>
+<p>
+SELinux-enabled programs are typically
+linked to the libselinux library.  This
+interface will allow access required for
+the libselinux constructor to function.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_dontaudit_libselinux_linked" lineno="1283">
+<summary>
+Do not audit SELinux-enabled program access for
+libselinux-linked programs.
+</summary>
+<desc>
+<p>
+SELinux-enabled programs are typically
+linked to the libselinux library.  This
+interface will dontaudit access required for
+the libselinux constructor to function.
+</p>
+<p>
+Generally this should not be used on anything
+but simple SELinux-enabled programs that do not
+rely on data initialized by the libselinux
+constructor.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_semanage_policy" lineno="1298">
+<summary>
+All rules necessary to run semanage command
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="seutil_setfiles" lineno="1375">
+<summary>
+All rules necessary to run setfiles command
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="setrans" filename="policy/modules/system/setrans.if">
+<summary>SELinux MLS/MCS label translation service.</summary>
+<interface name="setrans_translate_context" lineno="13">
+<summary>
+Allow a domain to translate contexts.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="setrans_initrc_domtrans" lineno="36">
+<summary>
+Execute setrans server in the setrans domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+</module>
+<module name="sosreport" filename="policy/modules/system/sosreport.if">
+<summary>policy for sosreport</summary>
+<interface name="sosreport_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run sosreport.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="sosreport_run" lineno="38">
+<summary>
+Execute sosreport in the sosreport domain, and
+allow the specified role the sosreport domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the sosreport domain.
+</summary>
+</param>
+</interface>
+<interface name="sosreport_role" lineno="62">
+<summary>
+Role access for sosreport
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="sysnetwork" filename="policy/modules/system/sysnetwork.if">
+<summary>Policy for network configuration: ifconfig and dhcp client.</summary>
+<interface name="sysnet_domtrans_dhcpc" lineno="13">
+<summary>
+Execute dhcp client in dhcpc domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_run_dhcpc" lineno="39">
+<summary>
+Execute DHCP clients in the dhcpc domain, and
+allow the specified role the dhcpc domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the clock domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="sysnet_sigchld_dhcpc" lineno="93">
+<summary>
+Send a SIGCHLD signal to the dhcp client.
+</summary>
+<param name="domain">
+<summary>
+The domain sending the SIGCHLD.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_kill_dhcpc" lineno="112">
+<summary>
+Send a kill signal to the dhcp client.
+</summary>
+<param name="domain">
+<summary>
+The domain sending the SIGKILL.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="sysnet_sigstop_dhcpc" lineno="130">
+<summary>
+Send a SIGSTOP signal to the dhcp client.
+</summary>
+<param name="domain">
+<summary>
+The domain sending the SIGSTOP.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_signull_dhcpc" lineno="148">
+<summary>
+Send a null signal to the dhcp client.
+</summary>
+<param name="domain">
+<summary>
+The domain sending the null signal.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_signal_dhcpc" lineno="167">
+<summary>
+Send a generic signal to the dhcp client.
+</summary>
+<param name="domain">
+<summary>
+The domain sending the signal.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="sysnet_dbus_chat_dhcpc" lineno="186">
+<summary>
+Send and receive messages from
+dhcpc over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_rw_dhcp_config" lineno="206">
+<summary>
+Read and write dhcp configuration files.
+</summary>
+<param name="domain">
+<summary>
+The domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_read_dhcpc_state" lineno="225">
+<summary>
+Read dhcp client state files.
+</summary>
+<param name="domain">
+<summary>
+The domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_delete_dhcpc_state" lineno="243">
+<summary>
+Delete the dhcp client state files.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_setattr_config" lineno="261">
+<summary>
+Set the attributes of network config files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_read_config" lineno="280">
+<summary>
+Read network config files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_dontaudit_read_config" lineno="300">
+<summary>
+Do not audit attempts to read network config files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_write_config" lineno="318">
+<summary>
+Write network config files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_create_config" lineno="337">
+<summary>
+Create network config files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_etc_filetrans_config" lineno="357">
+<summary>
+Create files in /etc with the type used for
+the network config files.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_manage_config" lineno="375">
+<summary>
+Create, read, write, and delete network config files.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_read_dhcpc_pid" lineno="394">
+<summary>
+Read the dhcp client pid file.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_delete_dhcpc_pid" lineno="413">
+<summary>
+Delete the dhcp client pid file.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_domtrans_ifconfig" lineno="431">
+<summary>
+Execute ifconfig in the ifconfig domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_run_ifconfig" lineno="462">
+<summary>
+Execute ifconfig in the ifconfig domain, and
+allow the specified role the ifconfig domain,
+and use the caller's terminal.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the ifconfig domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="sysnet_exec_ifconfig" lineno="482">
+<summary>
+Execute ifconfig in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_signal_ifconfig" lineno="502">
+<summary>
+Send a generic signal to ifconfig.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="sysnet_read_dhcp_config" lineno="520">
+<summary>
+Read the DHCP configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_search_dhcp_state" lineno="540">
+<summary>
+Search the DHCP state data directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_dhcp_state_filetrans" lineno="579">
+<summary>
+Create DHCP state data.
+</summary>
+<desc>
+<p>
+Create DHCP state data.
+</p>
+<p>
+This is added for DHCP server, as
+the server and client put their state
+files in the same directory.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="file_type">
+<summary>
+The type of the object to be created
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The object class.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_dns_name_resolve" lineno="599">
+<summary>
+Perform a DNS name resolution.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="sysnet_use_ldap" lineno="641">
+<summary>
+Connect and use a LDAP server.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_use_portmap" lineno="672">
+<summary>
+Connect and use remote port mappers.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_dontaudit_dhcpc_use_fds" lineno="706">
+<summary>
+Do not audit attempts to use
+the dhcp file descriptors.
+</summary>
+<param name="domain">
+<summary>
+The domain sending the SIGCHLD.
+</summary>
+</param>
+</interface>
+<interface name="sysnet_role_transition_dhcpc" lineno="733">
+<summary>
+Transition to system_r when execute an dhclient script
+</summary>
+<desc>
+<p>
+Execute dhclient script in a specified role
+</p>
+<p>
+No interprocess communication (signals, pipes,
+etc.) is provided by this interface since
+the domains are not owned by this module.
+</p>
+</desc>
+<param name="source_role">
+<summary>
+Role to transition from.
+</summary>
+</param>
+</interface>
+<tunable name="dhcpc_exec_iptables" dftval="false">
+<desc>
+<p>
+Allow dhcpc client applications to execute iptables commands
+</p>
+</desc>
+</tunable>
+</module>
+<module name="udev" filename="policy/modules/system/udev.if">
+<summary>Policy for udev.</summary>
+<interface name="udev_domtrans" lineno="13">
+<summary>
+Execute udev in the udev domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="udev_exec" lineno="31">
+<summary>
+Execute udev in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="udev_helper_domtrans" lineno="49">
+<summary>
+Execute a udev helper in the udev domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="udev_read_state" lineno="67">
+<summary>
+Allow process to read udev process state.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="udev_dontaudit_use_fds" lineno="88">
+<summary>
+Do not audit attempts to inherit a
+udev file descriptor.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="udev_dontaudit_rw_dgram_sockets" lineno="107">
+<summary>
+Do not audit attempts to read or write
+to a udev unix datagram socket.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="udev_dontaudit_search_db" lineno="125">
+<summary>
+Do not audit search of udev database directories.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="udev_read_db" lineno="143">
+<summary>
+Allow process to read list of devices.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="udev_rw_db" lineno="164">
+<summary>
+Allow process to modify list of devices.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="udev_manage_pid_files" lineno="185">
+<summary>
+Create, read, write, and delete
+udev pid files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="udev_signal" lineno="204">
+<summary>
+Send signal to udev process
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="unconfined" filename="policy/modules/system/unconfined.if">
+<summary>The unconfined domain.</summary>
+<interface name="unconfined_domain_noaudit" lineno="13">
+<summary>
+Make the specified domain unconfined.
+</summary>
+<param name="domain">
+<summary>
+Domain to make unconfined.
+</summary>
+</param>
+</interface>
+<interface name="unconfined_domain" lineno="126">
+<summary>
+Make the specified domain unconfined and
+audit executable memory and executable heap
+usage.
+</summary>
+<param name="domain">
+<summary>
+Domain to make unconfined.
+</summary>
+</param>
+</interface>
+<interface name="unconfined_alias_domain" lineno="159">
+<summary>
+Add an alias type to the unconfined domain.  (Deprecated)
+</summary>
+<desc>
+<p>
+Add an alias type to the unconfined domain.  (Deprecated)
+</p>
+<p>
+This is added to support targeted policy.  Its
+use should be limited.  It has no effect
+on the strict policy.
+</p>
+</desc>
+<param name="domain">
+<summary>
+New alias of the unconfined domain.
+</summary>
+</param>
+</interface>
+<interface name="unconfined_execmem_alias_program" lineno="185">
+<summary>
+Add an alias type to the unconfined execmem
+program file type.  (Deprecated)
+</summary>
+<desc>
+<p>
+Add an alias type to the unconfined execmem
+program file type.  (Deprecated)
+</p>
+<p>
+This is added to support targeted policy.  Its
+use should be limited.  It has no effect
+on the strict policy.
+</p>
+</desc>
+<param name="domain">
+<summary>
+New alias of the unconfined execmem program type.
+</summary>
+</param>
+</interface>
+</module>
+<module name="userdomain" filename="policy/modules/system/userdomain.if">
+<summary>Policy for user domains</summary>
+<template name="userdom_base_user_template" lineno="24">
+<summary>
+The template containing the most basic rules common to all users.
+</summary>
+<desc>
+<p>
+The template containing the most basic rules common to all users.
+</p>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty and pty.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<rolebase/>
+</template>
+<interface name="userdom_ro_home_role" lineno="159">
+<summary>
+Allow a home directory for which the
+role has read-only access.
+</summary>
+<desc>
+<p>
+Allow a home directory for which the
+role has read-only access.
+</p>
+<p>
+This does not allow execute access.
+</p>
+</desc>
+<param name="role">
+<summary>
+The user role
+</summary>
+</param>
+<param name="userdomain">
+<summary>
+The user domain
+</summary>
+</param>
+<rolebase/>
+</interface>
+<interface name="userdom_manage_home_role" lineno="213">
+<summary>
+Allow a home directory for which the
+role has full access.
+</summary>
+<desc>
+<p>
+Allow a home directory for which the
+role has full access.
+</p>
+<p>
+This does not allow execute access.
+</p>
+</desc>
+<param name="role">
+<summary>
+The user role
+</summary>
+</param>
+<param name="userdomain">
+<summary>
+The user domain
+</summary>
+</param>
+<rolebase/>
+</interface>
+<interface name="userdom_manage_tmp_role" lineno="286">
+<summary>
+Manage user temporary files
+</summary>
+<param name="role">
+<summary>
+Role allowed access.
+</summary>
+</param>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolebase/>
+</interface>
+<interface name="userdom_exec_user_tmp_files" lineno="315">
+<summary>
+The execute access user temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolebase/>
+</interface>
+<interface name="userdom_manage_tmpfs_role" lineno="351">
+<summary>
+Role access for the user tmpfs type
+that the user has full access.
+</summary>
+<desc>
+<p>
+Role access for the user tmpfs type
+that the user has full access.
+</p>
+<p>
+This does not allow execute access.
+</p>
+</desc>
+<param name="role">
+<summary>
+Role allowed access.
+</summary>
+</param>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="userdom_basic_networking" lineno="378">
+<summary>
+The interface allowing the user basic
+network permissions
+</summary>
+<param name="userdomain">
+<summary>
+The user domain
+</summary>
+</param>
+<rolebase/>
+</interface>
+<interface name="userdom_xwindows_client" lineno="417">
+<summary>
+The template for creating a user xwindows client.
+</summary>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<rolecap/>
+</interface>
+<template name="userdom_change_password_template" lineno="481">
+<summary>
+The template for allowing the user to change passwords.
+</summary>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<rolebase/>
+</template>
+<template name="userdom_common_user_template" lineno="511">
+<summary>
+The template containing rules common to unprivileged
+users and administrative users.
+</summary>
+<desc>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty, pty, tmp, and tmpfs files.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+</template>
+<template name="userdom_login_user_template" lineno="755">
+<summary>
+The template for creating a login user.
+</summary>
+<desc>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty, pty, home directories,
+tmp, and tmpfs files.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+</template>
+<template name="userdom_restricted_user_template" lineno="886">
+<summary>
+The template for creating a unprivileged login user.
+</summary>
+<desc>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty, pty, home directories,
+tmp, and tmpfs files.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+</template>
+<template name="userdom_restricted_xwindows_user_template" lineno="949">
+<summary>
+The template for creating a unprivileged xwindows login user.
+</summary>
+<desc>
+<p>
+The template for creating a unprivileged xwindows login user.
+</p>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty, pty, home directories,
+tmp, and tmpfs files.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+</template>
+<template name="userdom_unpriv_user_template" lineno="1073">
+<summary>
+The template for creating a unprivileged user roughly
+equivalent to a regular linux user.
+</summary>
+<desc>
+<p>
+The template for creating a unprivileged user roughly
+equivalent to a regular linux user.
+</p>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty, pty, home directories,
+tmp, and tmpfs files.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+</template>
+<template name="userdom_admin_user_template" lineno="1187">
+<summary>
+The template for creating an administrative user.
+</summary>
+<desc>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty, pty, home directories,
+tmp, and tmpfs files.
+</p>
+<p>
+The privileges given to administrative users are:
+<ul>
+<li>Raw disk access</li>
+<li>Set all sysctls</li>
+<li>All kernel ring buffer controls</li>
+<li>Create, read, write, and delete all files but shadow</li>
+<li>Manage source and binary format SELinux policy</li>
+<li>Run insmod</li>
+</ul>
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., sysadm
+is the prefix for sysadm_t).
+</summary>
+</param>
+</template>
+<template name="userdom_security_admin_template" lineno="1337">
+<summary>
+Allow user to run as a secadm
+</summary>
+<desc>
+<p>
+Create objects in a user home directory
+with an automatic type transition to
+a specified private type.
+</p>
+<p>
+This is a templated interface, and should only
+be called from a per-userdomain template.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role  of the object to create.
+</summary>
+</param>
+</template>
+<interface name="userdom_user_home_content" lineno="1410">
+<summary>
+Make the specified type usable in a
+user home directory.
+</summary>
+<param name="type">
+<summary>
+Type to be used as a file in the
+user home directory.
+</summary>
+</param>
+</interface>
+<interface name="userdom_attach_admin_tun_iface" lineno="1434">
+<summary>
+Allow domain to attach to TUN devices created by administrative users.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_setattr_user_ptys" lineno="1453">
+<summary>
+Set the attributes of a user pty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_create_user_pty" lineno="1471">
+<summary>
+Create a user pty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_getattr_user_home_dirs" lineno="1489">
+<summary>
+Get the attributes of user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_getattr_user_home_dirs" lineno="1508">
+<summary>
+Do not audit attempts to get the attributes of user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_search_user_home_dirs" lineno="1526">
+<summary>
+Search user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_search_user_home_dirs" lineno="1546">
+<summary>
+dontaudit Search user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_list_user_home_dirs" lineno="1564">
+<summary>
+List user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_list_user_home_dirs" lineno="1591">
+<summary>
+Do not audit attempts to list user home subdirectories.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit
+</summary>
+</param>
+</interface>
+<interface name="userdom_create_user_home_dirs" lineno="1611">
+<summary>
+Create user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_home_dirs" lineno="1629">
+<summary>
+Create user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_relabelto_user_home_dirs" lineno="1647">
+<summary>
+Relabel to user home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_relabelto_user_home_files" lineno="1666">
+<summary>
+Relabel to user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_relabel_user_home_files" lineno="1683">
+<summary>
+Relabel user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_home_filetrans_user_home_dir" lineno="1702">
+<summary>
+Create directories in the home dir root with
+the user home directory type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_user_home_domtrans" lineno="1739">
+<summary>
+Do a domain transition to the specified
+domain when executing a program in the
+user home directory.
+</summary>
+<desc>
+<p>
+Do a domain transition to the specified
+domain when executing a program in the
+user home directory.
+</p>
+<p>
+No interprocess communication (signals, pipes,
+etc.) is provided by this interface since
+the domains are not owned by this module.
+</p>
+</desc>
+<param name="source_domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="target_domain">
+<summary>
+Domain to transition to.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_search_user_home_content" lineno="1759">
+<summary>
+Do not audit attempts to search user home content directories.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_home_content_dirs" lineno="1780">
+<summary>
+Create, read, write, and delete directories
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_delete_user_home_content_dirs" lineno="1799">
+<summary>
+Delete directories in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_setattr_user_home_content_files" lineno="1817">
+<summary>
+Set the attributes of user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_setattr_user_home_content_files" lineno="1836">
+<summary>
+Do not audit attempts to set the
+attributes of user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_mmap_user_home_content_files" lineno="1854">
+<summary>
+Mmap user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_user_home_content_files" lineno="1873">
+<summary>
+Read user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_read_user_home_content_files" lineno="1893">
+<summary>
+Do not audit attempts to read user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_append_user_home_content_files" lineno="1913">
+<summary>
+Do not audit attempts to append user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_write_user_home_content_files" lineno="1931">
+<summary>
+Do not audit attempts to write user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_delete_user_home_content_files" lineno="1949">
+<summary>
+Delete files in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_relabel_user_home_content_files" lineno="1967">
+<summary>
+Do not audit attempts to write user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_user_home_content_symlinks" lineno="1985">
+<summary>
+Read user home subdirectory symbolic links.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_exec_user_home_content_files" lineno="2005">
+<summary>
+Execute user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="userdom_dontaudit_delete_user_home_content_files" lineno="2027">
+<summary>
+Dontaudit Delete files
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_exec_user_home_content_files" lineno="2045">
+<summary>
+Do not audit attempts to execute user home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_home_content_files" lineno="2064">
+<summary>
+Create, read, write, and delete files
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_manage_user_home_content_dirs" lineno="2086">
+<summary>
+Do not audit attempts to create, read, write, and delete directories
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_home_content_symlinks" lineno="2105">
+<summary>
+Create, read, write, and delete symbolic links
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_delete_user_home_content_symlinks" lineno="2125">
+<summary>
+Delete symbolic links in a user home directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_home_content_pipes" lineno="2144">
+<summary>
+Create, read, write, and delete named pipes
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_home_content_sockets" lineno="2165">
+<summary>
+Create, read, write, and delete named sockets
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_user_home_dir_filetrans" lineno="2197">
+<summary>
+Create objects in a user home directory
+with an automatic type transition to
+a specified private type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="private_type">
+<summary>
+The type of the object to create.
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The class of the object to be created.
+</summary>
+</param>
+</interface>
+<interface name="userdom_user_home_content_filetrans" lineno="2228">
+<summary>
+Create objects in a user home directory
+with an automatic type transition to
+a specified private type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="private_type">
+<summary>
+The type of the object to create.
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The class of the object to be created.
+</summary>
+</param>
+</interface>
+<interface name="userdom_user_home_dir_filetrans_user_home_content" lineno="2255">
+<summary>
+Create objects in a user home directory
+with an automatic type transition to
+the user home file type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The class of the object to be created.
+</summary>
+</param>
+</interface>
+<interface name="userdom_write_user_tmp_sockets" lineno="2274">
+<summary>
+Write to user temporary named sockets.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_list_user_tmp" lineno="2293">
+<summary>
+List user temporary directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_list_user_tmp" lineno="2313">
+<summary>
+Do not audit attempts to list user
+temporary directories.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_search_user_tmp" lineno="2331">
+<summary>
+Dontaudit search user temporary directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_manage_user_tmp_dirs" lineno="2350">
+<summary>
+Do not audit attempts to manage users
+temporary directories.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_user_tmp_files" lineno="2368">
+<summary>
+Read user temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_read_user_tmp_files" lineno="2389">
+<summary>
+Do not audit attempts to read users
+temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_append_user_tmp_files" lineno="2408">
+<summary>
+Do not audit attempts to append users
+temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_rw_user_tmp_files" lineno="2426">
+<summary>
+Read and write user temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_write_user_tmp_files" lineno="2447">
+<summary>
+Do not audit attempts to write users
+temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_manage_user_tmp_files" lineno="2466">
+<summary>
+Do not audit attempts to manage users
+temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_user_tmp_symlinks" lineno="2484">
+<summary>
+Read user temporary symbolic links.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmp_dirs" lineno="2505">
+<summary>
+Create, read, write, and delete user
+temporary directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmp_files" lineno="2525">
+<summary>
+Create, read, write, and delete user
+temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmp_chr_files" lineno="2545">
+<summary>
+Create, read, write, and delete user
+temporary chr files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmp_blk_files" lineno="2565">
+<summary>
+Create, read, write, and delete user
+temporary blk files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmp_symlinks" lineno="2585">
+<summary>
+Create, read, write, and delete user
+temporary symbolic links.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmp_pipes" lineno="2605">
+<summary>
+Create, read, write, and delete user
+temporary named pipes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmp_sockets" lineno="2625">
+<summary>
+Create, read, write, and delete user
+temporary named sockets.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_user_tmp_filetrans" lineno="2656">
+<summary>
+Create objects in a user temporary directory
+with an automatic type transition to
+a specified private type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="private_type">
+<summary>
+The type of the object to create.
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The class of the object to be created.
+</summary>
+</param>
+</interface>
+<interface name="userdom_tmp_filetrans_user_tmp" lineno="2682">
+<summary>
+Create objects in the temporary directory
+with an automatic type transition to
+the user temporary type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The class of the object to be created.
+</summary>
+</param>
+</interface>
+<interface name="userdom_rw_user_tmpfs_files" lineno="2700">
+<summary>
+Read/Write user tmpfs files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_rw_inherited_user_tmpfs_files" lineno="2721">
+<summary>
+Read/Write user tmpfs files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_user_tmpfs_files" lineno="2742">
+<summary>
+Manage user tmpfs files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_getattr_user_ttys" lineno="2762">
+<summary>
+Get the attributes of a user domain tty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_getattr_user_ttys" lineno="2780">
+<summary>
+Do not audit attempts to get the attributes of a user domain tty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_setattr_user_ttys" lineno="2798">
+<summary>
+Set the attributes of a user domain tty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_setattr_user_ttys" lineno="2816">
+<summary>
+Do not audit attempts to set the attributes of a user domain tty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_use_user_ttys" lineno="2834">
+<summary>
+Read and write a user domain tty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_use_user_ptys" lineno="2852">
+<summary>
+Read and write a user domain pty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_use_user_terminals" lineno="2870">
+<summary>
+Read and write a user domain tty and pty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_use_user_terminals" lineno="2891">
+<summary>
+Do not audit attempts to read and write
+a user domain tty and pty.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_spec_domtrans_all_users" lineno="2912">
+<summary>
+Execute a shell in all user domains.  This
+is an explicit transition, requiring the
+caller to use setexeccon().
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_xsession_spec_domtrans_all_users" lineno="2935">
+<summary>
+Execute an Xserver session in all unprivileged user domains.  This
+is an explicit transition, requiring the
+caller to use setexeccon().
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_spec_domtrans_unpriv_users" lineno="2958">
+<summary>
+Execute a shell in all unprivileged user domains.  This
+is an explicit transition, requiring the
+caller to use setexeccon().
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_xsession_spec_domtrans_unpriv_users" lineno="2981">
+<summary>
+Execute an Xserver session in all unprivileged user domains.  This
+is an explicit transition, requiring the
+caller to use setexeccon().
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_unpriv_user_semaphores" lineno="3002">
+<summary>
+Manage unpriviledged user SysV sempaphores.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_unpriv_user_shared_mem" lineno="3021">
+<summary>
+Manage unpriviledged user SysV shared
+memory segments.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_bin_spec_domtrans_unpriv_users" lineno="3041">
+<summary>
+Execute bin_t in the unprivileged user domains. This
+is an explicit transition, requiring the
+caller to use setexeccon().
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_entry_spec_domtrans_unpriv_users" lineno="3064">
+<summary>
+Execute all entrypoint files in unprivileged user
+domains. This is an explicit transition, requiring the
+caller to use setexeccon().
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_search_user_home_content" lineno="3085">
+<summary>
+Search users home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_list_user_home_content" lineno="3106">
+<summary>
+List users home directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_signal_unpriv_users" lineno="3126">
+<summary>
+Send general signals to unprivileged user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_use_unpriv_users_fds" lineno="3144">
+<summary>
+Inherit the file descriptors from unprivileged user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_use_unpriv_user_fds" lineno="3163">
+<summary>
+Do not audit attempts to inherit the
+file descriptors from all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_use_user_ptys" lineno="3181">
+<summary>
+Do not audit attempts to use user ptys.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_relabelto_user_ptys" lineno="3199">
+<summary>
+Relabel files to unprivileged user pty types.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_relabelfrom_user_ptys" lineno="3218">
+<summary>
+Do not audit attempts to relabel files from
+user pty types.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_write_user_tmp_files" lineno="3236">
+<summary>
+Write all users files in /tmp
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_write_inherited_user_tmp_files" lineno="3254">
+<summary>
+Write all inherited users files in /tmp
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_delete_user_tmp_files" lineno="3272">
+<summary>
+Delete all users files in /tmp
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_use_user_ttys" lineno="3290">
+<summary>
+Do not audit attempts to use user ttys.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_all_users_state" lineno="3308">
+<summary>
+Read the process state of all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_getattr_all_users" lineno="3328">
+<summary>
+Get the attributes of all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_use_all_users_fds" lineno="3346">
+<summary>
+Inherit the file descriptors from all user domains
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_use_all_users_fds" lineno="3365">
+<summary>
+Do not audit attempts to inherit the file
+descriptors from any user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_signal_all_users" lineno="3383">
+<summary>
+Send general signals to all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_sigchld_all_users" lineno="3401">
+<summary>
+Send a SIGCHLD signal to all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_create_all_users_keys" lineno="3419">
+<summary>
+Create keys for all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dbus_send_all_users" lineno="3437">
+<summary>
+Send a dbus message to all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_set_rlimitnh" lineno="3456">
+<summary>
+Allow apps to set rlimits on userdomain
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<template name="userdom_unpriv_usertype" lineno="3485">
+<summary>
+Define this type as a Allow apps to set rlimits on userdomain
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</template>
+<template name="userdom_admin_login_user_template" lineno="3521">
+<summary>
+The template for creating a unprivileged user roughly
+equivalent to a regular linux user.
+</summary>
+<desc>
+<p>
+The template for creating a unprivileged user roughly
+equivalent to a regular linux user.
+</p>
+<p>
+This template creates a user domain, types, and
+rules for the user's tty, pty, home directories,
+tmp, and tmpfs files.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+</template>
+<interface name="userdom_stream_connect" lineno="3570">
+<summary>
+Connect to users over an unix stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_ptrace_all_users" lineno="3590">
+<summary>
+Ptrace user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="userdom_dontaudit_search_admin_dir" lineno="3608">
+<summary>
+dontaudit Search /root
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_getattr_admin_home_files" lineno="3626">
+<summary>
+dontaudit Search getatrr /root files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_list_admin_dir" lineno="3644">
+<summary>
+dontaudit list /root
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_list_admin_dir" lineno="3662">
+<summary>
+Allow domain to list /root
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_search_admin_dir" lineno="3680">
+<summary>
+Allow Search /root
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_rw_semaphores" lineno="3698">
+<summary>
+RW unpriviledged user SysV sempaphores.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_admin" lineno="3716">
+<summary>
+Add attrinute admin domain
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dgram_send" lineno="3735">
+<summary>
+Send a message to unpriv users over a unix domain
+datagram socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_users_dgram_send" lineno="3754">
+<summary>
+Send a message to users over a unix domain
+datagram socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_execmod_user_home_files" lineno="3773">
+<summary>
+Allow execmod on files in homedirectory
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolebase/>
+</interface>
+<interface name="userdom_read_admin_home_files" lineno="3792">
+<summary>
+Read admin home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="userdom_dontaudit_read_admin_home_files" lineno="3811">
+<summary>
+Read admin home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="userdom_exec_admin_home_files" lineno="3831">
+<summary>
+Execute admin home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="userdom_manage_user_home_content" lineno="3851">
+<summary>
+Manage all files/directories in the homedir
+</summary>
+<param name="userdomain">
+<summary>
+The user domain
+</summary>
+</param>
+<rolebase/>
+</interface>
+<interface name="userdom_user_home_dir_filetrans_pattern" lineno="3885">
+<summary>
+Create objects in a user home directory
+with an automatic type transition to
+the user home file type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The class of the object to be created.
+</summary>
+</param>
+</interface>
+<interface name="userdom_admin_home_dir_filetrans" lineno="3915">
+<summary>
+Create objects in the /root directory
+with an automatic type transition to
+a specified private type.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="private_type">
+<summary>
+The type of the object to create.
+</summary>
+</param>
+<param name="object_class">
+<summary>
+The class of the object to be created.
+</summary>
+</param>
+</interface>
+<interface name="userdom_inherit_append_admin_home_files" lineno="3934">
+<summary>
+Append files inherited
+in the /root directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_signull_unpriv_users" lineno="3952">
+<summary>
+Send signull to unprivileged user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_user_tmpfs_files" lineno="3970">
+<summary>
+Read user tmpfs files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_write_user_tmp_dirs" lineno="3991">
+<summary>
+Write all users files in /tmp
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_manage_all_users_keys" lineno="4009">
+<summary>
+Manage keys for all user domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_dontaudit_rw_stream" lineno="4029">
+<summary>
+Do not audit attempts to read and write
+unserdomain stream.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userdom_append_user_home_content_files" lineno="4048">
+<summary>
+Append files
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_inherit_append_user_home_content_files" lineno="4069">
+<summary>
+Append files inherited
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_inherited_user_home_content_files" lineno="4088">
+<summary>
+Read files inherited
+in a user home subdirectory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_inherit_append_user_tmp_files" lineno="4107">
+<summary>
+Append files inherited
+in a user tmp files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userdom_read_home_certs" lineno="4126">
+<summary>
+Read system SSL certificates in the users homedir.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<tunable name="allow_user_postgresql_connect" dftval="false">
+<desc>
+<p>
+Allow users to connect to PostgreSQL
+</p>
+</desc>
+</tunable>
+<tunable name="user_direct_mouse" dftval="false">
+<desc>
+<p>
+Allow regular users direct mouse access
+</p>
+</desc>
+</tunable>
+<tunable name="user_direct_dri" dftval="false">
+<desc>
+<p>
+Allow regular users direct dri device access
+</p>
+</desc>
+</tunable>
+<tunable name="user_rw_noexattrfile" dftval="false">
+<desc>
+<p>
+Allow user to r/w files on filesystems
+that do not have extended attributes (FAT, CDROM, FLOPPY)
+</p>
+</desc>
+</tunable>
+<tunable name="user_ttyfile_stat" dftval="false">
+<desc>
+<p>
+Allow w to display everyone
+</p>
+</desc>
+</tunable>
+</module>
+<module name="xen" filename="policy/modules/system/xen.if">
+<summary>Xen hypervisor</summary>
+<interface name="xen_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run xend.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="xen_use_fds" lineno="31">
+<summary>
+Inherit and use xen file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="xen_dontaudit_use_fds" lineno="50">
+<summary>
+Do not audit attempts to inherit
+xen file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="xen_read_image_files" lineno="68">
+<summary>
+Read xend image files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="xen_append_log" lineno="90">
+<summary>
+Allow the specified domain to append
+xend log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="xen_manage_log" lineno="111">
+<summary>
+Create, read, write, and delete the
+xend log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="xen_dontaudit_rw_unix_stream_sockets" lineno="133">
+<summary>
+Do not audit attempts to read and write
+Xen unix domain stream sockets.  These
+are leaked file descriptors.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="xen_stream_connect_xenstore" lineno="151">
+<summary>
+Connect to xenstored over an unix stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="xen_stream_connect" lineno="170">
+<summary>
+Connect to xend over an unix domain stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="xen_stream_connect_xm" lineno="192">
+<summary>
+Connect to xm over an unix stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="xen_domtrans_xm" lineno="211">
+<summary>
+Execute a domain transition to run xm.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="xen_rw_image_files" lineno="232">
+<summary>
+Allow the specified domain to read/write
+xend image files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<tunable name="xen_use_nfs" dftval="false">
+<desc>
+<p>
+Allow xen to manage nfs files
+</p>
+</desc>
+</tunable>
+</module>

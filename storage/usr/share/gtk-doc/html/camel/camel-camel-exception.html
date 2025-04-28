@@ -1,0 +1,388 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>camel-exception</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="Fundamentals.html" title="Fundamentals">
+<link rel="prev" href="camel-camel-debug.html" title="camel-debug">
+<link rel="next" href="camel-CamelObject.html" title="CamelObject">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-camel-debug.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="Fundamentals.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelObject.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-camel-exception.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-camel-exception.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="camel-exception">
+<a name="camel-camel-exception"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-camel-exception.top_of_page"></a>camel-exception</span></h2>
+<p>camel-exception</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-camel-exception.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+enum                <a class="link" href="camel-camel-exception.html#ExceptionId" title="enum ExceptionId">ExceptionId</a>;
+struct              <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a>;
+#define             <a class="link" href="camel-camel-exception.html#CAMEL-EXCEPTION-INITIALISER--CAPS" title="CAMEL_EXCEPTION_INITIALISER">CAMEL_EXCEPTION_INITIALISER</a>
+<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *    <a class="link" href="camel-camel-exception.html#camel-exception-new" title="camel_exception_new ()">camel_exception_new</a>                 (void);
+void                <a class="link" href="camel-camel-exception.html#camel-exception-free" title="camel_exception_free ()">camel_exception_free</a>                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-camel-exception.html#camel-exception-init" title="camel_exception_init ()">camel_exception_init</a>                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-camel-exception.html#camel-exception-clear" title="camel_exception_clear ()">camel_exception_clear</a>               (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-camel-exception.html#camel-exception-set" title="camel_exception_set ()">camel_exception_set</a>                 (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a class="link" href="camel-camel-exception.html#ExceptionId" title="enum ExceptionId">ExceptionId</a> id,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *desc);
+void                <a class="link" href="camel-camel-exception.html#camel-exception-setv" title="camel_exception_setv ()">camel_exception_setv</a>                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a class="link" href="camel-camel-exception.html#ExceptionId" title="enum ExceptionId">ExceptionId</a> id,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *format,
+                                                         ...);
+void                <a class="link" href="camel-camel-exception.html#camel-exception-xfer" title="camel_exception_xfer ()">camel_exception_xfer</a>                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex_dst,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex_src);
+<a class="link" href="camel-camel-exception.html#ExceptionId" title="enum ExceptionId">ExceptionId</a>         <a class="link" href="camel-camel-exception.html#camel-exception-get-id" title="camel_exception_get_id ()">camel_exception_get_id</a>              (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="camel-camel-exception.html#camel-exception-get-description" title="camel_exception_get_description ()">camel_exception_get_description</a>     (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+#define             <a class="link" href="camel-camel-exception.html#camel-exception-is-set" title="camel_exception_is_set()">camel_exception_is_set</a>              (ex)
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-camel-exception.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-camel-exception.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum ExceptionId">
+<a name="ExceptionId"></a><h3>enum ExceptionId</h3>
+<pre class="programlisting">typedef enum {
+#include "camel-exception-list.def"
+
+} ExceptionId;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="struct CamelException">
+<a name="CamelException"></a><h3>struct CamelException</h3>
+<pre class="programlisting">struct CamelException {
+	/* do not access the fields directly */
+	ExceptionId id;
+	gchar *desc;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_EXCEPTION_INITIALISER">
+<a name="CAMEL-EXCEPTION-INITIALISER--CAPS"></a><h3>CAMEL_EXCEPTION_INITIALISER</h3>
+<pre class="programlisting">#define CAMEL_EXCEPTION_INITIALISER { 0, NULL }
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_new ()">
+<a name="camel-exception-new"></a><h3>camel_exception_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *    camel_exception_new                 (void);</pre>
+<p>
+Create and returns a new exception object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the newly allocated exception object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_free ()">
+<a name="camel-exception-free"></a><h3>camel_exception_free ()</h3>
+<pre class="programlisting">void                camel_exception_free                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Free an exception object. If the exception is <code class="literal">NULL</code>, nothing is
+done, the routine simply returns.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_init ()">
+<a name="camel-exception-init"></a><h3>camel_exception_init ()</h3>
+<pre class="programlisting">void                camel_exception_init                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Init an exception. This routine is mainly useful when using a
+statically allocated exception.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_clear ()">
+<a name="camel-exception-clear"></a><h3>camel_exception_clear ()</h3>
+<pre class="programlisting">void                camel_exception_clear               (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Clear an exception, that is, set the exception ID to
+<span class="type">CAMEL_EXCEPTION_NONE</span> and free the description text.  If the
+exception is <code class="literal">NULL</code>, this funtion just returns.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_set ()">
+<a name="camel-exception-set"></a><h3>camel_exception_set ()</h3>
+<pre class="programlisting">void                camel_exception_set                 (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a class="link" href="camel-camel-exception.html#ExceptionId" title="enum ExceptionId">ExceptionId</a> id,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *desc);</pre>
+<p>
+Set the value of an exception. The exception id is
+a unique number representing the exception. The
+textual description is a small text explaining
+what happened and provoked the exception.
+</p>
+<p>
+When <em class="parameter"><code>ex</code></em> is <code class="literal">NULL</code>, nothing is done, this routine
+simply returns.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> exception id
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>desc</code></em> :</span></p></td>
+<td> textual description of the exception
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_setv ()">
+<a name="camel-exception-setv"></a><h3>camel_exception_setv ()</h3>
+<pre class="programlisting">void                camel_exception_setv                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a class="link" href="camel-camel-exception.html#ExceptionId" title="enum ExceptionId">ExceptionId</a> id,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *format,
+                                                         ...);</pre>
+<p>
+Set the value of an exception. The exception id is
+a unique number representing the exception. The
+textual description is a small text explaining
+what happened and provoked the exception.
+In this version, the string is created from the format
+string and the variable argument list.
+</p>
+<p>
+It is safe to say:
+  camel_exception_setv (ex, ..., camel_exception_get_description (ex), ...);
+</p>
+<p>
+When <em class="parameter"><code>ex</code></em> is <code class="literal">NULL</code>, nothing is done, this routine
+simply returns.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> exception id
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
+<td> format of the description string. The format string is
+used as in <code class="function">printf()</code>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_xfer ()">
+<a name="camel-exception-xfer"></a><h3>camel_exception_xfer ()</h3>
+<pre class="programlisting">void                camel_exception_xfer                (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex_dst,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex_src);</pre>
+<p>
+Transfer the content of an exception from an exception object to
+another.  The destination exception receives the id and the
+description text of the source exception.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex_dst</code></em> :</span></p></td>
+<td> Destination exception object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex_src</code></em> :</span></p></td>
+<td> Source exception object
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_get_id ()">
+<a name="camel-exception-get-id"></a><h3>camel_exception_get_id ()</h3>
+<pre class="programlisting"><a class="link" href="camel-camel-exception.html#ExceptionId" title="enum ExceptionId">ExceptionId</a>         camel_exception_get_id              (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Get the id of an exception.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the exception id (<span class="type">CAMEL_EXCEPTION_NONE</span> will be returned if
+<em class="parameter"><code>ex</code></em> is <code class="literal">NULL</code> or unset)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_get_description ()">
+<a name="camel-exception-get-description"></a><h3>camel_exception_get_description ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       camel_exception_get_description     (<a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Get the exception description text.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the exception description text (<code class="literal">NULL</code> will be returned if
+<em class="parameter"><code>ex</code></em> is <code class="literal">NULL</code> or unset)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_exception_is_set()">
+<a name="camel-exception-is-set"></a><h3>camel_exception_is_set()</h3>
+<pre class="programlisting">#define camel_exception_is_set(ex) (camel_exception_get_id (ex) != CAMEL_EXCEPTION_NONE)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

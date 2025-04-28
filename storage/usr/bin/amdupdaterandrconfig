@@ -1,0 +1,612 @@
+#!/bin/sh
+#---------------------------------------------
+#  amdupdaterandrconfig
+#
+#  Utility script used to save resolution settings for all distributions with 
+#  different versions of Randr.
+#
+#   LICENSE:
+#
+#   Permission is hereby granted, free of charge, to any person obtaining a
+#   copy of this software and associated documentation files (the "Software"),
+#   to deal in the Software without restriction, including without limitation
+#   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+#   and/or sell copies of the Software, and to permit persons to whom the
+#   Software is furnished to do so, subject to the following conditions:
+#
+#   The above copyright notice and this permission notice shall be included
+#   in all copies or substantial portions of the Software.
+#
+#   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+#   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+#   THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+#   OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+#   ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+#   OTHER DEALINGS IN THE SOFTWARE.
+#
+#---------------------------------------------
+#
+# Changelog:
+# July 29, 2008 
+#
+#---------------------------------------------
+
+
+
+manualpage()
+{
+cat << _MANUALPAGE
+Name
+
+updaterandrconfig - save resolution configurations 
+
+Synopsis
+
+amdupdaterandrconfig SCREEN_NUM HEIGHT WIDTH FRESH_RATE [OUTPUT_NAME X_POSITION Y_POSITION ROTATION] [MODE]
+
+amdupdaterandrconfig { --help | --manual | --version }
+
+[*] are optional parameters that are only supported and required for RandR 1.2 or higher. MODE is only supported and required for KDE 4 or higher.
+
+Note: If MODE is not specified, "Single" will be used as default.
+
+Description
+
+Updaterandrconfig saves resolution configurations to specific files
+for different distributions. Super-user mode is not required. This 
+script does not support Gnome 2 environment with Randr 1.2 or higher.
+
+Options
+
+SCREEN_NUM:	X screen number
+
+HEIGHT:		height of the resolution to be saved
+
+WIDTH:		width of the resolution to be saved
+
+FRESH_RATE:	refresh rate of the resolution to be saved
+
+OUTPUT_NAME:	output name of the screen ; CRT1, COMPONENT_VIDEO, TV, etc, run command "xrandr" for more information
+
+X_POSITION:	position of the upper left corner of the screen on the X-axis
+
+Y_POSITION:	position of the upper left corner of the screen on the Y-axis
+
+ROTATION:	rotation of the screen; options are 1 = NORMAL (0), 2 = Left (90), 4 = Upside Down (180), 8 = Right (270)
+
+MODE:		Mode of the screen; options are -1 = Disabled, 0 = Single, 1 = Unified
+
+--help
+    Show command synopsis.
+--manual
+    Show this manualpage.
+--version
+    Show the updaterandrconfig version information.
+
+Exit Codes
+
+An exit code of 0 indicates success while a non-zero exit code indicates
+failure. The following failure codes can be returned:
+
+1
+    Error in command line syntax.
+2
+    One of the files passed on the command line did not exist.
+3
+    A required tool could not be found.
+4
+    The action failed.
+
+Examples
+updaterandrconfig 0 -1 -1 -1 default -1 -1 -1 -1
+
+updaterandrconfig 0 800 600 75 default 0 0 1
+
+updaterandrconfig 0 1200 800 60
+
+_MANUALPAGE
+}
+
+usage()
+{
+cat << _USAGE
+amdupdaterandrconfig SCREEN_NUM HEIGHT WIDTH FRESH_RATE [OUTPUT_NAME X_POSITION Y_POSITION ROTATION] [MODE]
+
+[*] are optional parameters that are only supported and required for RandR 1.2 or higher. MODE is only supported and required for KDE 4 or higher.
+
+Note: If MODE is not specified, "Single" will be used as default.
+
+Options:
+
+SCREEN_NUM:	X screen number
+
+HEIGHT:		height of the resolution to be saved
+
+WIDTH:		width of the resolution to be saved
+
+FRESH_RATE:	refresh rate of the resolution to be saved
+
+OUTPUT_NAME:	output name of the screen ; CRT1, COMPONENT_VIDEO, TV, etc, run command "xrandr" for more information
+
+X_POSITION:	position of the upper left corner of the screen on the X-axis
+
+Y_POSITION:	position of the upper left corner of the screen on the Y-axis
+
+ROTATION:	rotation of the screen; options are 1 = NORMAL (0), 2 = Left (90), 4 = Upside Down (180), 8 = Right (270)
+
+MODE:		Mode of the screen; options are -1 = Disabled, 0 = Single, 1 = Unified
+
+Examples
+updaterandrconfig 0 -1 -1 -1 default -1 -1 -1 -1
+
+updaterandrconfig 0 800 600 75 default 0 0 1
+
+updaterandrconfig 0 1200 800 60
+
+_USAGE
+}
+
+# KDE with RandR 1.1
+kde11()
+{
+	# if the keys are not present, we do not add them
+	export heightExist=`kreadconfig --file kcmrandrrc --group "Screen"$screen --key Height`
+	export widthExist=`kreadconfig --file kcmrandrrc --group "Screen"$screen --key Width`
+	export rateExist=`kreadconfig --file kcmrandrrc --group "Screen"$screen --key Refresh`
+	
+	if [ "$heightExist" != "" ] ; then
+		kwriteconfig --file kcmrandrrc --group "Screen"$screen --key Height $height 2>/dev/null
+		if [ $? -eq 0 ] ; then
+			exit $?	
+		fi
+	fi
+
+	if [ "$widthExist" != "" ] ; then
+		kwriteconfig --file kcmrandrrc --group "Screen"$screen --key Width $width 2>/dev/null
+		if [ $? -eq 0 ] ; then
+			exit $?	
+		fi
+	fi
+
+	if [ "$rateExist" != "" ] ; then
+		kwriteconfig --file kcmrandrrc --group "Screen"$screen --key Refresh $rate 2>/dev/null
+		if [ $? -eq 0 ] ; then
+			exit $?	
+		fi
+	fi	
+
+}
+
+# KDE with RandR 1.2 or higher
+kde12()
+{
+	
+	export rateExist=`kreadconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key RefreshRate 2>/dev/null`
+	export rectExist=`kreadconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key Rect 2>/dev/null`
+	export rotationExist=`kreadconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key Rotation 2>/dev/null`
+
+	if [ $mode -ne $MODE_DISABLED ]	; then
+		if [ "$rateExist" != "" ] ; then
+			kwriteconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key RefreshRate $rate 2>/dev/null
+			if [ $? -eq 0 ] ; then
+				exit $?	
+			fi
+		fi
+
+		if [ "$rectExist" != "" ] ; then
+			kwriteconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key Rect $position_x","$position_y","$height","$width 2>/dev/null
+			if [ $? -eq 0 ] ; then
+				exit $?	
+			fi
+		fi
+
+		if [ "$rotationExist" != "" ] ; then
+			kwriteconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key Rotation $rotation 2>/dev/null
+			if [ $? -eq 0 ] ; then
+				exit $?	
+			fi
+		fi
+	fi
+
+	# kde4 special
+	if [ x"$KDE_SESSION_VERSION" = x"4" ] ; then
+
+		export outputsUnifiedExist=`kreadconfig --file krandrrc --group "Screen_"$screen --key OutputsUnified 2>/dev/null`
+		export unifiedRectExist=`kreadconfig --file krandrrc --group "Screen_"$screen --key UnifiedRect 2>/dev/null`
+		export unifiedRotationExist=`kreadconfig --file krandrrc --group "Screen_"$screen --key UnifiedRotation 2>/dev/null`
+		export activeExist=`kreadconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key Active 2>/dev/null`
+
+		if [ "$outputsUnifiedExist" != "" ] ; then
+			if [ $mode -eq $MODE_UNIFIED ] ; then
+				kwriteconfig --file krandrrc --group "Screen_"$screen --key OutputsUnified true 2>/dev/null
+				if [ $? -eq 0 ] ; then
+					exit $?
+				fi
+			else
+				kwriteconfig --file krandrrc --group "Screen_"$screen --key OutputsUnified false 2>/dev/null
+				if [ $? -eq 0 ] ; then
+					exit $?
+				fi
+			fi
+		fi
+
+		if [ "$unifiedRectExist" != "" ] ; then
+			if [ $mode -eq $MODE_UNIFIED ] ; then
+				kwriteconfig --file krandrrc --group "Screen_"$screen --key UnifiedRect $position_x","$position_y","$height","$width 2>/dev/null
+				if [ $? -eq 0 ] ; then
+					exit $?
+				fi
+			fi
+		fi
+
+		if [ "$unifiedRotationExist" != "" ] ; then
+			if [ $mode -eq $MODE_UNIFIED ] ; then
+				kwriteconfig --file krandrrc --group "Screen_"$screen --key Rotation $rotation 2>/dev/null
+				if [ $? -eq 0 ] ; then
+					exit $?
+				fi
+			fi
+		fi
+
+		if [ "$activeExist" != "" ] ; then
+			if [ $mode -eq $MODE_DISABLED ] ; then
+				kwriteconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key Active false 2>/dev/null
+				if [ $? -eq 0 ] ; then
+					exit $?
+				fi
+			else
+				kwriteconfig --file krandrrc --group "Screen_"$screen"_Output_"$outputname --key Active true 2>/dev/null
+				if [ $? -eq 0 ] ; then
+					exit $?
+				fi
+			fi
+		fi
+
+	fi
+	
+}
+
+# GNOME with RandR 1.1
+gnome11()
+{
+	# if the keys are not present, we do not add them
+	export resolutionExist=`gconftool-2 --get /desktop/gnome/screen/default/$screen/resolution 2>/dev/null`
+	export rateExist=`gconftool-2 --get /desktop/gnome/screen/default/$screen/rate 2>/dev/null`
+
+	if [ "$resolutionExist" != "" ] ; then
+		gconftool-2 --set /desktop/gnome/screen/default/$screen/resolution --type string $height"x"$width 2>/dev/null
+		if [ $? -eq 0 ] ; then
+			exit $?	
+		fi
+	fi
+
+	if [ "$rateExist" != "" ] ; then
+		gconftool-2 --set /desktop/gnome/screen/default/$screen/rate --type int $rate 2>/dev/null
+		if [ $? -eq 0 ] ; then
+			exit $?	
+		fi
+	fi
+	
+}
+
+# GNOME with RandR 1.2
+gnome12()
+{
+#	echo "GNOME12"
+
+	# if the keys are not present, we do not add them
+	export resolutionExist=`gconftool-2 --get /desktop/gnome/screen/default/$screen/resolution 2>/dev/null`
+	export rateExist=`gconftool-2 --get /desktop/gnome/screen/default/$screen/rate 2>/dev/null`
+
+	if [ "$resolutionExist" != "" ] ; then
+		gconftool-2 --set /desktop/gnome/screen/default/$screen/resolution --type string $height"x"$width 2>/dev/null
+		if [ ! $? -eq 0 ] ; then
+			exit $?
+		fi
+	fi
+
+	if [ "$rateExist" != "" ] ; then
+		gconftool-2 --set /desktop/gnome/screen/default/$screen/rate --type int $rate 2>/dev/null
+		if [ ! $? -eq 0 ] ; then
+			exit $?
+		fi
+	fi
+}
+
+
+#----------------------------------------------------------------------------
+#   Common utility functions included in all XDG wrapper scripts
+#----------------------------------------------------------------------------
+
+DEBUG()
+{
+  [ ${XDG_UTILS_DEBUG_LEVEL-0} -lt $1 ] && return 0;
+  shift
+  echo "$@" >&2
+}
+
+#-------------------------------------------------------------
+# Exit script on successfully completing the desired operation
+
+exit_success()
+{
+    if [ $# -gt 0 ]; then
+        echo "$@"
+        echo
+    fi
+
+    exit 0
+}
+
+
+#-----------------------------------------
+# Exit script on malformed arguments, not enough arguments
+# or missing required option.
+# prints usage information
+
+exit_failure_syntax()
+{
+	if [ $# -gt 0 ]; then
+		echo "amdupdaterandrconfig: $@" >&2
+		echo "Try 'amdupdaterandrconfig --help' for more information."
+	else
+		echo "Invalid input parameters\n"
+		usage
+		echo "Use 'man amdupdaterandrconfig' or 'amdupdaterandrconfig --manual' for additional info."
+	fi
+
+    exit 1
+}
+
+#-------------------------------------------------------------
+# Exit script on missing file specified on command line
+
+exit_failure_file_missing()
+{
+	echo "amdupdaterandrconfig: File Missing. Configuration does not need to be saved."
+	exit 2
+}
+
+#-------------------------------------------------------------
+# Exit script on failure to locate necessary tool applications
+
+exit_failure_operation_impossible()
+{
+	echo "amdupdaterandrconfig: The session is not KDE or GNOME. Configuration cannot be saved."
+
+    exit 3
+}
+
+#-------------------------------------------------------------
+# Exit script on failure returned by a tool application
+
+exit_failure_operation_failed()
+{
+    if [ $# -gt 0 ]; then
+        echo "amdupdaterandrconfig: $@"
+    fi
+
+    exit 4
+}
+
+#------------------------------------------------------------
+# Exit script on insufficient permission to read a specified file
+
+exit_failure_file_permission_read()
+{
+    if [ $# -gt 0 ]; then
+        echo "amdupdaterandrconfig: $@"
+    fi
+
+    exit 5
+}
+
+#------------------------------------------------------------
+# Exit script on insufficient permission to read a specified file
+
+exit_failure_file_permission_write()
+{
+    if [ $# -gt 0 ]; then
+        echo "amdupdaterandrconfig: $@"
+    fi
+
+    exit 6
+}
+
+check_input_file()
+{
+    if [ ! -e "$1" ]; then
+        exit_failure_file_missing "file '$1' does not exist"
+    fi
+    if [ ! -r "$1" ]; then
+        exit_failure_file_permission_read "no permission to read file '$1'"
+    fi
+}
+
+check_vendor_prefix()
+{
+    file=`basename "$1"`
+    case "$file" in
+       [a-zA-Z]*-*)
+         return
+         ;;
+    esac
+
+    echo "amdupdaterandrconfig: filename '$file' does not have a proper vendor prefix" 
+    echo 'A vendor prefix consists of alpha characters ([a-zA-Z]) and is terminated' 
+    echo 'with a dash ("-"). An example filename is '"'example-$file'" 
+    echo "Use --novendor to override or 'amdupdaterandrconfig --manual' for additional info." 
+    exit 1
+}
+
+check_output_file()
+{
+    # if the file exists, check if it is writeable
+    # if it does not exists, check if we are allowed to write on the directory
+    if [ -e "$1" ]; then
+        if [ ! -w "$1" ]; then
+            exit_failure_file_permission_write "no permission to write to file '$1'"
+        fi
+    else
+        DIR=`dirname "$1"`
+        if [ ! -w "$DIR" -o ! -x "$DIR" ]; then
+            exit_failure_file_permission_write "no permission to create file '$1'"
+        fi
+    fi
+}
+
+#----------------------------------------
+# Checks for shared commands, e.g. --help
+
+check_common_commands()
+{
+    while [ $# -gt 0 ] ; do
+        parm="$1"
+        shift
+
+        case "$parm" in
+            --help)
+            usage
+            echo "Use 'man amdupdaterandrconfig' or 'amdupdaterandrconfig --manual' for additional info."
+            exit_success
+            ;;
+
+            --manual)
+            manualpage
+            exit_success
+            ;;
+
+            -v|--version)
+            echo "amdupdaterandrconfig 1.0"
+            exit_success
+            ;;
+        esac
+    done
+}
+
+#----------------------------------------
+# Checks if the input parameters are valid
+
+check_valid_input()
+{
+	# different cases
+	if [ $# -eq 4 ] ; then
+		_outputname=
+	elif [ $# -eq 5 ] ; then
+		_outputname=$5
+	elif [ $# -eq 8 ] ; then
+		_outputname=$5
+		_position_x=$6
+		_position_y=$7
+		_rotation=$8
+	elif [ $# -eq 9 ] ; then
+		_outputname=$5
+		_position_x=$6
+		_position_y=$7
+		_rotation=$8
+		_mode=$9
+	else
+		exit_failure_syntax
+	fi
+
+	# common
+	_screen=$1
+	_height=$2
+	_width=$3
+	_rate=$4
+
+	# validate screen
+	parm=$1
+	shift
+
+	test $parm -ge 0 >/dev/null
+	if [ $? -ne 0 ] ; then
+		exit_failure_syntax
+	fi
+
+	if [ $_mode -ne $MODE_DISABLED ] ; then
+		# validate height, width and rate
+		for i in 1 2 3
+		do
+			parm=$1
+			shift
+
+			test $parm -ge 0 >/dev/null
+			if [ $? -ne 0 ] ; then
+				exit_failure_syntax
+			fi
+		done
+
+		# validate position_x, position_y, rotation
+		if [ $# -ge 4 ] ; then
+			# ignore outputname
+			shift
+		
+			for i in 1 2 3 
+			do
+				parm=$1
+				shift
+
+				test $parm -ge 0 >/dev/null
+				if [ $? -ne 0 ] ; then
+					exit_failure_syntax
+				fi
+			done
+		fi
+	fi
+}
+
+# define
+MODE_DISABLED=-1
+MODE_SINGLE=0
+MODE_UNIFIED=1
+
+# check for common commands { --help | --manual | -v | --version }
+check_common_commands "$@"
+
+# check if input parmeters are valid
+check_valid_input "$@"
+
+# define
+screen=$_screen
+height=$_height
+width=$_width
+rate=$_rate
+outputname=${_outputname:-default}
+position_x=${_position_x:-0}
+position_y=${_position_y:-0}
+rotation=${_rotation:-1}
+mode=${_mode:-$MODE_SINGLE}
+
+# check for gnome or kde and randr versions
+
+if [ x"$KDE_FULL_SESSION" = x"true" ] ; then 
+	xrandr -v | grep 1.2 > /dev/null
+	if [ $? -eq 0 ] ; then
+		kde12 "$@"
+	else
+		kde11 "$@"
+	fi
+elif [ x"$GNOME_DESKTOP_SESSION_ID" != x"" ]; then
+	# randr 1.2(or higher) may be disabled by the driver but randr -v still shows 1.2(or higher)
+	# randr 1.2(or higher) requries xml parser in ccc:le, then we always run gnome11 here
+	#xrandr -v | grep 1.2 > /dev/null
+	#if [ $? -eq 0 ] ; then
+	#	gnome12 "$@"
+	#else
+		gnome11 "$@"	
+	#fi
+else
+	# Check for RandR version, potential fix for ENV variable in SU launch
+	xrandr -v | grep 1.2 > /dev/null
+	if [ $? -eq 0 ] ; then
+		kde12 "$@"
+	else
+		kde11 "$@"
+		gnome11 "$@"
+	fi
+#	exit_failure_operation_impossible "$@"
+fi
+
+exit_success

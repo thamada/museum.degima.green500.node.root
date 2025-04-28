@@ -1,0 +1,197 @@
+diff --git a/drivers/infiniband/hw/qib/qib_keys.c b/drivers/infiniband/hw/qib/qib_keys.c
+index e2b42e5..378b47a 100644
+--- a/drivers/infiniband/hw/qib/qib_keys.c
++++ b/drivers/infiniband/hw/qib/qib_keys.c
+@@ -161,31 +161,47 @@ int qib_lkey_ok(struct qib_lkey_table *rkt, struct qib_pd *pd,
+ 		isge->sge_length = sge->length;
+ 		isge->m = 0;
+ 		isge->n = 0;
++		spin_unlock_irqrestore(&rkt->lock, flags);
+ 		goto ok;
+ 	}
+ 	mr = rkt->table[(sge->lkey >> (32 - ib_qib_lkey_table_size))];
+ 	if (unlikely(mr == NULL || mr->lkey != sge->lkey ||
+ 		     mr->pd != &pd->ibpd))
+ 		goto bail;
++	atomic_inc(&mr->refcount);
++	spin_unlock_irqrestore(&rkt->lock, flags);
+ 
+ 	off = sge->addr - mr->user_base;
+ 	if (unlikely(sge->addr < mr->user_base ||
+ 		     off + sge->length > mr->length ||
+ 		     (mr->access_flags & acc) != acc))
+-		goto bail;
++		return ret;
+ 
+ 	off += mr->offset;
+-	m = 0;
+-	n = 0;
+-	while (off >= mr->map[m]->segs[n].length) {
+-		off -= mr->map[m]->segs[n].length;
+-		n++;
+-		if (n >= QIB_SEGSZ) {
+-			m++;
+-			n = 0;
++	if (mr->page_shift) {
++		/*
++		page sizes are uniform power of 2 so no loop is necessary 
++		entries_spanned_by_off is the number of times the loop below
++		would have executed.
++		*/
++		size_t entries_spanned_by_off;
++		
++		entries_spanned_by_off = off >> mr->page_shift;
++		off -= (entries_spanned_by_off << mr->page_shift);
++		m = entries_spanned_by_off/QIB_SEGSZ;
++		n = entries_spanned_by_off%QIB_SEGSZ;
++	} else {
++		m = 0;
++		n = 0;
++		while (off >= mr->map[m]->segs[n].length) {
++			off -= mr->map[m]->segs[n].length;
++			n++;
++			if (n >= QIB_SEGSZ) {
++				m++;
++				n = 0;
++			}
+ 		}
+ 	}
+-	atomic_inc(&mr->refcount);
+ 	isge->mr = mr;
+ 	isge->vaddr = mr->map[m]->segs[n].vaddr + off;
+ 	isge->length = mr->map[m]->segs[n].length - off;
+@@ -194,6 +210,7 @@ int qib_lkey_ok(struct qib_lkey_table *rkt, struct qib_pd *pd,
+ 	isge->n = n;
+ ok:
+ 	ret = 1;
++	return ret;
+ bail:
+ 	spin_unlock_irqrestore(&rkt->lock, flags);
+ 	return ret;
+@@ -240,30 +257,46 @@ int qib_rkey_ok(struct qib_qp *qp, struct qib_sge *sge,
+ 		sge->sge_length = len;
+ 		sge->m = 0;
+ 		sge->n = 0;
++		spin_unlock_irqrestore(&rkt->lock, flags);
+ 		goto ok;
+ 	}
+ 
+ 	mr = rkt->table[(rkey >> (32 - ib_qib_lkey_table_size))];
+ 	if (unlikely(mr == NULL || mr->lkey != rkey || qp->ibqp.pd != mr->pd))
+ 		goto bail;
++	atomic_inc(&mr->refcount);
++	spin_unlock_irqrestore(&rkt->lock, flags);
+ 
+ 	off = vaddr - mr->iova;
+ 	if (unlikely(vaddr < mr->iova || off + len > mr->length ||
+ 		     (mr->access_flags & acc) == 0))
+-		goto bail;
++		return ret;
+ 
+ 	off += mr->offset;
+-	m = 0;
+-	n = 0;
+-	while (off >= mr->map[m]->segs[n].length) {
+-		off -= mr->map[m]->segs[n].length;
+-		n++;
+-		if (n >= QIB_SEGSZ) {
+-			m++;
+-			n = 0;
++	if (mr->page_shift) {
++		/*
++		page sizes are uniform power of 2 so no loop is necessary 
++		entries_spanned_by_off is the number of times the loop below
++		would have executed.
++		*/
++		size_t entries_spanned_by_off;
++		
++		entries_spanned_by_off = off >> mr->page_shift;
++		off -= (entries_spanned_by_off << mr->page_shift);
++		m = entries_spanned_by_off/QIB_SEGSZ;
++		n = entries_spanned_by_off%QIB_SEGSZ;
++	} else {
++		m = 0;
++		n = 0;
++		while (off >= mr->map[m]->segs[n].length) {
++			off -= mr->map[m]->segs[n].length;
++			n++;
++			if (n >= QIB_SEGSZ) {
++				m++;
++				n = 0;
++			}
+ 		}
+ 	}
+-	atomic_inc(&mr->refcount);
+ 	sge->mr = mr;
+ 	sge->vaddr = mr->map[m]->segs[n].vaddr + off;
+ 	sge->length = mr->map[m]->segs[n].length - off;
+@@ -272,6 +305,7 @@ int qib_rkey_ok(struct qib_qp *qp, struct qib_sge *sge,
+ 	sge->n = n;
+ ok:
+ 	ret = 1;
++	return ret;
+ bail:
+ 	spin_unlock_irqrestore(&rkt->lock, flags);
+ 	return ret;
+diff --git a/drivers/infiniband/hw/qib/qib_mr.c b/drivers/infiniband/hw/qib/qib_mr.c
+index f283c3b..df34a73 100644
+--- a/drivers/infiniband/hw/qib/qib_mr.c
++++ b/drivers/infiniband/hw/qib/qib_mr.c
+@@ -39,7 +39,6 @@
+ /* Fast memory region */
+ struct qib_fmr {
+ 	struct ib_fmr ibfmr;
+-	u8 page_shift;
+ 	struct qib_mregion mr;        /* must be last */
+ };
+ 
+@@ -107,6 +106,7 @@ static struct qib_mr *alloc_mr(int count, struct qib_lkey_table *lk_table)
+ 			goto bail;
+ 	}
+ 	mr->mr.mapsz = m;
++	mr->mr.page_shift = 0;
+ 
+ 	/*
+ 	 * ib_reg_phys_mr() will initialize mr->ibmr except for
+@@ -232,6 +232,11 @@ struct ib_mr *qib_reg_user_mr(struct ib_pd *pd, u64 start, u64 length,
+ 	mr->mr.max_segs = n;
+ 	mr->umem = umem;
+ 
++	if (is_power_of_2(umem->page_size)) {
++		mr->mr.page_shift = ilog2(umem->page_size);
++		qib_dbg("mr %llx using page_shift optimization %u\n",
++			(unsigned long long)mr, mr->mr.page_shift);
++	}
+ 	m = 0;
+ 	n = 0;
+ 	list_for_each_entry(chunk, &umem->chunk_list, list) {
+@@ -336,7 +341,7 @@ struct ib_fmr *qib_alloc_fmr(struct ib_pd *pd, int mr_access_flags,
+ 	fmr->mr.offset = 0;
+ 	fmr->mr.access_flags = mr_access_flags;
+ 	fmr->mr.max_segs = fmr_attr->max_pages;
+-	fmr->page_shift = fmr_attr->page_shift;
++	fmr->mr.page_shift = fmr_attr->page_shift;
+ 
+ 	atomic_set(&fmr->mr.refcount, 0);
+ 	ret = &fmr->ibfmr;
+@@ -386,7 +391,7 @@ int qib_map_phys_fmr(struct ib_fmr *ibfmr, u64 *page_list,
+ 	spin_lock_irqsave(&rkt->lock, flags);
+ 	fmr->mr.user_base = iova;
+ 	fmr->mr.iova = iova;
+-	ps = 1 << fmr->page_shift;
++	ps = 1 << fmr->mr.page_shift;
+ 	fmr->mr.length = list_len * ps;
+ 	m = 0;
+ 	n = 0;
+diff --git a/drivers/infiniband/hw/qib/qib_verbs.h b/drivers/infiniband/hw/qib/qib_verbs.h
+index 690f3f7..8102fd4 100644
+--- a/drivers/infiniband/hw/qib/qib_verbs.h
++++ b/drivers/infiniband/hw/qib/qib_verbs.h
+@@ -301,6 +301,7 @@ struct qib_mregion {
+ 	int access_flags;
+ 	u32 max_segs;           /* number of qib_segs in all the arrays */
+ 	u32 mapsz;              /* size of the map array */
++	u8  page_shift;         /* zero -> non unform/non powerof2  sizes, non-zero -> uniform powerof2 size */
+ 	atomic_t refcount;
+ 	struct qib_segarray *map[0];    /* the segments */
+ };

@@ -1,0 +1,596 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>SystemTap Tapset Reference Manual</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="next" href="ch01.html" title="Chapter&#160;1.&#160;Introduction"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">SystemTap Tapset Reference Manual</th></tr><tr><td width="20%" align="left">&#160;</td><th width="60%" align="center">&#160;</th><td width="20%" align="right">&#160;<a accesskey="n" href="ch01.html">Next</a></td></tr></table><hr></div><div class="book" title="SystemTap Tapset Reference Manual"><div class="titlepage"><div><div><h1 class="title"><a name="TapsetRef"></a>SystemTap Tapset Reference Manual</h1></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="othername">SystemTap</span></h3><span class="contrib">Hackers</span>&#160;</div></div></div><div><p class="copyright">Copyright &#169; 2008-2009 Red Hat, Inc. and others</p></div><div><div class="legalnotice" title="Legal Notice"><a name="id515739"></a><p>
+     This documentation is free software; you can redistribute
+     it and/or modify it under the terms of the GNU General Public
+     License version 2 as published by the Free Software Foundation.
+   </p><p>
+     This program is distributed in the hope that it will be
+     useful, but WITHOUT ANY WARRANTY; without even the implied
+     warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+     See the GNU General Public License for more details.
+   </p><p>
+     You should have received a copy of the GNU General Public
+     License along with this program; if not, write to the Free
+     Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+     MA 02111-1307 USA
+   </p><p>
+     For more details see the file COPYING in the source
+     distribution of Linux.
+   </p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="ch01.html">1. Introduction</a></span></dt><dd><dl><dt><span class="section"><a href="ch01.html#format">Tapset Name Format</a></span></dt></dl></dd><dt><span class="chapter"><a href="ch02.html">2. Context Functions</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re01.html"><span>function::print_regs</span></a></span><span class="refpurpose"> &#8212; 
+  Print a register dump.
+ </span></dt><dt><span class="refentrytitle"><a href="re02.html"><span>function::execname</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the execname of a target process (or group of processes).
+ </span></dt><dt><span class="refentrytitle"><a href="re03.html"><span>function::pid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re04.html"><span>function::tid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the thread ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re05.html"><span>function::ppid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the process ID of a target process's parent process.
+ </span></dt><dt><span class="refentrytitle"><a href="re06.html"><span>function::pgrp</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the process group ID of the current process.
+ </span></dt><dt><span class="refentrytitle"><a href="re07.html"><span>function::sid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the session ID of the current process.
+ </span></dt><dt><span class="refentrytitle"><a href="re08.html"><span>function::pexecname</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the execname of a target process's parent process.
+ </span></dt><dt><span class="refentrytitle"><a href="re09.html"><span>function::gid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the group ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re10.html"><span>function::egid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the effective gid of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re11.html"><span>function::uid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the user ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re12.html"><span>function::euid</span></a></span><span class="refpurpose"> &#8212; 
+     Return the effective uid of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re13.html"><span>function::is_myproc</span></a></span><span class="refpurpose"> &#8212; 
+     Determines if the current probe point has occurred in the user's own process.
+ </span></dt><dt><span class="refentrytitle"><a href="re14.html"><span>function::cpu</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the current cpu number.
+ </span></dt><dt><span class="refentrytitle"><a href="re15.html"><span>function::pp</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the active probe point.
+ </span></dt><dt><span class="refentrytitle"><a href="re16.html"><span>function::registers_valid</span></a></span><span class="refpurpose"> &#8212; 
+     Determines validity of <code class="function">register</code> and <code class="function">u_register</code> in current context.
+ </span></dt><dt><span class="refentrytitle"><a href="re17.html"><span>function::user_mode</span></a></span><span class="refpurpose"> &#8212; 
+     Determines if probe point occurs in user-mode.
+ </span></dt><dt><span class="refentrytitle"><a href="re18.html"><span>function::is_return</span></a></span><span class="refpurpose"> &#8212; 
+     Whether the current probe context is a return probe.
+ </span></dt><dt><span class="refentrytitle"><a href="re19.html"><span>function::target</span></a></span><span class="refpurpose"> &#8212; 
+     Return the process ID of the target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re20.html"><span>function::module_name</span></a></span><span class="refpurpose"> &#8212; 
+     The module name of the current script.
+ </span></dt><dt><span class="refentrytitle"><a href="re21.html"><span>function::stp_pid</span></a></span><span class="refpurpose"> &#8212; 
+     The process id of the stapio process.
+ </span></dt><dt><span class="refentrytitle"><a href="re22.html"><span>function::stack_size</span></a></span><span class="refpurpose"> &#8212; 
+     Return the size of the kernel stack.
+ </span></dt><dt><span class="refentrytitle"><a href="re23.html"><span>function::stack_used</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the amount of kernel stack used.
+ </span></dt><dt><span class="refentrytitle"><a href="re24.html"><span>function::stack_unused</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the amount of kernel stack currently available.
+ </span></dt><dt><span class="refentrytitle"><a href="re25.html"><span>function::uaddr</span></a></span><span class="refpurpose"> &#8212; 
+     User space address of current running task. EXPERIMENTAL.
+ </span></dt><dt><span class="refentrytitle"><a href="re26.html"><span>function::cmdline_args</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch command line arguments from current process
+ </span></dt><dt><span class="refentrytitle"><a href="re27.html"><span>function::cmdline_arg</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch a command line argument.
+ </span></dt><dt><span class="refentrytitle"><a href="re28.html"><span>function::cmdline_str</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch all command line arguments from current process
+ </span></dt><dt><span class="refentrytitle"><a href="re29.html"><span>function::env_var</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch environment variable from current process
+ </span></dt><dt><span class="refentrytitle"><a href="re30.html"><span>function::print_stack</span></a></span><span class="refpurpose"> &#8212; 
+  Print out kernel stack from string.
+ </span></dt><dt><span class="refentrytitle"><a href="re31.html"><span>function::sprint_stack</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack for kernel addresses from string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re32.html"><span>function::probefunc</span></a></span><span class="refpurpose"> &#8212; 
+     Return the probe point's function name, if known.
+ </span></dt><dt><span class="refentrytitle"><a href="re33.html"><span>function::probemod</span></a></span><span class="refpurpose"> &#8212; 
+     Return the probe point's kernel module name.
+ </span></dt><dt><span class="refentrytitle"><a href="re34.html"><span>function::modname</span></a></span><span class="refpurpose"> &#8212; 
+     Return the kernel module name loaded at the address.
+ </span></dt><dt><span class="refentrytitle"><a href="re35.html"><span>function::symname</span></a></span><span class="refpurpose"> &#8212; 
+     Return the kernel symbol associated with the given address.
+ </span></dt><dt><span class="refentrytitle"><a href="re36.html"><span>function::symdata</span></a></span><span class="refpurpose"> &#8212; 
+     Return the kernel symbol and module offset for the address.
+ </span></dt><dt><span class="refentrytitle"><a href="re37.html"><span>function::usymname</span></a></span><span class="refpurpose"> &#8212; 
+  Return the symbol of an address in the current task. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re38.html"><span>function::usymdata</span></a></span><span class="refpurpose"> &#8212; 
+     Return the symbol and module offset of an address. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re39.html"><span>function::print_ustack</span></a></span><span class="refpurpose"> &#8212; 
+     Print out stack for the current task from string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re40.html"><span>function::sprint_ustack</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack for the current task from string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re41.html"><span>function::print_backtrace</span></a></span><span class="refpurpose"> &#8212; 
+  Print stack back trace
+ </span></dt><dt><span class="refentrytitle"><a href="re42.html"><span>function::sprint_backtrace</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack back trace as string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re43.html"><span>function::backtrace</span></a></span><span class="refpurpose"> &#8212; 
+     Hex backtrace of current stack
+ </span></dt><dt><span class="refentrytitle"><a href="re44.html"><span>function::task_backtrace</span></a></span><span class="refpurpose"> &#8212; 
+     Hex backtrace of an arbitrary task
+ </span></dt><dt><span class="refentrytitle"><a href="re45.html"><span>function::caller</span></a></span><span class="refpurpose"> &#8212; 
+     Return name and address of calling function
+ </span></dt><dt><span class="refentrytitle"><a href="re46.html"><span>function::caller_addr</span></a></span><span class="refpurpose"> &#8212; 
+     Return caller address
+ </span></dt><dt><span class="refentrytitle"><a href="re47.html"><span>function::print_ubacktrace</span></a></span><span class="refpurpose"> &#8212; 
+  Print stack back trace for current task. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re48.html"><span>function::sprint_ubacktrace</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack back trace for current task as string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re49.html"><span>function::print_ubacktrace_brief</span></a></span><span class="refpurpose"> &#8212; 
+     Print stack back trace for current task. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re50.html"><span>function::ubacktrace</span></a></span><span class="refpurpose"> &#8212; 
+     Hex backtrace of current task stack. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re51.html"><span>function::task_current</span></a></span><span class="refpurpose"> &#8212; 
+  The current task_struct of the current task.
+ </span></dt><dt><span class="refentrytitle"><a href="re52.html"><span>function::task_parent</span></a></span><span class="refpurpose"> &#8212; 
+     The task_struct of the parent task.
+ </span></dt><dt><span class="refentrytitle"><a href="re53.html"><span>function::task_state</span></a></span><span class="refpurpose"> &#8212; 
+     The state of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re54.html"><span>function::task_execname</span></a></span><span class="refpurpose"> &#8212; 
+     The name of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re55.html"><span>function::task_pid</span></a></span><span class="refpurpose"> &#8212; 
+     The process identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re56.html"><span>function::pid2task</span></a></span><span class="refpurpose"> &#8212; 
+     The task_struct of the given process identifier.
+ </span></dt><dt><span class="refentrytitle"><a href="re57.html"><span>function::pid2execname</span></a></span><span class="refpurpose"> &#8212; 
+     The name of the given process identifier.
+ </span></dt><dt><span class="refentrytitle"><a href="re58.html"><span>function::task_tid</span></a></span><span class="refpurpose"> &#8212; 
+     The thread identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re59.html"><span>function::task_gid</span></a></span><span class="refpurpose"> &#8212; 
+     The group identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re60.html"><span>function::task_egid</span></a></span><span class="refpurpose"> &#8212; 
+     The effective group identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re61.html"><span>function::task_uid</span></a></span><span class="refpurpose"> &#8212; 
+     The user identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re62.html"><span>function::task_euid</span></a></span><span class="refpurpose"> &#8212; 
+     The effective user identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re63.html"><span>function::task_prio</span></a></span><span class="refpurpose"> &#8212; 
+     The priority value of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re64.html"><span>function::task_nice</span></a></span><span class="refpurpose"> &#8212; 
+     The nice value of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re65.html"><span>function::task_cpu</span></a></span><span class="refpurpose"> &#8212; 
+     The scheduled cpu of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re66.html"><span>function::task_open_file_handles</span></a></span><span class="refpurpose"> &#8212; 
+     The number of open files of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re67.html"><span>function::task_max_file_handles</span></a></span><span class="refpurpose"> &#8212; 
+     The max number of open files for the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re68.html"><span>function::pn</span></a></span><span class="refpurpose"> &#8212; 
+  Returns the active probe name.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch03.html">3. Timestamp Functions</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re69.html"><span>function::get_cycles</span></a></span><span class="refpurpose"> &#8212; 
+  Processor cycle count.
+ </span></dt><dt><span class="refentrytitle"><a href="re70.html"><span>function::gettimeofday_ns</span></a></span><span class="refpurpose"> &#8212; 
+  Number of nanoseconds since UNIX epoch.
+ </span></dt><dt><span class="refentrytitle"><a href="re71.html"><span>function::gettimeofday_us</span></a></span><span class="refpurpose"> &#8212; 
+     Number of microseconds since UNIX epoch.
+ </span></dt><dt><span class="refentrytitle"><a href="re72.html"><span>function::gettimeofday_ms</span></a></span><span class="refpurpose"> &#8212; 
+     Number of milliseconds since UNIX epoch.
+ </span></dt><dt><span class="refentrytitle"><a href="re73.html"><span>function::gettimeofday_s</span></a></span><span class="refpurpose"> &#8212; 
+     Number of seconds since UNIX epoch.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch04.html">4. Time string utility function</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re74.html"><span>function::ctime</span></a></span><span class="refpurpose"> &#8212; 
+  Convert seconds since epoch into human readable date/time string.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch05.html">5. Memory Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re75.html"><span>function::vm_fault_contains</span></a></span><span class="refpurpose"> &#8212; 
+  Test return value for page fault reason
+ </span></dt><dt><span class="refentrytitle"><a href="re76.html"><span>probe::vm.pagefault</span></a></span><span class="refpurpose"> &#8212; 
+     Records that a page fault occurred.
+ </span></dt><dt><span class="refentrytitle"><a href="re77.html"><span>probe::vm.pagefault.return</span></a></span><span class="refpurpose"> &#8212; 
+     Indicates what type of fault occurred.
+ </span></dt><dt><span class="refentrytitle"><a href="re78.html"><span>function::addr_to_node</span></a></span><span class="refpurpose"> &#8212; 
+     Returns which node a given address belongs to within a NUMA system.
+ </span></dt><dt><span class="refentrytitle"><a href="re79.html"><span>probe::vm.write_shared</span></a></span><span class="refpurpose"> &#8212; 
+     Attempts at writing to a shared page.
+ </span></dt><dt><span class="refentrytitle"><a href="re80.html"><span>probe::vm.write_shared_copy</span></a></span><span class="refpurpose"> &#8212; 
+     Page copy for shared page write.
+ </span></dt><dt><span class="refentrytitle"><a href="re81.html"><span>probe::vm.mmap</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when an mmap is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re82.html"><span>probe::vm.munmap</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when an munmap is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re83.html"><span>probe::vm.brk</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a brk is requested (i.e. the heap will be resized).
+ </span></dt><dt><span class="refentrytitle"><a href="re84.html"><span>probe::vm.oom_kill</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a thread is selected for termination by the OOM killer.
+ </span></dt><dt><span class="refentrytitle"><a href="re85.html"><span>probe::vm.kmalloc</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when kmalloc is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re86.html"><span>probe::vm.kmem_cache_alloc</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when \
+ </span></dt><dt><span class="refentrytitle"><a href="re87.html"><span>probe::vm.kmalloc_node</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when kmalloc_node is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re88.html"><span>probe::vm.kmem_cache_alloc_node</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when \
+ </span></dt><dt><span class="refentrytitle"><a href="re89.html"><span>probe::vm.kfree</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when kfree is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re90.html"><span>probe::vm.kmem_cache_free</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when \
+ </span></dt><dt><span class="refentrytitle"><a href="re91.html"><span>function::proc_mem_size</span></a></span><span class="refpurpose"> &#8212; 
+  Total program virtual memory size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re92.html"><span>function::proc_mem_size_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Total program virtual memory size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re93.html"><span>function::proc_mem_rss</span></a></span><span class="refpurpose"> &#8212; 
+     Program resident set size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re94.html"><span>function::proc_mem_rss_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program resident set size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re95.html"><span>function::proc_mem_shr</span></a></span><span class="refpurpose"> &#8212; 
+     Program shared pages (from shared mappings)
+ </span></dt><dt><span class="refentrytitle"><a href="re96.html"><span>function::proc_mem_shr_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program shared pages (from shared mappings)
+ </span></dt><dt><span class="refentrytitle"><a href="re97.html"><span>function::proc_mem_txt</span></a></span><span class="refpurpose"> &#8212; 
+     Program text (code) size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re98.html"><span>function::proc_mem_txt_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program text (code) size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re99.html"><span>function::proc_mem_data</span></a></span><span class="refpurpose"> &#8212; 
+     Program data size (data + stack) in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re100.html"><span>function::proc_mem_data_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program data size (data + stack) in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re101.html"><span>function::mem_page_size</span></a></span><span class="refpurpose"> &#8212; 
+     Number of bytes in a page for this architecture
+ </span></dt><dt><span class="refentrytitle"><a href="re102.html"><span>function::bytes_to_string</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string for given bytes
+ </span></dt><dt><span class="refentrytitle"><a href="re103.html"><span>function::pages_to_string</span></a></span><span class="refpurpose"> &#8212; 
+     Turns pages into a human readable string
+ </span></dt><dt><span class="refentrytitle"><a href="re104.html"><span>function::proc_mem_string</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string of current proc memory usage
+ </span></dt><dt><span class="refentrytitle"><a href="re105.html"><span>function::proc_mem_string_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string of process memory usage
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch06.html">6. Task Time Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re106.html"><span>function::task_utime</span></a></span><span class="refpurpose"> &#8212; 
+  User time of the current task
+ </span></dt><dt><span class="refentrytitle"><a href="re107.html"><span>function::task_utime_tid</span></a></span><span class="refpurpose"> &#8212; 
+     User time of the given task
+ </span></dt><dt><span class="refentrytitle"><a href="re108.html"><span>function::task_stime</span></a></span><span class="refpurpose"> &#8212; 
+     System time of the current task
+ </span></dt><dt><span class="refentrytitle"><a href="re109.html"><span>function::task_stime_tid</span></a></span><span class="refpurpose"> &#8212; 
+     System time of the given task
+ </span></dt><dt><span class="refentrytitle"><a href="re110.html"><span>function::cputime_to_msecs</span></a></span><span class="refpurpose"> &#8212; 
+     Translates the given cputime into milliseconds
+ </span></dt><dt><span class="refentrytitle"><a href="re111.html"><span>function::msecs_to_string</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string for given milliseconds
+ </span></dt><dt><span class="refentrytitle"><a href="re112.html"><span>function::cputime_to_string</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string for given cputime
+ </span></dt><dt><span class="refentrytitle"><a href="re113.html"><span>function::task_time_string</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string of task time usage
+ </span></dt><dt><span class="refentrytitle"><a href="re114.html"><span>function::task_time_string_tid</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string of task time usage
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch07.html">7. IO Scheduler and block IO Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re115.html"><span>probe::ioscheduler.elv_next_request</span></a></span><span class="refpurpose"> &#8212; 
+  Fires when a request is retrieved from the request queue
+ </span></dt><dt><span class="refentrytitle"><a href="re116.html"><span>probe::ioscheduler.elv_next_request.return</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request retrieval issues a return signal
+ </span></dt><dt><span class="refentrytitle"><a href="re117.html"><span>probe::ioscheduler.elv_completed_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is completed
+ </span></dt><dt><span class="refentrytitle"><a href="re118.html"><span>probe::ioscheduler.elv_add_request.kp</span></a></span><span class="refpurpose"> &#8212; 
+     kprobe based probe to indicate that a request was added to the request queue
+ </span></dt><dt><span class="refentrytitle"><a href="re119.html"><span>probe::ioscheduler.elv_add_request.tp</span></a></span><span class="refpurpose"> &#8212; 
+     tracepoint based probe to indicate a request is added to the request queue.
+ </span></dt><dt><span class="refentrytitle"><a href="re120.html"><span>probe::ioscheduler.elv_add_request</span></a></span><span class="refpurpose"> &#8212; 
+     probe to indicate request is added to the request queue.
+ </span></dt><dt><span class="refentrytitle"><a href="re121.html"><span>probe::ioscheduler_trace.elv_completed_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is
+ </span></dt><dt><span class="refentrytitle"><a href="re122.html"><span>probe::ioscheduler_trace.elv_issue_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is
+ </span></dt><dt><span class="refentrytitle"><a href="re123.html"><span>probe::ioscheduler_trace.elv_requeue_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is
+ </span></dt><dt><span class="refentrytitle"><a href="re124.html"><span>probe::ioscheduler_trace.elv_abort_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is aborted.
+ </span></dt><dt><span class="refentrytitle"><a href="re125.html"><span>probe::ioscheduler_trace.plug</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request queue is plugged;
+ </span></dt><dt><span class="refentrytitle"><a href="re126.html"><span>probe::ioscheduler_trace.unplug_io</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request queue is unplugged;
+ </span></dt><dt><span class="refentrytitle"><a href="re127.html"><span>probe::ioscheduler_trace.unplug_timer</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when unplug timer associated
+ </span></dt><dt><span class="refentrytitle"><a href="re128.html"><span>probe::ioblock.request</span></a></span><span class="refpurpose"> &#8212; 
+  Fires whenever making a generic block I/O request.
+ </span></dt><dt><span class="refentrytitle"><a href="re129.html"><span>probe::ioblock.end</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever a block I/O transfer is complete.
+ </span></dt><dt><span class="refentrytitle"><a href="re130.html"><span>probe::ioblock_trace.bounce</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever a buffer bounce is needed for at least one page of a block IO request.
+ </span></dt><dt><span class="refentrytitle"><a href="re131.html"><span>probe::ioblock_trace.request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires just as a generic block I/O request is created for a bio.
+ </span></dt><dt><span class="refentrytitle"><a href="re132.html"><span>probe::ioblock_trace.end</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever a block I/O transfer is complete.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch08.html">8. SCSI Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re133.html"><span>probe::scsi.ioentry</span></a></span><span class="refpurpose"> &#8212; 
+  Prepares a SCSI mid-layer request
+ </span></dt><dt><span class="refentrytitle"><a href="re134.html"><span>probe::scsi.iodispatching</span></a></span><span class="refpurpose"> &#8212; 
+     SCSI mid-layer dispatched low-level SCSI command
+ </span></dt><dt><span class="refentrytitle"><a href="re135.html"><span>probe::scsi.iodone</span></a></span><span class="refpurpose"> &#8212; 
+     SCSI command completed by low level driver and enqueued into the done queue.
+ </span></dt><dt><span class="refentrytitle"><a href="re136.html"><span>probe::scsi.iocompleted</span></a></span><span class="refpurpose"> &#8212; 
+     SCSI mid-layer running the completion processing for block device I/O requests
+ </span></dt><dt><span class="refentrytitle"><a href="re137.html"><span>probe::scsi.ioexecute</span></a></span><span class="refpurpose"> &#8212; 
+     Create mid-layer SCSI request and wait for the result
+ </span></dt><dt><span class="refentrytitle"><a href="re138.html"><span>probe::scsi.set_state</span></a></span><span class="refpurpose"> &#8212; 
+     Order SCSI device state change
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch09.html">9. TTY Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re139.html"><span>probe::tty.open</span></a></span><span class="refpurpose"> &#8212; 
+  Called when a tty is opened
+ </span></dt><dt><span class="refentrytitle"><a href="re140.html"><span>probe::tty.release</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the tty is closed
+ </span></dt><dt><span class="refentrytitle"><a href="re141.html"><span>probe::tty.resize</span></a></span><span class="refpurpose"> &#8212; 
+     Called when a terminal resize happens
+ </span></dt><dt><span class="refentrytitle"><a href="re142.html"><span>probe::tty.ioctl</span></a></span><span class="refpurpose"> &#8212; 
+     called when a ioctl is request to the tty
+ </span></dt><dt><span class="refentrytitle"><a href="re143.html"><span>probe::tty.init</span></a></span><span class="refpurpose"> &#8212; 
+     Called when a tty is being initalized
+ </span></dt><dt><span class="refentrytitle"><a href="re144.html"><span>probe::tty.register</span></a></span><span class="refpurpose"> &#8212; 
+     Called when a tty device is registred
+ </span></dt><dt><span class="refentrytitle"><a href="re145.html"><span>probe::tty.unregister</span></a></span><span class="refpurpose"> &#8212; 
+     Called when a tty device is being unregistered
+ </span></dt><dt><span class="refentrytitle"><a href="re146.html"><span>probe::tty.poll</span></a></span><span class="refpurpose"> &#8212; 
+     Called when a tty device is being polled
+ </span></dt><dt><span class="refentrytitle"><a href="re147.html"><span>probe::tty.receive</span></a></span><span class="refpurpose"> &#8212; 
+     called when a tty receives a message
+ </span></dt><dt><span class="refentrytitle"><a href="re148.html"><span>probe::tty.write</span></a></span><span class="refpurpose"> &#8212; 
+     write to the tty line
+ </span></dt><dt><span class="refentrytitle"><a href="re149.html"><span>probe::tty.read</span></a></span><span class="refpurpose"> &#8212; 
+     called when a tty line will be read
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch10.html">10. Networking Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re150.html"><span>probe::netdev.receive</span></a></span><span class="refpurpose"> &#8212; 
+  Data received from network device.
+ </span></dt><dt><span class="refentrytitle"><a href="re151.html"><span>probe::netdev.transmit</span></a></span><span class="refpurpose"> &#8212; 
+     Network device transmitting buffer
+ </span></dt><dt><span class="refentrytitle"><a href="re152.html"><span>probe::netdev.change_mtu</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the netdev MTU is changed
+ </span></dt><dt><span class="refentrytitle"><a href="re153.html"><span>probe::netdev.open</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device is opened
+ </span></dt><dt><span class="refentrytitle"><a href="re154.html"><span>probe::netdev.close</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device is closed
+ </span></dt><dt><span class="refentrytitle"><a href="re155.html"><span>probe::netdev.hard_transmit</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the devices is going to TX (hard)
+ </span></dt><dt><span class="refentrytitle"><a href="re156.html"><span>probe::netdev.rx</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device is going to receive a packet
+ </span></dt><dt><span class="refentrytitle"><a href="re157.html"><span>probe::netdev.change_rx_flag</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device RX flag will be changed
+ </span></dt><dt><span class="refentrytitle"><a href="re158.html"><span>probe::netdev.set_promiscuity</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device enters/leaves promiscuity
+ </span></dt><dt><span class="refentrytitle"><a href="re159.html"><span>probe::netdev.ioctl</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device suffers an IOCTL
+ </span></dt><dt><span class="refentrytitle"><a href="re160.html"><span>probe::netdev.register</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device is registered
+ </span></dt><dt><span class="refentrytitle"><a href="re161.html"><span>probe::netdev.unregister</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the device is being unregistered
+ </span></dt><dt><span class="refentrytitle"><a href="re162.html"><span>probe::netdev.get_stats</span></a></span><span class="refpurpose"> &#8212; 
+     Called when someone asks the device statistics
+ </span></dt><dt><span class="refentrytitle"><a href="re163.html"><span>probe::netdev.change_mac</span></a></span><span class="refpurpose"> &#8212; 
+     Called when the netdev_name has the MAC changed
+ </span></dt><dt><span class="refentrytitle"><a href="re164.html"><span>probe::tcp.sendmsg</span></a></span><span class="refpurpose"> &#8212; 
+  Sending a tcp message
+ </span></dt><dt><span class="refentrytitle"><a href="re165.html"><span>probe::tcp.sendmsg.return</span></a></span><span class="refpurpose"> &#8212; 
+     Sending TCP message is done
+ </span></dt><dt><span class="refentrytitle"><a href="re166.html"><span>probe::tcp.recvmsg</span></a></span><span class="refpurpose"> &#8212; 
+     Receiving TCP message
+ </span></dt><dt><span class="refentrytitle"><a href="re167.html"><span>probe::tcp.recvmsg.return</span></a></span><span class="refpurpose"> &#8212; 
+     Receiving TCP message complete
+ </span></dt><dt><span class="refentrytitle"><a href="re168.html"><span>probe::tcp.disconnect</span></a></span><span class="refpurpose"> &#8212; 
+     TCP socket disconnection
+ </span></dt><dt><span class="refentrytitle"><a href="re169.html"><span>probe::tcp.disconnect.return</span></a></span><span class="refpurpose"> &#8212; 
+     TCP socket disconnection complete
+ </span></dt><dt><span class="refentrytitle"><a href="re170.html"><span>probe::tcp.setsockopt</span></a></span><span class="refpurpose"> &#8212; 
+     Call to <code class="function">setsockopt</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re171.html"><span>probe::tcp.setsockopt.return</span></a></span><span class="refpurpose"> &#8212; 
+     Return from <code class="function">setsockopt</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re172.html"><span>probe::tcp.receive</span></a></span><span class="refpurpose"> &#8212; 
+     Called when a TCP packet is received
+ </span></dt><dt><span class="refentrytitle"><a href="re173.html"><span>probe::udp.sendmsg</span></a></span><span class="refpurpose"> &#8212; 
+  Fires whenever a process sends a UDP message
+ </span></dt><dt><span class="refentrytitle"><a href="re174.html"><span>probe::udp.sendmsg.return</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever an attempt to send a UDP message is completed
+ </span></dt><dt><span class="refentrytitle"><a href="re175.html"><span>probe::udp.recvmsg</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever a UDP message is received
+ </span></dt><dt><span class="refentrytitle"><a href="re176.html"><span>probe::udp.recvmsg.return</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever an attempt to receive a UDP message received is completed
+ </span></dt><dt><span class="refentrytitle"><a href="re177.html"><span>probe::udp.disconnect</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a process requests for a UDP disconnection
+ </span></dt><dt><span class="refentrytitle"><a href="re178.html"><span>probe::udp.disconnect.return</span></a></span><span class="refpurpose"> &#8212; 
+     UDP has been disconnected successfully
+ </span></dt><dt><span class="refentrytitle"><a href="re179.html"><span>function::ip_ntop</span></a></span><span class="refpurpose"> &#8212; 
+  returns a string representation from an integer IP number
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch11.html">11. Socket Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re180.html"><span>probe::socket.send</span></a></span><span class="refpurpose"> &#8212; 
+  Message sent on a socket.
+ </span></dt><dt><span class="refentrytitle"><a href="re181.html"><span>probe::socket.receive</span></a></span><span class="refpurpose"> &#8212; 
+     Message received on a socket.
+ </span></dt><dt><span class="refentrytitle"><a href="re182.html"><span>probe::socket.sendmsg</span></a></span><span class="refpurpose"> &#8212; 
+     Message is currently being sent on a socket.
+ </span></dt><dt><span class="refentrytitle"><a href="re183.html"><span>probe::socket.sendmsg.return</span></a></span><span class="refpurpose"> &#8212; 
+     Return from socket.sendmsg.
+ </span></dt><dt><span class="refentrytitle"><a href="re184.html"><span>probe::socket.recvmsg</span></a></span><span class="refpurpose"> &#8212; 
+     Message being received on socket
+ </span></dt><dt><span class="refentrytitle"><a href="re185.html"><span>probe::socket.recvmsg.return</span></a></span><span class="refpurpose"> &#8212; 
+     Return from Message being received on socket
+ </span></dt><dt><span class="refentrytitle"><a href="re186.html"><span>probe::socket.aio_write</span></a></span><span class="refpurpose"> &#8212; 
+     Message send via <code class="function">sock_aio_write</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re187.html"><span>probe::socket.aio_write.return</span></a></span><span class="refpurpose"> &#8212; 
+     Conclusion of message send via <code class="function">sock_aio_write</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re188.html"><span>probe::socket.aio_read</span></a></span><span class="refpurpose"> &#8212; 
+     Receiving message via <code class="function">sock_aio_read</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re189.html"><span>probe::socket.aio_read.return</span></a></span><span class="refpurpose"> &#8212; 
+     Conclusion of message received via <code class="function">sock_aio_read</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re190.html"><span>probe::socket.writev</span></a></span><span class="refpurpose"> &#8212; 
+     Message sent via <code class="function">socket_writev</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re191.html"><span>probe::socket.writev.return</span></a></span><span class="refpurpose"> &#8212; 
+     Conclusion of message sent via <code class="function">socket_writev</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re192.html"><span>probe::socket.readv</span></a></span><span class="refpurpose"> &#8212; 
+     Receiving a message via <code class="function">sock_readv</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re193.html"><span>probe::socket.readv.return</span></a></span><span class="refpurpose"> &#8212; 
+     Conclusion of receiving a message via <code class="function">sock_readv</code>
+ </span></dt><dt><span class="refentrytitle"><a href="re194.html"><span>probe::socket.create</span></a></span><span class="refpurpose"> &#8212; 
+     Creation of a socket
+ </span></dt><dt><span class="refentrytitle"><a href="re195.html"><span>probe::socket.create.return</span></a></span><span class="refpurpose"> &#8212; 
+     Return from Creation of a socket
+ </span></dt><dt><span class="refentrytitle"><a href="re196.html"><span>probe::socket.close</span></a></span><span class="refpurpose"> &#8212; 
+     Close a socket
+ </span></dt><dt><span class="refentrytitle"><a href="re197.html"><span>probe::socket.close.return</span></a></span><span class="refpurpose"> &#8212; 
+     Return from closing a socket
+ </span></dt><dt><span class="refentrytitle"><a href="re198.html"><span>function::sock_prot_num2str</span></a></span><span class="refpurpose"> &#8212; 
+     Given a protocol number, return a string representation.
+ </span></dt><dt><span class="refentrytitle"><a href="re199.html"><span>function::sock_prot_str2num</span></a></span><span class="refpurpose"> &#8212; 
+     Given a protocol name (string), return the corresponding protocol number.
+ </span></dt><dt><span class="refentrytitle"><a href="re200.html"><span>function::sock_fam_num2str</span></a></span><span class="refpurpose"> &#8212; 
+     Given a protocol family number, return a string representation.
+ </span></dt><dt><span class="refentrytitle"><a href="re201.html"><span>function::sock_fam_str2num</span></a></span><span class="refpurpose"> &#8212; 
+     Given a protocol family name (string), return the corresponding
+ </span></dt><dt><span class="refentrytitle"><a href="re202.html"><span>function::sock_state_num2str</span></a></span><span class="refpurpose"> &#8212; 
+     Given a socket state number, return a string representation.
+ </span></dt><dt><span class="refentrytitle"><a href="re203.html"><span>function::sock_state_str2num</span></a></span><span class="refpurpose"> &#8212; 
+     Given a socket state string, return the corresponding state number.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch12.html">12. Kernel Process Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re204.html"><span>probe::kprocess.create</span></a></span><span class="refpurpose"> &#8212; 
+  Fires whenever a new process is successfully created
+ </span></dt><dt><span class="refentrytitle"><a href="re205.html"><span>probe::kprocess.start</span></a></span><span class="refpurpose"> &#8212; 
+     Starting new process
+ </span></dt><dt><span class="refentrytitle"><a href="re206.html"><span>probe::kprocess.exec</span></a></span><span class="refpurpose"> &#8212; 
+     Attempt to exec to a new program
+ </span></dt><dt><span class="refentrytitle"><a href="re207.html"><span>probe::kprocess.exec_complete</span></a></span><span class="refpurpose"> &#8212; 
+     Return from exec to a new program
+ </span></dt><dt><span class="refentrytitle"><a href="re208.html"><span>probe::kprocess.exit</span></a></span><span class="refpurpose"> &#8212; 
+     Exit from process
+ </span></dt><dt><span class="refentrytitle"><a href="re209.html"><span>probe::kprocess.release</span></a></span><span class="refpurpose"> &#8212; 
+     Process released
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch13.html">13. Signal Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re210.html"><span>probe::signal.send</span></a></span><span class="refpurpose"> &#8212; 
+  Signal being sent to a process
+ </span></dt><dt><span class="refentrytitle"><a href="re211.html"><span>probe::signal.send.return</span></a></span><span class="refpurpose"> &#8212; 
+     Signal being sent to a process completed
+ </span></dt><dt><span class="refentrytitle"><a href="re212.html"><span>probe::signal.checkperm</span></a></span><span class="refpurpose"> &#8212; 
+     Check being performed on a sent signal
+ </span></dt><dt><span class="refentrytitle"><a href="re213.html"><span>probe::signal.checkperm.return</span></a></span><span class="refpurpose"> &#8212; 
+     Check performed on a sent signal completed
+ </span></dt><dt><span class="refentrytitle"><a href="re214.html"><span>probe::signal.wakeup</span></a></span><span class="refpurpose"> &#8212; 
+     Sleeping process being wakened for signal
+ </span></dt><dt><span class="refentrytitle"><a href="re215.html"><span>probe::signal.check_ignored</span></a></span><span class="refpurpose"> &#8212; 
+     Checking to see signal is ignored
+ </span></dt><dt><span class="refentrytitle"><a href="re216.html"><span>probe::signal.check_ignored.return</span></a></span><span class="refpurpose"> &#8212; 
+     Check to see signal is ignored completed
+ </span></dt><dt><span class="refentrytitle"><a href="re217.html"><span>probe::signal.force_segv</span></a></span><span class="refpurpose"> &#8212; 
+     Forcing send of SIGSEGV
+ </span></dt><dt><span class="refentrytitle"><a href="re218.html"><span>probe::signal.force_segv.return</span></a></span><span class="refpurpose"> &#8212; 
+     Forcing send of SIGSEGV complete
+ </span></dt><dt><span class="refentrytitle"><a href="re219.html"><span>probe::signal.syskill</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a process
+ </span></dt><dt><span class="refentrytitle"><a href="re220.html"><span>probe::signal.syskill.return</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal completed
+ </span></dt><dt><span class="refentrytitle"><a href="re221.html"><span>probe::signal.sys_tkill</span></a></span><span class="refpurpose"> &#8212; 
+     Sending a kill signal to a thread
+ </span></dt><dt><span class="refentrytitle"><a href="re222.html"><span>probe::signal.systkill.return</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a thread completed
+ </span></dt><dt><span class="refentrytitle"><a href="re223.html"><span>probe::signal.sys_tgkill</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a thread group
+ </span></dt><dt><span class="refentrytitle"><a href="re224.html"><span>probe::signal.sys_tgkill.return</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a thread group completed
+ </span></dt><dt><span class="refentrytitle"><a href="re225.html"><span>probe::signal.send_sig_queue</span></a></span><span class="refpurpose"> &#8212; 
+     Queuing a signal to a process
+ </span></dt><dt><span class="refentrytitle"><a href="re226.html"><span>probe::signal.send_sig_queue.return</span></a></span><span class="refpurpose"> &#8212; 
+     Queuing a signal to a process completed
+ </span></dt><dt><span class="refentrytitle"><a href="re227.html"><span>probe::signal.pending</span></a></span><span class="refpurpose"> &#8212; 
+     Examining pending signal
+ </span></dt><dt><span class="refentrytitle"><a href="re228.html"><span>probe::signal.pending.return</span></a></span><span class="refpurpose"> &#8212; 
+     Examination of pending signal completed
+ </span></dt><dt><span class="refentrytitle"><a href="re229.html"><span>probe::signal.handle</span></a></span><span class="refpurpose"> &#8212; 
+     Signal handler being invoked
+ </span></dt><dt><span class="refentrytitle"><a href="re230.html"><span>probe::signal.handle.return</span></a></span><span class="refpurpose"> &#8212; 
+     Signal handler invocation completed
+ </span></dt><dt><span class="refentrytitle"><a href="re231.html"><span>probe::signal.do_action</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing a signal action
+ </span></dt><dt><span class="refentrytitle"><a href="re232.html"><span>probe::signal.do_action.return</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing a signal action completed
+ </span></dt><dt><span class="refentrytitle"><a href="re233.html"><span>probe::signal.procmask</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing blocked signals
+ </span></dt><dt><span class="refentrytitle"><a href="re234.html"><span>probe::signal.procmask.return</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing blocked signals completed
+ </span></dt><dt><span class="refentrytitle"><a href="re235.html"><span>probe::signal.flush</span></a></span><span class="refpurpose"> &#8212; 
+     Flushing all pending signals for a task
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch14.html">14. Directory-entry (dentry) Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re236.html"><span>function::d_name</span></a></span><span class="refpurpose"> &#8212; 
+  get the dirent name
+ </span></dt><dt><span class="refentrytitle"><a href="re237.html"><span>function::reverse_path_walk</span></a></span><span class="refpurpose"> &#8212; 
+     get the full dirent path
+ </span></dt><dt><span class="refentrytitle"><a href="re238.html"><span>function::d_path</span></a></span><span class="refpurpose"> &#8212; 
+     get the full nameidata path
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch15.html">15. Logging Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re239.html"><span>function::log</span></a></span><span class="refpurpose"> &#8212; 
+  Send a line to the common trace buffer.
+ </span></dt><dt><span class="refentrytitle"><a href="re240.html"><span>function::warn</span></a></span><span class="refpurpose"> &#8212; 
+     Send a line to the warning stream.
+ </span></dt><dt><span class="refentrytitle"><a href="re241.html"><span>function::exit</span></a></span><span class="refpurpose"> &#8212; 
+     Start shutting down probing script.
+ </span></dt><dt><span class="refentrytitle"><a href="re242.html"><span>function::error</span></a></span><span class="refpurpose"> &#8212; 
+     Send an error message.
+ </span></dt><dt><span class="refentrytitle"><a href="re243.html"><span>function::ftrace</span></a></span><span class="refpurpose"> &#8212; 
+     Send a message to the ftrace ring-buffer.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch16.html">16. Random functions Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re244.html"><span>function::randint</span></a></span><span class="refpurpose"> &#8212; 
+  Return a random number between [0,n)
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch17.html">17. String and data retrieving functions Tapset</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re245.html"><span>function::kernel_string</span></a></span><span class="refpurpose"> &#8212; 
+  Retrieves string from kernel memory.
+ </span></dt><dt><span class="refentrytitle"><a href="re246.html"><span>function::kernel_string2</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string from kernel memory with alternative error string.
+ </span></dt><dt><span class="refentrytitle"><a href="re247.html"><span>function::kernel_string_n</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string of given length from kernel memory.
+ </span></dt><dt><span class="refentrytitle"><a href="re248.html"><span>function::kernel_long</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a long value stored in kernel memory.
+ </span></dt><dt><span class="refentrytitle"><a href="re249.html"><span>function::kernel_int</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves an int value stored in kernel memory.
+ </span></dt><dt><span class="refentrytitle"><a href="re250.html"><span>function::kernel_short</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a short value stored in kernel memory.
+ </span></dt><dt><span class="refentrytitle"><a href="re251.html"><span>function::kernel_char</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a char value stored in kernel memory.
+ </span></dt><dt><span class="refentrytitle"><a href="re252.html"><span>function::kernel_pointer</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a pointer value stored in kernel memory.
+ </span></dt><dt><span class="refentrytitle"><a href="re253.html"><span>function::user_string</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string from user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re254.html"><span>function::user_string2</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string from user space with alternative error string.
+ </span></dt><dt><span class="refentrytitle"><a href="re255.html"><span>function::user_string_warn</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string from user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re256.html"><span>function::user_string_quoted</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves and quotes string from user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re257.html"><span>function::user_string_n</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string of given length from user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re258.html"><span>function::user_string_n2</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string of given length from user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re259.html"><span>function::user_string_n_warn</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves string from user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re260.html"><span>function::user_string_n_quoted</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves and quotes string from user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re261.html"><span>function::user_short</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a short value stored in user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re262.html"><span>function::user_short_warn</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a short value stored in user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re263.html"><span>function::user_int</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves an int value stored in user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re264.html"><span>function::user_int_warn</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves an int value stored in user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re265.html"><span>function::user_long</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a long value stored in user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re266.html"><span>function::user_long_warn</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a long value stored in user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re267.html"><span>function::user_char</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a char value stored in user space.
+ </span></dt><dt><span class="refentrytitle"><a href="re268.html"><span>function::user_char_warn</span></a></span><span class="refpurpose"> &#8212; 
+     Retrieves a char value stored in user space.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch18.html">18. A collection of standard string functions</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re269.html"><span>function::strlen</span></a></span><span class="refpurpose"> &#8212; 
+  Returns the length of a string.
+ </span></dt><dt><span class="refentrytitle"><a href="re270.html"><span>function::substr</span></a></span><span class="refpurpose"> &#8212; 
+     Returns a substring.
+ </span></dt><dt><span class="refentrytitle"><a href="re271.html"><span>function::stringat</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the char at a given position in the string.
+ </span></dt><dt><span class="refentrytitle"><a href="re272.html"><span>function::isinstr</span></a></span><span class="refpurpose"> &#8212; 
+     Returns whether a string is a substring of another string.
+ </span></dt><dt><span class="refentrytitle"><a href="re273.html"><span>function::text_str</span></a></span><span class="refpurpose"> &#8212; 
+     Escape any non-printable chars in a string.
+ </span></dt><dt><span class="refentrytitle"><a href="re274.html"><span>function::text_strn</span></a></span><span class="refpurpose"> &#8212; 
+     Escape any non-printable chars in a string.
+ </span></dt><dt><span class="refentrytitle"><a href="re275.html"><span>function::tokenize</span></a></span><span class="refpurpose"> &#8212; 
+     Return the next non-empty token in a string.
+ </span></dt><dt><span class="refentrytitle"><a href="re276.html"><span>function::str_replace</span></a></span><span class="refpurpose"> &#8212; 
+     str_replace Replaces all instances of a substring with another.
+ </span></dt><dt><span class="refentrytitle"><a href="re277.html"><span>function::strtol</span></a></span><span class="refpurpose"> &#8212; 
+     strtol - Convert a string to a long.
+ </span></dt><dt><span class="refentrytitle"><a href="re278.html"><span>function::isdigit</span></a></span><span class="refpurpose"> &#8212; 
+     Checks for a digit.
+ </span></dt></dl></dd><dt><span class="chapter"><a href="ch19.html">19. Utility functions for using ansi control chars in logs</a></span></dt><dd><dl><dt><span class="refentrytitle"><a href="re279.html"><span>function::ansi_clear_screen</span></a></span><span class="refpurpose"> &#8212; 
+  Move cursor to top left and clear screen.
+ </span></dt><dt><span class="refentrytitle"><a href="re280.html"><span>function::ansi_set_color</span></a></span><span class="refpurpose"> &#8212; 
+     Set the ansi Select Graphic Rendition mode.
+ </span></dt><dt><span class="refentrytitle"><a href="re281.html"><span>function::ansi_set_color2</span></a></span><span class="refpurpose"> &#8212; 
+     Set the ansi Select Graphic Rendition mode.
+ </span></dt><dt><span class="refentrytitle"><a href="re282.html"><span>function::ansi_set_color3</span></a></span><span class="refpurpose"> &#8212; 
+     Set the ansi Select Graphic Rendition mode.
+ </span></dt><dt><span class="refentrytitle"><a href="re283.html"><span>function::ansi_reset_color</span></a></span><span class="refpurpose"> &#8212; 
+     Resets Select Graphic Rendition mode.
+ </span></dt><dt><span class="refentrytitle"><a href="re284.html"><span>function::ansi_new_line</span></a></span><span class="refpurpose"> &#8212; 
+     Move cursor to new line.
+ </span></dt><dt><span class="refentrytitle"><a href="re285.html"><span>function::ansi_cursor_move</span></a></span><span class="refpurpose"> &#8212; 
+     Move cursor to new coordinates.
+ </span></dt><dt><span class="refentrytitle"><a href="re286.html"><span>function::ansi_cursor_hide</span></a></span><span class="refpurpose"> &#8212; 
+     Hides the cursor.
+ </span></dt><dt><span class="refentrytitle"><a href="re287.html"><span>function::ansi_cursor_save</span></a></span><span class="refpurpose"> &#8212; 
+     Saves the cursor position.
+ </span></dt><dt><span class="refentrytitle"><a href="re288.html"><span>function::ansi_cursor_restore</span></a></span><span class="refpurpose"> &#8212; 
+     Restores a previously saved cursor position.
+ </span></dt><dt><span class="refentrytitle"><a href="re289.html"><span>function::ansi_cursor_show</span></a></span><span class="refpurpose"> &#8212; 
+     Shows the cursor.
+ </span></dt></dl></dd></dl></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left">&#160;</td><td width="20%" align="center">&#160;</td><td width="40%" align="right">&#160;<a accesskey="n" href="ch01.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">&#160;</td><td width="20%" align="center">&#160;</td><td width="40%" align="right" valign="top">&#160;Chapter&#160;1.&#160;Introduction</td></tr></table></div></body></html>

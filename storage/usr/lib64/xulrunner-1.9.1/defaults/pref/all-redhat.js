@@ -1,0 +1,10 @@
+pref("app.update.enabled", false);
+pref("app.update.autoInstallEnabled", false);
+pref("browser.display.use_system_colors",   true);
+pref("browser.link.open_external",          3);
+pref("general.smoothScroll",                true);
+pref("general.useragent.vendor", "Fedora");
+pref("general.useragent.vendorSub", "1.9.1.15-1.fc12");
+pref("intl.locale.matchOS", true);
+pref("toolkit.networkmanager.disable", false);
+pref("toolkit.storage.synchronous", 0);

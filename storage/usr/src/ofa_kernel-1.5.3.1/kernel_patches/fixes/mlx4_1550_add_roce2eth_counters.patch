@@ -1,0 +1,167 @@
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/main.c	2010-10-10 16:41:52.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c	2010-10-10 16:42:58.932695067 +0200
+@@ -1361,6 +1361,8 @@ static void *mlx4_ib_add(struct mlx4_dev
+ 		err = mlx4_counter_alloc(ibdev->dev, &ibdev->counters[k]);
+ 		if (err)
+ 			ibdev->counters[k] = -1;
++		else
++			mlx4_set_iboe_counter(dev, ibdev->counters[k], k + 1);
+ 	}
+ 
+ 	spin_lock_init(&ibdev->sm_lock);
+Index: ofed_kernel-fixes/drivers/net/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/main.c	2010-10-10 16:41:51.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/main.c	2010-10-10 16:42:58.932695067 +0200
+@@ -180,6 +180,22 @@ void *mlx4_get_prot_dev(struct mlx4_dev 
+ }
+ EXPORT_SYMBOL(mlx4_get_prot_dev);
+ 
++void mlx4_set_iboe_counter(struct mlx4_dev *dev, int index, u8 port)
++{
++	struct mlx4_priv *priv = mlx4_priv(dev);
++
++	priv->iboe_counter_index[port - 1] = index;
++}
++EXPORT_SYMBOL(mlx4_set_iboe_counter);
++
++int mlx4_get_iboe_counter(struct mlx4_dev *dev, u8 port)
++{
++	struct mlx4_priv *priv = mlx4_priv(dev);
++
++	return priv->iboe_counter_index[port - 1];
++}
++EXPORT_SYMBOL(mlx4_get_iboe_counter);
++
+ int mlx4_check_port_params(struct mlx4_dev *dev,
+ 			   enum mlx4_port_type *port_type)
+ {
+@@ -1298,6 +1314,7 @@ static int __mlx4_init_one(struct pci_de
+ 	struct mlx4_dev *dev;
+ 	int err;
+ 	int port;
++	int i;
+ 
+ 	printk(KERN_INFO PFX "Initializing %s\n",
+ 	       pci_name(pdev));
+@@ -1376,6 +1393,8 @@ static int __mlx4_init_one(struct pci_de
+ 
+ 	INIT_LIST_HEAD(&priv->pgdir_list);
+ 	mutex_init(&priv->pgdir_mutex);
++	for (i = 0; i < MLX4_MAX_PORTS; ++i)
++		priv->iboe_counter_index[i] = -1;
+ 
+ 	/*
+ 	 * Now reset the HCA before we touch the PCI capabilities or
+Index: ofed_kernel-fixes/drivers/net/mlx4/mlx4.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/mlx4.h	2010-10-10 16:41:50.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/mlx4.h	2010-10-10 16:42:58.932695067 +0200
+@@ -324,6 +324,7 @@ struct mlx4_priv {
+ 	int                     changed_ports;
+ 	struct mlx4_sense       sense;
+ 	struct mutex		port_mutex;
++	int			iboe_counter_index[MLX4_MAX_PORTS];
+ };
+ 
+ static inline struct mlx4_priv *mlx4_priv(struct mlx4_dev *dev)
+Index: ofed_kernel-fixes/include/linux/mlx4/driver.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/linux/mlx4/driver.h	2010-10-10 16:41:46.000000000 +0200
++++ ofed_kernel-fixes/include/linux/mlx4/driver.h	2010-10-10 16:43:41.504192789 +0200
+@@ -71,5 +71,7 @@ void mlx4_unregister_interface(struct ml
+ void *mlx4_get_prot_dev(struct mlx4_dev *dev, enum mlx4_prot proto, int port);
+ 
+ struct mlx4_dev *mlx4_query_interface(void *, int *port);
++void mlx4_set_iboe_counter(struct mlx4_dev *dev, int index, u8 port);
++int mlx4_get_iboe_counter(struct mlx4_dev *dev, u8 port);
+ 
+ #endif /* MLX4_DRIVER_H */
+Index: ofed_kernel-fixes/drivers/net/mlx4/en_port.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/en_port.c	2010-10-10 16:41:48.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/en_port.c	2010-10-10 16:42:58.936693949 +0200
+@@ -143,6 +143,48 @@ int mlx4_SET_PORT_qpn_calc(struct mlx4_d
+ }
+ 
+ 
++static int read_iboe_counters(struct mlx4_dev *dev, int index, u64 counters[])
++{
++	struct mlx4_cmd_mailbox *mailbox;
++	int err;
++	int mode;
++	struct mlx4_counters_ext *ext;
++	struct mlx4_counters *reg;
++
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox))
++		return -ENOMEM;
++
++	err = mlx4_cmd_box(dev, 0, mailbox->dma, index, 0,
++			   MLX4_CMD_QUERY_IF_STAT, MLX4_CMD_TIME_CLASS_C);
++	if (err)
++		goto out;
++
++	mode = be32_to_cpu(((struct mlx4_counters *)mailbox->buf)->counter_mode) & 0xf;
++	switch (mode) {
++	case 0:
++		reg = mailbox->buf;
++		counters[0] = be64_to_cpu(reg->rx_frames);
++		counters[1] = be64_to_cpu(reg->tx_frames);
++		counters[2] = be64_to_cpu(reg->rx_bytes);
++		counters[3] = be64_to_cpu(reg->tx_bytes);
++		break;
++	case 1:
++		ext = mailbox->buf;
++		counters[0] = be64_to_cpu(ext->rx_uni_frames);
++		counters[1] = be64_to_cpu(ext->tx_uni_frames);
++		counters[2] = be64_to_cpu(ext->rx_uni_bytes);
++		counters[3] = be64_to_cpu(ext->tx_uni_bytes);
++		break;
++	default:
++		err = -EINVAL;
++	}
++
++out:
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	return err;
++}
++
+ int mlx4_en_DUMP_ETH_STATS(struct mlx4_en_dev *mdev, u8 port, u8 reset)
+ {
+ 	struct mlx4_en_stat_out_mbox *mlx4_en_stats;
+@@ -152,6 +194,13 @@ int mlx4_en_DUMP_ETH_STATS(struct mlx4_e
+ 	u64 in_mod = reset << 8 | port;
+ 	int err;
+ 	int i;
++	int counter;
++	u64 counters[4];
++
++	memset(counters, 0, sizeof counters);
++	counter = mlx4_get_iboe_counter(priv->mdev->dev, port);
++	if (counter >= 0)
++		err = read_iboe_counters(priv->mdev->dev, counter, counters);
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(mdev->dev);
+ 	if (IS_ERR(mailbox))
+@@ -166,14 +215,14 @@ int mlx4_en_DUMP_ETH_STATS(struct mlx4_e
+ 
+ 	spin_lock_bh(&priv->stats_lock);
+ 
+-	stats->rx_packets = 0;
+-	stats->rx_bytes = 0;
++	stats->rx_packets = counters[0];
++	stats->rx_bytes = counters[2];
+ 	for (i = 0; i < priv->rx_ring_num; i++) {
+ 		stats->rx_packets += priv->rx_ring[i].packets;
+ 		stats->rx_bytes += priv->rx_ring[i].bytes;
+ 	}
+-	stats->tx_packets = 0;
+-	stats->tx_bytes = 0;
++	stats->tx_packets = counters[1];
++	stats->tx_bytes = counters[3];
+ 	for (i = 0; i <= priv->tx_ring_num; i++) {
+ 		stats->tx_packets += priv->tx_ring[i].packets;
+ 		stats->tx_bytes += priv->tx_ring[i].bytes;

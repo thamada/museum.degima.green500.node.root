@@ -1,0 +1,892 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EDataBook</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Evolution-Data-Server Manual: Address Book Backend (libedata-book)">
+<link rel="up" href="ch01.html" title="Evolution-Data-Server Manual: Address Book Backend (libedata-book)">
+<link rel="prev" href="EBookBackendSync.html" title="EBookBackendSync">
+<link rel="next" href="libedata-book-EDataBookFactory.html" title="EDataBookFactory">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution-Data-Server Manual: Address Book Backend (libedata-book)">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="EBookBackendSync.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution-Data-Server Manual: Address Book Backend (libedata-book)</th>
+<td><a accesskey="n" href="libedata-book-EDataBookFactory.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#EDataBook.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#EDataBook.description" class="shortcut">Description</a>
+                 | 
+                <a href="#EDataBook.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry" title="EDataBook">
+<a name="EDataBook"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="EDataBook.top_of_page"></a>EDataBook</span></h2>
+<p>EDataBook</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="EDataBook.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+struct              <a class="link" href="EDataBook.html#EDataBook-struct" title="struct EDataBook">EDataBook</a>;
+<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *         <a class="link" href="EDataBook.html#e-data-book-new" title="e_data_book_new ()">e_data_book_new</a>                     (<a class="link" href="EBookBackend.html" title="EBookBackend">EBookBackend</a> *backend,
+                                                         ESource *source,
+                                                         GNOME_Evolution_Addressbook_BookListener listener);
+GNOME_Evolution_Addressbook_BookListener  <a class="link" href="EDataBook.html#e-data-book-get-listener" title="e_data_book_get_listener ()">e_data_book_get_listener</a>
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);
+<a class="link" href="EBookBackend.html" title="EBookBackend">EBookBackend</a> *      <a class="link" href="EDataBook.html#e-data-book-get-backend" title="e_data_book_get_backend ()">e_data_book_get_backend</a>             (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);
+ESource *           <a class="link" href="EDataBook.html#e-data-book-get-source" title="e_data_book_get_source ()">e_data_book_get_source</a>              (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-open" title="e_data_book_respond_open ()">e_data_book_respond_open</a>            (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-remove" title="e_data_book_respond_remove ()">e_data_book_respond_remove</a>          (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-create" title="e_data_book_respond_create ()">e_data_book_respond_create</a>          (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         EContact *contact);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-remove-contacts" title="e_data_book_respond_remove_contacts ()">e_data_book_respond_remove_contacts</a> (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-modify" title="e_data_book_respond_modify ()">e_data_book_respond_modify</a>          (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         EContact *contact);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-authenticate-user" title="e_data_book_respond_authenticate_user ()">e_data_book_respond_authenticate_user</a>
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-get-supported-fields" title="e_data_book_respond_get_supported_fields ()">e_data_book_respond_get_supported_fields</a>
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *fields);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-get-required-fields" title="e_data_book_respond_get_required_fields ()">e_data_book_respond_get_required_fields</a>
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *fields);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-get-supported-auth-methods" title="e_data_book_respond_get_supported_auth_methods ()">e_data_book_respond_get_supported_auth_methods</a>
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *fields);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-get-book-view" title="e_data_book_respond_get_book_view ()">e_data_book_respond_get_book_view</a>   (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a class="link" href="EDataBookView.html" title="EDataBookView">EDataBookView</a> *book_view);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-get-contact" title="e_data_book_respond_get_contact ()">e_data_book_respond_get_contact</a>     (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *vcard);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-get-contact-list" title="e_data_book_respond_get_contact_list ()">e_data_book_respond_get_contact_list</a>
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *cards);
+void                <a class="link" href="EDataBook.html#e-data-book-respond-get-changes" title="e_data_book_respond_get_changes ()">e_data_book_respond_get_changes</a>     (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *changes);
+void                <a class="link" href="EDataBook.html#e-data-book-report-writable" title="e_data_book_report_writable ()">e_data_book_report_writable</a>         (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> writable);
+void                <a class="link" href="EDataBook.html#e-data-book-report-connection-status" title="e_data_book_report_connection_status ()">e_data_book_report_connection_status</a>
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> is_online);
+void                <a class="link" href="EDataBook.html#e-data-book-report-auth-required" title="e_data_book_report_auth_required ()">e_data_book_report_auth_required</a>    (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="EDataBook.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="../gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="../libbonobo/libbonobo-bonobo-object.html#BonoboObject"
+>BonoboObject</a>
+         +----EDataBook
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="EDataBook.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="EDataBook.details"></a><h2>Details</h2>
+<div class="refsect2" title="struct EDataBook">
+<a name="EDataBook-struct"></a><h3>struct EDataBook</h3>
+<pre class="programlisting">struct EDataBook;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_new ()">
+<a name="e-data-book-new"></a><h3>e_data_book_new ()</h3>
+<pre class="programlisting"><a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *         e_data_book_new                     (<a class="link" href="EBookBackend.html" title="EBookBackend">EBookBackend</a> *backend,
+                                                         ESource *source,
+                                                         GNOME_Evolution_Addressbook_BookListener listener);</pre>
+<p>
+Create a new <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a> using <em class="parameter"><code>backend</code></em> for storage, <em class="parameter"><code>source</code></em> as the
+storage location and <em class="parameter"><code>listener</code></em> for reporting status.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
+<td> an <a class="link" href="EBookBackend.html" title="EBookBackend"><span class="type">EBookBackend</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
+<td> an <span class="type">ESource</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>listener</code></em> :</span></p></td>
+<td> a <span class="type">GNOME_Evolution_Addressbook_BookListener</span> CORBA object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A new <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_get_listener ()">
+<a name="e-data-book-get-listener"></a><h3>e_data_book_get_listener ()</h3>
+<pre class="programlisting">GNOME_Evolution_Addressbook_BookListener  e_data_book_get_listener
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);</pre>
+<p>
+Gets the CORBA listener associated with <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A <span class="type">GNOME_Evolution_Addressbook_BookListener</span>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_get_backend ()">
+<a name="e-data-book-get-backend"></a><h3>e_data_book_get_backend ()</h3>
+<pre class="programlisting"><a class="link" href="EBookBackend.html" title="EBookBackend">EBookBackend</a> *      e_data_book_get_backend             (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);</pre>
+<p>
+Gets the <a class="link" href="EBookBackend.html" title="EBookBackend"><span class="type">EBookBackend</span></a> being used to store data for <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The <a class="link" href="EBookBackend.html" title="EBookBackend"><span class="type">EBookBackend</span></a> being used.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_get_source ()">
+<a name="e-data-book-get-source"></a><h3>e_data_book_get_source ()</h3>
+<pre class="programlisting">ESource *           e_data_book_get_source              (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);</pre>
+<p>
+Gets the <span class="type">ESource</span> associated with <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> An <span class="type">ESource</span>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_open ()">
+<a name="e-data-book-respond-open"></a><h3>e_data_book_respond_open ()</h3>
+<pre class="programlisting">void                e_data_book_respond_open            (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status);</pre>
+<p>
+Respond to an 'open' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_remove ()">
+<a name="e-data-book-respond-remove"></a><h3>e_data_book_respond_remove ()</h3>
+<pre class="programlisting">void                e_data_book_respond_remove          (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status);</pre>
+<p>
+Respond to a 'remove' request to remove all of <em class="parameter"><code>book</code></em>'s data,
+specified by <em class="parameter"><code>opid</code></em>, indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_create ()">
+<a name="e-data-book-respond-create"></a><h3>e_data_book_respond_create ()</h3>
+<pre class="programlisting">void                e_data_book_respond_create          (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         EContact *contact);</pre>
+<p>
+Respond to a 'create' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> the contact created, or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_remove_contacts ()">
+<a name="e-data-book-respond-remove-contacts"></a><h3>e_data_book_respond_remove_contacts ()</h3>
+<pre class="programlisting">void                e_data_book_respond_remove_contacts (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids);</pre>
+<p>
+Respond to a 'remove contacts' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ids</code></em> :</span></p></td>
+<td> a list of contact IDs removed
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_modify ()">
+<a name="e-data-book-respond-modify"></a><h3>e_data_book_respond_modify ()</h3>
+<pre class="programlisting">void                e_data_book_respond_modify          (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         EContact *contact);</pre>
+<p>
+Respond to a 'modify' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> the modified <span class="type">EContact</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_authenticate_user ()">
+<a name="e-data-book-respond-authenticate-user"></a><h3>e_data_book_respond_authenticate_user ()</h3>
+<pre class="programlisting">void                e_data_book_respond_authenticate_user
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status);</pre>
+<p>
+Respond to an 'authenticate' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_get_supported_fields ()">
+<a name="e-data-book-respond-get-supported-fields"></a><h3>e_data_book_respond_get_supported_fields ()</h3>
+<pre class="programlisting">void                e_data_book_respond_get_supported_fields
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *fields);</pre>
+<p>
+Respond to a 'get supported fields' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fields</code></em> :</span></p></td>
+<td> a list of supported field names
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_get_required_fields ()">
+<a name="e-data-book-respond-get-required-fields"></a><h3>e_data_book_respond_get_required_fields ()</h3>
+<pre class="programlisting">void                e_data_book_respond_get_required_fields
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *fields);</pre>
+<p>
+Respond to a 'get required fields' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fields</code></em> :</span></p></td>
+<td> a list of required field names
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_get_supported_auth_methods ()">
+<a name="e-data-book-respond-get-supported-auth-methods"></a><h3>e_data_book_respond_get_supported_auth_methods ()</h3>
+<pre class="programlisting">void                e_data_book_respond_get_supported_auth_methods
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *fields);</pre>
+<p>
+Respond to a 'get supported auth methods' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fields</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_get_book_view ()">
+<a name="e-data-book-respond-get-book-view"></a><h3>e_data_book_respond_get_book_view ()</h3>
+<pre class="programlisting">void                e_data_book_respond_get_book_view   (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a class="link" href="EDataBookView.html" title="EDataBookView">EDataBookView</a> *book_view);</pre>
+<p>
+Respond to a 'get book view' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book_view</code></em> :</span></p></td>
+<td> the <a class="link" href="EDataBookView.html" title="EDataBookView"><span class="type">EDataBookView</span></a> created
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_get_contact ()">
+<a name="e-data-book-respond-get-contact"></a><h3>e_data_book_respond_get_contact ()</h3>
+<pre class="programlisting">void                e_data_book_respond_get_contact     (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *vcard);</pre>
+<p>
+Respond to a 'get contact' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vcard</code></em> :</span></p></td>
+<td> the found VCard, or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_get_contact_list ()">
+<a name="e-data-book-respond-get-contact-list"></a><h3>e_data_book_respond_get_contact_list ()</h3>
+<pre class="programlisting">void                e_data_book_respond_get_contact_list
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *cards);</pre>
+<p>
+Respond to a 'get contact list' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cards</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_respond_get_changes ()">
+<a name="e-data-book-respond-get-changes"></a><h3>e_data_book_respond_get_changes ()</h3>
+<pre class="programlisting">void                e_data_book_respond_get_changes     (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#guint32"
+>guint32</a> opid,
+                                                         GNOME_Evolution_Addressbook_CallStatus status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *changes);</pre>
+<p>
+Respond to a 'get changes' request specified by <em class="parameter"><code>opid</code></em> on <em class="parameter"><code>book</code></em>,
+indicating <em class="parameter"><code>status</code></em> as the outcome.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opid</code></em> :</span></p></td>
+<td> the operation ID that generated the response
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> the outcome of the operation
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>changes</code></em> :</span></p></td>
+<td> a list of GNOME_Evolution_Addressbook_BookChangeItem items
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_report_writable ()">
+<a name="e-data-book-report-writable"></a><h3>e_data_book_report_writable ()</h3>
+<pre class="programlisting">void                e_data_book_report_writable         (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> writable);</pre>
+<p>
+Notify listeners that <em class="parameter"><code>book</code></em>'s writeable status has changed
+to <em class="parameter"><code>writable</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>writable</code></em> :</span></p></td>
+<td> <code class="literal">TRUE</code> if <em class="parameter"><code>book</code></em> is writeable, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_report_connection_status ()">
+<a name="e-data-book-report-connection-status"></a><h3>e_data_book_report_connection_status ()</h3>
+<pre class="programlisting">void                e_data_book_report_connection_status
+                                                        (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> is_online);</pre>
+<p>
+Notify listeners that <em class="parameter"><code>book</code></em> requires authentication.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EDataBook.html" title="EDataBook"><span class="type">EDataBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>is_online</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_data_book_report_auth_required ()">
+<a name="e-data-book-report-auth-required"></a><h3>e_data_book_report_auth_required ()</h3>
+<pre class="programlisting">void                e_data_book_report_auth_required    (<a class="link" href="EDataBook.html" title="EDataBook">EDataBook</a> *book);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

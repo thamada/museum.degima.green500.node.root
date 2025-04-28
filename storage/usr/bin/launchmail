@@ -1,0 +1,125 @@
+#!/bin/bash
+#
+# Launch Preferred Mail Client
+# Usage:
+#	launchmail
+#
+# v4.0.0
+# ------
+# This script exists because gnome-open cannot launch the preferred mail client
+# without a "mailto:" address parameter.  This script also attempts to run a mail
+# client if GNOME's Preferred Application cannot be determined in cases where
+# gconftool-2 is not installed.
+#
+# by Warren Togami <wtogami@redhat.com>
+# (c) 2000-2006 Red Hat, Inc.
+#
+# This script is in the public domain.
+
+error_dialog() {
+    echo "$1"
+    if [ -x /usr/bin/zenity ]; then
+        /usr/bin/zenity --error --text="$1"
+    else
+        xmessage "$1"
+    fi
+}
+
+mimic_gnome_open() {
+    NEEDTERM=$(gconftool-2 -g /desktop/gnome/url-handlers/mailto/needs_terminal 2>/dev/null | sed -e 's/^\ *//; s/\ *$//')
+    # Check if text-mode
+    if [ "$NEEDTERM" == "true" ]; then
+        PREFTERM=$(gconftool-2 -g /desktop/gnome/applications/terminal/exec 2>/dev/null | sed -e 's/^\ *//; s/\ *$//')
+        TERMARGS=$(gconftool-2 -g /desktop/gnome/applications/terminal/exec_arg 2>/dev/null | sed -e 's/^\ *//; s/\ *$//')
+        # Check if terminal exists
+        if ! exists "$PREFTERM"; then
+            error_dialog "ERROR: The terminal $PREFTERM does not exist.  Please reconfigure."
+            [ -x /usr/bin/gnome-default-applications-properties ] && exec /usr/bin/gnome-default-applications-properties
+            exit 1
+        fi
+
+        # Run text-mode
+        exec $PREFTERM $TERMARGS $GCONF
+    fi
+    
+    # Check if GUI client exists
+    if ! exists "$GCONF"; then
+        error_dialog "ERROR: The mail client $GCONF does not exist.  Please reconfigure."
+        [ -x /usr/bin/gnome-default-applications-properties ] && exec /usr/bin/gnome-default-applications-properties
+        exit 1
+    fi
+    if [ "$GCONF" = "seamonkey" ] && [ -z $1 ]; then
+        GCONF="seamonkey -mail"
+    fi
+    if [ "$GCONF" = "evolution" ]; then
+        GCONF="evolution --component=mail"
+    fi
+
+    # Run GUI client
+    exec $GCONF
+}
+
+sanity_check() {
+	unset INVALID
+	echo "$1" | grep -q "launchmail" && INVALID="yes"
+	echo "$1" | grep -q "gnome-open" && INVALID="yes"
+	if [ "$INVALID" == "yes" ]; then
+		error_dialog "$1 is an invalid mail client.  Please reconfigure."
+		[ -x /usr/bin/gnome-default-applications-properties ] && exec /usr/bin/gnome-default-applications-properties
+		exit 1
+	fi
+}
+
+exists() {
+    which "${1%% *}" 2> /dev/null > /dev/null
+    return $?
+}
+
+# Attempt to run GNOME Preferred Application Mail Client
+if [ -x /usr/bin/gconftool-2 -a -x /usr/bin/gnome-default-applications-properties ]; then
+	# Pull key from gconf, remove %s or "%s", trim leading & trailing spaces
+	GCONF=$(gconftool-2 -g /desktop/gnome/url-handlers/mailto/command 2>/dev/null | sed -e 's/%s//; s/\"\"//; s/^\ *//; s/\ *$//')
+
+	# Remove arguments
+	GCONF="`echo $GCONF | cut -f1 -d" "`"
+
+	# sanity check (prevent infinite loops)
+	sanity_check "$GCONF"
+
+	# GNOME 2.4+ mimic gnome-open behavior to launch mail client
+	if [ ! -z $DISPLAY ] &&  [ -x /usr/bin/gnome-open ]; then
+		mimic_gnome_open "$*"
+	fi
+fi
+
+# Fallback to *any* mail client if all the above failed
+# usually because gconf and GNOME are not installed
+CLIENTS="thunderbird kmail evolution seamonkey sylpheed balsa"
+for client in $CLIENTS; do
+    if exists "$client"; then
+        if [ "$client" = "seamonkey" ] && [ -z $1 ]; then
+            client="seamonkey -mail"
+        fi
+        if [ "$client" = "evolution" ]; then
+            client="evolution --component=mail"
+        fi
+        exec "$client"
+    fi
+done
+
+# No graphical mail clients, try text-mode mail clients
+# first find a terminal...        
+TERMINALS="gnome-terminal konsole urxvt rxvt aterm xterm"
+for terminal in $TERMINALS; do
+    exists "$terminal" && break
+done
+# find a client...
+CLIENTS="mutt cone pine elm gnus" 
+for client in $CLIENTS; do
+    if exists "$client"; then
+        exec $terminal -e $client
+    fi
+done
+
+error_dialog "ERROR: No mail clients were found."
+exit 1

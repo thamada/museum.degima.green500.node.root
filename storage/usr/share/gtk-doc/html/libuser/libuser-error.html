@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>error</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libuser Reference Manual">
+<link rel="up" href="ch01.html" title="libuser">
+<link rel="prev" href="libuser-entity.html" title="entity">
+<link rel="next" href="libuser-prompt.html" title="prompt">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="libuser">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libuser-entity.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libuser Reference Manual</th>
+<td><a accesskey="n" href="libuser-prompt.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libuser-error.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libuser-error.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="error">
+<a name="libuser-error"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libuser-error.top_of_page"></a>error</span></h2>
+<p>error — Functions for allocating and manipulating <span class="type">lu_error</span> structures.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libuser-error.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#define             <a class="link" href="libuser-error.html#LU-ERROR-CHECK--CAPS" title="LU_ERROR_CHECK()">LU_ERROR_CHECK</a>                      (err_p_p)
+void                <a class="link" href="libuser-error.html#lu-error-new" title="lu_error_new ()">lu_error_new</a>                        (lu_error_t **error,
+                                                         lu_status_t code,
+                                                         const char *fmt,
+                                                         ...);
+void                <a class="link" href="libuser-error.html#lu-error-free" title="lu_error_free ()">lu_error_free</a>                       (lu_error_t **error);
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libuser-error.html#lu-error-is-success" title="lu_error_is_success ()">lu_error_is_success</a>                 (lu_status_t status);
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libuser-error.html#lu-error-is-warning" title="lu_error_is_warning ()">lu_error_is_warning</a>                 (lu_status_t status);
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libuser-error.html#lu-error-is-error" title="lu_error_is_error ()">lu_error_is_error</a>                   (lu_status_t status);
+const char *        <a class="link" href="libuser-error.html#lu-strerror" title="lu_strerror ()">lu_strerror</a>                         (lu_error_t *error);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libuser-error.description"></a><h2>Description</h2>
+<p>
+<code class="filename">error.h</code> includes declarations for allocating and
+manipulating <span class="type">lu_error</span> structures.  These structures hold error and status
+information passed between libuser, its modules, and applications.
+</p>
+<p>
+A struct <span class="type">lu_error</span> contains an error code and a human-readable, possibly
+translated error string.  The error string is using the encoding specified
+by <code class="literal">LC_CTYPE</code> locale category.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libuser-error.details"></a><h2>Details</h2>
+<div class="refsect2" title="LU_ERROR_CHECK()">
+<a name="LU-ERROR-CHECK--CAPS"></a><h3>LU_ERROR_CHECK()</h3>
+<pre class="programlisting">#define             LU_ERROR_CHECK(err_p_p)</pre>
+<p>
+Checks that the given pointer to a pointer to a struct does not already point
+to a valid <span class="type">lu_error</span> structure.  This macro is used by many internal functions
+to check that an error has not already occurred when they are invoked.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>err_p_p</code></em> :</span></p></td>
+<td>A pointer to a struct <span class="type">lu_error</span> * which will be checked.  If there
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_error_new ()">
+<a name="lu-error-new"></a><h3>lu_error_new ()</h3>
+<pre class="programlisting">void                lu_error_new                        (lu_error_t **error,
+                                                         lu_status_t code,
+                                                         const char *fmt,
+                                                         ...);</pre>
+<p>
+Creates a new <span class="type">lu_error</span> structure.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>A pointer to a struct <span class="type">lu_error</span> * which will hold the newly-created
+error structure. It must point to <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL--CAPS"
+><span class="type">NULL</span></a> before calling this function.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
+<td>An error code
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fmt</code></em> :</span></p></td>
+<td>Format string describing the error. If <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL--CAPS"
+><span class="type">NULL</span></a>, a default string is used.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>Arguments for <em class="parameter"><code>fmt</code></em>, if necessary
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_error_free ()">
+<a name="lu-error-free"></a><h3>lu_error_free ()</h3>
+<pre class="programlisting">void                lu_error_free                       (lu_error_t **error);</pre>
+<p>
+Frees an <span class="type">lu_error</span> structure.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>A pointer to a pointer to the structure to be freed.  The pointer is set
+to NULL after the error is freed.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_error_is_success ()">
+<a name="lu-error-is-success"></a><h3>lu_error_is_success ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            lu_error_is_success                 (lu_status_t status);</pre>
+<p>
+Check if the error code held by an error structure is a success code.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>An error code
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+><span class="type">gboolean</span></a> indicating whether or not the error is a success code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_error_is_warning ()">
+<a name="lu-error-is-warning"></a><h3>lu_error_is_warning ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            lu_error_is_warning                 (lu_status_t status);</pre>
+<p>
+Check if the error code held by an error structure is a warning code.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>An error code
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+><span class="type">gboolean</span></a> indicating whether or not the error is a warning code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_error_is_error ()">
+<a name="lu-error-is-error"></a><h3>lu_error_is_error ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            lu_error_is_error                   (lu_status_t status);</pre>
+<p>
+Check if the error code held by an error structure is an error code.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>An error code
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+><span class="type">gboolean</span></a> indicating whether or not the error is an error code.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_strerror ()">
+<a name="lu-strerror"></a><h3>lu_strerror ()</h3>
+<pre class="programlisting">const char *        lu_strerror                         (lu_error_t *error);</pre>
+<p>
+Converts an <span class="type">lu_error</span> structure to a string describing the error.
+If the <em class="parameter"><code>error-&gt;string</code></em> is <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>, returns a text representation of
+ <em class="parameter"><code>error-&gt;code</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>An error
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>error string valid at least until <em class="parameter"><code>error</code></em> is freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

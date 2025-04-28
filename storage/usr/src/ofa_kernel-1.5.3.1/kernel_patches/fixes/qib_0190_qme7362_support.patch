@@ -1,0 +1,15 @@
+diff --git a/drivers/infiniband/hw/qib/qib_iba7322.c b/drivers/infiniband/hw/qib/qib_iba7322.c
+index 412f643..68a3d3a 100644
+--- a/drivers/infiniband/hw/qib/qib_iba7322.c
++++ b/drivers/infiniband/hw/qib/qib_iba7322.c
+@@ -3523,6 +3523,10 @@ static unsigned qib_7322_boardname(struct qib_devdata *dd)
+ 	case BOARD_QME7342:
+ 		n = "InfiniPath_QME7342";
+ 		break;
++	case 8:
++		n = "InfiniPath_QME7362";
++		dd->flags |= QIB_HAS_QSFP;
++		break;
+ 	case 15:
+ 		n = "InfiniPath_QLE7342_TEST";
+ 		dd->flags |= QIB_HAS_QSFP;

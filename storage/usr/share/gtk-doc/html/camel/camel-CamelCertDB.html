@@ -1,0 +1,816 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelCertDB</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="Storage.html" title="Metadata Storage">
+<link rel="prev" href="camel-CamelKeyFile.html" title="CamelKeyFile">
+<link rel="next" href="camel-CamelDataCache.html" title="CamelDataCache">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-CamelKeyFile.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="Storage.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelDataCache.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelCertDB.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelCertDB.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelCertDB">
+<a name="camel-CamelCertDB"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelCertDB.top_of_page"></a>CamelCertDB</span></h2>
+<p>CamelCertDB</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelCertDB.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a>;
+enum                <a class="link" href="camel-CamelCertDB.html#CamelCertTrust" title="enum CamelCertTrust">CamelCertTrust</a>;
+                    <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a>;
+<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *       <a class="link" href="camel-CamelCertDB.html#camel-certdb-new" title="camel_certdb_new ()">camel_certdb_new</a>                    (void);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-set-default" title="camel_certdb_set_default ()">camel_certdb_set_default</a>            (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);
+<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *       <a class="link" href="camel-CamelCertDB.html#camel-certdb-get-default" title="camel_certdb_get_default ()">camel_certdb_get_default</a>            (void);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-set-filename" title="camel_certdb_set_filename ()">camel_certdb_set_filename</a>           (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelCertDB.html#camel-certdb-load" title="camel_certdb_load ()">camel_certdb_load</a>                   (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelCertDB.html#camel-certdb-save" title="camel_certdb_save ()">camel_certdb_save</a>                   (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-touch" title="camel_certdb_touch ()">camel_certdb_touch</a>                  (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);
+<a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *         <a class="link" href="camel-CamelCertDB.html#camel-certdb-get-cert" title="camel_certdb_get_cert ()">camel_certdb_get_cert</a>               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *fingerprint);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-add" title="camel_certdb_add ()">camel_certdb_add</a>                    (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-remove" title="camel_certdb_remove ()">camel_certdb_remove</a>                 (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);
+<a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *         <a class="link" href="camel-CamelCertDB.html#camel-certdb-cert-new" title="camel_certdb_cert_new ()">camel_certdb_cert_new</a>               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-cert-ref" title="camel_certdb_cert_ref ()">camel_certdb_cert_ref</a>               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-cert-unref" title="camel_certdb_cert_unref ()">camel_certdb_cert_unref</a>             (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);
+void                <a class="link" href="camel-CamelCertDB.html#camel-certdb-clear" title="camel_certdb_clear ()">camel_certdb_clear</a>                  (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="camel-CamelCertDB.html#camel-cert-get-string" title="camel_cert_get_string ()">camel_cert_get_string</a>               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> string);
+void                <a class="link" href="camel-CamelCertDB.html#camel-cert-set-string" title="camel_cert_set_string ()">camel_cert_set_string</a>               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> string,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *value);
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-get-issuer" title="camel_cert_get_issuer()">camel_cert_get_issuer</a>               (certdb,cert)
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-get-subject" title="camel_cert_get_subject()">camel_cert_get_subject</a>              (certdb,cert)
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-get-hostname" title="camel_cert_get_hostname()">camel_cert_get_hostname</a>             (certdb,cert)
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-get-fingerprint" title="camel_cert_get_fingerprint()">camel_cert_get_fingerprint</a>          (certdb,cert)
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-set-issuer" title="camel_cert_set_issuer()">camel_cert_set_issuer</a>               (certdb,cert,issuer)
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-set-subject" title="camel_cert_set_subject()">camel_cert_set_subject</a>              (certdb,cert,subject)
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-set-hostname" title="camel_cert_set_hostname()">camel_cert_set_hostname</a>             (certdb,cert,hostname)
+#define             <a class="link" href="camel-CamelCertDB.html#camel-cert-set-fingerprint" title="camel_cert_set_fingerprint()">camel_cert_set_fingerprint</a>          (certdb,cert,fingerprint)
+<a class="link" href="camel-CamelCertDB.html#CamelCertTrust" title="enum CamelCertTrust">CamelCertTrust</a>      <a class="link" href="camel-CamelCertDB.html#camel-cert-get-trust" title="camel_cert_get_trust ()">camel_cert_get_trust</a>                (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);
+void                <a class="link" href="camel-CamelCertDB.html#camel-cert-set-trust" title="camel_cert_set_trust ()">camel_cert_set_trust</a>                (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCertTrust" title="enum CamelCertTrust">CamelCertTrust</a> trust);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelCertDB.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelCertDB.details"></a><h2>Details</h2>
+<div class="refsect2" title="CamelCertDB">
+<a name="CamelCertDB"></a><h3>CamelCertDB</h3>
+<pre class="programlisting">typedef struct {
+	CamelObject parent_object;
+	struct _CamelCertDBPrivate *priv;
+
+	gchar *filename;
+	guint32 version;
+	guint32 saved_certs;
+	guint32 flags;
+
+	guint32 cert_size;
+
+	struct _EMemChunk *cert_chunks;
+
+	GPtrArray *certs;
+	GHashTable *cert_hash;
+} CamelCertDB;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum CamelCertTrust">
+<a name="CamelCertTrust"></a><h3>enum CamelCertTrust</h3>
+<pre class="programlisting">typedef enum {
+	CAMEL_CERT_TRUST_UNKNOWN,
+	CAMEL_CERT_TRUST_NEVER,
+	CAMEL_CERT_TRUST_MARGINAL,
+	CAMEL_CERT_TRUST_FULLY,
+	CAMEL_CERT_TRUST_ULTIMATE
+} CamelCertTrust;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelCert">
+<a name="CamelCert"></a><h3>CamelCert</h3>
+<pre class="programlisting">typedef struct {
+	guint32 refcount;
+
+	gchar *issuer;
+	gchar *subject;
+	gchar *hostname;
+	gchar *fingerprint;
+
+	CamelCertTrust trust;
+	GByteArray *rawcert;
+} CamelCert;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_new ()">
+<a name="camel-certdb-new"></a><h3>camel_certdb_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *       camel_certdb_new                    (void);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_set_default ()">
+<a name="camel-certdb-set-default"></a><h3>camel_certdb_set_default ()</h3>
+<pre class="programlisting">void                camel_certdb_set_default            (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_get_default ()">
+<a name="camel-certdb-get-default"></a><h3>camel_certdb_get_default ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *       camel_certdb_get_default            (void);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_set_filename ()">
+<a name="camel-certdb-set-filename"></a><h3>camel_certdb_set_filename ()</h3>
+<pre class="programlisting">void                camel_certdb_set_filename           (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_load ()">
+<a name="camel-certdb-load"></a><h3>camel_certdb_load ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_certdb_load                   (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_save ()">
+<a name="camel-certdb-save"></a><h3>camel_certdb_save ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_certdb_save                   (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_touch ()">
+<a name="camel-certdb-touch"></a><h3>camel_certdb_touch ()</h3>
+<pre class="programlisting">void                camel_certdb_touch                  (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_get_cert ()">
+<a name="camel-certdb-get-cert"></a><h3>camel_certdb_get_cert ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *         camel_certdb_get_cert               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *fingerprint);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fingerprint</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_add ()">
+<a name="camel-certdb-add"></a><h3>camel_certdb_add ()</h3>
+<pre class="programlisting">void                camel_certdb_add                    (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_remove ()">
+<a name="camel-certdb-remove"></a><h3>camel_certdb_remove ()</h3>
+<pre class="programlisting">void                camel_certdb_remove                 (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_cert_new ()">
+<a name="camel-certdb-cert-new"></a><h3>camel_certdb_cert_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *         camel_certdb_cert_new               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_cert_ref ()">
+<a name="camel-certdb-cert-ref"></a><h3>camel_certdb_cert_ref ()</h3>
+<pre class="programlisting">void                camel_certdb_cert_ref               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_cert_unref ()">
+<a name="camel-certdb-cert-unref"></a><h3>camel_certdb_cert_unref ()</h3>
+<pre class="programlisting">void                camel_certdb_cert_unref             (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_certdb_clear ()">
+<a name="camel-certdb-clear"></a><h3>camel_certdb_clear ()</h3>
+<pre class="programlisting">void                camel_certdb_clear                  (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_get_string ()">
+<a name="camel-cert-get-string"></a><h3>camel_cert_get_string ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       camel_cert_get_string               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> string);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_set_string ()">
+<a name="camel-cert-set-string"></a><h3>camel_cert_set_string ()</h3>
+<pre class="programlisting">void                camel_cert_set_string               (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> string,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *value);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_get_issuer()">
+<a name="camel-cert-get-issuer"></a><h3>camel_cert_get_issuer()</h3>
+<pre class="programlisting">#define camel_cert_get_issuer(certdb,cert) camel_cert_get_string (certdb, cert, CAMEL_CERT_STRING_ISSUER)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_get_subject()">
+<a name="camel-cert-get-subject"></a><h3>camel_cert_get_subject()</h3>
+<pre class="programlisting">#define camel_cert_get_subject(certdb,cert) camel_cert_get_string (certdb, cert, CAMEL_CERT_STRING_SUBJECT)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_get_hostname()">
+<a name="camel-cert-get-hostname"></a><h3>camel_cert_get_hostname()</h3>
+<pre class="programlisting">#define camel_cert_get_hostname(certdb,cert) camel_cert_get_string (certdb, cert, CAMEL_CERT_STRING_HOSTNAME)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_get_fingerprint()">
+<a name="camel-cert-get-fingerprint"></a><h3>camel_cert_get_fingerprint()</h3>
+<pre class="programlisting">#define camel_cert_get_fingerprint(certdb,cert) camel_cert_get_string (certdb, cert, CAMEL_CERT_STRING_FINGERPRINT)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_set_issuer()">
+<a name="camel-cert-set-issuer"></a><h3>camel_cert_set_issuer()</h3>
+<pre class="programlisting">#define camel_cert_set_issuer(certdb,cert,issuer) camel_cert_set_string (certdb, cert, CAMEL_CERT_STRING_ISSUER, issuer)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>issuer</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_set_subject()">
+<a name="camel-cert-set-subject"></a><h3>camel_cert_set_subject()</h3>
+<pre class="programlisting">#define camel_cert_set_subject(certdb,cert,subject) camel_cert_set_string (certdb, cert, CAMEL_CERT_STRING_SUBJECT, subject)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>subject</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_set_hostname()">
+<a name="camel-cert-set-hostname"></a><h3>camel_cert_set_hostname()</h3>
+<pre class="programlisting">#define camel_cert_set_hostname(certdb,cert,hostname) camel_cert_set_string (certdb, cert, CAMEL_CERT_STRING_HOSTNAME, hostname)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hostname</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_set_fingerprint()">
+<a name="camel-cert-set-fingerprint"></a><h3>camel_cert_set_fingerprint()</h3>
+<pre class="programlisting">#define camel_cert_set_fingerprint(certdb,cert,fingerprint) camel_cert_set_string (certdb, cert, CAMEL_CERT_STRING_FINGERPRINT, fingerprint)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fingerprint</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_get_trust ()">
+<a name="camel-cert-get-trust"></a><h3>camel_cert_get_trust ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelCertDB.html#CamelCertTrust" title="enum CamelCertTrust">CamelCertTrust</a>      camel_cert_get_trust                (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_cert_set_trust ()">
+<a name="camel-cert-set-trust"></a><h3>camel_cert_set_trust ()</h3>
+<pre class="programlisting">void                camel_cert_set_trust                (<a class="link" href="camel-CamelCertDB.html#CamelCertDB" title="CamelCertDB">CamelCertDB</a> *certdb,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCert" title="CamelCert">CamelCert</a> *cert,
+                                                         <a class="link" href="camel-CamelCertDB.html#CamelCertTrust" title="enum CamelCertTrust">CamelCertTrust</a> trust);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>certdb</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>trust</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

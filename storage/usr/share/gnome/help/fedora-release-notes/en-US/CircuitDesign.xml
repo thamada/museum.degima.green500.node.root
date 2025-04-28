@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+
+<section id="sect-Release_Notes-Circuit_Design">
+  <title>Circuit Design</title>
+
+  <indexterm>
+    <primary>Circuit Design</primary>
+    <secondary>Section</secondary>
+  </indexterm>
+  <para>
+    Fedora &PRODVER; includes a complete set of applications for
+    schematic capture, circuit simulation, and PCB layout.  The
+    following are major changes to these applications.  A complete
+    list of changes may be found at the end of this document.
+  </para>
+  <variablelist>
+
+    <varlistentry>
+      <term>geda</term>
+      <listitem>
+	<indexterm>
+	  <primary>geda</primary>
+	</indexterm>
+	<para>
+	  In Fedora 12, the <package>geda</package> suite, previously
+	  packaged as a number of individual applications, is now provided
+	  in a single, complete package.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>gspiceui</term>
+      <listitem>
+	<indexterm>
+	  <primary>gspiceui</primary>
+	</indexterm>
+	<para>
+	  Fedora’s <package>gspiceui</package> is now compiled under
+	  <package>wxgtk</package> 2.8 instead of the old
+	  <package>wxgtk</package> 2.6. This improves GSpiceUIi’s GUI
+	  interface.  GSpiceUI includes missing opamp-3.sym to
+	  /usr/share/gEDA/sym/misc/ (geda symbols directory).
+	  <note>
+	    <title>PPC64</title>
+	    <para>
+	      GSpiceUI is not available on Fedora supported PPC64
+	      architecture as a result of missing gwave for that
+	      architecture.
+	    </para>
+	  </note>
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>kicad</term>
+      <listitem>
+	<indexterm>
+	  <primary>kicad</primary>
+	</indexterm>
+	<para>
+	  Fedora 12 includes the latest version of
+	  <package>kicad</package>package> which incorporates a huge
+	  number of minor bug fixes and usability improvements. For a
+	  complete description of the many changes please refer to the
+	  upstream changelog at <ulink type="http" url="http://www.lis.inpg.fr/realise_au_lis/kicad/"></ulink>.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>ngspice</term>
+      <listitem>
+	<indexterm>
+	  <primary>ngspice</primary>
+	</indexterm>
+	<para>
+	  <package>ngspice</package> has been updated to rework 19.
+	  <itemizedlist>
+	    <listitem>
+	      <para>
+		Memory management: fixed memory leaks (Bug 514484 - A
+		Long Warning Message)
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+		Integration of espice bugfixes and enhancements
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+		Bug fixes in plots and cli interface.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+		Rework of BSim models, integration of EPFL-EKV model
+		V2.63, ADMS models mextram, hicum0, hicum2.
+	      </para>
+	    </listitem>
+	    <listitem>
+	      <para>
+		Fedora’s ngspice has been patched to accept calls from
+		Xcircuit TCL interface.
+	      </para>
+	    </listitem>
+	  </itemizedlist>
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>tclspice</term>
+      <listitem>
+	<indexterm>
+	  <primary>tclspice</primary>
+	</indexterm>
+	<para>
+	  <package>tclspice</package> is new to Fedora &PRODVER;.
+	</para>
+	<para>
+	  Before ngspice-rework-19, Fedora has considered
+	  <package>tclspice</package>’s stability too fragile.
+	  Examples of <package>tclspice</package> can be found via
+	  <command>rpm -qd tclspice</command>.
+	</para>
+	<para>
+	  Tclspice provides Fedora users with extended capabilities
+	  for mixed-signal design via its TCL backend. Since Fedora is
+	  also providing tools for boolean manipulation (explained in
+	  the following section), Fedora users have adequate materials
+	  to spin his or her own mixed-signal EDA plugin.
+	</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>xcircuit</term>
+      <listitem>
+	<indexterm>
+	  <primary>xcircuit</primary>
+	</indexterm>
+	<para>
+	  <package>xcircuit</package> has been updated to version
+	  3.6.161. Highlights include:
+	  <itemizedlist>
+	    <listitem>
+	      <para>
+		Supports multiple schematic layout windows.
+	      </para>
+	    </listitem>
+
+	    <listitem>
+	      <para>
+		A complete overhaul of the key-function binding
+		routines and the function dispatch mechanism was
+		effected.
+	      </para>
+	    </listitem>
+
+	    <listitem>
+	      <para>
+		Several additions and corrections need to be made to
+		make the multiplewindow implementation work properly.
+	      </para>
+	    </listitem>
+
+	    <listitem>
+	      <para>
+		The way libraries are handled by making the
+		distinction between library pages and files using the
+		concept of "technology namespaces" has improved.  Each
+		object has a name composed of a "technology prefix", a
+		double colon ("::"), and the object’s name. Each
+		library file declares a technology name, which is used
+		as the prefix for all objects in that file.  The
+		prefixes are used by XCircuit to track which objects
+		came from which file, regardless of the library page
+		onto which they were loaded. Added support for wires
+		connected to symbol pins remain connected while the
+		symbol is moved. It also expands upon the "Attach-to"
+		function, allowing wires to be (semi-) automatically
+		attached to pin labels or symbol pins.  The key macro
+		for "attach-to" (key "A") can also be used like the
+		"wire" function (key "w") to start a wire with its
+		start-point attached to a symbol pin or pin label.
+	      </para>
+	    </listitem>
+
+	    <listitem>
+	      <para>
+		The way info labels for PCB are handled was changed as
+		from version 3.6.66.
+	      </para>
+	    </listitem>
+
+	    <listitem>
+	      <para>
+		Runtime speed has been improved.
+	      </para>
+	    </listitem>
+
+	    <listitem>
+	      <para>
+		Fedora’s ngspice has been patched to accept calls from
+		Xcircuit TCL interface.
+	      </para>
+	    </listitem>
+
+	  </itemizedlist>
+	</para>
+      </listitem>
+    </varlistentry>
+
+  </variablelist>
+</section>
+
+

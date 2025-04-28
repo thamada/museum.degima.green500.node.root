@@ -1,0 +1,37 @@
+From e337df928ebd27f4908112ef77a245cef63bdcee Mon Sep 17 00:00:00 2001
+From: Vladimir Sokolovsky <vlad@mellanox.co.il>
+Date: Mon, 29 Nov 2010 17:19:17 +0200
+Subject: [PATCH 2/2] mlx4_ib: Set port number in the multicast gid
+
+Signed-off-by: Vladimir Sokolovsky <vlad@mellanox.co.il>
+---
+ drivers/infiniband/hw/mlx4/main.c |    6 ++++++
+ 1 files changed, 6 insertions(+), 0 deletions(-)
+
+diff --git a/drivers/infiniband/hw/mlx4/main.c b/drivers/infiniband/hw/mlx4/main.c
+index 9bd832e..1709577 100644
+--- a/drivers/infiniband/hw/mlx4/main.c
++++ b/drivers/infiniband/hw/mlx4/main.c
+@@ -676,6 +676,9 @@ static int mlx4_ib_mcg_attach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
+ 	struct mlx4_ib_dev *mdev = to_mdev(ibqp->device);
+ 	struct mlx4_ib_qp *mqp = to_mqp(ibqp);
+ 
++	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH)
++		gid->raw[5] = mqp->port;
++
+ 	err = mlx4_multicast_attach(mdev->dev, &mqp->mqp, gid->raw, !!(mqp->flags &
+ 				MLX4_IB_QP_BLOCK_MULTICAST_LOOPBACK),
+ 				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+@@ -721,6 +724,9 @@ static int mlx4_ib_mcg_detach(struct ib_qp *ibqp, union ib_gid *gid, u16 lid)
+ 	struct net_device *ndev;
+ 	struct gid_entry *ge;
+ 
++	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH)
++		gid->raw[5] = mqp->port;
++
+ 	err = mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
+ 				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+ 				MLX4_PROT_EN : MLX4_PROT_IB_IPV6);
+-- 
+1.7.0.4
+

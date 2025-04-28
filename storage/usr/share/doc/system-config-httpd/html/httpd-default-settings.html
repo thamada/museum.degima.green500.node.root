@@ -1,0 +1,404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Default Settings</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Basic Settings"
+HREF="httpd-basic-settings.html"><LINK
+REL="NEXT"
+TITLE="Logging"
+HREF="httpd-logging.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="httpd-basic-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-logging.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="HTTPD-DEFAULT-SETTINGS"
+></A
+>Chapter 3. Default Settings</H1
+><P
+>	After defining the <B
+CLASS="GUILABEL"
+>Server Name</B
+>, <B
+CLASS="GUILABEL"
+>Webmaster
+	  email address</B
+>, and <B
+CLASS="GUILABEL"
+>Available
+	  Addresses</B
+>, click the <B
+CLASS="GUILABEL"
+>Virtual Hosts</B
+> tab
+	  and click the <B
+CLASS="GUIBUTTON"
+>Edit Default Settings</B
+> button. The
+	  window shown in <A
+HREF="httpd-default-settings.html#HTTPD-SITE-CONFIG-SCREEN"
+>Figure 3-1</A
+> will
+	  appear. Configure the default settings for your Web server in this
+	  window. If you add a virtual host, the settings you configure for the
+	  virtual host take precedence for that virtual host. For a directive
+	  not defined within the virtual host settings, the default value is
+	  used.
+      </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="HTTPD-SITE-CONFIG"
+></A
+>Site Configuration</H1
+><P
+>	  The default values for the <B
+CLASS="GUILABEL"
+>Directory Page Search
+	    List</B
+> and <B
+CLASS="GUILABEL"
+>Error Pages</B
+> will work for
+	    most servers. If you are unsure of these settings, do not modify
+	    them.
+	</P
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-SITE-CONFIG-SCREEN"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-siteconfig.png"></P
+></DIV
+><P
+><B
+>Figure 3-1. Site Configuration</B
+></P
+></DIV
+><P
+>	  The entries listed in the <B
+CLASS="GUILABEL"
+>Directory Page Search
+	    List</B
+> define the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mod_dir.html#directoryindex"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>DirectoryIndex</TT
+></A
+>
+	    directive.  The <TT
+CLASS="COMMAND"
+>DirectoryIndex</TT
+> is the default
+	    page served by the server when a user requests an index of a
+	    directory by specifying a forward slash (/) at the end of the
+	    directory name.
+	</P
+><P
+>	  For example, when a user requests the page
+	  http://<TT
+CLASS="REPLACEABLE"
+><I
+>www.example.com</I
+></TT
+>/<TT
+CLASS="REPLACEABLE"
+><I
+>this_directory</I
+></TT
+>/,
+	  they are going to get either the <TT
+CLASS="COMMAND"
+>DirectoryIndex</TT
+>
+	  page if it exists, or a server-generated directory list.  The server
+	  will try to find one of the files listed in the <TT
+CLASS="COMMAND"
+>DirectoryIndex</TT
+>
+	  directive and will return the first one it finds.
+	  
+	  If it does not find any of these files and if <TT
+CLASS="COMMAND"
+>Options
+	  Indexes</TT
+> is set for that directory, the server will generate
+	  and return a list, in HTML format, of the subdirectories and files in
+	  the directory.
+	</P
+><P
+>	  Use the <B
+CLASS="GUILABEL"
+>Error Code</B
+> section to configure Apache HTTP Server to
+	  redirect the client to a local or external URL in the event of a
+	  problem or error. This option corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#errordocument"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>ErrorDocument</TT
+></A
+>
+	  directive. If a problem or error occurs when a client tries to connect
+	  to the Apache HTTP Server, the default action is to display the short
+	  error message shown in the <B
+CLASS="GUILABEL"
+>Error Code</B
+> column. To
+	  override this default configuration, select the error code and click
+	  the <B
+CLASS="GUILABEL"
+>Edit</B
+> button. Choose
+	  <B
+CLASS="GUIMENUITEM"
+>Default</B
+> to display the default short error
+	  message. Choose <B
+CLASS="GUIMENUITEM"
+>URL</B
+> to redirect the client
+	  to an external URL and enter a complete URL including the http:// in
+	  the <B
+CLASS="GUILABEL"
+>Location</B
+> field. Choose
+	  <B
+CLASS="GUIMENUITEM"
+>File</B
+> to redirect the client to an internal
+	  URL and enter a file location under the document root for the Web
+	  server. The location must begin the a slash (/) and be relative to the
+	  Document Root.
+	</P
+><P
+>	  For example, to redirect a 404 Not Found error code to a webpage that
+	  you created in a file called <TT
+CLASS="FILENAME"
+>404.html</TT
+>, copy
+	  <TT
+CLASS="FILENAME"
+>404.html</TT
+> to
+	  <TT
+CLASS="FILENAME"
+><TT
+CLASS="REPLACEABLE"
+><I
+>DocumentRoot</I
+></TT
+>/errors/404.html</TT
+>.
+	  In this case, <TT
+CLASS="REPLACEABLE"
+><I
+>DocumentRoot</I
+></TT
+> is the Document
+	  Root directory that you have defined (the default is
+	  <TT
+CLASS="FILENAME"
+>/var/www/html</TT
+>). Then, choose
+	  <B
+CLASS="GUIMENUITEM"
+>File</B
+> as the Behavior for <B
+CLASS="GUILABEL"
+>404 -
+	  Not Found</B
+> error code and enter
+	  <TT
+CLASS="FILENAME"
+>/errors/404.html</TT
+> as the
+	  <B
+CLASS="GUIMENUITEM"
+>Location</B
+>.
+	</P
+><P
+>	  From the <B
+CLASS="GUILABEL"
+>Default Error Page Footer</B
+> menu, you can
+	  choose one of the following options:
+	</P
+><P
+></P
+><UL
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>Show footer with email address</B
+> &#8212;
+	      Display the default footer at the bottom of all error pages
+	      along with the email address of the website maintainer specified
+	      by the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#serveradmin"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>ServerAdmin</TT
+></A
+>
+	      directive.  Refer to <A
+HREF="httpd-virtualhosts-settings.html#S3-HTTPD-VIRTUALHOSTS-ADD-GENERAL"
+>the Section called <I
+>General Options</I
+> in Chapter 4</A
+> for information
+	      about configuring the <TT
+CLASS="COMMAND"
+>ServerAdmin</TT
+> directive.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>Show footer</B
+> &#8212; Display just the
+	      default footer at the bottom of error pages.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>No footer</B
+> &#8212; Do not display a footer
+	      at the bottom of error pages.</P
+></LI
+></UL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="httpd-basic-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-logging.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Basic Settings</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Logging</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

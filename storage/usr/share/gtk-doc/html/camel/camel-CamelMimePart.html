@@ -1,0 +1,835 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelMimePart</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="MIME.html" title="MIME Objects">
+<link rel="prev" href="camel-CamelMedium.html" title="CamelMedium">
+<link rel="next" href="camel-CamelMultipart.html" title="CamelMultipart">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-CamelMedium.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="MIME.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelMultipart.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelMimePart.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelMimePart.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelMimePart">
+<a name="camel-CamelMimePart"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelMimePart.top_of_page"></a>CamelMimePart</span></h2>
+<p>CamelMimePart</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelMimePart.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+struct              <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a>;
+<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *     <a class="link" href="camel-CamelMimePart.html#camel-mime-part-new" title="camel_mime_part_new ()">camel_mime_part_new</a>                 (void);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-description" title="camel_mime_part_set_description ()">camel_mime_part_set_description</a>     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *description);
+const     <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *   <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-description" title="camel_mime_part_get_description ()">camel_mime_part_get_description</a>     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-disposition" title="camel_mime_part_set_disposition ()">camel_mime_part_set_disposition</a>     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *disposition);
+const     <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *   <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-disposition" title="camel_mime_part_get_disposition ()">camel_mime_part_get_disposition</a>     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-filename" title="camel_mime_part_set_filename ()">camel_mime_part_set_filename</a>        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);
+const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-filename" title="camel_mime_part_get_filename ()">camel_mime_part_get_filename</a>        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-content-id" title="camel_mime_part_set_content_id ()">camel_mime_part_set_content_id</a>      (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *contentid);
+const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-content-id" title="camel_mime_part_get_content_id ()">camel_mime_part_get_content_id</a>      (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-content-MD5" title="camel_mime_part_set_content_MD5 ()">camel_mime_part_set_content_MD5</a>     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *md5sum);
+const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-content-MD5" title="camel_mime_part_get_content_MD5 ()">camel_mime_part_get_content_MD5</a>     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-content-location" title="camel_mime_part_set_content_location ()">camel_mime_part_set_content_location</a>
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *location);
+const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-content-location" title="camel_mime_part_get_content_location ()">camel_mime_part_get_content_location</a>
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-encoding" title="camel_mime_part_set_encoding ()">camel_mime_part_set_encoding</a>        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         <a class="link" href="camel-camel-mime-utils.html#CamelTransferEncoding" title="enum CamelTransferEncoding">CamelTransferEncoding</a> encoding);
+<a class="link" href="camel-camel-mime-utils.html#CamelTransferEncoding" title="enum CamelTransferEncoding">CamelTransferEncoding</a>  <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-encoding" title="camel_mime_part_get_encoding ()">camel_mime_part_get_encoding</a>     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-content-languages" title="camel_mime_part_set_content_languages ()">camel_mime_part_set_content_languages</a>
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *content_languages);
+const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *     <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-content-languages" title="camel_mime_part_get_content_languages ()">camel_mime_part_get_content_languages</a>
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-content-type" title="camel_mime_part_set_content_type ()">camel_mime_part_set_content_type</a>    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *content_type);
+<a class="link" href="camel-camel-mime-utils.html#CamelContentType" title="CamelContentType">CamelContentType</a> *  <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-content-type" title="camel_mime_part_get_content_type ()">camel_mime_part_get_content_type</a>    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-construct-from-parser" title="camel_mime_part_construct_from_parser ()">camel_mime_part_construct_from_parser</a>
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         <a class="link" href="camel-CamelMimeParser.html#CamelMimeParser" title="struct CamelMimeParser">CamelMimeParser</a> *parser);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-set-content" title="camel_mime_part_set_content ()">camel_mime_part_set_content</a>         (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> length,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *type);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a>               <a class="link" href="camel-CamelMimePart.html#camel-mime-part-get-content-size" title="camel_mime_part_get_content_size ()">camel_mime_part_get_content_size</a>    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);
+void                <a class="link" href="camel-CamelMimePart.html#camel-mime-part-construct-content-from-parser" title="camel_mime_part_construct_content_from_parser ()">camel_mime_part_construct_content_from_parser</a>
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *,
+                                                         <a class="link" href="camel-CamelMimeParser.html#CamelMimeParser" title="struct CamelMimeParser">CamelMimeParser</a> *mp);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelMimePart.html#camel-mime-message-build-preview" title="camel_mime_message_build_preview ()">camel_mime_message_build_preview</a>    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *msg,
+                                                         <a class="link" href="camel-CamelFolderSummary.html#CamelMessageInfo" title="CamelMessageInfo">CamelMessageInfo</a> *info);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelMimePart.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelMimePart.details"></a><h2>Details</h2>
+<div class="refsect2" title="struct CamelMimePart">
+<a name="CamelMimePart"></a><h3>struct CamelMimePart</h3>
+<pre class="programlisting">struct CamelMimePart {
+	CamelMedium parent_object;
+
+	struct _camel_header_raw *headers; /* mime headers */
+
+	/* All fields here are -** PRIVATE **- */
+	/* TODO: these should be in a camelcontentinfo */
+	gchar *description;
+	CamelContentDisposition *disposition;
+	gchar *content_id;
+	gchar *content_MD5;
+	gchar *content_location;
+	GList *content_languages;
+	CamelTransferEncoding encoding;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_new ()">
+<a name="camel-mime-part-new"></a><h3>camel_mime_part_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *     camel_mime_part_new                 (void);</pre>
+<p>
+Create a new MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_description ()">
+<a name="camel-mime-part-set-description"></a><h3>camel_mime_part_set_description ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_description     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *description);</pre>
+<p>
+Set a description on the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>description</code></em> :</span></p></td>
+<td> description of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_description ()">
+<a name="camel-mime-part-get-description"></a><h3>camel_mime_part_get_description ()</h3>
+<pre class="programlisting">const     <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *   camel_mime_part_get_description     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the description of the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the description
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_disposition ()">
+<a name="camel-mime-part-set-disposition"></a><h3>camel_mime_part_set_disposition ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_disposition     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *disposition);</pre>
+<p>
+Set a disposition on the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>disposition</code></em> :</span></p></td>
+<td> disposition of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_disposition ()">
+<a name="camel-mime-part-get-disposition"></a><h3>camel_mime_part_get_disposition ()</h3>
+<pre class="programlisting">const     <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *   camel_mime_part_get_disposition     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the disposition of the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the dispisition
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_filename ()">
+<a name="camel-mime-part-set-filename"></a><h3>camel_mime_part_set_filename ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_filename        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);</pre>
+<p>
+Set the filename on a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> filename given to the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_filename ()">
+<a name="camel-mime-part-get-filename"></a><h3>camel_mime_part_get_filename ()</h3>
+<pre class="programlisting">const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     camel_mime_part_get_filename        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the filename of a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the filename of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_content_id ()">
+<a name="camel-mime-part-set-content-id"></a><h3>camel_mime_part_set_content_id ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_content_id      (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *contentid);</pre>
+<p>
+Set the content-id field on a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contentid</code></em> :</span></p></td>
+<td> content id
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_content_id ()">
+<a name="camel-mime-part-get-content-id"></a><h3>camel_mime_part_get_content_id ()</h3>
+<pre class="programlisting">const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     camel_mime_part_get_content_id      (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the content-id field of a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the content-id field of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_content_MD5 ()">
+<a name="camel-mime-part-set-content-MD5"></a><h3>camel_mime_part_set_content_MD5 ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_content_MD5     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *md5sum);</pre>
+<p>
+Set the content-md5 field of the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>md5sum</code></em> :</span></p></td>
+<td> the md5sum of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_content_MD5 ()">
+<a name="camel-mime-part-get-content-MD5"></a><h3>camel_mime_part_get_content_MD5 ()</h3>
+<pre class="programlisting">const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     camel_mime_part_get_content_MD5     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the content-md5 field of the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the content-md5 field of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_content_location ()">
+<a name="camel-mime-part-set-content-location"></a><h3>camel_mime_part_set_content_location ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_content_location
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *location);</pre>
+<p>
+Set the content-location field of the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>location</code></em> :</span></p></td>
+<td> the content-location value of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_content_location ()">
+<a name="camel-mime-part-get-content-location"></a><h3>camel_mime_part_get_content_location ()</h3>
+<pre class="programlisting">const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *     camel_mime_part_get_content_location
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the content-location field of a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the content-location field of a MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_encoding ()">
+<a name="camel-mime-part-set-encoding"></a><h3>camel_mime_part_set_encoding ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_encoding        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         <a class="link" href="camel-camel-mime-utils.html#CamelTransferEncoding" title="enum CamelTransferEncoding">CamelTransferEncoding</a> encoding);</pre>
+<p>
+Set the Content-Transfer-Encoding to use on a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>encoding</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-mime-utils.html#CamelTransferEncoding" title="enum CamelTransferEncoding"><span class="type">CamelTransferEncoding</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_encoding ()">
+<a name="camel-mime-part-get-encoding"></a><h3>camel_mime_part_get_encoding ()</h3>
+<pre class="programlisting"><a class="link" href="camel-camel-mime-utils.html#CamelTransferEncoding" title="enum CamelTransferEncoding">CamelTransferEncoding</a>  camel_mime_part_get_encoding     (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the Content-Transfer-Encoding of a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a class="link" href="camel-camel-mime-utils.html#CamelTransferEncoding" title="enum CamelTransferEncoding"><span class="type">CamelTransferEncoding</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_content_languages ()">
+<a name="camel-mime-part-set-content-languages"></a><h3>camel_mime_part_set_content_languages ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_content_languages
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *content_languages);</pre>
+<p>
+Set the Content-Languages field of a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>content_languages</code></em> :</span></p></td>
+<td> list of languages
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_content_languages ()">
+<a name="camel-mime-part-get-content-languages"></a><h3>camel_mime_part_get_content_languages ()</h3>
+<pre class="programlisting">const	  <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *     camel_mime_part_get_content_languages
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the Content-Languages set on the MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of languages
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_content_type ()">
+<a name="camel-mime-part-set-content-type"></a><h3>camel_mime_part_set_content_type ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_content_type    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *content_type);</pre>
+<p>
+Set the content-type on a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>content_type</code></em> :</span></p></td>
+<td> content-type string
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_content_type ()">
+<a name="camel-mime-part-get-content-type"></a><h3>camel_mime_part_get_content_type ()</h3>
+<pre class="programlisting"><a class="link" href="camel-camel-mime-utils.html#CamelContentType" title="CamelContentType">CamelContentType</a> *  camel_mime_part_get_content_type    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the Content-Type of a MIME part.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the parsed <a class="link" href="camel-camel-mime-utils.html#CamelContentType" title="CamelContentType"><span class="type">CamelContentType</span></a> of the MIME part
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_construct_from_parser ()">
+<a name="camel-mime-part-construct-from-parser"></a><h3>camel_mime_part_construct_from_parser ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_mime_part_construct_from_parser
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         <a class="link" href="camel-CamelMimeParser.html#CamelMimeParser" title="struct CamelMimeParser">CamelMimeParser</a> *parser);</pre>
+<p>
+Constructs a MIME part from a parser.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parser</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimeParser.html#CamelMimeParser" title="struct CamelMimeParser"><span class="type">CamelMimeParser</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">0</code> on success or <code class="literal">-1</code> on fail
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_set_content ()">
+<a name="camel-mime-part-set-content"></a><h3>camel_mime_part_set_content ()</h3>
+<pre class="programlisting">void                camel_mime_part_set_content         (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> length,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *type);</pre>
+<p>
+Utility function used to set the content of a mime part object to
+be the provided data. If <em class="parameter"><code>length</code></em> is 0, this routine can be used as
+a way to remove old content (in which case <em class="parameter"><code>data</code></em> and <em class="parameter"><code>type</code></em> are
+ignored and may be <code class="literal">NULL</code>).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td> data to put into the part
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
+<td> length of <em class="parameter"><code>data</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> Content-Type of the data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_get_content_size ()">
+<a name="camel-mime-part-get-content-size"></a><h3>camel_mime_part_get_content_size ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a>               camel_mime_part_get_content_size    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *mime_part);</pre>
+<p>
+Get the decoded size of the MIME part's content.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mime_part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the size of the MIME part's content in bytes.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_part_construct_content_from_parser ()">
+<a name="camel-mime-part-construct-content-from-parser"></a><h3>camel_mime_part_construct_content_from_parser ()</h3>
+<pre class="programlisting">void                camel_mime_part_construct_content_from_parser
+                                                        (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *,
+                                                         <a class="link" href="camel-CamelMimeParser.html#CamelMimeParser" title="struct CamelMimeParser">CamelMimeParser</a> *mp);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_mime_message_build_preview ()">
+<a name="camel-mime-message-build-preview"></a><h3>camel_mime_message_build_preview ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_mime_message_build_preview    (<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *msg,
+                                                         <a class="link" href="camel-CamelFolderSummary.html#CamelMessageInfo" title="CamelMessageInfo">CamelMessageInfo</a> *info);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>msg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

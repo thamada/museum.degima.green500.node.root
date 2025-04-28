@@ -1,0 +1,45 @@
+commit 69dcfc8aad24fa95ae0a0ad1405cf6847e3ec14a
+Author: Nishanth Aravamudan <nacc@us.ibm.com>
+Date:   Wed Oct 27 19:06:30 2010 +0000
+
+    cxgb3: fix crash due to manipulating queues before registration
+    
+    Along the same lines as "cxgb4: fix crash due to manipulating queues
+    before registration" (8f6d9f40476895571df039b6f1f5230ec7faebad), before
+    commit "net: allocate tx queues in register_netdevice"
+    netif_tx_stop_all_queues and related functions could be used between
+    device allocation and registration but now only after registration.
+    cxgb4 has such a call before registration and crashes now.  Move it
+    after register_netdev.
+    
+    Signed-off-by: Nishanth Aravamudan <nacc@us.ibm.com>
+    Cc: eric.dumazet@gmail.com
+    Cc: sonnyrao@us.ibm.com
+    Cc: Divy Le Ray <divy@chelsio.com>
+    Cc: Dimitris Michailidis <dm@chelsio.com>
+    Cc: netdev@vger.kernel.org
+    Cc: linux-kernel@vger.kernel.org
+    Tested-by: Nishanth Aravamudan <nacc@us.ibm.com>
+    Acked-by: Divy Le Ray <divy@chelsio.com>
+    Signed-off-by: David S. Miller <davem@davemloft.net>
+
+diff --git a/drivers/net/cxgb3/cxgb3_main.c b/drivers/net/cxgb3/cxgb3_main.c
+index 4e3c123..407d4e2 100644
+--- a/drivers/net/cxgb3/cxgb3_main.c
++++ b/drivers/net/cxgb3/cxgb3_main.c
+@@ -3301,7 +3301,6 @@ static int __devinit init_one(struct pci_dev *pdev,
+ 		pi->rx_offload = T3_RX_CSUM | T3_LRO;
+ 		pi->port_id = i;
+ 		netif_carrier_off(netdev);
+-		netif_tx_stop_all_queues(netdev);
+ 		netdev->irq = pdev->irq;
+ 		netdev->mem_start = mmio_start;
+ 		netdev->mem_end = mmio_start + mmio_len - 1;
+@@ -3342,6 +3341,7 @@ static int __devinit init_one(struct pci_dev *pdev,
+ 				adapter->name = adapter->port[i]->name;
+ 
+ 			__set_bit(i, &adapter->registered_device_map);
++			netif_tx_stop_all_queues(adapter->port[i]);
+ 		}
+ 	}
+ 	if (!adapter->registered_device_map) {

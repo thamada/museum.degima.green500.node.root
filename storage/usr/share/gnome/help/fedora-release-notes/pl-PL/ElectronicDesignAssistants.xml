@@ -1,0 +1,454 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Electronic_Design_Automation" lang="pl-PL">
+	<title>Automatyka projektowania elektroniki</title>
+	 <remark>Ta treść znajduje się tutaj: <ulink type="http" url="https://fedoraproject.org/wiki/Documentation_EDA_Beat">https://fedoraproject.org/wiki/Documentation_EDA_Beat</ulink></remark>
+	<para>
+		<indexterm>
+			<primary>Automatyka projektowania elektroniki</primary>
+		</indexterm>
+		 <indexterm>
+			<primary>Laboratorium elektroniczne Fedory</primary>
+		</indexterm>
+		 Ta sekcja przedstawia zmiany w Laboratorium Elektronicznym Fedory 12. Proszę zauważyć, wiele aplikacji w FEL jest przeznaczonych dla konkretnych społeczności Są one przedstawione w sekcjach Projektowanie układów (która zawiera symulację i układy PCB) oraz Programowanie wbudowane.
+	</para>
+	<section>
+		<title>Zbiorowa recenzja kodu</title>
+		<para>
+			<indexterm>
+				<primary>Zbiorowa recenzja kodu</primary>
+			</indexterm>
+			 Jeden z aspektów projektowania sprzętu cyfrowego jest konieczność śledzenia wielu plików, umieszczanych w wielu różnych narzędziach EDA. Ewentualne raporty lub listy sieciowe są analizowane i zapisywane w dzienniku jaki część metodologii podpisywania. Każda firma śledzi te zależne od projektu pliki w określonej strukturze katalogów i w wybranym systemie kontroli wersji.
+		</para>
+		<para>
+			Do zestawu Fedory dołączono efektywne i pewne rozwiązanie recenzji kodu. Te rozwiązanie recenzji oparte na oprogramowaniu Trac ułatwia także tworzenie odnośników i odniesień między błędami, zadaniami, zestawami zmian i plikami. Koordynatorzy projektów mogą mieć bardziej realistyczne rozeznanie w tworzonym projekcie i bardzo łatwo śledzić postęp, korzystając z kamieni milowych i terminów wydań.
+		</para>
+	</section>
+	
+	<section>
+		<title>Domyślne IDE Eclipse</title>
+		<para>
+			<indexterm>
+				<primary>Domyślne IDE Eclipse</primary>
+				<secondary>Automatyka projektowania elektroniki</secondary>
+			</indexterm>
+			 Dzięki pomocy i wsparciu zespołu Eclipse Fedory, Eclipse stało się głównym IDE w FEL do programowania i dokumentacji HDL IP. Ta adaptacja umożliwia prawdziwą współpracę między narzędziami oferowanymi przez różnych producentów oprogramowania wbudowanego.
+		</para>
+		<para>
+			Następujące wtyczki dostarczane domyślnie w platformie Laboratorium elektroniczne Fedory ulepszą: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						projektowanie interfejsów
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						automatyczne tworzenie dokumentacji i zarządzanie profesjonalnymi arkuszami danych
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Skrypty Perla/Tcl (moduły Perla zawarte w FEL10)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						kontrolę wersji projektów
+					</para>
+				</listitem>
+			</itemizedlist>
+			<table frame="all" id="tbl-FEL-Eclipse-Plugins">
+				<title>Wtyczki Eclipse wybrane do projektowania sprzętu</title>
+				<indexterm>
+					<primary>eclipse-veditor</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-eclox</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-texlipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-cdt</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-dltk-tcl</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-epic</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-subclipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-egit</primary>
+				</indexterm>
+				<tgroup cols="2">
+					<thead>
+						<row>
+							<entry>
+								Package
+							</entry>
+							<entry>
+								Opis
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								eclipse-veditor
+							</entry>
+							<entry>
+								Umożliwia projektantom IC/FPGA tworzenie kodu Verilog/VHDL w Eclipse. Dostarcza powiadamianie o błędach i ostrzeżeniach literówek, braku sygnałów i niepotrzebnych sygnałów itd. w czasie rzeczywistym.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-eclox
+							</entry>
+							<entry>
+								Jeśli kod VHDL zawiera komentarze w stylu Doxygen, można automatycznie utworzyć plik PDF, aby móc go użyć podczas wewnętrznych spotkań lub wysłać go do klienta.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-texlipse
+							</entry>
+							<entry>
+								Ponieważ plik PDF jest tworzony z LaTeX, wtyczka texlipse dostarcza kilka dodatkowych formatowań układu strony i łatwe tworzenie plików PDF. Wystarczy teraz nacisnąć Ctrl+S, zamiast ręcznego używania Kile. Z tego powodu Kile zostanie usunięte z Live DVD FEL.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-cdt
+							</entry>
+							<entry>
+								Dostarcza narzędzia programistyczne zagnieżdżonego C i C++.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-dltk-tcl
+							</entry>
+							<entry>
+								Skrypty Tcl mogą być zarządzane razem z kodem HDL.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-epic
+							</entry>
+							<entry>
+								Skrypty Perla mogą być zarządzane razem z kodem HDL.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-subclipse
+							</entry>
+							<entry>
+								Dodaje integrację z Subversion do IDE Eclipse
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-egit
+							</entry>
+							<entry>
+								Dodaje integrację z rozproszonym systemem kontroli wersji git do IDE Eclipse
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+	</section>
+	
+	<section>
+		<title>Projektowanie analogowych ASIC</title>
+		<variablelist>
+			<varlistentry>
+				<term>toped</term>
+				<listitem>
+					<indexterm>
+						<primary>toped</primary>
+					</indexterm>
+					<para>
+						Zaktualizowano do wydania konsolidacyjnego 0.9.4. Pakiet Toped Fedory domyślnie ustawia zmienną $TPD_GLOBAL na /usr/share/toped, aby użytkownik mógł uruchomić toped od razu po zainstalowaniu.
+					</para>
+					<para>
+						Graham Petley i Krustev Svilen dostarczyli dwa pliki TELL jako demonstrację, jak toped może współdziałać ze standardowymi komórkami Pharosc przez parsery GDSII i CIF programu Toped.
+					</para>
+					<para>
+						Główne zmiany 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Nowy renderer grafiki, który przyspiesza rysowanie do 3,5 razy. Wymaga OpenGL w wersji 1.4 (Fedora 11 używa 1.3, ale to nie jest problem) i wirtualnych obiektów bufora. Będzie używany jako podstawa przyszłych efektów graficznych.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Poprzedni renderer jest nadal używany przez sterowniki graficzne implementujące starsze wersji OpenGL, a także wirtualne pulpity.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Prędkość została także znacznie ulepszona.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Aktualizacje i poprawki zewnętrznych interfejsów, zwłaszcza GDSII.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Nowe narzędzie do konwersji plików technologii Virtuoso(C) do TELL.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Format TDT został zaktualizowany z nowymi wpisami. Zaktualizowana wersja to 0.7.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Format TDT został zaktualizowany z nowymi wpisami. Zaktualizowana wersja to 0.7.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Dalsze aktualizacje dostosowania interfejsu użytkownika - paski narzędziowe.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Aktualizacje wewnętrznego obsługiwania odwołań do komórek. W ich wyniku warstwa 0 jest obsługiwana teraz jako normalna warstwa.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+					<warning>
+						<title>Poprzednie wydania Toped nie będą mogły odczytać plików TDT wyprodukowanych przez te wydanie. </title>
+						<para>
+							Pewna część kodu nie została jeszcze połączona do głównego pnia rozwojowego, w tym parser raportów błędów kalibracji. Sugerowane jest zrobienie tego po wydaniu. Niektóre funkcje zostały opóźnione, aby nie poświęcać stabilności na tym etapie.
+						</para>
+					</warning>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Magic</term>
+				<listitem>
+					<indexterm>
+						<primary>magic</primary>
+					</indexterm>
+					<indexterm>
+						<primary>magic-doc</primary>
+					</indexterm>
+					<para>
+						Pakiet Magic Fedory został zaktualizowany do wersji 8.0.54.
+					</para>
+					<para>
+						Pakiet Magic Fedora posiada dokumentację w oddzielnym pakiecie o nazwie <package>magic-doc</package>. Zawiera on kilka przykładów scmos i samouczków. Zaawansowanych użytkowników VLSI programu Magic powinna zainteresować dokumentacja zmian w serii 8.0.
+					</para>
+					<para>
+						Funkcje: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									obrysowane czcionki wektorowe (dzięki projektowi freefont), naprawiające wiele problemów powiązanych z etykietami w programie Magic.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Wszystkie funkcje wyświetlania, manipulacji i OpenGL zostały ukończone.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Zawiera niektóre operatory "cifoutput" do użycia z nowym poleceniem "cif paint" do manipulowania układem używając operatorów zmiennych logicznych.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Runtime speed has been improved.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Dodano dwa dodatkowe menu do manipulacji siatką i ustawieniami tekstu.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Electric</term>
+				<listitem>
+					<indexterm>
+						<primary>electric</primary>
+					</indexterm>
+					<para>
+						Pakiet <package>electric</package> został zaktualizowany do wersji 8.09.
+					</para>
+					<para>
+						Proszę zauważyć, że większość użytkowników programu electric używa wtyczek firm trzecich, których nie można dodać do FEL z powodu niezgodności ich licencji z Fedorą. W związku z tym zespół Laboratorium elektronicznego Fedory rozumie, że wydanie nowej wersji zepsułoby zgodność z wtyczkami użytkowników. Nowa wersja programu electric zostanie umieszczona w repozytorium updates-testing.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>Projektowanie cyfrowe</title>
+		<variablelist>
+			<varlistentry>
+				<term>Dinotrace</term>
+				<listitem>
+					<indexterm>
+						<primary>dinotrace</primary>
+					</indexterm>
+					<para>
+						Nowy pakiet w Fedorze &PRODVER;. Dinotrace jest przeglądarką form fal, która rozumie zrzuty zmian wartości programu Verilog, ASCII i inne formaty śledzenia.
+					</para>
+					<para>
+						Umożliwia umieszczanie kursorów, wyróżnianie sygnałów, wyszukiwanie, drukowanie i inne możliwości przewyższające wiele komercyjnych przeglądarek form fal.
+					</para>
+					<para>
+						Dinotrace jest zoptymalizowane do szybkiego debugowania. Dzięki VTRACE awaria symulacji automatycznie umieści kursor w miejscu wystąpienia błędu, doda komentarze widoczne w przeglądarce. Cztery naciśnięcia myszą i błędy zostaną wyróżnione w plikach dzienników, a wartości sygnałów w miejscu błędu będą widoczne w źródle.
+					</para>
+					<para>
+						Fedora dostarcza także pakiet <code>dinotrace-mode</code> dla Emacsa pod nazwą <package>emacs-dinotrace-mode</package>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>eqntott</term>
+				<listitem>
+					<indexterm>
+						<primary>eqntott</primary>
+					</indexterm>
+					<para>
+						Pakiet <package>eqntott</package> konwertuje wyrażenia zmiennych logicznych w tablicę prawdy, która jest przydatna do przygotowywania wejścia dla pakietu espresso w celu minimalizacji logiki, konwertowania wyrażeń logicznych w prostsze formy i tworzenia tablic partycji. Pakiet <package>eqntott</package> jest nowością w Fedorze &PRODVER;.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>expresso-ab</term>
+				<listitem>
+					<indexterm>
+						<primary>expresso-ab</primary>
+					</indexterm>
+					<para>
+						Nowość w Fedorze &PRODVER;, pakiet <package>espresso</package> przyjmuje na wejściu dwupoziomową reprezentację dwuwartościowej (lub wielowartościową) funkcję zmiennej logicznej, i wytwarza minimalną odpowiednią reprezentację. Jest to narzędzie minimalizacji logiki boolowskiej.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Verilator</term>
+				<listitem>
+					<indexterm>
+						<primary>verilator</primary>
+					</indexterm>
+					<para>
+						Verilator jest najszybszym wolnym symulatorem HDL programu Verilog HDL. Kompiluje syntezowany kod Verilog plus trochę PSL, asercje SystemVerilog i Synthesis do kodu C++ lub SystemC. Jest zaprojektowany dla dużych projektów, gdzie wydajność symulacji jest najważniejsza, i pasuje zwłaszcza do tworzenia wykonywalnych modeli procesorów dla zespołów oprogramowania projektowania.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>vrq</term>
+				<listitem>
+					<indexterm>
+						<primary>vrq</primary>
+					</indexterm>
+					<para>
+						VRQ jest modularnym parserem Verilog, obsługującym narzędzia wtyczek do przetwarzania Verilog. Można wywoływać wiele narzędzi w formie potoku za jednym wykonaniem VRQ. Jest to ogólny interfejs parsera z obsługą wtyczek narzędzi zaplecz.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Alliance</term>
+				<listitem>
+					<indexterm>
+						<primary>Alliance</primary>
+					</indexterm>
+					<para>
+						W sierpniu 2009 w repozytorium rozwojowym CVS pakietu Alliance w Fedorze pojawiła się setna łata dotycząca stabilności na architekturach 64 bitowych. Cieszymy się więc, że projekt Alliance zastosował te wszystkie łaty. Zbudowano także nowe wydanie dla wszystkich wspieranych repozytoriów testowych Fedory i repozytorium testowego EPEL-5. W tym wydaniu jest także nowy graficzny interfejs użytkownika <package>xgra</package>, przeglądarka wykresów.
+					</para>
+					<para>
+						Alliance VLSI nie zostanie zastąpione przez pakiet herb (który miał być rozgałęzieniem projektu Alliance) w Feodrze. Przed wydaniem Fedory 11 rozwój herb był aktywny, ale skończyło się to po jej wydaniu. Ponieważ projekt Alliance VLSI jest aktywny i odpowiada na życzenia, nie ma obecnie żadnego dobrego powodu, aby zastąpić Alliance programem herb.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>Skrypty Perla do projektowania sprzętu</title>
+		<variablelist>
+			<varlistentry>
+				<term>perl-SystemPerl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-SystemPerl</primary>
+					</indexterm>
+					<para>
+						Jest to nowy pakiet w Fedorze &PRODVER;.
+					</para>
+					<para>
+						SystemPerl jest wersją języka SystemC. Został zaprojektowany, aby rozszerzyć tekst, więc niepotrzebne powtórzenia w języku zostały wyeliminowane. Dzięki używania sp_preproc, pliki SystemPerl mogą być rozszerzane do plików C++ w czasie kompilacji lub rozszerzane w miejscu, aby były prawidłowymi samodzielnymi plikami SystemC.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>perl-Verilog-Perl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-Verilog-Perl</primary>
+					</indexterm>
+					<para>
+						Pakiet <package>perl-Verilog-Perl</package> został zaktualizowany do wersji 3.123. Nowe funkcje zawierają: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Ulepszono ostrzeżenia podczas używania "do" jako identyfikatora.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Naprawiono poprzedzone identyfikatory preprocesora, błąd 106.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Naprawiono błąd kompilacji 5.8.8, rt48226.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Naprawiono błąd kompilacji Perl 5.8.0 z "callbackgen".
+								</para>
+							</listitem>
+						</itemizedlist>
+						<warning>
+							<para>
+								Pakiet perl-Verilog-Perl zastępuje perl-Verilog. Użytkownikom Fedory zaleca się odpowiednie dostosowanie własnych skryptów.
+							</para>
+						</warning>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+</section>
+
+

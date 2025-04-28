@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="de"><title>Werkzeug zum Einstellen von Datum und Uhrzeit</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>22.11.2007</date><revremark>Erstveröffentlichung</revremark></revision><revision><revnumber>1.0.1</revnumber><date>17.01.2008</date><revremark>Mache, dass das DocBook XML ordentlich validiert</revremark></revision><revision><revnumber>1.0.2</revnumber><date>18.01.2008</date><revremark>Mache den Dokumenten-Abstract extern</revremark></revision><revision><revnumber>1.0.3</revnumber><date>12.03.2008</date><revremark>Nutze menuchoice-Elemente, wo möglich</revremark></revision></revhistory><abstract role="description"><para>Das <application>Werkzeug zum Einstellen von Datum und Uhrzeit</application> ermöglicht es dem Nutzer, Datum und Zeit des Systems zu verändern, die vom System genutzte Zeitzone einzustellen und den Network Time Protocol (NTP)-Dämon zur Synchronisation mit Zeitservern zu konfigurieren.</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup><copyright><year>2009.</year><holder>Dominik Sandjaja (dominiksandjaja@fedoraproject.org)</holder></copyright><copyright><year>2009.</year><holder>Fabian Affolter (fab@fedoraproject.org)</holder></copyright></articleinfo><indexterm significance="normal"><primary><command>timetool</command>
+		</primary><see>Werkzeug zum Einstellen von Datum und Uhrzeit</see></indexterm><para>Das <application>Werkzeug zum Einstellen von Datum und Uhrzeit</application> ermöglicht es dem Nutzer, Datum und Zeit des Systems zu verändern, die vom System genutzte Zeitzone einzustellen und den Network Time Protocol (NTP)-Dämon zur Synchronisation mit Zeitservern zu konfigurieren.</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>Werkzeug zum Einstellen von Datum und Uhrzeit</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>Werkzeug zum Einstellen von Datum und Uhrzeit</see></indexterm><indexterm significance="normal"><primary><command>dateconfig</command> 
+        </primary><see>Werkzeug zum Einstellen von Datum und Uhrzeit</see></indexterm><para>Das <application>X</application> Fenstersystem muss laufen und Sie müssen root-Berechtigungen haben, um das Werkzeug zum Einstellen von Datum und Uhrzeit nutzen zu können. Es gibt drei Möglichkeiten, die Anwendung zu starten:</para><itemizedlist><listitem><para>Vom Desktop aus, gehen Sie zum <menuchoice><guimenu>Hauptmenü im Panel (das Menü mit dem "f"-Symbol)</guimenu><guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Datum &amp; Uhrzeit</guimenuitem></menuchoice></para></listitem><listitem><para>Vom Desktop aus, klicken Sie rechts auf die Uhrzeit in der Werkzeugleiste und wählen Sie <guimenuitem>Datum und Uhrzeit anpassen</guimenuitem>.</para></listitem><listitem><para>Tippen Sie den Befehl <command>system-config-date</command>, <command>system-config-time</command>, oder <command>dateconfig</command> an der Eingabeaufforderung, zum Beispiel in einem <application>XTerm</application>- oder einem <application>GNOME</application>-Terminal.</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>Eigenschaften von Datum und Uhrzeit</title><indexterm significance="normal"><primary>Konfiguration der Uhrzeit</primary></indexterm><indexterm significance="normal"><primary>Konfiguration des Datums</primary></indexterm><para>Wie in <xref linkend="dateconfig-time-date"/> gezeigt, ist der erste erscheinende Reiter zur Konfiguration von Datum und Uhrzeit des Systems.</para><figure float="0" id="dateconfig-time-date"><title>Eigenschaften von Datum und Uhrzeit</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>Eigenschaften von Datum und Uhrzeit</para></textobject></mediaobject></figure><para>Um das Datum zu ändern, nutzen Sie die Pfeile links und rechts des Monats um den Monat zu verändern, die Pfeile links und rechts des Jahres, um das Jahr zu ändern und klicken Sie auf den Wochentag, um diesen zu ändern.</para><para>Um die Uhrzeit zu ändern, nutzen Sie die hoch- und runter-Pfeile neben <guilabel>Stunde</guilabel>, <guilabel>Minute</guilabel> und <guilabel>Sekunde</guilabel> im Abschnitt <guilabel>Uhrzeit</guilabel>.</para><para>Als Alternative können Sie die Tastatur benutzen zum Ändern des Datums und der Zeit.Benutzen Sie <keycap>Tabulator</keycap> und <keycombo><keycap>Umschalttaste</keycap><keycap>Tabulator</keycap></keycombo>, um zwischen den Felder zu navigieren. In der Kalendar-Anzeige können Sie <keycombo><keycap>Ctrl</keycap><keycap>hoch</keycap></keycombo>-Pfeil und <keycombo><keycap>Ctrl</keycap><keycap>runter</keycap></keycombo>-Pfeil zum Ändern des Jahres, <keycombo><keycap>Ctrl</keycap><keycap>links</keycap></keycombo>-Pfeil und <keycombo><keycap>Ctrl</keycap><keycap>rechts</keycap></keycombo>-Pfeil zum Ändern des Monats und die Pfeiltasten und die <keycap>Leertaste</keycap> zum Wählen und Sezten des Datums. Im Stunden-, Minuten- und Sekunden-Bereich benutzen Sie bitte <keycap>hoch</keycap> und <keycap>runter</keycap> zum Ändern der Werte.</para><para>Nach einem Klick auf den <guibutton>OK</guibutton>-Knopf werden die Änderungen, die Sie an Datum, Uhrzeit, Zeitzone und dem NTP-Dämon vorgenommen haben angewendet und das Programm wird beendet.</para></section>
+	<section id="s1-dateconfig-ntp"><title>Eigenschaften des Network Time Protocol (NTP)</title><indexterm significance="normal"><primary>Konfiguration der Uhrzeit</primary><secondary>mit NTP-Server synchronisieren</secondary></indexterm><indexterm significance="normal"><primary>Network Time Protocol</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>konfiguriere</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para>Wie in <xref linkend="dateconfig-ntp"/> gezeigt, erscheint der zweite Reiter, welcher zur Konfiguration des NTP ist.</para><figure float="0" id="dateconfig-ntp"><title>NTP-Eigenschaften</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>NTP-Eigenschaften</para></textobject></mediaobject></figure><para>Der Network Time Protocol (NTP)-Daemon synchronisiert die Uhr des Systems mit einem entfernten Zeitserver oder einer anderen Zeitquelle. Die Anwendung ermöglicht, den NTP-Dämon so zu konfigurieren, dass er die Systemzeit von einem entfernten Server synchronisiert. Um dies einzustellen, wählen Sie <guibutton>Network Time Protocol aktivieren</guibutton>. Dies aktiviert die Liste der <guilabel>NTP-Server</guilabel> und weitere Optionen. Sie können einen der vordefinierten Server auswählen, einen der vordefinierten Server bearbeiten, indem Sie auf <guibutton>Bearbeiten</guibutton> klicken oder einen neuen Server hinzufügen, indem Sie auf <guibutton>Hinzufügen</guibutton> klicken. Ihr System fängt erst mit der Synchronisierung an, nachdem Sie auf <guibutton>OK</guibutton> geklickt haben. Danach wird die Konfiguration gespeichert und der NTP-Dämon wird gestartet bzw. neu gestartet, wenn er bereits lief.</para><para>Nach einem Klick auf den <guibutton>OK</guibutton>-Knopf werden die Änderungen, die Sie an Datum, Uhrzeit, Zeitzone und dem NTP-Dämon vorgenommen haben angewendet und das Programm wird beendet.</para></section>
+	<section id="s1-dateconfig-time-zone"><title>Konfiguration der Zeitzone</title><indexterm significance="normal"><primary>Konfiguration der Zeitzone</primary></indexterm><para>Wie in <xref linkend="dateconfig-timezone"/> gezeigt, erscheint der dritte Reiter, welcher zu Konfiguration der Zeitzone des Systems ist.</para><para>Um die Zeitzone des Systems einzustellen, klicken Sie auf den Reiter <guilabel>Zeitzone</guilabel>. Die Zeitzone kann entweder mit Hilfe der interaktiven Karte geändert werden oder indem die gewünschte Zeitzone aus der Liste unterhalb der Karte ausgewählt wird. Um die Karte zu nutzen, klicken Sie auf die Stadt, welche in Ihrer Zeitzone liegt. Es erscheint ein rotes <guilabel>X</guilabel> und die Zeitzone wird auch in der Liste unterhalb der Karte geändert. Sie können den Schieberegler links auf der Karte nutzen, um die Vergrößerungsstufe einzustellen.</para><para>Alternativ können Sie die Liste unterhalb der Karte nutzen. Wie auch bei der Karte können Sie erst die Region auswählen, bevor Sie die Stadt auswählen. In diesem Fall ist die Liste eine Baumliste, in der die Städte und Länder unterhalb ihrer jeweiligen Kontinente zusammengefasst sind. Es sind auch nicht-geografische Zeitzonen vorhanden, da diese für wissenschaftliche Zwecke benötigt werden.</para><para>Klicken Sie <guibutton>OK</guibutton> um die Änderungen anzuwenden und das Programm zu beenden.</para><figure float="0" id="dateconfig-timezone"><title>Eigenschaften der Zeitzone</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>Eigenschaften der Zeitzone</para></textobject></mediaobject></figure><para>Wenn Ihre Systemuhr UTC nutzt, wählen Sie die Option <guibutton>Systemuhr verwendet UTC</guibutton>. UTC steht für <firstterm>Universal Time, Coordinated</firstterm> und ist auch als Greenwich Mean Time (GMT) bekannt. Andere Zeitzonen sind durch den Abstand von der UTC-Zeit definiert.</para></section>
+</article>

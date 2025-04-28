@@ -1,0 +1,397 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>gweather-prefs</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libgweather Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgweather-gweather-gconf.html" title="gweather-gconf">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgweather-gweather-gconf.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libgweather Reference Manual</th>
+<td> </td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgweather-gweather-prefs.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libgweather-gweather-prefs.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="gweather-prefs">
+<a name="libgweather-gweather-prefs"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgweather-gweather-prefs.top_of_page"></a>gweather-prefs</span></h2>
+<p>gweather-prefs</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgweather-gweather-prefs.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">#define             <a class="link" href="libgweather-gweather-prefs.html#GCONF-TEMP-UNIT:CAPS" title="GCONF_TEMP_UNIT">GCONF_TEMP_UNIT</a>
+#define             <a class="link" href="libgweather-gweather-prefs.html#GCONF-SPEED-UNIT:CAPS" title="GCONF_SPEED_UNIT">GCONF_SPEED_UNIT</a>
+#define             <a class="link" href="libgweather-gweather-prefs.html#GCONF-PRESSURE-UNIT:CAPS" title="GCONF_PRESSURE_UNIT">GCONF_PRESSURE_UNIT</a>
+#define             <a class="link" href="libgweather-gweather-prefs.html#GCONF-DISTANCE-UNIT:CAPS" title="GCONF_DISTANCE_UNIT">GCONF_DISTANCE_UNIT</a>
+                    <a class="link" href="libgweather-gweather-prefs.html#GWeatherPrefs" title="GWeatherPrefs">GWeatherPrefs</a>;
+void                <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-load" title="gweather_prefs_load ()">gweather_prefs_load</a>                 (<a class="link" href="libgweather-gweather-prefs.html#GWeatherPrefs" title="GWeatherPrefs">GWeatherPrefs</a> *prefs,
+                                                         <a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-temp-enum-to-string" title="gweather_prefs_temp_enum_to_string ()">gweather_prefs_temp_enum_to_string</a>  (<a class="link" href="libgweather-weather.html#TempUnit" title="enum TempUnit">TempUnit</a> temp);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-speed-enum-to-string" title="gweather_prefs_speed_enum_to_string ()">gweather_prefs_speed_enum_to_string</a> (<a class="link" href="libgweather-weather.html#SpeedUnit" title="enum SpeedUnit">SpeedUnit</a> speed);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-pressure-enum-to-string" title="gweather_prefs_pressure_enum_to_string ()">gweather_prefs_pressure_enum_to_string</a>
+                                                        (<a class="link" href="libgweather-weather.html#PressureUnit" title="enum PressureUnit">PressureUnit</a> pressure);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-distance-enum-to-string" title="gweather_prefs_distance_enum_to_string ()">gweather_prefs_distance_enum_to_string</a>
+                                                        (<a class="link" href="libgweather-weather.html#DistanceUnit" title="enum DistanceUnit">DistanceUnit</a> distance);
+<a class="link" href="libgweather-weather.html#TempUnit" title="enum TempUnit">TempUnit</a>            <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-parse-temperature" title="gweather_prefs_parse_temperature ()">gweather_prefs_parse_temperature</a>    (const char *str,
+                                                         gboolean *is_default);
+<a class="link" href="libgweather-weather.html#SpeedUnit" title="enum SpeedUnit">SpeedUnit</a>           <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-parse-speed" title="gweather_prefs_parse_speed ()">gweather_prefs_parse_speed</a>          (const char *str,
+                                                         gboolean *is_default);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-get-temp-display-name" title="gweather_prefs_get_temp_display_name ()">gweather_prefs_get_temp_display_name</a>
+                                                        (<a class="link" href="libgweather-weather.html#TempUnit" title="enum TempUnit">TempUnit</a> temp);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-get-speed-display-name" title="gweather_prefs_get_speed_display_name ()">gweather_prefs_get_speed_display_name</a>
+                                                        (<a class="link" href="libgweather-weather.html#SpeedUnit" title="enum SpeedUnit">SpeedUnit</a> speed);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-get-pressure-display-name" title="gweather_prefs_get_pressure_display_name ()">gweather_prefs_get_pressure_display_name</a>
+                                                        (<a class="link" href="libgweather-weather.html#PressureUnit" title="enum PressureUnit">PressureUnit</a> pressure);
+const char *        <a class="link" href="libgweather-gweather-prefs.html#gweather-prefs-get-distance-display-name" title="gweather_prefs_get_distance_display_name ()">gweather_prefs_get_distance_display_name</a>
+                                                        (<a class="link" href="libgweather-weather.html#DistanceUnit" title="enum DistanceUnit">DistanceUnit</a> distance);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgweather-gweather-prefs.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgweather-gweather-prefs.details"></a><h2>Details</h2>
+<div class="refsect2" title="GCONF_TEMP_UNIT">
+<a name="GCONF-TEMP-UNIT:CAPS"></a><h3>GCONF_TEMP_UNIT</h3>
+<pre class="programlisting">#define GCONF_TEMP_UNIT     "temperature_unit"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GCONF_SPEED_UNIT">
+<a name="GCONF-SPEED-UNIT:CAPS"></a><h3>GCONF_SPEED_UNIT</h3>
+<pre class="programlisting">#define GCONF_SPEED_UNIT    "speed_unit"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GCONF_PRESSURE_UNIT">
+<a name="GCONF-PRESSURE-UNIT:CAPS"></a><h3>GCONF_PRESSURE_UNIT</h3>
+<pre class="programlisting">#define GCONF_PRESSURE_UNIT "pressure_unit"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GCONF_DISTANCE_UNIT">
+<a name="GCONF-DISTANCE-UNIT:CAPS"></a><h3>GCONF_DISTANCE_UNIT</h3>
+<pre class="programlisting">#define GCONF_DISTANCE_UNIT "distance_unit"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GWeatherPrefs">
+<a name="GWeatherPrefs"></a><h3>GWeatherPrefs</h3>
+<pre class="programlisting">typedef struct {
+    WeatherLocation *location;
+    gint update_interval;  /* in seconds */
+    gboolean update_enabled;
+    gboolean detailed;
+    gboolean radar_enabled;
+    gboolean use_custom_radar_url;
+    gchar *radar;
+
+    TempUnit     temperature_unit;
+    gboolean     use_temperature_default;
+    SpeedUnit    speed_unit;
+    gboolean     use_speed_default;
+    PressureUnit pressure_unit;
+    gboolean     use_pressure_default;
+    DistanceUnit distance_unit;
+    gboolean     use_distance_default;
+} GWeatherPrefs;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_load ()">
+<a name="gweather-prefs-load"></a><h3>gweather_prefs_load ()</h3>
+<pre class="programlisting">void                gweather_prefs_load                 (<a class="link" href="libgweather-gweather-prefs.html#GWeatherPrefs" title="GWeatherPrefs">GWeatherPrefs</a> *prefs,
+                                                         <a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefs</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_temp_enum_to_string ()">
+<a name="gweather-prefs-temp-enum-to-string"></a><h3>gweather_prefs_temp_enum_to_string ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_temp_enum_to_string  (<a class="link" href="libgweather-weather.html#TempUnit" title="enum TempUnit">TempUnit</a> temp);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>temp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_speed_enum_to_string ()">
+<a name="gweather-prefs-speed-enum-to-string"></a><h3>gweather_prefs_speed_enum_to_string ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_speed_enum_to_string (<a class="link" href="libgweather-weather.html#SpeedUnit" title="enum SpeedUnit">SpeedUnit</a> speed);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>speed</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_pressure_enum_to_string ()">
+<a name="gweather-prefs-pressure-enum-to-string"></a><h3>gweather_prefs_pressure_enum_to_string ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_pressure_enum_to_string
+                                                        (<a class="link" href="libgweather-weather.html#PressureUnit" title="enum PressureUnit">PressureUnit</a> pressure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pressure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_distance_enum_to_string ()">
+<a name="gweather-prefs-distance-enum-to-string"></a><h3>gweather_prefs_distance_enum_to_string ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_distance_enum_to_string
+                                                        (<a class="link" href="libgweather-weather.html#DistanceUnit" title="enum DistanceUnit">DistanceUnit</a> distance);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>distance</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_parse_temperature ()">
+<a name="gweather-prefs-parse-temperature"></a><h3>gweather_prefs_parse_temperature ()</h3>
+<pre class="programlisting"><a class="link" href="libgweather-weather.html#TempUnit" title="enum TempUnit">TempUnit</a>            gweather_prefs_parse_temperature    (const char *str,
+                                                         gboolean *is_default);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>str</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>is_default</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_parse_speed ()">
+<a name="gweather-prefs-parse-speed"></a><h3>gweather_prefs_parse_speed ()</h3>
+<pre class="programlisting"><a class="link" href="libgweather-weather.html#SpeedUnit" title="enum SpeedUnit">SpeedUnit</a>           gweather_prefs_parse_speed          (const char *str,
+                                                         gboolean *is_default);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>str</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>is_default</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_get_temp_display_name ()">
+<a name="gweather-prefs-get-temp-display-name"></a><h3>gweather_prefs_get_temp_display_name ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_get_temp_display_name
+                                                        (<a class="link" href="libgweather-weather.html#TempUnit" title="enum TempUnit">TempUnit</a> temp);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>temp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_get_speed_display_name ()">
+<a name="gweather-prefs-get-speed-display-name"></a><h3>gweather_prefs_get_speed_display_name ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_get_speed_display_name
+                                                        (<a class="link" href="libgweather-weather.html#SpeedUnit" title="enum SpeedUnit">SpeedUnit</a> speed);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>speed</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_get_pressure_display_name ()">
+<a name="gweather-prefs-get-pressure-display-name"></a><h3>gweather_prefs_get_pressure_display_name ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_get_pressure_display_name
+                                                        (<a class="link" href="libgweather-weather.html#PressureUnit" title="enum PressureUnit">PressureUnit</a> pressure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pressure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_prefs_get_distance_display_name ()">
+<a name="gweather-prefs-get-distance-display-name"></a><h3>gweather_prefs_get_distance_display_name ()</h3>
+<pre class="programlisting">const char *        gweather_prefs_get_distance_display_name
+                                                        (<a class="link" href="libgweather-weather.html#DistanceUnit" title="enum DistanceUnit">DistanceUnit</a> distance);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>distance</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

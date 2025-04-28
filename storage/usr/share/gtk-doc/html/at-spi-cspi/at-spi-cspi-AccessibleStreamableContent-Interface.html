@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AccessibleStreamableContent Interface</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<link rel="home" href="index.html" title="AT-SPI C Bindings Reference Manual">
+<link rel="up" href="spi-component.html" title="Subinterface Methods">
+<link rel="prev" href="at-spi-cspi-AccessibleSelection-Interface.html" title="AccessibleSelection Interface">
+<link rel="next" href="at-spi-cspi-AccessibleTable-Interface.html" title="AccessibleTable Interface">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="spi-main.html" title="SPI Main Event Loop and Registry">
+<link rel="chapter" href="spi-application.html" title="AccessibleApplication Methods">
+<link rel="chapter" href="spi-accessible.html" title="Basic Accessible Object Methods and Interface Query">
+<link rel="chapter" href="spi-component.html" title="Subinterface Methods">
+<link rel="chapter" href="ch05.html" title="Auxiliary Types">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="at-spi-cspi-AccessibleSelection-Interface.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="spi-component.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">AT-SPI C Bindings Reference Manual</th>
+<td><a accesskey="n" href="at-spi-cspi-AccessibleTable-Interface.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#at-spi-cspi-AccessibleStreamableContent-Interface.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#at-spi-cspi-AccessibleStreamableContent-Interface.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="AccessibleStreamableContent Interface">
+<a name="at-spi-cspi-AccessibleStreamableContent-Interface"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="at-spi-cspi-AccessibleStreamableContent-Interface.top_of_page"></a>AccessibleStreamableContent Interface</span></h2>
+<p>AccessibleStreamableContent Interface</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="at-spi-cspi-AccessibleStreamableContent-Interface.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+enum                <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContentSeekType" title="enum AccessibleStreamableContentSeekType">AccessibleStreamableContentSeekType</a>;
+void                <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-freeContentTypesList" title="AccessibleStreamableContent_freeContentTypesList ()">AccessibleStreamableContent_freeContentTypesList</a>
+                                                        (AccessibleStreamableContent *obj,
+                                                         char **content_types);
+void                <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-ref" title="AccessibleStreamableContent_ref ()">AccessibleStreamableContent_ref</a>     (AccessibleStreamableContent *obj);
+void                <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-unref" title="AccessibleStreamableContent_unref ()">AccessibleStreamableContent_unref</a>   (AccessibleStreamableContent *obj);
+char **             <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-getContentTypes" title="AccessibleStreamableContent_getContentTypes ()">AccessibleStreamableContent_getContentTypes</a>
+                                                        (AccessibleStreamableContent *obj);
+SPIBoolean          <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-open" title="AccessibleStreamableContent_open ()">AccessibleStreamableContent_open</a>    (AccessibleStreamableContent *obj,
+                                                         const char *content_type);
+long                <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-seek" title="AccessibleStreamableContent_seek ()">AccessibleStreamableContent_seek</a>    (AccessibleStreamableContent *obj,
+                                                         long int offset,
+                                                         <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContentSeekType" title="enum AccessibleStreamableContentSeekType">AccessibleStreamableContentSeekType</a> seek_type);
+SPIBoolean          <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-read" title="AccessibleStreamableContent_read ()">AccessibleStreamableContent_read</a>    (AccessibleStreamableContent *obj,
+                                                         void *buff,
+                                                         long int nbytes,
+                                                         unsigned int read_type);
+SPIBoolean          <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-close" title="AccessibleStreamableContent_close ()">AccessibleStreamableContent_close</a>   (AccessibleStreamableContent *obj);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="at-spi-cspi-AccessibleStreamableContent-Interface.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="at-spi-cspi-AccessibleStreamableContent-Interface.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum AccessibleStreamableContentSeekType">
+<a name="AccessibleStreamableContentSeekType"></a><h3>enum AccessibleStreamableContentSeekType</h3>
+<pre class="programlisting">typedef enum
+{
+  SPI_STREAM_SEEK_SET,
+  SPI_STREAM_SEEK_CUR,
+  SPI_STREAM_SEEK_END
+} AccessibleStreamableContentSeekType;
+</pre>
+<p>
+The seek type for a specified offset in AccessibleStreamableContent_seek.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="SPI-STREAM-SEEK-SET--CAPS"></a><span class="term"><code class="literal">SPI_STREAM_SEEK_SET</code></span></p></td>
+<td> seek from the 'top' of the streamable
+</td>
+</tr>
+<tr>
+<td><p><a name="SPI-STREAM-SEEK-CUR--CAPS"></a><span class="term"><code class="literal">SPI_STREAM_SEEK_CUR</code></span></p></td>
+<td> seek from the current position in the stream
+</td>
+</tr>
+<tr>
+<td><p><a name="SPI-STREAM-SEEK-END--CAPS"></a><span class="term"><code class="literal">SPI_STREAM_SEEK_END</code></span></p></td>
+<td> seek from the end of the stream (if known)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_freeContentTypesList ()">
+<a name="AccessibleStreamableContent-freeContentTypesList"></a><h3>AccessibleStreamableContent_freeContentTypesList ()</h3>
+<pre class="programlisting">void                AccessibleStreamableContent_freeContentTypesList
+                                                        (AccessibleStreamableContent *obj,
+                                                         char **content_types);</pre>
+<p>
+Free the memory associated with a call to <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-getContentTypes" title="AccessibleStreamableContent_getContentTypes ()"><span class="type">AccessibleStreamableContent_getContentTypes</span></a>, once 
+the result has been used.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> the AccessibleStreamableContent implementor on which to operate.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>content_types</code></em> :</span></p></td>
+<td> a list of content types previously returned by 
+    <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-getContentTypes" title="AccessibleStreamableContent_getContentTypes ()"><span class="type">AccessibleStreamableContent_getContentTypes</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since AT-SPI 1.4</p>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_ref ()">
+<a name="AccessibleStreamableContent-ref"></a><h3>AccessibleStreamableContent_ref ()</h3>
+<pre class="programlisting">void                AccessibleStreamableContent_ref     (AccessibleStreamableContent *obj);</pre>
+<p>
+Increment the reference count for an <span class="type">AccessibleStreamableContent</span> object.
+</p>
+<p>
+<em class="parameter"><code>Since</code></em>: AT-SPI 1.4</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> a pointer to the <span class="type">AccessibleStreamableContent</span> implementor on which to
+      operate.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_unref ()">
+<a name="AccessibleStreamableContent-unref"></a><h3>AccessibleStreamableContent_unref ()</h3>
+<pre class="programlisting">void                AccessibleStreamableContent_unref   (AccessibleStreamableContent *obj);</pre>
+<p>
+Decrement the reference count for an <span class="type">AccessibleStreamableContent</span> object.
+</p>
+<p>
+<em class="parameter"><code>Since</code></em>: AT-SPI 1.4</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> a pointer to the <span class="type">AccessibleStreamableContent</span> implementor
+      on which to operate. 
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_getContentTypes ()">
+<a name="AccessibleStreamableContent-getContentTypes"></a><h3>AccessibleStreamableContent_getContentTypes ()</h3>
+<pre class="programlisting">char **             AccessibleStreamableContent_getContentTypes
+                                                        (AccessibleStreamableContent *obj);</pre>
+<p>
+Get a list of strings containing the content mimetypes available from an
+      <span class="type">AccessibleStreamableContent</span> implementor.
+</p>
+<p>
+<em class="parameter"><code>Since</code></em>: AT-SPI 1.4</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> a pointer to the <span class="type">AccessibleStreamableContent</span> implementor on which to operate.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an array of strings, terminated by a NULL string, specifying the
+      mimetypes for which the streamed content is available.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_open ()">
+<a name="AccessibleStreamableContent-open"></a><h3>AccessibleStreamableContent_open ()</h3>
+<pre class="programlisting">SPIBoolean          AccessibleStreamableContent_open    (AccessibleStreamableContent *obj,
+                                                         const char *content_type);</pre>
+<p>
+Open a streaming connection to an AccessibleStreamableContent implementor,
+      of a particular content type.  Note that a client may only have one
+      open stream per streamable interface instance in the current 
+      implementation.
+</p>
+<p>
+<em class="parameter"><code>Since</code></em>: AT-SPI 1.4</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> a pointer to the <span class="type">AccessibleStreamableContent</span> implementor on which to operate.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>content_type</code></em> :</span></p></td>
+<td> a string specifying the content type to retrieve (should match one
+of the return strings from #<a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-getContentTypes" title="AccessibleStreamableContent_getContentTypes ()"><code class="function">AccessibleStreamableContent_getContentTypes()</code></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><span class="type">TRUE</span></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><span class="type">FALSE</span></a> if unsuccessful.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_seek ()">
+<a name="AccessibleStreamableContent-seek"></a><h3>AccessibleStreamableContent_seek ()</h3>
+<pre class="programlisting">long                AccessibleStreamableContent_seek    (AccessibleStreamableContent *obj,
+                                                         long int offset,
+                                                         <a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContentSeekType" title="enum AccessibleStreamableContentSeekType">AccessibleStreamableContentSeekType</a> seek_type);</pre>
+<p>
+Cause the current streamable content connection (obtained via
+    #<a class="link" href="at-spi-cspi-AccessibleStreamableContent-Interface.html#AccessibleStreamableContent-open" title="AccessibleStreamableContent_open ()"><code class="function">AccessibleStreamableContent_open()</code></a>) to seek to a particular offset in the
+    stream.
+</p>
+<p>
+<em class="parameter"><code>Since</code></em>: AT-SPI 1.4</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> a pointer to the <span class="type">AccessibleStreamableContent</span> implementor on which to operate.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>offset</code></em> :</span></p></td>
+<td> a long int specifying the offset into the stream.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>seek_type</code></em> :</span></p></td>
+<td> an enum indicating the seek offset type, may be SEEK_SET,
+           SEEK_CUR, SEEK_END (as in the <code class="function">lseek()</code> libc command).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><span class="type">TRUE</span></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><span class="type">FALSE</span></a> if unsuccessful.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_read ()">
+<a name="AccessibleStreamableContent-read"></a><h3>AccessibleStreamableContent_read ()</h3>
+<pre class="programlisting">SPIBoolean          AccessibleStreamableContent_read    (AccessibleStreamableContent *obj,
+                                                         void *buff,
+                                                         long int nbytes,
+                                                         unsigned int read_type);</pre>
+<p>
+Copy (read) bytes from the currently open streamable content connection
+    to a buffer.  This is a blocking API, in the sense that it does not 
+    return until the bytes have been read, or an error condition is 
+    detected.
+</p>
+<p>
+<em class="parameter"><code>Since</code></em>: AT-SPI 1.4</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> a pointer to the <span class="type">AccessibleStreamableContent</span> implementor on which to operate.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buff</code></em> :</span></p></td>
+<td> a pointer to a buffer into which the resulting bytes read from the stream
+       are to be written.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>nbytes</code></em> :</span></p></td>
+<td> a long integer indicating the number of bytes to read/write.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>read_type</code></em> :</span></p></td>
+<td> currently unused, specifies behavior of reads for streamed content
+       if blocking is not allowed, etc.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an integer indicating the number of bytes read, or -1 on error.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="AccessibleStreamableContent_close ()">
+<a name="AccessibleStreamableContent-close"></a><h3>AccessibleStreamableContent_close ()</h3>
+<pre class="programlisting">SPIBoolean          AccessibleStreamableContent_close   (AccessibleStreamableContent *obj);</pre>
+<p>
+Close the current streaming connection to an AccessibleStreamableContent implementor.
+This must be called before any subsequent AccessibleStreamableContent_open
+calls on the same object.
+</p>
+<p>
+<em class="parameter"><code>Since</code></em>: AT-SPI 1.4</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> a pointer to the <span class="type">AccessibleStreamableContent</span> implementor on which to operate.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><span class="type">TRUE</span></a> if successful, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><span class="type">FALSE</span></a> if unsuccessful.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

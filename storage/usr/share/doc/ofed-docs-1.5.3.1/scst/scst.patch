@@ -1,0 +1,20 @@
+diff -Naur scst/scst.h scst.wk/scst.h
+--- scst/scst.h	2009-08-14 17:09:47.000000000 -0700
++++ scst.wk/scst.h	2009-08-14 17:01:28.000000000 -0700
+@@ -2581,7 +2581,7 @@
+ void scst_aen_done(struct scst_aen *aen);
+ 
+ #if LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 24)
+-
++#ifndef RHEL_RELEASE_CODE
+ static inline struct page *sg_page(struct scatterlist *sg)
+ {
+ 	return sg->page;
+@@ -2610,6 +2610,7 @@
+ 	sg->length = len;
+ }
+ 
++#endif
+ #endif /* LINUX_VERSION_CODE < KERNEL_VERSION(2, 6, 24) */
+ 
+ static inline void sg_clear(struct scatterlist *sg)

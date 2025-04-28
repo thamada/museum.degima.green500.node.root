@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.26">
+<!ENTITY app "gnome-user-share">
+]>
+<article id="index" lang="ca">
+  <articleinfo>
+	 <title>Manual de la compartició de fitxers personals</title>
+	 <copyright>
+		<year>2009</year>
+		<holder>Red Hat, Inc.</holder>
+         </copyright><copyright><year>2009</year><holder>Joan Duran (jodufi@gmail.com)</holder></copyright>
+
+	 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+	 <authorgroup>
+           <author role="maintainer">
+             <firstname>Matthias</firstname>
+             <surname>Clasen</surname>
+           </author>
+	 </authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+		<revision>
+		  <revnumber>1.0</revnumber>
+		  <date>2009</date>
+		  <revdescription>
+			 <para role="author">Matthias Clasen <email>mclasen@redhat.com</email></para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Aquest manual descriu la versió 2.26 del gnome-user-share.</releaseinfo>
+	 <legalnotice>
+		<title>Comentaris</title>
+		<para>Per a informar d'un error o fer algun suggeriment sobre l'aplicació gnome-user-share o aquest manual, seguiu les indicacions a la <ulink url="ghelp:user-guide?feedback-bugs" type="help">pàgina de comentaris del GNOME</ulink>.</para>
+	 </legalnotice>
+    <abstract role="description">
+      <para>El gnome-user-share és un servei de sessió que habilita la compartició senzilla de fitxers entre diversos ordinadors.</para>
+    </abstract>
+  </articleinfo>
+  <indexterm><primary>gnome-user-share</primary></indexterm>
+  <indexterm><primary>compartició de fitxers</primary></indexterm>
+  <indexterm><primary>compartició</primary></indexterm>
+
+  <sect1 id="gnome-user-share-intro">
+	 <title>Introducció</title>
+	 <para>El gnome-user-share és un servei de sessió que exporta el contingut de la carpeta <filename>Públic</filename> del directori d'usuari, de manera que s'hi pot accedir fàcilment des d'altres ordinadors de la mateixa xarxa local. En els altres ordinadors, la carpeta compartida apareixerà amb un nom semblant a «Fitxers compartits de <replaceable>usuari</replaceable>» a la finestra de xarxa del <application>Nautilus</application>, on <replaceable>usuari</replaceable> serà reemplaçat pel vostre nom d'usuari.</para>
+	 <para>El gnome-user-share utilitza un servidor WebDAV per a compartir la carpeta <filename>Públic</filename> i notifica la compartició a la xarxa local utilitzant el mDNS.</para>
+         <para>A més, el gnome-user-share pot fer que els fitxers compartits estiguin disponibles a través de l'ObexFTP sobre Bluetooth i pot rebre fitxers que s'enviïn al vostre ordinador mitjançant Bluetooth.</para>
+  </sect1>
+
+  <sect1 id="gnome-user-share-getting-started">
+    <title>Primers passos</title>
+
+    <sect2 id="gnome-user-share-start">
+       <title>Com iniciar el gnome-user-share</title>
+
+       <para>
+         The gnome-user-share service is normally started by <application>gnome-session</application> when you log in. You can change this by opening <menuchoice><guimenu>Preferences</guimenu><guimenu>Startup Applications</guimenu></menuchoice> in the <guimenu>System</guimenu> menu, and modifying the 'User Sharing' entry in the list of startup programs.
+       </para>
+
+       <para>Per a configurar diversos aspectes de la compartició de fitxers, utilitzeu les Preferències de la compartició de fitxers, les quals trobareu al menú <guimenu>Sistema</guimenu> sota <menuchoice><guimenu>Preferències</guimenu><guimenu>Compartició de fitxers personals</guimenu></menuchoice>.</para>
+       <figure id="file-sharing-preferences">
+         <title>Preferències de la compartició de fitxers</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/file-sharing-preferences.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+ 
+     </sect2>
+     <sect2 id="gnome-user-share-enabling-sharing">
+       <title>Com habilitar la compartició de fitxers a través de la xarxa</title>
+       <para>Obriu les Preferències de la compartició de fitxers utilitzant <menuchoice><guimenu>Preferències</guimenu><guimenu>Compartició de fitxers personals</guimenu></menuchoice> al menú <guimenu>Sistema</guimenu>.</para>
+       <figure id="sharing-over-the-network">
+         <title>Compartició de fitxers a través de la xarxa</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-the-network.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Per a habilitar la compartició de fitxers mitjançant el WebDAV, utilitzeu la casella de selecció <guilabel>Comparteix fitxers públics a la xarxa</guilabel>. Quan la compartició de fitxers estigui habilitada, els controls per a la protecció amb contrasenya permeten establir una contrasenya que s'ha d'especificar abans de permetre l'accés als fitxers compartits a un usuari d'un altre ordinador. <note><para>Algunes configuracions de talla-focs a l'ordinador local poden causar problemes amb la notificació, com també a l'accés als fitxers compartits. Per a obtenir-ne més detalls consulteu l'administrador del sistema.</para></note><itemizedlist>
+           <listitem>
+              <para>Seleccioneu <guilabel>Mai</guilabel> per a permetre que tothom pugui llegir o escriure fitxers lliurement a la carpeta compartida.</para>
+           </listitem>
+           <listitem>
+              <para>Seleccioneu <guilabel>Sempre</guilabel> per a sol·licitar la contrasenya per a llegir o escriure fitxers a la carpeta compartida.</para>
+           </listitem>
+           <listitem>
+              <para>Seleccioneu <guilabel>Quan s'escriguin fitxers</guilabel> per a permetre a tothom llegir fitxers lliurement a la carpeta compartida, però sol·licitar contrasenya per a escriure'ls.</para>
+           </listitem>
+         </itemizedlist><note><para>Quan establiu una contrasenya, haureu de proporcionar-la a tots els usuaris que vulgueu que tinguin accés als fitxers compartits. Per això, hauríeu d'utilitzar una contrasenya diferent de les altres que utilitzeu normalment.</para></note></para>  
+     </sect2>
+
+     <sect2 id="gnome-user-share-enabling-bluetooth">
+       <title>Com habilitar la compartició de fitxers a través del Bluetooth</title>
+       <para>Obriu les Preferències de la compartició de fitxers utilitzant <menuchoice><guimenu>Preferències</guimenu><guimenu>Compartició de fitxers personals</guimenu></menuchoice> al menú <guimenu>Sistema</guimenu>.</para>
+       <figure id="sharing-over-bluetooth">
+         <title>Compartició de fitxers a través del Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Per a habilitar la compartició de fitxers mitjançant el Bluetooth, utilitzeu la casella de selecció <guilabel>Comparteix fitxers públics a través del Bluetooth</guilabel>. Per a permetre que dispositius Bluetooth remots suprimeixin fitxers de la carpeta compartida, utilitzeu la casella de selecció <guilabel>Permet que els dispositius remots suprimeixin fitxers</guilabel>. Per a permetre que dispositius Bluetooth remots accedeixin als fitxers compartits encara que no estiguin vinculats amb el vostre ordinador, utilitzeu la casella de selecció <guilabel>Cal que els dispositius remots estiguin vinculats a aquest ordinador</guilabel>. <note><para>Quan permeteu que dispositius remots no vinculats accedeixin als vostres fitxers remots, qualsevol persona amb un telèfon mòbil amb Bluetooth habilitat prop del vostre ordinador pot accedir -i potser fins i tot modificar- als fitxers compartits.</para></note></para>
+     </sect2>
+
+     <sect2 id="gnome-user-share-bluetooth-receiving">
+       <title>Com rebre fitxers a través del Bluetooth</title>
+       <para>Obriu les Preferències de la compartició de fitxers utilitzant <menuchoice><guimenu>Preferències</guimenu><guimenu>Compartició de fitxers personals</guimenu></menuchoice> al menú <guimenu>Sistema</guimenu>.</para>
+       <figure id="receiving-over-bluetooth">
+         <title>Recepció de fitxers a través del Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/receiving-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Per a permetre que dispositius Bluetooth remots que enviïn fitxers al vostre ordinador, utilitzeu la casella de selecció <guilabel>Rep els fitxers a la carpeta de baixades a través del Bluetooth</guilabel>. Els fitxers rebuts s'emmagatzemaran a la carpeta <filename>Baixades</filename> de la carpeta d'usuari. Quan estigui habilitada la recepció de fitxers, la secció <guilabel>Accepta els fitxers</guilabel> us permetrà determinar quins dispositius remots tenen permís per a enviar fitxers. <itemizedlist>
+            <listitem>
+              <para>Seleccioneu <guilabel>Sempre</guilabel> per a permetre que qualsevol dispositiu remot enviï fitxers.</para>
+            </listitem>
+            <listitem>
+              <para>Seleccioneu <guilabel>Només per a dispositius vinculats</guilabel> per a acceptar fitxers només de dispositius vinculats. <note><para>Els dispositius vinculats són aquells que estan connectats al vostre ordinador i en els quals heu d'introduir un codi PIN per a connectar-vos-hi.</para></note></para>
+            </listitem>
+            <listitem>
+              <para>Seleccioneu <guilabel>Només per a dispositius vinculats i de confiança</guilabel> per a acceptar fitxers només de dispositius vinculats. <note><para>Els dispositius es poden marcar com de confiança a la secció <guilabel>Dispositius coneguts</guilabel> del <application>bluetooth-properties</application>.</para></note></para>
+            </listitem>
+          </itemizedlist></para>
+        <para>Utilitzeu la casella de selecció <guilabel>Notifica sobre els fitxers rebuts</guilabel> per a seleccionar si voleu ser notificat quan es rep un fitxer mitjançant Bluetooth.</para>
+     </sect2>
+  </sect1>
+
+</article>

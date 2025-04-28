@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>prompt</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libuser Reference Manual">
+<link rel="up" href="ch01.html" title="libuser">
+<link rel="prev" href="libuser-error.html" title="error">
+<link rel="next" href="libuser-user.html" title="user">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="libuser">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libuser-error.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libuser Reference Manual</th>
+<td><a accesskey="n" href="libuser-user.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libuser-prompt.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libuser-prompt.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="prompt">
+<a name="libuser-prompt"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libuser-prompt.top_of_page"></a>prompt</span></h2>
+<p>prompt — Sample prompter functions for use with the libuser library.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libuser-prompt.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libuser-prompt.html#lu-prompt-console" title="lu_prompt_console ()">lu_prompt_console</a>                   (struct lu_prompt *prompts,
+                                                         int count,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> callback_data,
+                                                         struct lu_error **error);
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libuser-prompt.html#lu-prompt-console-quiet" title="lu_prompt_console_quiet ()">lu_prompt_console_quiet</a>             (struct lu_prompt *prompts,
+                                                         int count,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> callback_data,
+                                                         struct lu_error **error);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libuser-prompt.description"></a><h2>Description</h2>
+<p>
+prompt.h declares two predefined prompter functions which applications can use
+instead of providing their own.  These should suffice for most command-line
+applications.  Authors of graphical applications are encouraged to supply
+graphical implementations.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libuser-prompt.details"></a><h2>Details</h2>
+<div class="refsect2" title="lu_prompt_console ()">
+<a name="lu-prompt-console"></a><h3>lu_prompt_console ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            lu_prompt_console                   (struct lu_prompt *prompts,
+                                                         int count,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> callback_data,
+                                                         struct lu_error **error);</pre>
+<p>
+Prompts the user using a text console.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prompts</code></em> :</span></p></td>
+<td>An array of <span class="type">lu_prompt</span> structures.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>count</code></em> :</span></p></td>
+<td>The number of elements in the <em class="parameter"><code>prompts</code></em> array.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>callback_data</code></em> :</span></p></td>
+<td>Ignored.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>The location to store error information in the event of an error.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>A <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+><span class="type">gboolean</span></a> indicating success or failure.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_prompt_console_quiet ()">
+<a name="lu-prompt-console-quiet"></a><h3>lu_prompt_console_quiet ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            lu_prompt_console_quiet             (struct lu_prompt *prompts,
+                                                         int count,
+                                                         <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"
+>gpointer</a> callback_data,
+                                                         struct lu_error **error);</pre>
+<p>
+Prompts the user using a text console.  Unlike <a class="link" href="libuser-prompt.html#lu-prompt-console" title="lu_prompt_console ()"><code class="function">lu_prompt_console()</code></a>, this
+function will not prompt users for a question for which the calling
+application or module supplies a default, and will simply return the default.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prompts</code></em> :</span></p></td>
+<td>An array of <span class="type">lu_prompt</span> structures.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>count</code></em> :</span></p></td>
+<td>The number of elements in the <em class="parameter"><code>prompts</code></em> array.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>callback_data</code></em> :</span></p></td>
+<td>Ignored.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>The location to store error information in the event of an error.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>A <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+><span class="type">gboolean</span></a> indicating success or failure.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

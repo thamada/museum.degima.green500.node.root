@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<chapter id="core-tech">
+  <title>Tecnologías base</title>
+
+<section id="graphics">
+  <title>Interfaces gráficas</title>
+
+  <para>Muchas aplicaciones necesitarán proporcionar una interfaz gráfica para interactuar con usuarios. Las interfaces gráficas pueden crear un medio intuitivo y descubrible para que las personas interactúen con el software, y usuarios esperan que las aplicaciones proporcionen interfaces de usuario fáciles de usar y atractivas.</para>
+
+  <para>La Plataforma GNOME proporciona tecnología sofisticada de gráficos e interfaces de usuario, desde controles de interfaz de usuario estándar en una API de dibujo a pantalla de gráficos de alta calidad. El uso de las tecnologías de gráficos en GNOME le permite crear aplicaciones que son consistentes, intuitivas, y  estéticamente placenteras.</para>
+
+  <figure>
+    <title>Vistazo por las capas de las bibliotecas gráficas</title>
+    <mediaobject>
+      <imageobject>
+        <imagedata format="PNG" fileref="figures/graphics.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <section id="gtk">
+    <title>GTK+</title>
+
+    <para>GTK+ es la principal biblioteca usada para construir interfaces de usuario en GNOME. Proporciona todos los controles de interfaz de usuario, o widgets, usados en una aplicación gráfica común. Es una API moderna, orientada a objetos que permite construir interfaces de usuario atractivas y sofisticadas sin tratar con los detalles de bajo nivel como el pintado o la interacción con el dispositivo.</para>
+
+    <para>Además de los widgets básicos, como botones, casillas, y entradas de texto, GTK+ también proporciona potentes APIS según el modelo Vista-Controlador (MVC) para vistas de árbol, campos de texto multilínea, y acciones de menú y barra de herramientas.</para>
+
+    <para>Los widgets en GTK+ se emplazan en las ventanas usando un modelo de paquetes de cajas. Los programadores sólo especifican cómo empaquetar los widgets juntos en cajas contenedoras, en lugar de su posición en coordenadas absolutas. GTK+ se asegura de que las ventanas se dimensionan correctamente para ajustarse a su contenido y maneja automáticamente las redimensiones de ventanas.</para>
+
+    <para>Debido a que GTK+ ofrece una API flexible, desarrollar widgets adicionales para su uso en aplicaciones GTK+ es sencillo. Existen cierto número de bibliotecas de terceras partes que proporcionan widgets adicionales y muchos desarrolladores han creado widgets personalizados para propósitos especiales en sus aplicaciones.</para>
+
+    <para>GTK+ maneja los detalles difíciles de los interfaces de usuario e interacción del usuario y proporciona una API simple y potente que le permite centrarse en los detalles de su aplicación. Las aplicaciones desarrolladas con GTK+ se adaptarán inmediatamente al los ajustes del tema y tipografía del usuario, interactuarán debidamente con las tecnologías de asistencia y se comportarán como el usuario espera que se comporten.</para>
+
+    <para>Para obtener más información acerca de GTK+, consulte <ulink url="http://library.gnome.org/devel/gtk/stable/">El manual de referencia de GTK+</ulink> o visite <ulink url="http://gtk.org/">la página web de GTK+</ulink>.</para>
+  </section> <!-- gtk -->
+
+  <section id="libglade">
+    <title>Libglade</title>
+    <para>Libglade es una biblioteca para construir dinámicamente interfaces de usuario desde descripciones XML. Puede usar un constructor de interfaces gráficos como <application>Glade</application> para construir su interfaz de usuario y después importar la descripción del interfaz en su aplicación. Esto facilita la construcción de diseños complejos y ajusta los detalles del diseño.</para>
+
+    <para>Libglade permite a los programadores centrar su código en la lógica de sus aplicaciones, manteniendo el orden con la construcción actual del interfaz. Los constructores de interfaces gráficos también facilitan a las personas dedicadas a diseñar el interfaz, la construcción de interfaces sin tener que saber programar.</para>
+
+    <para>Para obtener más información acerca de libglade, consulte <ulink url="http://library.gnome.org/devel/libglade/stable/">El manual de referencia de Libglade</ulink>.</para>
+  </section>
+
+  <section id="pango">
+    <title>Pango</title>
+
+    <para>Pango es la biblioteca principal de gestión de texto y tipografías en la plataforma GNOME. Es responsable de mostrar y renderizar texto y se usa a través de GTK+. <footnote>
+    <para>El motor de dibujo Pango se puede usar con diferentes backends de tipografías y dibujado. En la mayoría de sistemas GNOME, Pango usará FreeType, fontconfig y Cairo para acceder a las tipografías y renderizar texto. En otros sistemas, Pango usará la tipografía nativa de los sistemas, tales como Uniscribe en Microsoft Windows y ATSUI en MacOs.</para></footnote></para>
+ 
+    <para>Pango tiene un soporte extensivo para los variados sistemas de escritura usados en todo el mundo. Muchos de los sistemas de escritura usados en los idiomas tienen complejas reglas de dibujado de glifos y composición de caracteres. Con Pango, casi todos los idomas pueden escribirse y mostrarse correctamente, permitiendo a los usuarios en cualquier parte ver texto en sus idiomas maternos. El soporte de Pango para múltiples sistemas de escritura es automático; los desarrolladores de aplicaciones no tienen que escribir ningún código especial para soportar otros idiomas.</para>
+
+    <figure>
+      <title>Mostrar múltiples idiomas con Pango</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata format="PNG" fileref="figures/pango.png"/>
+          </imageobject>
+          <textobject><para>Captura de pantalla del editor de textos <application>gedit</application> en la que se muestran frases de múltiples idiomas y sistemas de escritura.</para></textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>Pango soporta el estilo de texto usado en los típicos documentos e interfaces, incluyendo cursivas, tamaños de tipografía y subrayado. Pango usa un vocabulario simple parecido a XML llamado PangoMarkup que le permite establecer el tamaño de la tipografía, el color, los estilos y otros atributos del texto. Al usar PangoMarkup podrá especificar estilos en línea sin tener que iterar manualmente con los bloques de texto. Se puede usar PangoMarkup desde GTK+ directamente, permitiéndole dar estilo a textos en sus interfaces gráficas fácilmente.</para>
+
+    <para>Debería usar directamente Pango cuando necesite mostrar texto en la pantalla o en un medio diferente. Usar Pango permitirá a la disposición de su texto trabajar de forma parecida con GTK+ y el resto de la plataforma GNOME. le ayudará a crear código portable y, lo más importable, le asegurará que su aplicación pueda renderizar texto correctamente en cientos de idiomas diferentes.</para>
+
+    <para>Para obtener más información acerca de Pango, consulte <ulink url="http://library.gnome.org/devel/pango/stable/">El manual de referencia de Pango</ulink>.</para>
+  </section> <!-- pango -->
+
+  <section id="gdk">
+    <title>GDK</title>
+
+    <para>GDK es la biblioteca de bajo nivel que usa GTK+ para interactuar con el sistema para los dispositivos gráficos y de entrada. Aunque rara vez usará GDK directamente en el código de la aplicación, contiene toda la funcionalidad necesaria para dibujar objetos y texto en la pantalla e interactuar con el usuario con varios dispositivos de entrada. <footnote>
+    <para>GDK se puede ejecutar sobre varias plataformas, incluyendo el sistema X Window, Microsoft Windows, DirectFB y Quartz. Sobre cualquier plataforma, GDK proporciona el mismo API consistente, permitiendo a las aplicaciones GTK+ ejecutarse sin modificaciones.</para></footnote></para>
+
+    <para>GDK posee características de contexto gráfico y primitivas de dibujado que son adecuadas para dibujar objetos simples y renderizar imágenes en la pantalla. Ya que se proporciona un sistema de dibujado más extenso con Cairo, GDK proporciona ganchos para usar contextos Cairo dentro de GDK.</para>
+
+    <para>GDK le permite acceder a eventos del teclado, ratones y otros dispositivos de entrada, en lugar de conectarse con las señales de alto nivel que se usan en GTK+. GDK también proporciona rutinas de bajo nivel para acceder a los datos de arrastrar y soltar y del portapapeles del sistema. Cuando implemente controles personalizados, quizá deba acceder a estas características para implementar un comportamiento adecuado de la interacción con el usuario.</para>
+
+    <para>GDK proporciona otra funcionalidad necesaria para implementar un toolkit gráfico completo como GTK+. Ya que GDK actúa como una plataforma de abstracción, permitiendo que GTK+ se ejecute en múltiples entornos, proporciona una API para todas las funcionalidades del sistema que necesita GTK+. Esto incluye información acerca configuraciones multimonitor, resolución y profundidad de color, mapas de colores y cursores.</para>
+
+    <para>Debería usar GDK siempre que necesite acceso de bajo nivel al sistema de ventanas, incluyendo acceso a bajo nivel para eventos, ventanas y al portapapeles. Usar GDK para estas tareas asegura que su código es portable y se integra con el resto de su código GTK+. Generalmente no deberían usarse las rutinas de dibujado simple en GDK. En su lugar, debería usar la extensa funcionalidad que proporciona Cairo.</para>
+
+    <para>Para obtener más información acerca de GDK, consulte <ulink url="http://library.gnome.org/devel/gdk/stable/">El manual de referencia de GDK</ulink>.</para>
+  </section> <!-- gdk -->
+
+  <section id="cairo">
+    <title>Cairo</title>
+
+    <para>Cairo es una biblioteca gráfica 2D que cuenta con una API sofisticada para dibujar vectores gráficos, imágenes compuestas y renderizar texto con antialias. Cairo proporciona soporte para muchos dispositivos de salida, incluyendo el sistema X Window, Microsoft Windows y búferes de imagen, permitiéndole escribir código para dibujar gráficos en diferentes medios independiente de la plataforma.</para>
+
+    <para>El modelo de dibujado de Cairo es similar al que proporcionan PostScript y PDF. La API de Cairo proporciona operaciones de dibujado tales como pincelar y rellenar splines cúbicos de Bézier, componer imágenes y realizar transformaciones afines. Estas operaciones con vectores permiten a ricos gráficos con antialias sin tener que usar el caro dibujo basado en píxel en el código de su aplicación.</para>
+
+    <para>El rico modelo de Cairo permite renderizado de alta calidad en múltiples dispositivos. La misma API se puede usar para crear impresionantes gráficos y textos en la pantalla, para renderizar imágenes o crear salidas modificadas adecuadas para una impresión.</para>
+
+    <para>Debería usar Cairo siempre que necesite dibujar gráficos en su aplicación más allá de los widgets proporcionados por GTK+. Gran parte del dibujado realizado por GTK+ se lleva a cabo usando Cairo. Usar Cairo para su dibujado personalizado permitirá a su aplicación tener gráficos de alta calidad, con antialias e independientes de la resolución.</para>
+
+    <para>Para obtener más información acerca de Cairo, consulte <ulink url="http://www.cairographics.org/manual/">Cairo: Una biblioteca de gráficos vectoriales</ulink>.</para>
+  </section> <!-- cairo -->
+</section> <!-- graphics -->
+
+<section id="gio">
+  <title>Sistema de archivos virtual</title>
+
+  <para>GIO, parte de GLib, es la biblioteca núcleo que se usa para las operaciones sobre archivos y carpetas en GNOME. GIO proporciona una capa de abstracción del sistema de archivos unificada con complementos para «backend». En GNOME, la biblioteca GVFS proporciona un «backend» de GIO implementando múltiples protocolos de red y locales. Al usar GIO junto con GVFS permite a su aplicación que trabaje con archivos en máquinas remotas tan fácilmente como con archivos locales.</para>
+  
+  <para>GIO puede proporcionar información detallada acerca de carpetas y archivos, incluyendo el tipo MIME de un archivo y las aplicaciones que pueden usarse para abrir el archivo. Ya que GIO usa el estándar de <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink> para determinar los tipos y asociaciones de archivo, funciona correctamente bajo diferentes entornos de escritorio libres, ayudando a los desarrolladores de software independientes a crear software que pueda ejecutarse en diferentes entornos.</para>
+
+  <para>GIO se usa en muchas partes del escritorio GNOME. El gestor de archivos, <application>Nautilus</application>, usa GIO para mostrar las carpetas en sistemas locales y remotos. Para el usuario, esto significa que los servidores de red actuarán igual que los servidores locales: pueden arrastrar y soltar archivos entre ellos, ver las propiedades de los archivos y abrir los archivos con una aplicación. Usar GIO le permitirá que su aplicación abra todos los archivos a los que los usuarios pueden acceder en sus escritorios.</para>
+
+  <para>Para obtener más información acerca de GIO, consulte <ulink url="http://library.gnome.org/devel/gio/stable/">El manual de referencia de GIO</ulink>.</para>
+
+  <anchor id="gnome-vfs"/>
+
+  <para>En anteriores versiones de GNOME se usaba la biblioteca GnomeVFS para acceder a archivos y carpetas. Aunque GnomeVFS proporcionaba muchas de las mismas características, incluyendo acceso transparente a carpetas remotas, tenía un número de limitaciones que han llevado a GIO. GnomeVFS está obsoleto y no se debería usar en código nuevo, aunque aún estará soportado durante todo el ciclo de vida de GNOME 2. Para obtener más información acerca de GnomeVFS, consulte <ulink url="http://library.gnome.org/devel/gnome-vfs-2.0/stable/">GnomeVFS - Biblioteca de abstracción del sistema de archivos</ulink>.</para>
+</section> <!-- gio -->
+
+<section id="gconf">
+  <title>Configuración y bloqueo</title>
+
+  <para>GConf es el sistema de almacenamiento y recuperación de los ajustes de la configuración en GNOME. GConf consiste de dos partes: una biblioteca cliente para acceder a los ajustes y un demonio de sesión que es responsable de los detalles de almacenar y recuperar esos ajustes. Usar un demonio permite a GConf usar diferentes backends de almacenamiento, validar las entradas y proporcionar acceso simultáneo a diferentes aplicaciones.</para>
+
+  <para>Los ajustes almacenados en GConf se almacenan y recuperan usando una única clave o identificador de cadena. Las claves usan un espacio de nombre jerárquico para evitar colisiones entre los ajustes de las aplicaciones y el escritorio. Puede proporcionar un archivo de esquema para detallar sus claves de configuración. Esto permite a GConf validar el tipo de la entrada y mostrar documentación localizada acerca de la clave. Esto ayuda a los administradores del sistema, quienes pueden establecer múltiples ajustes de una vez sin tener que navegar por diálogos de preferencias.</para>
+
+  <para>GConf puede buscar ajustes de diferentes fuentes a la vez, generalmente desde diferentes ubicaciones en el sistema de archivos. Teniendo las apropiadas fuentes del sistema configuradas, GConf permite a los administradores del sistema proporcionar tanto ajustes obligatorios como predeterminados para todos los usuarios. Herramientas de GNOME como el <application>Editor de configuración</application> de y <application>Sabayon</application> hacen más fácil desplegar sistemas completamente configurados usando GConf.</para>
+
+  <para>La biblioteca cliente de GConf proporciona notificaciones de los cambios en los ajustes, haciendo más fácil proporcionar ajustes aplicables instantáneamente en su aplicación, independientemente de si los ajustes se cambian desde su aplicación o usando otra herramienta. Establecer el valor de una clave se notificará a todas las aplicaciones interesadas, permitiendo que los ajustes generales del escritorio y de otras aplicaciones multiplataforma trabajen conjuntamente y sin esfuerzo.</para>
+
+  <para>GConf facilita el bloqueo de sistemas a través del establecimiento claves particulares de sólo lectura, evitando que los usuarios cambien esos valores. Además, GNOME proporciona cierto número de claves de alta seguridad que pueden usarse para desactivar acciones tales como guardar al disco y cambiar la distribución del panel. Herramientas como <application>Pessulus</application> facilitan la tarea a los administradores de buscar y bloquear claves importantes.</para>
+
+  <para>Debería usar GConf para almacenar todas las preferencias del usuario en su aplicación. Usar GConf facilitará el proporcionar preferencias de aplicación instantánea y hará que sus ajustes sean accesibles a los administradores del sistema así como a las herramientas de configuración y respaldo.</para>
+
+  <para>Para obtener más información acerca de GConf, consulte <ulink url="http://library.gnome.org/devel/gconf/stable/">el manual de referencia de GConf</ulink>.</para>
+</section> <!-- gconf -->
+
+<section id="i18n">
+  <title>Internacionalización</title>
+  <para>El Escritorio GNOME y la Plataforma de Desarrollo proporcionan soporte completo para la internacionalización y localización de aplicaciones. La internacionalización es el proceso de asegurarse que su aplicación puede ser localizada, incluyendo el marcado de todas las cadenas para su traducción, usando números y un formato de cadenas correcto y ajustando las variaciones de las convenciones para fechas y horas, unidades y formateo.</para>
+
+  <para>GNOME usa el estándar gettext y las rutinas relacionadas para acceder a las localizaciones. El soporte para la localización usando gettext está incluido en cada componente de la plataforma GNOME. Herramientas automáticas pueden explorar su código fuente para buscar cadenas especialmente marcadas. Al usar gettext, puede acceder fácil y eficientemente a versiones traducidas para todas las cadenas, que sean visibles al usuario, en su aplicación desde dominios de traducción instalados con su aplicación.</para>
+
+  <para>Estos dominios de traducción se pueden crear usando archivos PO, que pueden usar los traductores para seguir los cambios en las cadenas y actualizar sus traducciones convenientemente. GNOME proporciona intltool, una herramienta para gestionar las traducciones en los archivos PO. Al usar intltool, los traductores pueden usar los archivos PO para traducir no sólo las cadenas en su aplicación, sino también otros tipos de archivos que use, tales como los archivos de esquema de GConf, archivos de entrada de escritorio y archivos XML.</para>
+
+  <para>GNOME también proporciona la herramienta xml2po como parte del paquete gnome-doc-utils. Esta herramienta permite a los traductores usar archivos PO para crear versiones traducidas de la documentación escrita en varios formatos XML, incluyendo XHTML y DocBook.</para>
+
+  <para>La internacionalización involucra más que la simple posibilidad de traducir las cadenas, GNOME soporta el desarrollo de su aplicación en todos los pasos del proceso. GTK+ ajustará automáticamente su presentación para los idiomas que se leen de derecha a izquierda y Pango tiene soporte completo para renderizar texto bidireccional y texto en varios sistemas de escritura diferentes. GTK+ soporta múltiples métodos de entrada, permitiendo a los usuarios de cualquier idioma introducir texto con sus teclados de forma eficiente. De forma nativa, la plataforma GNOME al completo usa la codificación de texto UTF-8 de Unicode, proporcionando acceso a los caracteres y sistemas de escritura de todo el mundo.</para>
+
+  <figure>
+    <title><application>Gnumeric</application> en varios idiomas</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata format="PNG" fileref="figures/i18n.png"/>
+        </imageobject>
+        <textobject><para>Capturas de pantalla de la aplicación de hoja de cálculo <application>Gnumeric</application> ejecutándose en hebreo, japonés y serbio.</para>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>Internacionalizar su aplicación ayuda a hacerla disponible a más usuarios a través del mundo. Mientras que los traductores experimentados deben proporcionar las traducciones para cualquier idioma, los programadores deben asegurarse de que la aplicación está adecuadamente internacionalizada antes de que se pueda localizar completamente.</para>
+
+  <!-- FIXME: where is danilo's awesome guide? -->
+  <para>Para obtener más información acerca de la internacionalización en GNOME, consulte <ulink url="http://www.gnome.org/~malcolm/i18n/">Internacionalizar las aplicaciones de GNOME</ulink>.</para>
+</section> <!-- i18n -->
+
+<section id="a11y">
+  <title>Accesibilidad</title>
+
+  <para>La accesibilidad es el proceso de asegurarse de que su aplicación se puede usar por personas con alguna o varias discapacidades. Las discapacidades pueden ser de muchos tipos: visuales, de coordinación, movimientos descoordinados, impedimentos auditivos, impedimentos cognitivos y del lenguaje y desordenes de apoplejías. Muchas personas tienen algún tipo de discapacidad y hacer su aplicación accesible permitirá que más gente pueda usarla de forma efectiva.</para>
+
+  <para>GNOME proporciona soporte para dispositivos de accesibilidad usando el entorno de trabajo ATK. Este entorno de trabajo define un conjunto de interfaces a las que los componentes del interfaz gráfico se deberán adherir. Esto permite a, por ejemplo, los lectores de pantalla leer el texto de un interfaz e interactuar con sus controles. El soporte de ATK está construido dentro de GTK+ y el resto de la plataforma GNOME usando la biblioteca GAIL, de tal forma que cualquier aplicación que use GTK+ tendrá cierto soporte accesibilidad razonable debido a este hecho.</para>
+
+  <para>Sin embargo, debería ser consciente de las cuestiones de accesibilidad cuando desarrolle sus aplicaciones. Aunque los interfaces GTK+ proporcionan una accesibilidad razonable de forma predeterminada, a menudo puede mejorar el comportamiento de su programa con las herramientas de accesibilidad proporcionando información adicional a ATK. Si desarrolla widgets personalizados, debería asegurarse que exponen sus propiedades a ATK. También debería evitar el uso de sonidos, gráficos o colores como única vía de enviarle información al usuario.</para>
+
+  <para>El escritorio GNOME posee cierto número de herramientas de accesibilidad que permiten a los usuarios con discapacidades usar plenamente el escritorio y sus aplicaciones. Las aplicaciones que implementan completamente ATK serán capaces de trabajar con las herramientas de accesibilidad. Las herramientas de accesibilidad de GNOME incluyen un lector de pantalla, un magnificador de pantalla, un teclado en pantalla y <application>Dasher</application>, una innovadora herramienta de predicción de entrada de texto.</para>
+
+  <para>Para recomendaciones extensas sobre accesibilidad, consulte <ulink url="http://developer.gnome.org/projects/gap/guide/gad/index.html">La accesibilidad en GNOME para desarrolladores</ulink>. Consulte también <ulink url="http://library.gnome.org/devel/atk/stable/">ATK - Toolkit de accesibilidad</ulink> y <ulink url="http://library.gnome.org/devel/gail-libgail-util/stable/">El manual de referencia de GAIL</ulink>.</para>
+</section> <!-- a11y -->
+
+<section id="multimedia">
+  <title>Multimedia</title>
+
+  <para>GStreamer es una biblioteca multimedia muy potente para reproducir, crear y manipular sonido, vídeo y otros tipos de media. Puede usar GStreamer para proporcionar reproducción de sonido y vídeo, grabar una entrada de múltiples fuentes y editar contenido multimedia. GStreamer soporta de forma predeterminada codificación y decodificación en numerosos formatos, además puede soportar formatos adicionales a través de complementos.</para>
+
+  <para>GStreamer proporciona una arquitectura flexible en la que se procesa el contenido multimedia a través de una «pipeline» de elementos. Cada elemento puede aplicar filtros al contenido, tales como codificación o decodificación, combinar múltiples fuentes o transformar el contenido multimedia. Esta arquitectura se permite para un grupo arbitrario de elementos, de tal forma que virtualmente pueda llevar a cabo cualquier efecto al usar GStreamer. Además, GStreamer está diseñado para no requerir exceso computacional, de tal forma que puede usarse en aplicaciones con altas latencias.</para>
+
+  <para>A la vez que GStreamer proporciona una potente API para manipular contenido multimedia, también proporciona rutinas convenientes para una simple reproducción. GStreamer puede construir automáticamente una «pipeline» para leer y reproducir archivos en cualquiera de los formatos soportados, permitiéndole usar fácilmente sonido y vídeo en su aplicación.</para>
+
+  <para>La arquitectura de GStreamer permite que los complementos añadan codificadores, decodificadores y todo tipo de filtro de contenidos. Los desarrolladores de terceras partes pueden proporcionar complementos para GStreamer que estarán disponibles automáticamente para todas las aplicaciones que usen GStreamer. Los complementos pueden proporcionar soporte para otros formatos multimedia o proporcionar funcionalidades y efectos adicionales.</para>
+
+  <para>Debería usar GStreamer siempre que necesite leer o reproducir contenido multimedia en su aplicación, o si su aplicación necesita manipular sonido o vídeo. Usar GStreamer hará más sencillo el desarrollo de su aplicación y proporcionará elementos fiables para muchas de sus necesidades.</para>
+
+  <para>Para obtener información más extensa sobre GStreamer, consulte <ulink url="http://gstreamer.freedesktop.org/data/doc/gstreamer/head/manual/html/index.html">El manual de desarrollo de aplicaciones de GStreamer</ulink>, <ulink url="http://gstreamer.freedesktop.org/data/doc/gstreamer/head/gstreamer/html/">El manual de referencia del núcleo de GStreamer 0.10</ulink> y <ulink url="http://gstreamer.freedesktop.org/documentation/">la página de documentación de GStreamer</ulink>.</para>
+</section> <!-- multimedia -->
+
+<section id="printing">
+  <title>Impresión</title>
+
+  <para>La mayoría de las aplicaciones necesitan proporcionar soporte para la impresión. Los usuarios esperan ser capaces de imprimir el contenido que ven en la pantalla. La plataforma GNOME proporciona bibliotecas para ayudarle a añadir soporte para obtener una impresión de alta calidad con su aplicación.</para>
+
+  <section id="gnomeprint">
+    <title>Impresión en GNOME</title>
+
+    <para>El entorno de trabajo de impresión de GNOME consiste en dos bibliotecas que le ayudan a proporcionar una impresión de alta calidad con un interfaz consistente en su aplicación. En el núcleo del entorno de trabajo de impresión está libgnomeprint, una biblioteca para crear salidas PostScript para enviar a las impresoras. En la parte superior de ella está libgnomeprintui, que proporciona controles de impresión estándar para el interfaz de usuario de su aplicación.</para>
+
+    <note><para>Se está trabajando para integrar la impresión directamente dentro de GTK+, proporcionando una API de impresión multiplataforma que puedan usar todas las aplicaciones. Mientras que el actual entorno de trabajo de impresión de GNOME se quedará obsoleto una vez que GTK+ soporte la impresión, la estabilidad de la API y ABI garantiza que continuarán siendo funcionales y seguirán estando soportadas durante el ciclo de vida de GNOME 2.</para></note>
+
+    <para>La biblioteca libgnomeprint implementa el modelo de imagen de PostScript que usan por la mayoría de las impresoras. Las impresoras que no soportan PostScript pueden usarse a través de CUPS, como se describe más abajo. Además del estándar de impresión PostScript, libgnomeprint también soporta canal alfa y antialias.</para>
+
+    <para>La biblioteca libgnomeprintui proporciona diálogos de impresión estándar, un diálogo de vista previa y otros varios controles y funcionalidades requeridas para construir la impresión dentro de un interfaz de usuario intuitivo. El entorno de trabajo de impresión de GNOME maneja los detalles de localización de las impresoras y purgado de los trabajos de impresión así como permite exportar directamente a PostScript y PDF desde el diálogo de impresión.</para>
+
+    <para>Debería usar libgnomeprint siempre que necesite renderizar el contenido para una impresión en PostScript. Debería usar libgnomeprintui para construir su interfaz de impresión, incluso si la salida renderizada proviene de otra fuente. Al usar el interfaz de trabajo de impresión de GNOME se proporciona a los usuarios un interfaz de usuario consistente con las características que esperan para las aplicaciones de impresión.</para>
+  </section>
+
+  <section id="cups">
+    <title>CUPS</title>
+
+    <para>En la mayoría de sistemas GNOME, CUPS (Common UNIX Printing System) actúa como el sistema de impresión de bajo nivel. CUPS proporciona un moderna arquitectura rica en características para descubrir impresoras, opciones de acceso de la impresora, y reparto de tareas a diferentes tipos de impresoras.</para>
+
+    <para>CUPS proporciona un conjunto de herramientas para descubrir automáticamente las impresoras locales y de red. Esto no sólo permite a los usuarios ver todas las impresoras disponibles sino también usar diferentes tipos de impresoras sin ninguna configuración manual.</para>
+
+    <para>CUPS proporciona un interfaz unificado para la impresión independientemente de la ubicación o del tipo de impresora. De forma similar, CUPS gestiona automáticamente múltiples protocolos de impresión aplicando filtros al contenido enviado por las impresoras. Las aplicaciones pueden simplemente proporcionar una salida PostScript y CUPS la convertirá automáticamente para las impresoras que no soporten PostScript de forma nativa.</para>
+
+    <para>CUPS también proporciona opciones para la configuración de la impresora en forma de archivos PPD (PostScript Printer Description). Las configuraciones PPD permiten a las aplicaciones exponer al usuario las posibilidades de cada impresora con un interfaz de usuario consistente. Por ejemplo, PPD le permite detectar si una impresora puede recopilar y grapar los trabajos imprimidos así como proporcionar la opción en el interfaz del usuario.</para>
+
+    <para>En la mayoría de los casos no necesitará un interfaz directo con CUPS en sus aplicaciones. Usando el entorno de trabajo de impresión de GNOME tendrá acceso automáticamente a la potencia y flexibilidad de CUPS. Tener CUPS por debajo de su aplicación significa una mejor experiencia de usuario con menor programación.</para>
+  </section>
+</section> <!-- printing -->
+
+</chapter>

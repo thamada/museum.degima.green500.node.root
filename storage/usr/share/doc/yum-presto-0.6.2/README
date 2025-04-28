@@ -1,0 +1,22 @@
+Presto: A project to add delta rpm support into yum for Fedora users
+https://fedorahosted.org/presto.  A list of presto-enabled repositories is
+available there.
+
+Installation:
+=============
+1. Install yum-presto on your system (yum -y install yum-presto)
+2. If your Fedora repositories aren't presto-enabled, find a mirror that is and
+   set your baseurl to point to it.  See the web site for a list of
+   presto-enabled Fedora mirrors.
+3. Now install an old rpm from a presto-enabled repository using rpm, then
+   try updating it using yum. The plugin should kick in, try to download the
+   drpm, reconstruct the full rpm, and yum should install that.
+
+Configuration file:
+======
+/etc/yum/pluginconf.d/presto.conf has the following options in [main]:
+keepdeltas=1                Always keep deltas in cache no matter what keepcache
+                            is set to.
+
+Note: If you don't specify keepdeltas, presto will follow
+      the keepcache option in yum.conf.

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-File_Systems" lang="nl-NL">
+	<title>Bestandssystemen</title>
+	<remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/FileSystems">https://fedoraproject.org/wiki/Docs/Beats/FileSystems</ulink></remark>
+	<section id="sect-Release_Notes-File_Systems-fusecompress">
+		<title>fusecompress</title>
+		<indexterm>
+			<primary>fusecompress</primary>
+		</indexterm>
+		<para>
+			<package>Fusecompress</package> is a compressing filesystem mountable by unprivileged users. Fedora-11 had fusecompress-1.99.19. Fedora-12 updates to fusecompress-2.6. This fixes many very nasty bugs but changes the on-disk format. Users with fusecompress filesystems will need to migrate their data to the new format. Unless they decompress before upgrading, they will need the <package>fusecompress_offline1</package> package to do so.
+		</para>
+		<warning>
+			<title>Je moet jouw bestandssysteem converteren</title>
+			<para>
+				Als een gebruiker deze vrijgave informatie niet leest en zich niet realiseert dat een formaat upgrade nodig is, zal de eerste aanwijzing van een probleem waarschijnlijk optreden als er geprobeerd wordt om een tekst bestand te lezen en deze wordt als binair gezien: 
+<screen>$ less test.txt
+ "test.dump" may be a binary file.  See it anyway?
+</screen>
+			</para>
+		</warning>
+		<para>
+			De standaard methode voor het vernieuwen van het systeem is gedocumenteerd in een <filename>/usr/share/doc/fusecompress_offline1-%{version}/README.fedora</filename> bestand in het fusecompress1 pakket. Het fusecompress pakket heeft een <filename>README.fedora</filename> die de gebruiker vertelt om <package>fusecompress_offline1</package> te installeren en het bovengenoemde bestand te lezen. De upgrade instructies worden hieronder herhaald:
+		</para>
+		<para>
+			
+<screen>Laten we aannemen dat in Fedora 11 je oude fusecompress rootDir (waar de bestanden
+in feite opgeslagen worden) in ~/.fusestorage is en dat je het aankoppelt op ~/storage. Je hebt
+nu vernieuwd naar Fedora 12 en je moet jouw fusecompress bestandssyteem vernieuwen
+naar het nieuwe schijf formaat.  Hier volgen de basis stappen:
+
+    # Wees er zeker van dat het oude fusecompress bestandssysteem niet meer aangekoppeld is
+    fusermount -u ~/storage
+    # Verplaats het naar een nieuwe locatie
+    mv ~/.fusestorage ~/.fusestorage.old
+    # Maak een nieuwe map aan voor het nieuwe data formaat
+    mkdir ~/.fusestorage
+    # Koppel de nieuwe map aan. Het is nu een nieuw formaat fusecompress bestandssysteem
+    fusecompress ~/.fusestorage ~/storage
+    # De-comprimeer alle bestanden in de oude fusecompress data map
+    fusecompress_offline1 ~/.fusestorage.old
+    # Verplaats de bestanden naar de nieuwe formaat opslag
+    mv .fusestorage.old/* ~/storage
+    # Als je verborgen bestanden hebt, denk er dan aan deze ook te verhuizen
+    mv .fusestorage.old/.?* ~/storage
+
+Merk op dat je voor het gebruik van deze procedure voldoende schijf ruimte moet hebben
+om alle bestanden opgeslagen in ~/.fusestorage.old te kunnen de-comprimeren.  Als je niet 
+zoveel ruimte hebt, moet je fusecompress_offline1 uitvoeren voor gedeeltes van
+~/.fusestorage.old en dit naar ~/storage te verplaatsen waar ze opnieuw gecomprimeerd worden,
+wat ruimte creëert zodat je fusecompress_offline1 voor meer bestanden kunt uitvoeren.
+</screen>
+		</para>
+	</section>
+
+</section>
+
+

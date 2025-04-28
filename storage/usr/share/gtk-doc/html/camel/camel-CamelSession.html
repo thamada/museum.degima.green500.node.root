@@ -1,0 +1,1257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelSession</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="Services.html" title="Services">
+<link rel="prev" href="Services.html" title="Services">
+<link rel="next" href="camel-camel-provider.html" title="camel-provider">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="Services.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="Services.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-camel-provider.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelSession.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelSession.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelSession">
+<a name="camel-CamelSession"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelSession.top_of_page"></a>CamelSession</span></h2>
+<p>CamelSession</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelSession.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+struct              <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (<a class="link" href="camel-CamelSession.html#CamelTimeoutCallback" title="CamelTimeoutCallback ()">*CamelTimeoutCallback</a>)             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+enum                <a class="link" href="camel-CamelSession.html#CamelSessionAlertType" title="enum CamelSessionAlertType">CamelSessionAlertType</a>;
+                    <a class="link" href="camel-CamelSession.html#CamelSessionThreadOps" title="CamelSessionThreadOps">CamelSessionThreadOps</a>;
+                    <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg">CamelSessionThreadMsg</a>;
+void                <a class="link" href="camel-CamelSession.html#camel-session-construct" title="camel_session_construct ()">camel_session_construct</a>             (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *storage_path);
+<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *      <a class="link" href="camel-CamelSession.html#camel-session-get-service" title="camel_session_get_service ()">camel_session_get_service</a>           (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *url_string,
+                                                         <a class="link" href="camel-camel-provider.html#CamelProviderType" title="enum CamelProviderType">CamelProviderType</a> type,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *      <a class="link" href="camel-CamelSession.html#camel-session-get-service-connected" title="camel_session_get_service_connected ()">camel_session_get_service_connected</a> (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *url_string,
+                                                         <a class="link" href="camel-camel-provider.html#CamelProviderType" title="enum CamelProviderType">CamelProviderType</a> type,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+#define             <a class="link" href="camel-CamelSession.html#camel-session-get-store" title="camel_session_get_store()">camel_session_get_store</a>             (session, url_string, ex)
+#define             <a class="link" href="camel-CamelSession.html#camel-session-get-transport" title="camel_session_get_transport()">camel_session_get_transport</a>         (session, url_string, ex)
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelSession.html#camel-session-get-storage-path" title="camel_session_get_storage_path ()">camel_session_get_storage_path</a>      (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelSession.html#camel-session-get-password" title="camel_session_get_password ()">camel_session_get_password</a>          (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *domain,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *prompt,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *item,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-CamelSession.html#camel-session-forget-password" title="camel_session_forget_password ()">camel_session_forget_password</a>       (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *domain,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *item,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelSession.html#camel-session-alert-user" title="camel_session_alert_user ()">camel_session_alert_user</a>            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionAlertType" title="enum CamelSessionAlertType">CamelSessionAlertType</a> type,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *prompt,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> cancel);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelSession.html#camel-session-build-password-prompt" title="camel_session_build_password_prompt ()">camel_session_build_password_prompt</a> (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *type,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *user,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *host);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelSession.html#camel-session-is-online" title="camel_session_is_online ()">camel_session_is_online</a>             (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);
+void                <a class="link" href="camel-CamelSession.html#camel-session-set-online" title="camel_session_set_online ()">camel_session_set_online</a>            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> online);
+<a class="link" href="camel-CamelFilterDriver.html#CamelFilterDriver" title="struct CamelFilterDriver">CamelFilterDriver</a> * <a class="link" href="camel-CamelSession.html#camel-session-get-filter-driver" title="camel_session_get_filter_driver ()">camel_session_get_filter_driver</a>     (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *type,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelSession.html#camel-session-check-junk" title="camel_session_check_junk ()">camel_session_check_junk</a>            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);
+void                <a class="link" href="camel-CamelSession.html#camel-session-set-check-junk" title="camel_session_set_check_junk ()">camel_session_set_check_junk</a>        (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> check_junk);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="camel-CamelSession.html#camel-session-thread-msg-new" title="camel_session_thread_msg_new ()">camel_session_thread_msg_new</a>        (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionThreadOps" title="CamelSessionThreadOps">CamelSessionThreadOps</a> *ops,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> size);
+void                <a class="link" href="camel-CamelSession.html#camel-session-thread-msg-free" title="camel_session_thread_msg_free ()">camel_session_thread_msg_free</a>       (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg">CamelSessionThreadMsg</a> *msg);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelSession.html#camel-session-thread-queue" title="camel_session_thread_queue ()">camel_session_thread_queue</a>          (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg">CamelSessionThreadMsg</a> *msg,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> flags);
+void                <a class="link" href="camel-CamelSession.html#camel-session-thread-wait" title="camel_session_thread_wait ()">camel_session_thread_wait</a>           (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> id);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelSession.html#camel-session-get-network-state" title="camel_session_get_network_state ()">camel_session_get_network_state</a>     (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);
+void                <a class="link" href="camel-CamelSession.html#camel-session-set-network-state" title="camel_session_set_network_state ()">camel_session_set_network_state</a>     (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> network_state);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *  <a class="link" href="camel-CamelSession.html#camel-session-get-junk-headers" title="camel_session_get_junk_headers ()">camel_session_get_junk_headers</a>      (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);
+void                <a class="link" href="camel-CamelSession.html#camel-session-set-junk-headers" title="camel_session_set_junk_headers ()">camel_session_set_junk_headers</a>      (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **headers,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **values,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> len);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelSession.html#camel-session-lookup-addressbook" title="camel_session_lookup_addressbook ()">camel_session_lookup_addressbook</a>    (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+void                <a class="link" href="camel-CamelSession.html#camel-session-forward-to" title="camel_session_forward_to ()">camel_session_forward_to</a>            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         struct _CamelFolder *folder,
+                                                         struct _CamelMimeMessage *message,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *address,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelSession.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelSession.details"></a><h2>Details</h2>
+<div class="refsect2" title="struct CamelSession">
+<a name="CamelSession"></a><h3>struct CamelSession</h3>
+<pre class="programlisting">struct CamelSession {
+	CamelObject parent_object;
+	struct _CamelSessionPrivate *priv;
+
+	gchar *storage_path;
+	CamelJunkPlugin *junk_plugin;
+
+	guint online:1;
+	guint check_junk:1;
+	guint network_state:1;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelTimeoutCallback ()">
+<a name="CamelTimeoutCallback"></a><h3>CamelTimeoutCallback ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (*CamelTimeoutCallback)             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="enum CamelSessionAlertType">
+<a name="CamelSessionAlertType"></a><h3>enum CamelSessionAlertType</h3>
+<pre class="programlisting">typedef enum {
+	CAMEL_SESSION_ALERT_INFO,
+	CAMEL_SESSION_ALERT_WARNING,
+	CAMEL_SESSION_ALERT_ERROR
+} CamelSessionAlertType;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelSessionThreadOps">
+<a name="CamelSessionThreadOps"></a><h3>CamelSessionThreadOps</h3>
+<pre class="programlisting">typedef struct {
+	void (*receive)(CamelSession *session, struct _CamelSessionThreadMsg *m);
+	void (*free)(CamelSession *session, struct _CamelSessionThreadMsg *m);
+} CamelSessionThreadOps;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelSessionThreadMsg">
+<a name="CamelSessionThreadMsg"></a><h3>CamelSessionThreadMsg</h3>
+<pre class="programlisting">typedef struct {
+	CamelMsg msg;
+
+	gint id;
+
+	CamelException ex;
+	CamelSessionThreadOps *ops;
+	struct _CamelOperation *op;
+	CamelSession *session;
+
+	gpointer data; /* free for implementation to define, not used by camel, do not use in client code */
+	/* user fields follow */
+} CamelSessionThreadMsg;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_construct ()">
+<a name="camel-session-construct"></a><h3>camel_session_construct ()</h3>
+<pre class="programlisting">void                camel_session_construct             (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *storage_path);</pre>
+<p>
+Constructs <em class="parameter"><code>session</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object to construct
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>storage_path</code></em> :</span></p></td>
+<td> path to a directory the session can use for
+persistent storage. (This directory must already exist.)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_service ()">
+<a name="camel-session-get-service"></a><h3>camel_session_get_service ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *      camel_session_get_service           (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *url_string,
+                                                         <a class="link" href="camel-camel-provider.html#CamelProviderType" title="enum CamelProviderType">CamelProviderType</a> type,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+This resolves a <a class="link" href="camel-camel-url.html#CamelURL" title="CamelURL"><span class="type">CamelURL</span></a> into a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a>, including loading the
+provider library for that service if it has not already been loaded.
+</p>
+<p>
+Services are cached, and asking for "the same" <em class="parameter"><code>url_string</code></em> multiple
+times will return the same CamelService (with its reference count
+incremented by one each time). What constitutes "the same" URL
+depends in part on the provider.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>url_string</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-url.html#CamelURL" title="CamelURL"><span class="type">CamelURL</span></a> describing the service to get
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> the provider type (<span class="type">CAMEL_PROVIDER_STORE</span> or
+<span class="type">CAMEL_PROVIDER_TRANSPORT</span>) to get, since some URLs may be able
+to specify either type.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the requested <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a>, or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_service_connected ()">
+<a name="camel-session-get-service-connected"></a><h3>camel_session_get_service_connected ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *      camel_session_get_service_connected (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *url_string,
+                                                         <a class="link" href="camel-camel-provider.html#CamelProviderType" title="enum CamelProviderType">CamelProviderType</a> type,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+This works like <a class="link" href="camel-CamelSession.html#camel-session-get-service" title="camel_session_get_service ()"><span class="type">camel_session_get_service</span></a>, but also ensures that
+the returned service will have been successfully connected (via
+<a class="link" href="camel-CamelService.html#camel-service-connect" title="camel_service_connect ()"><span class="type">camel_service_connect</span></a>.)</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>url_string</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-url.html#CamelURL" title="CamelURL"><span class="type">CamelURL</span></a> describing the service to get
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> the provider type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the requested <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a>, or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_store()">
+<a name="camel-session-get-store"></a><h3>camel_session_get_store()</h3>
+<pre class="programlisting">#define             camel_session_get_store(session, url_string, ex)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>url_string</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_transport()">
+<a name="camel-session-get-transport"></a><h3>camel_session_get_transport()</h3>
+<pre class="programlisting">#define             camel_session_get_transport(session, url_string, ex)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>url_string</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_storage_path ()">
+<a name="camel-session-get-storage-path"></a><h3>camel_session_get_storage_path ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_session_get_storage_path      (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+This returns the path to a directory which the service can use for
+its own purposes. Data stored there will remain between Evolution
+sessions. No code outside of that service should ever touch the
+files in this directory. If the directory does not exist, it will
+be created.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the path (which the caller must free), or <code class="literal">NULL</code> if an error
+occurs.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_password ()">
+<a name="camel-session-get-password"></a><h3>camel_session_get_password ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_session_get_password          (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *domain,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *prompt,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *item,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+This function is used by a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> to ask the application and
+the user for a password or other authentication data.
+</p>
+<p>
+<em class="parameter"><code>service</code></em> and <em class="parameter"><code>item</code></em> together uniquely identify the piece of data the
+caller is concerned with.
+</p>
+<p>
+<em class="parameter"><code>prompt</code></em> is a question to ask the user (if the application doesn't
+already have the answer cached). If <span class="type">CAMEL_SESSION_PASSWORD_SECRET</span>
+is set, the user's input will not be echoed back.
+</p>
+<p>
+If <span class="type">CAMEL_SESSION_PASSWORD_STATIC</span> is set, it means the password returned
+will be stored statically by the caller automatically, for the current
+session.
+</p>
+<p>
+The authenticator should set <em class="parameter"><code>ex</code></em> to <span class="type">CAMEL_EXCEPTION_USER_CANCEL</span> if
+the user did not provide the information. The caller must <a
+href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"
+><span class="type">g_free</span></a>
+the information returned when it is done with it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> the <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> this query is being made by
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
+<td> domain of password request.  May be null to use the default.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prompt</code></em> :</span></p></td>
+<td> prompt to provide to user
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>item</code></em> :</span></p></td>
+<td> an identifier, unique within this service, for the information
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> <span class="type">CAMEL_SESSION_PASSWORD_REPROMPT</span>, the prompt should force a reprompt
+<span class="type">CAMEL_SESSION_PASSWORD_SECRET</span>, whether the password is secret
+<span class="type">CAMEL_SESSION_PASSWORD_STATIC</span>, the password is remembered externally
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the authentication information or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_forget_password ()">
+<a name="camel-session-forget-password"></a><h3>camel_session_forget_password ()</h3>
+<pre class="programlisting">void                camel_session_forget_password       (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *domain,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *item,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+This function is used by a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> to tell the application
+that the authentication information it provided via
+<a class="link" href="camel-CamelSession.html#camel-session-get-password" title="camel_session_get_password ()"><span class="type">camel_session_get_password</span></a> was rejected by the service. If the
+application was caching this information, it should stop,
+and if the service asks for it again, it should ask the user.
+</p>
+<p>
+<em class="parameter"><code>service</code></em> and <em class="parameter"><code>item</code></em> identify the rejected authentication information,
+as with <a class="link" href="camel-CamelSession.html#camel-session-get-password" title="camel_session_get_password ()"><span class="type">camel_session_get_password</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> the <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> rejecting the password
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>item</code></em> :</span></p></td>
+<td> an identifier, unique within this service, for the information
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_alert_user ()">
+<a name="camel-session-alert-user"></a><h3>camel_session_alert_user ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_session_alert_user            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionAlertType" title="enum CamelSessionAlertType">CamelSessionAlertType</a> type,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *prompt,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> cancel);</pre>
+<p>
+Presents the given <em class="parameter"><code>prompt</code></em> to the user, in the style indicated by
+<em class="parameter"><code>type</code></em>. If <em class="parameter"><code>cancel</code></em> is <code class="literal">TRUE</code>, the user will be able to accept or
+cancel. Otherwise, the message is purely informational.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> the type of alert (info, warning, or error)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prompt</code></em> :</span></p></td>
+<td> the message for the user
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cancel</code></em> :</span></p></td>
+<td> whether or not to provide a "Cancel" option in addition to
+an "OK" option.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the user accepts, <code class="literal">FALSE</code> if they cancel.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_build_password_prompt ()">
+<a name="camel-session-build-password-prompt"></a><h3>camel_session_build_password_prompt ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_session_build_password_prompt (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *type,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *user,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *host);</pre>
+<p>
+Constructs a localized password prompt from <em class="parameter"><code>type</code></em>, <em class="parameter"><code>user</code></em> and <em class="parameter"><code>host</code></em>,
+suitable for passing to <a class="link" href="camel-CamelSession.html#camel-session-get-password" title="camel_session_get_password ()"><code class="function">camel_session_get_password()</code></a>.  The resulting
+string contains markup tags.  Use <a
+href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a> to free it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> account type (e.g. "IMAP")
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user</code></em> :</span></p></td>
+<td> user name for the account
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>host</code></em> :</span></p></td>
+<td> host name for the account
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a newly-allocated password prompt string
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_is_online ()">
+<a name="camel-session-is-online"></a><h3>camel_session_is_online ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_session_is_online             (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> whether or not <em class="parameter"><code>session</code></em> is online
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_set_online ()">
+<a name="camel-session-set-online"></a><h3>camel_session_set_online ()</h3>
+<pre class="programlisting">void                camel_session_set_online            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> online);</pre>
+<p>
+Sets the online status of <em class="parameter"><code>session</code></em> to <em class="parameter"><code>online</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>online</code></em> :</span></p></td>
+<td> whether or not the session should be online
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_filter_driver ()">
+<a name="camel-session-get-filter-driver"></a><h3>camel_session_get_filter_driver ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelFilterDriver.html#CamelFilterDriver" title="struct CamelFilterDriver">CamelFilterDriver</a> * camel_session_get_filter_driver     (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *type,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> the type of filter (eg, "incoming")
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a filter driver, loaded with applicable rules
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_check_junk ()">
+<a name="camel-session-check-junk"></a><h3>camel_session_check_junk ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_session_check_junk            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);</pre>
+<p>
+Do we have to check incoming messages to be junk?</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> whether or not we are checking incoming messages for junk
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_set_check_junk ()">
+<a name="camel-session-set-check-junk"></a><h3>camel_session_set_check_junk ()</h3>
+<pre class="programlisting">void                camel_session_set_check_junk        (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> check_junk);</pre>
+<p>
+Set check_junk flag, if set, incoming mail will be checked for being junk.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>check_junk</code></em> :</span></p></td>
+<td> state
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_thread_msg_new ()">
+<a name="camel-session-thread-msg-new"></a><h3>camel_session_thread_msg_new ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            camel_session_thread_msg_new        (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionThreadOps" title="CamelSessionThreadOps">CamelSessionThreadOps</a> *ops,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> size);</pre>
+<p>
+Create a new thread message, using ops as the receive/reply/free
+ops, of <em class="parameter"><code>size</code></em> bytes.
+</p>
+<p>
+<em class="parameter"><code>ops</code></em> points to the operations used to recieve/process and finally
+free the message.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ops</code></em> :</span></p></td>
+<td> thread operations
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
+<td> number of bytes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg"><span class="type">CamelSessionThreadMsg</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_thread_msg_free ()">
+<a name="camel-session-thread-msg-free"></a><h3>camel_session_thread_msg_free ()</h3>
+<pre class="programlisting">void                camel_session_thread_msg_free       (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg">CamelSessionThreadMsg</a> *msg);</pre>
+<p>
+Free a <em class="parameter"><code>msg</code></em>.  Note that the message must have been allocated using
+msg_new, and must nto have been submitted to any queue function.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>msg</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg"><span class="type">CamelSessionThreadMsg</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_thread_queue ()">
+<a name="camel-session-thread-queue"></a><h3>camel_session_thread_queue ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_session_thread_queue          (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg">CamelSessionThreadMsg</a> *msg,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> flags);</pre>
+<p>
+Queue a thread message in another thread for processing.
+The operation should be (but needn't) run in a queued manner
+with other operations queued in this manner.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>msg</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSessionThreadMsg" title="CamelSessionThreadMsg"><span class="type">CamelSessionThreadMsg</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> queue type flags, currently 0.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the id of the operation queued
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_thread_wait ()">
+<a name="camel-session-thread-wait"></a><h3>camel_session_thread_wait ()</h3>
+<pre class="programlisting">void                camel_session_thread_wait           (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> id);</pre>
+<p>
+Wait on an operation to complete (by id).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> id of the operation to wait on
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_network_state ()">
+<a name="camel-session-get-network-state"></a><h3>camel_session_get_network_state ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_session_get_network_state     (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_set_network_state ()">
+<a name="camel-session-set-network-state"></a><h3>camel_session_set_network_state ()</h3>
+<pre class="programlisting">void                camel_session_set_network_state     (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> network_state);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>network_state</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_get_junk_headers ()">
+<a name="camel-session-get-junk-headers"></a><h3>camel_session_get_junk_headers ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GHashTable"
+>GHashTable</a> *  camel_session_get_junk_headers      (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_set_junk_headers ()">
+<a name="camel-session-set-junk-headers"></a><h3>camel_session_set_junk_headers ()</h3>
+<pre class="programlisting">void                camel_session_set_junk_headers      (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **headers,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **values,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>headers</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>values</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_lookup_addressbook ()">
+<a name="camel-session-lookup-addressbook"></a><h3>camel_session_lookup_addressbook ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_session_lookup_addressbook    (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_session_forward_to ()">
+<a name="camel-session-forward-to"></a><h3>camel_session_forward_to ()</h3>
+<pre class="programlisting">void                camel_session_forward_to            (<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         struct _CamelFolder *folder,
+                                                         struct _CamelMimeMessage *message,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *address,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>folder</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

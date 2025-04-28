@@ -1,0 +1,3879 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="nautilus">
+  <title>ファイルを使った作業</title>
+
+  <!-- ID tag preserved for 2.8 compatibility -->
+  <anchor id="gosnautilus-1"/>
+
+  <!-- Desktop Overview / File Manager -->
+  <anchor id="gosoverview-56"/>
+
+  <!-- MOVE THIS ANCHOR -->
+  <!-- Desktop Overview / File Manager / To Open Files -->
+  <anchor id="gosoverview-58"/>
+
+  <!-- MOVE THIS ANCHOR -->
+  <!-- Desktop Overview / File Manager / To Move Files -->
+  <anchor id="gosoverview-57"/>
+
+  <!-- MOVE THESE ANCHORS -->
+  <!-- Desktop Overview / Desktop -->
+  <anchor id="gosgetstarted-11"/>
+  <!-- Desktop Overview / Desktop / To Open Desktop Objects -->
+  <anchor id="gosoverview-29"/>
+  <!-- Desktop Overview / Desktop / To Add Objects-->
+  <anchor id="gosoverview-19"/>
+  <!-- Using the Start Here Location -->
+  <anchor id="gosnautilus-445"/>
+  <!-- To Choose a View in Which to Display a File or Folder - (image/text view) -->
+  <anchor id="gosnautilus-100"/>
+  <!-- To Modify the Behavior of a View -->
+  <anchor id="gosnautilus-111"/>
+  <!-- To Resize an Icon in Icon View - (This can only be done on desktop now) -->
+  <anchor id="gosnautilus-103"/>
+  <!-- To Execute Other Actions When Displaying a File -->
+  <anchor id="gosnautilus-73"/>
+
+  <highlights>
+    <para>この章では <application>Nautilus</application> ファイル・マネージャの使い方について説明します。</para>
+  </highlights>
+
+  <sect1 id="gosnautilus-21">
+    <title>はじめに</title>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>introduction</secondary>
+    </indexterm>
+    <sect2 id="gosnautilus-22">
+    <title>ファイル・マネージャの機能</title>
+    <para><application>Nautilus</application> ファイル・マネージャはファイルとアプリケーションをまとめて取り扱うための簡単な手段をいろいろ提供してくれます。このファイル・マネージャを使うと、次のようなことができます:</para>
+    <itemizedlist>
+       <listitem><para>フォルダやドキュメントの生成</para></listitem>
+       <listitem><para>ファイルやフォルダの表示</para></listitem>
+       <listitem><para>ファイルの検索とその管理</para></listitem>
+       <listitem><para>スクリプトの実行とアプリケーションの起動</para></listitem>
+       <listitem><para>ファイルやフォルダが持つ外観の変更</para></listitem>
+       <listitem><para>お使いのコンピュータにある特別な場所を開く</para></listitem>
+       <listitem><para>CD や DVD への書き込み</para></listitem>
+       <listitem><para>フォントのインストールやアンインストール</para></listitem>
+     </itemizedlist>
+    <para>ファイル・マネージャを使い複数のファイルを体系化してフォルダの中に格納します。フォルダには、ファイルはもちろん別のフォルダも格納することができます。フォルダを利用することで、ファイルをより効率良く見つけ出せるようになります。</para>
+    <para>さらに <application>Nautilus</application> はデスクトップも管理します。デスクトップは画面上に表示されているいろいろなアイテムの裏側に横たわって動作しており、コンピュータの使い方を表現する一つのコンポーネントに相当します。</para>
+    <para>全てのユーザは自分専用のホーム・フォルダを所有します。ホーム・フォルダにはユーザのファイルが全て格納されています。デスクトップはもう一つ別のフォルダであり、このデスクトップにはホーム・フォルダやゴミ箱、あるいはフロッピー・ディスクや CD や USB フラッシュドライブのようなリムーバブル・メディアにアクセスするための特別なアイコンがいろいろ含まれています。</para>
+    <para>GNOME を利用している間、<application>Nautilus</application> はずっと動作しています。新しく <application>Nautilus</application> ウィンドウを開く場合は、デスクトップ上にある <guimenuitem>ホーム</guimenuitem>や<guimenuitem>コンピュータ</guimenuitem>といったアイコンをダブル・クリックするか、またはトップ・パネルにある<link linkend="places-menu"><guimenuitem>場所</guimenuitem>メニュー</link>からアイテムを選択して下さい。</para>
+    <para>GNOME では、ワードプロセッサのドキュメントや表計算、写真、動画、楽曲といったファイルを扱えます。</para>
+
+  </sect2>
+  <sect2 id="nautilus-presentation">
+    <title>ファイル・マネージャの動き</title>
+    <para><application>Nautilus</application> provides two modes in which you can interact with your filesystem: spatial and browser mode. You may decide which method you prefer and set  <application>Nautilus</application> to always use this by selecting (or deselecting) <guilabel>Always open in browser windows</guilabel> in the <guilabel>Behavior</guilabel> tab of the <link linkend="nautilus-preferences">Nautilus preferences dialog</link>.</para>
+    <para>空間モードは GNOME のデフォルトですが、お使いのディストリビューションやシステム管理者の設定によってはデフォルトでブラウザ・モードになっている場合があります。</para>   
+    <para>空間モードとブラウザ・モードの主な違いは次のとおりです:</para>
+      <variablelist>
+        <varlistentry><!-- BROWSER -->
+          <term>ブラウザ・モード: ファイルやフォルダを一同に並べて参照する</term>
+          <listitem>
+            <para>ファイル・マネージャのウィンドウは、いろいろな場所を表示することが可能なブラウザを表します。フォルダを開くと、現在のファイル・マネージャのウィンドウが更新されて、新しいフォルダの内容が表示されるようになっています。</para>
+            <para>ブラウザのウィンドウには、フォルダの内容だけではなく、ツールバーや場所バー、そしてサイドバーも表示されます。場所バーは階層化されたフォルダの現在位置を表示し、サイドバーはいろいろな種類の情報を格納することが可能になっています。</para>
+             <para>基本的にブラウザ・モードは、同時に表示するウィンドウの数を少なくするようなポリシーに従っています。ブラウザ・モードの利用法について詳細は「<xref linkend="nautilus-browser-mode"/>」をご覧下さい。</para>
+          <figure id="gosnautilus-FIG-naut-browser-mode">
+            <title>ブラウザ・モードの <application>Nautilus</application></title>
+            <screenshot>
+              <mediaobject>
+                <imageobject>
+                  <imagedata fileref="figures/naut_browser_mode.png" format="PNG"/>
+                </imageobject>
+                <textobject>
+                  <phrase>ブラウザ・モードの Nautilus</phrase>
+                </textobject>
+              </mediaobject>
+            </screenshot>
+          </figure>
+          </listitem>        
+        </varlistentry><!-- SPATIAL -->
+        <varlistentry>
+          <term>空間モード: ファイルやフォルダをオブジェクトとして操作する</term>
+          <listitem>
+            <para>ファイル・マネージャのウィンドウは特定のフォルダを表します。フォルダを開くということは、そのフォルダに対して新しくウィンドウを開くということです。特定のフォルダを開くたびに、それを最後に表示した時と同じ場所に同じ大きさのウィンドウが表示されるようになっています。これが「空間モード」と言われる所以です。</para>
+            <para>空間モードを利用すると、結果的には画面上にファイル・マネージャのウィンドウがたくさん表示されてしまう場合があります。その一方で、ファイルやフォルダというものが、あたかも特定の場所にある実際のオブジェクトとして表現され、それらのオブジェクトを使った作業が直感的に行えるということが判るでしょう。空間モードについて詳細は「<xref linkend="nautilus-spatial-mode"/>」をご覧下さい。</para>
+        
+            <figure id="gosnautilus-FIG-naut-spatial-mode">
+              <title>空間モードで開いた三つのフォルダ</title>
+              <screenshot>
+                <mediaobject>
+                  <imageobject>
+                    <imagedata fileref="figures/naut_spatial_mode.png" format="PNG"/>
+                  </imageobject>
+                  <textobject>
+                    <phrase>空間モードで開いた三つのフォルダ</phrase>
+                  </textobject>
+                </mediaobject>
+              </screenshot>
+            </figure>
+            <note>
+              <para>空間モードでは、<application>Nautilus</application> は開いたフォルダを別のアイコンで表現します。</para>
+            </note>
+          </listitem>             
+        </varlistentry>
+     </variablelist>   
+  </sect2>
+  </sect1>
+  <!-- ====================================================== Spatial mode -->  
+  <sect1 id="nautilus-spatial-mode">
+    <title>空間モード</title>
+    <anchor id="gosnautilus-24"/>       
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>navigating</secondary>
+    </indexterm>
+    <para>このセクションでは空間モード (<firstterm>Spatial Mode</firstterm>) に設定された <application>Nautilus</application> ファイル・マネージャを使って、お使いのシステムを参照する方法について説明します。空間モードでは、それぞれの <application>Nautilus</application> ウィンドウが一つのフォルダに相当します。任意のフォルダを開くと、以前それを開いた場所にそのフォルダに対応するウィンドウを開きます。これが <application>Nautilus</application> のデフォルトの動きです。</para>
+    <para>ブラウザ・モード (<firstterm>Browsing Mode</firstterm>) と空間モードの違いについては「<xref linkend="nautilus-presentation"/>」をご覧下さい。</para>    
+    <sect2 id="gosnautilus-510">
+      <title>空間モードのウィンドウ</title>
+      <para>任意のフォルダを開く度に新しい空間モードのウィンドウが表示されます。フォルダを開くには、次に示すいずれかの方法に従って下さい:</para>
+      <anchor id="gosnautilus-25"/><!-- removed id: Displaying Folder Contents -->
+      <itemizedlist>
+        <listitem><para>デスクトップまたは既に表示されているウィンドウの中のフォルダ・アイコンをダブルクリックする</para></listitem>
+        <listitem><para>フォルダを選択してから、<keycombo><keycap>Ctrl</keycap><keycap>O</keycap></keycombo> キーを押下する</para></listitem>
+        <listitem><para>フォルダを選択してから、<keycombo><keycap>Alt</keycap><keycap>下向きの矢印キー</keycap></keycombo>を押下する</para></listitem>
+        <listitem><para>トップ・パネルの<link linkend="places-menu"><guimenuitem>場所</guimenuitem>メニュー</link>からアイテムを選択する (ここにはホーム・フォルダとブックマークに登録したフォルダが一覧表示される; ブックマークについて詳細は「<xref linkend="nautilus-bookmarks"/>」を参照のこと)</para></listitem>
+      </itemizedlist>
+      
+      <para>現在のフォルダを閉じて新しいウィンドウを開く際は、<keycap>Shift</keycap> キーを押したままフォルダをダブルクリックするか、<keycombo><keycap>Shift</keycap><keycap>Alt</keycap><keycap>下向きの矢印キー</keycap></keycombo>を押下して下さい。</para>
+
+      <para><xref linkend="gosnautilus-FIG-504"/> はコンピュータ・フォルダの内容を表示した空間モードのウィンドウです。</para>
+      <figure id="gosnautilus-FIG-504">
+        <title>空間モードで表示したフォルダの内容 <indexterm><primary>file manager</primary><secondary>icon view</secondary><tertiary>illustration</tertiary></indexterm></title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/naut_spatial_view.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>空間モードで表示したフォルダの内容</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    <para>空間モードで開いた <application>Nautilus</application> のウィンドウは一箇所の場所しか表示していません。別の場所を選択すると、二つ目の <application>Nautilus</application> ウィンドウが表示されます。開く場所がそれぞれ前に表示した際のウィンドウの位置を記憶していることで、一度にたくさんフォルダを開いた場合でも簡単にお目当てのフォルダを特定できるようなっています。</para>
+    <para>例えばファイルやフォルダを別の場所に移動するような操作では、この空間モードが使いやすいと考えているユーザもいれば、逆に大量に表示されるウィンドウの数にたじろぐユーザもいます。<xref linkend="gosnautilus-FIG-naut-spatial-many-open"/> は空間モードでたくさんの場所を開いた状態の例です。</para>
+        <figure id="gosnautilus-FIG-naut-spatial-many-open">
+          <title>空間モードで開いた三つのフォルダ</title>
+          <screenshot>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="figures/naut_spatial_mode.png" format="PNG"/>
+              </imageobject>
+              <textobject>
+                <phrase>空間モードで開いた三つのフォルダ</phrase>
+              </textobject>
+            </mediaobject>
+          </screenshot>
+        </figure>
+<note>
+<para>Because spatial mode will fill your screen with <application>Nautilus</application> windows it is important to be able to reposition them effectively. By holding the <keycap>Alt</keycap> key and clicking anywhere within the bounds of a <application>Nautilus</application> window you may reposition it simply, instead of requiring that you reposition it by dragging its title bar.</para>
+</note>
+  </sect2>
+   <sect2 id="nautilus-spatial-components">
+      <title>空間モードのウィンドウを構成するコンポーネント</title>
+      <para><xref linkend="gosnautilus-TBL-85"/> でファイル・オブジェクトのウィンドウを構成しているコンポーネントについて説明します。</para>
+      <table frame="topbot" id="gosnautilus-TBL-85">
+        <title>空間モードのウィンドウを構成するコンポーネント</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="29.39*"/>
+          <colspec colname="colspec1" colwidth="70.61*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>コンポーネント</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>メニューバー</para>
+              </entry>
+              <entry valign="top">
+                <para>ファイル・マネージャで実行するタスクのメニューが含まれる</para>
+		<para>また、ファイル・マネージャのウィンドウ上で右クリックするメニューがポップアップするが、選択できるメニュー項目は右クリックした場所に依存する (例えば、ファイルやフォルダの上で右クリックすると、ファイルやフォルダに関連するタスクを選択でき、ビュー・ペインの背景で右クリックすると、ビュー・ペインに表示できるアイテムに関連するタスクを選択できる)</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+		<anchor id="gosnautilus-components-view"/>
+                <para>ビュー・ペイン</para>
+              </entry>
+              <entry valign="top">
+                <para>次に示す内容を表示する:</para>
+                <itemizedlist>
+                  <listitem>
+                    <para>フォルダ</para>
+                  </listitem>
+                  <listitem>
+                    <para>FTP サイト</para>
+                  </listitem>
+                  <listitem>
+                    <para>ウィンドウ共有</para>
+                  </listitem>
+                  <listitem>
+                    <para>WebDAV サーバ</para>
+                  </listitem>
+                  <listitem>
+                    <para>特別な URI を持つ場所</para>
+                  </listitem>
+                </itemizedlist>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>ステータスバー</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>ステータス情報を表示する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>親フォルダのセレクタ</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>このドロップダウン式のリストにはフォルダが階層構造で表示されるので、開きたいフォルダを一覧から選択する</para>
+                <tip><para>リストから選択する際に <keycap>Shift</keycap> キーを押下したままにすると、一旦、現在のフォルダを閉じてから新しいフォルダを開きます。</para></tip>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect2>
+    <sect2 id="gosnautilus-4">
+      <title>ホーム・フォルダを空間モードのウィンドウで表示する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>Home location</secondary>
+        <see>Home location</see>
+      </indexterm>
+      <indexterm>
+        <primary>Home location</primary>
+        <secondary>displaying</secondary>
+      </indexterm>
+      <para>ホーム・フォルダを表示する場合は、次に示すいずれかの操作に従います:</para>
+      <itemizedlist>
+        <listitem>
+          <para>デスクトップにある<guilabel>ホーム</guilabel>・オブジェクトをダブル・クリックする</para>
+        </listitem>
+        <listitem>
+          <para>From a folder window's menubar, choose <menuchoice><guimenu>Places</guimenu><guimenuitem>Home Folder</guimenuitem></menuchoice>. </para> 
+        </listitem>
+        <listitem><para>From the top panel menubar, choose <menuchoice><guimenu>Places</guimenu><guimenuitem>Home Folder</guimenuitem></menuchoice>. </para></listitem>
+      </itemizedlist>
+      <para>すると、空間モードのウィンドウに自分のホーム・フォルダの内容が表示されます。</para>
+    </sect2>
+    <sect2 id="gosnautilus-511">
+      <title>親フォルダを表示する</title>
+      <para>現在のフォルダを格納しているフォルダのことを親フォルダと言います。親フォルダの内容を表示する場合は、次に示すいずれかの操作に従います:</para>
+      <itemizedlist>
+        <listitem>
+          <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>親フォルダを開く</guimenuitem></menuchoice>.を選択する</para>
+        </listitem>
+        <listitem>
+          <para><keycombo><keycap>Alt</keycap><keycap>上向きの矢印キー</keycap></keycombo>を押下する</para>
+        </listitem>
+        <listitem><para>ウィンドウの左下にある親フォルダのセレクタから選択する</para></listitem>
+      </itemizedlist>
+      <para>現在開いているフォルダを一旦閉じてから親のフォルダを表示するのであれば、<keycap>Shift</keycap> キーを押下したまま親フォルダのセレクタから選択するか、または <keycombo><keycap>Shift</keycap><keycap>Alt</keycap><keycap>上向きの矢印キー</keycap></keycombo>を押下して下さい。</para>
+    </sect2>
+    <sect2 id="gosnautilus-512">
+      <title>フォルダを閉じる</title>
+      <para>フォルダを閉じる際はウィンドウの閉じるボタンをクリックするだけで良いのですが、これはウィンドウを大量に表示する空間モードではあまり効果的な方法ではないかもしれません。現在のフォルダのみ表示し、このフォルダにたどり着くまで開いてきた他のフォルダを閉じるのであれば、<menuchoice><guimenu>ファイル</guimenu><guimenuitem>全ての親フォルダを閉じる</guimenuitem></menuchoice>を選択して下さい。デスクトップ上にある全てのウィンドウを閉じたいのであれば、<menuchoice><guimenu>ファイル</guimenu><guimenuitem>全てのフォルダを閉じる</guimenuitem></menuchoice>を選択して下さい。</para>
+      </sect2>
+    <sect2 id="gosnautilus-501">
+      <title>ブラウザ・ウィンドウの中にフォルダを表示する</title>
+      <para>ブラウザ・モードでフォルダを一つだけ表示し、空間モードでこれ以降の作業を続行したいのであれば、次の手順に従って下さい:</para>
+      <orderedlist>
+        <listitem>
+          <para>Select a folder while in spatial mode.</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>フォルダの閲覧</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    <sect2 id="nautilus-open-location">
+      <title>場所を開く</title>
+      <para>空間モードから場所を直接入力することでフォルダやその他の場所を開くことができるようになっています。</para>
+      <para><menuchoice><shortcut><keycombo><keysym>L</keysym></keycombo></shortcut><guimenu>ファイル</guimenu><guimenuitem>場所を開く</guimenuitem></menuchoice> を選択して、開きたい場所のパス名または URI を入力して下さい。</para>
+  
+    </sect2>
+  </sect1>
+
+  <!-- ====================================================== Browser mode -->
+  <sect1 id="nautilus-browser-mode">
+    <title>ブラウザ・モード</title>
+    <!-- Viewing Files in a File Browser Window -->
+    <anchor id="gosnautilus-210"/>   
+    <anchor id="gosnautilus-447"/>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>windows</secondary>
+    </indexterm>
+    <para>このセクションではブラウザ・モード (<firstterm>Browser Mode</firstterm>) に設定された <application>Nautilus</application> ファイル・マネージャを使って、お使いのシステムを参照する方法について説明します。ブラウザ・モードでは、現在開いているファイル・マネージャのウィンドウでフォルダの内容を更新しながら新しいフォルダを表示していくようになっています。</para>
+    <para>ブラウザ・モード (<firstterm>Browsing Mode</firstterm>) と空間モードの違いについては「<xref linkend="nautilus-presentation"/>」をご覧下さい。</para>
+    <sect2 id="gosnautilus-492">
+      <title>ファイル・ブラウザのウィンドウ</title>
+      <para>次に示すいずれかの方法でファイル・ブラウザにアクセスできるようになっています: <itemizedlist>
+        <listitem><para><menuchoice><guimenu>アプリケーション</guimenu><guimenuitem>システムツール</guimenuitem><guimenuitem>ファイル・ブラウザ</guimenuitem></menuchoice>を選択します。</para></listitem>
+        <listitem><para>空間モードにいる時にフォルダの上で右クリックし<guimenuitem>フォルダの閲覧</guimenuitem>を選択することで、そのフォルダをブラウザ・モードで開くことができるようになっています。</para></listitem>
+        <listitem><para><application>Nautilus</application> の設定で<guilabel>常にブラウザ・ウィンドウで開く</guilabel>が有効になっている場合、フォルダをダブル・クリックするとブラウザ・ウィンドウが開きます。詳細は「<xref linkend="gosnautilus-56"/>」をご覧下さい。</para></listitem>
+      </itemizedlist></para>
+      <figure id="gosnautilus-FIG-naut-home-browser-mode">
+        <title>ファイル・ブラウザのウィンドウに表示したフォルダの内容</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/naut_browser_mode.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>ファイル・ブラウザのウィンドウに表示したフォルダ</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      <note>
+        <para>お使いのディストリビューションによっては、ツールバーにある<guibutton>ホーム</guibutton>・ボタンが別の名前 (例えば、<guibutton>ドキュメント</guibutton>) になっている場合があります。</para>
+      </note>
+      <sect3 id="gosnautilus-493">
+        <title>ファイル・ブラウザのウィンドウを構成するコンポーネント</title>
+        <para><xref linkend="gosnautilus-TBL-83"/> でファイル・ブラウザのウィンドウを構成しているコンポーネントについて説明します。</para>
+        <table frame="topbot" id="gosnautilus-TBL-83">
+          <title>ファイル・ブラウザのウィンドウを構成するコンポーネント</title>
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colname="colspec0" colwidth="29.39*"/>
+            <colspec colname="colspec1" colwidth="70.61*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>コンポーネント</para>
+                </entry>
+                <entry>
+                  <para>説明</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="top">
+                  <para>メニューバー</para>
+                </entry>
+                <entry valign="top">
+                  <para>ファイル・マネージャで実行するタスクのメニューが含まれる</para>
+		              <para>また、ファイル・マネージャのウィンドウ上で右クリックするメニューがポップアップするが、選択できるメニュー項目は右クリックした場所に依存する (例えば、ファイルやフォルダの上で右クリックすると、ファイルやフォルダに関連するタスクを選択でき、ビュー・ペインの背景で右クリックすると、ビュー・ペインに表示できるアイテムに関連するタスクを選択できる)</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>ツールバー</para>
+                </entry>
+                <entry valign="top">
+                  <para>ファイル・マネージャが提供している機能を実行する際に使用するボタンが含まれる</para>
+<itemizedlist>
+                    <listitem>
+                      <para><guibutton>戻る</guibutton>は一つ前に訪れていた場所へ戻る (ボタンの横にあるドロップ・ダウン式のリストにも最近訪れた場所の履歴がある)</para>
+                    </listitem>
+                    <listitem>
+                      <para><guimenu>進む</guimenu>は<guibutton>戻る</guibutton>と逆の機能を実行する</para>
+                    </listitem>
+                    <listitem>
+                      <para><guibutton>上へ</guibutton>は現在のフォルダの一つ上に移動する</para>
+                    </listitem>
+                    <listitem>
+                      <para><guibutton>再読込み</guibutton>は現在のフォルダの内容を更新する</para>
+                    </listitem>
+                    <listitem>
+                      <para><guibutton>ホーム</guibutton>はユーザのホーム・フォルダを開く</para>
+                    </listitem>
+                    <listitem>
+                      <para><guibutton>コンピュータ</guibutton>はコンピュータのフォルダを開く</para>
+                    </listitem>
+                    <listitem>
+                      <para><guibutton>検索</guibutton>は検索バーを表示する</para>
+                    </listitem>
+                  </itemizedlist>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec0" valign="top">
+                  <para>場所バー</para>
+                </entry>
+                <entry colname="colspec1" valign="top">
+                  <para>場所バーはコンピュータを含めシステムの中を移動する際にとても強力な機能を提供しており、セレクションに応じて３種類の表示形式を持つ (場所バーの使い方について詳細は「<xref linkend="nautilus-location-bar"/>」を参照のこと); 種類に関わらず全ての場所バーには次のアイテムが含まれる:</para>
+                  <itemizedlist>
+                    <listitem>
+                      <para><guimenu>拡大/縮小</guimenu>ボタン: 表示ペインの中にあるアイテムの大きさを変更できる</para>
+                    </listitem>
+                    <listitem>
+                      <para><guilabel>表示形式</guilabel>のドロップ・ダウン式リスト: 表示ペインに表示する形式を選択できる</para>
+                    </listitem>
+                  </itemizedlist>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+              		<anchor id="gosnautilus-540"/>
+                  <para>サイド・ペイン</para>
+                </entry>
+                <entry valign="top">
+                  <para>次に示す機能を提供する:</para>
+                  <itemizedlist>
+                    <listitem>
+                      <para>現在選択しているファイルまたはフォルダについての情報を表示する</para>
+                  </listitem>
+                  <listitem>
+                    <para>現在選択しているファイルがあるフォルダまで辿る</para>
+                  </listitem>
+                </itemizedlist>
+                <para>サイド・ペインを表示するには<menuchoice><guimenu>表示</guimenu><guimenuitem>サイド・ペイン</guimenuitem></menuchoice>を選択する; サイド・ペインの上部にドロップ・ダウン式のリストがあり、次の示すアイテムを選択することで、サイド・ペインで何を表示するかを決定する:</para>                
+      <itemizedlist>
+        <listitem>
+          <para>
+            <guilabel>場所</guilabel>
+          </para>
+          <para>特定の場所を表示する</para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>情報</guilabel>
+          </para>
+          <para>現在開いているフォルダについてアイコンとその情報を表示する</para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>ツリー</guilabel>
+          </para>
+          <para>ファイルシステムの階層ツリーを表示する (<guilabel>ツリー</guilabel>を使ってファイルを操作できる)</para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>履歴</guilabel>
+          </para>
+          <para>前に開いたフォルダや以前訪れた FTP サイトや URI などの履歴が表示される</para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>メモ</guilabel>
+          </para>
+          <para>現在のフォルダやファイルに対するメモを残すことができる</para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>エンブレム</guilabel>
+          </para>
+          <para>ファイルやフォルダに付与できるエンブレムが表示される</para>
+        </listitem>
+      </itemizedlist>
+      <para>サイド・ペインを閉じるには、サイド・ペインの右上にある <guibutton>X</guibutton> ボタンをクリックする</para>
+                </entry>
+            </row>
+            <row>
+              <entry valign="top">
+		<anchor id="gosnautilus-53"/>
+                <para>ビュー・ペイン</para>
+              </entry>
+              <entry valign="top">
+                <para>次に示す内容を表示する:</para>
+                <itemizedlist>
+                  <listitem>
+                    <para>フォルダ</para>
+                  </listitem>
+                  <listitem>
+                    <para>FTP サイト</para>
+                  </listitem>
+                  <listitem>
+                    <para>ウィンドウ共有</para>
+                  </listitem>
+                  <listitem>
+                    <para>WebDAV サーバ</para>
+                  </listitem>
+                  <listitem>
+                    <para>特別な URI を持つ場所</para>
+                  </listitem>
+                </itemizedlist>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>ステータスバー</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>ステータス情報を表示する</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect3>
+    </sect2>
+    <sect2 id="gosnautilus-18">
+      <title>ファイル・ブラウザのウィンドウ・コンポーネントの表示を切り替える</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>window components, showing and hiding</secondary>
+      </indexterm>
+      <para><xref linkend="gosnautilus-TBL-83"/> で説明したコンポーネントを表示したり表示しないようにするには、メニューから次のアイテムのいずれかを選択して下さい:</para>
+      <itemizedlist>
+        <listitem>
+          <para>サイド・ペインを隠す場合は<menuchoice><guimenu>表示</guimenu><guimenuitem>サイド・ペイン</guimenuitem></menuchoice>を選択し、もう一度サイド・ペインを表示する場合は再び<menuchoice><guimenu>表示</guimenu><guimenuitem>サイド・ペイン</guimenuitem></menuchoice>を選択する (あるいは <keycap>F9</keycap> キーを押下するとサイド・ペインの表示と非表示を切り替えることが可能)</para>
+        </listitem>
+        <listitem>
+          <para>ツールバーを隠す場合は<menuchoice><guimenu>表示</guimenu><guimenuitem>メイン・ツールバー</guimenuitem></menuchoice>を選択し、もう一度ツールバーを表示する場合は再び<menuchoice><guimenu>表示</guimenu><guimenuitem>メイン・ツールバー</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+          <para>場所バーを隠す場合は<menuchoice><guimenu>表示</guimenu><guimenuitem>場所バー</guimenuitem></menuchoice>を選択し、もう一度場所バーを表示する場合は再び<menuchoice><guimenu>表示</guimenu><guimenuitem>場所バー</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+          <para>ステータスバーを隠す場合は<menuchoice><guimenu>表示</guimenu><guimenuitem>ステータスバー</guimenuitem></menuchoice>を選択し、もう一度ステータスバーを表示する場合は再び<menuchoice><guimenu>表示</guimenu><guimenuitem>ステータスバー</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="nautilus-location-bar">
+      <title>場所バーの使い方</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>window components, showing and hiding</secondary>
+      </indexterm>
+      <para>ファイル・ブラウザの場所バーには、場所を入力するエントリ、またはボタン・バー、あるいは検索エントリのいずれかを表示することが可能になっています。いろいろな状況に応じて入力スタイルを選択してみて下さい。</para>
+
+
+    <itemizedlist>
+      <listitem>
+        <para><guilabel>ボタン・バー</guilabel></para>
+        <para>デフォルトで場所バーにはボタン・バーが表示されるようになっています。これは現在の場所を階層化し、それぞれのフォルダを一つのボタンとして表現したボタン列として表現されています。その中にあるボタンをクリックすると、それに対応するフォルダに移動できます。ボタン列の一番最後のボタンが最初に居たフォルダを表します。</para>
+        <para>さらにボタンをドラッグして、別の場所にそのフォルダをコピーすることも可能です。</para>
+      <figure id="gosnautilus-FIG-903">
+      <title>ボタン・バーの例</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/naut_button_bar.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>ボタン・バーの例</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      </listitem>    
+      <listitem>
+        <para><guilabel>場所を入力するエントリ</guilabel></para>
+        <para>場所を入力するエントリは現在の場所を表す文字列 (パス名) が表示されます (例えば、'/home/user/Documents')。このエントリは既知のフォルダへ素早く移動する場合に特に便利です。</para>
+        <para>新しい場所へ移動する際は、そのパスを入力するか現在表示されているパスを編集した後に <keycap>Enter</keycap> キーを押下して下さい。このエントリでは入力しているパスが一つしか存在していないのであれば自動的に残りの文字を補完するようになっています。補完したパス名の色が反転するので、問題なければ <keycap>Tab</keycap> キーを押下して下さい。</para>
+      <para>このエントリを場所バーのデフォルトにする場合は、場所バーの左にあるボタンをクリックして ON の状態にしておいて下さい。</para>
+      <para>ボタン・バーを利用している際に素早く場所の入力エントリに変更したいのであれば <keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo> キーを押下するか、<menuchoice><guimenu>移動</guimenu><guimenuitem>場所</guimenuitem></menuchoice>を選択するか、あるいは<keycap>スラッシュ (/)</keycap> を入力して root フォルダから絶対パスを指定してみて下さい。ここで <keycap>Enter</keycap> キーを押下して確定するか、または <keycap>Escape</keycap> キーで取り消した場合はボタン・バーが再び表示されます。</para>
+      <figure id="gosnautilus-FIG-902">
+      <title>場所を入力するエントリの例</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/naut_go_to_location.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>場所を入力するエントリの例</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      </listitem>
+      <listitem>
+        <para><guilabel>検索エントリ</guilabel></para>
+        <para><keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo> キーを押下するか、またはツールバーの<guibutton>検索</guibutton>ボタンをクリックすると、場所バーに検索バーが表示されます。検索に関して詳細は「<xref linkend="nautilus-searching"/>」をご覧になってみて下さい。実際にファイルがどこにあるのか判らない場合に、この検索バーが便利です。</para>
+      <figure id="gosnautilus-FIG-904">
+      <title>ボタン・バーの例</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/naut_search_bar.png" format="PNG"/>
+            </imageobject>
+            <textobject>
+              <phrase>検索バーの例</phrase>
+            </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+      </listitem>
+</itemizedlist>
+    </sect2>
+    <sect2 id="gosnautilus-499">
+      <title>ホーム・フォルダを表示する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>Home folder</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>Home location</secondary>
+        <see>Home location</see>
+      </indexterm>
+      <indexterm>
+        <primary>Home location</primary>
+        <secondary>displaying</secondary>
+      </indexterm>
+      <para>自分のホーム・フォルダに素早く移動したいのであれば、ファイル・ブラウザのウィンドウから次に示す操作のいずれかを実行して下さい:</para>
+      <itemizedlist>
+        <listitem>
+          <para><menuchoice><guimenu>移動</guimenu><guimenuitem>ホーム・フォルダ</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+          <para>ツールバーの<guibutton>ホーム</guibutton>・ボタンをクリックする</para>
+        </listitem>
+        <listitem>
+          <para>「場所」サイド・ペインから<guibutton><replaceable>自分のユーザ名</replaceable></guibutton>を表すボタンをクリックする</para>
+        </listitem>
+      </itemizedlist>
+      <para>すると、ファイル・ブラウザのウィンドウに自分のホーム・フォルダの内容が表示されます。</para>
+    </sect2>
+    <sect2 id="gosnautilus-500">
+      <title>フォルダを表示する</title>
+      <para>フォルダの内容は場所バーの右端にある<guilabel>表示の切り替え</guilabel>メニューを使って、一覧表示にしたりアイコン表示にできます。一覧表示またはアイコン表示について詳細は「<xref linkend="gosnautilus-7"/>」をご覧下さい。</para>
+      <itemizedlist>
+        <listitem>
+          <para>表示ペインにあるフォルダをダブルクリックする</para>
+        </listitem>
+        <listitem>
+          <para>サイド・ペインの種類を<guilabel>ツリー</guilabel>にする (詳細は「<xref linkend="gosnautilus-27"/>」を参照のこと)</para>
+        </listitem>
+        <listitem>
+          <para><guilabel>ボタン・バー</guilabel>をクリックする</para>
+        </listitem>
+        <listitem>
+          <para><keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo> で<guilabel>場所を入力するエントリ</guilabel>を表示し、表示したいフォルダのパス名を入力して <keycap>Return</keycap> キーを押下する (<guilabel>場所を入力するエントリ</guilabel>では自動補完をサポートしており、入力したパス名が唯一のフォルダを識別できる場合は、入力の途中でファイル・マネージャが<guilabel>場所を入力するエントリ</guilabel>の中に残りの文字列を候補として表示する)</para>
+        </listitem>
+        <listitem>
+          <para>ツールバーの<guibutton>戻る</guibutton>ボタンと<guibutton>進む</guibutton>ボタンを使って移動履歴を参照する</para>
+        </listitem>
+      </itemizedlist>
+      <para>現在の一つ上のフォルダに移動するには、<menuchoice><guimenu>移動</guimenu><guimenuitem>親フォルダを開く</guimenuitem></menuchoice>を選択するか、あるいはツールバーにある<guibutton>上へ</guibutton>ボタンをクリックして下さい。</para>
+    </sect2>
+    <sect2 id="gosnautilus-26">
+      <title>親フォルダを表示する</title>
+      <para>現在参照しているフォルダの親フォルダはただ一つだけ存在し、階層構造に例えると現在の一つ上のレベルに相当します。親フォルダの内容を表示するには、次の手順のいずれかに従って下さい:</para>
+      <itemizedlist>
+        <listitem>
+          <para>ツールバーにある<guibutton>上へ</guibutton>ボタンをクリックする</para>
+        </listitem>
+        <listitem>
+          <para>メニューバーの<menuchoice><guimenu>移動</guimenu><guimenuitem>親フォルダを開く</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+          <para><keycap>Backspace</keycap> キーを押下する</para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+    <sect2 id="gosnautilus-27">
+      <title>サイド・ペインからツリーを利用する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>Tree, using</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Tree, using</primary>
+      </indexterm>
+      <para><guilabel>ツリー</guilabel>表示はサイド・ペインの中で最も便利な機能の一つです。これはファイル・システムを階層化して表示してくれるので、簡単にファイル・システムを参照したり移動できます。サイド・ペインで<guilabel>ツリー</guilabel>表示にするには、サイド・ペインの上部にあるドロップ・ダウン式のリストから<guimenuitem>ツリー</guimenuitem>を選択して下さい。</para>
+<para><guilabel>ツリー</guilabel>表示では複数のフォルダが存在していることを下向きの矢印で表現します。</para>
+      
+      <para><xref linkend="gosnautilus-TBL-34"/> では<guilabel>ツリー</guilabel>表示を利用して実行できる作業とその意味を説明します。</para>
+      <table frame="topbot" id="gosnautilus-TBL-34">
+        <title>ツリー表示で提供している機能</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="50*"/>
+          <colspec colname="colspec1" colwidth="50*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>機能</para>
+              </entry>
+              <entry>
+                <para>アクションの意味</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para><guilabel>ツリー</guilabel>を開く</para>
+              </entry>
+              <entry valign="top">
+                <para>サイド・ペインの上部にあるドロップ・ダウン式のリストから<guilabel>ツリー</guilabel>を選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para><guilabel>ツリー</guilabel>を閉じる</para>
+              </entry>
+              <entry valign="top">
+                <para>サイド・ペインの上部にあるドロップ・ダウン式のリストから他のアイテムを選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para><guilabel>ツリー</guilabel>で畳まれたフォルダを展開する</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><guilabel>ツリー</guilabel>の中にあるフォルダの左横にある矢印をクリックする</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para><guilabel>ツリー</guilabel>で展開したフォルダを畳む</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><guilabel>ツリー</guilabel>の中にあるフォルダの左横にある矢印をクリックする</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>表示ペインの中にあるフォルダの内容を表示する</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><guilabel>ツリー</guilabel>の中にあるフォルダを選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>任意のファイルを開く</para>
+              </entry>
+              <entry valign="top">
+                <para><guilabel>ツリー</guilabel>の中にあるファイルを選択する</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para><guilabel>ツリー</guilabel>表示でファイルを表示しないように設定することもできるようになっています。詳細は「<xref linkend="gosnautilus-438"/>」をご覧下さい。</para>
+    </sect2>
+    <sect2 id="gosnautilus-5">
+      <title>移動履歴を活用する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>navigating history list</secondary>
+      </indexterm>
+      <para>ファイル・ブラウザのウィンドウではあなたが参照したファイルやフォルダ、FTP サイト、あるいは URI の履歴を管理しています。そのため、再びそれらのファイルや場所に素早くアクセスするために履歴の一覧を利用できます。この履歴の一覧には最後に参照した１０個のアイテムが格納されています。</para>
+      <para>履歴の一覧をクリアする時は、<menuchoice><guimenu>移動</guimenu><guimenuitem>履歴のクリア</guimenuitem></menuchoice>を選択して下さい。</para>
+      <sect3 id="gosnautilus-77">
+        <title>移動メニューから履歴の一覧にアクセスする</title>
+        <para>以前表示したアイテムの一覧を表示する時は<guimenu>移動</guimenu>メニューを選択して下さい。すると、この<guimenu>移動</guimenu>メニューの最後の方に履歴の一覧が表示されます。この一覧のアイテムをクリックすることで、アイテムにアクセスできるようになっています。</para>
+      </sect3>
+      <sect3 id="gosnautilus-78">
+        <title>ツールバーから履歴の一覧にアクセスする</title>
+        <para>ツールバーを使って履歴の一覧にアクセスするには、次に示すいずれかの操作に従って下さい:</para>
+        <itemizedlist>
+          <listitem>
+            <para>履歴の一覧にあるフォルダまたは URI を開くには、ツールバーにある<guibutton>戻る</guibutton>ボタンをクリックする</para>
+          </listitem>
+          <listitem>
+            <para>履歴の一覧にあるフォルダや URI を開くには、ツールバーにある<guibutton>進む</guibutton>ボタンをクリックする</para>
+          </listitem>
+          <listitem>
+            <para>以前アクセスしたアイテムの一覧を表示するには、ツールバーにある<guibutton>戻る</guibutton>ボタンの右側にある下向きの矢印をクリックして表示された一覧の中にあるアイテムをクリックする</para>
+          </listitem>
+          <listitem>
+            <para>以前アクセスしたアイテムの一覧を表示するには、ツールバーにある<guibutton>進む</guibutton>ボタンの右側にある下向きの矢印をクリックして表示された一覧の中にあるアイテムをクリックする</para>
+          </listitem>
+        </itemizedlist>
+      </sect3>
+      <sect3 id="gosnautilus-80">
+        <title>サイド・ペインにある履歴から履歴の一覧にアクセスする</title>
+        <indexterm>
+          <primary>file manager</primary>
+          <secondary>履歴</secondary>
+        </indexterm>
+        <para>サイド・ペインに<guilabel>履歴</guilabel>の一覧を表示するには、サイド・ペインの上部にあるドロップ・ダウン式のリストから<guilabel>履歴</guilabel>を選択して下さい。サイド・ペインの<guilabel>履歴</guilabel>には以前表示したアイテムが一覧表示されます。</para>
+        <para>表示ペインにある履歴の一覧からアイテムを選択するには、<guilabel>履歴</guilabel>の一覧にあるアイテムをダブル・クリックして下さい。</para>
+
+      </sect3>
+    </sect2>
+  </sect1>  
+  
+	<!-- ======================================================== Opening -->
+  <sect1 id="nautilus-open-file">
+    <title>ファイルを開く</title>
+    <!-- preserve id for backwards compatibility: 2.12 -->
+    <anchor id="gosnautilus-28"/>       
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>opening files</secondary>
+    </indexterm>
+    <para>ファイルを開くと、ファイル・マネージャはそのファイルの種類に応じたデフォルトのアクションを実行します。</para>
+    <para>例えば、楽曲ファイルを開くとデフォルトのプレイヤーを使って曲を再生しますし、テキスト・ファイルを開くとテキスト・エディタの中でファイルの中にある文章を読んだり編集することができますし、画像ファイルを開くとその画像データが表示されます。</para>
+    <para>ファイル・マネージャはファイルの内容をチェックしてそのファイルの種類を決定しています。ファイル・マネージャはファイルの先頭行でその種類を決定できない場合は、続いて<glossterm>ファイルの拡張子</glossterm>をチェックします。</para>
+    <note><para>実行可能なテキスト・ファイルを開いた場合、すなわち一種のプログラムとして <application>Nautilus</application> から実行できるファイルの場合はそのまま実行すべきか、あるいはテキスト・エディタで開くべきかを問い合わせるダイアログが表示されます。この時の動きは<link linkend="nautilus-preferences">ファイル・マネージャの設定</link>で変更できるようになっています。</para></note>
+    <sect2 id="gosnautilus-29">
+      <title>デフォルトのアクションを実行する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>executing default actions for files</secondary>
+      </indexterm>
+      <para>任意のファイルに対してデフォルトのアクションを実行したいのであれば、そのファイルをダブル・クリックして下さい。例えば、テキスト・ファイルに対するデフォルトのアクションはテキスト・ビューアでそのファイルの内容を表示するというものです。この場合、そのファイルをダブル・クリックするとテキスト・ビューアの中にファイルの内容が表示されます。</para>
+      <para>ファイル・マネージャの設定を変更できるようになっているので、デフォルトのアクションを実行する場合はファイルを一度だけクリックして下さい。詳細は「<xref linkend="gosnautilus-56"/>」をご覧下さい。</para>
+    </sect2>
+    <sect2 id="gosnautilus-30">
+      <title>デフォルトではないアクションを実行する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>executing non-default actions for files</secondary>
+      </indexterm>
+      <para>任意のファイルに対してデフォルト以外のアクションを実行するには、実行したいアクションを選択して下さい。<menuchoice><guimenu>ファイル</guimenu></menuchoice>メニューから<guimenuitem>次で開く</guimenuitem>を選択するか、あるいは<menuchoice><guimenuitem>次で開く</guimenuitem></menuchoice>サブメニューを選択して下さい。そして表示される一覧からアクションを選択して下さい。</para>
+    </sect2>
+    <sect2 id="gosnautilus-add-actions">
+      <title>アクションを追加する</title>
+	    <!-- preserve id for backwards compatibility: 2.12 -->
+	    <anchor id="gosnautilus-204"/><!-- Assigning Actions to Files -->
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>adding actions</secondary>
+      </indexterm>
+      <para>ファイルの種類に応じたアクションを関連付ける場合は次の手順に従って下さい:</para>
+      <orderedlist>
+        <listitem>
+         <para>ビュー・ペインの中からアクションを追加するファイルを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>別のアプリで開く</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+        <para>ダイアログから任意のアプリケーションを選択するか、またはこの種類のファイルを開く際に利用するプログラムを新規に指定する</para>
+        </listitem>
+      </orderedlist>
+       <para>すると、選択したアクションが特定の種類のファイルに対するアクションとして一覧に追加されます。この種類のファイルに未だアクションが関連付けられていない場合は、ここで追加したアクションが新たにデフォルトのアクションになります。</para>
+       <para>さらに、<menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>で開いたダイアログにある<guilabel>開き方</guilabel>のタブでもアクションを追加することができるようになっています。</para>
+   </sect2>
+    <sect2 id="gosnautilus-75">
+      <title>アクションを編集する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>modifying actions</secondary>
+      </indexterm>
+      <para>任意のファイルまたはファイルの種類に関連付けられているアクションを編集する場合は次の手順に従って下さい:</para>
+      <orderedlist>
+        <listitem>
+         <para>ビュー・ペインの中からアクションを編集するファイルを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+       <listitem>
+          <para><guilabel>開き方</guilabel>のタブをクリックする</para>
+        </listitem>
+        <listitem>
+          <para><guibutton>追加</guibutton>または<guibutton>削除</guibutton>ボタンを使って一覧のにあるアクションを調整します。さらに、アイテムの左端に付与されているオプション・ボタンをクリックしてデフォルトのアクションを指定して下さい。</para>
+        </listitem>
+      </orderedlist>
+    </sect2>    
+   
+	<!-- =========================================== Searching -->    
+  </sect1>
+  <sect1 id="nautilus-searching">
+    <title>ファイルの検索</title>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>searching files</secondary>
+    </indexterm>
+    <para><application>Nautilus</application> ファイル・マネージャは簡単にファイルやフォルダを検索するための機能を提供しています。検索を始めるには <keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo> キーを押下するか、またはツールバーにある<guibutton>検索</guibutton>ボタンをクリックして下さい。<xref linkend="gosnautilus-FIG-925"/> に示すような検索バーが表示されます。</para>
+                    <figure id="gosnautilus-FIG-925">
+                    <title>検索バーの例</title>
+                      <screenshot>
+                        <mediaobject>
+                          <imageobject>
+                            <imagedata fileref="figures/naut_search_bar.png" format="PNG"/>
+                          </imageobject>
+                          <textobject>
+                            <phrase>検索バーの例</phrase>
+                          </textobject>
+                        </mediaobject>
+                      </screenshot>
+                    </figure>
+<para>検索したいファイル名やフォルダ名、あるいはファイルの内容を検索バーのエントリに入力して <keycap>Enter</keycap> キーを押下して下さい。<xref linkend="gosnautilus-FIG-926"/> に示すような検索結果がビュー・ペインの中に表示されます。</para>
+                    <figure id="gosnautilus-FIG-926">
+                    <title>検索結果の例</title>
+                      <screenshot>
+                        <mediaobject>
+                          <imageobject>
+                            <imagedata fileref="figures/naut_search_results.png" format="PNG"/>
+                          </imageobject>
+                          <textobject>
+                            <phrase>検索結果の例</phrase>
+                          </textobject>
+                        </mediaobject>
+                      </screenshot>
+                    </figure>
+<para>この検索結果に不満がある場合はさらに条件を追加して検索の精度を上げることができるようになっています。このようにすると、特定の種類のファイルとか特定の場所にあるファイルだけを検索するといったように検索範囲にを制限することができます。条件を追加するにはビュー・ペインの右端にある <guibutton>+</guibutton> アイコンをクリックして下さい。<xref linkend="gosnautilus-FIG-927"/> はユーザのホーム・フォルダで、かつ通常のファイルのみを検索するといった条件を追加して検索範囲を制限しているところです。</para>
+                    <figure id="gosnautilus-FIG-927">
+                    <title>検索範囲を制限する例</title>
+                      <screenshot>
+                        <mediaobject>
+                          <imageobject>
+                            <imagedata fileref="figures/naut_refine_search.png" format="PNG"/>
+                          </imageobject>
+                          <textobject>
+                            <phrase>検索範囲を制限する例</phrase>
+                          </textobject>
+                        </mediaobject>
+                      </screenshot>
+                    </figure>
+    <sect2 id="nautilus-saving-searches">
+      <title>検索結果を保存する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>executing default actions for files</secondary>
+      </indexterm>
+      <para>Nautilus では後で利用したり参照できるように検索結果を保存できるようになっています。検索結果を保存しておけば、後でもう一度開いて閲覧できます。<xref linkend="gosnautilus-FIG-935"/> は保存してある３つの検索結果からその１つを閲覧しているところです。</para>
+                    <figure id="gosnautilus-FIG-935">
+                    <title>保存しておいた検索結果を閲覧している例</title>
+                      <screenshot>
+                        <mediaobject>
+                          <imageobject>
+                            <imagedata fileref="figures/nautilus_restore_saved_search.png" format="PNG"/>
+                          </imageobject>
+                          <textobject>
+                            <phrase>保存しておいた検索結果を閲覧している例</phrase>
+                          </textobject>
+                        </mediaobject>
+                      </screenshot>
+                    </figure>
+<para>保存した検索結果は通常のフォルダのように扱えます。例えば保存した結果を開いたり、移動したり、削除することができるようになっています。</para>
+    </sect2>
+  </sect1>
+
+	<!-- =========================================== Managing -->
+  <sect1 id="gosnautilus-8">
+    <title>ファイルとフォルダの管理</title>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>managing files and folders</secondary>
+    </indexterm>
+    <para>このセクションではファイルやフォルダを使った作業について説明します。</para>
+
+  	<sect2 id="nautilus-directories-file-systems" status="complete">
+  			<title>フォルダとファイル・システムについて</title>
+  				<para>Linux や UNIX のファイル・システムはツリーのような階層構造で管理しています。ファイル・システムの最上位は <filename>/</filename> で、「<emphasis>ルート・フォルダ</emphasis>」と言います。Linux や UNIX には複数のハードディスクやパーティション、そしていろいろなリムーバブル・メディアを含め、全てファイルとして扱うという設計理念があります。これは (他のディスクやパーティションを含め)、全てのファイルとフォルダはルート・フォルダの下に存在しているという意味です。</para>
+  				<para>例えば <filename>/home/jebediah/cheeses.odt</filename> は、<filename>home</filename> というフォルダの下にある <filename>jebediah</filename> というサブ・フォルダの中に格納された <filename>cheeses.odt</filename> というファイルに対する絶対パスを表します。<filename>home</filename> は同様にルート・フォルダ (<filename>/</filename>) の下にあるサブ・ディレクトリです。</para>
+  				<para>ルート・フォルダ (<filename>/</filename>) の下には、ほとんどの Linux ディストリビューションで共通に使用する重要なシステム・フォルダがたくさん格納されています。次はルート・フォルダ (<filename>/</filename>) の直下にあるフォルダの一覧です:</para>
+  					<itemizedlist>
+  						<listitem>
+  							<para><filename>/bin</filename> - システムに対して重要なバイナリ (<emphasis>bin</emphasis>ary) アプリケーションを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/boot</filename> - コンピュータを起動 (<emphasis>boot</emphasis>) するのに必要なファイルを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/dev</filename> - デバイス (<emphasis>dev</emphasis>ice) ファイルを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/etc</filename> - システム規模の設定ファイル、起動スクリプト... などなど (<emphasis>etc</emphasis>) を格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/home</filename> - ローカル・ユーザのホーム (<emphasis>home</emphasis>) フォルダ</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/lib</filename> - システム用のライブラリ (<emphasis>lib</emphasis>raries) を格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/lost+found</filename> - ルート・フォルダ (<filename>/</filename>) の下に格納された全てのファイルに対する「遺失物取扱所 (<emphasis>lost and found</emphasis> )」的なシステムを提供する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/media</filename> - CD やデジカメなどのリムーバブル・メディア (<emphasis>media</emphasis>) をマウントする場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/mnt</filename> - マウント済 (<emphasis>m</emphasis>ou<emphasis>nt</emphasis>ed) ファイル・システムを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/opt</filename> - オプション (<emphasis>opt</emphasis>ional) でインストールされたアプリケーションを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/proc</filename> - 現在実行中のプロセス (<emphasis>proc</emphasis>esses) を含むシステムの状態に関する情報を管理する特別な場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/root</filename> - <emphasis>root</emphasis> というユーザのホーム・フォルダに相当する場所 ('slash-root' あるいは日本語だと「スラ・ルート」と発音する)</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/sbin</filename> - システム (<emphasis>s</emphasis>ystem) 用の重要なバイナリ (<emphasis>bin</emphasis>aries) を格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/srv</filename> - サーバ (<emphasis>s</emphasis>e<emphasis>rv</emphasis>ers) が使用するデータを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/sys</filename> - システム (<emphasis>sys</emphasis>tem) に関する情報を格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/tmp</filename> - 作業用 (<emphasis>t</emphasis>e<emphasis>mp</emphasis>orary) ファイルを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/usr</filename> - 全てのユーザ (<emphasis>us</emphasis>e<emphasis>r</emphasis>s) からアクセスできるアプリケーションやファイルを格納する場所</para>
+  						</listitem>
+  						<listitem>
+  							<para><filename>/var</filename> - システム・ログやデータベースといった更新される可能性のある (<emphasis>var</emphasis>iable) ファイルを格納する場所</para>
+  						</listitem> 
+  					</itemizedlist>
+  	</sect2>
+
+    <sect2 id="gosnautilus-7">
+      <title>ファイルやフォルダを表示するビューを使う</title>
+      <indexterm>
+        <primary>viewer components</primary>
+      </indexterm>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>views</secondary>
+        <tertiary>introduction</tertiary>
+      </indexterm>
+      <para>ファイル・マネージャは、フォルダの内容をいろいろな方法で表示できるようにする「ビュー」 (例えばアイコン表示とか一覧表示) をいくつか提供しています。</para>
+      <itemizedlist>
+        <listitem>
+          <para>アイコン表示</para>
+          <para><xref linkend="gosnautilus-FIG-naut-icon-view"/> はフォルダの中に格納されたアイテムをアイコン形式で表示した例です。<figure id="gosnautilus-FIG-naut-icon-view">
+                    <title>アイコン表示で表示したホーム・フォルダの例</title>
+<screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_spatial_icon_view.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>アイコン表示で表示したホーム・フォルダの例</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+</figure></para>
+        </listitem>
+        <listitem>
+          <para>一覧表示</para>
+          <para><xref linkend="gosnautilus-FIG-naut-list-view"/> はフォルダの中に格納されたアイテムを一覧形式で表示した例です。<figure id="gosnautilus-FIG-naut-list-view">
+                    <title>一覧表示で表示したホーム・フォルダの例</title>
+<screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_spatial_list_view.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>一覧表示で表示したホーム・フォルダの例</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+</figure></para>
+        </listitem>
+      </itemizedlist>
+      <para><guilabel>表示</guilabel>メニューまたは表示方法を選択する<guilabel>ドロップ・ダウン式のリスト</guilabel>からアイコンまたは一覧表示を選択して下さい。表示ペインでは、フォルダに格納されたアイテムを並び替えたりアイテムの大きさを変更することができるようになっています。次のセクションはアイコン表示や一覧表示を使った作業についてそれぞれ説明します。</para>
+      <sect3 id="gosnautilus-101">
+        <title>アイコン表示のファイルをいろいろ並び替える</title>
+        <indexterm>
+          <primary>file manager</primary>
+          <secondary>icon view</secondary>
+          <tertiary>arranging files in</tertiary>
+        </indexterm>
+        <para>任意のフォルダの内容をアイコン表示で表示すると、フォルダの中にあるアイテムの並び替えを指定できます。アイコン表示でアイテムの並び替えを指定するには、<menuchoice><guimenu>表示</guimenu><guisubmenu>アイテムの並び替え</guisubmenu></menuchoice>を選択して下さい。<guisubmenu>アイテムの並び替え</guisubmenu>のサブメニューには次のようなセクションが含まれています:</para>
+        <itemizedlist>
+          <listitem>
+            <para>一番最初のセクションはファイルを手動で並び替えることができるオプションです</para>
+          </listitem>
+          <listitem>
+            <para>真ん中のセクションにはファイルを自動的に並び替えることができるオプションがいくつか含まれています</para>
+          </listitem>
+          <listitem>
+            <para>最後のセクションにはファイルを配置する方法を選択できるオプションがいくつか含まれています</para>
+          </listitem>
+        </itemizedlist>
+        <para>次の表で説明したサブメニューから妥当なオプションを選択して下さい:</para>
+        <informaltable frame="topbot">
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colname="colspec6" colwidth="28.75*"/>
+            <colspec colname="colspec7" colwidth="71.25*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>オプション</para>
+                </entry>
+                <entry>
+                  <para>説明</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>手動</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>このオプションを選択すると、アイテムを手動で並び替えることができる (アイテムを手動で並び替えるには、ビュー・ペインの中で移動したい場所にアイテムをドラッグ＆ドロップする)</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec6" valign="top">
+                  <para>
+                    <guilabel>名前順</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec7" valign="top">
+                  <para>このオプションを選択すると、アイテムの名前 (アルファベット順) で並び替えることができる (大小文字を区別せずに並び替える); ファイル・マネージャで隠しファイルを表示する設定になっている場合は隠しファイルが最後に表示される</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec6" valign="top">
+                  <para>
+                    <guilabel>サイズ順</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec7" valign="top">
+                  <para>このオプションを選択すると、アイテムのファイル・サイズで並び替えることができる (大きいサイズのファイルが先頭にくる); ファイル・サイズで並び替えを行うと、フォルダはその中に格納されているアイテムの数に応じて並び替えられる (フォルダはその中に格納されているアイテムの合計サイズで並び替えられるわけではない)</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec6" valign="top">
+                  <para>
+                    <guilabel>種類別</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec7" valign="top">
+                  <para>このオプションを選択すると、アイテムをオブジェクトの種類で並び替えることができる (アイテムはその <firstterm>MIME 型</firstterm>のアルファベット順で並び替えられる); MIME 型はファイルのフォーマットを特定し、アプリケーションから読み込めるようにする除法である (例えば、電子メールのアプリケーションならば <literal>image/png</literal> という MIME 型を利用して E-メールに添付されている PNG 画像ファイルを認識することができる)</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec6" valign="top">
+                  <para>
+                    <guilabel>更新日時順</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec7" valign="top">
+                  <para>このオプションを選択すると、アイテムを更新した日時で並び替えることができる (一番最近変更したアイテムが先頭にくる)</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec6" valign="top">
+                  <para>
+                    <guilabel>エンブレム順</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec7" valign="top">
+                  <para>このオプションを選択すると、アイテムに付与されているエンブレムの種類 (エンブレム名のアルファベット順) で並び替えることができる (エンブレムが付与されていないアイテムは最後にくる)</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec6" valign="top">
+                  <para>
+                    <guilabel>小さいレイアウト</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec7" valign="top">
+                  <para>このオプションを選択すると、隣り合うアイテム同士を接近させて配置する</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>逆順</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>このオプションを選択すると、並び替えたアイテムの順番が逆順になる (例えば、名前順でアイテムを並び替えている場合に<guilabel>逆順</guilabel>オプションを選択すると、アルファベット順の逆順でアイレムが表示される)</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </sect3>
+      <sect3 id="gosnautilus-listview-arrange">
+        <title>一覧表示のファイルをいろいろな形式で表示する</title>
+        <indexterm>
+          <primary>file manager</primary>
+          <secondary>list view</secondary>
+          <tertiary>arranging files in</tertiary>
+        </indexterm>
+        <para>フォルダの中身を一覧表示で表示すると、フォルダの中でアイテムをどのように配置して表示するかを指定できます。その際は、一覧表示のヘッダにある項目をクリックして配置したいアイテムのプロパティを変更して下さい。そのプロパティで逆順に並び替えたいのであれば、同じ項目をもう一度クリックして下さい。</para>
+        <para>一覧表示にある項目を削除したり新しい項目を追加する場合は、<menuchoice><guimenu>表示</guimenu><guisubmenu>表示する項目</guisubmenu></menuchoice>を選択して下さい。</para>
+        <para>ファイル・マネージャは特定のフォルダに対して指定した表示形式を記憶します。次回、再びフォルダの内容を表示すると、以前指定した形式でアイテムが表示されるようになっています。言い換えると、フォルダの中にアイテムを表示する方法を指定しておくと、その形式で表示するようにフォルダをカスタマイズしたということになります。フォルダの表示形式をデフォルトに戻したいのであれば、<menuchoice><guimenu>表示</guimenu><guimenuitem>デフォルト表示にリセット</guimenuitem></menuchoice>を選択して下さい。</para>
+      </sect3>
+<sect3 id="gosnautilus-102">
+      <title>表示するアイテムの大きさを変更する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>zooming in and out</secondary>
+      </indexterm>
+      <para>任意の表示でファイルやフォルダを表示している場合、それらのアイテムの大きさを変更することができます。次に示す方法のいずれからアイテムの大きさを変更できます:</para>
+      <itemizedlist>
+        <listitem>
+          <para>アイテムを大きく表示する場合は、<menuchoice><guimenu>表示</guimenu><guimenuitem>拡大</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+          <para>アイテムを小さく表示する場合は、<menuchoice><guimenu>表示</guimenu><guimenuitem>縮小</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+          <para>大きさを変更したアイテムを通常のサイズに戻す場合は、<menuchoice><guimenu>表示</guimenu><guimenuitem>通常サイズ</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+      </itemizedlist>
+      <para>ブラウザのウィンドウ上にあるズーム・ボタンを使って、表示しているアイテムの大きさを変更することも可能です。<xref linkend="gosnautilus-TBL-42"/> にズーム・ボタンの使い方を記します。</para>
+      <table frame="topbot" id="gosnautilus-TBL-42">
+        <title>ズーム・ボタン</title>
+        <tgroup cols="3" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="21.98*"/>
+          <colspec colname="colspec1" colwidth="32.86*"/>
+          <colspec colname="colspec2" colwidth="44.17*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>ボタン</para>
+              </entry>
+              <entry>
+                <para>ボタンの名前</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_zoom_out_button.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>拡大ボタン</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><guibutton>縮小</guibutton>ボタン</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>このボタンをクリックすると、表示しているアイテムの大きさが小さくなる</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_normal_size_button.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>通常サイズのボタン</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+              <entry valign="top">
+                <para><guibutton>通常サイズ</guibutton>のボタン</para>
+              </entry>
+              <entry valign="top">
+                <para>このボタンをクリックすると、通常の大きさに戻る</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_zoom_in_button.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>拡大ボタン</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><guibutton>拡大</guibutton>ボタン</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>このボタンをクリックすると、表示しているアイテムの大きさが大きくなる</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para>ファイル・マネージャは特定のフォルダに対して指定したアイテムの大きさを記憶します。次回、再びフォルダの内容を表示すると、以前指定した大きさでアイテムが表示されるようになっています。言い換えると、表示するアイテムの大きさを変更すると、その大きさで表示するようにフォルダをカスタマイズしたということになります。アイテムの大きさをデフォルトに戻したいのであれば、<menuchoice><guimenu>表示</guimenu><guimenuitem>デフォルト表示にリセット</guimenuitem></menuchoice>を選択して下さい。</para>
+    </sect3>
+    </sect2>
+
+    <sect2 id="nautilus-select">
+      <title>ファイルとフォルダを選択する</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-202"/>         
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>selecting files and folders</secondary>
+      </indexterm>
+      <para>ファイル・マネージャからファイルやフォルダを選択する方法がいくつかあります。<xref linkend="gosnautilus-TBL-10"/> に示すように、これは基本的にはマウスでファイルを選択することで実現します。さらに「<xref linkend="nautilus-select-pattern"/>」では特定のパターンに一致するファイルの集合を選択する方法について説明しています。</para>
+      <table frame="topbot" id="gosnautilus-TBL-10">
+        <title>ファイル・マネージャでアイテムを選択する方法</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="36.36*"/>
+          <colspec colname="colspec2" colwidth="63.64*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>機能</para>
+              </entry>
+              <entry colname="colspec2">
+                <para>アクションの意味</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>アイテムを一つ選択する</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>そのアイテムをクリックする</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>前後にあるアイテムを含めてアイテムの集合を選択する</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>アイコン表示では、選択したいアイテムの周囲をドラッグする</para>
+                <para>一覧表示では、グループの先頭アイテムをクリックし、<keycap>Shift</keycap> キーを押下したまま最後のアイテムをクリックする</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>複数のアイテムを選択する</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para><keycap>Ctrl</keycap> キーを押下しながらアイテムを次々と選択していく</para>
+                <para>もしくは、<keycap>Ctrl</keycap> キーを押下したまま選択したいアイテムの周囲をドラッグする</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>フォルダの中にある全てのアイテムを選択する</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para><menuchoice><guimenu>編集</guimenu><guimenuitem>全て選択</guimenuitem></menuchoice>を選択する</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para>選択したアイテムに対してデフォルトのアクションを実行する場合は、アイテムをダブル・クリックして下さい。この際、一度だけクリックしてデフォルトのアクションを実行できるような設定を指定することができます。詳細は「<xref linkend="gosnautilus-56"/>」をご覧下さい。</para>
+<sect3 id="nautilus-select-pattern">
+<title>特定のパターンに一致するファイルを選択する</title>
+<para><application>Nautilus</application> を利用すると、ファイル名や任意の数値を表すワイルドカードに基づくパターンに一致する全てのファイルを選択できるようになります。これは、例えばファイル名に "memo" という文字が含まれているファイルを全て選択したいといった時に便利です。<xref linkend="gosnautilus-TBL-select-pattern"/> に指定できるパターンの例とそのパターンに一致するようなファイルの例を示します。</para>
+<table frame="topbot" id="gosnautilus-TBL-select-pattern">
+        <title>ファイル・マネージャでアイテムを選択する方法</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="36.36*"/>
+          <colspec colname="colspec2" colwidth="63.64*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>パターン</para>
+              </entry>
+              <entry colname="colspec2">
+                <para>一致するファイルの例</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>note.*</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>このパターンは拡張子如何に関わらずファイル名が note である全てのファイルを指す</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>*.ogg</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>このパターンは拡張子が .ogg である全てのファイルを指す</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>*memo*</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>このパターンはファイル名に memo という文字列が含まれている全てのファイルを指す</para>
+              </entry>
+            </row>
+            </tbody>
+        </tgroup>
+      </table>
+      <para>パターンの選択機能を実行する場合は、メニューから<menuchoice><guimenu>編集</guimenu><guimenuitem>パターンの選択</guimenuitem></menuchoice>を選択して下さい。パターンを入力すると、それに一致するファイルやフォルダが選択状態になります。それから選択されたファイルやフォルダを使って何か操作を続けて下さい。</para>
+      </sect3>
+    </sect2>
+
+    <sect2 id="nautilus-dragndrop">
+      <title>ファイル・マネージャにドラッグ＆ドロップする</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-201"/>       
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>drag-and-drop</secondary>
+      </indexterm>
+      <para>ドラッグ＆ドロップでファイル・マネージャにおけるいくつかの操作を実行することができるようになっています。ドラッグ＆ドロップすると、実行するタスクに応じてマウス・ポインタにフィードバックが返されます。ドラッグ＆ドロップで実行できるタスクを<xref linkend="gosnautilus-TBL-11"/> に示します。また、ドラッグ＆ドロップした時のフィードバックにより変化するマウス・ポインタの形状も記します。</para>
+      <table frame="topbot" id="gosnautilus-TBL-11">
+        <title>ファイル・マネージャにドラッグ＆ドロップする</title>
+        <tgroup cols="3" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="36.36*"/>
+          <colspec colname="colspec2" colwidth="98.56*"/>
+          <colspec colname="colspec1" colwidth="28.70*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>機能</para>
+              </entry>
+              <entry colname="colspec2">
+                <para>アクションの意味</para>
+              </entry>
+              <entry colname="colspec1">
+                <para>マウス・ポインタ</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>アイテムを移動する</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>アイテムをドラッグして別の場所にドロップする</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/move_pointer.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>移動のポインタ</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>アイテムをコピーする</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>アイテムをドラッグし <keycap>Ctrl</keycap> キーを押下したままにして、コピーしたい場所にアイテムをドロップする</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/copy_pointer.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>コピーのポインタ</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>アイテムを指すシンボリック・リンクを作成する</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>アイテムをドラッグし <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap></keycombo> キーを押下したままにして、シンボリック・リンクを作成したい場所にアイテムをドロップする</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/link_pointer.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>シンボリック・リンクのポインタ</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>ドラッグしたアイテムで何を行うか問い合わせる</para>
+              </entry>
+              <entry colname="colspec2" valign="top">
+                <para>アイテムをドラッグし <keycap>Alt</keycap> キーを押下したままにしてドロップすると、ポップアップ・メニューが表示されるので、次のアイテムから一つ選択する (マウスの中ボタンを使っても同じ操作を実行できる):</para>
+                <itemizedlist>
+                  <listitem>
+                    <para>
+                      <guimenuitem>ここへ移動</guimenuitem>
+                    </para>
+                    <para>アイテムをこの場所に移動する</para>
+                  </listitem>
+                  <listitem>
+                    <para>
+                      <guimenuitem>ここへコピー</guimenuitem>
+                    </para>
+                    <para>アイテムをこの場所にコピーする</para>
+                  </listitem>
+                  <listitem>
+                    <para>
+                      <guimenuitem>ここへリンクを作る</guimenuitem>
+                    </para>
+                    <para>アイテムのシンボリック・リンクをこの場所に作成する</para>
+                  </listitem>
+                  <listitem>
+                    <para>
+                      <guimenuitem>背景としてセット</guimenuitem>
+                    </para>
+                    <para>アイテムが画像であるならば、その画像を背景にセットできる (このコマンドを使ってデスクトップとかサイドペインやビュー・ペインの背景を指定することが可能である)</para>
+                  </listitem>
+                  <listitem>
+                    <para>
+                      <guimenuitem>キャンセル</guimenuitem>
+                    </para>
+                    <para>このドラッグ＆ドロップ操作を取り消す</para>
+                  </listitem>
+                </itemizedlist>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/ask_pointer.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>問い合わせのポインタ</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect2>
+
+    <sect2 id="gosnautilus-9">
+      <title>ファイルやフォルダを移動する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>moving files and folders</secondary>
+      </indexterm>
+      <para>マウスでドラッグするか、あるいは切り取りと貼り付けのコマンドを利用してファイルやフォルダを移動することができます。次のセクションから、これらの二つの方法をそれぞれ説明します。</para>
+      <sect3 id="gosnautilus-537">
+        <title>新しい場所へドラッグ＆ドロップする</title>
+        <para>ファイルやフォルダをドラッグして新しい場所へドロップする手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>ファイル・マネージャのウィンドウを二つ開く:</para>
+            <itemizedlist>
+	            <listitem><para>移動するアイテムを格納したウィンドウ</para></listitem>
+	            <listitem><para>アイテムを移動する先の場所を表すウィンドウ、あるいはアイテムを移動する先のフォルダを格納したウィンドウ</para></listitem>
+            </itemizedlist>
+          </listitem>
+          <listitem>
+            <para>一方のウィンドウの中でファイルまたはフォルダをドラッグし、他方のウィンドウにドロップする (ウィンドウであればどの場所にドロップしても構わない)</para>
+          </listitem>
+        </orderedlist>
+        <para>ファイルまたはフォルダを現在の場所よりも一つ下のフォルダに移動するような場合、新規にウィンドウを開く必要はありません。代わりに、アイテムをドラッグし同じウィンドウ内の新しい場所へドロップして下さい。</para>
+        <tip><para>アイテムのドラッグに関して詳細は「<xref linkend="nautilus-dragndrop"/>」をご覧下さい。</para></tip>
+      </sect3>
+      <sect3 id="gosnautilus-538">
+        <title>新しい場所へカット＆ペーストする</title>
+        <para>ファイルまたはフォルダを切り取って別のフォルダの中に貼り付けることもできます。手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>Select the file or folder that you want to move, then choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Cut</guimenuitem></menuchoice>.</para>
+          </listitem>
+          <listitem>
+            <para>Open the folder to which you want to move the file or folder,
+then choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Paste
+</guimenuitem></menuchoice>.</para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    </sect2>
+    <sect2 id="gosnautilus-10">
+      <title>ファイルやフォルダをコピーする</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>copying files and folders</secondary>
+      </indexterm>
+      <para>マウスでドラッグするか、あるいはコピーと貼り付けのコマンドを利用してファイルやフォルダをコピーすることができます。次のセクションから、これら二つの方法をそれぞれ説明します。</para>
+      <sect3 id="gosnautilus-640">
+        <title>新しい場所へドラッグ＆ドロップする</title>
+        <para>ファイルやフォルダをコピーする手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>ファイル・マネージャのウィンドウを二つ開く:</para>
+            <itemizedlist>
+	            <listitem><para>移動するアイテムを格納したウィンドウ</para></listitem>
+	            <listitem><para>アイテムを移動する先の場所を表すウィンドウ、あるいはアイテムを移動する先のフォルダを格納したウィンドウ</para></listitem>
+            </itemizedlist>
+          </listitem>
+          <listitem>
+            <para>ファイルやフォルダをドラッグする前またはドラッグしている際に <keycap>Ctrl</keycap> キーを押下したまま、コピー先の新しい場所にドロップする (ウィンドウであればどの場所にドロップしても構わない)</para>
+          </listitem>          
+        </orderedlist>
+        <para>ファイルまたはフォルダを現在の場所よりも一つ下のフォルダにコピーするような場合、新規にウィンドウを開く必要はありません。代わりに、アイテムをドラッグして、<keycap>Ctrl</keycap> キーを押したまま同じウィンドウの新しい場所にドロップして下さい。</para>
+        <tip><para>アイテムのドラッグに関して詳細は「<xref linkend="nautilus-dragndrop"/>」をご覧下さい。</para></tip>
+      </sect3>
+      <sect3 id="gosnautilus-441">
+        <title>新しい場所にコピー＆ペーストする</title>
+        <para>ファイルまたはフォルダをコピーして別のフォルダの中に貼り付けることもできます。手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>Select the file or folder that you want to copy, then choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Copy</guimenuitem></menuchoice>.</para>
+          </listitem>
+          <listitem>
+            <para>Open the folder to which you want to copy the file or folder,
+then choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Paste
+</guimenuitem></menuchoice>.</para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    </sect2>
+    <sect2 id="gosnautilus-82">
+      <title>ファイルやフォルダの複製を作成する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>duplicating files and folders</secondary>
+      </indexterm>
+      <para>現在のフォルダにファイルやフォルダのコピーを生成する際の手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para>複製を作成したいファイルやフォルダを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>編集</guimenu><guimenuitem>複製</guimenuitem></menuchoice>を選択する</para>
+          <para>ファイルやフォルダの複製が現在のフォルダに作成された後に表示されます。</para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    <sect2 id="gosnautilus-11">
+      <title>フォルダを生成する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>creating folders</secondary>
+      </indexterm>
+      <para>フォルダを生成する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para>新しいフォルダを生成したい場所のフォルダを開く</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>フォルダの生成</guimenuitem></menuchoice>を選択するか、もしくは右クリックして表示されるメニューから<guimenuitem>フォルダの生成</guimenuitem>を選択する</para>
+          <para>フォルダ名が選択された状態で<guilabel>未タイトル</guilabel>のフォルダが追加される。</para>
+        </listitem>
+        <listitem>
+          <para>この状態でフォルダ名を入力し、 <keycap>Return</keycap> キーを押下する</para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    <sect2 id="gosnautilus-templates-docs">
+      <title>テンプレートとドキュメントについて</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>creating documents</secondary>
+      </indexterm>
+      <para>頻繁に作成するドキュメントからテンプレートを生成することができます。例えば、よく納品書を作成するような場合は空の納品書を生成し、それを <filename>$HOME/Templates</filename> というフォルダの中に <filename>invoice.doc</filename> という名前で保存しておきます。</para>
+      <para>ファイル・ブラウザのウィンドウからテンプレートのフォルダにアクセスする場合は、<menuchoice><guimenu>移動</guimenu><guimenuitem>テンプレート</guimenuitem></menuchoice>を選択して下さい。</para>
+      <para>ここで生成したテンプレートは<guilabel>ドキュメントの生成</guilabel>メニューのサブメニューにも表示されます。</para>
+      <para>さらに、テンプレートのフォルダの下にサブフォルダを生成しておくと、メニューのサブメニューとしてそのサブフォルダが表示されるようになります。</para>
+      <para>生成したテンプレートは他のユーザと共有することもできます。テンプレートのフォルダから共有するテンプレートを格納したフォルダにシンボリック・リンクを作成してみて下さい。</para>
+      <sect3 id="gosnautilus-514">
+        <title>ドキュメントを生成する</title>
+        <para>既にドキュメントのテンプレートをお持ちならば、インストールされたテンプレートからドキュメントの生成を選択できます。</para>
+        <para>ドキュメントを生成する手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>新しいドキュメントを生成するフォルダを選択する</para>
+          </listitem>
+          <listitem>
+            <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>ドキュメントの生成</guimenuitem></menuchoice>を選択するか、もしくは右クリックして表示されるメニューから<guimenuitem>ドキュメントの生成</guimenuitem>を選択する</para>
+            <para>(利用できるテンプレートの名前が<guilabel>ドキュメントの生成</guilabel>メニューの下にサブメニューとして表示される)</para>
+          </listitem>
+          <listitem>
+            <para>生成したいドキュメントのテンプレート名をダブル・クリックする</para>
+          </listitem>
+          <listitem>
+            <para>妥当なフォルダに保存する前にドキュメントの名前を変更しておく</para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    </sect2>
+    <sect2 id="gosnautilus-12">
+      <title>ファイル名やフォルダ名を変更する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>renaming folders</secondary>
+      </indexterm>
+      <para>ファイルやフォルダの名前を変更する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para>名前を変更するファイルまたはフォルダを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>編集</guimenu><guimenuitem>名前の変更...</guimenuitem></menuchoice>を選択するか、もしくは右クリックして表示されるメニューから<guimenuitem>名前の変更...</guimenuitem>を選択する</para>
+          <para>(ファイルやフォルダの名前が選択状態になる)</para>
+        </listitem>
+        <listitem>
+          <para>新しい名前を入力して <keycap>Return</keycap> キーを押下する</para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    <sect2 id="gosnautilus-13">
+      <title>ファイルやフォルダをゴミ箱へ移動する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>ゴミ箱</secondary>
+        <see>ゴミ箱</see>
+      </indexterm>
+      <indexterm>
+        <primary>ゴミ箱</primary>
+        <secondary>moving files or folders to</secondary>
+      </indexterm>
+      <para>ファイルやフォルダを<guilabel>ゴミ箱</guilabel>へ移動する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para><guilabel>ゴミ箱</guilabel>へ移動するファイルまたはフォルダを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>編集</guimenu><guimenuitem>ゴミ箱へ移動する</guimenuitem></menuchoice>を選択するか、もしくは右クリックして表示されるメニューから<guimenuitem>ゴミ箱へ移動する</guimenuitem>を選択する</para>
+        </listitem>
+      </orderedlist>
+      <para>あるいは、ファイルまたはフォルダをドラッグし、デスクトップ上の<guilabel>ゴミ箱</guilabel>へドロップして下さい。</para>
+      <note>
+        <para>ファイルやフォルダをリムーバブル・メディアから<guilabel>ゴミ箱</guilabel>へ移動すると、リムーバブル・メディア上にある<guilabel>ゴミ箱</guilabel>オブジェクトの中にファイルやフォルダが格納されます。リムーバブル・メディアにあるファイルやフォルダを完全に削除したいのであれば、<guilabel>ゴミ箱</guilabel>を空にして下さい。</para>
+      </note>
+    </sect2>
+    <sect2 id="gosnautilus-443">
+      <title>ファイルやフォルダを削除する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>deleting files or folders</secondary>
+      </indexterm>
+      <para>ファイルやフォルダを削除すると、それらは<guilabel>ゴミ箱</guilabel>へは移動されず、ファイルシステムから完全に抹消されます。<guilabel>ファイル・マネージャの設定</guilabel>ダイアログにある<guilabel>ゴミ箱を経由しないで削除する</guilabel>というオプションを有効にした場合にのみ、<guimenuitem>削除</guimenuitem>メニューを利用できるようになっています。</para>
+      <para>ファイルやフォルダを削除する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para>削除するファイルまたはフォルダを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>編集</guimenu><guimenuitem>削除</guimenuitem></menuchoice>を選択するか、もしくは右クリックして表示されるメニューから<guimenuitem>削除</guimenuitem>を選択する</para>
+        </listitem>
+      </orderedlist>
+      <para>あるいは、削除するファイルまたはフォルダを選択し、<keycombo><keycap>Shift</keycap><keycap>Del</keycap></keycombo> というショートカット・キーを押下します。<note>
+	  <para>このショートカット・キーは、<guilabel>ゴミ箱を経由しないで削除する</guilabel>というオプションには関係なく利用できます。</para>
+	</note></para>
+    </sect2>
+    <sect2 id="nautilus-symlink">
+      <title>ファイルやフォルダを指すシンボリック・リンクを作成する</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-14"/>        
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>creating symbolic link</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>シンボリック・リンク</primary>
+        <secondary>to file or folder, creating</secondary>
+      </indexterm>
+      <para>シンボリック・リンクは別のファイルやフォルダを指す特別な種類のファイルです。シンボリック・リンクに対して何かファイル操作を行うと、そのシンボリック・リンクが指しているファイルやフォルダに適用されます。但し、シンボリック・リンクを削除すると、リンクを表すファイルは削除されますが、リンクが指しているファイルやフォルダは削除されません。</para>
+      <para>任意のファイルやフォルダに対するシンボリック・リンクを作成する場合は、リンク先のファイルやフォルダを選択し、<menuchoice><guimenu>編集</guimenu><guimenuitem>リンクの作成</guimenuitem></menuchoice>を選択して下さい。表示しているフォルダにリンクが追加されます。</para>
+      <para>あるいは、リンク先のファイルやフォルダを選択し <keycombo><keycap>Ctrl</keycap><keycap>Shift</keycap></keycombo> キーを押下してから、リンクを作成したい場所にドラッグ＆ドリップして下さい。</para>
+      <para>デフォルトで、ファイル・マネージャがシンボリック・リンクに対するエンブレムを追加してくれます。</para>
+      <note>
+        <para>シンボリック・リンクのパーミッションはリンクが指すファイルやフォルダのパーミッションに応じて決定されます。</para>
+      </note>
+      <tip><para>アイテムのドラッグに関して詳細は「<xref linkend="nautilus-dragndrop"/>」をご覧下さい。</para></tip>      
+    </sect2>
+    <sect2 id="gosnautilus-476">
+      <title>ファイルやフォルダのプロパティを表示する</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>viewing properties</secondary>
+      </indexterm>
+      <para>ファイルやフォルダのプロパティを表示する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para>プロパティを表示するファイルやフォルダを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択すると、プロパティ・ダイアログが表示される</para>
+        </listitem>
+        <listitem>
+          <para>プロパティ・ダイアログを使って、ファイルやフォルダのプロパティを表示する</para>
+        </listitem>
+        <listitem>
+          <para><guibutton>閉じる</guibutton>ボタンをクリックしてプロパティ・ダイアログを閉じる</para>
+        </listitem>
+      </orderedlist>
+
+      <para>次の表はファイルやフォルダに対して表示したり指定することが可能なプロパティの一覧です (実際に表示される情報はオブジェクトの種類によって異なります):</para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colwidth="27.27*"/>
+          <colspec colwidth="72.73*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>プロパティ</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>名前</para>
+              </entry>
+              <entry valign="top">
+                <para>ファイルやフォルダの名前で、ここでファイル名を変更することができ、<guibutton>閉じる</guibutton>ボタンをクリックすると変更した名前が適用される</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>種類</para>
+              </entry>
+              <entry valign="top">
+                <para>オブジェクトの種類 (例えば、ファイルとかフォルダとか)</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>場所</para>
+              </entry>
+              <entry valign="top">
+                <para>オブジェクトに対するシステムのパスで、オブジェクトがコンピュータの中に格納されている場所を表す (システムのルートからたどった絶対パス)</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>ボリューム</para>
+              </entry>
+              <entry valign="top">
+                <para>フォルダが格納されているボリュームで、これはメディアを格納しているフォルダの物理的な場所を表す (例えばハードディスクや CD-ROM ドライブなど)</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>空き容量</para>
+              </entry>
+              <entry valign="top">
+                <para>フォルダが格納されているボリュームで空いているサイズ (これは、このフォルダにコピーすることが可能なデータの最大値を表す)</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>MIME 型</para>
+              </entry>
+              <entry valign="top">
+                <para>オブジェクトの種類を表す公式な名前</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>修正日時</para>
+              </entry>
+              <entry valign="top">
+                <para>オブジェクトを最後に変更した時の日付と時刻</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>アクセス日時</para>
+              </entry>
+              <entry valign="top">
+                <para>オブジェクトを最後に表示した時の日付と時刻</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    
+  	<sect2 id="nautilus-permissions-overview" status="review">
+			<title>ファイルのパーミッションについて</title>
+        <para>パーミッションとはファイルやフォルダにそれぞれ割り当てられた設定であり、ユーザがアクセスすることができる種類を決定する情報です。例えば、自分に所属するファイルを他のユーザが読み込んだり編集できるかどうか、あるいは読み込むことはできても編集はできないといったことを決定するものです。</para>
+        <para>ファイルはそれぞれ特定のユーザに所属し、所有者が属しているグループが関連付けられています。スーパー・ユーザである "root" はシステムにあるすべてのファイルにアクセスできます。</para>
+        <para>ユーザ毎に３種類のカテゴリに対してパーミッションを指定することができます:</para>        
+        <variablelist>
+          <varlistentry><term>所有者</term>
+            <listitem>
+              <para>ファイルやフォルダを生成したユーザ</para>
+            </listitem>
+          </varlistentry>
+          <varlistentry><term>グループ</term>
+            <listitem>
+              <para>所有者が所属しているグループ</para>
+            </listitem>     
+          </varlistentry>
+          <varlistentry><term>その他</term>
+            <listitem>
+              <para>それ以外の全てのユーザ</para>
+            </listitem>     
+          </varlistentry>
+        </variablelist>
+        <para>上記のカテゴリに対して、それぞれ別々のパーミッションを指定することができます。これらは、次のようにファイルとフォルダに対して別々に適用されます:</para>
+        <variablelist>
+          <varlistentry><term>読み込み</term>
+            <listitem>          
+            <para>ファイルをオープンできる</para>
+            <para>フォルダの中身を表示できる</para>
+            </listitem>          
+          </varlistentry>
+          <varlistentry><term>書き込み</term>
+            <listitem>          
+            <para>ファイルを編集したり削除できる</para>
+            <para>フォルダの中身を変更できる</para>
+             </listitem>          
+         </varlistentry>
+          <varlistentry><term>実行</term>
+            <listitem>          
+            <para>ファイルをプログラムとして実行できる</para>
+            <para>フォルダに移動できる</para>
+            </listitem>          
+          </varlistentry>
+        </variablelist>        
+
+        <para>ファイルやフォルダのパーミッションを変更する際の詳細は「<xref linkend="nautilus-permissions"/>」をご覧下さい。</para>
+    </sect2>
+
+    <sect2 id="nautilus-permissions">
+      <title>パーミッションを変更する</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-430"/>
+      
+      <sect3 id="nautilus-permissions-file">    
+        <title>ファイルのパーミッションを変更する</title>
+
+        <indexterm>
+          <primary>file manager</primary>
+          <secondary>changing permissions</secondary>
+        </indexterm>
+        <indexterm>
+          <primary>permissions</primary>
+          <secondary>changing file</secondary>
+        </indexterm>      
+        <para>ファイルのパーミッションを変更する手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>変更するファイルを選択する</para>
+          </listitem>
+          <listitem>
+            <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択すると、そのファイルまたはフォルダに対応する<link linkend="nautilus-properties">プロパティ・ウィンドウ</link>が表示される</para>
+          </listitem>
+          <listitem>
+            <para><guilabel>アクセス権</guilabel>というタブをクリックする</para>
+          </listitem>
+          <listitem>
+            <para>ファイルのグループを変更する場合は、ドロップ・ダウン式のセレクタからユーザが属しているグループを選択する</para>
+          </listitem>
+          <listitem>          
+            <para>所有者やグループ、その他のユーザ毎に、ファイルに付与するパーミッションをセレクタから選択する</para>
+            <variablelist>
+              <varlistentry><term>なし</term>
+                <listitem>
+                  <para>ファイルにアクセスすることはできない (ファイルの所有者のみ指定可能)</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>読み込み専用</term>
+                <listitem>
+                  <para>ファイルの内容を表示するためにオープンすることはできるが、内容を変更することはできない</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>読み書き</term>
+                <listitem>
+                  <para>ファイルに対する通常のアクセスが可能である (オープンしたり保存することが可能)</para>
+                </listitem>     
+              </varlistentry>
+            </variablelist>
+          </listitem>
+          <listitem>
+            <para>ファイルをプログラムとして実行できるようにする場合は<guilabel>実行</guilabel>を選択する</para>
+          </listitem>
+        </orderedlist>   
+      </sect3>    
+
+      <sect3 id="nautilus-permissions-folder">    
+        <title>フォルダのパーミッションを変更する</title>
+        
+        <para>フォルダのパーミッションを変更する手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>変更するフォルダを選択する</para>
+          </listitem>
+          <listitem>
+            <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択すると、そのファイルまたはフォルダに対応する<link linkend="nautilus-properties">プロパティ・ウィンドウ</link>が表示される</para>
+          </listitem>
+          <listitem>
+            <para><guilabel>アクセス権</guilabel>というタブをクリックする</para>
+          </listitem>
+          <listitem>
+            <para>フォルダのグループを変更する場合は、ドロップ・ダウン式のセレクタからユーザが属しているグループを選択する</para>
+          </listitem>
+          <listitem>          
+            <para>所有者やグループ、その他のユーザ毎に、フォルダに付与するパーミッションをセレクタから選択する</para>
+            <variablelist>
+              <varlistentry><term>なし</term>
+                <listitem>
+                  <para>フォルダにアクセスすることはできない (フォルダの所有者のみ指定可能)</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>表示のみ</term>
+                <listitem>
+                  <para>フォルダの中に格納されたアイテムを一覧表示することはできるが、それらをオープンすることはできない</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>アクセスのみ</term>
+                <listitem>
+                  <para>フォルダの中に格納されたアイテムに対して、それらに付与されたパーミッションに応じてオープンしたり変更することができる</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>作成と削除</term>
+                <listitem>
+                  <para>フォルダの中にあるファイルにアクセスできることに加え、フォルダの中に新しいファイルを作成したり任意のファイルを削除できる</para>
+                </listitem>     
+              </varlistentry>
+            </variablelist>
+          </listitem>
+        </orderedlist>  
+       
+        <para>フォルダの中に格納された全てのアイテムのパーミッションを指定する場合は、<guilabel>ファイルのアクセス権</guilabel>と<guilabel>実行</guilabel>というプロパティを指定し、<guibutton>これらの権限をフォルダ内の全てのアイテムに適用する</guibutton>をクリックして下さい。</para>
+      </sect3>           
+
+    </sect2>
+    
+    <sect2 id="gosnautilus-200">
+      <title>ファイルやフォルダにメモを付与する</title>
+      <para>ファイルやフォルダにメモを付与することができるようになっています。メモを付与する方法がいくつかあります:</para>
+      <itemizedlist>
+        <listitem>
+          <para>プロパティ・ダイアログから</para>
+        </listitem>
+        <listitem>
+          <para>サイド・ペインにある<guilabel>メモ</guilabel>から</para>
+        </listitem>
+      </itemizedlist>
+      <sect3 id="nautilus-notes">
+        <title>プロパティ・ダイアログからメモを付与する</title>
+        <!-- preserve id for backwards compatibility: 2.12 -->
+        <anchor id="gosnautilus-472"/>           
+        <indexterm>
+          <primary>notes</primary>
+          <secondary>adding to files and folders</secondary>
+        </indexterm>
+        <indexterm>
+          <primary>file manager</primary>
+          <secondary>notes</secondary>
+          <tertiary>adding</tertiary>
+        </indexterm>
+        <para>ファイルやフォルダにメモを付与する手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>メモを付与する先のファイルやフォルダを選択する</para>
+          </listitem>
+          <listitem>
+            <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択すると、そのファイルまたはフォルダに対応する<link linkend="nautilus-properties">プロパティ・ウィンドウ</link>が表示される</para>
+          </listitem>
+          <listitem>
+            <para><guilabel>メモ</guilabel>というタブをクリックし、その中にメモしたい内容を入力する</para>
+          </listitem>
+          <listitem>
+            <para><guibutton>閉じる</guibutton>ボタンをクリックして、プロパティ・ダイアログを閉じる (ファイルまたはフォルダにメモのエンブレムが付与される)</para>
+          </listitem>
+        </orderedlist>
+        <para><indexterm><primary>notes</primary><secondary>deleting</secondary></indexterm><indexterm><primary>file manager</primary><secondary>notes</secondary><tertiary>deleting</tertiary></indexterm>付与したメモを削除する場合は、同様にプロパティ・ダイアログの<guilabel>メモ</guilabel>というタブに入力した文字列を削除して下さい。</para>
+      </sect3>
+      <sect3 id="gosnautilus-473">
+        <title>サイド・ペインからメモを付与する</title>
+        <para>ファイルやフォルダにメモを付与する手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para>メモを付与するフォルダをビューペインの中に開く</para>
+          </listitem>
+          <listitem>
+            <para>サイド・ペインの上部にあるドロップ・ダウン式のリストから<guilabel>メモ</guilabel>を選択する (サイド・ペインを表示するには<menuchoice><guimenu>表示</guimenu><guimenuitem>サイド・ペイン</guimenuitem></menuchoice>を選択する)</para>
+          </listitem>
+          <listitem>
+            <para>サイド・ペインにメモを入力する (ビュー・ペインのフォルダにはメモのエンブレムが付与され、サイド・ペインにはメモ・アイコンが付与されるので、メモを表示する場合はアイコンをクリックする)</para>
+          </listitem>
+        </orderedlist>
+        <para>付与したメモを削除する場合は、同様にサイド・ペインの<guilabel>メモ</guilabel>に入力した文字列を削除して下さい。</para>
+      </sect3>
+    </sect2>
+    <sect2 id="nautilus-bookmarks">
+      <title>お気に入りの場所に対してブックマークを活用する</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-36"/>         
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>bookmarks</secondary>
+      </indexterm>
+      <para><application>Nautilus</application> では、よく閲覧するフォルダや場所を<firstterm>ブックマーク</firstterm>の一覧として保存しておくことができるようになっています。</para>
+      <para>ブックマークの一覧には次に示す場所からアクセスできます:</para>
+      <itemizedlist>
+    	  <listitem><para>トップ・パネルにある<guimenu>場所</guimenu>メニュー</para></listitem>
+    	  <listitem><para>空間モードのフォルダ・ウィンドウにある<guimenu>場所</guimenu>メニュー</para></listitem>
+    	  <listitem><para>ブラウザ・モードのフォルダ・ウィンドウにある<guimenu>ブックマーク</guimenu>メニュー</para></listitem>
+    	  <listitem><para><link linkend="filechooser-open"><guilabel>ファイルを開く</guilabel>ダイアログ</link>の中にあるサイド・ペイン (これを使うと、ブックマークの中に格納されているファイルに素早くアクセスできる)</para></listitem>
+    	  <listitem><para><link linkend="filechooser-save"><guilabel>ファイルの保存</guilabel>ダイアログ</link>には一般的な操作でよく利用する場所が一覧表示されている (この一覧を利用すると、ブックマークの中に格納されているファイルに素早く保存することができる)</para></listitem>
+      </itemizedlist>
+      
+      <para>ブックマークの中にあるアイテムを開く場合は、メニューからアイテムを選択して下さい。</para>
+
+      <sect3 id="gosnautilus-40">
+        <title>ブックマークを追加する</title>
+        <para>ブックマークを追加するには、追加したいフォルダや場所を開いてから、<menuchoice><guimenu>場所</guimenu><guimenuitem>ブックマークの追加</guimenuitem></menuchoice>を選択して下さい。</para>
+        <para><application>Nautilus</application> ブラウザのウィンドウの場合は、<menuchoice><guimenu>ブックマーク</guimenu><guimenuitem>ブックマークの追加</guimenuitem></menuchoice>を選択して下さい。</para>
+      </sect3>
+      <sect3 id="gosnautilus-41">
+        <title>ブックマークを編集する</title>
+        <para>ブックマークを編集する手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem>
+            <para><menuchoice><guimenu>場所</guimenu><guimenuitem>ブックマークの編集</guimenuitem></menuchoice>を選択するか、あるいはファイル・マネージャのウィンドウならば、<menuchoice><guimenu>ブックマーク</guimenu><guimenuitem>ブックマークの編集</guimenuitem></menuchoice>を選択する (<guilabel>ブックマークの編集</guilabel>ダイアログが表示される)</para>
+          </listitem>
+          <listitem>
+            <para><guilabel>ブックマークの編集</guilabel>ダイアログの左側から任意のブックマークを選択すると、次の表に示すようなブックマークの詳細情報が<guilabel>ブックマークの編集</guilabel>ダイアログの右側に表示されるのでそれを編集する</para>
+            <informaltable frame="topbot">
+              <tgroup cols="2" colsep="0" rowsep="0">
+                <colspec colwidth="27.27*"/>
+                <colspec colwidth="72.73*"/>
+                <thead>
+                  <row rowsep="1">
+                    <entry>
+                      <para>ダイアログの要素</para>
+                    </entry>
+                    <entry>
+                      <para>説明</para>
+                    </entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry valign="top">
+                      <para>
+                        <guilabel>名前</guilabel>
+                      </para>
+                    </entry>
+                    <entry valign="top">
+                      <para>ブックマーク・メニューでブックマークを識別するための名前</para>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry valign="top">
+                      <para>
+                        <guilabel>場所</guilabel>
+                      </para>
+                    </entry>
+                    <entry valign="top">
+                      <para>ブックマークが指す場所</para>
+                      <para>お使いのシステムにあるフォルダには <uri>file:///</uri> という URI を使用すること</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+          </listitem>
+          <listitem>
+            <para>ブックマークを削除する場合はダイアログの左側からブックマークを選択して、<guilabel>削除</guilabel>ボタンをクリックする</para>
+          </listitem>
+        </orderedlist>
+      </sect3>
+    </sect2>
+    <sect2 id="nautilus-trash">
+      <title>ゴミ箱を活用する</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-44"/>         
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/naut_trash_launcher.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>空っぽのゴミ箱</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <indexterm>
+        <primary>ゴミ箱</primary>
+        <secondary>introduction</secondary>
+      </indexterm>
+      <para>ゴミ箱は、ユーザが保存しておく必要がないと判断したファイルなどを格納しておく特別なフォルダです。ゴミ箱にあるファイルはゴミ箱を空っぽにするまでファイルシステムから抹消されることはありません。例えば、ユーザが心変わりした場合 (ファイルを削除しなければよかったと思った時) や間違ったファイルをうっかり削除してしまった場合を考慮して、このような２段階処理を採用しています。</para>
+      <para>次に示すアイテムを<guilabel>ゴミ箱</guilabel>へ移動できます:</para>
+      <itemizedlist>
+        <listitem>
+          <para>ファイル</para>
+        </listitem>
+        <listitem>
+          <para>フォルダ</para>
+        </listitem>
+        <listitem>
+          <para>デスクトップのオブジェクト</para>
+        </listitem>
+      </itemizedlist>
+      <para><guilabel>ゴミ箱</guilabel>からファイルを取り出す必要がある場合は、<guilabel>ゴミ箱</guilabel>の内容を表示して<guilabel>ゴミ箱</guilabel>の中からファイルを移動して下さい。<guilabel>ゴミ箱</guilabel>を空にすると、<guilabel>ゴミ箱</guilabel>の中に格納された全てのオブジェクトが完全に抹消されます。</para>
+      <sect3 id="gosnautilus-107">
+        <title>ゴミ箱を表示する</title>
+        <indexterm>
+          <primary>ゴミ箱</primary>
+          <secondary>displaying</secondary>
+        </indexterm>
+        <para><guilabel>ゴミ箱</guilabel>の中身を表示するには、次のような方法があります:</para>
+        <itemizedlist>
+          <listitem>
+            <para>ブラウザ・モードのウィンドウから</para>
+            <para><menuchoice><guimenu>移動</guimenu><guimenuitem>ゴミ箱</guimenuitem></menuchoice>を選択すると、<guilabel>ゴミ箱</guilabel>の内容がウィンドウに表示される</para>
+          </listitem>
+          <listitem>
+            <para>空間モードのウィンドウから</para>
+            <para><menuchoice><guimenu>場所</guimenu><guimenuitem>ゴミ箱</guimenuitem></menuchoice>を選択すると、<guilabel>ゴミ箱</guilabel>の内容がウィンドウに表示される</para>
+          </listitem>
+          <listitem>
+            <para>デスクトップから</para>
+            <para>デスクトップ上の<guilabel>ゴミ箱</guilabel>オブジェクトをダブル・クリックする</para>
+          </listitem>
+        </itemizedlist>
+      </sect3>
+      <sect3 id="gosnautilus-108">
+        <title>ゴミ箱を空にする</title>
+        <indexterm>
+          <primary>ゴミ箱</primary>
+          <secondary>emptying</secondary>
+        </indexterm>
+        <para><guilabel>ゴミ箱</guilabel>の内容を空っぽにするには、次の方法があります:</para>
+        <itemizedlist>
+          <listitem>
+            <para>ブラウザ・モードのウィンドウから</para>
+            <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>ゴミ箱を空にする</guimenuitem></menuchoice>を選択する</para>
+          </listitem>
+          <listitem>
+            <para>デスクトップから</para>
+            <para><guilabel>ゴミ箱</guilabel>オブジェクトを右クリックして、<guimenuitem>ゴミ箱を空にする</guimenuitem>を選択する</para>
+          </listitem>
+        </itemizedlist>
+   <caution>
+    <para>ゴミ箱を空にすると、ゴミ箱の中にあった全てのファイルが破棄されます。ゴミ箱を空にする前に、本当に必要のないファイルだけがゴミ箱に格納されていることを確認するようにして下さい。</para>
+   </caution>
+      </sect3>
+    </sect2>
+    <sect2 id="nautilus-hidden-files">
+      <title>隠しファイルについて</title>
+      <indexterm>
+        <primary>hidden</primary>
+        <secondary>files</secondary>
+      </indexterm>
+      <para>デフォルトで、<application>Nautilus</application> はフォルダの中にあるシステム・ファイルやバックアップ・ファイルを表示しないようになっています。これは、それらのファイルを過て変更したり削除してコンピュータの操作に悪い影響を与えないようにするためです。さらに、ホーム・フォルダのような場所に余計なファイルを散乱させないようにするためでもあります。Nautilus では次のようなアイテムを表示しないようになっています:</para>
+      <itemizedlist>
+        <listitem><para>隠しファイル (ファイル名の先頭にピリオド <literal>.</literal> が付いているファイル)</para></listitem>
+        <listitem><para>バックアップ・ファイル (ファイル名の終端にチルダ <literal>~</literal> が付いているファイル)</para></listitem>
+        <listitem><para>特定のフォルダにある <filename>.hidden</filename> というファイルの中に一覧にした複数のファイル</para></listitem>
+      </itemizedlist>
+      
+      <para>特定のフォルダで<menuchoice><guimenu>表示</guimenu><guimenuitem>隠しファイルを表示する</guimenuitem></menuchoice>というオプションを切り替えることで、隠しファイルを表示したり隠したままにすることができます。</para>
+      
+      <para><application>Nautilus</application> で常に隠しファイルを表示する際の設定方法については「<xref linkend="nautilus-preferences"/>」をご覧下さい。</para>
+
+      <sect3 id="nautilus-managing-hidden-files">
+        <title>ファイルやフォルダを隠す</title>
+        <indexterm>
+          <primary>create</primary>
+          <secondary>hidden</secondary>
+        </indexterm>
+        <para><application>Nautilus</application> で任意のファイルやフォルダを表示しないようにするには、ファイル名を変更して先頭にピリオド (<literal>.</literal>) 文字を付与するか、または対象となるフォルダに <filename>.hidden</filename> というファイルを生成し、表示したくないファイルやフォルダを次の例のように一覧にして記述しておいて下さい:</para>
+        <programlisting>ファイル名
+フォルダ名</programlisting>
+        <para>それから、<application>Nautilus</application> ウィンドウで表示している内容を更新してやる必要があるかもしれません: <keycombo><keycap>Ctrl</keycap><keycap>R</keycap></keycombo> キーを押下してみて下さい。</para>
+      </sect3>
+  </sect2>
+  </sect1>
+  <!-- ====================================================== File properties -->    
+
+  <sect1 id="nautilus-properties">
+    <title>アイテムのプロパティ</title>
+    <!-- preserve id for backwards compatibility: 2.12 -->
+    <anchor id="gosnautilus-51"/><!-- was: changing icon, but linked to from the GUI -->
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>properties</secondary>
+    </indexterm>    
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>file properties</secondary>
+    </indexterm>
+    <para><guilabel>アイテムのプロパティ</guilabel>・ウィンドウにはファイル・マネージャの中にあるファイルやフォルダ、あるいは他のアイテムに関する詳細な情報が表示されます。このウィンドウを開くと、次のような操作も実現できます:</para> 
+    <itemizedlist>
+      <listitem><para>アイテムのアイコンを変更する:「<xref linkend="nautilus-icon"/>」を参照のこと</para></listitem>
+      <listitem><para>アイテムにエンブレムを付与したり取り去る:「<xref linkend="nautilus-emblems"/>」を参照のこと</para></listitem>
+      <listitem><para>アイテムに対する UNIX のファイル権限を変更する:「<xref linkend="nautilus-permissions"/>」を参照のこと</para></listitem>
+      <listitem><para>アイテム及び同じ種類のファイルをどのアプリケーションを使って開くかを定義する</para></listitem>
+      <listitem><para>アイテムにメモを付与する:「<xref linkend="nautilus-notes"/>」を参照のこと</para></listitem>
+    </itemizedlist>
+    <para>アイテムのプロパティ・ウィンドウを開く手順は次のとおりです:</para>
+    <orderedlist>
+	    <listitem><para>プロパティを調査または変更するアイテムを選択する (１個以上のアイテムを選択すると、プロパティ・ウィンドウには全てのアイテムに共通なプロパティだけが表示される)</para></listitem>
+	    <listitem>
+	      <para>次の操作のいずれかを実行する:</para>
+  	      <itemizedlist>
+        	  <listitem><para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択する</para></listitem>
+            <listitem><para>選択したアイテムの上で右クリックし<guimenuitem>プロパティ</guimenuitem>を選択する</para></listitem>
+            <listitem><para><keycombo><keycap>Alt</keycap><keycap>Return</keycap></keycombo> キーを押下する</para></listitem>
+          </itemizedlist>
+	    </listitem>
+    </orderedlist>
+      
+ 
+
+  </sect1>  
+
+  
+  
+  <!-- ====================================================== Appearance -->  
+  <sect1 id="gosnautilus-203">
+    <title>ファイルやフォルダの外観の変更</title>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>modifying appearance of files and folders</secondary>
+    </indexterm>
+    <para><application>Nautilus</application> ファイル・マネージャを使ってファイルやフォルダの外観を変更する方法がいくつか用意されています。エンブレムや背景を追加することでファイルやフォルダの見た目をカスタマイズできます。さらに、<application>Nautilus</application> でそれらのアイテムを表示する際の形式も変更できます。次のセクションでどのように変更するかを説明します。</para>
+    <sect2 id="gosnautilus-550">
+      <title>アイコンとエンブレムについて</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>icons</secondary>
+        <tertiary>introduction</tertiary>
+      </indexterm>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>emblems</secondary>
+        <see>emblems</see>
+      </indexterm>
+      <indexterm>
+        <primary>emblems</primary>
+        <secondary>introduction</secondary>
+      </indexterm>
+      <para>ファイル・マネージャはファイルやフォルダをアイコンとして表示します。そのため、アイコンはファイルの種類を表現する画像になってたり、小さなサムネイルになっていたり、あるいはファイルの中身をプレビュー表示する画像になっていたりします。さらに、複数のエンブレムをファイルやフォルダのアイコンに追加できます。エンブレムがファイルのアイコンに追加されることにより、ファイルを管理する上でもう一つ別の意味を強調してくれます。例えば、<guilabel>important</guilabel> というエンブレムをファイルに追加することで、重要なファイルであることを強調することができ、次の図に示すような視覚的な効果も与えてくれます:</para>
+<screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/naut_emblem.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>important なエンブレムが付いたファイルのアイコン</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      
+      <para><guilabel>Important (!)</guilabel> のエンブレムをアイコンに追加することにより、左側にあるファイルと右側にあるファイルとの違いが分かるでしょう。エンブレムの追加について詳細は「<xref linkend="nautilus-emblems"/>」をご覧下さい。</para>
+      <para>ファイル・マネージャは次に示すファイルの種類に応じて自動的にエンブレムを追加してくれます:</para>
+      <itemizedlist>
+        <listitem>
+          <para>シンボリック・リンク</para>
+        </listitem>
+        <listitem>
+          <para>次に示すような権限を持っている場合のアイテム:<indexterm><primary>permissions</primary><secondary>and emblems</secondary></indexterm></para>
+          <itemizedlist>
+            <listitem>
+              <para>読み込みの権限がない</para>
+            </listitem>
+            <listitem>
+              <para>書き込みの権限がない</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+      <para>次の表はデフォルトのエンブレムを表します:</para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>デフォルトのエンブレム</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_link_emblem.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>シンボリック・リンク</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><indexterm><primary>symbolic links</primary><secondary>and emblems</secondary></indexterm>シンボリック・リンク</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_nowrite_emblem.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>書き込みの権限が無いことを表すエンブレム</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+              <entry valign="top">
+                <para>書き込みの権限がない</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <screenshot>
+                  <mediaobject>
+                    <imageobject>
+                      <imagedata fileref="figures/naut_noread_emblem.png" format="PNG"/>
+                    </imageobject>
+                    <textobject>
+                      <phrase>読み込みの権限が無いことを表すエンブレム</phrase>
+                    </textobject>
+                  </mediaobject>
+                </screenshot>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>読み込みの権限がない</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="nautilus-icon">
+      <title>ファイルやフォルダのアイコンを変更する</title> 
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>icons</secondary>
+        <tertiary>changing</tertiary>
+      </indexterm>
+      <para>ファイルやフォルダ単体を表すアイコンを変更する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para>変更するファイルまたはフォルダを選択する</para>
+        </listitem>
+        <listitem>
+          <para><menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択すると、そのファイルまたはフォルダに対応する<link linkend="nautilus-properties">プロパティ・ウィンドウ</link>が表示される</para>
+        </listitem>
+        <listitem>
+          <para>タブの中から<guilabel>基本</guilabel>というセクションを選択し、現在表示されている<guibutton>アイコン</guibutton>クリックすると、<guilabel>アイコンの選択</guilabel>ダイアログが表示される</para>
+        </listitem>
+        <listitem>
+          <para><guilabel>アイコンの選択</guilabel>ダイアログを使って、ファイルやフォルダを表す新しいアイコンを選択する</para>
+        </listitem>
+        <listitem>
+          <para><guibutton>閉じる</guibutton>ボタンをクリックしてプロパティ・ダイアログを閉じる</para>
+        </listitem>
+      </orderedlist>
+      <para>独自に設定したアイコンから元のアイコンに戻す場合は、対象となるファイルまたはフォルダを選択し、<menuchoice><guimenu>ファイル</guimenu><guimenuitem>プロパティ</guimenuitem></menuchoice>を選択してから<guibutton>アイコン</guibutton>をクリックします。そして表示される<guilabel>アイコンの選択</guilabel>ダイアログにある<guibutton>元に戻す</guibutton>ボタンをクリックして下さい。</para>
+    </sect2>
+    <sect2 id="nautilus-emblems">
+      <title>ファイルやフォルダにエンブレムを付与する</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-112"/>       
+      <indexterm>
+        <primary>emblems</primary>
+        <secondary>adding to file</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>emblems</primary>
+        <secondary>adding to folder</secondary>
+      </indexterm>
+      <para>アイテムにエンブレムを付与する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para>エンブレムを付与する先のアイテムを選択する</para>
+        </listitem>
+        <listitem>
+          <para>アイテムの上で右クリックして<guimenuitem>プロパティ</guimenuitem>を選択する (このアイテムに対する<link linkend="nautilus-properties">プロパティ・ウィンドウ</link>が表示される)</para>
+        </listitem>
+        <listitem>
+          <para><guilabel>エンブレム</guilabel>というタブをクリックして<guilabel>エンブレム</guilabel>のセクションを表示する</para>
+        </listitem>
+        <listitem>
+          <para>アイテムに付与するエンブレムを選択する</para>
+        </listitem>
+        <listitem>
+          <para><guibutton>閉じる</guibutton>ボタンをクリックしてプロパティ・ダイアログを閉じる</para>
+        </listitem>
+      </orderedlist>
+      <para>ブラウザ・モードでも、サイド・ペインのエンブレム・セクションからエンブレムをアイテムへドラッグすることでも同様の効果があります。</para>
+    </sect2>
+    <sect2 id="gosnautilus-471">
+      <title>新しいエンブレムを作成する</title>
+      <indexterm>
+        <primary>emblems</primary>
+        <secondary>adding new</secondary>
+      </indexterm>
+      <para>新しくエンブレムを作成する手順は次のとおりです:</para>
+      <orderedlist>
+        <listitem>
+          <para><menuchoice><guimenu>編集</guimenu><guimenuitem>背景とエンブレム</guimenuitem></menuchoice>を選択する</para>
+        </listitem>
+        <listitem>
+          <para>左側にある<guibutton>エンブレム</guibutton>ボタンをクリックしてから、<guibutton>新しいエンブレムの追加</guibutton>ボタンをクリックする (<guilabel>新しいエンブレムの作成</guilabel>ダイアログが表示される)</para>
+        </listitem>
+        <listitem>
+          <para><guilabel>キーワード</guilabel>という入力欄にエンブレムの名前を入力する</para>
+        </listitem>
+        <listitem>
+          <para>その下にある<guilabel>画像ボタン</guilabel>をクリックすると、ダイアログが表示されるので<guibutton>参照</guibutton>ボタンをクリックする (エンブレムを選択する際は <guibutton>OK</guibutton> ボタンをクリックする)</para>
+        </listitem>
+        <listitem>
+          <para><guilabel>新しいエンブレムにする画像ファイルの選択</guilabel>ダイアログで <guibutton>OK</guibutton> ボタンをクリックする</para>
+        </listitem>
+      </orderedlist>
+    </sect2>
+    <sect2 id="nautilus-backgrounds-and-emblems">
+      <title>背景を変更する</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-50"/>         
+      <anchor id="gosnautilus-63"/>
+      <anchor id="gosnautilus-64"/>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>changing backgrounds</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>backgrounds</primary>
+        <secondary>changing screen component</secondary>
+      </indexterm>
+      <para>The file manager includes background patterns and emblems that you can
+      use to change the appearance of your folders.  Background patterns and emblems
+      can also be used on the desktop, on folders and certain side panes in the file
+      browser, and on panels.</para>
+      <para>To change the background of a window, pane, or panel,  perform the following
+      steps: </para>
+      <orderedlist>
+        <listitem>
+          <para>Choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Backgrounds and Emblems</guimenuitem></menuchoice>
+          in any file manager window. The <guilabel>Backgrounds and Emblems</guilabel> dialog is displayed.</para>
+        </listitem>
+        <listitem>
+          <para>Click the <guibutton>Patterns</guibutton> button or the <guibutton>Colors</guibutton>
+          button to see a list of background patterns or background colors you can use.</para>
+        </listitem>
+        <listitem>
+          <para>To change the background, drag a pattern or color to the desired window, pane, or panel.
+          To reset the background, drag the <guilabel>Reset</guilabel> entry to the desired window, pane,
+          or panel.</para>
+        </listitem>
+      </orderedlist>
+
+      <para>You can set the background of all folders in the file manager by dragging a pattern
+      or color with your right or middle mouse button.  When you release the drag, you will see
+      a popup menu with the option to set the pattern or color as the background for all folders.</para>
+
+      <para>You can add a new pattern to the list by clicking the <guibutton>Add a New Pattern</guibutton>
+      button when the patterns are selected.  Locate an image file in the file chooser dialog and click
+      <guibutton>Open</guibutton>.  The image file will appear in the list of patterns you can use.</para>
+
+      <para>You can add a new color to the list by clicking the <guibutton>Add a New Color</guibutton>
+      button when the colors are selected.  Select a color in the color chooser dialog and click
+      <guibutton>OK</guibutton>.  The color will appear in the list of colors you can use.</para>
+    </sect2>    
+  </sect1>  
+  
+  <!-- ====================================================== Removable media -->    
+  <sect1 id="gosnautilus-460">
+    <title>リムーバブル・メディアの使い方</title>
+    <!-- compatibility -->
+    <anchor id="gosnautilus-469"/>
+    <indexterm>
+      <primary>removable media</primary>
+      <secondary>introduction</secondary>
+    </indexterm>
+    <para>
+      The file manager can initiate various actions when removable media appear,
+      such as mounting it, opening a file manager window showing its contents,
+      or running a suitable application that can handle it (for example a music
+      player for an audio CD). See <xref linkend="gosnautilus-61"/> for how to
+      configure these actions for different media formats.
+    </para>
+    <sect2 id="gosnautilus-462">
+      <title>メディアをマウントする</title>
+      <indexterm>
+        <primary>removable media</primary>
+        <secondary>mounting</secondary>
+      </indexterm>
+      <para>メディアを<firstterm>マウント</firstterm>する際は、そのメディアのファイルシステムにアクセスできるようにします。メディアをマウントすると、自分が使用しているファイルシステムのサブディレクトリにメディアのファイルシステムが格納されます。</para>
+      <para>To mount media, insert the media in the appropriate device. An icon 
+that represents the media is added to the desktop. The icon is added only
+if your system is configured to mount the device automatically when media
+is detected. </para>
+      <para>If your system is not configured to mount the device automatically,
+you must mount the device manually. Double-click on the <guilabel>Computer</guilabel> icon from the desktop. A <guilabel>Computer </guilabel> dialog
+is displayed. Double-click on the icon that represents the media. For example,
+to mount a floppy diskette, double-click on the <guilabel>Floppy</guilabel>
+icon. An icon that represents the media is added to the desktop. </para>
+      <note>
+        <para>You cannot change the name of a removable media icon.</para>
+      </note>
+    </sect2>
+    <sect2 id="gosnautilus-461">
+      <title>メディアの中身を表示する</title>
+      <indexterm>
+        <primary>removable media</primary>
+        <secondary>displaying media contents</secondary>
+      </indexterm>
+      <para>次に示すいずれかの方法でメディアに格納されたデータを表示することができます:</para>
+      <itemizedlist>
+        <listitem>
+          <para>Double-click on the icon that represents the media on the
+desktop. </para>
+        </listitem>
+        <listitem>
+          <para>Right-click on the icon that represents the media on the
+desktop, then choose <guimenuitem>Open</guimenuitem>. </para>
+        </listitem>
+      </itemizedlist>
+      <para>すると、ファイル・マネージャのウィンドウにメディアの中に格納されたデータが表示されます。表示内容を更新する際は<guibutton>再読込み</guibutton>ボタンをクリックして下さい。</para>
+    </sect2>
+    <sect2 id="gosnautilus-463">
+      <title>メディアのプロパティを表示する</title>
+      <indexterm>
+        <primary>removable media</primary>
+        <secondary>displaying media properties</secondary>
+      </indexterm>
+      <para>To display the properties of removable media,
+right-click on the icon that represents the media on the desktop, then choose <guimenuitem>Properties</guimenuitem>. A dialog displays the properties of the media.</para>
+      <para>プロパティ・ダイアログを閉じる際は、<guibutton>閉じる</guibutton>ボタンをクリックして下さい。</para>
+    </sect2>
+    <sect2 id="gosnautilus-464">
+      <title>メディアを取り出す</title>
+      <indexterm>
+        <primary>removable media</primary>
+        <secondary>ejecting</secondary>
+      </indexterm>
+      <para>To eject media, right-click on the media icon on the desktop,
+then choose <guimenuitem>Eject</guimenuitem>. If the drive for the media is
+a motorized drive, the media is ejected from the drive. If the drive for the
+media is not motorized, wait until the desktop icon for the media disappears,
+then eject the media manually.</para>
+      <para>You cannot eject media from a motorized drive when the media is mounted.
+To eject media, first unmount the media. For example, to remove a USB flash drive, perform the following steps:</para>
+      <orderedlist>
+        <listitem>
+          <para>Close all file manager windows, <application>Terminal</application>
+windows, and any other windows that access the USB drive. </para>
+        </listitem>
+        <listitem>
+          <para>Right-click on the icon that represents the drive on
+the desktop, then choose <guimenuitem>Eject</guimenuitem>. The desktop icon
+for the drive disappears.</para>
+        </listitem>
+        <listitem>
+          <para>Remove the USB flash drive.</para>
+        </listitem>
+      </orderedlist>
+          <caution>
+            <para>You must unmount removable media before ejecting. Do not remove a USB flash drive before you unmount the flash drive. If you do not unmount the media first you might lose data.</para>
+          </caution>
+    </sect2>
+  </sect1>
+  <sect1 id="nautilus-cdwriter">
+    <title>CD や DVD への書き込み</title>
+    <!-- preserve id for backwards compatibility: 2.12 -->
+    <anchor id="gosnautilus-475"/>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>writing CDs</secondary>
+    </indexterm>
+    <indexterm>
+      <primary>CDs, writing</primary>
+    </indexterm>
+    <indexterm>
+      <primary>writing CDs</primary>
+    </indexterm>
+    <indexterm>
+      <primary>burning CDs</primary>
+      <see>writing CDs</see>
+    </indexterm>
+    <para>CD や DVD への書き込みは重要なドキュメントのバックアップを残しておくような時に便利です。そのためには、お使いのコンピュータが CD または DVD ライターを備えている必要があります。</para>
+    <tip><para>お使いのコンピュータが CD や DVD ドライブみたいなものを装備しているかどうかを確認する簡単な方法は、まずトップ・エッジ・パネルのメニューバーから<menuchoice><guimenu>場所</guimenu><guimenuitem>コンピュータ</guimenuitem></menuchoice>を選択してダイアログを表示します。そして、コンピュータに搭載されている CD ドライブのアイコンに "CD-RW" とか "DVD(+-)R" のようなラベルが付与されていたら、お使いのコンピュータで書き込みを行うことができます。</para></tip>
+    
+    <para>いつでもディスクへ書き込むファイルを選択できます。ファイル・マネージャでは CD や DVD へ書き込むファイルなどを格納する特別なフォルダを用意しています。その場所にあるデータの全てを簡単に CD や DVD へ書き込むことができるようになっています。</para>
+
+    <sect2 id="nautilus-cdwriter-data">
+      <title>データ・ディスクを作成する</title>
+    <para>CD や DVD に書き込む手順は次のとおりです:</para>
+    <orderedlist>
+      <listitem>
+        <para>Open <menuchoice><guimenu>Applications</guimenu><guimenu>System Tools</guimenu><guimenuitem>CD/DVD Creator</guimenuitem></menuchoice>. The file manager opens the CD/DVD Creator folder.</para>
+        <note><para>In a File Browser window, the <guimenuitem>CD/DVD Creator</guimenuitem> item is available in the <guimenu>Go</guimenu> menu.</para></note>
+      </listitem>
+      <listitem>
+        <para>CD や DVD に書き込むファイルやフォルダをドラッグして、この CD/DVD の作成フォルダにドロップする</para>
+      </listitem>
+      <listitem>
+        <para>書き込みが可能な空の CD または DVD メディアをライターのあるドライブに挿入する</para>
+      </listitem>
+      <listitem>
+        <para><guibutton>ディスクへの書き込み</guibutton>ボタンをクリックするか、または<menuchoice><guimenu>ファイル</guimenu><guimenuitem>ディスクへ書き込む</guimenuitem></menuchoice>を選択すると、<guilabel>ディスクへの書き込み</guilabel>ダイアログが表示される</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>ディスクへの書き込み</guilabel>ダイアログを使い、次の表に示すようなプロパティを指定する:</para>
+        <informaltable frame="topbot">
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colwidth="50*"/>
+            <colspec colwidth="50*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>ダイアログの要素</para>
+                </entry>
+                <entry>
+                  <para>説明</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>書き込み先</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>ドロップ・ダウン式のリストから書き込む先のデバイスを選択するが、CD イメージのファイルを作成する場合は<guilabel>ファイル・イメージ</guilabel>を選択する (CD イメージのファイルは全てのデータが CD と同じ形式で保存された通常のファイルであり、あとで CD へ書き込むことができる)</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>ディスクの名前</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>CD の名前を入力する</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>データのサイズ</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>ディスクへ書き込まれるデータのサイズが表示される (挿入する空のディスクは最低でもこのサイズは必要である)</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>書き込み速度</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>ドロップ・ダウン式のリストから CD へ書き込む際の書き込み速度を選択する</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </listitem>
+      <listitem>
+        <para><guibutton>書き込む</guibutton>ボタンをクリックする</para>
+        <para><guilabel>書き込み先</guilabel>のリストから<guilabel>ファイル・イメージ</guilabel>を選択した場合、<guilabel>ディスク・イメージのファイル名の選択</guilabel>ダイアログが表示されます。このダイアログからファイル・イメージを保存する先のパス名を指定して下さい。デフォルトで<filename>.iso</filename>という拡張子が付与されます。</para>
+        <para>すると、<guilabel>ディスクへの書き込み</guilabel>ダイアログが表示されます。この作業は時間がかかります。ディスクに書き込まれている間、またはディスクのファイル・イメージを生成している間などはその経過が表示され、書き込みが完了するとその旨のメッセージがダイアログに表示されます。</para>
+      </listitem>
+    </orderedlist>
+    <tip><para>You can set the CD/DVD Creator folder to open automatically when you instert a blank disc. See <xref linkend="gosnautilus-61"/>.</para></tip>
+    <note><para>現在のオペレーティング・システムでは、CD に書き込まれたファイルシステムを長いファイル名を使って読み込むことが可能です (Joliet と Rock Ridge 形式に対応した CD-ROM ファイルシステムの拡張機能を利用しています)。</para></note>
+    </sect2>
+    <sect2 id="nautilus-cdwriter-copy">
+      <title>CD や DVD をコピーする</title>
+        <para>CD や DVD の複製を別のディスクまたはシステムに保存するイメージ・ファイルに生成することができるようになっています。コピーを生成する手順は次のとおりです:</para>
+        <orderedlist>
+          <listitem><para>コピーするディスクをドライブに挿入する</para></listitem>               
+          <listitem><para>トップ・エッジ・パネルのメニューバーから<menuchoice><guimenu>場所</guimenu><guimenuitem>コンピュータ</guimenuitem></menuchoice>を選択する</para></listitem>       
+          <listitem><para>CD のアイコンの上で右クリックし、<guimenuitem>ディスクのコピー</guimenuitem>を選択する</para></listitem>       
+          <listitem><para><guilabel>ディスクへの書き込み</guilabel>ダイアログが表示される</para></listitem>  
+        </orderedlist>
+        <para>書き込みが可能なドライブが１台しかない場合は、まず最初にディスクからイメージ・ファイルを生成します。それから、コピー元のディスクを取り出して、コピー先の空ディスクを挿入するよう指示するダイアログが表示されます。</para>
+        <tip><para>複数の複製を作成するような場合は<guilabel>ディスクへの書き込み</guilabel>ダイアログからイメージ・ファイルを選択し、ディスク・イメージを作成して下さい: 詳細は「<xref linkend="nautilus-cdwriter-writeimage"/>」をご覧下さい。</para></tip>
+
+    </sect2>    
+    <sect2 id="nautilus-cdwriter-writeimage">
+      <title>イメージ・ファイルからディスクを作成する</title>
+      <para>１個のディスク・イメージを１枚の CD または DVD に書き込むことが可能になっています。例えば、インターネットからディスク・イメージをダウンロードするとか、既にディスク・イメージを作成していた場合などです。ディスク・イメージは通常 <filename>.iso</filename> という拡張子が付いており、時々 ISO ファイルと呼ばれます。</para>
+        <para>ディスク・イメージを書き込む場合は、ディスク・イメージの上で右クリックし、ポップアップ・メニューから<guimenuitem>ディスクへの書き込み</guimenuitem>を選択して下さい。</para>      
+    </sect2>
+  </sect1>
+
+  <sect1 id="gosnautilus-515">
+    <title>リモート・サーバへの接続</title>
+    <para><application>Nautilus</application> ファイル・マネージャではファイルやアプリケーション、FTP サイト、Windows 共有、WebDav サーバ、SSH サーバに対して統一されたアクセス・ポイントを提供しています。</para>  
+    <sect2 id="nautilus-server-connect">
+      <title>リモート・サーバへアクセスする</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gosnautilus-37"/>      
+      <!-- MOVE THIS ANCHOR -->
+      <!-- To Add a Network Server -->
+      <anchor id="gosnautilus-466"/>
+      <indexterm>
+        <primary>FTP サイト</primary>
+        <secondary>accessing</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>FTP サイト</secondary>
+        <see>FTP サイト</see>
+      </indexterm>
+      <para>ファイル・マネージャを使ってリモート・サーバである FTP サイトや Windows 共有、WebDav サーバ、SSH サーバのいずれかにアクセスできます。</para>
+<para>リモート・サーバに接続するには<menuchoice><guimenu>ファイル</guimenu><guimenuitem>サーバへ接続</guimenuitem></menuchoice>を選択して下さい。あるいは、<menuchoice><guimenu>場所</guimenu><guimenuitem>サーバへ接続</guimenuitem></menuchoice>を選択することでも、同じようなダイアログにアクセスできます。</para>
+<para>任意のリモート・サーバに接続するには、サービスの種類の選択から始めて、サーバのアドレスを入力していって下さい。</para>
+<para>もしリモート・サーバから要求されたら、次に示すオプション情報もそれぞれ一緒に入力して下さい:</para>
+            <informaltable frame="topbot">
+              <tgroup cols="2" colsep="0" rowsep="0">
+                <colspec colname="colspec0" colwidth="27.27*"/>
+                <colspec colname="colspec1" colwidth="72.73*"/>
+                <thead>
+                  <row rowsep="1">
+                    <entry>
+                      <para>ダイアログの要素</para>
+                    </entry>
+                    <entry>
+                      <para>説明</para>
+                    </entry>
+                  </row>
+                </thead>
+                <tbody>
+                  <row>
+                    <entry valign="top">
+                      <para>
+                        <guilabel>ポート番号</guilabel>
+                      </para>
+                    </entry>
+                    <entry valign="top">
+                      <para>接続するサーバのポート番号 (これはデフォルトのポート番号を変更する必要がある場合にのみ使用すること; 通常は空のままにしておく)</para>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry valign="top">
+                      <para>
+                        <guilabel>フォルダ</guilabel>
+                      </para>
+                    </entry>
+                    <entry valign="top">
+                        <para>サーバに接続したら開くフォルダ</para>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry colname="colspec0">
+                      <para>
+                        <guilabel>ユーザ名</guilabel>
+                      </para>
+                    </entry>
+                    <entry colname="colspec1">
+                      <para>The user name of the account used to connect to the server.
+This should be supplied with the connection information if needed.
+The user name information is not appropriate for a public FTP connection.</para>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry colname="colspec0">
+                      <para>
+                        <guilabel>接続で使用する名前</guilabel>
+                      </para>
+                    </entry>
+                    <entry colname="colspec1">
+                      <para>The designation of the connection as it will appear in the file manager.</para>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry colname="colspec0">
+                      <para>
+                        <guilabel>共有する場所</guilabel>
+                      </para>
+                    </entry>
+                    <entry colname="colspec1">
+                      <para>Windows 共有するフォルダの名前 (Windows 共有でのみ使用する)</para>
+                    </entry>
+                  </row>
+                  <row>
+                    <entry colname="colspec0">
+                      <para>
+                        <guilabel>ドメイン名</guilabel>
+                      </para>
+                    </entry>
+                    <entry colname="colspec1">
+                      <para>Windows のドメイン (Windows 共有でのみ使用する)</para>
+                    </entry>
+                  </row>
+                </tbody>
+              </tgroup>
+            </informaltable>
+<para>サーバ情報を URI の形式で指定するような場合とか特殊な接続が必要になった場合は、サービスの種類から<menuchoice><guimenuitem>その他</guimenuitem></menuchoice>を選択して下さい。</para>
+<para>接続に必要な情報を入力したら<guibutton>接続</guibutton>ボタンをクリックして下さい。接続に成功すると、接続先のサーバにある内容が表示され、そのリモート・サーバへオブジェクトをドラッグ＆ドロップして送信したり、逆に受信することができるようになります。</para>
+    </sect2>
+    <sect2 id="nautilus-accessnetwork">
+      <title>ネットワークの場所にアクセスする</title>
+      <!-- MOVE THIS ANCHOR -->
+      <!-- To Add a Network Server -->
+      <anchor id="gosnautilus-508"/>
+      <anchor id="gosnautilus-509"/>
+      <anchor id="gosnautilus-465"/>      
+      <indexterm>
+        <primary>network places</primary>
+        <secondary>accessing</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>network places</secondary>
+        <see>network places</see>
+      </indexterm>
+      <para>お使いのシステムからネットワーク上にある場所にアクセスできる設定になっているならば、ファイル・マネージャを使ってそのネットワークの場所にアクセスできます。</para>
+      <para>ネットワークの場所にアクセスするには、ファイル・マネージャを開いて、<menuchoice><guimenu>場所</guimenu><guimenuitem>ネットワーク</guimenuitem></menuchoice>を選択して下さい。ウィンドウの中にアクセス可能なネットワークの場所が表示されるので、アクセスしたい場所をダブル・クリックして下さい。</para>
+      <para><indexterm><primary>NFS servers</primary><see>Unix network</see></indexterm>UNIX 共有にアクセスする場合は <guilabel>UNIX ネットワーク</guilabel> (NFS) というオブジェクトをダブル・クリックして下さい。すると、利用できる UNIX 共有の一覧がファイル・マネージャの中に表示されます。</para>
+      <para><indexterm><primary>Samba servers</primary><see>Windows network</see></indexterm>Windows 共有にアクセスする場合は <guilabel>Windows ネットワーク</guilabel> (SMB) というオブジェクトをダブル・クリックして下さい。すると、利用できる Windows 共有の一覧がファイル・マネージャの中に表示されます。</para>
+    </sect2>
+    <!-- special URIs by and large obsolete or at least arcane -->
+    <sect2 id="gosnautilus-467">
+      <title>特殊な URI にアクセスする</title>
+      <indexterm>
+        <primary>special URI locations</primary>
+        <secondary>accessing</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>special URI locations</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>URI, special</primary>
+        <see>special URI locations</see>
+      </indexterm>
+      <para>Nautilus has certain special URI locations that enable you to access particular functions from the file manager.</para>
+      <para>これ以降は高度な技術を必要とするユーザを対象にしています: そのような技術とは、ほとんどの場合、簡単にファイル・マネージャから提供されている機能や場所にアクセスする手段のことを指します。</para>
+      <para><xref linkend="gosnautilus-TBL-479"/> にファイル・マネージャから指定できる特殊な URI とそれが指す場所の一覧を示します:</para>
+      <table frame="topbot" id="gosnautilus-TBL-479">
+        <title>特殊な URI とその場所</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="33.94*"/>
+          <colspec colname="colspec1" colwidth="66.06*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>URI の表記</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <command>burn:///</command>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>CD や DVD に書き込むファイルやフォルダを一時的にコピーしておく場所であり、この場所にあるデータを実際に CD へ書き込むことができる (詳細は「<xref linkend="nautilus-cdwriter"/>」を参照のこと)</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <command>network:///</command>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>お使いのシステムがネットワーク上の場所にアクセスできるような設定になっている場合は、接続が可能なネットワークの場所が表示されるので、ネットワークの場所にアクセスする場合はそのアイコンをダブル・クリックする (この URI を使って、システムにネットワークの場所を追加することができる; 詳細は「<xref linkend="nautilus-accessnetwork"/>」を参照のこと)</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect2>
+  </sect1>
+
+
+	<!-- ============================================== prefs -->
+  <sect1 id="nautilus-preferences">
+
+    <title>Nautilus の設定</title>
+    <!-- preserve id for backwards compatibility: 2.12 -->
+    <anchor id="gosnautilus-15"/>
+    <anchor id="gosnautilus-17"/>
+    <!-- preserve id for backwards compatibility: 2.16 -->    
+    <anchor id="prefs-filemanager"/>
+    <anchor id="goscustdesk-84"/>        
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>customizing</secondary>
+    </indexterm>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>preferences</secondary>
+      <tertiary>introduction</tertiary>
+    </indexterm>
+    <indexterm>
+      <primary>preferences, file manager</primary>
+      <see>file manager preferences</see>
+    </indexterm>
+    <para>ファイル・マネージャの設定を自分向けにカスタマイズする場合は<guilabel>ファイル・マネージャの設定</guilabel>ダイアログを使って下さい。</para>
+		<para><guilabel>ファイル・マネージャの設定</guilabel>ダイアログを表示するには、<menuchoice><guimenu>編集</guimenu><guimenuitem>設定</guimenuitem></menuchoice>を選択して下さい。あるいは、トップ・エッジ・パネルから<menuchoice><guimenu>システム</guimenu><guisubmenu>設定</guisubmenu><guimenuitem>ファイルの管理</guimenuitem></menuchoice>を直接選択しても構いません。</para>
+    <para>次に示すような類の設定を指定することができます:</para>
+    <itemizedlist>
+      <listitem>
+        <para>各種ビューアに対するデフォルトの設定</para>
+      </listitem>
+      <listitem>
+        <para>ファイルやフォルダ、実行可能なテキスト・ファイル、そしてゴミ箱の動き</para>
+      </listitem>
+      <listitem>
+        <para>アイコンの見出しや日付の書式などの情報</para>
+      </listitem>
+      <listitem>
+        <para>一覧表示で表示する項目やその順番</para>
+      </listitem>
+      <listitem>
+        <para>ファイル・マネージャのパフォーマンスに影響するプレビュー表示のオプション</para>
+      </listitem>
+      <listitem>
+        <para>How removable media and connected devices are handled.</para>
+      </listitem>
+    </itemizedlist>
+    <sect2 id="gosnautilus-438">
+      <title>表示の設定</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>preferences</secondary>
+        <tertiary>views</tertiary>
+      </indexterm>
+      <para>表示に関するデフォルト設定を指定したり、並び替えのオプションや表示のオプションを選択することができるようになっています。さらに、アイコン表示や一覧表示のデフォルトの設定も指定できます。</para>
+      <para>デフォルトの表示設定を指定する場合は<menuchoice><guimenu>編集</guimenu><guimenuitem>設定</guimenuitem></menuchoice>を選択し、ダイアログにある<guilabel>表示</guilabel>タブをクリックして、<guilabel>表示</guilabel>セクションを表示して下さい。</para>
+      <para><xref linkend="gosnautilus-TBL-30"/> に変更できる設定項目を示します。</para>
+      <table frame="topbot" id="gosnautilus-TBL-30">
+        <title>表示の設定</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>ダイアログの要素</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>新しいフォルダの表示形式</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Select the default view for folders. When you open
+a folder, the folder is displayed in the view that you select. This can be the icon view, the list view, or the compact view, which is a variant of the icon view that is organized in columns rather than rows..</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>アイテムの配置方式</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>フォルダの中にあるアイテムを表示する際の並び替えの条件 (アイテムの特徴) を指定する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>フォルダをファイルよりも前に配置する</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>フォルダの中にあるアイテムを並び替えて表示する際に、ファイルの前にフォルダの一覧を配置するかどうかを指定する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>隠しファイルとバックアップ・ファイルを表示する</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>通常はフォルダの中に表示されない類のファイルも追加で表示するかどうかを指定する (隠しファイルについて詳細は「<xref linkend="nautilus-hidden-files"/>」を参照のこと)</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>Default zoom level</guilabel> in the Icon View, Compact View, or List View sections
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>Select the default zoom level for folders that are displayed
+in this view. The zoom level specifies the size of items in a view.</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>コンパクトな配置にする</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイコン表示の際に隣り合うアイテムを接近させて配置するかどうかを指定する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>アイコンの横にラベルを配置する</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>アイコンの下側ではなく、横にラベルを表示するかどうかを指定する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>All columns have the same width</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>Select this option to make all columns in a compact view have the same width.</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>フォルダのみ表示する</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>サイド・ペインにある<guilabel>ツリー</guilabel>ではフォルダのみ表示するかどうかを指定する</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect2>
+    <sect2 id="gosnautilus-56">
+      <title>動作の設定</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>preferences</secondary>
+        <tertiary>behavior</tertiary>
+      </indexterm>
+      <para>ファイルとフォルダの設定を指定する場合は<menuchoice><guimenu>編集</guimenu><guimenuitem>設定</guimenuitem></menuchoice>を選択し、ダイアログにある<guilabel>動作</guilabel>タブをクリックして、<guilabel>動作</guilabel>セクションを表示して下さい。次に示す項目を指定することができます:</para>
+
+      <variablelist>
+       	<varlistentry>
+      	  <term><guilabel>Single click to open items</guilabel></term>
+      	  <listitem>
+      	    <para>アイテムを (シングル) クリックしたら、そのアイテムにデフォルトのアクションを適用する場合はこのオプションを選択して下さい。このオプションを選択した際にアイテムの上にポインタを置くと、アイテムのラベルに下線が付与されます。</para>
+      	  </listitem>
+      	</varlistentry>
+       	<varlistentry>
+      	  <term><guilabel>Double click to open items</guilabel></term>
+      	  <listitem>
+      	    <para>アイテムをダブル・クリックしたら、そのアイテムにデフォルトのアクションを適用する場合はこのオプションを選択して下さい。</para>
+      	  </listitem>
+      	</varlistentry>
+       	<varlistentry>
+      	  <term><guilabel>常にブラウザ・ウィンドウで開く</guilabel></term>
+      	  <listitem>
+      	    <para>デフォルトで <application>Nautilus</application> を空間モードではなくブラウザモードで利用する場合はこのオプションを選択して下さい。このオプションを選択することで、同じウィンドウの中にアイテムを表示するか、あるいはアイテムをオブジェクトとして扱って参照できるようになります。</para>
+      	  </listitem>
+      	</varlistentry>
+       	<varlistentry>
+      	  <term><guilabel>Run executable text files when they are opened</guilabel></term>
+      	  <listitem>
+      	    <para>実行可能なテキスト・ファイルを選択したら起動する場合はこのオプションを選択して下さい。実行可能なテキスト・ファイルとは、例えばシェル・スクリプトなどのファイルを指します。</para>
+      	  </listitem>
+      	</varlistentry>
+       	<varlistentry>
+      	  <term><guilabel>View executable text files when they are opened</guilabel></term>
+      	  <listitem>
+      	    <para>実行可能なテキスト・ファイルを選択したらそのテキスト・ファイルの中身を表示する場合はこのオプションを選択して下さい。</para>
+      	  </listitem>
+      	</varlistentry>
+       	<varlistentry>
+      	  <term><guilabel>毎回確認する</guilabel></term>
+      	  <listitem>
+      	    <para>実行可能なテキスト・ファイルを選択する度に問い合わせのダイアログ (ファイルを実行するか、または中身を表示するか) を表示する場合はこのオプションを選択して下さい。</para>
+      	  </listitem>
+      	</varlistentry>
+       	<varlistentry>
+      	  <term><guilabel>ゴミ箱を空にする/ファイルを削除する前に確認する</guilabel></term>
+      	  <listitem>
+      	    <para><guilabel>ゴミ箱</guilabel>を空にしたりファイルを削除する前に確認ダイアログを表示する場合はこのオプションを選択して下さい。但し、特別な理由がない限り、このオプションはデフォルトのままとし変更しないで下さい。</para>
+      	  </listitem>
+      	</varlistentry>
+       	<varlistentry>
+      	  <term><guilabel>ゴミ箱を経由しないで削除する</guilabel></term>
+      	  <listitem>
+      	    <para>次のメニューに<guimenuitem>削除</guimenuitem>メニューを追加する際に指定します:</para>
+                      <itemizedlist>
+                        <listitem>
+                          <para><guimenu>編集</guimenu>メニュー</para>
+                        </listitem>
+                        <listitem>
+                          <para>ファイルやデスクトップのオブジェクト上で右クリックしたらポップアップ表示されるメニュー</para>
+                        </listitem>
+                      </itemizedlist>
+                      <para>アイテムを選択すると<guimenuitem>削除</guimenuitem>というメニュー項目を利用して、アイテムをファイルシステムから即座に削除することができます。一度削除したファイルを元に戻す方法はありません。特別な理由がない限り、このオプションを変更しないようにして下さい。</para>
+      	  </listitem>
+      	</varlistentry>
+      </variablelist>
+    </sect2>
+    <sect2 id="gosnautilus-439">
+      <title>アイテムの設定</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>icons</secondary>
+        <tertiary>caption preferences</tertiary>
+      </indexterm>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>preferences</secondary>
+        <tertiary>icon captions</tertiary>
+      </indexterm>
+      <para>アイコンの見出しはアイコン表示にした時のファイルやフォルダの名前を表します。さらに、この見出しにはファイルやフォルダに関して３つの追加情報が含まれています。このような追加情報はファイル名の後ろに表示されます。通常は１つの情報だけが表示されていますが、アイコンを拡大すると残りの情報が表示されます。このアイコンの見出しに何の追加情報を表示するかを指定できるようになっています。</para>
+      <para>アイコンの見出しを指定する場合は<menuchoice><guimenu>編集</guimenu><guimenuitem>設定</guimenuitem></menuchoice>を選択し、ダイアログにある<guilabel>アイテム</guilabel>・タブをクリックして、<guilabel>アイテム</guilabel>というセクションを表示して下さい。</para>
+      <para>アイコンの見出しに表示したい情報をドロップ・ダウン式のリストからそれぞれ選択して下さい。一つ目のリストから先頭に表示する情報を選択し、二つ目のリストから二番目に表示する情報を選択するといった感じで順に指定していきます。次の表は、ここで選択できる情報について説明ししたものです:</para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>情報</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>サイズ</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの大きさを表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>種類</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの MIME 型を表す文字列を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>更新日時</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの最終更新日時を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>アクセス日</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムに最後にアクセスした日付を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>所有者</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの所有者を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>グループ</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムが属しているグループを表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>アクセス権</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><indexterm><primary>permissions</primary><secondary>displaying as characters</secondary></indexterm>三文字からなるアクセス権を３つ指定するアイテムのアクセス権限 (例えば <computeroutput>-rwxrw-r--</computeroutput>) を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>８進数表記のアクセス権</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><indexterm><primary>permissions</primary><secondary>displaying in octal notation</secondary></indexterm>８進数形式のアイテムのアクセス権限 (例えば <computeroutput>764</computeroutput>) を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>MIME 型</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの MIME 型を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>なし</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムに対して何も情報を表示しない際に指定する</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>日付の<guilabel>書式</guilabel>オプションを使うと、ファイル・マネージャで使用する日付の表記方法を選択できます。</para>
+    </sect2>
+    <sect2 id="gosnautilus-490">
+      <title>一覧の項目の設定</title>
+      <para>ファイル・マネージャのウィンドウでどんな情報が表示されるのかを指定することができるようになっています。一覧表示で表示する項目や、その項目を表示する順番を指定できます。</para>
+      <para>一覧の項目に対する設定を指定する場合は<menuchoice><guimenu>編集</guimenu><guimenuitem>設定</guimenuitem></menuchoice>を選択し、ダイアログにある<guilabel>一覧の項目</guilabel>・タブをクリックして<guilabel>一覧の項目</guilabel>というセクションを表示して下さい。</para>
+      <para>一覧表示で表示する項目を指定する場合は、その項目のオプションをチェックして<guibutton>表示する</guibutton>ボタンをクリックして下さい。一覧表示で項目を表示しないようにする場合は、その項目のオプションをチェックして<guibutton>表示しない</guibutton>ボタンをクリックして下さい。</para>
+      <para><guibutton>上げる</guibutton>と<guibutton>下げる</guibutton>ボタンを使って、一覧表示で項目を表示する場所を指定して下さい。</para>
+      <para>デフォルトの項目をデフォルトの位置に表示する場合は<guibutton>デフォルトに戻す</guibutton>ボタンをクリックして下さい。</para>
+      <para>次の表は、ここで選択できる項目について説明ししたものです:</para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>情報</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>名前</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>アイテムの名前 (ファイル名やフォルダ名) を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>サイズ</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの大きさを表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>種類</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの MIME 型の説明を表示する際に選択する (<guilabel>開き方</guilabel>のタブでアプリケーションを指定する際に利用する)</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>更新日時</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの最終更新日時を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>アクセス日</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムに最後にアクセスした日付を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>グループ</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>アイテムが属しているグループを表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>MIME 型</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>アイテムの MIME 型を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>８進数表記のアクセス権</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para><indexterm><primary>permissions</primary><secondary>displaying in octal notation</secondary></indexterm>８進数形式のアイテムのアクセス権限 (例えば <computeroutput>764</computeroutput>) を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>所有者</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>アイテムの所有者を表示する際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>アクセス権</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para><indexterm><primary>permissions</primary><secondary>displaying as characters</secondary></indexterm>三文字からなるアクセス権を３つ指定するアイテムのアクセス権限 (例えば <computeroutput>-rwxrw-r--</computeroutput>) を表示する際に選択する</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </sect2>
+    <sect2 id="gosnautilus-60">
+      <title>プレビューの設定</title>
+      <indexterm>
+        <primary>file manager</primary>
+        <secondary>preferences</secondary>
+        <tertiary>preview</tertiary>
+      </indexterm>
+      <para>ファイル・マネージャにはファイルをプレビューして表示したり再生する機能がいくつか含まれています。プレビューの機能はファイル・マネージャの応答速度に影響してきます。そのため、ファイル・マネージャの処理速度を改善するためにその動作を変更することができるようになっています。プレビューするファイルの種類に応じて、次の表にあるオプションを選択できます:</para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colwidth="35.09*"/>
+          <colspec colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>オプション</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>常に</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>ローカルのファイル及びその他のファイルシステムの両方で実行する</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>ローカルのみ</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>ローカルのファイルに対してのみ実行する</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>しない</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>実行しない</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>プレビューのオプションを指定する場合は<menuchoice><guimenu>編集</guimenu><guimenuitem>設定</guimenuitem></menuchoice>を選択し、ダイアログにある<guilabel>プレビュー</guilabel>・タブをクリックして、<guilabel>プレビュー</guilabel>・セクションを表示して下さい。</para>
+      <para><xref linkend="gosnautilus-TBL-41"/> に変更できるプレビューの設定項目を示します。</para>
+      <table frame="topbot" id="gosnautilus-TBL-41">
+        <title>プレビューの設定</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>ダイアログの要素</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>アイコン内のテキスト表示</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>アイコン表示でテキスト・ファイルの内容をプレビューする際に選択する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>サムネイルの表示</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>画像ファイルを表示する際に選択する (ファイル・マネージャはユーザのホームフォルダ配下の各フォルダで <filename>.thumbnails</filename> というフォルダの中にサムネイルのキャッシュを格納している)</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>ファイルの最大サイズ</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>ファイル・マネージャがサムネイルを生成してもよいファイルの最大サイズを指定する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>サウンド・ファイルの演奏</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>サウンド・ファイルをプレビューとして演奏する際に指定する</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec0">
+                <para>
+                  <guilabel>アイテム数のカウント</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1">
+                <para>フォルダの中にあるアイテムの総数を表示する際に指定する (アイコン表示の場合、各フォルダの中に格納されたアイテムの総数を表示するために拡大率を上げる必要があるかもしれない)</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </sect2>
+    <sect2 id="gosnautilus-61">
+      <title>Media Preferences</title>
+      <para>
+        You can configure how <application>Nautilus</application> handles
+        removable media and devices that are connected to the computer, such
+        as music players or cameras. For each media format or device 
+        type, <application>Nautilus</application> offers to run one of the 
+        applications that are known to support this format, as well as
+        the following options:
+      </para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colwidth="35.09*"/>
+          <colspec colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>オプション</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Ask what to do</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Make <application>Nautilus</application> ask for the desired
+                   action when the media or device appears.</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Do Nothing</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Do nothing.</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Open Folder</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Treat the media or device like an ordinary folder and open
+                it in a <application>Nautilus</application> window.</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Open with other Application</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Select an application to run with the <application>Nautilus</application> application chooser dialog. Note that applications known to handle
+                the media or device can be chosen directly from the drop-down list.
+                
+                </para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>The most common media formats can be configured in the <guilabel>Media Handling</guilabel> section: audio CDs, video DVDs, music players, cameras, and software cds.</para>
+      <para>To configure the handling for other media formats, first select the format in the <guilabel>Type</guilabel> drop-down list, then select the desired handling for this format in the <guilabel>Action</guilabel> drop-down list.</para>
+      <para><xref linkend="gosnautilus-TBL-43"/> lists other media handling preferences that
+you can modify.</para>
+      <table frame="topbot" id="gosnautilus-TBL-43">
+        <title>プレビューの設定</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>ダイアログの要素</para>
+              </entry>
+              <entry>
+                <para>説明</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Never prompt or start programs on media insertion</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>
+                   Select this option to prevent <application>Nautilus</application> from showing dialogs or running programs when media or devices appear. When this option is selected, the preferences for the handling of specific media formats are ignored.
+                </para>
+              </entry>
+           </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Browse media when inserted</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>
+                  When this option is selected, <application>Nautilus</application>
+                  will automatically open a folder when media is inserted. This
+                  only applies for media formats for which the handling has not been explicitly configured.
+                </para>
+              </entry>
+           </row>
+         </tbody>
+       </tgroup>
+      </table>
+    </sect2>
+
+  </sect1>
+  
+  <sect1 id="gosnautilus-440">
+    <title>Nautilus の拡張</title>
+    <indexterm>
+      <primary>file manager</primary>
+      <secondary>running scripts</secondary>
+    </indexterm>
+    <indexterm>
+      <primary>scripts, running from file manager</primary>
+    </indexterm>
+<para>Nautilus は主として二種類の方法で拡張できるようになっています。それは <application>Nautilus</application> の拡張機能を経由する方法と、スクリプトを利用する方法です。このセクションでは二つの方法の違いとインストール方法について説明します。</para>
+    <sect2 id="gosnautilus-444">
+      <title>Nautilus スクリプト</title>
+      <para>Nautilus からスクリプトを実行できます。スクリプトは基本的に <application>Nautilus</application> 拡張機能よりもシンプルな処理を担当し、お使いのコンピュータで実行することが可能なスクリプト言語で記述できるものとします。スクリプトを実行する場合は<menuchoice><guimenu>ファイル</guimenu><guimenuitem>スクリプト</guimenuitem></menuchoice>を選択し、そのサブメニューから実行するスクリプトを指定して下さい。</para>
+      <para>特定のファイルに対してスクリプトを実行する場合、まず表示ペインでファイルを選択します。そして<menuchoice><guimenu>ファイル</guimenu><guimenuitem>スクリプト</guimenuitem></menuchoice>を選択し、そのサブメニューから実行するスクリプトを指定して下さい。複数のファイルを選択し一括してスクリプトを実行すことも可能です。</para>
+      <para>コンテキスト・メニューからスクリプトにアクセスすることもできます。</para>
+      <note>
+        <para>未だスクリプトをインストールしていない場合は、スクリプト・メニューは表示されません。</para>
+      </note>
+      <sect3 id="gosnautilus-install-scripts">
+      <title>ファイル・マネージャ専用スクリプトをインストールする</title>
+        <para>ファイル・マネージャにはスクリプトを格納できる特別なフォルダが用意されています。フォルダの中にある実行形式のファイルは全て、スクリプト・メニューに表示されます。スクリプト・フォルダは $HOME/.gnome2/nautilus-scripts です。</para>
+        <para>スクリプトをインストールするには、単にそれをスクリプト・フォルダの中にコピーして、実行権限を与えるだけです。</para>
+      <para>スクリプト・フォルダの中身を表示する場合、既にスクリプトをインストールしているならば<menuchoice><guimenu>ファイル</guimenu><guisubmenu>スクリプト</guisubmenu><guimenuitem>スクリプト・フォルダを開く</guimenuitem></menuchoice>を選択して下さい。未だスクリプトをインストールしていない場合は、ファイル・マネージャを使ってスクリプト・フォルダを参照する必要があります。その場合は、隠しファイルを表示するような設定にしておく必要があるので、<menuchoice><guimenu>表示</guimenu><guimenuitem>隠しファイルを表示する</guimenuitem></menuchoice>を選択して下さい。</para>
+<para><application>Nautilus</application> 用のスクリプトをダウンロードするのに都合のよいサイトとしては <ulink url="http://g-scripts.sourceforge.net"><citetitle>G-Scripts ウェブサイト</citetitle></ulink>があります。</para>
+    </sect3>
+    <sect3 id="gosnautilus-write-scripts">
+      <title>ファイル・マネージャ専用スクリプトを作成する</title>
+       <para>ローカルのフォルダから何らかの処理を実行するような場合は、選択したファイル名をスクリプトに引き渡すことになります。リモートのフォルダ (例: ウェブや FTP の内容を表示しているフォルダなど) から実行する場合はスクリプトに何も引き渡さないようにします。</para>
+       <para>次の表にスクリプトに引き渡すことが可能な変数の一覧を示します:</para>
+       <informaltable frame="topbot">
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colwidth="50*"/>
+            <colspec colwidth="50*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>環境変数</para>
+                </entry>
+                <entry>
+                  <para>説明</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>ファイル・マネージャから選択したファイルを改行文字で区切って表現したパス (ローカルの場合のみ)</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>NAUTILUS_SCRIPT_SELECTED_URIS</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>ファイル・マネージャから選択したファイルを改行文字で区切って表現した URI</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>NAUTILUS_SCRIPT_CURRENT_URI</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>現在の場所を表す URI</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>NAUTILUS_SCRIPT_WINDOW_GEOMETRY</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>現在のウィンドウの位置と大きさ</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+    </sect3>
+  </sect2>
+  <sect2 id="nautilus-extensions">
+    <title>Nautilus 拡張機能</title>
+    <para><application>Nautilus</application> の拡張機能は <application>Nautilus</application> スクリプトよりもはるかに強力です (<application>Nautilus</application> を拡張する範囲と方法の両方にわたって強力です)。<application>Nautilus</application> の拡張機能は基本的にお使いのシステムの管理者によってインストールされるものです。</para>
+<para><application>Nautilus</application> の拡張機能として有名なものは次のとおりです: <orderedlist>
+        <listitem>
+          <para>nautilus-actions</para>
+          <para>この拡張機能を使うと、ファイルの種類に応じたアクションを簡単に割り当てることができます。</para>
+        </listitem>
+        <listitem>
+          <para>nautilus-send-to</para>
+          <para>これは E-メールとかインスタント・メッセンジャー、Bluetooth などを使って任意のファイルやフォルダを簡単に転送する機能を提供しています。</para>
+        </listitem>
+        <listitem>
+          <para>nautilus-open-terminal</para>
+          <para>これは選択した場所で端末を開く機能を提供しています。</para>
+        </listitem>
+      </orderedlist></para>
+<note>
+        <para><application>Nautilus</application> の右クリック・メニューからデフォルトで利用できる<guilabel>端末を開く</guilabel>というコマンドをお探しなら、<application>nautilus-open-terminal</application> とう拡張機能をインストールしてみて下さい。</para>
+      </note>
+  </sect2>
+  </sect1>
+</chapter>

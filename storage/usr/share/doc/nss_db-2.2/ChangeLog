@@ -1,0 +1,68 @@
+2000-08-15  Mark Kettenis  <kettenis@gnu.org>
+
+	* README: Add warning about Berkeley DB not being on the root
+	partition.
+
+	* rellns-sh: Copied from scripts directory in glibc CVS
+	repository.
+	* Makefile.am (EXTRA_DIST): Add rellns-sh.
+
+	* configure.in: Add logic to install libnss_db in
+	/lib when configuring on Linux with prefix "/usr".
+	* Makefile.am (VERSION, INTERFACE, slibdir): New variables
+	(libnss_db_la_LDFLAGS): Use $(INTERFACE) for the library version
+	info.
+	(install-data-local): Add rules to install libnss_db in a way that
+	mimmicks the way glibc does it as closely as possible.
+
+	* aclocal.m4, configure, Makefile.in: Regenerated.
+
+2000-08-09  Mark Kettenis  <kettenis@gnu.org>
+
+	* makedb.c: Don't include <dlfcn.h>, "nss_db/dummy-db.h" and
+	"../version.h".  Include "db-compat.h".  Replace usage of NSS_DB
+	with DB.
+	(PACKAGE): Don't define.
+	[DB_VERSION_MAJOR < 3] (db_strerror): New define.
+	(main): Use PACKAGE in call to textdomain.
+	Don't call load_db.  Call db_open instead of dbopen.  Use
+	db_strerror to print error messages.
+	(process_input): Use ISO C function definition.  Use db_strerror
+	to print error messages.
+	(print_database): Likewise.
+
+	* nss_db.h: Include <db.h>.  Don't include <stdint.h>.  Only
+	provide prototypes of internal_setent and internal_endent.
+	* db-netgrp.c: Don't include <dlfcn.h> and "nsswitch.h".  Replace
+	usage of NSS_DB with DB.
+	(_nss_db_setnetgrent): Don't use DL_CALL_FCT.
+	* db-alias.c: Don't include <dlfcn.h> and "nsswitch.h".  Include
+	<stdio.h>.  Replace usage of NSS_DB, with DB.
+	(lookup): Don't use DL_CALL_FCT.
+	(_nss_db_getaliasbyname_r): Call alloca instead of __alloca.
+	* db-XXX.c: Don't include <dlfcn.h>, <fcntl.h> and "nsswitch.h".
+	Include <alloca.h>, <ctype.h>, <db.h>, <netdb.h>, <stdio.h> and
+	<string.h>.  Replace usage of NSS_DB with DB.
+	(lookup): Don't use DL_CALL_FCT.  Tweak error reporting logic a bit.
+	(_nss_db_get##name##_r): Call alloca instead of	__alloca.
+
+	* db-open.c: Remove contents, except for set_cloexec_flag.
+	Reimplement internal_setent, internal_endent.
+
+	* AUTHORS, COPYING, COPYING.LIB, ChangeLog, INSTALL, Makefile.am,
+	Makefile.in, NEWS, README, THANKS, aclocal.m4, config.guess,
+	config.sub, configure, configure.in, db-compat.c, db-compat.h,
+	db-ethers.c, db-grp.c, db-proto.c, db-pwd.c, db-rpc.c,
+	db-service.c, db-spwd.c, install-sh, libnss_db.map, ltconfig,
+	ltmain.sh, missing, mkinstalldirs: New files.
+
+	* files-ethers.c, files-grp.c, files-parse.c, files-proto.c
+	files-pwd.c, files-rpc.c, files-service.c, files-spwd.c: Copied from
+	nss/nss_files directory in glibc CVS repository.
+	* db-XXX.c, db-alias.c, db-netgrp.c, db-open.c, nss_db.h: Copied
+	from nss/nss_db directory in glibc CVS repository.
+	* db-Makefile, makedb.c: Copied from nss directory in glibc CVS
+	repository.
+	* netgroup.h: Copied from inet/netgroup.h in glibc CVS repository.
+
+See ChangeLog in glibc distribution for earlier changes.

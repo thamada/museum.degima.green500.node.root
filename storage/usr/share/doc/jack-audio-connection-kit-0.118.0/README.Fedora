@@ -1,0 +1,113 @@
+	INTEGRATE JACK WITH PULSEAUDIO
+
+The original text is placed at:
+    http://www.harald-hoyer.de/linux/pulseaudio-and-jackd
+
+Switch to root account.
+
+Install the required packages:
+    yum install pulseaudio-module-jack alsa-plugins-jack jack-audio-connection-kit 
+
+Add yourself to the pulse-rt and jackuser groups.
+    usermod -a -G pulse-rt,jackuser "<your username>"
+
+Switch to your normal user account.
+
+Create ~/bin subdirectory if absent:
+    mkdir -p ~/bin
+
+Copy the pulseaudio start file:
+    cp /usr/share/doc/jack-audio-connection-kit-*/jack.pa ~/bin/jack.pa
+    chmod 755 ~/bin/jack.pa
+
+Close all your sessions and relogin to get the new group permissions and
+limits.
+
+Kill the current pulseaudio daemon:
+    pulseaudio -k
+
+Start the jack daemon (your parameters may be different):
+    jackd -R -P4 -dalsa -r44100 -p512 -n4 -D -Chw:0 -Phw:0
+or use
+    qjackctl -s
+if you have it installed and configured.
+
+Start the pulseaudio daemon:
+    ~/bin/jack.pa
+
+Now everything should work.
+
+
+	USING ALSA DIRECTLY
+
+Due to big amount of text lines and a few necessary graphics here is only link
+to very useful article about jack-audio-connection-kit and ALSA. So, go by
+following link:
+    http://www.legg.uklinux.net/rosegarden_sound_howto_fc7.html
+
+
+	RUNNING JACK SERVER IN REALTIME MODE
+
+NOTE: this chapter describes steps for older Fedora vesions.
+
+The JACK server jackd has the capability to run in a real-time mode
+which greatly decreases the chance of audio glitches. The real-time mode
+is enabled by passing the -R or --realtime option to jackd when starting
+the server. It is only possible to run jackd in real-time mode as a
+non-root user by modifying your PAM configuration, PAM stands for
+Pluggable Authentication Modules and is the primary authentification
+mechanism used on Fedora. The primary source of PAM documentation can be
+found at the following at http://www.kernel.org/pub/linux/libs/pam/
+
+The specific PAM configuration file that needs to be modified is
+/etc/security/limits.conf and it controls the system resource limits. It
+is important to understand that modifying the resource limits
+configuration files can decrease the security of your system.
+Documentation specific to the resource limits PAM module can be found at
+http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/pam-6.html#ss6.12
+
+The resource limits that need to be changed to allow jackd to run in
+realtime mode are named rtprio and memlock. To increase the limits for a
+specific user named fred you would add the following to
+/etc/security/limits.conf
+
+fred - rtprio 20
+fred - memlock 50000
+
+The value of rtprio can be set in the range 0 - 99 where any value
+greater that 0 will allow the user to change the scheduling policy to
+"real-time". By default the JACK server requires a minimum rtprio
+setting of 20 but jackd will accept a command line parameter -P or
+--realtime-priority which will change the minimum required value of
+rtprio that is needed, but the default of 20 is nearly always
+sufficient.
+
+The appropriate value for memlock is dependent on the amount of memory
+present in the system but a minimum value of 50000(50MB) and a maximum
+value of half the available memory can be used as a rough guideline. 
+
+To verify that the resource limits have been modified you can use the
+bash built-in ulimit command, for example:
+
+$ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+max nice                        (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 8191
+max locked memory       (kbytes, -l) 50000
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+max rt priority                 (-r) 20
+stack size              (kbytes, -s) 10240
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 8191
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+file locks                      (-x) unlimited
+
+Keep in mind that you may have to re-login before changes to limits.conf
+take effect.
+

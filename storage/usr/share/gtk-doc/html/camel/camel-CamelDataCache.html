@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelDataCache</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="Storage.html" title="Metadata Storage">
+<link rel="prev" href="camel-CamelCertDB.html" title="CamelCertDB">
+<link rel="next" href="camel-CamelDB.html" title="CamelDB">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-CamelCertDB.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="Storage.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelDB.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelDataCache.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelDataCache.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelDataCache">
+<a name="camel-CamelDataCache"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelDataCache.top_of_page"></a>CamelDataCache</span></h2>
+<p>CamelDataCache</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelDataCache.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a>;
+<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *    <a class="link" href="camel-CamelDataCache.html#camel-data-cache-new" title="camel_data_cache_new ()">camel_data_cache_new</a>                (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-CamelDataCache.html#camel-data-cache-set-expire-age" title="camel_data_cache_set_expire_age ()">camel_data_cache_set_expire_age</a>     (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         time_t when);
+void                <a class="link" href="camel-CamelDataCache.html#camel-data-cache-set-expire-access" title="camel_data_cache_set_expire_access ()">camel_data_cache_set_expire_access</a>  (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         time_t when);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelDataCache.html#camel-data-cache-rename" title="camel_data_cache_rename ()">camel_data_cache_rename</a>             (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cache,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *old,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *new,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a class="link" href="camel-CamelStream.html#CamelStream" title="struct CamelStream">CamelStream</a> *       <a class="link" href="camel-CamelDataCache.html#camel-data-cache-add" title="camel_data_cache_add ()">camel_data_cache_add</a>                (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a class="link" href="camel-CamelStream.html#CamelStream" title="struct CamelStream">CamelStream</a> *       <a class="link" href="camel-CamelDataCache.html#camel-data-cache-get" title="camel_data_cache_get ()">camel_data_cache_get</a>                (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelDataCache.html#camel-data-cache-remove" title="camel_data_cache_remove ()">camel_data_cache_remove</a>             (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelDataCache.html#camel-data-cache-clear" title="camel_data_cache_clear ()">camel_data_cache_clear</a>              (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cache,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelDataCache.html#camel-data-cache-get-filename" title="camel_data_cache_get_filename ()">camel_data_cache_get_filename</a>       (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelDataCache.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelDataCache.details"></a><h2>Details</h2>
+<div class="refsect2" title="CamelDataCache">
+<a name="CamelDataCache"></a><h3>CamelDataCache</h3>
+<pre class="programlisting">typedef struct {
+	CamelObject parent_object;
+
+	struct _CamelDataCachePrivate *priv;
+
+	gchar *path;
+	guint32 flags;
+
+	time_t expire_age;
+	time_t expire_access;
+} CamelDataCache;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_new ()">
+<a name="camel-data-cache-new"></a><h3>camel_data_cache_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *    camel_data_cache_new                (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Create a new data cache.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> Base path of cache, subdirectories will be created here.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> Open flags, none defined.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A new cache object, or NULL if the base path cannot
+be written to.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_set_expire_age ()">
+<a name="camel-data-cache-set-expire-age"></a><h3>camel_data_cache_set_expire_age ()</h3>
+<pre class="programlisting">void                camel_data_cache_set_expire_age     (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         time_t when);</pre>
+<p>
+Set the cache expiration policy for aged entries.
+</p>
+<p>
+Items in the cache older than <em class="parameter"><code>when</code></em> seconds may be
+flushed at any time.  Items are expired in a lazy
+manner, so it is indeterminate when the items will
+physically be removed.
+</p>
+<p>
+Note you can set both an age and an access limit.  The
+age acts as a hard limit on cache entries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cdc</code></em> :</span></p></td>
+<td> A <a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache"><span class="type">CamelDataCache</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>when</code></em> :</span></p></td>
+<td> Timeout for age expiry, or -1 to disable.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_set_expire_access ()">
+<a name="camel-data-cache-set-expire-access"></a><h3>camel_data_cache_set_expire_access ()</h3>
+<pre class="programlisting">void                camel_data_cache_set_expire_access  (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         time_t when);</pre>
+<p>
+Set the cache expiration policy for access times.
+</p>
+<p>
+Items in the cache which haven't been accessed for <em class="parameter"><code>when</code></em>
+seconds may be expired at any time.  Items are expired in a lazy
+manner, so it is indeterminate when the items will
+physically be removed.
+</p>
+<p>
+Note you can set both an age and an access limit.  The
+age acts as a hard limit on cache entries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cdc</code></em> :</span></p></td>
+<td> A <a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache"><span class="type">CamelDataCache</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>when</code></em> :</span></p></td>
+<td> Timeout for access, or -1 to disable access expiry.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_rename ()">
+<a name="camel-data-cache-rename"></a><h3>camel_data_cache_rename ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_data_cache_rename             (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cache,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *old,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *new,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Rename a cache path.  All cache items accessed from the old path
+are accessible using the new path.
+</p>
+<p>
+CURRENTLY UNIMPLEMENTED</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cache</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>old</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>new</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> -1 on error.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_add ()">
+<a name="camel-data-cache-add"></a><h3>camel_data_cache_add ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelStream.html#CamelStream" title="struct CamelStream">CamelStream</a> *       camel_data_cache_add                (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Add a new item to the cache.
+</p>
+<p>
+The key and the path combine to form a unique key used to store
+the item.
+</p>
+<p>
+Potentially, expiry processing will be performed while this call
+is executing.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cdc</code></em> :</span></p></td>
+<td> A <a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache"><span class="type">CamelDataCache</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> Relative path of item to add.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td> Key of item to add.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A CamelStream (file) opened in read-write mode.
+The caller must unref this when finished.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_get ()">
+<a name="camel-data-cache-get"></a><h3>camel_data_cache_get ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelStream.html#CamelStream" title="struct CamelStream">CamelStream</a> *       camel_data_cache_get                (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Lookup an item in the cache.  If the item exists, a stream
+is returned for the item.  The stream may be shared by
+multiple callers, so ensure the stream is in a valid state
+through external locking.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cdc</code></em> :</span></p></td>
+<td> A <a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache"><span class="type">CamelDataCache</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> Path to the (sub) cache the item exists in.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td> Key for the cache item.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A cache item, or NULL if the cache item does not exist.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_remove ()">
+<a name="camel-data-cache-remove"></a><h3>camel_data_cache_remove ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_data_cache_remove             (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Remove/expire a cache item.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cdc</code></em> :</span></p></td>
+<td> A <a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache"><span class="type">CamelDataCache</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_clear ()">
+<a name="camel-data-cache-clear"></a><h3>camel_data_cache_clear ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_data_cache_clear              (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cache,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Clear all items in a given cache path or all items in the cache.
+</p>
+<p>
+CURRENTLY_UNIMPLEMENTED</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cache</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> Path to clear, or NULL to clear all items in all paths.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> -1 on error.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_data_cache_get_filename ()">
+<a name="camel-data-cache-get-filename"></a><h3>camel_data_cache_get_filename ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_data_cache_get_filename       (<a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache">CamelDataCache</a> *cdc,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *path,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Lookup the filename for an item in the cache</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cdc</code></em> :</span></p></td>
+<td> A <a class="link" href="camel-CamelDataCache.html#CamelDataCache" title="CamelDataCache"><span class="type">CamelDataCache</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> Path to the (sub) cache the item exists in.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td> Key for the cache item.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The filename for a cache item
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

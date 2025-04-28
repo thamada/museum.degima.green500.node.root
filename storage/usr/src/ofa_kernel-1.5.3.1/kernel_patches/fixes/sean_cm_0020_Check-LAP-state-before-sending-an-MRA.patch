@@ -1,0 +1,60 @@
+From 50a025c69ee749d822c301f9bf63dee13c113680 Mon Sep 17 00:00:00 2001
+From: Sean Hefty <sean.hefty@intel.com>
+Date: Wed, 21 Jul 2010 23:36:52 +0000
+Subject: [PATCH] IB/cm: Check LAP state before sending an MRA
+
+NULL pointer dereferences in ib_cm_init_qp_attr() were seen by some
+users.  From a crash dump, I determined that we died in
+cm_init_qp_rts_attr() (it's inlined, so it doesn't show up in the
+traceback) on the line labeled below:
+
+static int cm_init_qp_rts_attr(struct cm_id_private *cm_id_priv,
+                               struct ib_qp_attr *qp_attr,
+                               int *qp_attr_mask)
+{
+        ........
+        if (cm_id_priv->id.lap_state == IB_CM_LAP_UNINIT) {
+                .....
+        } else {
+               *qp_attr_mask = IB_QP_ALT_PATH | IB_QP_PATH_MIG_STATE;
+               qp_attr->alt_port_num = cm_id_priv->alt_av.port->port_num; <-die
+
+
+The problem is that the rdma_cm can call ib_send_cm_mra() after a
+connection has been established.  The ib_cm incorrectly assumes that
+the MRA is in response to a LAP (load alternate path) message, even
+though no LAP message has been received.  The ib_cm needs to check the
+lap_state before sending an MRA if the cm_id state is established.
+
+Reported-by: Arthur Kepner <akepner@sgi.com>
+Reported-by: Josh England <jjengla@gmail.com>
+Signed-off-by: Sean Hefty <sean.hefty@intel.com>
+Signed-off-by: Roland Dreier <rolandd@cisco.com>
+---
+ drivers/infiniband/core/cm.c |   10 ++++++----
+ 1 files changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/infiniband/core/cm.c b/drivers/infiniband/core/cm.c
+index ad63b79..64e0903 100644
+--- a/drivers/infiniband/core/cm.c
++++ b/drivers/infiniband/core/cm.c
+@@ -2409,10 +2409,12 @@ int ib_send_cm_mra(struct ib_cm_id *cm_id,
+ 		msg_response = CM_MSG_RESPONSE_REP;
+ 		break;
+ 	case IB_CM_ESTABLISHED:
+-		cm_state = cm_id->state;
+-		lap_state = IB_CM_MRA_LAP_SENT;
+-		msg_response = CM_MSG_RESPONSE_OTHER;
+-		break;
++		if (cm_id->lap_state == IB_CM_LAP_RCVD) {
++			cm_state = cm_id->state;
++			lap_state = IB_CM_MRA_LAP_SENT;
++			msg_response = CM_MSG_RESPONSE_OTHER;
++			break;
++		}
+ 	default:
+ 		ret = -EINVAL;
+ 		goto error1;
+-- 
+1.7.0.4
+

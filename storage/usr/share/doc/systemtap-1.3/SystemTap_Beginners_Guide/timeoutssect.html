@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.3.4. Monitoring Polling Applications</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="mainsect-profiling.html" title="4.3. Profiling" /><link rel="prev" href="threadtimessect.html" title="4.3.3. Determining Time Spent in Kernel and User Space" /><link rel="next" href="topsyssect.html" title="4.3.5. Tracking Most Frequently Used System Calls" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="threadtimessect.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="topsyssect.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="4.3.4. Monitoring Polling Applications" id="timeoutssect" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="timeoutssect">4.3.4. Monitoring Polling Applications</h3></div></div></div><a id="id2133640" class="indexterm"></a><a id="id800860" class="indexterm"></a><a id="id795125" class="indexterm"></a><a id="id783274" class="indexterm"></a><div class="para">
+		This section describes how to identify and monitor which applications are polling. Doing so allows you to track unnecessary or excessive polling, which can help you pinpoint areas for improvement in terms of CPU usage and power savings.
+	</div><div class="formalpara" id="timeouts"><h5 class="formalpara">timeout.stp</h5>
+			
+<pre class="programlisting">
+#! /usr/bin/env stap
+# Copyright (C) 2009 Red Hat, Inc.
+# Written by Ulrich Drepper &lt;drepper@redhat.com&gt;
+# Modified by William Cohen &lt;wcohen@redhat.com&gt;
+
+global process, timeout_count, to
+global poll_timeout, epoll_timeout, select_timeout, itimer_timeout
+global nanosleep_timeout, futex_timeout, signal_timeout
+
+probe syscall.poll, syscall.epoll_wait {
+  if (timeout) to[pid()]=timeout
+}
+
+probe syscall.poll.return {
+  p = pid()
+  if ($return == 0 &amp;&amp; to[p] &gt; 0 ) {
+    poll_timeout[p]++
+    timeout_count[p]++
+    process[p] = execname()
+    delete to[p]
+  }
+}
+
+probe syscall.epoll_wait.return {
+  p = pid()
+  if ($return == 0 &amp;&amp; to[p] &gt; 0 ) {
+    epoll_timeout[p]++
+    timeout_count[p]++
+    process[p] = execname()
+    delete to[p]
+  }
+}
+
+probe syscall.select.return {
+  if ($return == 0) {
+    p = pid()
+    select_timeout[p]++
+    timeout_count[p]++
+    process[p] = execname()
+  }
+}
+
+probe syscall.futex.return {
+  if (errno_str($return) == "ETIMEDOUT") {
+    p = pid()
+    futex_timeout[p]++
+    timeout_count[p]++
+    process[p] = execname()
+  }
+}
+
+probe syscall.nanosleep.return {
+  if ($return == 0) {
+    p = pid()
+    nanosleep_timeout[p]++
+    timeout_count[p]++
+    process[p] = execname()
+  }
+}
+
+probe kernel.function("it_real_fn") {
+  p = pid()
+  itimer_timeout[p]++
+  timeout_count[p]++
+  process[p] = execname()
+}
+
+probe syscall.rt_sigtimedwait.return {
+  if (errno_str($return) == "EAGAIN") {
+    p = pid()
+    signal_timeout[p]++
+    timeout_count[p]++
+    process[p] = execname()
+  }
+}
+
+probe syscall.exit {
+  p = pid()
+  if (p in process) {
+    delete process[p]
+    delete timeout_count[p]
+    delete poll_timeout[p]
+    delete epoll_timeout[p]
+    delete select_timeout[p]
+    delete itimer_timeout[p]
+    delete futex_timeout[p]
+    delete nanosleep_timeout[p]
+    delete signal_timeout[p]
+  }
+}
+
+probe timer.s(1) {
+  ansi_clear_screen()
+  printf ("  pid |   poll  select   epoll  itimer   futex nanosle  signal| process\n")
+  foreach (p in timeout_count- limit 20) {
+     printf ("%5d |%7d %7d %7d %7d %7d %7d %7d| %-.38s\n", p,
+              poll_timeout[p], select_timeout[p],
+              epoll_timeout[p], itimer_timeout[p],
+              futex_timeout[p], nanosleep_timeout[p],
+              signal_timeout[p], process[p])
+  }
+}
+
+</pre>
+		</div><div class="para">
+		<a class="xref" href="timeoutssect.html#timeouts" title="timeout.stp">timeout.stp</a> tracks how many times each application used the following system calls over time:
+	</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+				<code class="command">poll</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">select</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">epoll</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">itimer</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">futex</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">nanosleep</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">signal</code>
+			</div></li></ul></div><div class="para">
+		In some applications, these system calls are used excessively. As such, they are normally identified as "likely culprits" for polling applications. Note, however, that an application may be using a different system call to poll excessively; sometimes, it is useful to find out the top system calls used by the system (refer to <a class="xref" href="topsyssect.html" title="4.3.5. Tracking Most Frequently Used System Calls">Section 4.3.5, “Tracking Most Frequently Used System Calls”</a> for instructions). Doing so can help you identify any additional suspects, which you can add to <a class="xref" href="timeoutssect.html#timeouts" title="timeout.stp">timeout.stp</a> for tracking.
+	</div><a id="id2210917" class="indexterm"></a><a id="id667120" class="indexterm"></a><a id="id2213851" class="indexterm"></a><div class="example" title="Example 4.16. timeout.stp Sample Output" id="timeoutsoutput"><h6>Example 4.16. <a class="xref" href="timeoutssect.html#timeouts" title="timeout.stp">timeout.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+  uid |   poll  select   epoll  itimer   futex nanosle  signal| process
+28937 | 148793       0       0    4727   37288       0       0| firefox
+22945 |      0   56949       0       1       0       0       0| scim-bridge
+    0 |      0       0       0   36414       0       0       0| swapper
+ 4275 |  23140       0       0       1       0       0       0| mixer_applet2
+ 4191 |      0   14405       0       0       0       0       0| scim-launcher
+22941 |   7908       1       0      62       0       0       0| gnome-terminal
+ 4261 |      0       0       0       2       0    7622       0| escd
+ 3695 |      0       0       0       0       0    7622       0| gdm-binary
+ 3483 |      0    7206       0       0       0       0       0| dhcdbd
+ 4189 |   6916       0       0       2       0       0       0| scim-panel-gtk
+ 1863 |   5767       0       0       0       0       0       0| iscsid
+ 2562 |      0    2881       0       1       0    1438       0| pcscd
+ 4257 |   4255       0       0       1       0       0       0| gnome-power-man
+ 4278 |   3876       0       0      60       0       0       0| multiload-apple
+ 4083 |      0    1331       0    1728       0       0       0| Xorg
+ 3921 |   1603       0       0       0       0       0       0| gam_server
+ 4248 |   1591       0       0       0       0       0       0| nm-applet
+ 3165 |      0    1441       0       0       0       0       0| xterm
+29548 |      0    1440       0       0       0       0       0| httpd
+ 1862 |      0       0       0       0       0    1438       0| iscsid
+</pre></div></div><br class="example-break" /><div class="para">
+		You can increase the sample time by editing the timer in the second probe (<code class="command">timer.s()</code>). The output of <a class="xref" href="mainsect-profiling.html#countcalls" title="functioncallcount.stp">functioncallcount.stp</a> contains the name and UID of the top 20 polling applications, along with how many times each application performed each polling system call (over time). <a class="xref" href="timeoutssect.html#timeoutsoutput" title="Example 4.16. timeout.stp Sample Output">Example 4.16, “timeout.stp Sample Output”</a> contains an excerpt of the script:
+	</div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="threadtimessect.html"><strong>Prev</strong>4.3.3. Determining Time Spent in Kernel and User ...</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="topsyssect.html"><strong>Next</strong>4.3.5. Tracking Most Frequently Used System Calls</a></li></ul></body></html>

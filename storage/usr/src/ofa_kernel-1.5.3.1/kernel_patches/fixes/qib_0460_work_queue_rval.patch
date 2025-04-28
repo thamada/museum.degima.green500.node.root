@@ -1,0 +1,52 @@
+commit 0aca4522fd6e2ec6e76b848f71760de6decc5492
+Author: Mike Marciniszyn <mike.marciniszyn@qlogic.com>
+Date:   Mon Dec 20 12:41:08 2010 -0500
+
+    IB/qib: Add return value testing for work queue creation
+    
+    The code ignored potentially NULL rvals.  This patch adds testing for NULL
+    and the appropriate failure branches at the end of qib_init().
+    
+    Signed-off-by: Mike Marciniszyn <mike.marciniszyn@qlogic.com>
+
+diff --git a/drivers/infiniband/hw/qib/qib_init.c b/drivers/infiniband/hw/qib/qib_init.c
+index 493e314..cc9ce5c 100644
+--- a/drivers/infiniband/hw/qib/qib_init.c
++++ b/drivers/infiniband/hw/qib/qib_init.c
+@@ -1098,7 +1098,16 @@ static int __init qlogic_ib_init(void)
+ 	 * removal.
+ 	 */
+ 	qib_wq = create_workqueue("qib");
++	if (!qib_wq) {
++		ret = -ENOMEM;
++		goto bail_trace;
++	}
++
+ 	qib_cq_wq = create_singlethread_workqueue("qib_cq");
++	if (!qib_cq_wq) {
++		ret = -ENOMEM;
++		goto bail_wq;
++	}
+ 
+ 	/*
+ 	 * These must be called before the driver is registered with
+@@ -1108,7 +1117,7 @@ static int __init qlogic_ib_init(void)
+ 	if (!idr_pre_get(&qib_unit_table, GFP_KERNEL)) {
+ 		printk(KERN_ERR QIB_DRV_NAME ": idr_pre_get() failed\n");
+ 		ret = -ENOMEM;
+-		goto bail_trace;
++		goto bail_cq_wq;
+ 	}
+ 
+ 	if (qib_wc_pat) {
+@@ -1138,6 +1147,10 @@ bail_unit:
+ 	idr_destroy(&qib_unit_table);
+ bail_trace:
+ 	qib_trace_fini();
++bail_cq_wq:
++	destroy_workqueue(qib_cq_wq);
++bail_wq:
++	destroy_workqueue(qib_wq);
+ bail_dev:
+ 	qib_dev_cleanup();
+ bail:

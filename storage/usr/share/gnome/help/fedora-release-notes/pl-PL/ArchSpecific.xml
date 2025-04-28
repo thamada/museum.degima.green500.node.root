@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Architecture_Specific_Notes" lang="pl-PL">
+	<title>Informacje specyficzne dla różnych architektur</title>
+	<remark>Ta treść znajduje się tutaj: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific">https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific</ulink></remark>
+	<para>
+		Ta sekcja dostarcza informacji, które są specyficzne dla obsługiwanych architektur Fedory.
+	</para>
+	<section id="sect-Release_Notes-Architecture_Specific_Notes_686">
+		<title>Podstawa 32 bitów została zmieniona na i686</title>
+		<para>
+			Fedora 11 posiadała i586 jako podstawę 32 bitowej architektury x86.
+		</para>
+		<para>
+			W Fedorze 12 przełączono na i686 jako podstawową architekturę (zawierającą CMOV), zoptymalizowaną dla procesorów Atom.
+		</para>
+		<para>
+			Oznacza to utratę obsługi następujących rodzin procesorów: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Intel i586 (wszystkie)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Procesory Geode firmy National Semiconductor
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						VIA C3 (rdzenie Ezra i Samuel)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						AMD Geode GX
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>
+			AMD Geode LX (używany w laptopach XO fundacji OLPC) i późniejsze procesory Geode NX powinny nadal działać. Zainteresowani oczywiście mogą utworzyć drugorzędną architekturę dla starszych procesorów
+		</para>
+		<para>
+			Zalety: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Szybsze pliki binarne na głównych architekturach (Pentium M, Via C7, wszystkie architektury 64 bitowe, Atom)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Realistycznie od dawna nie obsługiwano i586. Teraz jest to bardziej logiczne.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Mniej budowanych wersji jądra
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<!-- 	<xi:include href="ArchSpecific-PPC.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+	<xi:include href="ArchSpecific-x86.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+	<xi:include href="ArchSpecific-x86_64.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+ -->
+</section>
+
+

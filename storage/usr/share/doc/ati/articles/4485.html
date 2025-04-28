@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>Installing the ATI Proprietary Linux Driver</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.2  (Linux)">
+	<META NAME="CREATED" CONTENT="20050808;16203600">
+	<META NAME="CHANGED" CONTENT="20050808;16235700">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<TABLE WIDTH=846 BORDER=1 CELLPADDING=2 CELLSPACING=3 FRAME=VOID RULES=COLS BGCOLOR="#ffffff" STYLE="page-break-before: always">
+	<COL WIDTH=36>
+	<COL WIDTH=78>
+	<COL WIDTH=3>
+	<COL WIDTH=43>
+	<COL WIDTH=3>
+	<COL WIDTH=271>
+	<COL WIDTH=16>
+	<COL WIDTH=337>
+	<TBODY>
+		<TR>
+			<TD COLSPAN=8 WIDTH=836>
+				<P><FONT SIZE=4><B>How can I configure multiple monitors in
+				Linux?</B></FONT></P>
+				<P>The ATI Proprietary Linux driver provides support for a wide
+				variety of monitor configurations. The following <TT>fglrxconfig</TT>
+				options can be used to configure displays:</P>
+				<UL>
+					<LI><P STYLE="margin-bottom: 0in">Enable TV Out (if one of the
+					displays is a TV) 
+					</P>
+					<UL>
+						<LI><P STYLE="margin-bottom: 0in">Yes or No 
+						</P>
+					</UL>
+					<LI><P STYLE="margin-bottom: 0in">Select Monitor configuration 
+					</P>
+					<UL>
+						<LI><P STYLE="margin-bottom: 0in">See below for available
+						configurations 
+						</P>
+					</UL>
+					<LI><P STYLE="margin-bottom: 0in">Configure monitor arrangement
+					(if more than one monitor is connected) 
+					</P>
+					<UL>
+						<LI><P STYLE="margin-bottom: 0in">Horizontal: select whether
+						screen 1 is left or right of screen 0 
+						</P>
+						<LI><P STYLE="margin-bottom: 0in">Vertical: select whether
+						screen 1 is above or below screen 0 
+						</P>
+					</UL>
+					<LI><P STYLE="margin-bottom: 0in">Set Primary and Secondary
+					monitors 
+					</P>
+					<UL>
+						<LI><P STYLE="margin-bottom: 0in">Secondary monitor may not
+						have all the same features as Primary 
+						</P>
+					</UL>
+					<LI><P STYLE="margin-bottom: 0in">Choose available resolutions 
+					</P>
+					<UL>
+						<LI><P>These should not exceed the capabilities of your monitor
+												</P>
+					</UL>
+				</UL>
+				<P>Simply run 
+				</P>
+				<PRE STYLE="margin-bottom: 0.2in">fglrxconfig</PRE><P>
+				and provide the desired answers at the appropriate prompts.
+				Answer yes when asked to update the XF86Config file. Your new
+				settings should take effect the next time you start X.</P>
+				<P><B>Monitor Layout Configurations</B></P>
+				<P>The following Monitor configurations are available:</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD ROWSPAN=6 WIDTH=36 VALIGN=TOP></TD>
+			<TH COLSPAN=2 WIDTH=88 BGCOLOR="#ececec">
+				<P>Mode</P>
+			</TH>
+			<TH COLSPAN=2 WIDTH=54 BGCOLOR="#ececec">
+				<P>Screens</P>
+			</TH>
+			<TH COLSPAN=2 WIDTH=294 BGCOLOR="#ececec">
+				<P>Description</P>
+			</TH>
+			<TD ROWSPAN=6 WIDTH=337 VALIGN=TOP></TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD COLSPAN=2 WIDTH=88>
+				<P>Single Head</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=54>
+				<P ALIGN=CENTER>1</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=294>
+				<P>single display only, the second remains dark</P>
+			</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD COLSPAN=2 WIDTH=88>
+				<P>Laptop Mode</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=54>
+				<P ALIGN=CENTER>2</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=294>
+				<P>toggle between internal or external screen</P>
+			</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD COLSPAN=2 WIDTH=88>
+				<P>Clone Mode</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=54>
+				<P ALIGN=CENTER>2</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=294>
+				<P>same content on both screens</P>
+			</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD COLSPAN=2 WIDTH=88>
+				<P>Big Desktop</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=54>
+				<P ALIGN=CENTER>2</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=294>
+				<P>one desktop stretched across both screens</P>
+			</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD COLSPAN=2 WIDTH=88>
+				<P>Dual Head</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=54>
+				<P ALIGN=CENTER>2</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=294>
+				<P>separate instances of XFree86 on each screen</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=8 WIDTH=836>
+				<P>For Big Desktop and Dual Head modes, a vertical or horizontal
+				orientation can be selected. In some cases, it is also possible
+				to select which monitor will be Primary and which will be
+				Secondary.</P>
+				<P>Some of these configurations allow for extremely large desktop
+				resolutions. Please note the maximum resolutions for OpenGL
+				operation are as follows:</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD ROWSPAN=3 WIDTH=36 VALIGN=TOP></TD>
+			<TH WIDTH=78 BGCOLOR="#ececec">
+				<P>Resolution</P>
+			</TH>
+			<TH COLSPAN=2 WIDTH=53 BGCOLOR="#ececec">
+				<P>Family</P>
+			</TH>
+			<TH COLSPAN=2 WIDTH=281 BGCOLOR="#ececec">
+				<P>Boards</P>
+			</TH>
+			<TD ROWSPAN=3 COLSPAN=2 WIDTH=361 VALIGN=TOP></TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD WIDTH=78>
+				<P ALIGN=CENTER>2560x2560</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=53>
+				<P ALIGN=CENTER>R300</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=281>
+				<P>Radeon 9500-9800, FireGL Z1/X1/X2</P>
+			</TD>
+		</TR>
+	</TBODY>
+	<TBODY>
+		<TR>
+			<TD WIDTH=78>
+				<P ALIGN=CENTER>2048x2048</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=53>
+				<P ALIGN=CENTER>R200</P>
+			</TD>
+			<TD COLSPAN=2 WIDTH=281>
+				<P>Radeon 8500-9200, FireGL 8700/8800/E1</P>
+			</TD>
+		</TR>
+		<TR>
+			<TD COLSPAN=8 WIDTH=836>
+				<P>3D windows may corrupt or go blank if stretched beyond this
+				limit.</P>
+				<P>The various monitor layout configurations have the following
+				features and limitations:</P>
+				<BLOCKQUOTE>Single Head</BLOCKQUOTE>
+				<UL>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Single monitor
+					operation only 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">If a second monitor
+					is connected, it remains dark 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Only mode available
+					if you have only one monitor connected 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Only mode in which
+					Quad Buffer Stereo will work properly 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE>The only mode in which full overlay support will
+					be available 
+					</BLOCKQUOTE>
+				</UL>
+				<BLOCKQUOTE>Clone</BLOCKQUOTE>
+				<UL>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Contents of primary
+					monitor are duplicated on the second monitor 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">If one of the
+					monitors cannot display the selected resolution: 
+					</BLOCKQUOTE>
+					<UL>
+						<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">A lower resolution
+						is automatically selected for that monitor 
+						</BLOCKQUOTE>
+						<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">It will behave as a
+						virtual desktop at the original resolution 
+						</BLOCKQUOTE>
+						<LI><BLOCKQUOTE>The smaller screen will pan as the mouse moves
+						around 
+						</BLOCKQUOTE>
+					</UL>
+				</UL>
+				<BLOCKQUOTE>Big Desktop</BLOCKQUOTE>
+				<UL>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">A single desktop is
+					stretched across both monitors 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Monitors may overlap
+					by a configurable number of pixels 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Both monitors have to
+					operate with the same video mode settings 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Both screens use a
+					single framebuffer and only one window manager 
+					</BLOCKQUOTE>
+					<UL>
+						<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">The smaller display
+						will NOT autoscroll as in Clone Mode 
+						</BLOCKQUOTE>
+					</UL>
+					<LI><BLOCKQUOTE>Big Desktop can be configured for Horizontal or
+					Vertical operation 
+					</BLOCKQUOTE>
+				</UL>
+				<BLOCKQUOTE>Dual Head</BLOCKQUOTE>
+				<UL>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Independent displays
+					and video modes are possible for each monitor 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Each monitor uses a
+					separate framebuffer and separate instance of XFree86 
+					</BLOCKQUOTE>
+					<UL>
+						<LI><BLOCKQUOTE STYLE="margin-bottom: 0in">Items CANNOT be
+						dragged from one screen to the other 
+						</BLOCKQUOTE>
+					</UL>
+					<LI><BLOCKQUOTE>It is possible to run two separate window
+					managers in this configuration<BR>(one on each monitor) 
+					</BLOCKQUOTE>
+					<LI><BLOCKQUOTE>Please note that fireglcontrol panel cannot be
+					used to configure Dual Head mode.<BR>Dual Head mode must be
+					configured manually or through fglrxconfig. 
+					</BLOCKQUOTE>
+				</UL>
+				<P>INFO-BASE#4485</P>
+				<P>&nbsp;</P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

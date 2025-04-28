@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<chapter id="ipc-network">
+  <title>IPC und Netzwerk</title>
+
+<section id="clipboard">
+  <title>Zwischenablagen und Ziehen-und-Ablegen</title>
+
+  <para>Wenn Benutzer mit immer mehr Datentypen in verschiedenen Anwendungen arbeiten, entwickelt sich häufig Bedarf an Möglichkeiten zum Austausch von Daten und Objekten zwischen ihren Anwendungen. GNOME unterstützt zwei Methoden für die Datenübertragung zwischen Anwendungen: Zum einen das Ziehen-und-Ablegen, zum anderen das Kopieren in eine un d Einfügen aus einer systemweiten Zwischenablage. Sowohl die Zwischenablage als auch Ziehen-und-Ablegen funktionieren über Anwendungsgrenzen hinweg, einschließlich mit Anwendungen, die nicht mit GNOME entwickelt wurden.</para>
+
+  <para>Die Zwischenablage wird verwendet, wenn der Benutzer explizit Daten in einer Anwendung kopiert. Die Anwendung nimmt die Zwischenablage dann »in Beschlag«. Wenn der Benutzer Daten aus der Zwischenablage in eine andere Anwendung einfügt, erfragt diese die Daten aus der Zwischenablage, die von der ersten Anwendung stammen. Die Operationen der Zwischenablage werden durch GTK+ vollständig untertsützt.</para>
+
+  <para>Ziehen-und-Ablegen funktioniert ähnlich. Allerdings ist es nötig, dass der Mauszeiger seine Form ändert, sobald er über mögliche Ablageziele bewegt wird. Wenn eine Anwendung erkennt, dass während einer Aktion zum Ablegen sich der Mauszeiger über ihr befindet, muss sie die Form des Mauszeigers entsprechend aktualisieren, um anzugeben, ob das Ablegen an der jeweiligen Stelle möglich ist oder nicht. GTK+ stellt Unterstützung für Ziehen-und-Ablegen über eine hochentwickelte Schnittstelle bereit und erleichtert die Verwaltung von Ablagezielen in Ihrer Anwendung dadurch wesentlich.</para>
+
+  <para>Sowohl die Zwischenablage als auch das Ziehen-und-Ablegen erfordern Verhandlungen über die Inhalte. Wenn eine Anwendung Daten anbietet, zeigt sie an, welche Formate für diese Daten verfügbar sind. Die empfangenden Anwendungen können die verwertbaren Formate abfragen. Wenn beispielsweise ein Benutzer Text aus einem Webbrowser kopiert, dann bittet eine Textverarbeitung um den Empfang der Daten in HTML, während ein gewöhnlicher Texteditor dir Daten als reinen Text ohne Formatierung empfangen kann.</para>
+
+  <para>Sie sollten die Funktionalität zum Ziehen-und-Ablegen für jegliche Daten anbieten, mit denen Ihre Anwendung umgehen kann. Die Zwischenablage und das Ziehen-und-Ablegen sind für weitaus mehr als nur für reinen Text zu gebrauchen. Auch Dateien, Grafiken und Klänge sind Beispiele für mögliche zwischen Anwendungen übertragbare Daten. Wenn Sie GTK+ verwenden, erhalten Sie automatisch Unterstützung für das Ziehen-und-Ablegen in Textdarstellungen, Farbknöpfen, Dateiwählern und anderen in der Schnittstelle eingebauten Bedienelementen. Sie sollten die Schnittstellen in GTK+ verwenden, um Unterstützung für alle Daten in Ihrer Anwendung anzubieten.</para>
+
+  <para>Weitere Informationen finden Sie in <ulink url="http://www.newplanetsoftware.com/xdnd/">Drag-and-Drop Protocol for the X Window System</ulink>, <ulink url="http://standards.freedesktop.org/clipboards-spec/clipboards-latest.txt">X Clipboard Explanation</ulink>, und <ulink url="http://freedesktop.org/wiki/ClipboardManager">The Clipboard Manager Specification</ulink>.</para>
+</section>
+
+<section id="dbus">
+  <title>D-BUS-Benachrichtigung</title>
+
+  <para>D-BUS ist ein plattformübergreifendes Nachrichtensystem zum Senden von Ereignismeldungen zwischen verschiedenen Anwendungen sowie den eingebauten Komponenten des Systems. D-BUS stellt eine einfache Schnittstelle zum Senden von Nachrichten zu bestimmten Diensten und für die Verbreitung von Meldungen an alle interessierten Dienste dar. D-BUS ermöglicht die Kommunikation zwischen verschiedenen Anwendungstypen und deren gemeinsame Integration in den Desktop, wobei eine bessere Interaktion durch den Benutzer erreicht wird.</para>
+
+  <para>D-Bus provides a session and a system bus.  The session bus is
+  used by applications in a single user session, allowing them to share
+  data and event notifications and to integrate into the user's desktop.
+  For example, movie players can send a D-Bus message to prevent the
+  screensaver from activating when the user is watching a movie.</para>
+
+  <para>The system bus is a single message bus which runs independently of
+  any user sessions.  It can communicate with applications in any session,
+  enabling those applications to interact with system components without
+  dealing with low-level system details.  The system bus is used to provide
+  important functionality that users expect to work on their systems.  For
+  example, the system bus is used to monitor when network interfaces go up
+  or down, when external drives get plugged in, and when laptop batteries
+  are low.</para>
+
+  <para>D-Bus is developed jointly on <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink>, so you can
+  use it with different desktop environments and applications.  Because
+  D-Bus is a cross-desktop project, you use it to create portable and
+  versatile software that seamlessly integrates with the user's desktop,
+  regardless of which desktop it is.</para>
+
+  <para>Weitere Informationen über D-Bus finden Sie im <ulink url="http://dbus.freedesktop.org/doc/dbus-tutorial.html">D-BUS-Tutorial</ulink> und der <ulink url="http://dbus.freedesktop.org/doc/dbus-specification.html">D-BUS-Spezifikation</ulink>.</para>
+</section>
+
+<section id="bonobo-corba">
+  <title>Bonobo und CORBA</title>
+
+  <para>Bonobo ist ein Framework zur Erzeugung wiederverwendbarer Komponenten für Anwendungen. Aufsetzend auf dem Industriestandard »Common Object Request Broker Architecture« (CORBA), stellt Bonobo alle gemeinsamen Schnittstellen zur Erzeugung und einfachen Verarbeitung von Komponenten in GNOME-Anwendungen zur Verfügung.</para>
+
+  <para>Bonobo-Komponenten können in einer Vielzahl von Situationen verwendet werden und helfen Ihnen bei der Erstellung flexibler und erweiterbarer Software. Wenn beispielsweise eine Komponente zur Darstellung von Multimedia-Inhalten in einer Textverarbeitung entwickelt e'wird, so kann die Textverarbeitung nun auch mit solchen Inhalten umgehen, ohne dass die Textverarbeitung direkt damit arbeiten muss. Bonobo-Komponenten werden auch zur Einbettung von Applets in das GNOME-Panel verwendet. Die Verwendung von Bonobo erlaubt die effektive Kommunikation der Applets mit dem Panel, was einer konsistenten Benutzeroberfläche zugute kommt.</para>
+
+  <para>Bonobo-Komponenten sind nicht auf grafische Bedienelemente beschränkt. Bonobo wird von Evolution, der E-Mail- und Groupware-Suite von GNOME verwendet, um den Benutzerzugriff auf Adressbuch und Kalender zu ermöglichen. Dadurch kann der Benutzer alle seine Informationen an einer zentralen Stelle speichern, worauf alle Anwendungen zugreifen können.</para>
+
+  <para>Bonobo wird außerhalb von CORBA erstellt, was die Ausführung von Komponenten als separate Prozesse erlaubt. Komponenten können in verschiedenen Sprachen geschrieben werden und auf verschiedene Laufzeitumgebungen aufsetzen. Es ist lediglich erforderlich, sie mit einer Schnittstelle gemäß der »Interface Definition Language« (IDL) zu verknüpfen. Das flexible Design von CORBA ermöglicht die Ausführung von Komponenten auf separaten Rechnern in einem Netzwerk.</para>
+
+  <para>GNOME stellt seine eigene und ressourcenschonende CORBA-Implementation mit ORBit bereit. Die in GNOME enthaltenen Werkzeuge und Bibliotheken ermöglichen das effektive Schreiben von Komponenten in C, einer Sprache, die für andere CORBA-Implementationen oft nicht verfügbar ist. ORBit ist eine unglaublich schnelle CORBA-Implementation.</para>
+
+  <para>Bonobo helps fill the gaps in CORBA, providing the additional
+  interfaces and specifications needed to support consistent components.
+  Although you will rarely need to use CORBA without Bonobo, it can be
+  used directly.  For instance, GNOME's accessibility infastructure uses
+  CORBA to allow assistive tools to inspect and interact with running
+  applications.</para>
+
+  <para>You may wish to use Bonobo to provide complex graphical components
+  that can be embedded into applications.  For most IPC needs, however,
+  GNOME is moving towards D-Bus, as integrating D-Bus into applications
+  is considerably easier.</para>
+
+  <para>Weitere Informationen über Bonobo finden Sie im <ulink url="http://library.gnome.org/devel/libbonobo/stable/">Libbonobo-Referenzhandbuch</ulink> und <ulink url="http://library.gnome.org/devel/libbonoboui/stable/">LibbonoboUI-Referenzhandbuch</ulink>. Informationen über ORBit, die CORBA-Implementation von GNOME, sind im <ulink url="http://library.gnome.org/devel/ORBit2/stable/">ORBit2-Referenzhandbuch</ulink> verfügbar.</para>
+</section>
+
+<section id="dns-sd">
+  <title>Dienste</title>
+
+  <para>DNS Service Discovery, or Zeroconf, is a technology for automatically
+  locating available services on a network.  Zeroconf allows users to access
+  network resources without having to provide explicit addresses or configure
+  their applications manually.</para>
+
+  <para>DNS Service Discovery is already used in numerous places throughout
+  GNOME, and further support will be added in the future.  For example,
+  <application>Nautilus</application>, the GNOME file manager, uses DNS
+  Service Discovery to locate various file servers on the local network.
+  <application>Ekiga</application>, the videoconferencing and telephony
+  application in GNOME, can locate and publish the user's presence and
+  locate other users on a local network using DNS Service Discovery.</para>
+
+  <para>Full DNS Service Discovery support is provided by the Avahi library.
+  For more information on Avahi, visit <ulink url="http://avahi.org/">the
+  Avahi web site</ulink>.</para>
+</section>
+
+<section id="xml-web-services">
+  <title>XML und Web-Dienste</title>
+
+  <para>In unserer sich immer mehr vernetzenden Welt steigt die Anzahl der Anwendungen, die Unterstützung für Webdienste benötigen. Manchmal fügen Webdienste nur einfache Funktionalitäten hinzu, während sie bei anderen Anwendungen die Kernfunktion darstellen. Anwendungen, die eine für sich stehende Bedienbarkeit bereits über Jahre hinweg anbieten, finden innovative Betätigungsfelder in Webdiensten.</para>
+
+  <para>Die GNOME-Plattform bietet Unterstützung sowohl für die Nutzung von Webdiensten aus Ihrer Anwendung heraus, als auch umfassende Bibliotheken für die Verarbeitung, Verwaltung und Umwandlung von XML, der Sprache des Webs. </para>
+
+  <section id="libsoup">
+    <title>SOAP</title>
+
+    <para>Mit der libsoup-Bibliothek stellt GNOME Unterstützung für SOAP bereit, ein oft verwendetes Protokoll für die Übertragung von XML-Meldungen über HTTP. SOAP erlaubt Entwicklern die Bereitstellung einer Web-Schnittstelle, die dann von Anwendungen zum Abrufen von Informationen, Senden von Daten, für Transaktionen oder jeden anderen verfügbaren Dienst verwendet werden kann.</para>
+
+    <para>SOAP kann zum Suchen und Abrufen von Informationen verewendet werden, zur Interaktion mit einem Online-Speicher, zur Verwaltung von Benutzerkonten auf anderen Systemen und für viele andere Zwecke. Webdienste stellen mehr und mehr grundlegende Funktionen für Benutzer bereit. Anwendungen, die SOAP verwenden, können die Integration und Bedienbarkeit für Benutzer verbessern.</para>
+
+    <para>Die libsoup-Bibliothek enthält eine HTTP-Implementation sowie eine Reihe von Schnittstellen für die Konstruktion und Verarbeitung von SOAP-Meldungen. Sie erlaubt die sichere Legitimierung, so dass Webdienste auf private Benutzerkonten über eine sichere Verbindung zugreifen können. Die Verwendung von libsoup ermöglicht den leichten Zugriff auf Webdienste ohne manuelles Parsen und Interpretieren der durch SOUP gesendeten Meldungen.</para>
+
+    <para>Weitere Informationen über libsoup finden Sie im <ulink url="http://library.gnome.org/devel/libsoup/stable/">libsoup-Referenzhandbuch</ulink>.</para>
+  </section>
+
+  <section id="libxml2">
+    <title>XML-Verarbeitung</title>
+
+    <para>Seit seiner formellen Einführung im Jahre 1998 wird XML (eXtensible Markup Language) in einer ständig steigenden Zahl von Anwendungen verwendet. XML hat einen sehr weit gefassten Anwendungsbereich, der von Dokumentformaten wie XHTML und DocBook bis hin zu Internetprotokollen wie SOAP und Jabber reicht. XML verfügt über eine saubere und einfache Syntax, wodurch sich Anwendungen auf Ihre speziellen Bedürfnisse zuschneiden lassen.</para>
+
+    <para>GNOME wird mit der libxml2-Bibliothek geliefert und verwendet diese sehr intensiv im gesamten Desktop. Die libxml2-Bibliothek ist eine schnelle und vollständig standardkonforme Bibliothek zur XML-Verarbeitung und stellt alles Nötige zur Verfügung, was für die Verwendung von XML in Ihrer Anwendung erforderlich ist.</para>
+
+    <para>Die libxml2-Bibliothek stellt eine Reihe von Schnittstellen für die Arbeit mit XML bereit. Sie können das verwenden, was für Ihre Anwendungsentwicklung am besten geeignet ist. Zusätzlich zum eigentlichen Schnittstellenbaum bietet libxml2 auch die Callback-basierte SAX2-Schnittstelle, Lese- und Schreibschnittstellen für XML-Datenströme und eine vollständige Unterstützung für XPath.</para>
+
+    <para>Zusätzlich zur DTD-Unterstützung kann die Validierung von Dokumenten mittels RELAX NG erfolgen. Dies erlaubt Ihnen ein flexibleres Validierungsmodell und trotzdem eine einfache Verwendung. XML Schema wird teilweise unterstützt, die neue Schema-Sprache des W3C.</para>
+
+    <para>Sie sollten libxml2 verwenden, wo immer Sie in Ihrer Anwendung direkt mit XML arbeiten. Die Verwendung von libxml2 stellt sicher, dass das Parsen, die Verarbeitung und die Ausgabe von XML standardkonform erfolgt. Damit dürfte der Ärger über Inkompatibilitäten zwischen Anwendungen ein Ende haben.</para>
+
+    <para>Weitere Informationen über libxml2 finden Sie in <ulink url="http://xmlsoft.org/tutorial/index.html">The Libxml Tutorial</ulink> und <ulink url="http://xmlsoft.org/html/libxml-lib.html">The Reference Manual for libxml2</ulink>.</para>
+  </section>
+
+  <section id="libxslt">
+    <title>Umwandlung von XML mittels XSLT</title>
+
+    <para>XSLT ist eine XML-basierte Sprache zur Umwandlung von XML in andere Formate. XSLT ist vorlagenbasiert, was Ihnen die Auswahl bestimmter XML-Elementtypen und deren entsprechende Ausgabe ermöglicht. Basierend auf XML und XPath hilft XSLT Entwicklern bei der Erzeugung sauberer und modularisierter, zur jeweiligen Anwendung passender Vorlagen für die Umwandlung eines XML-Dialekts in ein anderes Format.</para>
+
+    <para>GNOME wird mit der libxslt-bibliothek geliefert, einer vollständigen Umsetzung des XSLT-Standards. Die libxslt-Bibliothek setzt auf die Unterstützung für XML und XPath in libxml2 auf, wodurch sie schnell und standardkonform ist.</para>
+
+    <para>Sie sollten libxslt verwenden, um XML-Dokumente umzuwandeln. Obwohl XSLT nicht immer der perfekte Weg für die Verarbeitung von XML ist, so kann damit doch oft die Entwicklung vereinfacht werden. Seit es libxslt ermöglicht, Funktionen und Elemente als Erweiterungen einzubinden, können Sie es besser an Ihre Anwendung anpassen.</para>
+
+    <para>Weitere Informationen über libxslt finden Sie in <ulink url="http://xmlsoft.org/XSLT/html/index.html">The XSLT C library for Gnome</ulink>.</para>
+  </section>
+</section>
+
+</chapter>

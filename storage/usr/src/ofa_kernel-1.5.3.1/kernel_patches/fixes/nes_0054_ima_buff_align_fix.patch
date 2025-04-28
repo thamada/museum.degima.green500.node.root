@@ -1,0 +1,21 @@
+diff --git a/drivers/infiniband/hw/nes/nes_ud.c b/drivers/infiniband/hw/nes/nes_ud.c
+index 0ceb9a2..d0af571 100644
+--- a/drivers/infiniband/hw/nes/nes_ud.c
++++ b/drivers/infiniband/hw/nes/nes_ud.c
+@@ -1595,6 +1595,7 @@ int nes_ud_post_recv(struct nes_ud_file *file,
+ 		page_id = ((mr->va & ~PAGE_MASK) + mr_offset) >> PAGE_SHIFT;
+ 
+ 		nic_rqe->wqe_words[NES_NIC_RQ_WQE_LENGTH_3_2_IDX] = 0;
++		nic_rqe->wqe_words[NES_NIC_RQ_WQE_LENGTH_1_0_IDX] = 0;
+ 
+ 		wqe_fragment_length =
+ 		(u16 *)&nic_rqe->wqe_words[NES_NIC_RQ_WQE_LENGTH_1_0_IDX];
+@@ -1612,7 +1613,7 @@ int nes_ud_post_recv(struct nes_ud_file *file,
+ 			NES_NIC_RQ_WQE_FRAG0_LOW_IDX + 2*wqe_fragment_index,
+ 				  mr->addrs[page_id]+page_offset);
+ 
+-			if (remaining_length >= PAGE_SIZE)
++			if (remaining_length >= (PAGE_SIZE - page_offset))
+ 				wqe_fragment_length[wqe_fragment_index] =
+ 					cpu_to_le16(PAGE_SIZE - page_offset);
+ 			else

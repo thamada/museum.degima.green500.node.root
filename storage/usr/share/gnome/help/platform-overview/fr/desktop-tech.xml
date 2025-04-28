@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<chapter id="desktop-tech">
+  <title>Technologies du bureau</title>
+
+<section id="applications-mime">
+  <title>Registres d'applications et de types de fichiers</title>
+  <para>Pour que les applications soient utiles, il faut que les utilisateurs puissent les trouver et les lancer. Dans l'environnement de bureau GNOME, les utilisateurs peuvent lancer les applications par le menu Applications ou en ouvrant les fichiers dans le gestionnaire de fichiers. GNOME permet l'enregistrement des applications et des types de fichiers lors de l'installation des applications. Ces mécanismes sont spécifiés dans <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink>. Ainsi, les mêmes données permettent de faire fonctionner une application dans d'autres environnements de bureau.</para>
+
+  <para>L'ajout d'une application se résume simplement à la mise à disposition d'un fichier .desktop contenant les informations nécessaires. Ces fichiers utilisent une syntaxe simple sur le principe clé-valeur, avec la possibilité supplémentaire de fournir le contenu traduit de certaines valeurs. Le fichier .desktop d'une application doit contenir les informations suivantes :</para>
+
+  <itemizedlist>
+    <listitem><para>un nom et un commentaire, traduits dans autant de langues que l'application peut prendre en charge ;</para></listitem>
+    <listitem><para>une liste de catégories, provenant d'une liste définie, utilisée pour placer l'application dans le menu Applications ;</para></listitem>
+    <listitem><para>une icône, soit sous la forme d'un chemin d'accès absolu ou comme un simple nom correspondant au système de thème d'icône ;</para></listitem>
+    <listitem><para>une liste de types de fichiers pris en charge par l'application ;</para></listitem>
+    <listitem><para>la commande nécessaire au lancement de l'application.</para></listitem>
+  </itemizedlist>
+
+  <para>Si l'application gère des types de fichiers personnalisés qui ne sont pas encore connus du système, il est nécessaire d'ajouter ces types dans le registre des types de fichiers. Tous les types de fichiers sont accessibles au travers des types MIME. Par exemple, les fichiers audio Ogg Vorbis possèdent le type MIME <literal>application/ogg</literal>. Pour ajouter un type MIME, vous devez fournir une description du type au moyen d'un fichier d'informations MIME XML. Ces fichiers fournissent un nom traduit pour le type ainsi que des informations sur la manière de déterminer le type d'un fichier, soit en relation avec le nom du fichier, soit en examinant le contenu du fichier.</para>
+
+  <para>Pour plus d'informations sur les applications, consultez <ulink url="http://standards.freedesktop.org/desktop-entry-spec/latest/">The Desktop Entry Specification</ulink> et <ulink url="http://standards.freedesktop.org/menu-spec/latest/">The Desktop Menu Specification</ulink>. Pour plus d'informations sur les types de fichiers, consultez <ulink url="http://standards.freedesktop.org/shared-mime-info-spec/latest/">The Shared MIME Info Specification</ulink>.</para>
+</section>
+
+<section id="panel-applets">
+  <title>Applets de tableau de bord</title>
+  <para>Le bureau GNOME comporte des tableaux de bord souples et puissants, auxquels les utilisateurs peuvent ajouter de petites applications appelées applets de tableau de bord. Celles-ci donnent un accès rapide à toutes sortes d'informations et de fonctionnalités utiles. Par exemple, le bureau GNOME est livré entre autres avec des applets de tableau de bord pour passer d'une fenêtre à l'autre ou d'un espace de travail à un autre, pour afficher les prévisions météos et pour afficher l'activité du réseau.</para>
+
+  <para>Une applet de tableau de bord peut augmenter les fonctionnalités d'une application, ou elle peut constituer une application en soi. Si le seul but est d'afficher brièvement des notifications, il est alors préférable d'utiliser la zone de notifications, qui apparaît également dans le tableau de bord de l'utilisateur. L'utilisation d'applets de tableau de bord devrait être réservée aux cas où il s'agit d'offrir des fonctionnalités plus riches que la zone de notification.</para>
+
+  <para>Les applets de tableau de bord sont des processus indépendants qui utilisent Bonobo pour communiquer avec le tableau de bord. Bonobo permet aux applets de s'intégrer au tableau de bord afin de présenter une interface utilisateur cohérente. Par exemple, le menu contextuel de chaque applet de tableau de bord contient des éléments standards pour enlever, déplacer et verrouiller l'applet. Chaque applet peut ajouter ensuite ses propres éléments au menu contextuel pour effectuer d'autres actions. Par exemple, l'applet de tableau de bord <application>Bulletin météo</application> dispose d'éléments de menu contextuel pour afficher un bulletin détaillé et pour mettre à jour les informations affichées.</para>
+
+  <para>Pour plus d'informations sur les applets de tableau de bord, consultez <ulink url="http://library.gnome.org/devel/panel-applet/stable/">The Panel Applet Library</ulink>.</para>
+</section>
+
+<section id="nofication-area">
+  <title>Zone de notification</title>
+  <para>En plus des lanceurs et des applets de tableau de bord, le tableau de bord GNOME comporte aussi une zone de notifications que les applications peuvent exploiter pour signaler des événements aux utilisateurs. Les notifications peuvent être utiles pour avertir de l'arrivée de nouveaux courriels, de mises à jour disponibles, de rendez-vous imminents ou pour tout autre événement.</para>
+
+  <para>Les notifications sont de simples icônes qu'une application peut placer dans la zone de notification sur le tableau de bord des utilisateurs. L'application peut ensuite effectuer d'autres actions lorsque l'utilisateur clique sur l'icône. Actuellement, le système de notification est programmé avec la bibliothèque expérimentale Egg ; cependant, la prochaine version de GTK+ prendra en charge les icônes de notification.</para>
+
+  <para>La zone de notification est une spécification <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink>, ce qui signifie que les icônes apparaissent également dans d'autres environnements de bureau. Pour plus d'informations au sujet de la zone de notification, consultez <ulink url="http://standards.freedesktop.org/systemtray-spec/latest/">The System Tray Protocol Specification</ulink>.</para>
+</section>
+
+<section id="nautilus">
+  <title>Gestionnaire de fichiers</title>
+
+  <para>GNOME est livré avec <application>Nautilus</application>, un gestionnaire de fichiers intuitif et puissant. Grâce à la technologie avancée de GVFS, <application>Nautilus</application> est capable d'afficher des dossiers distants comme s'ils se trouvaient dans le système de fichiers local, donnant ainsi accès à tous les fichiers des utilisateurs où qu'ils se trouvent avec une même interface.</para>
+
+  <para><application>Nautilus</application> dispose d'une interface d'extensions, permettant aux développeurs d'étendre ses fonctionnalités afin de donner encore plus d'informations sur les fichiers. L'utilisation du système en devient d'autant plus riche et cohérente, en évitant de devoir recourir à d'autres applications pour gérer les différents types de fichiers.</para>
+
+  <para>Les greffons de <application>Nautilus</application> peuvent étendre les fonctionnalités du gestionnaire de fichiers de plusieurs manières. Ils peuvent ajouter des informations supplémentaires dans les fenêtres de propriétés de fichiers, donnant ainsi toutes les informations utiles au sujet de ces fichiers. Par exemple, GNOME est fourni avec un greffon qui affiche des informations supplémentaires sur les fichiers audio et vidéo, telles que le codec utilisé, la taille de la vidéo ou encore l'artiste et l'album des fichiers musicaux extraits de CD.</para>
+
+  <para>Les greffons peuvent aussi ajouter des colonnes dans l'affichage sous forme de liste et placer automatiquement des emblèmes sur les fichiers. Cela peut être utile pour donner des informations pertinentes au premier coup d'oeil. Par exemple, un greffon <application>Nautilus</application> pourrait donner des informations de contrôle de version sur des dossiers récupérés d'un système de contrôle de version. Il serait ainsi possible de voir directement dans le gestionnaire de fichiers si un fichier est à jour ou si des changements ont été effectués localement.</para>
+
+  <para><application>Nautilus</application> permet aussi aux développeurs d'ajouter des éléments dans le menu contextuel des fichiers et des dossiers. Il est possible de spécifier pour quels types de fichiers le menu contextuel doit s'afficher, afin que les actions correspondantes ne soient disponibles que pour les fichiers concernés. Par exemple, <application>File Roller</application>, l'utilitaire de gestion d'archives pour GNOME, ajoute un élément au menu contextuel pour extraire directement les fichiers archive. Les éléments supplémentaires dans les menus contextuels facilitent un accès rapide aux opérations courantes sur divers types de fichiers.</para>
+
+  <para>En plus d'une architecture extensible, <application>Nautilus</application> est aussi capable d'afficher une vignette pour tout type de fichier pour lequel une routine adéquate est fournie. Les vignettes présentent un aperçu du fichier, ce qui facilite la recherche visuelle des fichiers. GNOME sait créer automatiquement des vignettes pour la plupart des fichiers image et vidéo, et il permet aux applications d'installer des programmes générateurs de vignette pour des fichiers spécifiques. La gestion des vignettes est entièrement spécifiée par <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink>, ce qui permet à toutes les applications d'utiliser tous les générateurs de vignette.</para>
+</section>
+
+<section id="window-manager">
+  <title>Gestionnaire de fenêtres</title>
+
+  <para>Le gestionnaire de fenêtres est un programme spécial responsable de l'affichage des bordures et des barres de titre autour des fenêtres. Il s'occupe aussi de la gestion de toutes les opérations effectuées sur les fenêtres, comme le déplacement, le redimensionnement, la minimisation et le déplacement entre espaces de travail. Les fenêtres sont gérées de manière cohérente presque sans intervention des développeurs d'applications. Lorsque les applications ont besoin d'agir sur le gestionnaire de fenêtres, ils peuvent ajouter des propriétés à leurs fenêtres en appelant des fonctions de GTK+.</para>
+
+  <para>Des programmes externes peuvent cependant interagir directement avec le gestionnaire de fenêtres, et même contrôler son comportement. À l'aide de la bibliothèque libwnck de GNOME, les applications peuvent obtenir des informations sur le placement et l'état de toutes les fenêtres et demander au gestionnaire de fenêtres d'éffectuer diverses actions sur ces fenêtres.</para>
+
+  <para>La bibliothèque libwnck n'est pas spécifique au gestionnaire de fenêtres de GNOME. Toutes ses fonctionnalités utilisent EWMH (Extended Window Manager Hints). EWMH a été développée conjointement avec <ulink url="http://www.freedesktop.org">freedesktop.org</ulink> pour fournir une interaction unifiée avec les gestionnaires de fenêtres dans les différents environnements de bureau.</para>
+
+  <para>Les interactions entre le gestionnaire de fenêtres et libwnck peuvent concerner des tâches simples, comme l'affichage des applets « espaces de travail » et « liste des fenêtres » dans le tableau de bord, ou des tâches plus complexes, comme l'application d'actions automatiques sur des nouvelles fenêtres en fonction de certaines de leurs propriétés.</para>
+</section>
+
+<section id="control-center">
+  <title>Centre de contrôle</title>
+  <para>Le bureau GNOME présente un menu unique pour toutes les préférences des divers éléments du bureau et pour les paramètres d'administration du système. Les boîtes de dialogue des préférences et des paramètres peuvent être placées dans ce menu pour les rendre facilement accessibles. Pour le menu des préférences, il s'agit d'ajouter les éléments concernés dans le registre des applications avec la catégorie <literal>Settings</literal>. Pour le menu d'administration, il faut utiliser à la fois les catégories <literal>Settings</literal> et <literal>System</literal>.</para>
+
+  <para>Si vous mettez à disposition une boîte de dialogue qui permet aux administrateurs de configurer le système dans son ensemble, vous devriez ajouter cette boîte dans le menu d'administration. Si vous mettez à disposition une boîte de dialogue permettant aux utilisateurs d'adapter des préférences qui concernent plusieurs applications, vous devriez alors l'ajouter au menu des préférences. Mais vous ne devez pas utiliser ces menus généraux pour des préférences d'applications individuelles.</para>
+</section>
+
+<section id="keyring">
+  <title>Enregistrement des mots de passe</title>
+
+  <para>GNOME contient un gestionnaire de trousseaux de clés moderne et sécurisé afin de conserver les mots de passe et les autres données sensibles des utilisateurs. Les application peuvent exploiter la bibliothèque du gestionnaire de trousseaux pour sauvegarder et accéder aux mots de passe. Les utilisateurs peuvent gérer leurs mots de passe au moyen de l'application <application>Gestionnaire de trousseaux</application> de GNOME.</para>
+
+  <para>Le gestionnaire de trousseaux peut gérer plusieurs trousseaux, et chaque trousseau peut contenir autant d'éléments que nécessaire. Un élément de trousseau contient une donnée quelconque, souvent un mot de passe. Chaque trousseau est verrouillé individuellement et il est obligatoire de fournir un mot de passe pour le déverrouiller. Lorsque le trousseau est déverrouillé, l'utilisateur peut accéder à tous les éléments qu'il contient.</para>
+
+  <para>The keyring manager provides access control lists for each keyring
+  item, controlling which applications are allowed access to that item.
+  If an unknown application attempts to access a keyring item, the keyring
+  manager will prompt the user to allow or deny that application access.
+  This helps prevent malicious or poorly-written programs from accessing
+  the user's sensitive data.</para>
+
+  <para>Les données d'un trousseau enregistrées sur le système de fichiers sont chiffrées par l'algorithme AES block et les attributs de l'élément sont hachés avec SHA1. Grâce au hachage des attributs, le gestionnaire de trousseaux est capable de rechercher des éléments demandés par les applications même sans déverrouiller le trousseau. Le déverrouillage intervient au moment où un élément correspondant est trouvé et qu'il doit être récupéré.</para>
+
+  <para>Le gestionnaire de trousseaux gère également un trousseau de session. Les éléments de ce trousseau de session ne sont jamais enregistrés sur le disque, et ils sont effacés dès que la session de l'utilisateur prend fin. Ce trousseau peut être utilisé pour stocker des mots de passe qui ne doivent être utilisés que dans la session actuelle.</para>
+
+  <para>Si vous utilisez GIO pour accéder à des serveurs distants, vous profitez automatiquement du gestionnaire de trousseaux. Chaque fois que GVFS doit authentifier l'utilisateur, il offre l'option d'enregistrer le mot de passe, soit dans le trousseau par défaut, soit dans le trousseau de session.</para>
+
+  <para>Vous devriez utiliser le gestionnaire de trousseaux chaque fois que votre application a besoin d'enregistrer des mots de passe ou d'autres données sensibles pour les utilisateurs. Cela permet d'améliorer la cohérence générale de l'interface tout en conservant les données de manière sûre.</para>
+</section>
+
+<section id="session">
+  <title>Gestion de session</title>
+  <para>GNOME fournit des outils pour permettre aux applications de fonctionner de manière cohérente d'une session à l'autre. Les utilisateurs peuvent se déconnecter avec des applications encore lancées, et celles-ci sont restaurées lorsque l'utilisateur se reconnecte. Pour offrir cette fonctionnalité, l'application doit se connecter au gestionnaire de sessions et enregistrer son état au moment de la déconnexion de l'utilisateur.</para>
+
+  <para>GNOME dispose d'une interface de programmation simple pour la gestion des sessions dans la bibliothèque GNOME User Interface. Consultez la section <ulink url="http://library.gnome.org/devel/libgnomeui/stable/GnomeClient.html">GnomeClient</ulink> du <ulink url="http://library.gnome.org/devel/libgnomeui/stable/">manuel de référence de la bibliothèque GNOME UI</ulink> pour obtenir de plus amples informations sur la manipulation du gestionnaire de sessions de GNOME.</para>
+</section>
+
+<section id="address-book-calendar">
+  <title>Carnet d'adresses et calendrier</title>
+  <para>Avec Evolution Data Server, GNOME dispose d'un carnet d'adresses et d'un calendrier uniques utilisables par toutes les applications pour enregistrer et récupérer des informations. L'utilisation de Evolution Data Server permet aux utilisateurs de ne pas devoir maintenir des listes de contacts distinctes dans chaque application, ni de copier manuellement des événements dans plusieurs calendriers.</para>
+
+  <para>Les gens utilisent de plus en plus les ordinateurs pour interagir avec leurs amis et leurs collègues. Des applications telles que la messagerie, la messagerie instantanée et les applications de téléphonie et de vidéo-conférence sont exploitées pour communiquer. Ces applications disposent fréquemment des listes de contacts pour faciliter leur usage. En utilisant Evolution Data Server, les applications peuvent enregistrer les informations de contact à un seul endroit, permettant ainsi à toutes les applications d'avoir accès aux données pertinentes en lien avec les contacts de l'utilisateur.</para>
+
+  <para>Les applications peuvent également utiliser Evolution Data Server pour enregistrer et récupérer des rendez-vous dans le calendrier des utilisateurs. Par exemple, l'horloge du tableau de bord affiche un simple calendrier lorsqu'on clique dessus. Si des rendez-vous ont été agendés, ils apparaissent sous le calendrier. Cela permet d'avoir accès plus facilement aux rendez-vous à venir sans devoir ouvrirune application de gestion de calendrier.</para>
+
+  <para>Pour plus d'informations sur le carnet d'adresses, consultez <ulink url="http://gnome.org/projects/evolution/developer-doc/libebook/ch01.html"> Evolution API Reference: libebook</ulink>. Pour plus d'informations sur le calendrier, consultez <ulink url="http://gnome.org/projects/evolution/developer-doc/libecal/index.html"> Evolution API Reference: libecal</ulink>.</para>
+</section>
+
+<section id="usability">
+  <title>Ergonomie</title>
+  <para>Le bureau GNOME se concentre sur l'ergonomie, avec pour objectif de fournir une prise en main simple et cohérente de l'interface. Les gens utilisent l'ordinateur pour effectuer des tâches (ou pour jouer !), et non pas pour apprendre à maîtriser des interfaces compliquées. Lors de la conception de votre application, vous devez prendre en compte la capacité des utilisateurs à reconnaître des paradigmes usuels dans les interfaces, la rapidité d'apprentissage des éléments propres à votre application et l'efficacité de l'exécution de tâches lorsque ces éléments ont été acquis.</para>
+
+  <para>GNOME fournit des recommandations complètes pour les interfaces utilisateurs (Human Interface Guidelines) afin d'aider à réaliser des applications attrayantes et ergonomiques. Même si aucune recommandation ne peut fournir de réponse unique à toutes les problématiques d'ergonomie, la compréhension des recommandations de GNOME en terme d'interface utilisateur peut faciliter la création d'applications ergonomiques. Pour plus d'informations, veuillez consulter <ulink url="http://library.gnome.org/devel/hig-book/stable/">The GNOME Human Interface Guidelines</ulink>.</para>
+</section>
+
+<section id="documentation">
+  <title>Documentation</title>
+  <para>Toutes les applications devraient offrir de la documentation pour aider ses utilisateurs à comprendre l'application et à résoudre les problèmes qui pourraient survenir. Même si une application bien conçue ne devrait pas exiger la lecture d'une documentation avant son utilisation, il faut tout de même considérer la documentation comme un outil important pour les utilisateurs, en particulier pour les applications complexes.</para>
+
+  <para>GNOME met à disposition un cadre de développement unifié pour offrir de la documentation utilisateur. La documentation peut être rédigée en DocBook, un langage professionnel standard. L'usage de DocBook permet de s'affranchir des détails de formatage. La documentation est automatiquement et uniformément formatée selon les conventions identiques au reste de la documentation système.</para>
+
+  <para>Le visionneur d'aide de GNOME, <application>Yelp</application>, affiche et imprime la documentation, présente une liste de toute la documentation d'un système et permet de rechercher en plein texte dans toute la documentation. En utilisant le système d'aide mis à disposition par GNOME, vous profitez gratuitement de toutes ces fonctionnalités.</para>
+
+  <para>Pour plus d'informations sur l'écriture de documentation pour votre application, consultez le <ulink url="http://library.gnome.org/devel/gdp-handbook/stable/">manuel GNOME pour l'écriture de documentation logicielle</ulink> (en anglais), <ulink url="http://www.docbook.org/tdg/en/html/docbook.html">DocBook: The Definitive Guide</ulink> et <ulink url="http://library.gnome.org/devel/gdp-style-guide/stable/">le guide de style de la documentation GNOME</ulink> (en anglais).</para>
+</section>
+
+</chapter>

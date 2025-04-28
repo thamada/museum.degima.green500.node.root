@@ -1,0 +1,37 @@
+mlx4/ib: Fix WARNING: at lib/swiotlb.c:562
+
+mlx4_ib_free_cq_buf should not be called under spin_lock_irq
+as dma_free_coherent() needs irqs enabled
+
+Signed-off-by: Vladimir Sokolovsky <vlad@mellanox.co.il>
+---
+Index: ofa_kernel-1.5.3/drivers/infiniband/hw/mlx4/cq.c
+===================================================================
+--- ofa_kernel-1.5.3.orig/drivers/infiniband/hw/mlx4/cq.c	2010-12-12 17:46:05.000000000 +0200
++++ ofa_kernel-1.5.3/drivers/infiniband/hw/mlx4/cq.c	2010-12-13 15:46:08.000000000 +0200
+@@ -407,10 +407,14 @@
+ 		cq->resize_buf = NULL;
+ 		cq->resize_umem = NULL;
+ 	} else {
++		struct mlx4_ib_cq_buf tmp_buf;
++		int tmp_cqe = 0;
++ 
+ 		spin_lock_irq(&cq->lock);
+ 		if (cq->resize_buf) {
+ 			mlx4_ib_cq_resize_copy_cqes(cq);
+-			mlx4_ib_free_cq_buf(dev, &cq->buf, cq->ibcq.cqe);
++			tmp_buf = cq->buf;
++			tmp_cqe = cq->ibcq.cqe;
+ 			cq->buf      = cq->resize_buf->buf;
+ 			cq->ibcq.cqe = cq->resize_buf->cqe;
+ 
+@@ -418,6 +422,9 @@
+ 			cq->resize_buf = NULL;
+ 		}
+ 		spin_unlock_irq(&cq->lock);
++
++		if (tmp_cqe)
++			mlx4_ib_free_cq_buf(dev, &tmp_buf, tmp_cqe);
+ 	}
+ 
+ 	goto out;

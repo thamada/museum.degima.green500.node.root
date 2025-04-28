@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Networking" lang="pl-PL">
+	<title>Sieć</title>
+	<remark>Ta treść znajduje się tutaj: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Networking">https://fedoraproject.org/wiki/Docs/Beats/Networking</ulink></remark>
+	<section id="sect-Release_Notes-Networking-System_wide">
+		<title><application>Menedżer sieci</application> z połączeniami systemowymi i ulepszoną obsługą połączeń komórkowych</title>
+		<para>
+			<application>Menedżer sieci</application> może teraz tworzyć i modyfikować systemowe połączenia sieciowe w katalogu <filename>/etc/sysconfig</filename>. <application>Menedżer sieci</application> już od jakiegoś czasu potrafił odczytywać informacje o połączeniach systemowych z katalogu <filename>/etc/sysconfig</filename>. Teraz włączono pełną obsługę odczytu/zapisu. Możliwość tworzenia lub modyfikowania nowych połączeń systemowych będzie kontrolowana przez polityki biblioteki <application>PolicyKit</application>. Początkowo obsługiwane będą tylko połączenia przewodowe i bezprzewodowe. Później dołączone do tego zostaną połączenia VPN. Sekrety połączeń będą przechowywane w plikach <filename>.keys</filename> w katalogu <filename>/etc/sysconfig</filename>.
+		</para>
+		<para>
+			Dzięki dostarczaniu bazy danych prekonfigurowanych dostawców połączeń komórkowych, obsłudze więcej sprzętu i pozwalaniu na skanowanie sieci GSM, <application>Menedżer sieci</application> znacznie ułatwia używanie połączeń komórkowych. Dostawca połączenia jest automatycznie rozpoznawany, więc wystarczy podłączyć urządzenie USB i można połączyć się z siecią w ciągu kilku minut.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-IPv6">
+		<title>Ulepszona obsługa IPv6 w <application>Menedżerze sieci</application></title>
+		<para>
+			W przypadku trybu tekstowego lub używania bezpośrednio plików <filename>ifcfg</filename> <application>Menedżer sieci</application> powinien podnieść interfejs za pomocą łączności IPv6 poprawnie podczas uruchamiania. Żadne modyfikacje plików <filename>ifcfg</filename> nie powinny być konieczne.
+		</para>
+		<para>
+			W przypadku użytkowników trybu graficznego pojawi się nowa karta IPv6 w edytorze połączeń, która umożliwia kontrolę ustawień IPv6 podobnie do już istniejących ustawień IPv4. Po wybraniu metody konfiguracji (<literal>automatyczne</literal> jest domyślne, i będzie przestrzegało ogłoszeń routera i próbowało pobrać informacje o DNS za pomocą trybu tylko informacji DHCPv6) i podaniu wszelkich dodatkowych ustawień, a następnie zapisaniu połączenia, aktywowanie tego połączenia powinno skonfigurować interfejs z pełną obsługą IPv6, jeśli została zażądana przez użytkownika.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Network_Interface_Management">
+		<title>Network Interface Management</title>
+		<para>
+			Konfigurowanie interfejsów sieciowych na komputerze w przypadku dość skomplikowanych, ale częstych scenariuszy jest ogólnie rzecz biorąc dostępne tylko dla zaawansowanych użytkowników, i jest kiepsko obsługiwane przez istniejące narzędzia. Obejmuje to tworzenie mostków i ustawianie podrzędnego wobec mostka fizycznego NIC lub powiązanie dwóch NIC, dodawanie interfejsu VLAN do węzła i ustawienie go jako podrzędnego względem mostka.
+		</para>
+		<para>
+			Skomplikowane ustawienia mostków są często wymagane na gospodarzach wirtualizacji i często muszą być wykonywane zdalnie przez narzędzia zarządzania wyższego poziomu, zamiast przez użytkowników.
+		</para>
+		<para>
+			Ta funkcja spełnia te potrzeby dostarczając ogólnozadaniową bibliotekę konfiguracji sieci (<application>netcf</application>) i dodatki do API biblioteki <application>libvirt</application>, aby używać lokalnego API biblioteki <application>netcf</application> przez zdalne możliwości <application>libvirt</application>.
+		</para>
+		<para>
+			Za pomocą biblioteki <application>netcf</application>, logiczne interfejsy sieciowe (na przykład mostek i jego interfejsy podrzędne) są opisywane jako jednostki, a <application>netcf</application> zajmuje się tłumaczeniem tego opisu na odpowiednie pliki <filename>ifcfg-*</filename>. Aby zagwarantować bezproblemowe współistnienie biblioteki <application>netcf</application> z innymi narzędziami konfiguracji sieci, w tym <application>vi</application>, <application>netcf</application> jest obukierunkowe: modyfikuje pliki <filename>ifcfg-*</filename> oparte na opisie interfejsów biblioteki <application>netcf</application>, ale także odczytuje pliki <filename>ifcfg-*</filename>, aby utworzyć taki opis. Jest więc możliwe używanie <application>netcf</application> razem z dowolną inną metodą zmieniania konfiguracji sieci, a zarazem uniknięto wszystkich pułapek wcześniejszych prób &mdash; jak na przykład skryptów konfiguracji sieci Xena.
+		</para>
+		<para>
+			Planowane jest przełączenie <application>Menedżera sieci</application> na używanie biblioteki <application>netcf</application> jako zaplecza konfiguracji systemowych połączeń sieciowych w przyszłym wydaniu; mimo że nie jest to część tej nowej funkcji, ujednolici to doświadczenie użytkownika względem konfiguracji sieci. Podobnie planowane jest wykorzystanie funkcjonalności konfiguracji sieci w przyszłym wydaniu programu <application>virt-manager</application>.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Bluetooth">
+		<title>Usługa Bluetooth na żądanie</title>
+		<para>
+			W celu obsługi urządzeń Bluetooth poprzednie wydania Fedory uruchamiały w tle usługę Bluetooth. W tym wydaniu ta usługa jest zamiast tego uruchamiana na żądanie, kiedy jest potrzebna i jest automatycznie zatrzymywana po 30 sekundach od ostatniego użycia urządzenia. Skraca to czas uruchamiania.
+		</para>
+	</section>
+	
+	<!-- 
+<section id="sect-Release_Notes-Networking-NFS">
+	<title
+>NFS V4 Default</title>
+
+	<para>
+		The latest version of the NFS protocol is version 4, which was first introduced in Fedora&nbsp;Core&nbsp;2 (the first distro to have such support). Previously, the default NFS version was version 3. Therefore, when an simple NFS mount was done (<command
+>mount server:/export /mnt</command
+>) version 3 is the first protocol version that was tried.
+	</para>
+
+	<para>
+		In Fedora&nbsp;12, version 4 is tried first. If the server does not support version 4, the mount then tries version 3.
+	</para
+> 
+</section>
+ -->
+</section>
+
+

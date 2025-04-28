@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Directories</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Default Settings"
+HREF="httpd-default-settings.html"><LINK
+REL="PREVIOUS"
+TITLE="Environment Variables"
+HREF="httpd-environment-variables.html"><LINK
+REL="NEXT"
+TITLE="Virtual Hosts Settings"
+HREF="httpd-virtualhosts-settings.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="httpd-environment-variables.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Default Settings</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-virtualhosts-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="HTTPD-DIRECTORIES"
+></A
+>Directories</H1
+><P
+>	  Use the <B
+CLASS="GUILABEL"
+>Directories</B
+> page to configure options for
+	  specific directories. This corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#directory"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>&#60;Directory&#62;</TT
+></A
+>
+	  directive.
+	</P
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-DIRECTORIES-SCREEN"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-directories.png"></P
+></DIV
+><P
+><B
+>Figure 3-4. Directories</B
+></P
+></DIV
+><P
+>	  Click the <B
+CLASS="GUIBUTTON"
+>Edit</B
+> button in the top right-hand
+	  corner to configure the <B
+CLASS="GUILABEL"
+>Default Directory Options</B
+>
+	  for all directories that are not specified in the
+	  <B
+CLASS="GUILABEL"
+>Directory</B
+> list below it. The options that you
+	  choose are listed as the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#options"
+TARGET="_top"
+> Options
+	  </A
+> directive within the
+	  <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#directory"
+TARGET="_top"
+>	    <TT
+CLASS="COMMAND"
+>&#60;Directory&#62;</TT
+></A
+> directive. You can
+	  configure the following options:
+	</P
+><P
+></P
+><UL
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>ExecCGI</B
+> &#8212; Allow execution of CGI
+	      scripts. CGI scripts are not executed if this option is not
+	      chosen.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>FollowSymLinks</B
+> &#8212; Allow symbolic links
+	      to be followed.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>Includes</B
+> &#8212; Allow server-side
+	      includes.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>IncludesNOEXEC</B
+> &#8212; Allow server-side
+	      includes, but disable the <TT
+CLASS="COMMAND"
+>#exec</TT
+> and
+	      <TT
+CLASS="COMMAND"
+>#include</TT
+> commands in CGI scripts.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>Indexes</B
+> &#8212; Display a formatted list
+	      of the directory's contents, if no
+	      <TT
+CLASS="COMMAND"
+>DirectoryIndex</TT
+> (such as
+	      <TT
+CLASS="FILENAME"
+>index.html</TT
+>) exists in the requested
+	      directory.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>Multiview</B
+> &#8212; Support
+	      content-negotiated multiviews; this option is disabled by
+	      default.</P
+></LI
+><LI
+><P
+><B
+CLASS="GUILABEL"
+>SymLinksIfOwnerMatch</B
+> &#8212; Only follow
+	      symbolic links if the target file or directory has the same
+	      owner as the link.</P
+></LI
+></UL
+><P
+>	  To specify options for specific directories, click the
+	  <B
+CLASS="GUIBUTTON"
+>Add</B
+> button beside the
+	  <B
+CLASS="GUILABEL"
+>Directory</B
+> list box. The window shown in <A
+HREF="httpd-directories.html#HTTPD-DIRECTORIES-ADD"
+>Figure 3-5</A
+> appears. Enter the directory to
+	  configure in the <B
+CLASS="GUILABEL"
+>Directory</B
+> text field at the
+	  bottom of the window. Select the options in the right-hand list, and
+	  configure the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mod_access.html#order"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>Order</TT
+></A
+>
+	  directive with the left-hand side options.  The
+	  <TT
+CLASS="COMMAND"
+>Order</TT
+> directive controls the order in which allow
+	  and deny directives are evaluated. In the <B
+CLASS="GUILABEL"
+>Allow hosts
+	  from</B
+> and <B
+CLASS="GUILABEL"
+>Deny hosts from</B
+> text field,
+	  you can specify one of the following:
+	</P
+><P
+></P
+><UL
+><LI
+><P
+>Allow all hosts &#8212; Type <TT
+CLASS="USERINPUT"
+><B
+>all</B
+></TT
+> to
+	      allow access to all hosts.</P
+></LI
+><LI
+><P
+>Partial domain name &#8212; Allow all hosts whose names match
+	      or end with the specified string.</P
+></LI
+><LI
+><P
+>Full IP address &#8212; Allow access to a specific IP
+	    address.</P
+></LI
+><LI
+><P
+>A subnet &#8212; Such as
+	      <TT
+CLASS="USERINPUT"
+><B
+>192.168.1.0/255.255.255.0</B
+></TT
+>
+	    </P
+></LI
+><LI
+><P
+>A network CIDR specification &#8212; such as
+	      <TT
+CLASS="USERINPUT"
+><B
+>10.3.0.0/16</B
+></TT
+></P
+></LI
+></UL
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-DIRECTORIES-ADD"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-directories-add.png"></P
+></DIV
+><P
+><B
+>Figure 3-5. Directory Settings</B
+></P
+></DIV
+><P
+>	  If you check the <B
+CLASS="GUILABEL"
+>Let .htaccess files override directory
+	    options</B
+>, the configuration directives in the
+	    <TT
+CLASS="FILENAME"
+>.htaccess</TT
+> file take precedence.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="httpd-environment-variables.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-virtualhosts-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Environment Variables</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="httpd-default-settings.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Virtual Hosts Settings</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

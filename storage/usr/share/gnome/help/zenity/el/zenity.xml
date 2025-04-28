@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY author1 "Sun">
+<!ENTITY author2 "Java Desktop System Documentation Team">
+<!ENTITY publisher "Sun Microsystems, Inc.">
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY appversion "2.6.0">
+<!ENTITY app "<application>Zenity</application>">
+<!ENTITY appname "Zenity">
+<!ENTITY date "August 2004">
+<!ENTITY manrevision "2.0">
+]>
+<!-- ================ Document Header ================= -->
+<article id="index" lang="el">
+
+  <articleinfo>
+    <title>Εγχειρίδιο του Zenity</title>
+    <subtitle>Εγχειρίδιο της εφαρμογής επιφάνειας εργασίας Zenity V2.0</subtitle>
+    <copyright>
+	    <year>2003</year>
+	    <year>2004</year>
+	    <holder>Sun Microsystems, Inc.</holder>
+    </copyright><copyright><year>2009</year><holder>Στέργιος Προσινικλής (steriosprosiniklis@gmail.com)</holder></copyright>
+
+    <!-- Translators: uncomment this
+    <copyright>
+	    <year>2004</year>
+	    <holder>ME_THE_TRANSLATOR</holder>
+    </copyright>
+    -->
+
+    <publisher>
+	    <publishername>Sun Microsystems, Inc.</publishername>
+    </publisher>
+
+      <legalnotice id="legalnotice">
+	<para>Δίνεται άδεια για αντιγραφή, διανομή και/ή τροποποίηση του εγγράφου υπό τους όρους της Ελεύθερης Άδειας Τεκμηρίωσης GNU (GFDL), Έκδοση 1.1 ή μεταγενέστερη εκδιδόμενη από το Ίδρυμα Ελεύθερου Λογισμικού χωρίς Σταθερά Εδάφια, χωρίς Εξώφυλλα Κειμένου, και χωρίς Οπισθόφυλλα Κειμένου. Μπορείτε να βρείτε ένα αντίγραφο της GFDL σε αυτόν τον <ulink type="help" url="ghelp:fdl">σύνδεσμο</ulink> ή στο αρχείο COPYING-DOCS που διανεμήθηκε με αυτόν τον οδηγό.</para>
+         <para>Αυτή η τεκμηρίωση είναι μέρος της συλλογής τεκμηρίωσης του GNOME όπως διανέμεται υπό τους όρους του GFDL. Εάν επιθυμείτε να διανείμετε αυτή την τεκμηρίωση ξεχωριστά από την συλλογή, μπορείτε να το κάνετε εάν η τεκμηρίωση συνοδεύεται από αντίγραφο της άδειας (GFDL) όπως περιγράφεται στον τομέα 6 της άδειας.</para>
+
+	<para>Πολλά από τα ονόματα που χρησιμοποιούνται από εταιρίες για να ξεχωρίσουν τα προϊόντα και τις υπηρεσίες είναι σήματα κατατεθέν. Όπου αυτά τα ονόματα εμφανίζονται στην τεκμηρίωση GNOME, και τα μέλη της ομάδας τεκμηρίωσης GNOME έχουν γνώση αυτών, τότε αυτά αναγράφονται με κεφαλαίους χαρακτήρες ή με αρχικούς κεφαλαίους χαρακτήρες.</para>
+
+	<para>ΤΟ ΈΓΓΡΑΦΟ ΚΑΙ ΤΡΟΠΟΠΟΙΗΜΕΝΕΣ ΕΚΔΟΣΕΙΣ ΑΥΤΟΥ ΠΑΡΕΧΟΝΤΑΙ ΥΠΟ ΤΟΥΣ ΟΡΟΥΣ ΤΗΣ ΑΔΕΙΑΣ GNU FREE DOCUMENTATION ΜΕ ΤΗΝ ΠΕΡΑΙΤΕΡΩ ΔΙΕΥΚΡΙΝΙΣΗ ΟΤΙ: <orderedlist>
+		<listitem>
+		  <para>Η ΤΕΚΜΗΡΙΩΣΗ ΑΥΤΗ ΠΑΡΕΧΕΤΑΙ "ΩΣ ΕΧΕΙ", ΧΩΡΙΣ ΚΑΜΙΑ ΕΓΓΥΗΣΗ ΟΤΙ ΜΠΟΡΕΙ ΝΑ ΕΞΥΠΗΡΕΤΗΣΕΙ ΚΑΠΟΙΟ ΣΚΟΠΟ Η ΟΤΙ ΕΙΝΑΙ ΧΩΡΙΣ ΣΦΑΛΜΑ. ΟΛΟΚΛΗΡΗ Η ΕΥΘΥΝΗ ΓΙΑ ΤΗΝ ΠΟΙΟΤΗΤΑ, ΑΚΡΙΒΕΙΑ ΚΑΙ ΛΕΙΤΟΥΡΓΙΚΟΤΗΤΑ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ Ή ΠΑΡΑΛΛΑΓΩΝ ΑΥΤΗΣ ΑΝΗΚΕΙ ΣΕ ΕΣΑΣ. ΕΑΝ Η ΤΕΚΜΗΡΙΩΣΗ ΑΥΤΗ Ή ΠΑΡΑΛΛΑΓΗ ΑΥΤΗΣ ΕΙΝΑΙ ΛΑΘΟΣ ΚΑΤΑ ΚΑΠΟΙΟ ΤΡΟΠΟ ΕΣΕΙΣ ΑΝΑΛΑΜΒΑΝΕΤΕ ΤΗΝ ΕΥΘΥΝΗ ΤΗΣ ΔΙΟΡΘΩΣΗΣ. Η ΑΠΑΛΛΑΓΗ ΕΥΘΥΝΗΣ ΠΟΥ ΣΥΝΟΔΕΥΕΙ ΑΥΤΗ ΤΗΝ ΤΕΚΜΗΡΙΩΣΗ ΕΙΝΑΙ ΑΝΑΠΟΣΠΑΣΤΟ ΚΟΜΜΑΤΙ ΑΥΤΗΣ. ΚΑΜΙΑ ΧΡΗΣΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ Ή ΠΑΡΑΛΛΑΓΩΝ ΑΥΤΗΣ ΔΕΝ ΕΠΙΤΡΕΠΕΤΑΙ ΠΑΡΑ ΜΟΝΟ ΕΑΝ ΣΥΝΟΔΕΥΕΤΑΙ ΑΠΟ ΤΗΝ ΑΠΑΛΛΑΓΗ ΕΥΘΥΝΗΣ.</para>
+		</listitem>
+		<listitem>
+		  <para>ΣΕ ΚΑΜΙΑ ΠΕΡΙΠΤΩΣΗ ΚΑΙ ΥΠΟ ΚΑΜΙΑ ΝΟΜΙΚΗ ΣΥΝΘΗΚΗ, ΕΙΤΕ ΜΕΣΩ ΣΥΜΒΟΛΑΙΩΝ Ή ΑΛΛΙΩΣ, ΔΕΝ ΕΥΘΥΝΟΝΤΑΙ Ο ΣΥΓΓΡΑΦΕΑΣ, Ο ΔΙΑΝΟΜΕΑΣ, Η ΑΛΛΟΣ ΣΥΝΥΠΕΥΘΥΝΟΣ ΓΙΑ ΤΗΝ ΣΥΓΓΡΑΦΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ, ΓΙΑ ΕΜΜΕΣΕΣ Η ΑΜΕΣΕΣ, ΤΥΧΑΙΕΣ Ή ΜΗ ΖΗΜΙΕΣ ΠΑΝΤΩΣ ΦΥΣΕΩΣ ΠΟΥ ΠΡΟΕΡΧΟΝΤΑΙ ΑΠΟ ΤΗΝ ΧΡΗΣΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ ΚΑΙ/Ή ΠΑΡΑΛΛΑΓΩΝ ΑΥΤΗΣ ΑΚΟΜΑ ΚΑΙ ΕΑΝ ΕΧΕΙ ΥΠΑΡΞΕΙ ΠΡΟΕΙΔΟΠΟΙΗΣΗ ΓΙΑ ΤΗΝ ΠΙΘΑΝΟΤΗΤΑ ΥΠΑΡΞΗΣ ΤΕΤΟΙΩΝ ΖΗΜΙΩΝ.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+
+    <authorgroup>
+      <author>
+        <firstname>Sun</firstname>
+        <surname>Ομάδα τεκμηρίωσης του συστήματος επιφάνειας εργασίας Java</surname>
+        <affiliation><orgname>Sun Microsystems, Inc.</orgname></affiliation>
+      </author>
+      <author role="maintainer">
+        <firstname>Glynn</firstname>
+        <surname>Foster</surname>
+        <affiliation>
+          <orgname>Έργο τεκμηρίωσης GNOME</orgname>
+        </affiliation>
+      </author>
+      <editor>
+        <firstname>Nicholas</firstname>
+        <surname>Curran</surname>
+        <affiliation>
+          <orgname>Έργο τεκμηρίωσης GNOME</orgname>
+        </affiliation>
+      </editor>
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>Εγχειρίδιο της εφαρμογής επιφάνειας εργασίας Zenity V2.0</revnumber>
+        <date>Αύγουστος 2004</date>
+        <revdescription>
+          <para role="author">Ομάδα τεκμηρίωσης του συστήματος επιφάνειας εργασίας Java της Sun</para>
+          <para role="publisher">Sun Microsystems, Inc.</para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>Εγχειρίδιο Zenity V1.0</revnumber>
+        <date>Ιανουάριος 2003</date>
+        <revdescription>
+          <para role="author">Glynn Foster</para>
+          <para role="publisher">Έργο τεκμηρίωσης GNOME</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <releaseinfo>Αυτό το εγχειρίδιο περιγράφει την έκδοση 2.6.0 της εφαρμογής Zenity.</releaseinfo>
+
+    <legalnotice>
+	    <title>Ανάδραση</title>
+	    <para>Για να στείλετε τις παρατηρήσεις σας, ακολουθήστε τις οδηγίες στην σελίδα «<ulink url="ghelp:gnome-feedback" type="help">Feedback Page</ulink>».</para>
+<!-- Translators may also add here feedback address for translations -->
+
+    </legalnotice>
+    <abstract role="description">
+            <para>To «Zenity» είναι το πρόγραμμα δημιουργίας παραθύρων διαλόγων (dialog boxes) του GNOME. Εκτελεί την ίδια λειτουργία με το παλαιότερο gdialog καθώς και το dialog σε κατάσταση κονσόλας. Σας επιτρέπει να προβάλλετε παράθυρα διαλόγων από την γραμμή εντολών και από δέσμες ενεργειών κελύφους.</para>
+    </abstract>
+  </articleinfo>
+  
+  <indexterm>
+    <primary>εντολή zenity</primary>
+  </indexterm>
+  <indexterm>
+    <primary>δημιουργός διαλόγου</primary>
+  </indexterm>
+<!-- ================ Document Body ================= -->
+
+<!-- ==== Introduction ====== -->
+
+  <sect1 id="zenity-introduction">
+    <title>Εισαγωγή</title>
+
+    <para>Η εφαρμογή <application>Zenity</application> σας επιτρέπει να δημιουργήσετε τους παρακάτω τύπους απλών διαλόγων:</para>
+
+    <itemizedlist>
+        <listitem><para>Ημερολογίου</para></listitem>
+	<listitem><para>Επιλογής αρχείου</para></listitem>
+	<listitem><para>Λίστας</para></listitem>
+	<listitem><para>Εικονίδιο ειδοποίησης</para></listitem>
+        <listitem><para>Μηνυμάτων</para>
+            <itemizedlist>
+	        <listitem><para>Σφάλματος</para></listitem>
+		<listitem><para>Πληροφόρησης</para></listitem>
+		<listitem><para>Ερώτησης</para></listitem>
+		<listitem><para>Προειδοποίησης</para></listitem>
+	    </itemizedlist>
+	</listitem>
+	<listitem><para>Ένδειξης προόδου</para></listitem>
+        <listitem><para>Καταχώρησης κειμένου</para></listitem>
+	<listitem><para>Πληροφοριών κειμένου</para></listitem>
+    </itemizedlist>
+
+  </sect1>
+
+<!-- ==== Usage ====== -->
+
+  <sect1 id="zenity-usage">
+    <title>Χρήση</title>
+
+    <para>Όταν γράφετε σενάρια, μπορείτε χρησιμοποιώντας το <application>Zenity</application> να δημιουργήσετε απλούς διαλόγους που αλληλεπιδρούν γραφικά με τον χρήστη, ως εξής:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Μπορείτε να δημιουργήσετε έναν διάλογο για να αποκτήσετε πληροφορίες από τον χρήστη. Για παράδειγμα, μπορείτε να προτρέψετε τον χρήστη να επιλέξει μία ημερομηνία από διάλογο ημερολογίου, ή να επιλέξει ένα αρχείο από διάλογο επιλογής αρχείου.</para>
+      </listitem>
+      <listitem>
+        <para>Μπορείτε να δημιουργήσετε έναν διάλογο για να παρέχετε στον χρήστη πληροφορίες. Για παράδειγμα, χρησιμοποιώντας έναν διάλογο προόδου δείχνετε την τρέχουσα κατάσταση μίας εργασίας, ή μπορείτε να χρησιμοποιήσετε έναν διάλογο προειδοποίησης του χρήστη.</para>
+      </listitem>
+    </itemizedlist>
+    <para>
+	When the user closes the dialog, <application>Zenity</application> prints the text produced by the dialog to standard output.
+    </para>
+
+    <note>
+      <para>Όταν γράφετε εντολές για το <application>Zenity</application>, βεβαιωθείτε ότι χρησιμοποιείτε εισαγωγικά σε κάθε όρισμα.</para>
+      <para>Για παράδειγμα, χρησιμοποιείστε: <screen><userinput><command>zenity --calendar --title="Ημερολόγιο διακοπών"</command></userinput></screen> και όχι: <screen><userinput><command>zenity --calendar --title=Ημερολόγιο διακοπών</command></userinput></screen></para>
+      <para>Αν δεν χρησιμοποιήσετε εισαγωγικά, μπορεί να πάρετε μη αναμενόμενα αποτελέσματα.</para>
+    </note>
+
+    <sect2 id="zenity-usage-mnemonics">
+      <title>Πλήκτρα πρόσβασης</title>
+	<para>Ένα πλήκτρο πρόσβασης σας επιτρέπει να εκτελέσετε μία ενέργεια από το πληκτρολόγιο χωρίς να χρησιμοποιήσετε το ποντίκι για να επιλέξετε μία εντολή από μενού ή διάλογο. Κάθε πλήκτρο πρόσβασης προσδιορίζεται από ένα υπογραμμισμένο γράμμα σε επιλογές μενού ή διαλόγων.</para>
+	<para>Κάποιοι από τους διαλόγους του <application>Zenity</application> υποστηρίζουν την χρήση πλήκτρων πρόσβασης. Για να προσδιορίσετε τον χαρακτήρα που θα χρησιμοποιηθεί σαν πλήκτρο πρόσβασης, βάλτε μία υπογράμμιση _ πριν τον χαρακτήρα στο κείμενο του διαλόγου. Το παρακάτω παράδειγμα σας δείχνει πως να καθορίσετε το γράμμα Ε σαν πλήκτρο πρόσβασης:</para>
+	<screen><userinput>"_Επιλογή ονόματος".</userinput></screen>
+    </sect2>
+
+    <sect2 id="zenity-usage-exitcodes">
+      <title>Κώδικες εξόδου (Exit codes)</title>
+    <para>Το <application>Zenity</application> αποδίδει τους εξής κώδικες εξόδου:</para>
+
+    <informaltable frame="all">
+      <tgroup cols="2" colsep="1" rowsep="1">
+        <colspec colname="COLSPEC0" colwidth="50*"/>
+        <colspec colname="COLSPEC1" colwidth="50*"/>
+        <thead>
+          <row valign="top">
+            <entry colname="COLSPEC0">
+              <para>Κώδικας εξόδου</para></entry>
+            <entry colname="COLSPEC1">
+              <para>Περιγραφή</para></entry>
+          </row>
+        </thead>
+        <tbody>
+          <row valign="top">
+            <entry>
+              <para><varname>0</varname></para>
+            </entry>
+            <entry>
+              <para>Ο χρήστης πάτησε είτε το πλήκτρο <guibutton>Εντάξει</guibutton> είτε το πλήκτρο <guibutton>Κλείσιμο</guibutton>.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>1</varname></para>
+            </entry>
+            <entry>
+              <para>Ο χρήστης είτε πάτησε το πλήκτρο <guibutton>Ακύρωση</guibutton>, ή χρησιμοποίησε τις λειτουργίες του παραθύρου για να κλείσει τον διάλογο.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>-1</varname></para>
+            </entry>
+            <entry>
+              <para>Συνέβη ένα απρόσμενο σφάλμα.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>5</varname></para>
+            </entry>
+            <entry>
+              <para>Ο διάλογος έκλεισε λόγω συμπλήρωσης του χρονικού περιθωρίου.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    </sect2>
+
+
+  <!-- ==== General Options ====== -->
+
+  <sect2 id="zenity-usage-general-options">
+    <title>Γενικές επιλογές</title>
+
+    <para>Όλοι οι διάλογοι του <application>Zenity</application> υποστηρίζουν τις παρακάτω γενικές επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--title</option>=<replaceable>Τίτλος</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει τον τίτλο του διαλόγου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--window-icon</option>=<replaceable>διαδρομή του_εικονιδίου</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το εικονίδιο που προβάλλεται στο πλαίσιο παραθύρου του διαλόγου. Επίσης είναι διαθέσιμα 4 εικονίδια της εφαρμογής χρησιμοποιώντας τις εξής λέξεις κλειδιά - 'info', 'warning', 'question' και 'error'.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--width</option>=<replaceable>πλάτος</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το πλάτος του διαλόγου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--height</option>=<replaceable>ύψος</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το ύψος του διαλόγου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--timeout</option>=<replaceable>χρονικό περιθώριο</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το χρονικό περιθώριο σε δευτερόλεπτα μετά το οποίο ο διάλογος κλείνει.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== Miscellaneous Options ====== -->
+
+  <sect2 id="zenity-help-options">
+    <title>Επιλογές βοήθειας</title>
+
+    <para>Το <application>Zenity</application> παρέχει τις παρακάτω επιλογές βοήθειας:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--help</option></term>
+	<listitem>
+	  <para>Προβάλλει σύντομο κείμενο βοήθειας.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--help-all</option></term>
+	<listitem>
+	  <para>Πλήρες κείμενο βοήθειας για όλους τους διαλόγους.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-general</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις γενικές επιλογές διαλόγου.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-calendar</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου ημερολογίου.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-entry</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου καταχώρησης κειμένου.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-error</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου εμφάνισης σφάλματος.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-info</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου πληροφοριών κειμένου.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-file-selection</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου επιλογής αρχείου.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-list</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου λίστας.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-notification</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του εικονιδίου ειδοποίησης.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-progress</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου ένδειξης προόδου.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-question</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου ερώτησης.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-warning</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου προειδοποίησης.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-text-info</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για τις επιλογές του διαλόγου πληροφοριών κειμένου.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-misc</option></term>
+	<listitem>
+	  <para>Προβάλλει κείμενο βοήθειας για διάφορες επιλογές.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-gtk</option></term>
+	<listitem>
+	  <para>Προβάλλει βοήθεια για τις επιλογές GTK+.</para>
+	</listitem>
+      </varlistentry>
+ 
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== Miscellaneous Options ====== -->
+
+  <sect2 id="zenity-miscellaneous-options">
+    <title>Διάφορες επιλογές</title>
+
+    <para>Το <application>Zenity</application> επίσης παρέχει τις παρακάτω διάφορες επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--about</option></term>
+	<listitem>
+	  <para>Προβάλλει το παράθυρο διαλόγου <guilabel>Περί zenity</guilabel>, που περιέχει πληροφορίες έκδοσης, πνευματικών δικαιωμάτων και υπευθύνων ανάπτυξης του <application>Zenity</application>.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--version</option></term>
+	<listitem>
+	  <para>Εκτυπώνει την έκδοση του <application>Zenity</application>.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== GTK+ Options ====== -->
+
+  <sect2 id="zenity-gtk-options">
+    <title>Επιλογές GTK+</title>
+
+    <para>Το <application>Zenity</application> υποστηρίζει τις συνήθεις επιλογές του GTK+. Για περισσότερες πληροφορίες γύρω από αυτές, εκτελέστε την εντολή <command>zenity -?</command>.</para>
+
+  </sect2>
+
+<!-- ==== Environment variables ==== -->
+
+  <sect2 id="zenity-environment-variables">
+    <title>Environment Variables</title>
+
+    <para>
+      Normally, <application>Zenity</application> detects the terminal window from which it was launched
+      and keeps itself above that window.  This behavior can be disabled by
+      unsetting the <envar>WINDOWID</envar> environment variable.
+    </para>
+
+  </sect2>
+
+  </sect1>
+<!-- ==== Calendar Options ====== -->
+
+  <sect1 id="zenity-calendar-options">
+    <title>Διάλογος ημερολογίου</title>
+
+    <para>
+        Use the <option>--calendar</option> option to create a calendar dialog. <application>Zenity</application> returns the selected date to standard output. If no date is specified on the command line, the dialog uses the current date.
+    </para>
+    <para>Ο διάλογος ημερολογίου υποστηρίζει τις εξής επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>κείμενο</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το κείμενο που προβάλλεται στον διάλογο ημερολογίου.</para>
+	</listitem>
+      </varlistentry>
+     	
+      <varlistentry>
+        <term><option>--day</option>=<replaceable>ημέρα</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει την ημέρα που επιλέγεται στον διάλογο ημερολογίου. Η <replaceable>ημέρα</replaceable> πρέπει να είναι ένας αριθμός από 1 έως και 31.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--month</option>=<replaceable>μήνας</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει τον μήνα που επιλέγεται στον διάλογο ημερολογίου. Ο <replaceable>μήνας</replaceable> πρέπει να είναι ένας αριθμός από 1 έως και 12.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--year</option>=<replaceable>έτος</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το έτος που επιλέγεται στον διάλογο ημερολογίου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--date-format</option>=<replaceable>μορφή</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει την μορφή που αποδίδεται από τον διάλογο ημερολογίου μετά την επιλογή ημερομηνίας. Η προεπιλεγμένη μορφή εξαρτάται από την προσαρμογή εντοπιότητας(locale) που χρησιμοποιείτε. Η <replaceable>μορφή</replaceable> πρέπει να συντάσσεται έτσι ώστε να γίνεται αποδεκτή από την λειτουργία <command>strftime</command>, για παράδειγμα <literal>%A %d/%m/%y</literal>.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Το παρακάτω παράδειγμα δέσμης ενεργειών κελύφους δείχνει πως να δημιουργήσετε έναν διάλογο ημερολογίου: <programlisting>
+        #!/bin/sh
+
+
+        if zenity --calendar \
+        --title="Επιλέξτε ημερομηνία" \
+        --text="Κάντε κλικ σε μια ημερομηνία για να την επιλέξετε." \
+        --day=2 --month=4 --year=2009
+          then echo $?
+          else echo "No date selected"
+        fi
+      </programlisting></para>
+
+    <figure id="zenity-calendar-screenshot">
+      <title>Παράδειγμα διαλόγου ημερολογίου</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+              <imagedata fileref="figures/zenity-calendar-screenshot.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+              <phrase>Παράδειγμα διαλόγου ημερολογίου <application>Zenity</application></phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+   </figure>
+													  
+  </sect1>
+
+
+<!-- ==== File Selection Options ====== -->
+
+  <sect1 id="zenity-file-selection-options">
+    <title>Διάλογος επιλογής αρχείου</title>
+
+    <para>
+	Use the <option>--file-selection</option> option to create a file selection dialog. <application>Zenity</application> returns the selected files or directories to standard 
+        output. The default mode of the file selection dialog is open.
+    </para>
+    <para>Ο διάλογος επιλογής αρχείου υποστηρίζει τις παρακάτω επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--filename</option>=<replaceable>όνομα αρχείου</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το αρχείο ή τον κατάλογο που είναι επιλεγμένος στον διάλογο επιλογής αρχείου όταν ανοίγει.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--multiple</option></term>
+	<listitem>
+	  <para>Επιτρέπει την επιλογή πολλών ονομάτων αρχείου στον διάλογο επιλογής αρχείου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--directory</option></term>
+	<listitem>
+	  <para>Επιτρέπει μόνο την επιλογή καταλόγων στον διάλογο επιλογής αρχείου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--save</option></term>
+	<listitem>
+	  <para>Ρύθμιση του διαλόγου επιλογής αρχείου σε κατάσταση λειτουργίας αποθήκευσης.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--separator</option>=<replaceable>διαχωριστικό</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει την συμβολοσειρά που χρησιμοποιείται για να διαχωρίσει την αποδοθείσα λίστα ονομάτων.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Το παρακάτω παράδειγμα δέσμης ενεργειών κελύφους δείχνει πως δημιουργείτε έναν διάλογο επιλογής αρχείου: <programlisting>
+        #!/bin/sh
+
+        FILE=`zenity --file-selection --title="Επιλέξτε ένα αρχείο"`
+
+        case $? in
+                 0)
+                        echo "\"$FILE\" selected.";;
+                 1)
+                        echo "No file selected.";;
+                -1)
+                        echo "No file selected.";;
+        esac
+      </programlisting></para>
+
+    <figure id="zenity-fileselection-screenshot">
+      <title>Παράδειγμα διαλόγου επιλογής αρχείου</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-fileselection-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Παράδειγμα διαλόγου επιλογής αρχείου <application>Zenity</application></phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Notification Options ====== -->
+  <sect1 id="zenity-notification-options">
+    <title>Εικονίδιο ειδοποίησης</title>
+
+    <para>
+    </para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>κείμενο</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το κείμενο που προβάλλεται στην περιοχή ειδοποίησης.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Το παρακάτω παράδειγμα σεναρίου εντολών δείχνει πως μπορείτε να δημιουργήσετε ένα εικονίδιο ειδοποίησης: <programlisting>
+        #!/bin/sh
+
+        zenity --notification\
+          --window-icon="info" \
+          --text="Υπάρχουν ενημερώσεις συστήματος!"
+       </programlisting></para>
+
+    <figure id="zenity-notification-screenshot">
+      <title>Παράδειγμα εικονιδίου ειδοποίησης</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+              <imagedata fileref="figures/zenity-notification-screenshot.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+              <phrase>Παράδειγμα εικονιδίου ειδοποίησης <application>Zenity</application></phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+   </figure>
+													  
+  </sect1>
+
+<!-- ==== List Options ====== -->
+
+  <sect1 id="zenity-list-options">
+    <title>Διάλογος λίστας</title>
+
+    <para>
+	Use the <option>--list</option> option to create a list dialog. <application>Zenity</application> returns the entries in the first column of text of selected rows to standard output.
+    </para>
+
+    <para>Τα δεδομένα για τον διάλογο πρέπει να οριστούν ανά στήλη και ανά σειρά. Μπορείτε να δώσετε τα δεδομένα στον διάλογο με κανονική εισαγωγή. Κάθε εγγραφή πρέπει να διαχωρίζεται από χαρακτήρα νέας γραμμής.</para>
+
+    <para>Αν χρησιμοποιήσετε την επιλογή <option>--checklist</option> ή <option>--radiolist</option>, κάθε σειρά πρέπει να αρχίζει με 'TRUE' or 'FALSE'.</para>
+
+    <para>Ο διάλογος λίστας υποστηρίζει τις παρακάτω επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--column</option>=<replaceable>στήλη</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει τις κεφαλίδες των στηλών που προβάλλονται στον διάλογο λίστας. Πρέπει να ορίσετε μία επιλογή <option>στήλη</option> για κάθε στήλη που θέλετε να προβάλλετε στον διάλογο.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--checklist</option></term>
+	<listitem>
+	  <para>Καθορίζει ότι η πρώτη στήλη του διαλόγου λίστας περιέχει κουτιά επιλογής.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--radiolist</option></term>
+	<listitem>
+	  <para>Καθορίζει ότι η πρώτη στήλη του διαλόγου λίστας περιέχει κουμπιά επιλογής.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--editable</option></term>
+	<listitem>
+	  <para>Επιτρέπει την επεξεργασία των προβαλλόμενων αντικειμένων.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--separator</option>=<replaceable>διαχωριστικό</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει ποια συμβολοσειρά χρησιμοποιείται όταν ο διάλογος λίστας αποδίδει τις επιλεγμένες εγγραφές.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--print-column</option>=<replaceable>στήλη</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει ποια στήλη πρέπει να τυπώνεται σαν αποτέλεσμα κατά την επιλογή. Η προεπιλεγμένη στήλη είναι '1'. Το 'ALL' μπορεί να χρησιμοποιηθεί για να εκτυπωθούν όλες οι στήλες της λίστας.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Το παρακάτω παράδειγμα σεναρίου εντολών σας δείχνει πως να δημιουργήσετε έναν διάλογο λίστας: <programlisting>
+        #!/bin/sh
+
+        zenity --list \
+          --title="Επιλέξτε τα Bugs που θέλετε να προβάλετε" \
+          --column="Αριθμός Bug" --column="Σοβαρότητα" --column="Περιγραφή" \
+            992383 Κανονική "GtkTreeView crashes on multiple selections" \
+            293823 Μεγάλη "GNOME Dictionary does not handle proxy" \
+            393823 Κρίσιμη "Menu editing does not work in GNOME 2.0"
+      </programlisting></para>
+
+    <figure id="zenity-list-screenshot">
+      <title>Παράδειγμα διαλόγου λίστας</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-list-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Παράδειγμα διαλόγου λίστας <application>Zenity</application></phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Message Options ====== -->
+
+  <sect1 id="zenity-message-options">
+    <title>Διάλογοι μηνυμάτων</title>
+
+    <para>Το <application>Zenity</application> μπορεί να δημιουργήσει τέσσερεις τύπους διαλόγων μηνύματος:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Σφάλματος</para>
+      </listitem>
+      <listitem>
+        <para>Πληροφόρησης</para>
+      </listitem>
+      <listitem>
+        <para>Ερώτησης</para>
+      </listitem>
+      <listitem>
+        <para>Προειδοποίησης</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Για κάθε τύπο, χρησιμοποιήστε την επιλογή <option>--text</option> για να καθορίσετε το κείμενο που θα προβάλλεται στον διάλογο.</para>
+
+    <sect2 id="zenity-error-dialog">
+      <title>Διάλογος σφάλματος</title>
+
+      <para>Χρησιμοποιήστε την επιλογή <option>--error</option> για την δημιουργία διαλόγου σφάλματος.</para>
+
+      <para>Το παρακάτω παράδειγμα σεναρίου εντολών σας δείχνει πως να δημιουργήσετε έναν διάλογο σφάλματος: <programlisting>
+          #!/bin/bash
+
+          zenity --error \
+          --text="Αδύνατη η εύρεση του /var/log/syslog."
+        </programlisting></para>
+
+      <figure id="zenity-error-screenshot">
+        <title>Παράδειγμα διαλόγου σφάλματος</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-error-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase>Παράδειγμα διαλόγου σφάλματος <application>Zenity</application></phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-info-dialog">
+      <title>Διάλογος πληροφόρησης</title>
+
+      <para>Χρησιμοποιήστε την επιλογή <option>--info</option> για να δημιουργήσετε έναν διάλογο πληροφόρησης.</para>
+
+      <para>Το παρακάτω παράδειγμα σεναρίου εντολών δείχνει πως μπορείτε να δημιουργήσετε έναν διάλογο πληροφόρησης: <programlisting>
+          #!/bin/bash
+
+          zenity --info \
+          --text="Η συγχώνευση ολοκληρώθηκε. Ενημερώθηκαν 3 από 10 αρχεία."
+        </programlisting></para>
+
+      <figure id="zenity-information-screenshot">
+        <title>Παράδειγμα διαλόγου πληροφόρησης</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-information-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase>Παράδειγμα διαλόγου πληροφόρησης <application>Zenity</application></phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-question-dialog">
+      <title>Διάλογος ερώτησης</title>
+
+      <para>Χρησιμοποιήστε την επιλογή <option>--question</option> για να δημιουργήσετε έναν διάλογο ερώτησης.</para>
+
+      <para>Το παρακάτω παράδειγμα σεναρίου εντολών δείχνει πως μπορείτε να δημιουργήσετε έναν διάλογο ερώτησης: <programlisting>
+          #!/bin/bash
+
+          zenity --question \
+          --text="Θέλετε σίγουρα να συνεχίσετε;"
+        </programlisting></para>
+
+      <figure id="zenity-question-screenshot">
+        <title>Παράδειγμα διαλόγου ερώτησης</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-question-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase>Παράδειγμα διαλόγου ερώτησης <application>Zenity</application></phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-warning-dialog">
+      <title>Διάλογος προειδοποίησης</title>
+
+      <para>Χρησιμοποιήστε την επιλογή <option>--warning</option> για να δημιουργήσετε έναν διάλογο προειδοποίησης.</para>
+
+      <para>Το παρακάτω παράδειγμα σεναρίου εντολών δείχνει πως μπορείτε να δημιουργήσετε έναν διάλογο προειδοποίησης: <programlisting>
+          #!/bin/bash
+        
+          zenity --warning \
+          --text="Αποσυνδέστε το καλώδιο ρεύματος για να αποφύγετε την ηλεκτροπληξία."
+        </programlisting></para>
+
+      <figure id="zenity-warning-screenshot">
+        <title>Παράδειγμα διαλόγου προειδοποίησης</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-warning-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase>Παράδειγμα διαλόγου προειδοποίησης <application>Zenity</application></phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+  </sect1>
+
+<!-- ==== Progress Options ====== -->
+
+  <sect1 id="zenity-progress-options">
+    <title>Διάλογος ένδειξης προόδου</title>
+
+    <para>Χρησιμοποιήστε την επιλογή <option>--progress</option> για να δημιουργήσετε έναν διάλογο ένδειξης προόδου.</para>
+
+    <para>Το <application>Zenity</application> διαβάζει τα δεδομένα εισόδου ανά γραμμή. Αν μία γραμμή αρχίζει με #, το κείμενο ενημερώνεται με το κείμενο της γραμμής. Αν η γραμμή περιέχει μόνο έναν αριθμό, το ποσοστό ενημερώνεται με αυτόν τον αριθμό.</para>
+	
+    <para>Ο διάλογος ένδειξης προόδου υποστηρίζει τις παρακάτω επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>κείμενο</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το κείμενο που προβάλλεται στο διάλογο ένδειξης προόδου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--percentage</option>=<replaceable>ποσοστό</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το αρχικό ποσοστό που μπαίνει στον διάλογο ένδειξης προόδου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--auto-close</option></term>
+	<listitem>
+	  <para>Κλείνει τον διάλογο ενημέρωσης προόδου όταν επιτευχθεί το 100%.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--pulsate</option></term>
+	<listitem>
+	  <para>Ορίζει ότι η μπάρα προόδου πάλλεται έως ότου διαβαστεί ένας χαρακτήρας EOF από την κανονική είσοδο.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Το παρακάτω παράδειγμα σεναρίου εντολών σας δείχνει πως θα δημιουργήσετε έναν διάλογο ένδειξης προόδου: <programlisting>
+        #!/bin/sh
+        (
+        echo "10" ; sleep 1
+        echo "# Ενημέρωση καταγραφών αλληλογραφίας" ; sleep 1
+        echo "20" ; sleep 1
+        echo "# Επαναφορά εργασιών cron" ; sleep 1
+        echo "50" ; sleep 1
+        echo "This line will just be ignored" ; sleep 1
+        echo "75" ; sleep 1
+        echo "# Επανεκκίνηση συστήματος" ; sleep 1
+        echo "100" ; sleep 1
+        ) |
+        zenity --progress \
+          --title="Ενημέρωση καταγραφών συστήματος" \
+          --text="Ενημέρωση καταγραφών αλληλογραφίας..." \
+          --percentage=0
+
+        if [ "$?" = -1 ] ; then
+                zenity --error \
+                  --text="Ακύρωση ενημέρωσης."
+        fi
+
+      </programlisting></para>
+
+    <figure id="zenity-progress-screenshot">
+      <title>Παράδειγμα διαλόγου ένδειξης προόδου</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-progress-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Παράδειγμα διαλόγου ένδειξης προόδου <application>Zenity</application></phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Text Entry Options ====== -->
+
+  <sect1 id="zenity-text-entry-options">
+    <title>Διάλογος καταχώρησης κειμένου</title>
+
+    <para>
+        Use the <option>-entry</option> option to create a text entry dialog. <application>Zenity</application> returns the contents of the text entry to standard output. 
+    </para>	
+    <para>Ο διάλογος καταχώρησης κειμένου υποστηρίζει τις ακόλουθες επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>κείμενο</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το κείμενο που προβάλλεται στον διάλογο καταχώρησης κειμένου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--entry-text</option>=<replaceable>κείμενο</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει το κείμενο που προβάλλεται στο πεδίο εισαγωγής του διαλόγου καταχώρησης κειμένου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--hide-text</option></term>
+	<listitem>
+	  <para>Αποκρύπτει το κείμενο στο πεδίο εισαγωγής του διαλόγου καταχώρησης κειμένου.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Το παρακάτω παράδειγμα σεναρίου εντολών σας δείχνει πως μπορείτε να δημιουργήσετε έναν διάλογο καταχώρησης κειμένου <programlisting>
+        #!/bin/sh
+
+        if zenity --entry \
+        --title="Προσθήκη καταχώρησης" \
+        --text="Εισάγετε τον _κωδικό πρόσβασής σας:" \
+        --entry-text "κωδικός" \
+        --hide-text
+          then echo $?
+          else echo "Δεν δώσατε κωδικό"
+        fi
+      </programlisting></para>
+
+    <figure id="zenity-entry-screenshot">
+      <title>Παράδειγμα διαλόγου καταχώρησης κειμένου</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-entry-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Παράδειγμα διαλόγου καταχώρησης κειμένου <application>Zenity</application></phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </sect1>
+
+<!-- ==== Text Information Options ====== -->
+
+  <sect1 id="zenity-text-options">
+    <title>Διάλογος πληροφορίων κειμένου</title>
+
+    <para>Χρησιμοποιήστε την επιλογή <option>--text-info</option> για να δημιουργήσετε έναν διάλογο πληροφοριών κειμένου.</para>
+	
+    <para>Ο διάλογος πληροφοριών κειμένου υποστηρίζει τις παρακάτω επιλογές:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--filename</option>=<replaceable>όνομα αρχείου</replaceable></term>
+	<listitem>
+	  <para>Καθορίζει ένα αρχείο που φορτώνεται στον διάλογο πληροφοριών κειμένου.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--editable</option></term>
+        <listitem>
+          <para>Allows the displayed text to be edited. The edited text is returned to standard output when the dialog is closed.</para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Το ακόλουθο παράδειγμα σεναρίου εντολών σας δείχνει πως μπορείτε να δημιουργήσετε έναν διάλογο πληροφοριών κειμένου: <programlisting>
+        #!/bin/sh
+
+        FILE=`zenity --file-selection \
+          --title="Επιλογή αρχείου"`
+
+        case $? in
+                 0)
+                        zenity --text-info \
+                          --title=$FILE \
+                          --filename=$FILE \
+                          --editable 2&gt;/tmp/tmp.txt;;
+                 1)
+                        echo "Δεν επιλέχθηκε αρχείο.";;
+                -1)
+                        echo "Δεν επιλέχθηκε αρχείο.";;
+        esac
+      </programlisting></para>
+
+    <figure id="zenity-text-screenshot">
+      <title>Παράδειγμα διαλόγου πληροφοριών κειμένου</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-text-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase>Παράδειγμα διαλόγου πληροφοριών κειμένου <application>Zenity</application></phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+</article>

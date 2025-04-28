@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+
+<section id="sect-Release_Notes-Fedora_Desktop">
+	<title>Fedora Desktop</title>
+	<remark>This beat is located here: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Desktop">https://fedoraproject.org/wiki/Docs/Beats/Desktop</ulink></remark>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-Spanning_Desktop">
+		<title>Spanning Desktop</title>
+		<para>
+			In the latest version of '''Xorg''' included in this release, if you have a dual monitor setup, your desktop display will span across them instead of using a cloned display by default. This matches the behaviour of other operating systems. 
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-Webcam">
+		<title>Better webcam support</title>
+
+		<para>
+			The better webcam support feature for Fedora&nbsp;10 did much to improve webcam support in Linux. We now have a library (<application>libv4l</application>) for decompressing various proprietary video formats in user space, and almost all applications that use webcams have been patched to use this library.
+		</para>
+
+		<para>Fedora&nbsp;12 contains a second push for better webcam support, comprising three pieces:
+		<itemizedlist>
+			<listitem><para>Lots of testing, fixing bugs, and improving of existing in-kernel drivers.</para></listitem>
+			<listitem><para>Add video processing to <application>libv4l</application> for better video quality for cams which lack any of the following in hardware:
+			<itemizedlist>
+				<listitem><para>White balancing</para></listitem>
+				<listitem><para>Gamma correction</para></listitem>
+				<listitem><para>Automatic adjustment of exposure (gain)</para></listitem>
+				<listitem><para>Recognize laptop cams which are known to be installed upside down and rotate the image 180 degrees in software</para></listitem>
+			</itemizedlist></para></listitem>
+			<listitem><para>Clean up existing out-of-tree drivers, moving the decompression to <application>libv4l</application> where needed and merge them into the mainline, specifically the following ones:
+			<itemizedlist>
+				<listitem><para>qc-usb: stv0600 (and similar)-based cams, mainly Logitech QuickCam Express (done as of kernel 2.6.29)</para></listitem>
+				<listitem><para>ov51x-jpeg: ov511(+) and ov518(+) driver (done as of kernel 2.6.31rc1, libv4l-0.6.0)</para></listitem>
+				<listitem><para>qc-usb-messenger: st6422-based cams mainly Logitech QuickCam Messenger models (done as of kernel 2.6.31rc1)</para></listitem>
+				<listitem><para>sn9c20x: sn9c20x-based cams, many newer cheap cams (done as of kernel 2.6.31rc2)</para></listitem></itemizedlist></para></listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-ABRT">
+		<title>ABRT</title>
+		<para>
+		  <indexterm>
+		    <primary>ABRT</primary>
+		  </indexterm>
+		The <application>ABRT</application> automatic bug reporting tool replaces <application>bug-buddy</application> and <application>kerneloops</application> in the Fedora&nbsp;12 desktop. <application>ABRT</application> has an extensible architecture and can not only catch and report segmentation faults and kernel oops, but also python backtraces. In contrast to <application>bug-buddy</application>, it can catch segmentation faults in any binary, not just GTK+ applications.</para>
+
+		<para>If you have manually modified the <application>GConf</application> settings for the <application>bug-buddy</application> GTK+ module before, you may see warning messages like the following from GTK+ applications:</para>
+
+<screen><computeroutput>Gtk-Message: Failed to load module "gnomebreakpad":</computeroutput>
+<computeroutput>libgnomebreakpad.so: cannot open shared object file: No such file or directory</computeroutput></screen>
+
+
+		<para>To stop these messages, run the following command in a terminal in your session:</para>
+
+<screen><command>gconftool-2 --type bool --set /apps/gnome_settings_daemon/gtk-modules/gnomebreakpad false</command></screen>
+
+
+	</section>
+
+	<section id="sect-Release_Notes-Fedora_Desktop-GNOME">
+		<title>GNOME 2.28</title>
+		<para>
+		  <indexterm>
+		    <primary>GNOME</primary>
+		  </indexterm>
+
+			The <application>GNOME 2.28.1</application> desktop is part of this release, and is the default environment used in the Fedora Desktop Live image. The Desktop Live image is a downloadable CD you can use to test the new GNOME environment with or without installing it. The image can be written to CD, or to a USB flash disk; for instructions, refer to <ulink url="https://fedoraproject.org/wiki/FedoraLiveCD/USBHowTo"></ulink>.
+		</para>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Icons">
+			<title>Icons in menus and buttons</title>
+			<para>
+				Icons in menus and buttons are not shown by default in <application>GNOME 2.28</application>. To get the old, icon-rich appearance back, select <menuchoice><guimenu>System</guimenu><guimenuitem>Preferences</guimenuitem><guimenuitem>Appearance</guimenuitem></menuchoice>, click the <guilabel>Interface</guilabel> tab and enable <guilabel>Show icons in menus</guilabel>. There is, however, no menu interface to enable the icons for the buttons. To set the corresponding GConf keys instead for enabling both the menus and buttons to have icons:
+<screen><command>gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true</command>
+<command>gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true</command></screen>
+			</para>
+		</section>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Changes">
+		  <title>Additional imrpovements in GNOME 2.28</title>
+		<para>
+		  Compared to previous Fedora releases, there are a
+		  number of other changes in the default configuration
+		  of the GNOME desktop:
+		  <itemizedlist>
+		    <listitem><para> The 'Windows' preference dialog
+		    is no longer installed by default. It is still
+		    available in the control-center-extra package
+		    </para></listitem>
+		    <listitem><para> The 'Main Menu' preference dialog
+		    is no longer installed by default. It is still
+		    available in the alacarte package
+		    </para></listitem>
+		    <listitem><para> The user switcher has been moved
+		    to the far right of the top panel
+		    </para></listitem>
+		    <listitem><para> The 'Show Desktop' button has
+		    been removed by default. If you prefer, you can
+		    add this panel applet back with right click, "Add
+		    to Panel..." and selecting "Show Desktop".
+		    </para></listitem>
+		    <listitem><para> The number of workspaces in the
+		    'Workspace Switcher' has been reduced to 2
+		    </para></listitem>
+		    <listitem><para> The panel now adds padding
+		    between applets and between icons in the
+		    notification area. The padding can be removed with
+		    the following commands:
+		    <screen>
+gconftool-2 --type int --set /apps/panel/toplevels/top_panel/padding 0
+gconftool-2 --type int --set /apps/panel/toplevels/bottom_panel/padding 0
+gconftool-2 --type int --set /apps/panel/applets/systray/prefs/padding 0
+		    </screen>
+		    </para></listitem>
+		  </itemizedlist>
+		</para>
+		</section>
+
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Gnote">
+		<title>Gnote</title>
+			<para>
+			  <indexterm>
+			    <primary>gnote</primary>
+			  </indexterm>
+			  <indexterm>
+			    <primary>tomboy</primary>
+			  </indexterm>
+				<application>Gnote</application> is installed by default in GNOME for this release replacing <application>Tomboy</application>. <application>Gnote</application> is a port of <application>Tomboy</application> from Mono to C++ and consumes fewer resources. <application>Gnote</application> is both an applet that can sit in your GNOME panel as well as a individual application you can run within other desktop environments. Fedora Desktop Live CD since the Fedora 10 release has excluded Mono and hence Mono-based applications like <application>Tomboy</application> due to lack of space. <application>Gnote</application> will be installed by default in the Live CD as well in this release. <application>Tomboy</application> is still available as a optional alternative. If you are upgrading from the previous release you will not be migrated to <application>Gnote</application> and will continue to have <application>Tomboy</application>. <application>Tomboy</application> users can migrate easily to <application>Gnote</application> as it shares the file format and a plugin is available in <application>Gnote</application> that will automatically import <application>Tomboy</application> notes on first run. Many of the <application>Tomboy</application> plugins have been ported to <application>Gnote</application>. The following plugins are available as part of <application>Gnote</application>:
+				
+				<itemizedlist>
+					<listitem><para>Bugzilla Links</para></listitem>
+					<listitem><para>Tomboy Importer</para></listitem>
+					<listitem><para>Fixed Width</para></listitem>
+					<listitem><para>Insert Timestamp</para></listitem>
+					<listitem><para>Export to HTML</para></listitem>
+					<listitem><para>Printing Support</para></listitem>
+					<listitem><para>Sticky Notes Importer</para></listitem>
+					<listitem><para>Backlinks</para></listitem>
+				</itemizedlist>
+			</para>
+			<para>
+				You can copy the notes from <application>Tomboy</application> to <application>Gnote</application> using the following command in your home directory:
+<screen><command>cp -r .tomboy .gnote</command></screen>
+			</para>
+			<para>
+				The sticky notes applet is not provided anymore since <application>Gnote</application> provides a better note taking utility and is available by default in this release.
+			</para>
+		</section>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Sound_preferences">
+			<title>Sound preferences</title>
+			<para>
+				The GNOME sound preferences now supports profile switching.
+			</para>
+		</section>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Empathy">
+			<title>Empathy</title>
+			<para>
+			  <indexterm>
+			    <primary>empathy</primary>
+			  </indexterm>
+			  <indexterm>
+			    <primary>pidgin</primary>
+			  </indexterm>
+
+				<application>Empathy</application> replaces <application>Pidgin</application> as the default instant messenger in GNOME. <application>Empathy</application> is better integrated with GNOME and provides audio and video functionality for users of the Extensible Messaging and Presence Protocol (XMPP, formerly Jabber) with more improvements planned. <application>Empathy</application> supports importing accounts from <application>Pidgin</application> on first run so you can migrate more easily. If you are upgrading from a previous release, you will continue to have <application>Pidgin</application> by default. <application>Pidgin</application> continues to be available in the repository and is actively maintained.
+			</para>
+
+			<para>The major advantages and disadvantages of <application>Empathy</application> are:
+				<itemizedlist>
+					<title>Advantages</title>
+					<listitem><para>Better GNOME integration. Passwords are stored in the keyring instead of plain text like in <application>Pidgin</application></para></listitem>
+					<listitem><para>Voice chat with <application>GoogleTalk</application>. Voice chat requires extra <application>gstreamer</application> codecs and manual firewall reconfiguration and <application>Pidgin</application> now uses the same framework as well.</para></listitem>
+					<listitem><para>Account migration support from <application>Pidgin</application> has been added to <application>Empathy</application>.</para></listitem>
+					<listitem><para>Support for collaboration with <application>Abiword</application> and other programs</para></listitem>
+					<listitem><para>Geo Location (very recent feature) </para></listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<title>Disdvantages</title>
+					<listitem><para>Missing plugin system, so many of the add-on features available to <application>Pidgin</application> (like encryption) are not available to <application>Empathy</application></para></listitem>
+					<listitem><para>No proxy support </para></listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Totem">
+			<title>Totem</title>
+			<para>
+			  <indexterm>
+			    <primary>totem</primary>
+			  </indexterm>
+			  <indexterm>
+			    <primary>gstreamer</primary>
+			  </indexterm>
+				<application>Totem</application> only supports a <application>gstreamer</application> back end now. The <application>totem-xine</application> back end has been removed completely.
+			</para>
+		</section>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Epiphany">
+			<title>Epiphany</title>
+			<para>
+			  <indexterm>
+			    <primary>epiphany</primary>
+			  </indexterm>
+				<application>Epiphany</application> in this release is now using the WebKit engine instead of the Gecko engine from <application>Firefox</application>.
+			</para>
+		</section>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME_Shell">
+			<title>GNOME Shell &mdash; preview of GNOME 3</title>
+			<para>
+			  <indexterm>
+			    <primary>GNOME shell</primary>
+			  </indexterm>
+				A very early version of GNOME Shell is now available in the repository. GNOME Shell is a key part of GNOME 3 and is in active development with the heavy involvement of Fedora developers and interaction designers. A simple way to try out GNOME Shell is to install the <package>desktop-effects</package> package:
+<screen><command>yum install desktop-effects gnome-shell</command></screen>
+			</para>
+			<para>
+				Then, click <menuchoice><guimenu>System</guimenu><guimenuitem>Preferences</guimenuitem><guimenuitem>Desktop Effects</guimenuitem></menuchoice>
+			</para>
+			<para>
+				If you would like to configure it manually, run
+<screen><command>mkdir ~/.config/autostart</command>
+<command>ln -s /usr/share/applications/gnome-shell.desktop ~/.config/autostart</command></screen>
+			</para>
+			<para>
+				You can also run the following to invoke it directly.
+<screen><command>gnome-shell --replace &amp;</command></screen>
+			</para>
+		</section>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-KDE">
+		<title>KDE 4.3</title>
+		<para>
+	    <indexterm>
+	      <primary>KDE</primary>
+	    </indexterm>
+			<application>KDE 4.3</application> is part of this release and is the default environment in the Fedora KDE Desktop Live image. The KDE Desktop Live image is a downloadable CD you can use to test the new KDE environment with or without installing it. You can write the image to a CD or to a USB flash drive.
+		</para>
+		<para>
+			<application>KDE 4.3</application> is the latest release of KDE 4, with many enhancements and new features. <application>Plasma</application> has a new <citetitle>Air</citetitle> look, improved job and notification management and fully-configurable keyboard shortcuts. There are also new <application>Plasma</application> widgets and existing ones are improved. <application>KWin</application> is optimized for performance and brings new desktop effects to KDE. KDE now contains a new bug reporting tool, making it easier to report bugs to the KDE developers.
+		</para>
+	</section>
+
+	<section id="sect-Release_Notes-Fedora_Desktop-moblin">
+	  <title>Moblin Desktop</title>
+	  <para>
+	    <indexterm>
+	      <primary>moblin-desktop</primary>
+	    </indexterm>
+	    The Moblin Architecture is designed to support multiple
+	    platforms and usage models ranging from Netbooks and
+	    NetTops to Mobile Internet Devices (MID) and various
+	    embedded usage models, such as In Vehicle Infotainment
+	    systems.
+	  </para>
+	  <para>
+	    A preview of the Core Moblin 2 desktop environment for
+	    NetBook/NetTop/MID devices is available for testing in
+	    Fedora.
+	  </para>
+	  <para>
+	    The Moblin Desktop may be installed as a group with yum:
+	    <screen>
+sudo yum install @moblin-desktop
+	    </screen>
+	  </para>
+	</section>
+
+</section>
+
+

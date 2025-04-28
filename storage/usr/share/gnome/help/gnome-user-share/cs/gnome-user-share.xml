@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.26">
+<!ENTITY app "gnome-user-share">
+]>
+<article id="index" lang="cs">
+  <articleinfo>
+	 <title>Příručka ke sdílení osobních souborů</title>
+	 <copyright>
+		<year>2009</year>
+		<holder>Red Hat, Inc.</holder>
+         </copyright><copyright><year>2009</year><holder>Martin Picek (picek.martin@gnome-cesko.cz)</holder></copyright>
+
+	 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+	 <authorgroup>
+           <author role="maintainer">
+             <firstname>Matthias</firstname>
+             <surname>Clasen</surname>
+           </author>
+	 </authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+		<revision>
+		  <revnumber>1.0</revnumber>
+		  <date>2009</date>
+		  <revdescription>
+			 <para role="author">Matthias Clasen <email>mclasen@redhat.com</email></para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Tato uživatelská příručka popisuje gnome-user-share ve verzi 2.26.</releaseinfo>
+	 <legalnotice>
+		<title>Ohlasy</title>
+		<para>Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci gnome-user-share nebo této příručce, postupujte dle instrukcí na <ulink url="ghelp:user-guide?feedback-bugs" type="help">stránce s ohlasy na GNOME</ulink>.</para>
+	 </legalnotice>
+    <abstract role="description">
+      <para>gnome-user-share je služba sezení, která umožňuje snadné sdílení souborů mezi několika počítači.</para>
+    </abstract>
+  </articleinfo>
+  <indexterm><primary>gnome-user-share</primary></indexterm>
+  <indexterm><primary>sdílení souborů</primary></indexterm>
+  <indexterm><primary>sdílení</primary></indexterm>
+
+  <sect1 id="gnome-user-share-intro">
+	 <title>Úvod</title>
+	 <para>gnome-user-share je služba sezení, která exportuje obsah adresáře <filename>Veřejné</filename> z vašeho domovského adresáře tak, aby mohl být snadno přístupný z ostatních počítačů ve vaší lokální síti. Na ostatních počítačích bude sdílený adresář zobrazen v okně Síť aplikace <application>Nautilus</application> a bude mít název podobný jako „Veřejné soubory uživatele <replaceable>Uživatel</replaceable>“, kde výraz <replaceable>Uživatel</replaceable> bude nahrazen vaším uživatelským jménem.</para>
+	 <para>Ke sdílení adresáře <filename>Veřejné</filename> používá gnome-user-share server WebDAV a na lokální síti jej ostatním počítačům „nabízí“ prostředictvím mDNS.</para>
+         <para>gnome-user-share navíc umí sdílené soubory zpřístupnit po Bluetooth pomocí ObexFTP a přijímat je pomocí ObexPush.</para>
+  </sect1>
+
+  <sect1 id="gnome-user-share-getting-started">
+    <title>Začínáme</title>
+
+    <sect2 id="gnome-user-share-start">
+       <title>Spuštění gnome-user-share</title>
+
+       <para>
+         The gnome-user-share service is normally started by <application>gnome-session</application> when you log in. You can change this by opening <menuchoice><guimenu>Preferences</guimenu><guimenu>Startup Applications</guimenu></menuchoice> in the <guimenu>System</guimenu> menu, and modifying the 'User Sharing' entry in the list of startup programs.
+       </para>
+
+       <para>K nastavení nejrůznějších aspektů sdílení souborů použijte Nastavení sdílení souborů, které lze najít v nabídce <menuchoice><guimenu>Systém</guimenu><guimenu>Volby</guimenu><guimenu>Sdílení osobních souborů</guimenu></menuchoice>.</para>
+       <figure id="file-sharing-preferences">
+         <title>Nastavení sdílení souborů</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/file-sharing-preferences.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+ 
+     </sect2>
+     <sect2 id="gnome-user-share-enabling-sharing">
+       <title>Povolení sdílení souborů po síti</title>
+       <para>Pomocí <menuchoice><guimenu>Volby</guimenu><guimenu>Sdílení osobních souborů</guimenu></menuchoice> z nabídky <guimenu>Systém</guimenu> otevřete Nastavení sdílení souborů.</para>
+       <figure id="sharing-over-the-network">
+         <title>Sdílení souborů po síti</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-the-network.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Chcete-li povolit sdílení pomocí WebDAV, použijte zaškrtávací políčko <guilabel>Sdílet veřejné soubory po síti</guilabel>. Když je sdílení povoleno, ovládací prvky týkající se ochrany heslem vám umožní nastavit heslo, které musí uživatel na jiném počítači zadat, aby mohl přistupovat k vašim sdíleným souborům. <note><para>Některá nastavení firewallu na místním počítači mohou způsobovat problémy s nabízením sdílených souborů i s přístupem k nim. Kontaktujte svého správce systému, chcete-li se dovědět více informací.</para></note><itemizedlist>
+           <listitem>
+              <para>Zvolte <guilabel>Nikdy</guilabel>, chcete-li všem povolit libovolné čtení a upravování souborů ve vašem sdíleném adresáři.</para>
+           </listitem>
+           <listitem>
+              <para>Zvolte <guilabel>Vždy</guilabel>, aby zadání hesla bylo vyžadováno při čtení i upravování souborů ve vašem sdíleném adresáři.</para>
+           </listitem>
+           <listitem>
+              <para>Zvolte <guilabel>Při zapisování do souborů</guilabel>, chcete-li všem povolit libovolné čtení souborů ve vašem sdíleném adresáři, ale upravování souborů chcete podmínit zadáním hesla.</para>
+           </listitem>
+         </itemizedlist><note><para>Pokud nastavíte heslo, musíte ho říci všem uživatelům, kteří mají mít přístup ke sdíleným souborům. Proto byste měli nastavit heslo, které je odlišné od dalších hesel, která už používáte.</para></note></para>  
+     </sect2>
+
+     <sect2 id="gnome-user-share-enabling-bluetooth">
+       <title>Povolení sdílení souborů po Bluetooth</title>
+       <para>Pomocí <menuchoice><guimenu>Volby</guimenu><guimenu>Sdílení osobních souborů</guimenu></menuchoice> z nabídky <guimenu>Systém</guimenu> otevřete Nastavení sdílení souborů.</para>
+       <figure id="sharing-over-bluetooth">
+         <title>Sdílení souborů po Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Chcete-li povolit sdílení pomocí Bluetooth, použijte zaškrtávací políčko <guilabel>Sdílet adresář Veřejné po Bluetooth</guilabel>. Chcete-li povolit vzdáleným zařízením Bluetooth mazat soubory z vašeho sdíleného adresáře, použijte zaškrtávací políčko <guilabel>Povolit vzdáleným počítačům mazat soubory</guilabel>. Chcete-li povolit zařízením Bluetooth přistupovat k vašim sdíleným souborům, i když nejsou svázána s vaším počítačem, použijte zaškrtávací políčko <guilabel>Požadovat po vzdálených zařízeních spárování s počítačem</guilabel>. <note><para>Pokud povolíte nesvázaným vzdáleným zařízením přistupovat k vašim sdíleným souborům, kdokoli s mobilním telefonem s Bluetooth v blízkosti vašeho počítače může přistupovat k vašim souborům a možná je i měnit.</para></note></para>
+     </sect2>
+
+     <sect2 id="gnome-user-share-bluetooth-receiving">
+       <title>Přijímání souborů po Bluetooth</title>
+       <para>Pomocí <menuchoice><guimenu>Volby</guimenu><guimenu>Sdílení osobních souborů</guimenu></menuchoice> z nabídky <guimenu>Systém</guimenu> otevřete Nastavení sdílení souborů.</para>
+       <figure id="receiving-over-bluetooth">
+         <title>Přijímání souborů po Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/receiving-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Chcete-li povolit zařízením Bluetooth posílat soubory do vašeho počítače, použijte zaškrtávací políčko <guilabel>Soubory poslané po Bluetooth přijímat do adresáře pro stahování</guilabel>. Přijaté soubory budou ukládány do adresáře, který je vybrán jako cílové umístění stahovaných souborů. Když je přijímání souborů povoleno, v sekci <guilabel>Přijímat soubory</guilabel> můžete určit, jaká vzdálená zařízení vám mohou posílat soubory. <itemizedlist>
+            <listitem>
+              <para>Zvolte <guilabel>Vždy</guilabel>, chcete-li povolit všem vzdáleným zařízením posílat soubory.</para>
+            </listitem>
+            <listitem>
+              <para>Zaškrtněte <guilabel>Pouze ze svázaných zařízení</guilabel>, chcete-li přijímat soubory pouze od svázaných zařízení. <note><para>Svázaná zařízení jsou taková zařízení, která byla připojena k vašemu počítači a zadala kód PIN.</para></note></para>
+            </listitem>
+            <listitem>
+              <para>Zaškrtněte <guilabel>Pouze ze svázaných a důvěryhodných zařízení</guilabel>, chcete-li přijímat soubory pouze ze svázaných a důvěryhodných zařízení. <note><para>Počítače mohou být označeny jako důvěryhodné v sekci <guilabel>Známé počítače</guilabel> aplikace <application>bluetooth-properties</application>.</para></note></para>
+            </listitem>
+          </itemizedlist></para>
+        <para>Použijte zaškrtávací políčko <guilabel>Oznamovat přijaté soubory</guilabel>, chcete-li být informováni o přijetí souboru po Bluetooth.</para>
+     </sect2>
+  </sect1>
+
+</article>

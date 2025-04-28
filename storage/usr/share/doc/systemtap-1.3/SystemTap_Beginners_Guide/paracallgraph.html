@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.3.2. Call Graph Tracing</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="mainsect-profiling.html" title="4.3. Profiling" /><link rel="prev" href="mainsect-profiling.html" title="4.3. Profiling" /><link rel="next" href="threadtimessect.html" title="4.3.3. Determining Time Spent in Kernel and User Space" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="mainsect-profiling.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="threadtimessect.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="4.3.2. Call Graph Tracing" id="paracallgraph" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="paracallgraph">4.3.2. Call Graph Tracing</h3></div></div></div><a id="id660306" class="indexterm"></a><a id="id646659" class="indexterm"></a><a id="id679736" class="indexterm"></a><a id="id660247" class="indexterm"></a><a id="id656865" class="indexterm"></a><a id="id1006798" class="indexterm"></a><a id="id782368" class="indexterm"></a><div class="para">
+		This section describes how to trace incoming and outgoing function calls.
+	</div><div class="formalpara" id="scriptcallgraph"><h5 class="formalpara">para-callgraph-simple.stp</h5>
+			
+<pre class="programlisting">
+function trace(entry_p) {&#13;
+  if(tid() in trace)&#13;
+    printf("%s%s%s\n",thread_indent(entry_p),&#13;
+           (entry_p&gt;0?"-&gt;":"&lt;-"),&#13;
+           probefunc())&#13;
+}&#13;
+&#13;
+global trace&#13;
+probe kernel.function(@1).call {&#13;
+  if (execname() == "stapio") next # skip our own helper process&#13;
+  trace[tid()] = 1&#13;
+  trace(1)&#13;
+}&#13;
+probe kernel.function(@1).return {&#13;
+  trace(-1)&#13;
+  delete trace[tid()]&#13;
+}&#13;
+&#13;
+probe kernel.function(@2).call { trace(1) }&#13;
+probe kernel.function(@2).return { trace(-1) }&#13;
+function trace(entry_p) {&#13;
+  if(tid() in trace)&#13;
+    printf("%s%s%s\n",thread_indent(entry_p),&#13;
+           (entry_p&gt;0?"-&gt;":"&lt;-"),&#13;
+           probefunc())&#13;
+}&#13;
+&#13;
+global trace&#13;
+probe kernel.function(@1).call {&#13;
+  if (execname() == "stapio") next # skip our own helper process&#13;
+  trace[tid()] = 1&#13;
+  trace(1)&#13;
+}&#13;
+probe kernel.function(@1).return {&#13;
+  trace(-1)&#13;
+  delete trace[tid()]&#13;
+}&#13;
+&#13;
+probe kernel.function(@2).call { trace(1) }&#13;
+probe kernel.function(@2).return { trace(-1) }&#13;
+
+</pre>
+		</div><a id="id795115" class="indexterm"></a><a id="id709076" class="indexterm"></a><a id="id669546" class="indexterm"></a><a id="id2182755" class="indexterm"></a><div class="para">
+		<a class="xref" href="paracallgraph.html#scriptcallgraph" title="para-callgraph-simple.stp">para-callgraph-simple.stp</a> takes two command-line arguments:
+	</div><a id="id665137" class="indexterm"></a><a id="id725645" class="indexterm"></a><a id="id662455" class="indexterm"></a><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+				A <em class="firstterm">trigger function</em> (<code class="command">@1</code>), which enables or disables tracing on a per-thread basis. Tracing in each thread will continue as long as the trigger function has not exited yet.
+			</div></li><li class="listitem"><div class="para">
+				The kernel function/s whose entry/exit call you'd like to trace (<code class="command">@2</code>).
+			</div></li></ul></div><a id="id678991" class="indexterm"></a><a id="id1006850" class="indexterm"></a><a id="id2216025" class="indexterm"></a><div class="para">
+		<a class="xref" href="paracallgraph.html#scriptcallgraph" title="para-callgraph-simple.stp">para-callgraph-simple.stp</a> uses <code class="command">thread_indent()</code>; as such, its output contains the timestamp, process name, and thread ID of <code class="command">@2</code> (i.e. the probe function you are tracing). For more information about <code class="command">thread_indent()</code>, refer to its entry in <a class="xref" href="systemtapscript-handler.html#systemtapscript-functions" title="SystemTap Functions">SystemTap Functions</a>.
+	</div><div class="para">
+		The following example contains an excerpt from the output for <code class="command">stap para-callgraph.stp sys_read '*@fs/*.c'</code>:
+	</div><div class="example" title="Example 4.14. para-callgraph-simple.stp Sample Output" id="paracallgraphoutput"><h6>Example 4.14. <a class="xref" href="paracallgraph.html#scriptcallgraph" title="para-callgraph-simple.stp">para-callgraph-simple.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+[...]
+     0 klogd(1391):-&gt;sys_read
+    14 klogd(1391): -&gt;fget_light
+    22 klogd(1391): &lt;-fget_light
+    27 klogd(1391): -&gt;vfs_read
+    35 klogd(1391):  -&gt;rw_verify_area
+    43 klogd(1391):  &lt;-rw_verify_area
+    49 klogd(1391):  -&gt;kmsg_read
+     0 sendmail(1696):-&gt;sys_read
+    17 sendmail(1696): -&gt;fget_light
+    26 sendmail(1696): &lt;-fget_light
+    34 sendmail(1696): -&gt;vfs_read
+    44 sendmail(1696):  -&gt;rw_verify_area
+    52 sendmail(1696):  &lt;-rw_verify_area
+    58 sendmail(1696):  -&gt;proc_file_read
+    70 sendmail(1696):   -&gt;loadavg_read_proc
+    84 sendmail(1696):    -&gt;proc_calc_metrics
+    92 sendmail(1696):    &lt;-proc_calc_metrics
+    95 sendmail(1696):   &lt;-loadavg_read_proc
+   101 sendmail(1696):  &lt;-proc_file_read
+   106 sendmail(1696):  -&gt;dnotify_parent
+   115 sendmail(1696):  &lt;-dnotify_parent
+   119 sendmail(1696):  -&gt;inotify_dentry_parent_queue_event
+   127 sendmail(1696):  &lt;-inotify_dentry_parent_queue_event
+   133 sendmail(1696):  -&gt;inotify_inode_queue_event
+   141 sendmail(1696):  &lt;-inotify_inode_queue_event
+   146 sendmail(1696): &lt;-vfs_read
+   151 sendmail(1696):&lt;-sys_read
+</pre></div></div><br class="example-break" /></div><ul class="docnav"><li class="previous"><a accesskey="p" href="mainsect-profiling.html"><strong>Prev</strong>4.3. Profiling</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="threadtimessect.html"><strong>Next</strong>4.3.3. Determining Time Spent in Kernel and User ...</a></li></ul></body></html>

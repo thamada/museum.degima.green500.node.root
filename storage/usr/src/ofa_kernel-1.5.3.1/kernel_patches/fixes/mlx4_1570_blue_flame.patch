@@ -1,0 +1,633 @@
+commit a4b2fc67d886795faf570e0fc6df97985667448e
+Author: Eli Cohen <eli@mellanox.co.il>
+Date:   Thu Nov 11 10:02:42 2010 +0200
+
+    mlx4: Add blue flame support for kernel consumers
+    
+    Using blue flame can improve latency by allowing the HW to more efficiently
+    access the WQE. A consumer who wants to use blue flame, has to create the QP
+    with inline support. When posting a send WR, the consumer has to set
+    IB_SEND_INLINE in the send flags. This approach is similar to that take in
+    userspace; that is, in order to use blue flame you must use inline. However, if
+    the send WR is too large for blue flame, it will only use inline.
+    A kernel consumer that creates a QP with inline support, will be allocated a
+    UAR and a blue flame register. All QP doorbells will be set to the UAR and blue
+    flame posts to the blue flame register. We make use of all available registers
+    in a blue flame page.
+    
+    Signed-off-by: Eli Cohen <eli@mellanox.co.il>
+
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/cq.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/cq.c	2010-12-20 14:28:45.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/cq.c	2010-12-20 14:35:47.379141476 +0200
+@@ -785,7 +785,7 @@ int mlx4_ib_arm_cq(struct ib_cq *ibcq, e
+ 	mlx4_cq_arm(&to_mcq(ibcq)->mcq,
+ 		    (flags & IB_CQ_SOLICITED_MASK) == IB_CQ_SOLICITED ?
+ 		    MLX4_CQ_DB_REQ_NOT_SOL : MLX4_CQ_DB_REQ_NOT,
+-		    to_mdev(ibcq->device)->uar_map,
++		    to_mdev(ibcq->device)->priv_uar.map,
+ 		    MLX4_GET_DOORBELL_LOCK(&to_mdev(ibcq->device)->uar_lock));
+ 
+ 	return 0;
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/main.c	2010-12-20 14:28:48.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c	2010-12-20 14:35:48.059636118 +0200
+@@ -1246,8 +1246,8 @@ static void *mlx4_ib_add(struct mlx4_dev
+ 	if (mlx4_uar_alloc(dev, &ibdev->priv_uar))
+ 		goto err_pd;
+ 
+-	ibdev->uar_map = ioremap(ibdev->priv_uar.pfn << PAGE_SHIFT, PAGE_SIZE);
+-	if (!ibdev->uar_map)
++	ibdev->priv_uar.map = ioremap(ibdev->priv_uar.pfn << PAGE_SHIFT, PAGE_SIZE);
++	if (!ibdev->priv_uar.map)
+ 		goto err_uar;
+ 	MLX4_INIT_DOORBELL_LOCK(&ibdev->uar_lock);
+ 
+@@ -1407,7 +1407,7 @@ err_counter:
+ 		mlx4_counter_free(ibdev->dev, ibdev->counters[k - 1]);
+ 
+ err_map:
+-	iounmap(ibdev->uar_map);
++	iounmap(ibdev->priv_uar.map);
+ 
+ err_uar:
+ 	mlx4_uar_free(dev, &ibdev->priv_uar);
+@@ -1439,7 +1439,7 @@ static void mlx4_ib_remove(struct mlx4_d
+ 		flush_workqueue(wq);
+ 		ibdev->rocee.nb.notifier_call = NULL;
+ 	}
+-	iounmap(ibdev->uar_map);
++	iounmap(ibdev->priv_uar.map);
+ 
+ 	mlx4_foreach_port(p, dev, MLX4_PORT_TYPE_IB)
+ 		mlx4_CLOSE_PORT(dev, p);
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/mlx4_ib.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/mlx4_ib.h	2010-12-20 14:28:47.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/mlx4_ib.h	2010-12-20 14:35:48.083639535 +0200
+@@ -184,6 +184,8 @@ struct mlx4_ib_qp {
+ 	u8			state;
+ 	int			mlx_type;
+ 	struct list_head	gid_list;
++	int			max_inline_data;
++	struct mlx4_bf		bf;
+ };
+ 
+ struct mlx4_ib_srq {
+@@ -217,8 +219,6 @@ struct mlx4_ib_dev {
+ 	struct ib_device	ib_dev;
+ 	struct mlx4_dev	       *dev;
+ 	int			num_ports;
+-	void __iomem	       *uar_map;
+-
+ 	struct mlx4_uar		priv_uar;
+ 	u32			priv_pdn;
+ 	MLX4_DECLARE_DOORBELL_LOCK(uar_lock);
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/qp.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/qp.c	2010-12-20 14:28:47.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/qp.c	2010-12-20 14:36:10.643135992 +0200
+@@ -39,6 +39,7 @@
+ #include <rdma/ib_addr.h>
+ 
+ #include <linux/mlx4/qp.h>
++#include <linux/io.h>
+ 
+ #include "mlx4_ib.h"
+ #include "user.h"
+@@ -101,6 +102,19 @@ static const __be32 mlx4_ib_opcode[] = {
+ 	[IB_WR_MASKED_ATOMIC_FETCH_AND_ADD]	= cpu_to_be32(MLX4_OPCODE_MASKED_ATOMIC_FA),
+ };
+ 
++#ifndef wc_wmb
++	#if defined(__i386__)
++		#define wc_wmb() asm volatile("lock; addl $0,0(%%esp) " ::: "memory")
++	#elif defined(__x86_64__)
++		#define wc_wmb() asm volatile("sfence" ::: "memory")
++	#elif defined(__ia64__)
++		#define wc_wmb() asm volatile("fwb" ::: "memory")
++	#else
++		#define wc_wmb() wmb()
++	#endif
++#endif
++
++
+ static struct mlx4_ib_sqp *to_msqp(struct mlx4_ib_qp *mqp)
+ {
+ 	return container_of(mqp, struct mlx4_ib_sqp, qp);
+@@ -489,8 +503,7 @@ static int set_kernel_sq_size(struct mlx
+ 	cap->max_send_sge = min(qp->sq.max_gs,
+ 				min(dev->dev->caps.max_sq_sg,
+ 				    dev->dev->caps.max_rq_sg));
+-	/* We don't support inline sends for kernel QPs (yet) */
+-	cap->max_inline_data = 0;
++	qp->max_inline_data = cap->max_inline_data;
+ 
+ 	return 0;
+ }
+@@ -603,6 +616,15 @@ static int create_qp_common(struct mlx4_
+ 			*qp->db.db = 0;
+ 		}
+ 
++		if (qp->max_inline_data) {
++			err = mlx4_bf_alloc(dev->dev, &qp->bf);
++			if (err) {
++				mlx4_ib_dbg("failed to allocate blue flame register (%d)", err);
++				qp->bf.uar = &dev->priv_uar;
++			}
++		} else
++			qp->bf.uar = &dev->priv_uar;
++
+ 		if (mlx4_buf_alloc(dev->dev, qp->buf_size, PAGE_SIZE * 2, &qp->buf)) {
+ 			err = -ENOMEM;
+ 			goto err_db;
+@@ -683,6 +705,9 @@ err_db:
+ 	if (!pd->uobject && !init_attr->srq && init_attr->qp_type != IB_QPT_XRC)
+ 		mlx4_db_free(dev->dev, &qp->db);
+ 
++	if (qp->max_inline_data)
++		mlx4_bf_free(dev->dev, &qp->bf);
++
+ err:
+ 	return err;
+ }
+@@ -780,6 +805,8 @@ static void destroy_qp_common(struct mlx
+ 		kfree(qp->sq.wrid);
+ 		kfree(qp->rq.wrid);
+ 		mlx4_buf_free(dev->dev, qp->buf_size, &qp->buf);
++		if (qp->max_inline_data)
++			mlx4_bf_free(dev->dev, &qp->bf);
+ 		if (!qp->ibqp.srq && qp->ibqp.qp_type != IB_QPT_XRC)
+ 			mlx4_db_free(dev->dev, &qp->db);
+ 	}
+@@ -1107,7 +1134,7 @@ static int __mlx4_ib_modify_qp(struct ib
+ 	if (qp->ibqp.uobject)
+ 		context->usr_page = cpu_to_be32(to_mucontext(ibqp->uobject->context)->uar.index);
+ 	else
+-		context->usr_page = cpu_to_be32(dev->priv_uar.index);
++		context->usr_page = cpu_to_be32(qp->bf.uar->index);
+ 
+ 	if (attr_mask & IB_QP_DEST_QPN)
+ 		context->remote_qpn = cpu_to_be32(attr->dest_qp_num);
+@@ -1801,6 +1828,87 @@ static __be32 send_ieth(struct ib_send_w
+ 	}
+ }
+ 
++static int lay_inline_data(struct mlx4_ib_qp *qp, struct ib_send_wr *wr,
++			   void *wqe, int *sz)
++{
++	struct mlx4_wqe_inline_seg *seg;
++	void *addr;
++	int len, seg_len;
++	int num_seg;
++	int off, to_copy;
++	int i;
++	int inl = 0;
++
++	seg = wqe;
++	wqe += sizeof *seg;
++	off = ((unsigned long)wqe) & (unsigned long)(MLX4_INLINE_ALIGN - 1);
++	num_seg = 0;
++	seg_len = 0;
++
++	for (i = 0; i < wr->num_sge; ++i) {
++		addr = (void *) (unsigned long)(wr->sg_list[i].addr);
++		len  = wr->sg_list[i].length;
++		inl += len;
++
++		if (inl > qp->max_inline_data) {
++			inl = 0;
++			return -1;
++		}
++
++		while (len >= MLX4_INLINE_ALIGN - off) {
++			to_copy = MLX4_INLINE_ALIGN - off;
++			memcpy(wqe, addr, to_copy);
++			len -= to_copy;
++			wqe += to_copy;
++			addr += to_copy;
++			seg_len += to_copy;
++			wmb(); /* see comment below */
++			seg->byte_count = htonl(MLX4_INLINE_SEG | seg_len);
++			seg_len = 0;
++			seg = wqe;
++			wqe += sizeof *seg;
++			off = sizeof *seg;
++			++num_seg;
++		}
++
++		memcpy(wqe, addr, len);
++		wqe += len;
++		seg_len += len;
++		off += len;
++	}
++
++	if (seg_len) {
++		++num_seg;
++		/*
++		 * Need a barrier here to make sure
++		 * all the data is visible before the
++		 * byte_count field is set.  Otherwise
++		 * the HCA prefetcher could grab the
++		 * 64-byte chunk with this inline
++		 * segment and get a valid (!=
++		 * 0xffffffff) byte count but stale
++		 * data, and end up sending the wrong
++		 * data.
++		 */
++		wmb();
++		seg->byte_count = htonl(MLX4_INLINE_SEG | seg_len);
++	}
++
++	*sz = (inl + num_seg * sizeof *seg + 15) / 16;
++
++	return 0;
++}
++
++/*
++ * Avoid using memcpy() to copy to BlueFlame page, since memcpy()
++ * implementations may use move-string-buffer assembler instructions,
++ * which do not guarantee order of copying.
++ */
++static void mlx4_bf_copy(unsigned long *dst, unsigned long *src, unsigned bytecnt)
++{
++	__iowrite64_copy(dst, src, bytecnt / 8);
++}
++
+ int mlx4_ib_post_send(struct ib_qp *ibqp, struct ib_send_wr *wr,
+ 		      struct ib_send_wr **bad_wr)
+ {
+@@ -1821,6 +1929,7 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 	int i;
+ 	int blh = 0;
+ 	__be16 vlan = 0;
++	int inl = 0;
+ 
+ 	spin_lock_irqsave(&qp->sq.lock, flags);
+ 
+@@ -1845,6 +1954,7 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 		}
+ 
+ 		ctrl = wqe = get_send_wqe(qp, ind & (qp->sq.wqe_cnt - 1));
++		*((u32 *) (&ctrl->vlan_tag)) = 0;
+ 		qp->sq.wrid[(qp->sq.head + nreq) & (qp->sq.wqe_cnt - 1)] = wr->wr_id;
+ 
+ 		ctrl->srcrb_flags =
+@@ -1981,7 +2091,6 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 
+ 		dseg = wqe;
+ 		dseg += wr->num_sge - 1;
+-		size += wr->num_sge * (sizeof (struct mlx4_wqe_data_seg) / 16);
+ 
+ 		/* Add one more inline data segment for ICRC for MLX sends */
+ 		if (unlikely(qp->ibqp.qp_type == IB_QPT_SMI ||
+@@ -1990,8 +2099,18 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 			size += sizeof (struct mlx4_wqe_data_seg) / 16;
+ 		}
+ 
+-		for (i = wr->num_sge - 1; i >= 0; --i, --dseg)
+-			set_data_seg(dseg, wr->sg_list + i);
++		if (wr->send_flags & IB_SEND_INLINE && wr->num_sge) {
++			int sz;
++			err = lay_inline_data(qp, wr, wqe, &sz);
++			if (!err) {
++				inl = 1;
++				size += sz;
++			}
++		} else {
++			size += wr->num_sge * (sizeof (struct mlx4_wqe_data_seg) / 16);
++			for (i = wr->num_sge - 1; i >= 0; --i, --dseg)
++				set_data_seg(dseg, wr->sg_list + i);
++		}
+ 
+ 		/*
+ 		 * Possibly overwrite stamping in cacheline with LSO
+@@ -2004,6 +2123,11 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 		ctrl->fence_size = (wr->send_flags & IB_SEND_FENCE ?
+ 				    MLX4_WQE_CTRL_FENCE : 0) | size;
+ 
++		if (vlan) {
++			ctrl->ins_vlan = 1 << 6;
++			ctrl->vlan_tag = vlan;
++		}
++
+ 		/*
+ 		 * Make sure descriptor is fully written before
+ 		 * setting ownership bit (because HW can start
+@@ -2016,11 +2140,6 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 			goto out;
+ 		}
+ 
+-		if (vlan) {
+-			ctrl->ins_vlan = 1 << 6;
+-			ctrl->vlan_tag = vlan;
+-		}
+-
+ 		ctrl->owner_opcode = mlx4_ib_opcode[wr->opcode] |
+ 			(ind & qp->sq.wqe_cnt ? cpu_to_be32(1 << 31) : 0) |
+ 			(blh ? cpu_to_be32(1 << 6) : 0);
+@@ -2044,7 +2163,24 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 	}
+ 
+ out:
+-	if (likely(nreq)) {
++	if (nreq == 1 && inl && size > 1 && size < qp->bf.buf_size / 16) {
++		ctrl->owner_opcode |= htonl((qp->sq_next_wqe & 0xffff) << 8);
++		*(u32 *) (&ctrl->vlan_tag) |= qp->doorbell_qpn;
++		/*
++		 * Make sure that descriptor is written to memory
++		 * before writing to BlueFlame page.
++		 */
++		wmb();
++
++		++qp->sq.head;
++
++		mlx4_bf_copy(qp->bf.reg + qp->bf.offset, (unsigned long *) ctrl,
++			     ALIGN(size * 16, 64));
++		wc_wmb();
++
++		qp->bf.offset ^= qp->bf.buf_size;
++
++	} else if (nreq) {
+ 		qp->sq.head += nreq;
+ 
+ 		/*
+@@ -2053,8 +2189,7 @@ out:
+ 		 */
+ 		wmb();
+ 
+-		writel(qp->doorbell_qpn,
+-		       to_mdev(ibqp->device)->uar_map + MLX4_SEND_DOORBELL);
++		writel(qp->doorbell_qpn, qp->bf.uar->map + MLX4_SEND_DOORBELL);
+ 
+ 		/*
+ 		 * Make sure doorbells don't leak out of SQ spinlock
+@@ -2062,8 +2197,10 @@ out:
+ 		 */
+ 		mmiowb();
+ 
+-		stamp_send_wqe(qp, stamp, size * 16);
++	}
+ 
++	if (likely(nreq)) {
++		stamp_send_wqe(qp, stamp, size * 16);
+ 		ind = pad_wraparound(qp, ind);
+ 		qp->sq_next_wqe = ind;
+ 	}
+Index: ofed_kernel-fixes/drivers/net/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/main.c	2010-12-20 14:28:48.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/main.c	2010-12-20 14:28:48.000000000 +0200
+@@ -38,6 +38,7 @@
+ #include <linux/errno.h>
+ #include <linux/pci.h>
+ #include <linux/dma-mapping.h>
++#include <linux/io-mapping.h>
+ 
+ #include <linux/mlx4/device.h>
+ #include <linux/mlx4/doorbell.h>
+@@ -873,8 +874,31 @@ static void mlx4_free_icms(struct mlx4_d
+ 	mlx4_free_icm(dev, priv->fw.aux_icm, 0);
+ }
+ 
++static int map_bf_area(struct mlx4_dev *dev)
++{
++	struct mlx4_priv *priv = mlx4_priv(dev);
++	resource_size_t bf_start;
++	resource_size_t bf_len;
++	int err = 0;
++
++	bf_start = pci_resource_start(dev->pdev, 2) + (dev->caps.num_uars << PAGE_SHIFT);
++	bf_len = pci_resource_len(dev->pdev, 2) - (dev->caps.num_uars << PAGE_SHIFT);
++	priv->bf_mapping = io_mapping_create_wc(bf_start, bf_len);
++	if (!priv->bf_mapping)
++		err = -ENOMEM;
++
++	return err;
++}
++
++static void unmap_bf_area(struct mlx4_dev *dev)
++{
++	if (mlx4_priv(dev)->bf_mapping)
++		io_mapping_free(mlx4_priv(dev)->bf_mapping);
++}
++
+ static void mlx4_close_hca(struct mlx4_dev *dev)
+ {
++	unmap_bf_area(dev);
+ 	mlx4_CLOSE_HCA(dev, 0);
+ 	mlx4_free_icms(dev);
+ 	mlx4_UNMAP_FA(dev);
+@@ -941,6 +965,9 @@ static int mlx4_init_hca(struct mlx4_dev
+ 		goto err_stop_fw;
+ 	}
+ 
++	if (map_bf_area(dev))
++		mlx4_dbg(dev, "Kernel support for blue flame is not available for kernels < 2.6.28\n");
++
+ 	init_hca.log_uar_sz = ilog2(dev->caps.num_uars);
+ 
+ 	err = mlx4_init_icm(dev, &dev_cap, &init_hca, icm_size);
+@@ -971,6 +998,7 @@ err_free_icm:
+ 	mlx4_free_icms(dev);
+ 
+ err_stop_fw:
++	unmap_bf_area(dev);
+ 	mlx4_UNMAP_FA(dev);
+ 	mlx4_free_icm(dev, priv->fw.fw_icm, 0);
+ 
+@@ -1396,6 +1424,9 @@ static int __mlx4_init_one(struct pci_de
+ 	for (i = 0; i < MLX4_MAX_PORTS; ++i)
+ 		priv->iboe_counter_index[i] = -1;
+ 
++	INIT_LIST_HEAD(&priv->bf_list);
++	mutex_init(&priv->bf_mutex);
++
+ 	/*
+ 	 * Now reset the HCA before we touch the PCI capabilities or
+ 	 * attempt a firmware command, since a boot ROM may have left
+Index: ofed_kernel-fixes/drivers/net/mlx4/mlx4.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/mlx4.h	2010-12-20 14:28:48.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/mlx4.h	2010-12-20 14:35:54.155636114 +0200
+@@ -311,6 +311,8 @@ struct mlx4_priv {
+ 	struct mlx4_qp_table	qp_table;
+ 	struct mlx4_mcg_table	mcg_table;
+ 	struct mlx4_bitmap	counters_bitmap;
++	struct list_head	bf_list;
++	struct mutex		bf_mutex;
+ 
+ 	struct mlx4_catas_err	catas_err;
+ 
+@@ -325,6 +327,7 @@ struct mlx4_priv {
+ 	struct mlx4_sense       sense;
+ 	struct mutex		port_mutex;
+ 	int			iboe_counter_index[MLX4_MAX_PORTS];
++	struct io_mapping      *bf_mapping;
+ };
+ 
+ static inline struct mlx4_priv *mlx4_priv(struct mlx4_dev *dev)
+Index: ofed_kernel-fixes/drivers/net/mlx4/pd.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/pd.c	2010-12-20 14:28:05.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/pd.c	2010-12-20 14:35:54.047639050 +0200
+@@ -33,6 +33,7 @@
+ 
+ #include <linux/init.h>
+ #include <linux/errno.h>
++#include <linux/io-mapping.h>
+ 
+ #include <asm/page.h>
+ 
+@@ -78,6 +79,7 @@ int mlx4_uar_alloc(struct mlx4_dev *dev,
+ 		return -ENOMEM;
+ 
+ 	uar->pfn = (pci_resource_start(dev->pdev, 2) >> PAGE_SHIFT) + uar->index;
++	uar->map = NULL;
+ 
+ 	return 0;
+ }
+@@ -89,6 +91,98 @@ void mlx4_uar_free(struct mlx4_dev *dev,
+ }
+ EXPORT_SYMBOL_GPL(mlx4_uar_free);
+ 
++int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf)
++{
++	struct mlx4_priv *priv = mlx4_priv(dev);
++	struct mlx4_uar *uar;
++	int err = 0;
++	int idx;
++
++	if (!priv->bf_mapping)
++		return -ENOMEM;
++
++	mutex_lock(&priv->bf_mutex);
++	if (!list_empty(&priv->bf_list))
++		uar = list_entry(priv->bf_list.next, struct mlx4_uar, bf_list);
++	else {
++		uar = kmalloc(sizeof *uar, GFP_KERNEL);
++		if (!uar) {
++			err = -ENOMEM;
++			goto out;
++		}
++		err = mlx4_uar_alloc(dev, uar);
++		if (err)
++			goto free_kmalloc;
++
++		uar->map = ioremap(uar->pfn << PAGE_SHIFT, PAGE_SIZE);
++		if (!uar->map) {
++			err = -ENOMEM;
++			goto free_uar;
++		}
++
++		uar->bf_map = io_mapping_map_wc(priv->bf_mapping, uar->index << PAGE_SHIFT);
++		if (!uar->bf_map) {
++			err = -ENOMEM;
++			goto unamp_uar;
++		}
++		uar->free_bf_bmap = 0;
++		list_add(&uar->bf_list, &priv->bf_list);
++	}
++
++	bf->uar = uar;
++	idx = ffz(uar->free_bf_bmap);
++	uar->free_bf_bmap |= 1 << idx;
++	bf->uar = uar;
++	bf->offset = 0;
++	bf->buf_size = dev->caps.bf_reg_size / 2;
++	bf->reg = uar->bf_map + idx * dev->caps.bf_reg_size;
++	if (uar->free_bf_bmap == (1 << dev->caps.bf_regs_per_page) - 1)
++		list_del_init(&uar->bf_list);
++
++	goto out;
++
++unamp_uar:
++	bf->uar = NULL;
++	iounmap(uar->map);
++
++free_uar:
++	mlx4_uar_free(dev, uar);
++
++free_kmalloc:
++	kfree(uar);
++
++out:
++	mutex_unlock(&priv->bf_mutex);
++	return err;
++}
++EXPORT_SYMBOL_GPL(mlx4_bf_alloc);
++
++void mlx4_bf_free(struct mlx4_dev *dev, struct mlx4_bf *bf)
++{
++	struct mlx4_priv *priv = mlx4_priv(dev);
++	int idx;
++
++	if (!bf->uar || !bf->uar->bf_map)
++		return;
++
++	mutex_lock(&priv->bf_mutex);
++	idx = (bf->reg - bf->uar->bf_map) / dev->caps.bf_reg_size;
++	bf->uar->free_bf_bmap &= ~(1 << idx);
++	if (!bf->uar->free_bf_bmap) {
++		if (!list_empty(&bf->uar->bf_list))
++			list_del(&bf->uar->bf_list);
++
++		io_mapping_unmap(bf->uar->bf_map);
++		iounmap(bf->uar->map);
++		mlx4_uar_free(dev, bf->uar);
++		kfree(bf->uar);
++	} else if (list_empty(&bf->uar->bf_list))
++		list_add(&bf->uar->bf_list, &priv->bf_list);
++
++	mutex_unlock(&priv->bf_mutex);
++}
++EXPORT_SYMBOL_GPL(mlx4_bf_free);
++
+ int mlx4_init_uar_table(struct mlx4_dev *dev)
+ {
+ 	if (dev->caps.num_uars <= 128) {
+Index: ofed_kernel-fixes/include/linux/mlx4/device.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/linux/mlx4/device.h	2010-12-20 14:28:48.000000000 +0200
++++ ofed_kernel-fixes/include/linux/mlx4/device.h	2010-12-20 14:35:49.919637801 +0200
+@@ -341,6 +341,17 @@ struct mlx4_fmr {
+ struct mlx4_uar {
+ 	unsigned long		pfn;
+ 	int			index;
++	struct list_head	bf_list;
++	unsigned		free_bf_bmap;
++	void __iomem	       *map;
++	void __iomem	       *bf_map;
++};
++
++struct mlx4_bf {
++	unsigned long		offset;
++	int			buf_size;
++	struct mlx4_uar	       *uar;
++	void __iomem	       *reg;
+ };
+ 
+ struct mlx4_cq {
+@@ -514,6 +525,8 @@ void mlx4_xrcd_free(struct mlx4_dev *dev
+ 
+ int mlx4_uar_alloc(struct mlx4_dev *dev, struct mlx4_uar *uar);
+ void mlx4_uar_free(struct mlx4_dev *dev, struct mlx4_uar *uar);
++int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf);
++void mlx4_bf_free(struct mlx4_dev *dev, struct mlx4_bf *bf);
+ 
+ int mlx4_mtt_init(struct mlx4_dev *dev, int npages, int page_shift,
+ 		  struct mlx4_mtt *mtt);
+Index: ofed_kernel-fixes/include/linux/mlx4/qp.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/linux/mlx4/qp.h	2010-12-20 14:28:47.000000000 +0200
++++ ofed_kernel-fixes/include/linux/mlx4/qp.h	2010-12-20 14:28:48.000000000 +0200
+@@ -314,6 +314,7 @@ struct mlx4_wqe_data_seg {
+ 
+ enum {
+ 	MLX4_INLINE_ALIGN	= 64,
++	MLX4_INLINE_SEG		= 1 << 31,
+ };
+ 
+ struct mlx4_wqe_inline_seg {

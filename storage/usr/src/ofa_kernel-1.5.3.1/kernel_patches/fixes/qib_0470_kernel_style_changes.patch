@@ -1,0 +1,202 @@
+diff --git a/drivers/infiniband/hw/qib/qib_driver.c b/drivers/infiniband/hw/qib/qib_driver.c
+index 20fd97d..d015ab7 100644
+--- a/drivers/infiniband/hw/qib/qib_driver.c
++++ b/drivers/infiniband/hw/qib/qib_driver.c
+@@ -467,9 +467,11 @@ static u32 qib_rcv_hdrerr(struct qib_ctxtdata *rcd, struct qib_pportdata *ppd,
+ 						if (list_empty(&qp->rspwait)) {
+ 							qp->r_flags |=
+ 								QIB_R_RSP_NAK;
+-							atomic_inc(&qp->refcount);
+-							list_add_tail(&qp->rspwait,
+-								      &rcd->qp_wait_list);
++							atomic_inc(
++							 &qp->refcount);
++							list_add_tail(
++							 &qp->rspwait,
++							 &rcd->qp_wait_list);
+ 						}
+ 					} /* Out of sequence NAK */
+ 				} /* QP Request NAKs */
+diff --git a/drivers/infiniband/hw/qib/qib_iba7322.c b/drivers/infiniband/hw/qib/qib_iba7322.c
+index 4e3a621..ba3f57a 100644
+--- a/drivers/infiniband/hw/qib/qib_iba7322.c
++++ b/drivers/infiniband/hw/qib/qib_iba7322.c
+@@ -2004,19 +2004,20 @@ static noinline void handle_7322_p_errors(struct qib_pportdata *ppd)
+ 		else {
+ 			u32 lstate;
+ 			/*
+-			 * We need the current logical link state before lflags are
+-			 * set in handle_e_ibstatuschanged.
++			 * We need the current logical link state before lflags
++			 * are set in handle_e_ibstatuschanged.
+ 			 */
+ 			lstate = qib_7322_iblink_state(ibcs[0]);
+ 
+ 			if (IS_QMH(dd) && !ppd->cpspec->bounced &&
+ 			    ltstate == IB_PHYSPORTSTATE_LINKUP &&
+ 			    (lstate >= IB_PORT_INIT && lstate <= IB_PORT_ACTIVE)) {
+-				qib_cdbg(LINKVERB, "IB%u:%u artificially bouncing link\n",
++				qib_cdbg(LINKVERB,
++					 "IB%u:%u artificially bouncing link\n",
+ 					 dd->unit, ppd->port);
+ 				ppd->cpspec->bounced = 1;
+ 				qib_7322_set_ib_cfg(ppd, QIB_IB_CFG_LSTATE,
+-						    IB_LINKCMD_DOWN | IB_LINKINITCMD_POLL);
++			    	 IB_LINKCMD_DOWN|IB_LINKINITCMD_POLL);
+ 			}
+ 
+ 			/*
+@@ -4431,9 +4432,9 @@ static void qib_update_7322_usrhead(struct qib_ctxtdata *rcd, u64 hd,
+ 				    u32 updegr, u32 egrhd, u32 npkts)
+ {
+ 	/*
+- 	 * Need to write timeout register before updating rcvhdrhead to ensure
+- 	 * that the timer is enabled on reception of a packet.
+- 	 */
++	 * Need to write timeout register before updating rcvhdrhead to ensure
++	 * that the timer is enabled on reception of a packet.
++	 */
+ 	if (hd >> IBA7322_HDRHEAD_PKTINT_SHIFT)
+ 		adjust_rcv_timeout(rcd, npkts);
+ 	qib_write_ureg(rcd->dd, ur_rcvhdrhead, hd, rcd->ctxt);
+@@ -6039,7 +6040,7 @@ static void qsfp_7322_event(struct work_struct *work)
+ 		u64 now = get_jiffies_64();
+ 		if (time_after64(now, pwrup))
+ 			break;
+-		msleep(1);
++		msleep(20);
+ 	}
+ 	ret = qib_refresh_qsfp_cache(ppd, &qd->cache);
+ 	/*
+@@ -7148,7 +7149,7 @@ static void qib_7322_txchk_change(struct qib_devdata *dd, u32 start,
+ 		/* make sure we see an updated copy next time around */
+ 		sendctrl_7322_mod(dd->pport, QIB_SENDCTRL_AVAIL_BLIP);
+ 		sleeps++;
+-		msleep(1);
++		msleep(20);
+ 	}
+ 
+ 	switch (which) {
+@@ -8108,13 +8109,13 @@ static int serdes_7322_init_new(struct qib_pportdata *ppd)
+ 	/*       RX Analog reset */
+ 	/*       RX Digital reset */
+ 	ibsd_wr_allchans(ppd, 0, 0, BMASK(15, 13));
+-	msleep(1);
++	msleep(20);
+ 	/*       RX Analog reset */
+ 	ibsd_wr_allchans(ppd, 0, (1 << 14), BMASK(14, 14));
+-	msleep(1);
++	msleep(20);
+ 	/*       RX Digital reset */
+ 	ibsd_wr_allchans(ppd, 0, (1 << 13), BMASK(13, 13));
+-	msleep(1);
++	msleep(20);
+ 
+ 	/* setup LoS params; these are subsystem, so chan == 5 */
+ 	/* LoS filter threshold_count on, ch 0-3, set to 8 */
+@@ -8147,13 +8148,13 @@ static int serdes_7322_init_new(struct qib_pportdata *ppd)
+ 	ibsd_wr_allchans(ppd, 15, 1, BMASK(0, 0));
+ 	/*       Enable RX Offset Calibration latch */
+ 	ibsd_wr_allchans(ppd, 12, (1 << 4), BMASK(4, 4));
+-	msleep(1);
++	msleep(20);
+ 	/*       Start Calibration */
+ 	ibsd_wr_allchans(ppd, 4, (1 << 10), BMASK(10, 10));
+ 	tstart = get_jiffies_64();
+ 	while (chan_done &&
+ 	       !time_after64(tstart, tstart + msecs_to_jiffies(500))) {
+-		msleep(1);
++		msleep(20);
+ 		for (chan = 0; chan < SERDES_CHANS; ++chan) {
+ 			rxcaldone = ahb_mod(ppd->dd, IBSD(ppd->hw_pidx),
+ 					    (chan + (chan >> 1)),
+@@ -8181,7 +8182,7 @@ static int serdes_7322_init_new(struct qib_pportdata *ppd)
+ 
+ 	/*       Turn off Calibration */
+ 	ibsd_wr_allchans(ppd, 4, 0, BMASK(10, 10));
+-	msleep(1);
++	msleep(20);
+ 
+ 	/* BRING RX UP */
+ 	/*       Set LE2 value (May be overridden in qsfp_7322_event) */
+@@ -8223,7 +8224,7 @@ static int serdes_7322_init_new(struct qib_pportdata *ppd)
+ 	ibsd_wr_allchans(ppd, 13, (0 << 5), (1 << 5));
+ 	/*       Disable auto adapt for LE1 */
+ 	ibsd_wr_allchans(ppd, 1, (0 << 15), BMASK(15, 15));
+-	msleep(10);
++	msleep(20);
+ 	/*       Enable AFE Offset Cancel */
+ 	ibsd_wr_allchans(ppd, 12, (1 << 12), BMASK(12, 12));
+ 	/*       Enable Baseline Wander Correction */
+diff --git a/drivers/infiniband/hw/qib/qib_keys.c b/drivers/infiniband/hw/qib/qib_keys.c
+index 378b47a..e04abd4 100644
+--- a/drivers/infiniband/hw/qib/qib_keys.c
++++ b/drivers/infiniband/hw/qib/qib_keys.c
+@@ -180,12 +180,12 @@ int qib_lkey_ok(struct qib_lkey_table *rkt, struct qib_pd *pd,
+ 	off += mr->offset;
+ 	if (mr->page_shift) {
+ 		/*
+-		page sizes are uniform power of 2 so no loop is necessary 
++		page sizes are uniform power of 2 so no loop is necessary
+ 		entries_spanned_by_off is the number of times the loop below
+ 		would have executed.
+ 		*/
+ 		size_t entries_spanned_by_off;
+-		
++
+ 		entries_spanned_by_off = off >> mr->page_shift;
+ 		off -= (entries_spanned_by_off << mr->page_shift);
+ 		m = entries_spanned_by_off/QIB_SEGSZ;
+@@ -275,12 +275,12 @@ int qib_rkey_ok(struct qib_qp *qp, struct qib_sge *sge,
+ 	off += mr->offset;
+ 	if (mr->page_shift) {
+ 		/*
+-		page sizes are uniform power of 2 so no loop is necessary 
++		page sizes are uniform power of 2 so no loop is necessary
+ 		entries_spanned_by_off is the number of times the loop below
+ 		would have executed.
+ 		*/
+ 		size_t entries_spanned_by_off;
+-		
++
+ 		entries_spanned_by_off = off >> mr->page_shift;
+ 		off -= (entries_spanned_by_off << mr->page_shift);
+ 		m = entries_spanned_by_off/QIB_SEGSZ;
+diff --git a/drivers/infiniband/hw/qib/qib_qp.c b/drivers/infiniband/hw/qib/qib_qp.c
+index 371af8a..e16751f 100644
+--- a/drivers/infiniband/hw/qib/qib_qp.c
++++ b/drivers/infiniband/hw/qib/qib_qp.c
+@@ -157,7 +157,8 @@ static int alloc_qpn(struct qib_devdata *dd, struct qib_qpn_table *qpt,
+ 				ret = qpn;
+ 				goto bail;
+ 			}
+-			offset = find_next_offset(qpt, map, offset, dd->n_krcv_queues);
++			offset = find_next_offset(qpt, map, offset,
++				dd->n_krcv_queues);
+ 			qpn = mk_qpn(qpt, map, offset);
+ 			/*
+ 			 * This test differs from alloc_pidmap().
+@@ -462,8 +463,8 @@ int qib_error_qp(struct qib_qp *qp, enum ib_wc_status err)
+ 		qp->s_flags &= ~(QIB_S_TIMER | QIB_S_WAIT_RNR);
+ 		del_timer(&qp->s_timer);
+ 	}
+-	
+-	if (qp->s_flags & QIB_S_ANY_WAIT_SEND) 
++
++	if (qp->s_flags & QIB_S_ANY_WAIT_SEND)
+ 		qp->s_flags &= ~QIB_S_ANY_WAIT_SEND;
+ 
+ 	spin_lock(&dev->pending_lock);
+diff --git a/drivers/infiniband/hw/qib/qib_verbs.h b/drivers/infiniband/hw/qib/qib_verbs.h
+index 2b37481..550c0a4 100644
+--- a/drivers/infiniband/hw/qib/qib_verbs.h
++++ b/drivers/infiniband/hw/qib/qib_verbs.h
+@@ -301,7 +301,7 @@ struct qib_mregion {
+ 	int access_flags;
+ 	u32 max_segs;           /* number of qib_segs in all the arrays */
+ 	u32 mapsz;              /* size of the map array */
+-	u8  page_shift;         /* zero -> non unform/non powerof2  sizes, non-zero -> uniform powerof2 size */
++	u8  page_shift;         /* 0 - non unform/non powerof2 sizes */
+ 	atomic_t refcount;
+ 	struct qib_segarray *map[0];    /* the segments */
+ };

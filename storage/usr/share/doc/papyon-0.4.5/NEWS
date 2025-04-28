@@ -1,0 +1,136 @@
+papyon-0.4.5 (2010-03-10)
+=========================
+
+The "Beige Curtain" release.
+
+Fixes:
+  * Don't display the password in the logs anymore (fd.o #25014)
+
+papyon-0.4.4 (2010-01-19)
+=========================
+
+The "Black Phone" release.
+
+Fixes:
+  * Fix crash in base64decode (fd.o #24138)
+  * Fix KeyError in session.py (fd.o #23881)
+
+papyon-0.4.3 (2009-11-09)
+=========================
+
+The "Green Carrot" release.
+
+Fixes:
+  * Add the missing arument to Profile._client_capability_changed (fd.o #24042)
+  * Fix crash when printing unicode char in message headers (fd.o #24223)
+  * Add missing import in group_contact_delete (fd.o #24236)
+  * Improve audio/video call support
+
+papyon-0.4.2 (2009-09-03)
+=========================
+
+The "Red Kayak" release.
+
+Enhancements:
+  * Bumped minimal required Python version to 2.5
+  * Dropped dependency on pyCrypto
+  * Added support for audio and video conferences
+
+Fixes:
+  * Fixed crash when FindMemberships response is empty (Bug #23039)
+  * Fixed crash when accepting contact invites (Bugs #18514, #19229)
+  * No longer disconnect the client when an non-critical address
+    book error is triggered (Bugs #14371, #15869)
+  * Fixed sending of messages to contacts using Microsoft Messenger for Mac
+  * Fixed some encoding issues with Python 2.6 loggin (only supports unicode)
+  * Send new client capabilities to the server when changed (Bug #13982)
+  * Fixed crash when receiving badly formed UBX command (Bug #17917)
+
+papyon-0.4.1 (2009-07-28)
+=========================
+
+The "Blue Raincoat" release.
+
+Enhancements:
+  * Added support to cancel login anytime (Bug #14089)
+  * Replaced deprecated modules (md5 and sha) (Bug #21885)
+
+Fixes:
+  * Fixed logging of binary data (non-ascii characters) (Bug #22722)
+  * Fixed crash when receiving an offline message (Bug #14623)
+  * Fixed connection to new account without any contact (Bug #19228)
+  * Fixed crash when a contact from address book don't have a display name (Bug #19920)
+  * Added handling for some address book errors (Bug #15869)
+  * Added handling of OUT commands (Bug #13004)
+  * Implemented missing member types for address book (Bug #22558)
+
+papyon-0.4.0 (2009-07-02)
+=========================
+
+Enhancements:
+  * Forked pymsn to create papyon
+  * Added webcam sessions support
+
+Fixes:
+  * Fixed reception of P2P data from WLM 2009 users
+
+pymsn-0.3.3 (2008-08-05)
+========================
+
+The "Green Moustache" release.
+
+Fixes:
+  * Removed an assert statement causing pymsn to fail with the newest CVR response
+  * Removed the python-adns dependency
+  * Fixed a DNS resolution issue
+  * Fixed a small error in the decorator module
+
+pymsn-0.3.2 (2008-07-20)
+========================
+
+Fixes:
+  * Fixed MSNObject handling in Profile
+  * Added Profile events support
+  * Fixed typo in the EmailContactAdd scenario
+  * Fixed Unicode problems in Contact.attributes
+  * Fixed a ContactMembershipsUpdate bug
+  * Removed the unused SLPTransferRequestBody check, this still not supported by our msnp2p stack
+  * Fixed the msnp2p test file
+  * Fixed iterating over the switchboard handlers and changing the handlers set (Stéphan Kochen)
+  * Fixed a missing AddressBookError import (Stéphan Kochen)
+
+pymsn-0.3.1 (2008-01-16)
+========================
+
+Fixes:
+  * Fixed adding contacts already in Memberships list but not with isMessengerUser
+
+
+pymsn-0.3.0 (2008-01-10)
+========================
+
+Enhancements:
+  * Complete rewrite
+  * MSNP15 support
+
+
+pymsn-0.2.2
+===========
+
+The "Yellow Ivy" release.
+
+Enhancements:
+  * Added display pictures request in Client class
+  * Enhanced HTTPPollConnection, now supporting http proxy, and nasty
+    proxy not honoring the Keep-Alive
+  * Added ability to choose the transport in the Client
+  * Added Storage system to enable pymsn to cache object across sessions
+  * Added display picture publishing
+
+Fixes:
+  * Fixed https redirection while authentication
+    (encountered with @msn.com accounts)
+  * Fixed pymsn msnp2p bug causing second msnslp session to fail
+  * Fixed a bug showing wrong representation of Messages in debug messages
+  * Fixed display-picture-updated signal being emitted before data update
+  * Fixed transport in Conversation not being given the correct proxy

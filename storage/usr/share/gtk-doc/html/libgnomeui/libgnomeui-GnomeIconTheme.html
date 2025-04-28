@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GnomeIconTheme</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="GNOME UI Library Reference Manual">
+<link rel="up" href="deprecated.html" title="Deprecated Modules">
+<link rel="prev" href="GnomeIconTextItem.html" title="GnomeIconTextItem">
+<link rel="next" href="GnomeMDI.html" title="GnomeMDI">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GNOME UI Library (libgnomeui)">
+<link rel="chapter" href="initialization.html" title="Initialization and Session Management">
+<link rel="chapter" href="application-mgmt.html" title="Application Management">
+<link rel="chapter" href="druids.html" title="Druids">
+<link rel="chapter" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="chapter" href="miscellaneous.html" title="Miscellaneous Utility Functions and Macros">
+<link rel="chapter" href="deprecated.html" title="Deprecated Modules">
+<link rel="chapter" href="libgnomeui-objects.html" title="Object Hierarchy">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GnomeIconTextItem.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="deprecated.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME UI Library Reference Manual</th>
+<td><a accesskey="n" href="GnomeMDI.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgnomeui-GnomeIconTheme.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgnomeui-GnomeIconTheme.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgnomeui-GnomeIconTheme"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgnomeui-GnomeIconTheme.top_of_page"></a>GnomeIconTheme</span></h2>
+<p>GnomeIconTheme</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libgnomeui-GnomeIconTheme.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnomeui/libgnomeui.h&gt;
+
+                    <a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconThemeClass" title="GnomeIconThemeClass">GnomeIconThemeClass</a>;
+typedef             <a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a>;
+<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *    <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-new" title="gnome_icon_theme_new ()">gnome_icon_theme_new</a>                (void);
+void                <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-get-search-path" title="gnome_icon_theme_get_search_path ()">gnome_icon_theme_get_search_path</a>    (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         char **path[],
+                                                         int *n_elements);
+void                <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-set-search-path" title="gnome_icon_theme_set_search_path ()">gnome_icon_theme_set_search_path</a>    (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *path[],
+                                                         int n_elements);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-get-allow-svg" title="gnome_icon_theme_get_allow_svg ()">gnome_icon_theme_get_allow_svg</a>      (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme);
+void                <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-set-allow-svg" title="gnome_icon_theme_set_allow_svg ()">gnome_icon_theme_set_allow_svg</a>      (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> allow_svg);
+char *              <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-get-example-icon-name" title="gnome_icon_theme_get_example_icon_name ()">gnome_icon_theme_get_example_icon_name</a>
+                                                        (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme);
+void                <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-append-search-path" title="gnome_icon_theme_append_search_path ()">gnome_icon_theme_append_search_path</a> (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *path);
+void                <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-prepend-search-path" title="gnome_icon_theme_prepend_search_path ()">gnome_icon_theme_prepend_search_path</a>
+                                                        (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *path);
+void                <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-set-custom-theme" title="gnome_icon_theme_set_custom_theme ()">gnome_icon_theme_set_custom_theme</a>   (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *theme_name);
+char *              <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-lookup-icon" title="gnome_icon_theme_lookup_icon ()">gnome_icon_theme_lookup_icon</a>        (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *icon_name,
+                                                         int size,
+                                                         const GnomeIconData **icon_data,
+                                                         int *base_size);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-has-icon" title="gnome_icon_theme_has_icon ()">gnome_icon_theme_has_icon</a>           (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *icon_name);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-list-icons" title="gnome_icon_theme_list_icons ()">gnome_icon_theme_list_icons</a>         (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *context);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-theme-rescan-if-needed" title="gnome_icon_theme_rescan_if_needed ()">gnome_icon_theme_rescan_if_needed</a>   (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme);
+GnomeIconData *     <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-data-dup" title="gnome_icon_data_dup ()">gnome_icon_data_dup</a>                 (const GnomeIconData *icon_data);
+void                <a class="link" href="libgnomeui-GnomeIconTheme.html#gnome-icon-data-free" title="gnome_icon_data_free ()">gnome_icon_data_free</a>                (GnomeIconData *icon_data);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="libgnomeui-GnomeIconTheme.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="libgnomeui-GnomeIconTheme.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeIconThemeClass"></a><h3>GnomeIconThemeClass</h3>
+<pre class="programlisting">typedef struct {
+  GObjectClass parent_class;
+
+  void (* changed)  (GnomeIconTheme *icon_theme);
+} GnomeIconThemeClass;
+</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeIconThemeClass</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeIconTheme"></a><h3>GnomeIconTheme</h3>
+<pre class="programlisting">typedef GtkIconTheme GnomeIconTheme;
+</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeIconTheme</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-new"></a><h3>gnome_icon_theme_new ()</h3>
+<pre class="programlisting"><a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *    gnome_icon_theme_new                (void);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-get-search-path"></a><h3>gnome_icon_theme_get_search_path ()</h3>
+<pre class="programlisting">void                gnome_icon_theme_get_search_path    (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         char **path[],
+                                                         int *n_elements);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_get_search_path</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n_elements</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-set-search-path"></a><h3>gnome_icon_theme_set_search_path ()</h3>
+<pre class="programlisting">void                gnome_icon_theme_set_search_path    (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *path[],
+                                                         int n_elements);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_set_search_path</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n_elements</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-get-allow-svg"></a><h3>gnome_icon_theme_get_allow_svg ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_icon_theme_get_allow_svg      (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_get_allow_svg</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-set-allow-svg"></a><h3>gnome_icon_theme_set_allow_svg ()</h3>
+<pre class="programlisting">void                gnome_icon_theme_set_allow_svg      (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> allow_svg);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_set_allow_svg</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>allow_svg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-get-example-icon-name"></a><h3>gnome_icon_theme_get_example_icon_name ()</h3>
+<pre class="programlisting">char *              gnome_icon_theme_get_example_icon_name
+                                                        (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_get_example_icon_name</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-append-search-path"></a><h3>gnome_icon_theme_append_search_path ()</h3>
+<pre class="programlisting">void                gnome_icon_theme_append_search_path (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *path);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_append_search_path</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-prepend-search-path"></a><h3>gnome_icon_theme_prepend_search_path ()</h3>
+<pre class="programlisting">void                gnome_icon_theme_prepend_search_path
+                                                        (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *path);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_prepend_search_path</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-set-custom-theme"></a><h3>gnome_icon_theme_set_custom_theme ()</h3>
+<pre class="programlisting">void                gnome_icon_theme_set_custom_theme   (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *theme_name);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_set_custom_theme</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme_name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-lookup-icon"></a><h3>gnome_icon_theme_lookup_icon ()</h3>
+<pre class="programlisting">char *              gnome_icon_theme_lookup_icon        (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *icon_name,
+                                                         int size,
+                                                         const GnomeIconData **icon_data,
+                                                         int *base_size);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_lookup_icon</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>base_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-has-icon"></a><h3>gnome_icon_theme_has_icon ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_icon_theme_has_icon           (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *icon_name);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_has_icon</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-list-icons"></a><h3>gnome_icon_theme_list_icons ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             gnome_icon_theme_list_icons         (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme,
+                                                         const char *context);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_list_icons</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-theme-rescan-if-needed"></a><h3>gnome_icon_theme_rescan_if_needed ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_icon_theme_rescan_if_needed   (<a class="link" href="libgnomeui-GnomeIconTheme.html#GnomeIconTheme" title="GnomeIconTheme">GnomeIconTheme</a> *theme);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_theme_rescan_if_needed</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>theme</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-data-dup"></a><h3>gnome_icon_data_dup ()</h3>
+<pre class="programlisting">GnomeIconData *     gnome_icon_data_dup                 (const GnomeIconData *icon_data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_data_dup</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-data-free"></a><h3>gnome_icon_data_free ()</h3>
+<pre class="programlisting">void                gnome_icon_data_free                (GnomeIconData *icon_data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_data_free</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>icon_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>3.5.4. Processing Multiple Elements in an Array</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="arrayoperators.html" title="3.5. Array Operations in SystemTap" /><link rel="prev" href="arrayops-increment.html" title="3.5.3. Incrementing Associated Values" /><link rel="next" href="arrayops-deleting.html" title="3.5.5. Clearing/Deleting Arrays and Array Elements" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="arrayops-increment.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="arrayops-deleting.html"><strong>Next</strong></a></li></ul><div class="section" title="3.5.4. Processing Multiple Elements in an Array" id="arrayops-foreach"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="arrayops-foreach">3.5.4. Processing Multiple Elements in an Array</h3></div></div></div><a id="id664427" class="indexterm"></a><a id="id664439" class="indexterm"></a><a id="id2177114" class="indexterm"></a><a id="id2177126" class="indexterm"></a><a id="id695290" class="indexterm"></a><a id="id666707" class="indexterm"></a><div class="para">
+			Once you've collected enough information in an array, you will need to retrieve and process all elements in that array to make it useful. Consider <a class="xref" href="arrayops-increment.html#simplesimplevfsread" title="Example 3.14. vfsreads.stp">Example 3.14, “vfsreads.stp”</a>: the script collects information about how many VFS reads each process performs, but does not specify what to do with it. The obvious means for making <a class="xref" href="arrayops-increment.html#simplesimplevfsread" title="Example 3.14. vfsreads.stp">Example 3.14, “vfsreads.stp”</a> useful is to print the key pairs in the array <code class="command">reads</code>, but how?
+		</div><a id="id2221231" class="indexterm"></a><a id="id2211943" class="indexterm"></a><a id="id2134214" class="indexterm"></a><a id="id2134230" class="indexterm"></a><a id="id675805" class="indexterm"></a><a id="id2215843" class="indexterm"></a><a id="id2215858" class="indexterm"></a><div class="para">
+			The best way to process all key pairs in an array (as an iteration) is to use the <code class="command">foreach</code> statement. Consider the following example:
+		</div><a id="id657034" class="indexterm"></a><a id="id657050" class="indexterm"></a><a id="id667005" class="indexterm"></a><a id="id2211122" class="indexterm"></a><a id="id2211137" class="indexterm"></a><div class="example" title="Example 3.15. cumulative-vfsreads.stp" id="simplevfsreadprint"><h6>Example 3.15. cumulative-vfsreads.stp</h6><div class="example-contents"><pre class="programlisting">
+global reads
+probe vfs.read
+{ 
+  reads[execname()] ++
+}
+probe timer.s(3)
+{
+  foreach (count in reads)
+    printf("%s : %d \n", count, reads[count])
+}
+</pre></div></div><br class="example-break" /><div class="para">
+			In the second probe of <a class="xref" href="arrayops-foreach.html#simplevfsreadprint" title="Example 3.15. cumulative-vfsreads.stp">Example 3.15, “cumulative-vfsreads.stp”</a>, the <code class="command">foreach</code> statement uses the variable <code class="command">count</code> to reference each iteration of a unique key in the array <code class="command">reads</code>. The <code class="command">reads[count]</code> array statement in the same probe retrieves the associated value of each unique key.
+		</div><div class="para">
+			Given what we know about the first probe in <a class="xref" href="arrayops-foreach.html#simplevfsreadprint" title="Example 3.15. cumulative-vfsreads.stp">Example 3.15, “cumulative-vfsreads.stp”</a>, the script prints VFS-read statistics every 3 seconds, displaying names of processes that performed a VFS-read along with a corresponding VFS-read count.
+		</div><a id="id678310" class="indexterm"></a><a id="id658228" class="indexterm"></a><a id="id658244" class="indexterm"></a><a id="id736055" class="indexterm"></a><a id="id662994" class="indexterm"></a><a id="id678013" class="indexterm"></a><a id="id678029" class="indexterm"></a><a id="id913026" class="indexterm"></a><div class="para">
+			Now, remember that the <code class="command">foreach</code> statement in <a class="xref" href="arrayops-foreach.html#simplevfsreadprint" title="Example 3.15. cumulative-vfsreads.stp">Example 3.15, “cumulative-vfsreads.stp”</a> prints <span class="emphasis"><em>all</em></span> iterations of process names in the array, and in no particular order. You can instruct the script to process the iterations in a particular order by using <code class="command">+</code> (ascending) or <code class="command">-</code> (descending). In addition, you can also limit the number of iterations the script needs to process with the <code class="command">limit <em class="replaceable"><code>value</code></em></code> option.
+		</div><div class="para">
+			For example, consider the following replacement probe:
+		</div><pre class="screen">
+probe timer.s(3)
+{
+  foreach (count in reads- limit 10)
+    printf("%s : %d \n", count, reads[count])
+}
+</pre><div class="para">
+			This <code class="command">foreach</code> statement instructs the script to process the elements in the array <code class="command">reads</code> in descending order (of associated value). The <code class="command">limit 10</code> option instructs the <code class="command">foreach</code> to only process the first ten iterations (i.e. print the first 10, starting with the highest value).
+		</div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="arrayops-increment.html"><strong>Prev</strong>3.5.3. Incrementing Associated Values</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="arrayops-deleting.html"><strong>Next</strong>3.5.5. Clearing/Deleting Arrays and Array Elements</a></li></ul></body></html>

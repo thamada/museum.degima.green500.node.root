@@ -1,0 +1,25 @@
+commit 7bd912998ec9cdbb0268138b6b51f28adf7865f4
+Author: Dan Carpenter <error27@gmail.com>
+Date:   Wed Apr 7 09:39:01 2010 +0000
+
+    IB/mlx4: Check correct variable for allocation failure
+    
+    The intent here is to check the "mfrpl->mapped_page_list" allocation.
+    We checked "mfrpl->ibfrpl.page_list" earlier.
+    
+    Signed-off-by: Dan Carpenter <error27@gmail.com>
+    Signed-off-by: Roland Dreier <rolandd@cisco.com>
+
+diff --git a/drivers/infiniband/hw/mlx4/mr.c b/drivers/infiniband/hw/mlx4/mr.c
+index 8f3666b..63ec26f 100644
+--- a/drivers/infiniband/hw/mlx4/mr.c
++++ b/drivers/infiniband/hw/mlx4/mr.c
+@@ -238,7 +238,7 @@ struct ib_fast_reg_page_list *mlx4_ib_alloc_fast_reg_page_list(struct ib_device
+ 	mfrpl->mapped_page_list = dma_alloc_coherent(&dev->dev->pdev->dev,
+ 						     size, &mfrpl->map,
+ 						     GFP_KERNEL);
+-	if (!mfrpl->ibfrpl.page_list)
++	if (!mfrpl->mapped_page_list)
+ 		goto err_free;
+ 
+ 	WARN_ON(mfrpl->map & 0x3f);

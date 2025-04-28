@@ -1,0 +1,1993 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Specializable GType System</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="D-Bus GLib bindings - Reference Manual">
+<link rel="up" href="ch02.html" title="API Reference">
+<link rel="prev" href="dbus-glib-DBusGProxy.html" title="DBusGProxy">
+<link rel="next" href="dbus-glib-DBus-GLib-low-level.html" title="DBus GLib low level">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Introduction">
+<link rel="chapter" href="ch02.html" title="API Reference">
+<link rel="chapter" href="ch03.html" title="Tools Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="dbus-glib-DBusGProxy.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">D-Bus GLib bindings - Reference Manual</th>
+<td><a accesskey="n" href="dbus-glib-DBus-GLib-low-level.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#dbus-glib-Specializable-GType-System.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#dbus-glib-Specializable-GType-System.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="Specializable GType System">
+<a name="dbus-glib-Specializable-GType-System"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="dbus-glib-Specializable-GType-System.top_of_page"></a>Specializable GType System</span></h2>
+<p>Specializable GType System — Specialized GTypes</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1" title="Stability Level">
+<a name="dbus-glib-Specializable-GType-System.stability-level"></a><h2>Stability Level</h2>
+Unstable, unless otherwise indicated
+</div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="dbus-glib-Specializable-GType-System.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionIterator" title="DBusGTypeSpecializedCollectionIterator ()">*DBusGTypeSpecializedCollectionIterator</a>)
+                                                        (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapIterator" title="DBusGTypeSpecializedMapIterator ()">*DBusGTypeSpecializedMapIterator</a>)  (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *key_val,
+                                                         const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value_val,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+                    <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedConstructor" title="DBusGTypeSpecializedConstructor ()">*DBusGTypeSpecializedConstructor</a>)  (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type);
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedFreeFunc" title="DBusGTypeSpecializedFreeFunc ()">*DBusGTypeSpecializedFreeFunc</a>)     (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> val);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCopyFunc" title="DBusGTypeSpecializedCopyFunc ()">*DBusGTypeSpecializedCopyFunc</a>)     (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> src);
+                    <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedVtable" title="DBusGTypeSpecializedVtable">DBusGTypeSpecializedVtable</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionFixedAccessorFunc" title="DBusGTypeSpecializedCollectionFixedAccessorFunc ()">*DBusGTypeSpecializedCollectionFixedAccessorFunc</a>)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *values,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *len);
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionIteratorFunc" title="DBusGTypeSpecializedCollectionIteratorFunc ()">*DBusGTypeSpecializedCollectionIteratorFunc</a>)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionIterator" title="DBusGTypeSpecializedCollectionIterator ()">DBusGTypeSpecializedCollectionIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionAppendFunc" title="DBusGTypeSpecializedCollectionAppendFunc ()">*DBusGTypeSpecializedCollectionAppendFunc</a>)
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionEndAppendFunc" title="DBusGTypeSpecializedCollectionEndAppendFunc ()">*DBusGTypeSpecializedCollectionEndAppendFunc</a>)
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx);
+                    <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionVtable" title="DBusGTypeSpecializedCollectionVtable">DBusGTypeSpecializedCollectionVtable</a>;
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapIteratorFunc" title="DBusGTypeSpecializedMapIteratorFunc ()">*DBusGTypeSpecializedMapIteratorFunc</a>)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapIterator" title="DBusGTypeSpecializedMapIterator ()">DBusGTypeSpecializedMapIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapAppendFunc" title="DBusGTypeSpecializedMapAppendFunc ()">*DBusGTypeSpecializedMapAppendFunc</a>)
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *key,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);
+                    <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapVtable" title="DBusGTypeSpecializedMapVtable">DBusGTypeSpecializedMapVtable</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedStructGetMember" title="DBusGTypeSpecializedStructGetMember ()">*DBusGTypeSpecializedStructGetMember</a>)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *ret_value);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedStructSetMember" title="DBusGTypeSpecializedStructSetMember ()">*DBusGTypeSpecializedStructSetMember</a>)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *new_value);
+                    <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedStructVtable" title="DBusGTypeSpecializedStructVtable">DBusGTypeSpecializedStructVtable</a>;
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-collection" title="dbus_g_type_get_collection ()">dbus_g_type_get_collection</a>          (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> specialization);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-map" title="dbus_g_type_get_map ()">dbus_g_type_get_map</a>                 (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> key_specialization,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> value_specialization);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-structv" title="dbus_g_type_get_structv ()">dbus_g_type_get_structv</a>             (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> num_members,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> *types);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-struct" title="dbus_g_type_get_struct ()">dbus_g_type_get_struct</a>              (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> first_type,
+                                                         ...);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-is-collection" title="dbus_g_type_is_collection ()">dbus_g_type_is_collection</a>           (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-is-map" title="dbus_g_type_is_map ()">dbus_g_type_is_map</a>                  (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-is-struct" title="dbus_g_type_is_struct ()">dbus_g_type_is_struct</a>               (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-collection-specialization" title="dbus_g_type_get_collection_specialization ()">dbus_g_type_get_collection_specialization</a>
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-map-key-specialization" title="dbus_g_type_get_map_key_specialization ()">dbus_g_type_get_map_key_specialization</a>
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-map-value-specialization" title="dbus_g_type_get_map_value_specialization ()">dbus_g_type_get_map_value_specialization</a>
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-struct-member-type" title="dbus_g_type_get_struct_member_type ()">dbus_g_type_get_struct_member_type</a>  (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-struct-size" title="dbus_g_type_get_struct_size ()">dbus_g_type_get_struct_size</a>         (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-construct" title="dbus_g_type_specialized_construct ()">dbus_g_type_specialized_construct</a>   (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-init-append" title="dbus_g_type_specialized_init_append ()">dbus_g_type_specialized_init_append</a> (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-collection-append" title="dbus_g_type_specialized_collection_append ()">dbus_g_type_specialized_collection_append</a>
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *elt);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-collection-end-append" title="dbus_g_type_specialized_collection_end_append ()">dbus_g_type_specialized_collection_end_append</a>
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-map-append" title="dbus_g_type_specialized_map_append ()">dbus_g_type_specialized_map_append</a>  (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *key,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-collection-get-fixed" title="dbus_g_type_collection_get_fixed ()">dbus_g_type_collection_get_fixed</a>    (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *len);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-collection-value-iterate" title="dbus_g_type_collection_value_iterate ()">dbus_g_type_collection_value_iterate</a>
+                                                        (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionIterator" title="DBusGTypeSpecializedCollectionIterator ()">DBusGTypeSpecializedCollectionIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-map-value-iterate" title="dbus_g_type_map_value_iterate ()">dbus_g_type_map_value_iterate</a>       (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapIterator" title="DBusGTypeSpecializedMapIterator ()">DBusGTypeSpecializedMapIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-struct-get-member" title="dbus_g_type_struct_get_member ()">dbus_g_type_struct_get_member</a>       (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *dest);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-struct-set-member" title="dbus_g_type_struct_set_member ()">dbus_g_type_struct_set_member</a>       (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *src);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-struct-get" title="dbus_g_type_struct_get ()">dbus_g_type_struct_get</a>              (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         ...);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-struct-set" title="dbus_g_type_struct_set ()">dbus_g_type_struct_set</a>              (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         ...);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-init" title="dbus_g_type_specialized_init ()">dbus_g_type_specialized_init</a>        (void);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-register-collection" title="dbus_g_type_register_collection ()">dbus_g_type_register_collection</a>     (const char *name,
+                                                         const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionVtable" title="DBusGTypeSpecializedCollectionVtable">DBusGTypeSpecializedCollectionVtable</a> *vtable,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-register-map" title="dbus_g_type_register_map ()">dbus_g_type_register_map</a>            (const char *name,
+                                                         const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapVtable" title="DBusGTypeSpecializedMapVtable">DBusGTypeSpecializedMapVtable</a> *vtable,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);
+const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapVtable" title="DBusGTypeSpecializedMapVtable">DBusGTypeSpecializedMapVtable</a>* <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-map-peek-vtable" title="dbus_g_type_map_peek_vtable ()">dbus_g_type_map_peek_vtable</a>
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> map_type);
+const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionVtable" title="DBusGTypeSpecializedCollectionVtable">DBusGTypeSpecializedCollectionVtable</a>* <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-collection-peek-vtable" title="dbus_g_type_collection_peek_vtable ()">dbus_g_type_collection_peek_vtable</a>
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> collection_type);
+void                <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-register-struct" title="dbus_g_type_register_struct ()">dbus_g_type_register_struct</a>         (const char *name,
+                                                         const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedStructVtable" title="DBusGTypeSpecializedStructVtable">DBusGTypeSpecializedStructVtable</a> *vtable,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="dbus-glib-Specializable-GType-System.description"></a><h2>Description</h2>
+<p>
+Specialized gtypes are basically a way to allow the definition of
+recursive GTypes. It allows the definition of 'containers' which is
+basically a user defined structure capabale of holding other data and a 
+set of functions defining how to access that structure. Containers come in
+3 flavors: collections, maps and structs. 
+</p>
+<p>
+A collection is a container that holds an ordered set of items, all
+of which must be the same type. 
+</p>
+<p>
+A map is a container that holds a set of key/value pairs. 
+The keys have one type, and the values another.
+</p>
+<p>
+A struct is a container that holds a fixed number of members, each member 
+having a predefined type.
+</p>
+<p>
+A specialization is a GType detailing a particular container with
+particular types (a type specialization).
+</p>
+<p>
+Functions are provided for constructing and manipulating specializations.
+</p>
+<p>
+This documentation needs splitting into two pages, one for defining new
+containers and using existing containers. I expect most users to only do
+the latter. I also need to add some examples.</p>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="dbus-glib-Specializable-GType-System.details"></a><h2>Details</h2>
+<div class="refsect2" title="DBusGTypeSpecializedCollectionIterator ()">
+<a name="DBusGTypeSpecializedCollectionIterator"></a><h3>DBusGTypeSpecializedCollectionIterator ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedCollectionIterator)
+                                                        (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedMapIterator ()">
+<a name="DBusGTypeSpecializedMapIterator"></a><h3>DBusGTypeSpecializedMapIterator ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedMapIterator)  (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *key_val,
+                                                         const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value_val,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key_val</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value_val</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedAppendContext">
+<a name="DBusGTypeSpecializedAppendContext"></a><h3>DBusGTypeSpecializedAppendContext</h3>
+<pre class="programlisting">typedef struct {
+  /* public */
+  GValue *val;
+  GType specialization_type;
+  /* padding */
+  gpointer b;
+  guint c;
+  gpointer d;
+} DBusGTypeSpecializedAppendContext;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedConstructor ()">
+<a name="DBusGTypeSpecializedConstructor"></a><h3>DBusGTypeSpecializedConstructor ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (*DBusGTypeSpecializedConstructor)  (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedFreeFunc ()">
+<a name="DBusGTypeSpecializedFreeFunc"></a><h3>DBusGTypeSpecializedFreeFunc ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedFreeFunc)     (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> val);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedCopyFunc ()">
+<a name="DBusGTypeSpecializedCopyFunc"></a><h3>DBusGTypeSpecializedCopyFunc ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (*DBusGTypeSpecializedCopyFunc)     (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> src);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>src</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedVtable">
+<a name="DBusGTypeSpecializedVtable"></a><h3>DBusGTypeSpecializedVtable</h3>
+<pre class="programlisting">typedef struct {
+  DBusGTypeSpecializedConstructor    constructor;
+  DBusGTypeSpecializedFreeFunc       free_func;
+  DBusGTypeSpecializedCopyFunc       copy_func;
+  GDestroyNotify                     simple_free_func; /* for type-independent freeing if possible */
+  gpointer                           padding2;
+  gpointer                           padding3;
+} DBusGTypeSpecializedVtable;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedCollectionFixedAccessorFunc ()">
+<a name="DBusGTypeSpecializedCollectionFixedAccessorFunc"></a><h3>DBusGTypeSpecializedCollectionFixedAccessorFunc ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (*DBusGTypeSpecializedCollectionFixedAccessorFunc)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *values,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>values</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedCollectionIteratorFunc ()">
+<a name="DBusGTypeSpecializedCollectionIteratorFunc"></a><h3>DBusGTypeSpecializedCollectionIteratorFunc ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedCollectionIteratorFunc)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionIterator" title="DBusGTypeSpecializedCollectionIterator ()">DBusGTypeSpecializedCollectionIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iterator</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedCollectionAppendFunc ()">
+<a name="DBusGTypeSpecializedCollectionAppendFunc"></a><h3>DBusGTypeSpecializedCollectionAppendFunc ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedCollectionAppendFunc)
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedCollectionEndAppendFunc ()">
+<a name="DBusGTypeSpecializedCollectionEndAppendFunc"></a><h3>DBusGTypeSpecializedCollectionEndAppendFunc ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedCollectionEndAppendFunc)
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedCollectionVtable">
+<a name="DBusGTypeSpecializedCollectionVtable"></a><h3>DBusGTypeSpecializedCollectionVtable</h3>
+<pre class="programlisting">typedef struct {
+  DBusGTypeSpecializedVtable                        base_vtable;
+  DBusGTypeSpecializedCollectionFixedAccessorFunc   fixed_accessor;
+  DBusGTypeSpecializedCollectionIteratorFunc        iterator;
+  DBusGTypeSpecializedCollectionAppendFunc          append_func;
+  DBusGTypeSpecializedCollectionEndAppendFunc       end_append_func;
+} DBusGTypeSpecializedCollectionVtable;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedMapIteratorFunc ()">
+<a name="DBusGTypeSpecializedMapIteratorFunc"></a><h3>DBusGTypeSpecializedMapIteratorFunc ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedMapIteratorFunc)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapIterator" title="DBusGTypeSpecializedMapIterator ()">DBusGTypeSpecializedMapIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iterator</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedMapAppendFunc ()">
+<a name="DBusGTypeSpecializedMapAppendFunc"></a><h3>DBusGTypeSpecializedMapAppendFunc ()</h3>
+<pre class="programlisting">void                (*DBusGTypeSpecializedMapAppendFunc)
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *key,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedMapVtable">
+<a name="DBusGTypeSpecializedMapVtable"></a><h3>DBusGTypeSpecializedMapVtable</h3>
+<pre class="programlisting">typedef struct {
+  DBusGTypeSpecializedVtable                        base_vtable;
+  DBusGTypeSpecializedMapIteratorFunc               iterator;
+  DBusGTypeSpecializedMapAppendFunc                 append_func;
+} DBusGTypeSpecializedMapVtable;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedStructGetMember ()">
+<a name="DBusGTypeSpecializedStructGetMember"></a><h3>DBusGTypeSpecializedStructGetMember ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (*DBusGTypeSpecializedStructGetMember)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *ret_value);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>member</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ret_value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedStructSetMember ()">
+<a name="DBusGTypeSpecializedStructSetMember"></a><h3>DBusGTypeSpecializedStructSetMember ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (*DBusGTypeSpecializedStructSetMember)
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> instance,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *new_value);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>member</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>new_value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="DBusGTypeSpecializedStructVtable">
+<a name="DBusGTypeSpecializedStructVtable"></a><h3>DBusGTypeSpecializedStructVtable</h3>
+<pre class="programlisting">typedef struct {
+  DBusGTypeSpecializedVtable                        base_vtable;
+  DBusGTypeSpecializedStructGetMember               get_member;
+  DBusGTypeSpecializedStructSetMember               set_member;
+} DBusGTypeSpecializedStructVtable;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_collection ()">
+<a name="dbus-g-type-get-collection"></a><h3>dbus_g_type_get_collection ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_collection          (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> specialization);</pre>
+<p>
+Gets a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> for a particular collection instance, 
+creating the type if not already created.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
+<td> a string specifying a registered collection type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>specialization</code></em> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of collection elements
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of that instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_map ()">
+<a name="dbus-g-type-get-map"></a><h3>dbus_g_type_get_map ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_map                 (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> key_specialization,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> value_specialization);</pre>
+<p>
+Gets a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> for a particular map instance,
+creating the type if not already created.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
+<td> a string specifying a registered map type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key_specialization</code></em> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of keys
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value_specialization</code></em> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of values
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of that instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_structv ()">
+<a name="dbus-g-type-get-structv"></a><h3>dbus_g_type_get_structv ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_structv             (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> num_members,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> *types);</pre>
+<p>
+Gets a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> for a particular struct instance,
+creating the type if not already created.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
+<td> a string specifying a registered struct type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>num_members</code></em> :</span></p></td>
+<td> number of members in the struct
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>types</code></em> :</span></p></td>
+<td> an array specufying a GType for each struct element
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of that instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_struct ()">
+<a name="dbus-g-type-get-struct"></a><h3>dbus_g_type_get_struct ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_struct              (const char *container,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> first_type,
+                                                         ...);</pre>
+<p>
+Varags methsod to get a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> for a particular struct instance,
+creating the type if not already created.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
+<td> a string specifying a registered struct type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_type</code></em> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> for the struct's first member
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td> more GTypes for the struct's members, terminated by G_TYPE_INVALID
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a> of that instance
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_is_collection ()">
+<a name="dbus-g-type-is-collection"></a><h3>dbus_g_type_is_collection ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_is_collection           (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+Tests if a given GType is a collection.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a GType to test
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> true if the given GType is a collection
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_is_map ()">
+<a name="dbus-g-type-is-map"></a><h3>dbus_g_type_is_map ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_is_map                  (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+Tests if a given GType is a map,
+i.e. it was created with <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-map" title="dbus_g_type_get_map ()"><span class="type">dbus_g_type_get_map</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a GType to test
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> true if the given GType is a map
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_is_struct ()">
+<a name="dbus-g-type-is-struct"></a><h3>dbus_g_type_is_struct ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_is_struct               (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+Tests if a given GType is a struct,
+i.e. it was created with <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-struct" title="dbus_g_type_get_struct ()"><span class="type">dbus_g_type_get_struct</span></a></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a GType to test
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> true if the given GType is a struct
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_collection_specialization ()">
+<a name="dbus-g-type-get-collection-specialization"></a><h3>dbus_g_type_get_collection_specialization ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_collection_specialization
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a collection GType, as created by <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-collection" title="dbus_g_type_get_collection ()"><span class="type">dbus_g_type_get_collection</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the element type for a given collection GType.
+Returns G_TYPE_INVALID if not a collection GType
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_map_key_specialization ()">
+<a name="dbus-g-type-get-map-key-specialization"></a><h3>dbus_g_type_get_map_key_specialization ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_map_key_specialization
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a map GType, as created by <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-map" title="dbus_g_type_get_map ()"><span class="type">dbus_g_type_get_map</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the key type for a given map GType.
+Returns G_TYPE_INVALID if not a map GType
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_map_value_specialization ()">
+<a name="dbus-g-type-get-map-value-specialization"></a><h3>dbus_g_type_get_map_value_specialization ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_map_value_specialization
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a map GType, as created by <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-map" title="dbus_g_type_get_map ()"><span class="type">dbus_g_type_get_map</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the value type for a given map GType.
+Returns G_TYPE_INVALID if not a map GType
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_struct_member_type ()">
+<a name="dbus-g-type-get-struct-member-type"></a><h3>dbus_g_type_get_struct_member_type ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a>               dbus_g_type_get_struct_member_type  (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a struct GType, as created with <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-struct" title="dbus_g_type_get_struct ()"><span class="type">dbus_g_type_get_struct</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>member</code></em> :</span></p></td>
+<td> the index of a struct member
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the type for a given member of a struct <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a>.
+Returns G_TYPE_INVALID if not a struct GType
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_get_struct_size ()">
+<a name="dbus-g-type-get-struct-size"></a><h3>dbus_g_type_get_struct_size ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               dbus_g_type_get_struct_size         (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a struct GType, as created with <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-struct" title="dbus_g_type_get_struct ()"><span class="type">dbus_g_type_get_struct</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the number of members in a given struct <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a>.
+Returns G_TYPE_INVALID if not a struct GType
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_specialized_construct ()">
+<a name="dbus-g-type-specialized-construct"></a><h3>dbus_g_type_specialized_construct ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            dbus_g_type_specialized_construct   (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> gtype);</pre>
+<p>
+Create an instance of a given specialized type. 
+The structure created and returned will depend on the container type of the 
+GType. E.g. If the given type was created by 
+dbus_g_type_get_collection("GArray", G_TYPE_INT), 
+then this will return a GArray with element_size of sizeof(int)</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gtype</code></em> :</span></p></td>
+<td> a specialized <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+><span class="type">GType</span></a>, as created by <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-collection" title="dbus_g_type_get_collection ()"><span class="type">dbus_g_type_get_collection</span></a>, <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-map" title="dbus_g_type_get_map ()"><span class="type">dbus_g_type_get_map</span></a> or <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-get-struct" title="dbus_g_type_get_struct ()"><span class="type">dbus_g_type_get_struct</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a pointer to a newly constructed instance of the given type.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_specialized_init_append ()">
+<a name="dbus-g-type-specialized-init-append"></a><h3>dbus_g_type_specialized_init_append ()</h3>
+<pre class="programlisting">void                dbus_g_type_specialized_init_append (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx);</pre>
+<p>
+Create a new context for adding elements to a collection or key/value pairs 
+to a map. You generally don't need or want to use this..</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> containing an instance of specialized type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td> a <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext"><span class="type">DBusGTypeSpecializedAppendContext</span></a> in which to return a new appending context.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_specialized_collection_append ()">
+<a name="dbus-g-type-specialized-collection-append"></a><h3>dbus_g_type_specialized_collection_append ()</h3>
+<pre class="programlisting">void                dbus_g_type_specialized_collection_append
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *elt);</pre>
+<p>
+Appends a given element to the end of a collection.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td> a context created by <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-init-append" title="dbus_g_type_specialized_init_append ()"><span class="type">dbus_g_type_specialized_init_append</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>elt</code></em> :</span></p></td>
+<td> a GValue containing an element to append to the collection.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_specialized_collection_end_append ()">
+<a name="dbus-g-type-specialized-collection-end-append"></a><h3>dbus_g_type_specialized_collection_end_append ()</h3>
+<pre class="programlisting">void                dbus_g_type_specialized_collection_end_append
+                                                        (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx);</pre>
+<p>
+Finish appending elements to a given collection</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td> a context created by <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-init-append" title="dbus_g_type_specialized_init_append ()"><span class="type">dbus_g_type_specialized_init_append</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_specialized_map_append ()">
+<a name="dbus-g-type-specialized-map-append"></a><h3>dbus_g_type_specialized_map_append ()</h3>
+<pre class="programlisting">void                dbus_g_type_specialized_map_append  (<a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedAppendContext" title="DBusGTypeSpecializedAppendContext">DBusGTypeSpecializedAppendContext</a> *ctx,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *key,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *val);</pre>
+<p>
+Inserts the given key/value pair into the map instance.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td> a context created by <a class="link" href="dbus-glib-Specializable-GType-System.html#dbus-g-type-specialized-init-append" title="dbus_g_type_specialized_init_append ()"><span class="type">dbus_g_type_specialized_init_append</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td> a GValue containing a key
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td> a GValue containing a value 
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_collection_get_fixed ()">
+<a name="dbus-g-type-collection-get-fixed"></a><h3>dbus_g_type_collection_get_fixed ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_collection_get_fixed    (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *len);</pre>
+<p>
+if the collection has elements of fixed size (i.e. a fundamental type), 
+return the contents of the array.
+Its pretty obscure and I don't think anyone uses it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_collection_value_iterate ()">
+<a name="dbus-g-type-collection-value-iterate"></a><h3>dbus_g_type_collection_value_iterate ()</h3>
+<pre class="programlisting">void                dbus_g_type_collection_value_iterate
+                                                        (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionIterator" title="DBusGTypeSpecializedCollectionIterator ()">DBusGTypeSpecializedCollectionIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Calls the given function for each element of the collection. 
+The function is passed a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> containing the element and the given 
+<em class="parameter"><code>user_data</code></em> parameter. The collection may not be modified while iterating over 
+it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> holding a collection type.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iterator</code></em> :</span></p></td>
+<td> a function to call for each element
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> user data to pass to the <em class="parameter"><code>iterator</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_map_value_iterate ()">
+<a name="dbus-g-type-map-value-iterate"></a><h3>dbus_g_type_map_value_iterate ()</h3>
+<pre class="programlisting">void                dbus_g_type_map_value_iterate       (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapIterator" title="DBusGTypeSpecializedMapIterator ()">DBusGTypeSpecializedMapIterator</a> iterator,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Calls the given function for each key/value pair of the map. 
+The function is passed two GValues containing the key/value pair and the given 
+<em class="parameter"><code>user_data</code></em> parameter. The map may not be modified while iterating over 
+it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> holding a collection type.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iterator</code></em> :</span></p></td>
+<td> a function to call for each element
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> user data to pass to the <em class="parameter"><code>iterator</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_struct_get_member ()">
+<a name="dbus-g-type-struct-get-member"></a><h3>dbus_g_type_struct_get_member ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_struct_get_member       (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *dest);</pre>
+<p>
+Fetches a given member of a given struct instance. <em class="parameter"><code>dest</code></em> must be initialised 
+was the correct type for that member, e.g. as returned by 
+<em class="parameter"><code>dbus_g_type_get_struct_member_type</code></em></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> containing a struct instance
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>member</code></em> :</span></p></td>
+<td> the index of a given member
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
+<td> an initialised <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> in which to return the struct member
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE if sucessful
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_struct_set_member ()">
+<a name="dbus-g-type-struct-set-member"></a><h3>dbus_g_type_struct_set_member ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_struct_set_member       (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *src);</pre>
+<p>
+Sets a given member of a struct to a new value. The type of <em class="parameter"><code>src</code></em> must match 
+the exiting type of <em class="parameter"><code>member</code></em> member of the struct.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> containing a struct instance
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>member</code></em> :</span></p></td>
+<td> the index of a given member
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>src</code></em> :</span></p></td>
+<td> an <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> containing the new value for that struct member
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE if sucessful
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_struct_get ()">
+<a name="dbus-g-type-struct-get"></a><h3>dbus_g_type_struct_get ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_struct_get              (const <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         ...);</pre>
+<p>
+Collects the selected values of this struct into the return locations
+provided.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> containing a <span class="type">DBusGTypeStruct</span> type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>member</code></em> :</span></p></td>
+<td> struct member to get
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td> location in which to return the value of this member,
+      followed optionally by more member/return locations pairs, followed by
+      by <span class="type">G_MAXUINT</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <span class="type">FALSE</span> on failure
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_struct_set ()">
+<a name="dbus-g-type-struct-set"></a><h3>dbus_g_type_struct_set ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            dbus_g_type_struct_set              (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> member,
+                                                         ...);</pre>
+<p>
+Sets the selected members of the struct in <em class="parameter"><code>value</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> containing a <span class="type">DBusGTypeStruct</span> type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>member</code></em> :</span></p></td>
+<td> struct member to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td> value for the first member, followed optionally by
+      more member/value pairs, followed by <span class="type">G_MAXUINT</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <span class="type">FALSE</span> on failure
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_specialized_init ()">
+<a name="dbus-g-type-specialized-init"></a><h3>dbus_g_type_specialized_init ()</h3>
+<pre class="programlisting">void                dbus_g_type_specialized_init        (void);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_register_collection ()">
+<a name="dbus-g-type-register-collection"></a><h3>dbus_g_type_register_collection ()</h3>
+<pre class="programlisting">void                dbus_g_type_register_collection     (const char *name,
+                                                         const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionVtable" title="DBusGTypeSpecializedCollectionVtable">DBusGTypeSpecializedCollectionVtable</a> *vtable,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);</pre>
+<p>
+Defines a new collection container.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> The name of a new collection container
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vtable</code></em> :</span></p></td>
+<td> the vtable defining the new container
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> As yet unused.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_register_map ()">
+<a name="dbus-g-type-register-map"></a><h3>dbus_g_type_register_map ()</h3>
+<pre class="programlisting">void                dbus_g_type_register_map            (const char *name,
+                                                         const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapVtable" title="DBusGTypeSpecializedMapVtable">DBusGTypeSpecializedMapVtable</a> *vtable,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);</pre>
+<p>
+Defines a new map container.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> The name of a new map container
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vtable</code></em> :</span></p></td>
+<td> the vtable defining the new container
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> As yet unused.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_map_peek_vtable ()">
+<a name="dbus-g-type-map-peek-vtable"></a><h3>dbus_g_type_map_peek_vtable ()</h3>
+<pre class="programlisting">const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedMapVtable" title="DBusGTypeSpecializedMapVtable">DBusGTypeSpecializedMapVtable</a>* dbus_g_type_map_peek_vtable
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> map_type);</pre>
+<p>
+Peek the vtable for a given map specialization</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>map_type</code></em> :</span></p></td>
+<td> a gtype of a map specialization
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_collection_peek_vtable ()">
+<a name="dbus-g-type-collection-peek-vtable"></a><h3>dbus_g_type_collection_peek_vtable ()</h3>
+<pre class="programlisting">const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedCollectionVtable" title="DBusGTypeSpecializedCollectionVtable">DBusGTypeSpecializedCollectionVtable</a>* dbus_g_type_collection_peek_vtable
+                                                        (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> collection_type);</pre>
+<p>
+Peek the vtable for a given collection specialization</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>collection_type</code></em> :</span></p></td>
+<td> a gtype of a collection specialization
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="dbus_g_type_register_struct ()">
+<a name="dbus-g-type-register-struct"></a><h3>dbus_g_type_register_struct ()</h3>
+<pre class="programlisting">void                dbus_g_type_register_struct         (const char *name,
+                                                         const <a class="link" href="dbus-glib-Specializable-GType-System.html#DBusGTypeSpecializedStructVtable" title="DBusGTypeSpecializedStructVtable">DBusGTypeSpecializedStructVtable</a> *vtable,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);</pre>
+<p>
+Defines a new struct container.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> The name of a new struct container
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vtable</code></em> :</span></p></td>
+<td> the vtable defining the new container
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> As yet unused.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+From 969ef5ea43145afdb061107aed8c2a52397a9bad Mon Sep 17 00:00:00 2001
+From: Yevgeny Petrilin <yevgenyp@mellanox.co.il>
+Date: Tue, 21 Dec 2010 10:05:49 +0200
+Subject: [PATCH] mlx4_en: validating TCP header exists when selecting TX queue
+
+Signed-off-by: Yevgeny Petrilin <yevgenyp@mellanox.co.il>
+---
+ drivers/net/mlx4/en_tx.c |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/mlx4/en_tx.c b/drivers/net/mlx4/en_tx.c
+index d501981..00d5896 100644
+--- a/drivers/net/mlx4/en_tx.c
++++ b/drivers/net/mlx4/en_tx.c
+@@ -641,8 +641,10 @@ u16 mlx4_en_select_queue(struct net_device *dev, struct sk_buff *skb)
+ 	case IPPROTO_UDP:
+ 		break;
+ 	case IPPROTO_TCP:
+-		hash_index = (hash_index ^ be16_to_cpu(th->dest ^ th->source)) &
+-				MLX4_EN_TX_HASH_MASK;
++		if (th) {
++			hash_index = (hash_index ^ be16_to_cpu(th->dest ^ th->source)) &
++					MLX4_EN_TX_HASH_MASK;
++		}
+ 		break;
+ 	default:
+ 		return MLX4_EN_NUM_HASH_RINGS;
+-- 
+1.7.1.1
+

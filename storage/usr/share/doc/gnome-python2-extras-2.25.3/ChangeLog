@@ -1,0 +1,1532 @@
+2.25.4:
+
+2009-02-06  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Regenerated (and re-hand-edited).
+
+2009-01-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Use define-interface instead of define-object for
+	DataHandler and DataModel, because h2defs.py gets this wrong.
+	* gda/gda_defs_interface.patch: Added this change as a patch so we can 
+	reapply it when we next regenerate gda.defs.
+
+2009-01-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Regenerated to avoid some undefined symbols with 
+	the latest libgda.
+
+2.25.2:
+
+2009-01-22  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.ac: Require the latest libgda.
+	* gda/gda.defs: Regenerated.
+
+2.25.1:
+
+2009-01-04  Gian Mario Tagliaretti  <gianmt@gnome.org>
+
+	* examples/gtkspell/gtkspell.py: rename to spell.py
+
+2008-12-18  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Updated by hand to fix the build, because h2defs.py 
+	now crashes on the gda-*.h headers.
+
+2008-11-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Regenerated with h2defs.py to fix the build with 
+	latest libgda-4.0.
+
+2008-11-17  Johannes Schmid  <jhs@gnome.org>	
+
+	* gdl/gdl.override: Fix build with gdl enabled
+
+2008-10-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.ac:
+	* gda/Makefile.am:
+	* gda/gda.defs:
+	* gda/gda.override:
+	* gda/gdamodule.c:
+	* gda/pygda-3.0.pc.in:
+	* gda/pygda-4.0.pc.in:
+	Initial port to libgda-4.0.
+
+2008-05-24  Arun Raghavan  <arunisgod@gmail.com>
+
+	reviewed by: Gustavo Carneiro
+
+	* Makefile.am:
+	* configure.ac:
+
+	Bug 534307 – configure script could really use the ability to
+	select particular modules.
+
+2008-03-02  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* tests/common.py: When an import fails, print the traceback but
+	carry on to the next test.
+
+2008-03-02   Gilles Dartiguelongue  <gilles.dartiguelongue@esiee.org>
+	reviewed by Gustavo J. A. M. Carneiro
+
+	* tests/Makefile.am: Set PYTHONPATH to the toplevel dir before
+	running the import tests.
+
+2008-03-02  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* configure.ac:
+	* gtkmozembed/Makefile.am:
+	* gtkmozembed/gtkmozembed.defs:
+	Fix gtkmozembed build issues related to XUL 1.9 (bug #503067).
+
+2008-02-02  Armin Burgmeier  <armin@openismus.com>
+
+	* configure.ac: Detect if we are on Win32.
+
+	* gda/Makefile.am: Rename gda.dll to gda.pyd when installing because
+	this is what python looks for.
+
+2007-12-30  Armin Burgmeier  <armin@openismus.com>
+
+	* acinclude.m4: Detect python library to link against.
+
+	* configure.ac: Added AC_LIBTOOL_WIN32_DLL to create DLL files on
+	Windows, instead of static libraries.
+
+	* gda/Makefile.am: Added the -no-undefined linker flag and link against
+	libpython, so that all references are resolved. This is required to
+	create a shared library on Windows.
+
+2007-12-29  Gian Mario Tagliaretti  <gianmt@gnome.org>
+
+	* configure.ac: 
+	* Makefile.am: 
+	* docs/gtkmozembed/Makefile.am 
+	* docs/gtkspell/Makefile.am Add conditional docs build (--enable-docs)
+
+	* docs/ref-html-style.xsl:
+	* docs/tut-html-style.xsl:
+	* docs/html.xsl:
+	* docs/pygtk-ref-docs.make:
+	* docs/devhelp.xsl:
+	* docs/pdf-style.xsl:
+	* docs/common.xsl:
+	* docs/pdf.xsl:
+	* docs/Makefile.am: Remove unsed files
+
+	* docs/gtkspell/gtkspell-closses.xml:
+	* docs/gtkmozembed/gtkmozembed-gtkmozembed.xml:
+	* docs/gtkmozembed/gtkmozembed-closses.xml: A lot of cleanup and fixes.
+
+	* docs/gtkmozembed/entities.docbook.in:
+	* docs/gtkspell/entities.docbook.in: New files.
+
+2007-12-15  Matthew Barnes  <mbarnes@redhat.com>
+
+	* gtkmozembed/gtkmozembed.defs:
+	Wrap gtk_moz_embed_set_path() (#400861).
+
+2007-08-07  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* COPYING: egg.recent is GPL, not LGPL. Closes #464396.
+
+2007-07-08  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* egg/recent/eggrecent.override:
+	* egg/tray/trayicon.override:
+	* gda/gda.override:
+	* gdl/gdl.override:
+	* gksu/gksu.override:
+	* gksu2/gksu2.override:
+	* gtkhtml2/gtkhtml2.override:
+	* gtkmozembed/gtkmozembed.override: #include "config.h" to get a
+	__version__ attribute on the module when compiling with
+	newer (pygtk trunk) codegen.
+
+2007-06-18  Sebastien Bacher  <seb128@ubuntu.com>
+
+	* acinclude.m4: use python-config to get python includes
+	(Closes #448182)
+
+=== 2.19.1 ===
+
+2007-06-02  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* egg/tray/trayiconmodule.c (inittrayicon): By popular demand,
+	undeprecate egg.trayicon, at least until gtk+ adds all the
+	functionality to GtkStatusIcon.  Partially fixes #434023.
+
+2007-04-09  Gian Mario Tagliaretti  <gianmt@gnome.org>
+
+	* COPYING: Update package names and their licences.
+
+2007-04-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am (EXTRA_DIST),
+	* examples/gksu2/simple.py: Add a simple gksu2 example.
+
+	* gksu2/gksu2.override (_wrap_gksu_su_full): Fix return value
+	comparison with TRUE; should be a simple boolean evaluation.
+	Fix a couple of PyGkSuCustomNotify leaks.  Better parameter type
+	checking, and allow 'ask_pass' and 'pass_not_needed' to be None.
+	Allow python threads to run during the library function call.
+	(pass_not_needed_func): Fix ref leak in py_context.  Don't pass
+	the user data parameter if it is missing.
+	(ask_pass_func): Fix ref leak in py_context and py_prompt. Don't pass
+	the user data parameter if it is missing.  Don't pass a py_error
+	parameter into the callback; instead look for a gobject.GError
+	exception being raised.
+
+	* gksu2/gksu2module.c (init_gksu2): Add missing
+	pygksu2_add_constants prototype.
+
+2007-03-30  Armin Burgmeier  <armin@openismus.com>
+
+	* gda/pygdavalue_conversions.c: Return an uninitialized (NULL) value
+	instead of crashing when the input is Py_None.
+
+2007-03-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Corrected the .defs for the interfaces, such as GdaDataModel, which 
+	were wrongly declared as objects.
+	* examples/gda/select.py: Do not use get() on values, because these are now GValues, instead of 
+	GdaValues, and they have a cleverer API.
+
+2007-03-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/gda/select.py: Change execute_single_command() to execute_select_command(), for 
+	pygda 3.0. This now gets further but then fails with this error:
+	TypeError: multiple bases have instance lay-out conflict
+
+2007-03-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/gda/select.py: Rename DATABASE to DB_NAME as advised by a libgda-3.0 runtime warning.
+	* gda/gda.defs: Add gda_data_source_info_new(), which we already hand-coded in gda.override 
+	because it does not really exist.
+	*_open_connection(): Added default values, as we had before in pygda 1.2.
+
+2007-03-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Added fields for DataSourceInfo.
+
+2007-03-27  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gda.defs: Renamed gda_config* function to config_*(), 
+	so that they appear as gda.config_*() in the python API. This is the 
+	same hack that I used for libgda-1.2, and it was lost when we regenerated 
+	the .defs with h2defs.py. This restores the gda.config_*() methods to the API, 
+	so that the examples can use them.
+	Added define-boxed for DataSourceInfo and ProviderSourceInfo, which 
+	h2defs.py failed to generate. This restores the functions that used these objects.
+
+2007-03-26  Gian Mario Tagliaretti  <gianmt@gnome.org>
+
+	* configure.ac: Conditionally build new module gksu2
+	
+	* Makefile.am: New module gksu2
+	
+	* gksu2/*: Import of new module gksu2
+
+2007-03-21  Armin Burgmeier  <armin@openismus.com>
+
+	* gda/gda.defs: Removed some private functions.
+
+	* gda/gda-arg-types.py: Added argtype for conversion between GValue
+	and PyObject, using the conversions defined in
+	pygdavalue_conversions.c.
+
+	* gda/Makefile.am: Pass the argtypes defined in gda/gda-arg-types.py
+	to the code generator.
+
+	* gda/pygda_value_conversions.c: Changed gda_value_get_uint() to
+	g_value_get_uint().
+
+	* gda/gda.override: Added libgda/gda-parameter-util.h to includes.
+
+2007-03-07  Armin Burgmeier  <armin@openismus.com>
+
+	* gda/gda.defs: Regenerated with h2defs.py from libgda-3.0 headers.
+
+	* gda/gda.override:
+	* gda/gdaglue.h:
+	* gda/pygdavalue_conversions.h:
+	* gda/pygdavalue_conversions.c: Applied Murray's patch from #342947.
+	Added g_value_init() calls to pygda_value_from_pyobject() because I
+	doubt that the GValue has the correct type initially.
+
+	* gda/pygda-3.0.pc.in: Moved from pygda-1.2, adjusted requirement and
+	pygtkincludedir.
+
+	* configure.ac: Check for libgda-3.0 presence.
+
+This is the trunk branch. See also the gnome-2-18 branch.
+
+=== 2.14.3 ===
+2007-02-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.14.3.
+
+	* tests/common.py: Ignore deprecation warnings during unit tests.
+
+2007-02-18  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* README: Update, add some install hints.  Closes #405182.
+
+2007-02-05  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am: Build gksu conditionally, like it was supposed to
+	all along.  Fixes #404508.
+
+2007-02-04  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* egg/tray/eggtrayicon.c: Apply patch from bug #150726.
+	Closes bug #403969: Tray icons ignores gnome-panel transparency setting.
+
+	* egg/recent/eggrecentmodule.c (initrecent): Raise a deprecation warning.
+	(initrecent): Init glib threads to avoid the GSlice warning.
+
+	* egg/tray/trayiconmodule.c (inittrayicon): Raise a deprecation warning.
+
+2007-01-20  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gda/pygda-1.2.pc.in,
+	* gnome-python-extras-2.0.pc.in: Define datarootdir.
+
+2007-01-20  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	reviewed (and tweaked) by: Gustavo Carneiro.
+
+	* Makefile.am:
+	* examples/gdl/gdl_combo_button.py:
+	* examples/gdl/gdl_dock.py:
+	Add a couple of new GDL examples.
+
+	* configure.ac:
+	* gdl/Makefile.am:
+	* gdl/gdl.defs:
+	* gdl/gdl.override:
+	Conditionally support both the new gdl 0.7.x API and the slightly
+	older 0.6.x one.  Closes bug #398157.
+
+2006-11-07  Murray Cumming  <murrayc@murrayc.com>
+
+	* COPYING: Mention that pygda is under the LGPL. Bug #358883.
+
+2006-08-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* examples/gtkhtml2/simple-browser.py (link_clicked): Fix
+	extraction of mime type; closes #321576.
+
+	* gtkhtml2/gtkhtml2.override (_wrap_html_document_open_stream):
+	Raise exception on error return value.
+
+=== 2.14.2 ===
+2006-07-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version.
+
+2006-07-11  Daniel Macks  <dmacks@netspace.org>
+
+	* configure.ac: Bug #345390 postfix.
+
+=== 2.14.1 ===
+2006-07-10  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.14.1.
+
+	* NEWS: Update.
+
+2006-07-05  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Blacklist pygtk 2.9.[01].  Fixes #342775.
+
+2006-07-04  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* acinclude.m4: Fix "underquoted definition of..." automake warning.
+
+2006-07-04  Daniel Macks  <dmacks@netspace.org>
+
+	reviewed by: Gustavo
+
+	* egg/tray/trayicon.override:
+	* gtkhtml2/gtkhtml2.override:
+	* gtkmozembed/gtkmozembed.override: Add #define
+	NO_IMPORT_PYGOBJECT before #include <pygobject.h>.  Fixes Bug
+	345388 "build failure: multiply defined __PyGObject_API".
+
+	* configure.ac:
+	* egg/recent/Makefile.am: Use defsdir from gnome-python-2.0.pc
+	where appropriate.  Fixes bug #345390: "Misuse of pygtk defsdir."
+
+2006-07-04  Julien Louis  <ptitlouis@sysif.net>
+
+	reviewed by: Gustavo
+
+	* configure.ac: Allow building gtkmozembed against xulrunner.
+	Fixes #344484.
+
+2006-05-08  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/pygtk-ref-docs.make (html.stamp): Pass "--stringparam
+	chunker.output.encoding UTF-8" to xsltproc to force utf-8 output encoding.
+
+=== 2.14.0 ===
+2006-03-12  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: Version 2.14.0.
+
+2006-03-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkspell/gtkspellmodule.c (_wrap_gtkspell_set_language): Check for
+	ParseTuple errors.
+	(_wrap_gtkspell_get_from_text_view): idem.
+	(_wrap_gtkspell_set_language): Accept None.
+
+=== 2.13.3 ===
+2006-01-20  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* configure.ac: Bump version to 2.13.3.
+
+	* NEWS: Update.
+
+	* README: Add information on where to find the modules from g-p-d.
+
+	* tests/common.py: Print status of each imported module.
+
+	* docs/Makefile.am (SUBDIRS): Remove gtksourceview, gnomeprint,
+	and gnomeprintui.
+
+	* tests/common.py (modules): Don't test removed modules.
+
+	* configure.ac: Remove g-p-d stuff.
+
+	* Makefile.am: Remove references to modules moved to
+	gnome-python-desktop.
+
+2006-01-18  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/pygda-1.2.pc.in: Fix a typo on the prefix line.
+	* gda/pygda-2.0.pc.in: Remove this from CVS. See my last commit for 
+	explanation.
+
+=== 2.13.2 ===
+2006-01-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* egg/recent/*: Update eggrecent sources from libegg CVS.
+
+	* configure.ac: Bump version to 2.13.2.
+
+2006-01-16  Johan Dahlin  <johan@gnome.org>
+
+	* Makefile.am:
+	* configure.ac:
+	* metacity/.cvsignore:
+	* metacity/Makefile.am:
+	* metacity/metacity.defs:
+	* metacity/metacity.override:
+	* metacity/metacitymodule.c: (initmetacity):
+
+	Add metacity bindings.
+
+2006-01-14  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.ac:
+	* gda/.cvsignore:
+	* gda/Makefile.am:
+	* gda/gda.defs:
+	* gda/gda.override:
+	* gda/pygda-1.2.pc.in:
+	* gda/pygdavalue_conversions.c: (pygda_value_from_pyobject),
+	(pygda_value_as_pyobject): Revert pygda to wrapping the libgda-1.2 API 
+	instead of the libgda-2.0 API because libgda-2.0 is unlikely to be API-stable 
+	in the next few months. And, because distros package g-p-e as one package, pygda-2.0 
+	would prevent distribution of pygda-1-2, which kills Glom, which is the only thing 
+	that uses pygda.
+
+2006-01-14  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.ac: Fix the required libgda-2.0 version, because the libgda 
+	version has _decreased_, for laughs.
+
+2006-01-11  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* gnomeapplet/applet.override: Import gtk.Widget type.
+
+	* configure.ac: Require libpanelapplet >= 2.13.4 now.
+
+	* gnomeapplet/applet.defs: Declare wrapper for
+	panel_applet_set_background_widget.
+
+=== 2.13.1 ===
+2006-01-02  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.13.1.
+
+	* NEWS: Update.
+
+	* MAINTAINERS: Add.
+
+2006-01-02  Benoît Dejean  <benoit@placenet.org>
+
+	* configure.ac: Requires libgtop 2.13.0.
+
+2005-12-24  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* wnck/wnckmodule.c (initwnck): Add missing call to
+	pywnck_add_constants to register flags/enums.
+
+=== 2.13.0 ===
+2005-12-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.13.0.
+
+	* NEWS: Update.
+
+	* wnck/wnck.override (_wrap_wnck_tasklist_get_size_hint_list):
+	override/impl.
+
+2005-12-11  Alex Graveley  <alex@beatniksoftware.com>
+
+	* wnck/wnck.override (_wrap_wnck_application_get_windows)
+	(_wrap_wnck_screen_get_windows)
+	(_wrap_wnck_screen_get_windows_stacked)
+	(_wrap_wnck_class_group_get_windows): Bug 323775: wnck bindings
+	free lists they don't own.
+
+	Reviewed by Gustavo Carneiro.
+
+2005-10-30  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* examples/applet/applet.py (sample_factory): print
+	applet.get_background(), to test.
+
+	* docs/gnomeprint/gnomeprint-gnomeprintconfig.xml:
+	s/lenght/length/.  Thanks Michael R Head.  Closes #314304.
+
+2005-10-30  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* egg/recent/eggrecent.override (_wrap_egg_recent_model_get_list):
+	Implement this. Closes #319960.
+
+	* gnomeapplet/applet.override (_wrap_panel_applet_get_background):
+	Implement this.  Closes #315989.
+
+2005-10-24  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
+
+	* nautilusburn/nb_module.c: Add docstring to get_drives_list.
+	(nb_get_drives_list): Make first parameter optional.  Fix default
+	value for second parameter.
+
+	* nautilusburn/nautilus_burn.override
+	(_wrap_nautilus_burn_recorder_write_tracks): Unblock threads.
+	(_wrap_nautilus_burn_recorder_blank_disc): idem.
+
+	Reviewed by Gustavo J. A. M. Carneiro.
+
+2005-10-23  Murray Cumming <murrayc@murrayc.com>
+
+	* configure.ac: Require libgda-2.0 instead of libgda (1.2).
+	* gda/Makefile.am:
+	* gda/pygda-1.2.pc.in:
+	* gda/pygda-2.0.pc.in: Renamed the file, so that the pygda 
+	API version matches the libgda version. Require libgda-2.0 
+	instead of libgda (1.2).
+	* gda/gda.defs: Regenerate with h2defs.py
+	* gda/gda.override: Do not include xgl stuff that was removed 
+	from libgda.
+	* gda/pygdavalue_conversions.c: (pygda_value_from_pyobject),
+	(pygda_value_as_pyobject): Update for changed GdaValue API and 
+	GdaConnection API.
+
+2005-10-18  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gda/pygdavalue_conversions.c: Disable support for date/time
+	values if Python version <= 2.3, so that it at least compiles on
+	python23.
+
+2005-10-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* wnck/wnck.defs (needs_attention): wnck_window_needs_attention
+	was renamed to wnck_window_needs_attention.  Thanks to Dave
+	Malcolm.
+
+	* tests/: Add test suite.  For now, all it does is import each
+	module, to catch undefined symbol errors.
+
+	* configure.ac, Makefile.am: Add tests dir.
+
+=== 2.12.0 ===
+2005-09-10  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtkmozembed/gtkmozembed-gtkmozembed.xml: Fix open-uri
+	parameter, should be 'uri' instead of 'visibility'.  Thanks
+	Baptiste Mille-Mathias.
+
+	* configure.ac: Version 2.12.0
+
+	* gtksourceview/gtksourceview.override
+	(_wrap_gtk_source_view_new): Update to new constructor API.
+
+	* gtkmozembed/gtkmozembed.defs (gtk_moz_embed_set_comp_path):
+	renamed to set_comp_path.
+	(gtk_moz_embed_set_profile_path): renamed to set_profile_path.
+
+	* gtksourceview/gtksourceview.defs
+	(gtk_source_iter_forward_search): renamed to
+	source_iter_forward_search.
+	(gtk_source_iter_backward_search): renamed to
+	source_iter_backward_search.
+	(gtk_source_style_scheme_get_default): renamed to
+	source_style_scheme_get_default.
+	(gtk_source_iter_find_matching_bracket): renamed to
+	source_iter_find_matching_bracket.
+
+	* gtksourceview/gtksourceview.override
+	(_wrap_gtk_source_buffer_new): Update to new constructor API.
+
+2005-09-09  Raphael Slinckx  <rslinckx@cvs.gnome.org>
+
+	* mediaprofiles/mediaprofiles.override:
+	* mediaprofiles/mediaprofilesmodule.c:
+	Fix the include header, remove gnome-media prefix
+
+2005-09-09  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* mediaprofiles/Makefile.am: Install mediaprofiles.defs.
+
+	* gtkmozembed/Makefile.am: Install gtkmozembed.defs.
+
+	* gtksourceview/Makefile.am: Install gtksourceview.defs to
+	$(datadir)/pygtk/2.0/defs.
+
+2005-08-17  Raphael Slinckx  <rslinckx@cvs.gnome.org>
+
+	* examples/mediaprofiles/profiles.py:
+	* mediaprofiles/mediaprofiles.defs:
+
+	Change names of functions:
+		choose_window to chooser_combo
+		choose_window_get_active to chooser_combo_get_profile
+		choose_window_set_active to chooser_combo_set_profile
+
+	Update example accordingly
+
+=== 2.11.4 ===
+2005-08-09  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* wnck/wnckmodule.c: idem.
+
+	* gtkhtml2/gtkhtml2module.c: Add #include <Python.h> at the top to
+	avoid preprocessor warning.
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.11.4.
+
+2005-08-09  Raphael Slinckx  <rslinckx@cvs.gnome.org>
+
+	* AUTHORS:
+	* Makefile.am:
+	* configure.ac:
+	* examples/mediaprofiles/profiles.py:
+	* mediaprofiles/.cvsignore:
+	* mediaprofiles/Makefile.am:
+	* mediaprofiles/mediaprofiles.defs:
+	* mediaprofiles/mediaprofiles.override:
+	* mediaprofiles/mediaprofilesmodule.c:
+
+	Add python bindings for the gnome-media's 
+	gnome-media-profiles package. This allows to retreive
+	audio compression preferences from gconf, used for example
+	by Sound Juicer. See example file for usage.
+
+2005-07-27  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: In case --with-mozpackage option is given, look
+	for package $mozpackage-gtkmozembed, not mozilla-gtkmozembed.
+	Fixes #311642.  Thanks Joseph Sacco and James Henstridge.
+
+=== 2.11.3 ===
+2005-07-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* egg/recent/*: Resync sources with gnome cvs.  Add wrappers for
+	new EggRecentViewUIManager.
+
+	* egg/tray/*: Resync sources with gnome cvs.  Fixes Bug 172479:
+	EggTrayIcons can still appear 1 pixel wide.
+
+2005-07-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.11.3.
+
+2005-07-21  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
+
+	Reviewed by: Gustavo Carneiro  <gjc@inescporto.p>
+
+	* nautilusburn/nb_drive.c: (nb_Drive_init),
+	(nb_Drive_door_is_open), (nb_Drive_get_media_type_full),
+	(nb_Drive_unmount), (nb_Drive_eject): Add constructor and new
+	methods (get_media_type_full, door_is_open, eject, unmount) to
+	nautilusburn.Drive.
+	
+	* nautilusburn/nb_module.c: (nb_bytes_to_seconds): Update to
+	libnautilus-burn 2.11.3 API changes.
+
+2005-06-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtkmozembed/gtkmozembed-gtkmozembed.xml: Add an inline
+	example "TinyGecko", by Nikos Kouremenos.
+
+2005-06-15  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gnomeprintui/*: New gnomeprint.ui documentation.
+
+	* configure.ac: Output docs/gnomeprintui/Makefile.
+
+	* docs/Makefile.am (SUBDIRS): Add gnomeprintui.
+
+2005-06-12  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gnomeprint/gnomeprint-gnomeprintfontface.xml: Add new
+	gnomeprint.FontFace section.
+
+	* docs/gnomeprint/gnomeprint-gnomeprintglyphlist.xml: Add new
+	gnomeprint.GlyphList section.
+
+	* docs/gnomeprint/Makefile.am,
+	* docs/gnomeprint/gnomeprint-classes.xml: Include new sections.
+	
+2005-06-04  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+	
+	* docs/gnomeprint/Makefile.am,
+	* docs/gnomeprint/gnomeprint-classes.xml,
+	* docs/gnomeprint/gnomeprint-gnomeprintfont.xml:
+	Add gnomeprint.Font section.
+	
+	* docs/gnomeprint/gnomeprint-gnomeprintconfig.xml:
+	* docs/gnomeprint/gnomeprint-gnomeprintcontext.xml:
+	* docs/gnomeprint/gnomeprint-gnomeprintjob.xml: Misc. fixes.
+
+2005-06-03  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* configure.ac: Write docs/gnomeprint/Makefile.
+
+	* docs/Makefile.am (SUBDIRS): Add gnomeprint subdir.
+
+	* docs/gnomeprint/*: Add new gnomeprint documentation.
+
+2005-05-30  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-gtksourceprintjob.xml: Add.
+	
+	* docs/gtksourceview/gtksourceview-classes.xml: Include
+	gtksourceview-gtksourceprintjob.xml.
+
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourceprintjob.xml.
+
+2005-05-28  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: gnomeprint module depends on gnome-python.
+	egg.trayicon doesn't depend on libgnomeui.
+
+2005-05-24  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* examples/gnomeprint/test-print.py (render_to_job): Add a drawing
+	from www.pythonchallenge.com, just for fun.
+
+2005-05-22  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtkspell/gtkspell-gtkspell.xml: Clarify lang parameter usage.
+
+2005-05-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkspell/gtkspellmodule.c (_wrap_gtkspell_new_attach): Method
+	name in error message should be __new__, not __init__. Accept
+	lang=None meaning NULL.
+
+2005-05-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Make gnomeapplet and egg.recent depend on
+	gnome-python, due to required bonobo argtypes.
+	Don't check for gnome-python-2.0 unconditionally.
+
+	* Makefile.am (SUBDIRS): Add gksu.
+
+	* configure.ac: Detect libraries for gksu* modules.
+
+	* gksu/*: New gksu and gksu.ui modules by Gian Mario Tagliaretti.
+
+	* docs/pygtk-ref-docs.make: Add rule to generate reference tarballs.
+
+	* docs/ref-html-style.xsl: Call template generate.index.
+
+	* docs/common.xsl: Copy-paste "template to create the index.sgml
+	anchor index" and "template to output gtkdoclink elements for the
+	unknown targets" from gtk-doc.
+
+	* docs/pygtk-ref-docs.make (html.stamp): Call gtkdoc-fixxref.
+
+2005-05-20  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: egg.recent module doesn't _really_ require
+	librsvg-2.0, no matter what upstream configure.in says.
+
+=== 2.11.2 ===
+2005-05-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtkspell/Makefile.am (EXTRA_DIST): Idem.
+
+	* docs/gtkmozembed/Makefile.am (EXTRA_DIST): Idem.
+
+	* docs/gtksourceview/Makefile.am (EXTRA_DIST): Swap order of html
+	and html.stamp.
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.11.2.
+
+2005-05-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* wnck/wnck.override, wnck/wnck.defs: Remove
+	wnck_create_window_menu, as it was removed from the C API.
+
+	* nautilusburn/nautilus_burn.defs (get_error_message)
+	(get_error_message_details): Remove these methods, as they were
+	removed from the C API.  I guess the same information is now
+	provided through the GError, which maps to an exception in Python.
+
+	* nautilusburn/nautilus_burn.override
+	(_wrap_nautilus_burn_recorder_blank_disc): Update to
+	libnautilus-burn 2.11.1 API changes.
+
+	* configure.ac: Require libnautilus-burn version 2.11.1 now, due
+	to API changes.
+
+	* nautilusburn/nautilus_burn.override: here and there, fix
+	indentation and spaces.
+	(_wrap_nautilus_burn_recorder_write_tracks): Remove redundant
+	PyGIL API calls.  Update to libnautilus-burn 2.11.1 API changes.
+
+2005-05-10  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* examples/gtkspell/gtkspell.py: Add new and improved gtkspell
+	example.
+
+	* Makefile.am (EXTRA_DIST): Include new gtkspell example.
+
+2005-05-08  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtkspell/*: Add gtkspell reference documentation.
+
+2005-05-03  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-classes.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcelanguage.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcelanguagesmanager.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcemarker.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcestylescheme.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagstyle.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagtable.xml:
+	Misc. corrections.
+
+	* docs/gtksourceview/gtksourceview-gtksourcetag.xml: New
+	documentation for class gtksourceview.SourceTag.
+
+	* docs/gtksourceview/Makefile.am: Add gtksourceview-gtksourcetag.xml.
+
+2005-05-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkspell/gtkspellmodule.c (_wrap_gtkspell_new_attach): Check for
+	errors in call to PyArg_ParseTuple.  Also check for correct
+	parameter type.
+	(initgtkspell): Import TextView type from module gtk.
+	(_wrap_gtkspell_new_attach): Refactor a bit, check for more
+	errors, and accept a language parameter.
+	(_wrap_gtkspell_detach): Don't DECREF self!
+
+2005-05-01  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* gtksourceview/gtksourceview.defs: Add objects SourceTag,
+	SyntaxTag and PatternTag.  Fixes #302594.
+
+2005-04-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Require libpanelapplet_required_version 2.10.0.
+
+	* gnomeapplet/applet.defs (request_focus): Add. Fixes #301254.
+
+2005-04-25  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtkmozembed/*,
+	* docs/Makefile.am:
+	* configure.ac: Add gtkmozembed docs.
+
+2005-04-21  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-gtksourcelanguagesmanager.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcemarker.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcestylescheme.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagstyle.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagtable.xml: Add.
+
+	* docs/gtksourceview/gtksourceview-classes.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcelanguage.xml: Some improvements.
+
+2005-04-19  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml: Fix IDs.
+
+	* docs/gtksourceview/gtksourceview-gtksourceview.xml: Fix IDs.
+	
+	* docs/gtksourceview/gtksourceview-gtksourcelanguage.xml: Add.
+	
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourcelanguage.xml.
+
+2005-04-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourcelanguage.xml
+
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml: Add this,
+	written by Gian Mario Tagliaretti.
+
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourcebuffer.xml.
+
+	* docs/gtksourceview/gtksourceview-classes.xml: Include
+	gtksourceview-gtksourcebuffer.xml.
+
+2005-04-17  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/pygdavalue_conversions.c: (pygda_value_as_pyobject):
+	Return a PyFloat for a GdaNumeric, instead of a PyLong, 
+	so we do not lose the part after the decimal point.
+
+2005-04-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/pygtk-ref-docs.make, docs/gtksourceview/Makefile.am: Use
+	variable REFERENCE_DOC_NAME exclusively instead of DOC_MODULE.
+
+	* docs/gtksourceview/gtksourceview-classes.xml: Turn this into a
+	book, so that a .devhelp file is generated.
+
+	* Makefile.am (SUBDIRS): Add docs.
+
+	* configure.ac: Write docs/Makefile and docs/gtksourceview/Makefile.
+
+	* docs/*: General infrasctruture for reference documentation.
+	Parts copied from module pygtk-docs, other stuff copied from
+	gtk-doc.
+
+	* docs/gtksourceview/*: The start of gtksourceview documentation,
+	by Gian Mario Tagliaretti.
+
+2005-04-16  Murray Cumming, <murrayc@murrayc.com>
+
+	* gda/pygdavalue_conversions.c: (pygda_value_as_pyobject):
+	Added casts needed by gcc 3.4.
+	* gda/pygdavalue_conversions.h: Use extern C, so it 
+	can be included by C++.
+
+2005-04-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/Makefile.am: Export all symbols, not just 
+	initgda(), so we can use the utility functions too.
+
+=== 2.11.0 ===
+2005-04-15  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* NEWS: Update.
+
+	* gtkspell/gtkspellmodule.c: Remove "static" in
+	gtkspell_SpellType.  Fixes compilation with gcc 4.0.  Thanks
+	Sebastien Bacher.
+	(initgtkspell): Missing init_pygobject.
+	(gtkspell_methods, gtkspell_functions) Missing NULL terminator.
+
+2005-04-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/pygda-1.2.pc.in: Remove @THREADING_CFLAGS@ which has 
+	no value, and was just copied from the pygtk .pc.in file.
+
+2005-04-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.11.0.
+
+2005-04-14  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.defs: Add defauilt values for 
+	Client.open_connection(), Connection.execute_single_command(), 
+	gda.Command().
+	* examples/gda/select.py: Use default method 
+	values, to make the code more concise.
+
+2005-04-14  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* configure.ac: Fix a small copy-paste error (init build_gtop
+	instead of build_libgda, also s/build_libgda/build_gda/).
+	
+
+2005-04-14  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/Makefile.am: Distribute gdaglue.h
+
+2005-04-14  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/Makefile.am:
+	Install utility headers and pkg-config file.
+	* gda/gda.override:
+	The GValue get/set functions now use the 
+	functions from pygdavalue_conversions.[h|cc].
+	* gda/pygdavalue_conversions.h:
+	* gda/pygdavalue_conversions.cc:
+	Added pygda_value_from_pyobject() and 
+        pygda_value_as_pyobject(), containing the 
+	code from the get/set functions, because we 
+	might want to reuse this later.
+	* gda/pygda-1.2.pc.in: Added pkg-config file 
+	so that the location of the utility headers 
+	can be discovered.
+
+2005-04-14  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.override: Ignore the gda_xql_*() functions 
+	because they are useless cruft. However, I can not 
+	find a way to ignore the GdaXql* types.
+
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.defs: Mark gda_value_new_*() functions as 
+	constructors of GdaValues, so that python allows them 
+	to be instantiated.
+
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.override: Added gda.Value::set(). We need the 
+	explicit set_*() methods too.
+
+2005-04-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* examples/gda/select.py: Use Value::get().
+	* gda/gda.override: Added gda.Value.get() and ignored the 
+	_get() functions from the .defs.
+
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
+	* examples/gda/select.py: Now works.
+	* gda/gda.defs: Added define-boxed for FieldAttributes.
+	* gda/gda.override: _wrap_gda_data_source_info_tp_setattr():
+	Allow setting of the cnc_string too. I wish we could tell 
+	pygtk to generate setters automatically.
+	* gda/gdamodule.c: (initgda): Call pygda_add_constants(), so 
+	that enum values are added to the API.
+
+2005-04-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gdamodule.c: Get the argc and argv and use them to call 
+	gda_init(). This removes the need to initialize gettext ourselves.
+	However, gda_init() requires two extra parameters and I do not 
+	know how to supply them from the application.
+
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.defs: Rename gda_config_* method names to 
+	config_. The method name is the name of the method in the binding,
+ 	not the C function name. 
+	* examples/gda/list_data_sources.py:
+	* examples/gda/select.py: Updated for config API change. However, 
+	I guess this should prbably be gda.Config.method_name() instead of 
+	gda.config_method_name().
+	* gda/gda.override: Added a get_config_key() to be used instead of 
+	get_config_key_[type](), because python can do that. From a patch 
+	to the mailing list by Filip Van Raemdonck.
+
+2005-04-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* Added gda, a first attempt at wrapping libgda 1.2. This is 
+	the code from pygda 0.3.0, with some changes.
+	* examples/: Added gda/.
+
+2005-03-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gnomeapplet/applet.override (_wrap_panel__applet_bonobo_factory)
+	(_wrap_panel__applet_bonobo_factory): Unblock threads. Fixes
+	#168057.
+
+	* examples/applet/applet.py: Solve deprecation warnings.  Be a bit
+	more verbose.
+
+	* examples/applet/README: Update, there is no need anymore to
+	restart b-a-s if you copy the .server to /usr/lib/bonobo/servers.
+
+=== 2.10.0 ===
+2005-03-07  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.10.0.  Require gnome-python 2.10.0.
+
+2005-03-02  Sebastien Bacher  <seb128@debian.org>
+
+	* configure.ac: Require libwnck 2.9.92
+	
+	* wnck/wnck.defs: updated for the new wnck API.
+
+=== 2.9.4 ===
+2005-02-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* examples/gnomeprint/test-print.py (render_to_job): Add a Hello
+	World string rendered with pango layout.  Code heavily based on
+	John C Barstow's post to pygtk list,
+	http://www.daa.com.au/pipermail/pygtk/2005-February/009580.html,
+	slightly modified.
+
+	* configure.ac: Version 2.9.4.
+
+	* egg/recent/egg-recent-item.c, egg/recent/egg-recent-item.h:
+	Re-merge with libegg HEAD to get latest fixes.
+
+	* egg/recent/eggrecent.override (_wrap_egg_recent_item_new):
+	Override, accept optional 'uri' parameter (calls
+	egg_recent_item_new_from_uri).
+
+2005-02-09  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
+
+	* nautilusburn/nautilus_burn.defs: Add def for enum
+	NautilusBurnMediaType.
+
+=== 2.9.3 ===
+2005-01-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* totem/Makefile.am (CLEANFILES): Clean plparser.c.
+
+	* nautilusburn/Makefile.am (nautilusburn_la_SOURCES): Add missing
+	nb_drive.h, nb_track.h, and nb_typebuiltins.h.
+	(defs_DATA): Add missing nb_drive_selection.defs.
+
+	* egg/recent/egg-recent-model.c: Apply patch in comment #4 of bug
+	#160531 to fix the huge startup delay.  Thanks Paolo Maggi.
+
+	* egg/recent/eggrecent.defs: EggRecentItem.[gs]et_count removed.
+
+	* egg/recent/egg-recent-item.c,
+	* egg/recent/egg-recent-item.h,
+	* egg/recent/egg-recent-model.c,
+	* egg/recent/egg-recent-model.h: Update to CVS libegg versions.
+
+	* AUTHORS: Update.
+
+	* configure.ac: Use new macro GNOME_COMMON_INIT from gnome-common
+	instead of manually changing ACLOCAL variable.  Support linking to
+	either mozilla or firefox for gtkmozembed, and add
+	--with-gtkmozembed to manually select one of them.
+
+2005-01-22  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* configure.ac: Requires libgtop 2.9.5.
+
+2005-01-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Require gtksourceview 1.1.90.
+
+2005-01-19  Stéphan Kochen  <stephan@kochen.nl>
+
+	* gtksourceview/gtksourceview.defs: Add
+	gtksourceview.SourceView.[gs]set_highlight_current_line.
+
+2005-01-18  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am (SUBDIRS): Add nautilusburn.
+	(EXTRA_DIST): Add nautilusburn examples.
+
+	* configure.ac: Check for libnautilus-burn, prepare to build
+	nautilusburn module.
+
+	* COPYING: Add license information for new nautilusburn module.
+
+2005-01-18  Tiago Cogumbreiro  <cogumbreiro@users.sf.net>
+
+	* examples/nautilusburn/*: Add examples for new nautilusburn module.
+
+	* nautilusburn/*: Add bindings for libnautilus-burn.
+	
+2005-01-17  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* configure.ac: Requires glib >= 2.6.0 and libgtop >= 2.9.4.
+
+2005-01-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* COPYING: Update.  libtotem-plparser is officially now LGPL.
+
+2005-01-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtksourceview/gtksourceview.override
+	(_wrap_gtk_source_tag_style__set_bold): Use PyObject_IsTrue to
+	obtain boolean value from object.
+	(_wrap_gtk_source_tag_style__set_italic): idem.
+	(_wrap_gtk_source_tag_style__set_strikethrough): idem.
+	(_wrap_gtk_source_tag_style__set_underline): idem.
+	(_wrap_gtk_source_tag_style__set_mask): Remove, not really needed.
+	(_wrap_gtk_source_tag_style__set_foreground): Add
+	GTK_SOURCE_TAG_STYLE_USE_FOREGROUND to the mask.
+	(_wrap_gtk_source_tag_style__set_background): Add
+	GTK_SOURCE_TAG_STYLE_USE_BACKGROUND to the mask.
+	(_wrap_gtk_source_languages_manager_get_available_languages): Add
+	a missing const to shut up gcc.
+	(_gslist_to_pylist_objs): Add const to parameter.
+	(_wrap_gtk_source_languages_manager_get_lang_files_dirs): Add
+	const to avoid compiler warning.  Don't free the return value.
+	(_gslist_to_pylist_strs): Make parameter const.
+	(_wrap_gtk_source_tag_style__set_foreground): Accept also None, in
+	which case the flag GTK_SOURCE_TAG_STYLE_USE_FOREGROUND is cleared
+	in the mask.
+	(_wrap_gtk_source_tag_style__set_background): Accept also None, in
+	which case the flag GTK_SOURCE_TAG_STYLE_USE_BACKGROUND is cleared
+	in the mask.
+
+2005-01-15  Stéphan Kochen  <stephan@kochen.nl>
+
+	* gtksourceview/gtksourceview.override: Implement setters for
+	GtkSourceTagStyle attributes bold, italic, underline,
+	strikethrough, mask, foreground, and background.
+
+2005-01-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* COPYING: Replace GPL license with a table indicating license per
+	python module.
+
+	* Makefile.am (EXTRA_DIST): Add COPYING.GPL and COPYING.LGPL.
+
+	* gtkmozembed/Makefile.am (pkgpyexec_LTLIBRARIES): Remove
+	'module' suffix from library name.
+
+	* gtksourceview/Makefile.am (pkgpyexec_LTLIBRARIES): Remove
+	'module' suffix from library name.
+
+	* gtkspell/Makefile.am (pkgpyexecdir): Install gtkspell inside the
+	gtk-2.0 pygtk subdir.
+	(gtkspell_la_LDFLAGS): Add -export-symbols-regex initgtkspell.
+
+	* gtop/gtop.c: Add Benoît Dejean's libgtop module, from gdesklets.
+
+	* gtop/Makefile.am: Makefile to build gtop module.
+
+	* gdl/Makefile.am (pkgpyexec_LTLIBRARIES): Rename gdlmodule.la to
+	gdl.la.
+	(INCLUDES): Remove redundant $(PYGTK_CFLAGS).
+
+	* configure.ac: Check for gtop libs.
+
+	* gdl/gdl.defs (gdl_dock_item_new_with_stock): Convert to property
+	based constructor.
+	(gdl_dock_paned_new): idem.
+	(gdl_dock_tablabel_new): idem.
+
+	* gdl/gdl.override (_wrap_gdl_dock_object_dock): Handle
+	'other_data' parameter.
+
+	* gdl/gdl.defs (gdl_dock_new): Add (caller-owns-return #f) to
+	avoid overriding the constructor.
+
+2005-01-15  John Palmieri  <johnp@martianrock.com>
+
+	* Makefile.am (SUBDIRS): Conditionally add gdl to SUBDIRS.
+
+	* configure.ac: Check for gdl libraries.
+
+	* gdl/*: Add new gdl module, wrapping the C gdl library.
+
+	* examples/gdl/gdl_test.py: New gdl example.
+
+	* Makefile.am (EXTRA_DIST): Include the gdl example.
+
+	Fixes #163250 (New gdl module).
+
+2005-01-06  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* totem/plparser.override: Update to new totem-plparser API (new
+	user_data parameter).  Optionally pass user_data to the python
+	callback.  General code cleanup.
+
+2005-01-04  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* totem/*: Add Tiago Cogumbreiro's totem playlist parser bindings
+	 (http://s1x.homelinux.net/projects/totem-pl-parser-python), with
+	some modifications to Makefile.am.  Fixes #162359.
+
+	* Makefile.am: Add totem conditionally to SUBDIRS.
+
+	* configure.ac: Require pygtk version `pygtk_required_version'
+	instead of 2.0.0 for pygtkspell.
+	Check for totem-plparser library; write totem/Makefile.
+
+2004-12-31  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Post-release version bump to 2.9.3.
+
+	* NEWS: Fix typos.
+
+=== 2.9.2 ===
+2004-12-31  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.9.2.
+
+2004-12-26  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am (EXTRA_DIST): Add gtkspell example.
+
+	* examples/gtkspell/test.py: Add, from pygtkspell 0.3.1's source
+	tarball.
+
+	* gtkspell/Makefile.am (INCLUDES): Remove redundant *_CFLAGS.
+
+	* gtkspell/gtkspellmodule.c: Move all wrappers above the method
+	list variable.  Make everything static except initgtkspell().
+
+	* gtkspell/pygtkspell.h: Removed.
+
+	* gtkspell/pygtkspell.h: Code here doesn't belong in a header
+	file.  Move everything to gtkspellmodule.c.
+
+	* gtkspell/*: Add pygtkspell (0.3.1) sources, by John (J5)
+	Palmieri <johnp@martianrock.com>.  Fixes #162067.
+
+	* Makefile.am (SUBDIRS): Add gtkspell.
+
+	* configure.ac: Check for gtkspell libs.
+
+2004-12-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkmozembed/gtkmozembedmodule.c (initgtkmozembed): Call
+	pygtkmozembed_add_constants.
+
+	* gtkmozembed/gtkmozembed.defs: Uncomment enums and flags, but
+	remove the gtype-id fields.
+
+	* configure.ac: Detect/define MOZILLA_HOME.
+
+	* gtkmozembed/Makefile.am (gtkmozembedmodule_la_LDFLAGS): Add
+	-R$(MOZILLA_HOME), copy-pasted from galeon.
+
+2004-12-14  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkmozembed/*: Add Johan Dahlin's pymozembed (0.1) module.
+
+	* Makefile.am: Conditionally add gtkmozembed to SUBDIRS.
+
+	* configure.ac: Detect GTKMOZEMBED required packages.  Write
+	gtkmozembed/Makefile.  Print whether gtkmozembed module will be
+	built.
+
+	* gnomeprint/printui.override: Import Canvas from gnomecanvas
+	instead of deprecated gnome.canvas.
+
+2004-12-04  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* Makefile.am (EXTRA_DIST): Add egg/recent examples to dist.
+
+	* examples/egg/recent/Bonobo_Sample_Hello.xml: Add this, based on
+	the bonoboui example in gnome-python.
+
+	* examples/egg/recent/bonobo-view.py: Add bonobo recent files
+	example, based on the bonoboui example in gnome-python.
+
+	* examples/egg/recent/gtk-view.py: Add jdahlin's GtkUIManager
+	example, modified to support recent files and gnomevfs.
+
+	* egg/recent/eggrecent.defs: RecentView is actually an interface,
+	not an object.
+
+2004-12-03  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/eggrecent.override (EGG_TYPE_RECENT_VIEW_GTK):
+	define, missing from egg sources.
+	import gtk.Widget type.
+
+	* egg/recent/eggrecent.c: 
+
+	* egg/recent/eggrecent.defs: Add missing GObject declaration for
+	RecentViewGtk -- somehow h2def missed it.
+
+	* examples/egg/recent/populate-recent.py: A port of
+	populate-recent.c from libegg to python.
+
+=== 2.9.1 ===
+2004-11-29  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* NEWS: Update.
+
+	* egg/recent/Makefile.am (EXTRA_DIST): Add missing eggrecent.defs.
+	(DISTCLEANFILES): Add stamp-eggtypebuiltins.h eggtypebuiltins.c
+	eggtypebuiltins.h.
+
+	* configure.ac: version <- 2.9.1
+	Output build status information for egg.recent.
+
+2004-11-27  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/eggrecent.override: override
+	_wrap_egg_recent_model_set_filter_(uri_schemes|groups|mime_types).
+
+2004-11-26  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/egg-recent-model.h, egg/recent/egg-recent-modelc:
+	Implement binding friendly variants of
+	egg_recent_model_set_filter_mime_types,
+	egg_recent_model_set_filter_groups, and
+	egg_recent_model_set_filter_uri_schemes, accepting a null
+	terminated string array instead of variable number of arguments.
+
+	* egg/recent/eggrecent.defs: Add missing definition of
+	RecentViewBonobo.
+	(get_ui_component): Remove const- from return type.
+	(RecentItem): Add missing declation for the RecentItem boxed type.
+
+	* egg/recent/Makefile.am (.defs.c): Register bonobo types.
+
+	* egg/recent/eggrecent.override (EGG_TYPE_RECENT_VIEW_BONOBO):
+	define, missing from the header.
+
+2004-11-26  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac, egg/Makefile.am: Detect/build egg.recent module.
+	* egg/recent/egg-recent-item.c
+	* egg/recent/egg-recent-item.h
+	* egg/recent/egg-recent-model.c
+	* egg/recent/egg-recent-model.h
+	* egg/recent/egg-recent-util.c
+	* egg/recent/egg-recent-util.h
+	* egg/recent/egg-recent-view-bonobo.c
+	* egg/recent/egg-recent-view-bonobo.h
+	* egg/recent/egg-recent-view-gtk.c
+	* egg/recent/egg-recent-view-gtk.h
+	* egg/recent/egg-recent-view.c
+	* egg/recent/egg-recent-view.h
+	* egg/recent/egg-recent.h
+	* egg/recent/eggrecent.defs
+	* egg/recent/eggrecent.override
+	* egg/recent/eggrecentmodule.c
+	* egg/recent/populate-recent.c: sources taken from libegg.
+
+2004-11-24  Johan Dahlin  <johan@gnome.org>
+
+	* Makefile.am:
+	* autogen.sh:
+	* configure.ac:
+	* gtkhtml2/Makefile.am:
+	* wnck/.cvsignore:
+	* wnck/Makefile.am:
+	* wnck/wnck.defs:
+	* wnck/wnck.override:
+	(_wrap_wnck_create_window_menu): Wrap this..
+	(_wrap_wnck_class_group_get_windows): ...and this.
+
+	* wnck/wnckmodule.c:
+
+	Add wnck bindings and change automake requirement from 1.9.2 to
+	1.7.x
+	
+2004-11-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* gnomeapplet/Makefile.am (pygnome_PYTHON): Install compat dummy
+	applet.py module here instead of in gnome-python.
+	(install-exec-hook): Remove old module applet.la.
+
+2004-11-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* gtksourceview/Makefile.am (.defs.c): fix path to gnomeprint defs
+	when builddir is a subdir of srcdir.
+
+=== 2.9.0 ===
+2004-11-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* NEWS: Update.
+
+	* Makefile.am (EXTRA_DIST): s/EXTRAS_DIST/EXTRA_DIST/.
+
+2004-11-21  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* Makefile.am (EXTRAS_DIST): Add trayicon example to dist.
+
+	* egg/Makefile.am (SUBDIRS): make tray subdir conditional.
+
+	* configure.ac: Check for EGGTRAY packages.  Write egg/Makefile
+	and egg/tray/Makefile.
+
+	* egg/tray/Makefile.am,
+	* egg/tray/eggtrayicon.c,
+	* egg/tray/eggtrayicon.h,
+	* egg/tray/trayicon.defs,
+	* egg/tray/trayicon.override,
+	* egg/tray/trayiconmodule.c: Add trayicon wrapper, copied from
+	http://www-106.ibm.com/developerworks/linux/library/l-wrap/, added
+	automake integration and update eggtrayicon.[ch] to current cvs
+	sources.
+
+	* egg/Makefile.am, egg/__init__.py: Add 'egg' package, only
+	providing a namespace for future libegg wrappers.
+
+	* configure.ac: Copy code from pygtksourceview to support new
+	gtksourceview module.
+
+	* Makefile.am (EXTRAS_DIST): Add gtksourceview example to dist.
+
+	* examples/gtksourceview/test-widget.py: Add, copied from
+	pygtksourceview/tests.
+
+	* AUTHORS: Add contents of pygtksourceview's AUTHORS.
+
+	* gtksourceview/Makefile.am,
+	* gtksourceview/gtksourceview.defs,
+	* gtksourceview/gtksourceview.override,
+	* gtksourceview/gtksourceviewmodule.c: Import gtksourceview
+	module, from pygtksourceview 1.1.
+
+2004-11-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* gnomeapplet/appletmodule.c (initgnomeapplet): Change name of
+	module to "gnomeapplet".
+
+	* gnomeprint/Makefile.am (.defs.c): grab the canvas defs from
+	$(PYGTK_DEFSDIR) instead of ../gnome.
+
+	* AUTHORS: Add myself as author.
+
+	* gnome-python-extras-2.0.pc.in: don't need to define defsdir or
+	argtypesdir.
+
+	* gnomeapplet/Makefile.am: Makefile to build gnomeapplet
+	module. Based on gnome-python's gnome/Makefile.am.  Renamed applet
+	module to gnomeapplet.
+
+	* configure.ac: s/gnome_python/gnome_python_extras/.  Remove
+	checks for libaries not used.  Check for gnome-python 2.5.90.
+	AC_SUBST variable GNOME_PYTHON_ARGTYPES_DIR, whose value is taken
+	from the variable 'argtyes' of gnome-python's pkgconfig file.
+	Require python 2.3.
+
+	* Makefile.am (EXTRAS_DIST): Remove all examples unrelated to this
+	package. s/gnome-python-extras-2.0.pc.in/gnome-python-2.0.pc.in/.
+	Change SUBDIRS definition to match new layout.
+

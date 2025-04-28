@@ -1,0 +1,16 @@
+#!/bin/bash
+# rebuild-gcj-db
+
+# Rebuild all the standard databases.
+for base in /usr/lib*; do
+   dbLocation=`/usr/bin/gcj-dbtool -p $base`
+   libdir=$base/gcj
+   if ! test -d $libdir; then
+      # No shared libraries here.
+      continue
+   fi
+   dirname $dbLocation | xargs mkdir -p
+   /usr/bin/gcj-dbtool -n $dbLocation 64
+   find $libdir -follow -name '*.db' -print0 | \
+      xargs -0 /usr/bin/gcj-dbtool -m $dbLocation $dbLocation
+done

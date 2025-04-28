@@ -1,0 +1,627 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GnomeScores</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="GNOME UI Library Reference Manual">
+<link rel="up" href="deprecated.html" title="Deprecated Modules">
+<link rel="prev" href="GnomePropertyBox.html" title="GnomePropertyBox">
+<link rel="next" href="libgnomeui-GnomeThemeFile.html" title="GnomeThemeFile">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GNOME UI Library (libgnomeui)">
+<link rel="chapter" href="initialization.html" title="Initialization and Session Management">
+<link rel="chapter" href="application-mgmt.html" title="Application Management">
+<link rel="chapter" href="druids.html" title="Druids">
+<link rel="chapter" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="chapter" href="miscellaneous.html" title="Miscellaneous Utility Functions and Macros">
+<link rel="chapter" href="deprecated.html" title="Deprecated Modules">
+<link rel="chapter" href="libgnomeui-objects.html" title="Object Hierarchy">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GnomePropertyBox.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="deprecated.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME UI Library Reference Manual</th>
+<td><a accesskey="n" href="libgnomeui-GnomeThemeFile.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GnomeScores.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#GnomeScores.description" class="shortcut">Description</a>
+                 | 
+                <a href="#GnomeScores.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#GnomeScores.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GnomeScores"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GnomeScores.top_of_page"></a>GnomeScores</span></h2>
+<p>GnomeScores</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GnomeScores.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnomeui/libgnomeui.h&gt;
+
+                    <a class="link" href="GnomeScores.html#GnomeScores-struct" title="GnomeScores">GnomeScores</a>;
+GtkWidget *         <a class="link" href="GnomeScores.html#gnome-scores-display-with-pixmap" title="gnome_scores_display_with_pixmap ()">gnome_scores_display_with_pixmap</a>    (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *pixmap_logo,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *app_name,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *level,
+                                                         int pos);
+GtkWidget*          <a class="link" href="GnomeScores.html#gnome-scores-new" title="gnome_scores_new ()">gnome_scores_new</a>                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> n_scores,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **names,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *scores,
+                                                         time_t *times,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> clear);
+void                <a class="link" href="GnomeScores.html#gnome-scores-construct" title="gnome_scores_construct ()">gnome_scores_construct</a>              (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> n_scores,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **names,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *scores,
+                                                         time_t *times,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> clear);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-logo-label" title="gnome_scores_set_logo_label ()">gnome_scores_set_logo_label</a>         (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *txt,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *font,
+                                                         GdkColor *col);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-logo-pixmap" title="gnome_scores_set_logo_pixmap ()">gnome_scores_set_logo_pixmap</a>        (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *pix_name);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-logo-widget" title="gnome_scores_set_logo_widget ()">gnome_scores_set_logo_widget</a>        (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         GtkWidget *w);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-color" title="gnome_scores_set_color ()">gnome_scores_set_color</a>              (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> n,
+                                                         GdkColor *col);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-def-color" title="gnome_scores_set_def_color ()">gnome_scores_set_def_color</a>          (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         GdkColor *col);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-colors" title="gnome_scores_set_colors ()">gnome_scores_set_colors</a>             (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         GdkColor *col);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-logo-label-title" title="gnome_scores_set_logo_label_title ()">gnome_scores_set_logo_label_title</a>   (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *txt);
+void                <a class="link" href="GnomeScores.html#gnome-scores-set-current-player" title="gnome_scores_set_current_player ()">gnome_scores_set_current_player</a>     (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> i);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeScores.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"
+>GInitiallyUnowned</a>
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBin
+                                 +----GtkWindow
+                                       +----GtkDialog
+                                             +----GnomeScores
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeScores.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GnomeScores implements
+ GtkBuildable and  AtkImplementorIface.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeScores.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeScores.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeScores-struct"></a><h3>GnomeScores</h3>
+<pre class="programlisting">typedef struct _GnomeScores GnomeScores;</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeScores</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-display-with-pixmap"></a><h3>gnome_scores_display_with_pixmap ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_scores_display_with_pixmap    (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *pixmap_logo,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *app_name,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *level,
+                                                         int pos);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_display_with_pixmap</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Does all the work of displaying the best scores.
+It calls gnome_score_get_notables to retrieve the info, creates the window,
+and show it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pixmap_logo</code></em> :</span></p></td>
+<td> Filename of a logo pixmap to display
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>app_name</code></em> :</span></p></td>
+<td> Name of the application, as in gnome_score_init.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>level</code></em> :</span></p></td>
+<td> Level of the game or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td> Position in the top ten of the current player, as returned by gnome_score_log.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>  If a dialog is displayed return it's pointer.  It can also
+be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> if no dialog is displayed
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-new"></a><h3>gnome_scores_new ()</h3>
+<pre class="programlisting">GtkWidget*          gnome_scores_new                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> n_scores,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **names,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *scores,
+                                                         time_t *times,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> clear);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Creates the high-scores window.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n_scores</code></em> :</span></p></td>
+<td> Number of positions.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>names</code></em> :</span></p></td>
+<td> Names of the players.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scores</code></em> :</span></p></td>
+<td> Scores
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>times</code></em> :</span></p></td>
+<td> Time in which the scores were done
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>clear</code></em> :</span></p></td>
+<td> Add a "Clear" Button?
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A new <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-construct"></a><h3>gnome_scores_construct ()</h3>
+<pre class="programlisting">void                gnome_scores_construct              (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> n_scores,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **names,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *scores,
+                                                         time_t *times,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> clear);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_construct</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+useful for language bindings and subclassing, not to be used by
+itself, see <a class="link" href="GnomeScores.html#gnome-scores-new" title="gnome_scores_new ()"><span class="type">gnome_scores_new</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n_scores</code></em> :</span></p></td>
+<td> Number of positions.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>names</code></em> :</span></p></td>
+<td> Names of the players.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scores</code></em> :</span></p></td>
+<td> Scores
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>times</code></em> :</span></p></td>
+<td> Time in which the scores were done
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>clear</code></em> :</span></p></td>
+<td> Add a "Clear" Button?
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-logo-label"></a><h3>gnome_scores_set_logo_label ()</h3>
+<pre class="programlisting">void                gnome_scores_set_logo_label         (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *txt,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *font,
+                                                         GdkColor *col);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_logo_label</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Creates a label to be the logo</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>txt</code></em> :</span></p></td>
+<td> Text in the label.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>font</code></em> :</span></p></td>
+<td> Font to use in the label.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>col</code></em> :</span></p></td>
+<td> Color to use in the label.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-logo-pixmap"></a><h3>gnome_scores_set_logo_pixmap ()</h3>
+<pre class="programlisting">void                gnome_scores_set_logo_pixmap        (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *pix_name);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_logo_pixmap</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the logo on the scores dialog box to a pixmap</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pix_name</code></em> :</span></p></td>
+<td> filename of a pixmap
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-logo-widget"></a><h3>gnome_scores_set_logo_widget ()</h3>
+<pre class="programlisting">void                gnome_scores_set_logo_widget        (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         GtkWidget *w);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_logo_widget</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Set an arbitrary widget to be the logo.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>w</code></em> :</span></p></td>
+<td> Widget to be used as logo.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-color"></a><h3>gnome_scores_set_color ()</h3>
+<pre class="programlisting">void                gnome_scores_set_color              (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> n,
+                                                         GdkColor *col);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_color</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Set the color of one entry.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n</code></em> :</span></p></td>
+<td> Entry to be changed.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>col</code></em> :</span></p></td>
+<td> Color.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-def-color"></a><h3>gnome_scores_set_def_color ()</h3>
+<pre class="programlisting">void                gnome_scores_set_def_color          (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         GdkColor *col);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_def_color</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Set the default color of the entries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>col</code></em> :</span></p></td>
+<td> Color
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-colors"></a><h3>gnome_scores_set_colors ()</h3>
+<pre class="programlisting">void                gnome_scores_set_colors             (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         GdkColor *col);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_colors</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Set the color of all the entries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>col</code></em> :</span></p></td>
+<td> Array of colors.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-logo-label-title"></a><h3>gnome_scores_set_logo_label_title ()</h3>
+<pre class="programlisting">void                gnome_scores_set_logo_label_title   (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *txt);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_logo_label_title</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Creates a label to be the logo</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>txt</code></em> :</span></p></td>
+<td> Name of the logo.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-scores-set-current-player"></a><h3>gnome_scores_set_current_player ()</h3>
+<pre class="programlisting">void                gnome_scores_set_current_player     (<a class="link" href="GnomeScores.html" title="GnomeScores">GnomeScores</a> *gs,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> i);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_scores_set_current_player</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Set the index of the current player in top ten.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gs</code></em> :</span></p></td>
+<td> A <a class="link" href="GnomeScores.html" title="GnomeScores"><span class="type">GnomeScores</span></a> widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
+<td> Index of the current(from 0 to 9).
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

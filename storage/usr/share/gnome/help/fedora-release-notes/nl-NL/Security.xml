@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Security" lang="nl-NL">
+	<title>Beveiliging</title>
+	<remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Security">https://fedoraproject.org/wiki/Docs/Beats/Security</ulink></remark>
+	<para>
+		Deze paragraaf bevat informatie over verschillende beveiliging items van Fedora.
+	</para>
+	<section id="sect-Release_Notes-Security-Lower_process_capabilities">
+		<title>Lagere proces mogelijkheden</title>
+		<para>
+			Daemons die als root draaien zijn herzien en gecorrigeerd om met lagere proces mogelijkheden te draaien. Dit vermindert de wenselijkheid om deze deamons te gebruiken voor rechten escalatie. Bovendien zijn de schaduw bestand rechten veranderd naar <literal>000</literal> en verschillende mappen in <filename>$PATH</filename> zijn ingesteld op <literal>555</literal> om te voorkomen dat daemons zonder <literal>DAC_OVERRIDE</literal> in staat zijn toegang te krijgen tot het schaduw bestand of kunnen schrijven naar de <filename>$PATH</filename> mappen.
+		</para>
+		<para>
+			Als iemand een systeem aanvalt, kan hij normaal niet veel doen behalve als hij rechten kan escaleren. Deze kenmerk vermindert het aantal aanval doelen dat gebruikt kan worden voor rechten escalatie. Als root processen niet alle rechten hebben, zijn ze moeilijker te gebruiken om het systeem in gevaar te brengen.
+		</para>
+		<para>
+			Processen met de root uid kunnen een systeem nog steeds beschadigen, omdat ze naar bijna elk bestand kunnen schrijven en natuurlijk het <filename>/etc/shadow</filename> bestand kunnen lezen. Als echter het systeem versterkt wordt zodat root het <literal>DAC_OVERRIDE</literal> vermogen nodig heeft, zijn er slechts een beperkt aantal processen die het systeem kunnen beschadigen. Dit zal geen enkele beheer mogelijkheid beïnvloeden omdat die altijd volledige rechten krijgen waarvan <literal>DAC_OVERRIDE</literal> onderdeel is. Daarom, zelfs als iemand een root proces met succes aanvalt, is het nu moeilijker voor hem om voordeel uit deze aanval te halen.
+		</para>
+		<para>
+			Een versterkt systeem zal rechten hebben zoals: <literal>555</literal> <filename>/bin</filename>, <literal>555</literal> <filename>/lib</filename>, <literal>000</literal> <filename>/etc/shadow</filename> enzovoort. Het huidige werkingsgebied is het omvatten van de mappen in de <filename>$PATH</filename> variabele, bibliotheek mappen, <filename>/boot</filename>, en <filename>/root</filename>. Deze aanpak beïnvloedt SELinux op geen enkele manier en vult het aan omdat de mogelijkheden DAC controles zijn en zij de eerste keuze hebben om een toegang toe te staan.
+		</para>
+	</section>
+
+</section>
+
+

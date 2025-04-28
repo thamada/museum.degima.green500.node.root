@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Installing the ATI Proprietary Linux Driver</title>
+  <style type="text/css"><!--
+  .readthis { background-color: #ECECEC; }
+  --></style>
+</head>
+<body>
+  <table bgcolor="#FFFFFF">
+    <tr>
+      <td>
+        <p><font size="+1"><b>3D applications produce "open of shared memory object failed" error message</b></font></p>
+        
+        <p>This information applies to the following system configurations:</p>
+        
+        <ul>
+        	<li>ATI Proprietary Linux Driver version 3.14.6 and later</li>
+        </ul>
+        
+        <p>The following may occur when trying to run certain 3D applications:</p>
+        
+        <ul>
+        	<li>3D image appears corrupt or blank</li>
+        	<li>missing textures</li>
+        	<li>system performance drops sharply</li>
+        </ul>
+        
+        <p>The following error message may also appear numerous times:</p>
+        <blockquote>
+<pre>
+FGLTexMgr: open of shared memory object failed (Function not implemented)
+__FGLTexMgrCreateObject: __FGLTexMgrSHMmalloc failed!!!
+fglX11AllocateManagedSurface: __FGLTexMgrCreateObject failed!!
+</pre>
+        </blockquote>
+        
+        <p>The display driver requires POSIX Shared Memory to be enabled on the system in order to run these applications correctly. This feature should be enabled by default on most current Linux distributions, but may be disabled intentionally by some system administrators or not included in older distributions.</p>
+        
+        <p>To enable POSIX Shared Memory on your system, perform the following as root:</p>
+        
+        <ol>
+        	<li><p>Add the following line to <code>/etc/fstab</code> (if it isn't there already):</p>
+        		<blockquote>
+        		<pre>tmpfs   /dev/shm       tmpfs    defaults        0 0</pre>
+        		</blockquote>
+        	</li>
+        	<li><p>Mount shared memory as follows:</p>
+        		<blockquote>
+        		<pre>mount /dev/shm</pre>
+        		</blockquote>
+        	</li>
+        	<li><p>Issue the following command to check that it mounted properly:</p>
+        		<blockquote>
+        		<pre>mount | grep "shm"</pre>
+        		</blockquote>
+        	</li>
+        	<li>
+        		<p>If the mount was successful, then the following output (or similar) should appear:</p>
+        		<blockquote>
+        		<pre>tmpfs on /dev/shm type tmpfs (rw)</pre>
+        		</blockquote>
+        		<p>At this point, POSIX Shared Memory is enabled. Your 3D applications should run properly and the error message above should no longer occur.</p>
+        		<p>If the output from this commnd is blank, then the mount failed.</p>
+        	</li>
+        </ol>
+        
+
+        <p>If <code>/dev/shm</code> fails to mount, then this feature may not be turned on in your Linux kernel. In this case we recommend upgrading to a more recent Linux kernel, or contacting your Linux Distribution vendor for more information on enabling POSIX Shared Memory.</p>
+
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

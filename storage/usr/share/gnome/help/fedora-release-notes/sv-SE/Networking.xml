@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Networking" lang="sv-SE">
+	<title>Nätverk</title>
+	<remark>Denna nyhet finns här: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Networking">https://fedoraproject.org/wiki/Docs/Beats/Networking</ulink></remark>
+	<section id="sect-Release_Notes-Networking-System_wide">
+		<title><application>NetworkManager</application> med systemvida anslutningar och förbättrat stöd för mobilt bredband</title>
+		<para>
+			<application>NetworkManager</application> kan nu skapa och redigera systemvida nätverksanslutningar i <filename>/etc/sysconfig</filename>. <application>NetworkManager</application> har kunnat läsa information om systemvida nätverksanslutningar från <filename>/etc/sysconfig</filename> sedan en tid. Nu har vi aktiverat fullständigt stöd för läsning och skrivning för systemanslutningar. Möjligheten att skapa eller modifera nya systeanslutningar kommer att styras av policyer i <application>PolicyKit</application>. Från början stöds endast trådbundna och trådlösa anslutningar. Senare kommer vpn-anslutningar att följa. För anslutningar som behöver hemligheter kommer dessa att lagras i <filename>.keys</filename>-filer i <filename>/etc/sysconfig</filename>.
+		</para>
+		<para>
+			Genom att tillhandahålla en databas över förkonfigurerade mobila bredbandsoperatörer, stödja mer hårdvara och tillåta sökning efter GSM-nätverk, gör <application>NetworkManager</application> användandet av mobilt bredband mycket enklare. Din bredbandsoperatör kommer automatiskt kännas igen av <application>NetworkManager</application> och den kommer att göra det enkelt att bara sticka in din USB-enhet och få dig nätansluten på några minuter.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-IPv6">
+		<title>Förbättrat stöd för IPv6 i <application>NetworkManager</application></title>
+		<para>
+			För användare av ickegrafiska gränssnitt, och för dem som använder <filename>ifcfg</filename>-filer direkt, skall <application>NetworkManager</application> starta upp gränssnittet med IPv6-anslutning korrekt vid uppstart. Ingen ädnring av <filename>ifcfg</filename>-filerna skall vara nödvändig.
+		</para>
+		<para>
+			För användare av grafiska gränssnitt kommer en ny IPv6-flik dyka upp i anslutningsredigeraren som kommer möjliggöra styrning av IPv6-inställningarna liknande styrningen av IPv4-inställningar som redan finns. Efter att a valt konfigurationsmetod (<literal>auto</literal> är standard, vilket kommer att ta hänsyn till ruttannonseringar och försöka hämta DNS-information i läget för endast DHCPv6-information) och matat in eventuella ytterligare inställningar de kan vilja använda, och därefter sparat anslutningen, bör aktivering av den anslutningen konfigurera gränssnittet fullständigt med IPv6 så som användaren begärt.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Network_Interface_Management">
+		<title>Hantering av nätverksgränssnitt</title>
+		<para>
+			Att konfigurera nätverksgränssnitt på en maskin för måttligt komplicerade och ändå vanliga fall är generellt endast möjligt för avancerade användare och mycket dåligt stött av befintliga verktyg. Sådana fall inkluderar att skapa en brygga och förslava ett fysiskt gränssnitt till det eller att binda samman två gränssnitt, lägga till ett VLAN-gränssnitt till förbundet och förslava det till en brygga.
+		</para>
+		<para>
+			Komplicerade brygguppsättningar behövs ofta på virtualiserade värdar, och måste ofta utföras på avstand av administrationsverktyg på högre nivå, snarare än av en mänsklig användare.
+		</para>
+		<para>
+			Denna funktion tar hand om dessa behov genom att tillhandahålla ett nätverkskonfigurationsbibliotek för allmän användning (<application>netcf</application>) och tillägg till <application>libvirt</application>-API:et för att synliggöra <application>netcf</application>s lokala API via <application>libvirt</application>s fjärrfunktioner.
+		</para>
+		<para>
+			Med <application>netcf</application>, beskrivs ett logiskt nätverksgränssnitt (till exempel en brygga och dess slavar) som en enhet, och <application>netcf</application> tar hand om att översätta beskrivningen till lämpliga <filename>ifcfg-*</filename>-filer. För att garantera en lycklig samexistens av <application>netcf</application> med andra nätverkskonfigurationsverktyg, inklusive <application>vi</application>, är <application>netcf</application> dubbelriktad: den ändrar <filename>ifcfg-*</filename>-filer baserat på en <application>netcf</application>-gränssnittsbeskrivning, men läser också <filename>ifcfg-*</filename>-filer för att generera en sådan beskrivning. Det är därför möjligt att använda <application>netcf</application> sida vid sida med vilken annan metod att ändra nätverkskonfiguration som helst, och många av fallgroparna i tidigare försök att göra detta &mdash; till exemple Xens nätverksskript &mdash; undviks.
+		</para>
+		<para>
+			Det planeras att byta ut <application>NetworkManager</application> mot <application>netcf</application> som bakände för systemvid nätverkskonfiguration i en framtida utgåva. Utan att vara en del av denna funktion kommer det att göra användandet runt nätverkskonfiguration ännu mer enhetligt. På motsvarande sätt planeras det att synliggöra nätverkskonfigurationsfunktionaliteten i en framtida utgåva av <application>virt-manager</application>.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Bluetooth">
+		<title>Blåtandstjänst vid behov</title>
+		<para>
+			För att stödja Blåtandsenheter startades bakgrundstjänsten Blåtand som standard i tidigare versioner av Fedora. I denna utgåva startas Blåtandstjänsten vid behov och slutar automatiskt 30 sekunder efter att enheten senast använts. Detta minskar den initiala uppstartstiden och -resurserna.
+		</para>
+	</section>
+	
+	<!-- 
+<section id="sect-Release_Notes-Networking-NFS">
+	<title
+>NFS V4 Default</title>
+
+	<para>
+		The latest version of the NFS protocol is version 4, which was first introduced in Fedora&nbsp;Core&nbsp;2 (the first distro to have such support). Previously, the default NFS version was version 3. Therefore, when an simple NFS mount was done (<command
+>mount server:/export /mnt</command
+>) version 3 is the first protocol version that was tried.
+	</para>
+
+	<para>
+		In Fedora&nbsp;12, version 4 is tried first. If the server does not support version 4, the mount then tries version 3.
+	</para
+> 
+</section>
+ -->
+</section>
+
+

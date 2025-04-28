@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GnomeDateEdit</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="GNOME UI Library Reference Manual">
+<link rel="up" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="prev" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="next" href="GnomeHRef.html" title="GnomeHRef">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GNOME UI Library (libgnomeui)">
+<link rel="chapter" href="initialization.html" title="Initialization and Session Management">
+<link rel="chapter" href="application-mgmt.html" title="Application Management">
+<link rel="chapter" href="druids.html" title="Druids">
+<link rel="chapter" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="chapter" href="miscellaneous.html" title="Miscellaneous Utility Functions and Macros">
+<link rel="chapter" href="deprecated.html" title="Deprecated Modules">
+<link rel="chapter" href="libgnomeui-objects.html" title="Object Hierarchy">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="fixme.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="fixme.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME UI Library Reference Manual</th>
+<td><a accesskey="n" href="GnomeHRef.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GnomeDateEdit.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#GnomeDateEdit.description" class="shortcut">Description</a>
+                 | 
+                <a href="#GnomeDateEdit.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#GnomeDateEdit.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                 | 
+                <a href="#GnomeDateEdit.properties" class="shortcut">Properties</a>
+                 | 
+                <a href="#GnomeDateEdit.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GnomeDateEdit"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GnomeDateEdit.top_of_page"></a>GnomeDateEdit</span></h2>
+<p>GnomeDateEdit</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GnomeDateEdit.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnomeui/libgnomeui.h&gt;
+
+enum                <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a>;
+                    <a class="link" href="GnomeDateEdit.html#GnomeDateEdit-struct" title="GnomeDateEdit">GnomeDateEdit</a>;
+GtkWidget *         <a class="link" href="GnomeDateEdit.html#gnome-date-edit-new" title="gnome_date_edit_new ()">gnome_date_edit_new</a>                 (time_t the_time,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> show_time,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> use_24_format);
+GtkWidget *         <a class="link" href="GnomeDateEdit.html#gnome-date-edit-new-flags" title="gnome_date_edit_new_flags ()">gnome_date_edit_new_flags</a>           (time_t the_time,
+                                                         <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a> flags);
+void                <a class="link" href="GnomeDateEdit.html#gnome-date-edit-construct" title="gnome_date_edit_construct ()">gnome_date_edit_construct</a>           (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         time_t the_time,
+                                                         <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a> flags);
+void                <a class="link" href="GnomeDateEdit.html#gnome-date-edit-set-time" title="gnome_date_edit_set_time ()">gnome_date_edit_set_time</a>            (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         time_t the_time);
+time_t              <a class="link" href="GnomeDateEdit.html#gnome-date-edit-get-time" title="gnome_date_edit_get_time ()">gnome_date_edit_get_time</a>            (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);
+void                <a class="link" href="GnomeDateEdit.html#gnome-date-edit-set-popup-range" title="gnome_date_edit_set_popup_range ()">gnome_date_edit_set_popup_range</a>     (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         int low_hour,
+                                                         int up_hour);
+void                <a class="link" href="GnomeDateEdit.html#gnome-date-edit-set-flags" title="gnome_date_edit_set_flags ()">gnome_date_edit_set_flags</a>           (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a> flags);
+int                 <a class="link" href="GnomeDateEdit.html#gnome-date-edit-get-flags" title="gnome_date_edit_get_flags ()">gnome_date_edit_get_flags</a>           (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);
+time_t              <a class="link" href="GnomeDateEdit.html#gnome-date-edit-get-initial-time" title="gnome_date_edit_get_initial_time ()">gnome_date_edit_get_initial_time</a>    (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);
+time_t              <a class="link" href="GnomeDateEdit.html#gnome-date-edit-get-date" title="gnome_date_edit_get_date ()">gnome_date_edit_get_date</a>            (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"
+>GInitiallyUnowned</a>
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBox
+                                 +----GtkHBox
+                                       +----GnomeDateEdit
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GnomeDateEdit implements
+ GtkBuildable,  AtkImplementorIface and  GtkOrientable.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GnomeDateEdit.html#GnomeDateEdit--dateedit-flags" title='The "dateedit-flags" property'>dateedit-flags</a>"           <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a>    : Read / Write
+  "<a class="link" href="GnomeDateEdit.html#GnomeDateEdit--initial-time" title='The "initial-time" property'>initial-time</a>"             <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gulong"
+>gulong</a>                : Read / Write
+  "<a class="link" href="GnomeDateEdit.html#GnomeDateEdit--lower-hour" title='The "lower-hour" property'>lower-hour</a>"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read / Write
+  "<a class="link" href="GnomeDateEdit.html#GnomeDateEdit--time" title='The "time" property'>time</a>"                     <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gulong"
+>gulong</a>                : Read / Write
+  "<a class="link" href="GnomeDateEdit.html#GnomeDateEdit--upper-hour" title='The "upper-hour" property'>upper-hour</a>"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read / Write
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="GnomeDateEdit.html#GnomeDateEdit-date-changed" title='The "date-changed" signal'>date-changed</a>"                                   : Run First
+  "<a class="link" href="GnomeDateEdit.html#GnomeDateEdit-time-changed" title='The "time-changed" signal'>time-changed</a>"                                   : Run First
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEditFlags"></a><h3>enum GnomeDateEditFlags</h3>
+<pre class="programlisting">typedef enum {
+	GNOME_DATE_EDIT_SHOW_TIME             = 1 &lt;&lt; 0,
+	GNOME_DATE_EDIT_24_HR                 = 1 &lt;&lt; 1,
+	GNOME_DATE_EDIT_WEEK_STARTS_ON_MONDAY = 1 &lt;&lt; 2,
+	GNOME_DATE_EDIT_DISPLAY_SECONDS       = 1 &lt;&lt; 3
+} GnomeDateEditFlags;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit-struct"></a><h3>GnomeDateEdit</h3>
+<pre class="programlisting">typedef struct _GnomeDateEdit GnomeDateEdit;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-new"></a><h3>gnome_date_edit_new ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_date_edit_new                 (time_t the_time,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> show_time,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> use_24_format);</pre>
+<p>
+Creates a new <a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit"><span class="type">GnomeDateEdit</span></a> widget which can be used
+to provide an easy to use way for entering dates and times.
+If <em class="parameter"><code>the_time</code></em> is 0 then current time is used.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>the_time</code></em> :</span></p></td>
+<td> date and time to be displayed on the widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>show_time</code></em> :</span></p></td>
+<td> whether time should be displayed
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>use_24_format</code></em> :</span></p></td>
+<td> whether 24-hour format is desired for the time display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit"><span class="type">GnomeDateEdit</span></a> widget.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-new-flags"></a><h3>gnome_date_edit_new_flags ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_date_edit_new_flags           (time_t the_time,
+                                                         <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a> flags);</pre>
+<p>
+Creates a new <a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit"><span class="type">GnomeDateEdit</span></a> widget with the
+specified flags. If <em class="parameter"><code>the_time</code></em> is 0 then current time is used.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>the_time</code></em> :</span></p></td>
+<td> The initial time for the date editor.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> A bitmask of GnomeDateEditFlags values.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the newly-created date editor widget.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-construct"></a><h3>gnome_date_edit_construct ()</h3>
+<pre class="programlisting">void                gnome_date_edit_construct           (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         time_t the_time,
+                                                         <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a> flags);</pre>
+<p>
+For language bindings and subclassing only</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> The <a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit"><span class="type">GnomeDateEdit</span></a> object to construct
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>the_time</code></em> :</span></p></td>
+<td> The initial time for the date editor.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> A bitmask of GnomeDateEditFlags values.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-set-time"></a><h3>gnome_date_edit_set_time ()</h3>
+<pre class="programlisting">void                gnome_date_edit_set_time            (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         time_t the_time);</pre>
+<p>
+Changes the displayed date and time in the GnomeDateEdit
+widget to be the one represented by <em class="parameter"><code>the_time</code></em>.  If <em class="parameter"><code>the_time</code></em> is 0
+then current time is used.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> the GnomeDateEdit widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>the_time</code></em> :</span></p></td>
+<td> The time and date that should be set on the widget
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-get-time"></a><h3>gnome_date_edit_get_time ()</h3>
+<pre class="programlisting">time_t              gnome_date_edit_get_time            (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> The GnomeDateEdit widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the time entered in the GnomeDateEdit widget
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-set-popup-range"></a><h3>gnome_date_edit_set_popup_range ()</h3>
+<pre class="programlisting">void                gnome_date_edit_set_popup_range     (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         int low_hour,
+                                                         int up_hour);</pre>
+<p>
+Sets the range of times that will be provide by the time popup
+selectors.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> The GnomeDateEdit widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>low_hour</code></em> :</span></p></td>
+<td> low boundary for the time-range display popup.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>up_hour</code></em> :</span></p></td>
+<td>  upper boundary for the time-range display popup.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-set-flags"></a><h3>gnome_date_edit_set_flags ()</h3>
+<pre class="programlisting">void                gnome_date_edit_set_flags           (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde,
+                                                         <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a> flags);</pre>
+<p>
+Changes the display flags on an existing date editor widget.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> The date editor widget whose flags should be changed.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> The new bitmask of GnomeDateEditFlags values.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-get-flags"></a><h3>gnome_date_edit_get_flags ()</h3>
+<pre class="programlisting">int                 gnome_date_edit_get_flags           (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);</pre>
+<p>
+Queries the display flags on a date editor widget.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> The date editor whose flags should be queried.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The current display flags for the specified date editor widget.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-get-initial-time"></a><h3>gnome_date_edit_get_initial_time ()</h3>
+<pre class="programlisting">time_t              gnome_date_edit_get_initial_time    (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);</pre>
+<p>
+Queries the initial time that was set using the
+<a class="link" href="GnomeDateEdit.html#gnome-date-edit-set-time" title="gnome_date_edit_set_time ()"><span class="type">gnome_date_edit_set_time</span></a> or during creation</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> The date editor whose initial time should be queried
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>  The initial time in seconds (standard time_t format)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-date-edit-get-date"></a><h3>gnome_date_edit_get_date ()</h3>
+<pre class="programlisting">time_t              gnome_date_edit_get_date            (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *gde);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_date_edit_get_date</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Deprecated, use <a class="link" href="GnomeDateEdit.html#gnome-date-edit-get-time" title="gnome_date_edit_get_time ()"><span class="type">gnome_date_edit_get_time</span></a></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gde</code></em> :</span></p></td>
+<td> The GnomeDateEdit widget
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit--dateedit-flags"></a><h3>The <code class="literal">"dateedit-flags"</code> property</h3>
+<pre class="programlisting">  "dateedit-flags"           <a class="link" href="GnomeDateEdit.html#GnomeDateEditFlags" title="enum GnomeDateEditFlags">GnomeDateEditFlags</a>    : Read / Write</pre>
+<p>Flags for how DateEdit looks.</p>
+<p>Default value: GNOME_DATE_EDIT_SHOW_TIME</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit--initial-time"></a><h3>The <code class="literal">"initial-time"</code> property</h3>
+<pre class="programlisting">  "initial-time"             <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gulong"
+>gulong</a>                : Read / Write</pre>
+<p>The initial time.</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit--lower-hour"></a><h3>The <code class="literal">"lower-hour"</code> property</h3>
+<pre class="programlisting">  "lower-hour"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read / Write</pre>
+<p>Lower hour in the time popup selector.</p>
+<p>Allowed values: [0,24]</p>
+<p>Default value: 7</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit--time"></a><h3>The <code class="literal">"time"</code> property</h3>
+<pre class="programlisting">  "time"                     <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gulong"
+>gulong</a>                : Read / Write</pre>
+<p>The time currently selected.</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit--upper-hour"></a><h3>The <code class="literal">"upper-hour"</code> property</h3>
+<pre class="programlisting">  "upper-hour"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                  : Read / Write</pre>
+<p>Upper hour in the time popup selector.</p>
+<p>Allowed values: [0,24]</p>
+<p>Default value: 19</p>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeDateEdit.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit-date-changed"></a><h3>The <code class="literal">"date-changed"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *dateedit,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)      : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dateedit</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeDateEdit-time-changed"></a><h3>The <code class="literal">"time-changed"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeDateEdit.html" title="GnomeDateEdit">GnomeDateEdit</a> *dateedit,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)      : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dateedit</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

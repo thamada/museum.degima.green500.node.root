@@ -1,0 +1,462 @@
+2008-02-25  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifdfile.cpp: Detect that a thumbnail is mistakenly marked as
+	JPEG (for CR2 files). (see Gnome bug #421175)
+
+2008-02-24  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/io/memstream.cpp (MemStream::read()): check bounds 
+	of the memory buffer.
+	* lib/io/stream.{cpp,h}: declare the exceptions that readByte() 
+	throw (when reaching EOF)
+	* lib/crwdecompressor.cpp: catch getBytes() that throw an 
+	exception to prevent reading past the buffer.
+
+	* lib/ifdfile.cpp: Fix a bug where it would try to extract 
+	the thumbnail from the CFA ifd (Canon CR2 does not indicate
+	the type).
+
+	* configure.in: bump soversion.
+
+	* lib/ifdfile.cpp: Fix a bug where CR2 thumbnails are 
+	inapropriately recognized as 8RGB.
+	* testsuite/testsuite.xml: add CRW file. Fix thumbnails
+	test for CR2.
+
+	* demo/thumbc.c (main): Add -s option to allow
+	passing the request thumbnail size.
+
+2008-02-22  Hubert Figuiere  <hub@figuiere.net>
+
+	* demo/thumbc.c (main): Output PPM files if the data
+	is 8RGB.
+
+	* lib/ciffcontainer.cpp: Make sure the heap is loaded.
+
+2008-02-20  Hubert Figuiere  <hub@figuiere.net>
+
+	* tools/ordiag.cpp: Fix a typo in the dump of the 
+	CFA pattern.
+
+2008-02-19  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifdfilecontainer.{h,cpp}: add locateDirsPreHook()
+	to allow a hook prior to locating the IFD directories.
+	* lib/mrwcontainer.{h,cpp}: make code more robust to fail 
+	more nicely.
+	* lib/mrwfile.cpp: fix a crasher when dereferencing a NULL
+	shared_ptr<>. Occur if there is a file error.
+
+2008-02-17  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifdentry.{cpp,h}: Fix a template problem with Apple
+	broken gcc.
+
+	* lib/mrwfile.cpp: use uint32_t for offsets in the 
+	IFDFile. (fix 64-bits)
+
+	* testsuite/testsuite.cpp (Test::run): skip file if
+	not found. 
+	Make test more robusts to diagnostic.
+
+	* lib/ciffcontainer.{cpp.h}: refactor CIFF container
+	to support metadata.
+	* lib/crwfile.{cpp,h}, testsuite/testsuite.xml:
+	get orientation meta data for CRW.
+	* include/libopenraw++/rawfile.h: getMetaValue() is pure
+	virtual.
+
+	* lib/ifdfile.cpp: Handle new-style CFA Pattern tag.
+
+2008-02-16  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifdfile.cpp: fix regression with PEF files: they
+	advertise 12-bits but are 16-bits unpacked.
+	* testsuite/testsuite.xml: add PEF *-ist D to the testsuite.
+	* lib/unpack.cpp: the Nikon unpacking only for Nikon unpack.
+	
+	* lib/ifdfile.cpp, lib/rawdata.cpp, 
+	include/libopenraw++/rawdata.h: setCompression() / 
+	compression().
+
+	* tools/ordiag.cpp: dump the compression if applicable.
+	
+	* lib/ifdfile.cpp: refactor the unpack for 8 bits data.
+
+	* testsuite/testsuite.xml: Added Leica M8 to the test.
+
+2008-02-15  Hubert Figuiere  <hfiguiere@novell.com>
+
+	* lib/ifdfile.cpp: support 8-bits RAW data. (M8 support)
+
+	* lib/unpack.{cpp,h}, lib/mrwfile.cp: compute the adequate 
+	block size.
+	* lib/ifdfile.cpp: fix the Nikon unpack. Add hack for
+	Nikon D100.
+	* testsuite/testsuite.xml: update test for D100 and R-D1.
+
+	* lib/unpack.{h,cpp}, test/testunpack.cpp, lib/mrwfile.cpp,
+	lib/ifdfile.cpp: unpack is now a class to store an 
+	internal state and deal with some variety of "pack" like
+	Nikons.
+	
+	* lib/rawcontainer.cpp, lib/ifddir.cpp: Remove excessive 
+	debugging.
+
+2008-02-14  Hubert Figuiere  <hfiguiere@novell.com>
+
+	* lib/ifdfile.cpp, lib/ifd.h, lib/neffile.{cpp,h}: Detect
+	D100 files marked wrongly as compressed. Declare the other
+	Nikon compression scheme (the one using the quantization 
+	table).
+
+	* lib/ifdfile.cpp (IFDFile::_enumThumbnailSizes): scan the 
+	subIFDs for previews. Check for compression in case the
+	there is a StripOffset for a JPEG preview.
+
+2008-02-13  Hubert Figuiere  <hfiguiere@novell.com>
+
+	* lib/erffile.cpp: remove the "compression" hack.
+	* lib/ifdfile.cpp, lib/ifd.h: better detect compression
+	and fix the 12 bits unpacking.
+	* testsuite/testsuite.xml: update test suite.
+	
+	* lib/mrwfile.cpp: Change the buffer size to make sure
+	it is a multiple of 3. This should fix the decoding problem.
+
+	* lib/unpack.{cpp,h}, lib/mrwfile.cpp: rename to take byte order 
+	into account. Store the values as uint16_t. 
+	* test/testunpack.cpp: fix the test for the above changes.
+
+	* testsuite/testsuite.{h,cpp}, testsuite/testsuitehandler.cpp
+	testsuite/testsuitetags.txt: Add support for doing a Md5
+	on the output. Currently it is a CRC.
+
+2008-02-12  Hubert Figuiere  <hfiguiere@novell.com>
+
+	* lib/ifd.h: CfaCompoment consts.
+	* lib/ifdfile.cpp: Move away the CFA pattern extraction.
+	
+	* testsuite/testsuite.xml: Add more Nikon samples.
+
+	* testsuite/testsuite.{cpp,h}, testsuite/testsuitehandler.cpp,
+	testsuite/testsuitetags.txt, testsuite/testsuite.xml: add 
+	CFA Pattern test. Return failure if a test fail.
+	* include/libopenraw/rawdata.h, include/libopenraw/consts.h, 
+	include/libopenraw++/rawdata.h, lib/capi/rawdata.cpp, 
+	lib/cr2file.cpp, lib/crwfile.cpp, lib/dngfile.cpp,
+	lib/ifdfile.cpp, lib/mrwfile.cpp, lib/rawdata.cpp,
+	tools/ordiag.cpp: Allow getting the CFA Pattern.
+	
+2008-02-11  Hubert Figuiere  <hfiguiere@novell.com>
+
+	* lib/ifdentry.{h,cpp}: fix a bug in get() where fetching
+	a locally stored array failed like array of bytes. Also
+	implement the type trait for BYTE.
+
+	* lib/unpack.{cpp,h}, lib/mrwfile.cpn, lib/Makefile.am: 
+	split off unpack.
+	* test/testunpack.cpp, lib/Makefile.am: test unpack
+
+	* Kill CMake support for good.
+
+2008-02-07  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/mrwcontainer.h, lib/mrwfile.cpp, README:
+	Extract and unpack RAW for Minolta A1, A2, 5D and 7D.
+	(still with a bug)
+	
+2008-02-03  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifddir.cpp, lib/ifdfilecontainer.{cpp,h}:
+	Add hooks to set the Exif offset.
+	* lib/mrwcontainer.{cpp,h}, lib/mrwfile.cpp:
+	Add support for 7HI and 7i MRW files.
+
+2008-02-02  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/mrwfile.cpp: Fix getting the makernote offset.
+	* lib/ifdentry.h: offset() is implemented properly.
+	Make get() less error prone: allow overriding the type
+	check as well as deal with undefined type.
+	* lib/ifdentry.cpp: Fix some warnings.
+	* lib/ifd.h: Forgot include protection.
+
+	* lib/ifdentry.h: new accessors count() and offset().
+	* lib/rawcontainer.{h,cpp}: added readUInt8()
+	* lib/mrwcontainer.{h,cpp}, lib/mrwfile.{h,cpp}, lib/rawfile.cpp: 
+	MRW support	
+
+2008-01-26  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifdfilecontainer.cpp: is the m_offset to create the IFDDir
+	and look up for the IFD. Needed by MRW and RAF (in the future).
+
+2008-01-13  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/crwdecompressor.cpp, testsuite/xmlhandler.cpp: Fix build on
+	openSUSE Factory.
+
+	* autogen.sh: re-order commands in autogens.sh (Closes bug #14055)
+
+==== 0.0.4 ====
+
+2008-01-12  Hubert Figuiere  <hub@figuiere.net>
+
+	* Remove unused exempi dependency.
+
+2008-01-07  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/cr2file.{cpp,h}, lib/ifdfile.{cpp,h},
+	testsuite/testsuite.xml: getting exif meta values is
+	refactored. Orientation works for PEF, NEF, DNG, ERF, ORF and ARW.
+	* lib/rawfile.cpp: Orientation is in the TIFF namespace.
+
+2008-01-06  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/*, lib/tiffepfile.{cpp,h}: Refactoring: have a TIFF/EP base
+	class. Have Exif IFD, Main IFD and CFA IFD located in a common
+	way.
+
+2008-01-05  Hubert Figuiere  <hub@figuiere.net>
+
+	* testsuite/*: Working testsuite.
+	
+	* tools/ordiag.cpp: Display the thumbnail byte size.
+
+2008-01-02  Hubert Figuiere  <hub@figuiere.net>
+
+	* testsuite/*, Makefile.am, configure.in: bootstrap the test 
+	suite including a new XML parser.
+
+2007-12-30  Hubert Figuiere  <hub@figuiere.net>
+
+	* README, include/libopenraw/consts.h, lib/Makefile.am,
+	lib/erffile.{h,cpp}, lib/rawfile.cpp, tools/ordiag.cpp:
+	Epson ERF support for thumbnail and compressed CFA.
+
+2007-12-22  Hubert Figuiere  <hub@figuiere.net>
+
+	* configure.in, m4/boost.m4, test/Makefile.am: Change boost
+	detection. Closes bug #13658. Closes bug #13659
+
+2007-12-18  Hubert Figuiere  <hub@figuiere.net>
+
+	* demo/Makefile.am: gdk demo opted out. Closes bug #13718
+
+	* lib/io/io.c: remove stray ';'. Closes bug #13717
+
+2007-12-17  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ciffcontainer.{cpp,h}, lib/crwfile.cpp: retrieve the orientation
+	from the CIFF/CRW files.
+
+2007-12-11  Hubert Figuiere  <hub@figuiere.net>
+
+	* README: Update build instruction. Closes bug #13595
+
+2007-12-05  Hubert Figuiere  <hub@figuiere.net>
+
+	* demo/thumbc.c, lib/io/teststream.cpp, test/ciffcontainertest.cpp,
+	test/fileio.t.c: warning removal.
+	
+2007-12-02  Hubert Figuiere  <hub@figuiere.net>
+	* Get orientation (CR2-only).
+	* API for orientation.
+	* Rotate gdk pixbuf depending on orientation.
+
+2007-11-26  Hubert Figuiere  <hub@figuiere.net>
+
+	* New rawfile C API.
+
+2007-11-25  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/crwfile.cpp: Fix crash with A610 CRW files and other non-CIFF
+	files. Closes bug #13393
+
+	* lib/io/posix_io.c (posix_munmap): Fix unused parameter warning.
+
+	* lib/jfifcontainer.cpp: Add string.h to fix build on Factory.
+
+==== 0.0.3 ====
+
+2007-11-25  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/io/io.c: check input pointer for validity.
+	Closes bug #13371.
+
+	* demo/gdk.c,demo/Makefile.am: new demo.
+	* demo/thumb.cpp (main): Check that the returned rawfile
+	is not null.
+
+2007-11-24  Hubert Figuiere  <hub@figuiere.net>
+
+	* gnome/gdkpixbuf.c (or_thumbnail_to_pixbuf): The data is not
+	copied by gdk_pixbuf_new_from_data(). Copy it.
+	Closes bug #13383.
+
+2007-11-12  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/io/teststream.cpp: Fix an error triggered by
+	openSUSE Factory: missing header.
+
+2007-07-09  Hubert Figuiere  <hub@figuiere.net>
+
+	* gnome/gdkpixbuf.c (or_gdkpixbuf_extract_thumbnail): Removing an
+	annoying debug message.
+
+2007-07-08  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/capi/rawdata.cpp, include/libopenraw++/rawdata.h,
+	include/libopenraw/libopenraw.h, include/libopenraw/rawdata.h: 
+	New API in C.
+
+	* demo/ccfa.c (main): New sample for RAW extraction
+	using the C API.
+
+	* lib/ljpegdecompressor.cpp (GetDht): avoid memcpy()
+	on the huffman tables, and check better the index.
+
+2007-07-07  Hubert Figuiere  <hub@figuiere.net>
+
+	* Support for CRW decompression.
+
+	* lib/io/memstream.cpp: remove annoying debug message.
+	MemStream::seek return the current position.
+
+	* configure.in: fix configure.in breakage. Setting the CXXFLAGS
+	with -Werror and all these warnings break the detection.
+
+2007-07-05  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ljpegdecompressor.{h,cpp}: make more methods static or 
+	functions.
+
+	* lib/rawdata.cpp (RawData::append()): fix endianess issue. The
+	code is now endian neutral and works fine on PPC (big endian).
+
+2007-07-04  Hubert Figuiere  <hub@figuiere.net>
+
+	* test/ljpegtest.cpp (test_ljpeg): Make the test check
+	against a checksum. Don't test the decompressor internals.
+
+	* lib/ljpegdecompressor.cpp (MIN_GET_BITS): use int32_t and
+	not long. This Fix the 64-bits issue.
+
+	* Added unit testing for the lossless JPEG decompressor. 
+
+2007-07-02  Hubert Figuiere  <hub@figuiere.net>
+
+	* Internal API change: can request uncompressed CFA data.
+
+2007-06-30  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/peffile.cpp: Mark CFA uncompressed if they
+	are.
+
+	* Handle the slicing for CR2 files. Better error 
+	handling.
+
+2007-06-05  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/dngfile.cpp: decompress RAW from DNG. The spec 
+	is very fuzzy... so it is know to be broken.
+
+2007-06-02  Hubert Figuiere  <hub@figuiere.net>
+
+	* demo/cfa.cpp: will save as .pgm file. 
+
+	* support decompressing CFA from the RAW file
+	using ljpeg. CR2 files only for now.
+
+2007-04-19  Hubert Figuiere  <hub@figuiere.net>
+
+	* Added infrastructure for decompression.
+
+2007-04-09  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifdentry.{h,cpp}, lib/ifddir.{h,cpp}: IFDTypeDesc
+	renamed IDFTypeTrait.
+
+2007-04-02  Hubert Figuiere  <hub@figuiere.net>
+
+	* Makefile.am (ACLOCAL_AMFLAGS): make sure
+	aclocal is called properly in maintainer mode.
+
+2007-03-31  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/ifddir.{h,cpp}: get() API changed.
+	* lib/ifdentry.h: get() is now a static method 
+	of IFDTypeDesc<> as the template member code
+	choke on gcc-3.3.
+
+	* autogen.sh: aclocal includes from m4 dir
+	* configure.in: use AX_BOOST_CHECK
+	* m4/ax_boost_base.m4: add macro to check boost.
+
+2007-03-21  Pav Lucistnik  <pav@FreeBSD.org>
+	
+	* gnome/include/libopenraw-gnome/Makefile.am: 
+	Don't create the Gnome include dir if building
+	without it.
+
+2007-03-21  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/crwfile.cpp, lib/ifdfile.cpp: use scoped_ptr<>
+	instead of delete.
+
+2007-03-20  Hubert Figuiere  <hub@figuiere.net>
+
+	* demo/thumbc.c (main): kill some warnings.
+
+	* demo/thumb.cpp, tools/ordiag.cpp: Use scoped_ptr<> 
+	when applicable.
+
+2007-03-01  Hubert Figuiere  <hub@figuiere.net>
+
+	* README: Added E500 to the list of tested formats.
+
+2007-02-06  Hubert Figuiere  <hub@figuiere.net>
+
+	* README: update the support list.
+	* lib/neffile.cpp: Refactor the standard way 
+	of fetching the CFA from and IFD
+	* lib/*: Added CFA extraction support for
+	DNG, PEF, ORF. Stubbed for ARW.
+	* include/libopenraw++/rawfile.h: _getRawData() is
+	now pure virtual.
+
+	* lib/ciffcontainer.{h,cpp}, lib/crwfile.{h,cpp}: 
+	Retrieve CFA data from Canon CRW. Support all CIFF
+	based files.
+
+	* lib/ifdentry.{h,cpp}: fix some warnings.
+
+2007-02-05  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/cr2file.cpp, lib/exception.h, lib/ifddir.{cpp,h},
+	lib/ifdentry.{cpp,h}, lib/ifdfile.cpp, lib/neffile.cpp: 
+	templatize data fetching. Implement fetching arrays and
+	data stored outside IFD. Fetching subIFD need a subscript.
+	Getting CFA data out of a NEF from D70 works.
+
+	* tools/ordiag.cpp: Delete the RawFile instance.
+
+2007-01-30  Hubert Figuiere  <hub@figuiere.net>
+
+	* README: Added Canon 1DS and 30D in the list.
+
+2007-01-29  Hubert Figuiere  <hub@figuiere.net>
+
+	* lib/bitmapdata.cpp, lib/rawdata.cpp,
+	include/libopenraw++/bitmapdata.h, 
+	include/libopenraw++/rawdata.h:
+	Added bitmap data and raw data classes.
+	* include/libopenraw++/thumbnail.h,
+	lib/thumbnail.cpp: inherit from BitmapData.
+	* include/*, lib/*, configure.in: Add RAW data extraction
+	support for CR2 and NEF. 
+	Fix a bug when reading IFDEntry with an that overflow a sint16_t.
+	* tools/Makefile.am: link to the .la
+	* tools/ordiag.cpp: Dump CFA data.
+

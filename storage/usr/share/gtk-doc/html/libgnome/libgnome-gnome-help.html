@@ -1,0 +1,665 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>gnome-help</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GNOME Library Reference Manual">
+<link rel="up" href="ch03.html" title="Displaying Help and External Info">
+<link rel="prev" href="ch03.html" title="Displaying Help and External Info">
+<link rel="next" href="libgnome-gnome-url.html" title="gnome-url">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="libgnome.html" title="Part I. GNOME Library (libgnome)">
+<link rel="chapter" href="ch01.html" title="Initializing Applications and Starting Programs">
+<link rel="chapter" href="ch02.html" title="Configuration">
+<link rel="chapter" href="ch03.html" title="Displaying Help and External Info">
+<link rel="chapter" href="ch04.html" title="Miscellaneous">
+<link rel="chapter" href="ch05.html" title="Lower Level Interactions">
+<link rel="chapter" href="ch06.html" title="Deprecated Modules">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch03.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME Library Reference Manual</th>
+<td><a accesskey="n" href="libgnome-gnome-url.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgnome-gnome-help.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgnome-gnome-help.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="gnome-help">
+<a name="libgnome-gnome-help"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgnome-gnome-help.top_of_page"></a>gnome-help</span></h2>
+<p>gnome-help — Display application and GNOME system help.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgnome-gnome-help.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnome/libgnome.h&gt;
+
+enum                <a class="link" href="libgnome-gnome-help.html#GnomeHelpError" title="enum GnomeHelpError">GnomeHelpError</a>;
+#define             <a class="link" href="libgnome-gnome-help.html#GNOME-HELP-ERROR--CAPS" title="GNOME_HELP_ERROR">GNOME_HELP_ERROR</a>
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-help.html#gnome-help-display" title="gnome_help_display ()">gnome_help_display</a>                  (const char *file_name,
+                                                         const char *link_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-help.html#gnome-help-display-with-doc-id" title="gnome_help_display_with_doc_id ()">gnome_help_display_with_doc_id</a>      (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-help.html#gnome-help-display-with-doc-id-and-env" title="gnome_help_display_with_doc_id_and_env ()">gnome_help_display_with_doc_id_and_env</a>
+                                                        (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         char **envp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-help.html#gnome-help-display-desktop" title="gnome_help_display_desktop ()">gnome_help_display_desktop</a>          (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-help.html#gnome-help-display-desktop-with-env" title="gnome_help_display_desktop_with_env ()">gnome_help_display_desktop_with_env</a> (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         char **envp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-help.html#gnome-help-display-uri" title="gnome_help_display_uri ()">gnome_help_display_uri</a>              (const char *help_uri,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-help.html#gnome-help-display-uri-with-env" title="gnome_help_display_uri_with_env ()">gnome_help_display_uri_with_env</a>     (const char *help_uri,
+                                                         char **envp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgnome-gnome-help.description"></a><h2>Description</h2>
+<p>
+These functions provide a way to display help files that are either installed
+as part of the main GNOME installation or that are specific to the current
+application.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgnome-gnome-help.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum GnomeHelpError">
+<a name="GnomeHelpError"></a><h3>enum GnomeHelpError</h3>
+<pre class="programlisting">typedef enum {
+  GNOME_HELP_ERROR_INTERNAL,
+  GNOME_HELP_ERROR_NOT_FOUND
+} GnomeHelpError;
+</pre>
+<p>
+The different error codes which can be thrown in the <a class="link" href="libgnome-gnome-help.html#GNOME-HELP-ERROR--CAPS" title="GNOME_HELP_ERROR"><span class="type">GNOME_HELP_ERROR</span></a> domain.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="GNOME-HELP-ERROR-INTERNAL--CAPS"></a><span class="term"><code class="literal">GNOME_HELP_ERROR_INTERNAL</code></span></p></td>
+<td>Something went wrong internally. This is most
+likely caused by a resource problem or bad installation.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-HELP-ERROR-NOT-FOUND--CAPS"></a><span class="term"><code class="literal">GNOME_HELP_ERROR_NOT_FOUND</code></span></p></td>
+<td>Help file does not exist.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_HELP_ERROR">
+<a name="GNOME-HELP-ERROR--CAPS"></a><h3>GNOME_HELP_ERROR</h3>
+<pre class="programlisting">#define GNOME_HELP_ERROR (gnome_help_error_quark ())
+</pre>
+<p>
+The class (or domain) of errors raised directly by the gnome-help module. This
+is used as a value in the domain field of the <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> structure.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gnome_help_display ()">
+<a name="gnome-help-display"></a><h3>gnome_help_display ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_help_display                  (const char *file_name,
+                                                         const char *link_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Displays the help file specified by <em class="parameter"><code>file_name</code></em> at location <em class="parameter"><code>link_id</code></em> in the
+preferred help browser of the user.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
+<td> The name of the help document to display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>link_id</code></em> :</span></p></td>
+<td> Can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>. If set, refers to an anchor or section id within the
+requested document.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> instance that will hold the specifics of any error which
+occurs during processing, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise (in which case <em class="parameter"><code>error</code></em> will
+contain the actual error).
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_help_display_with_doc_id ()">
+<a name="gnome-help-display-with-doc-id"></a><h3>gnome_help_display_with_doc_id ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_help_display_with_doc_id      (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Displays the help file specified by <em class="parameter"><code>file_name</code></em> at location <em class="parameter"><code>link_id</code></em> within
+the <em class="parameter"><code>doc_id</code></em> domain in the preferred help browser of the user.  Most of the
+time, you want to call <a class="link" href="libgnome-gnome-help.html#gnome-help-display" title="gnome_help_display ()"><code class="function">gnome_help_display()</code></a> instead.
+</p>
+<p>
+This function will display the help through creating a "ghelp" URI, by
+looking for <em class="parameter"><code>file_name</code></em> in the applications installed help location (found by
+<a class="link" href="libgnome-gnome-program.html#GNOME-FILE-DOMAIN-APP-HELP--CAPS"><span class="type">GNOME_FILE_DOMAIN_APP_HELP</span></a>) and its app_id.  The resulting URI is roughly
+in the form "ghelp:appid/file_name?link_id".  If a matching file cannot be
+found, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> is returned and <em class="parameter"><code>error</code></em> is set.
+</p>
+<p>
+Please note that this only displays application help.  To display help files
+from the global GNOME domain, you will want to use
+<a class="link" href="libgnome-gnome-help.html#gnome-help-display-desktop" title="gnome_help_display_desktop ()"><code class="function">gnome_help_display_desktop()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> The current application object, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> for the default one.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>doc_id</code></em> :</span></p></td>
+<td> The document identifier, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> to default to the application ID
+(app_id) of the specified <em class="parameter"><code>program</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
+<td> The name of the help document to display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>link_id</code></em> :</span></p></td>
+<td> Can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>. If set, refers to an anchor or section id within the
+requested document.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> instance that will hold the specifics of any error which
+occurs during processing, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise (in which case <em class="parameter"><code>error</code></em> will
+contain the actual error).
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_help_display_with_doc_id_and_env ()">
+<a name="gnome-help-display-with-doc-id-and-env"></a><h3>gnome_help_display_with_doc_id_and_env ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_help_display_with_doc_id_and_env
+                                                        (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         char **envp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Like <code class="function">gnome_display_with_doc_id()</code>, but the the contents of <em class="parameter"><code>envp</code></em>
+will become the url viewer's environment rather than inheriting
+from the parents environment.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> The current application object, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> for the default one.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>doc_id</code></em> :</span></p></td>
+<td> The document identifier, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> to default to empty string.
+(app_id) of the specified <em class="parameter"><code>program</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
+<td> The name of the help document to display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>link_id</code></em> :</span></p></td>
+<td> Can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>. If set, refers to an anchor or section id within the
+requested document.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>envp</code></em> :</span></p></td>
+<td> child's environment, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> to inherit parent's.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> instance that will hold the specifics of any error which
+occurs during processing, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise (in which case <em class="parameter"><code>error</code></em> will
+contain the actual error).
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" title="gnome_help_display_desktop ()">
+<a name="gnome-help-display-desktop"></a><h3>gnome_help_display_desktop ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_help_display_desktop          (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Displays the GNOME system help file specified by <em class="parameter"><code>file_name</code></em> at location
+<em class="parameter"><code>link_id</code></em> in the preferred help browser of the user.  This is done by creating
+a "ghelp" URI, by looking for <em class="parameter"><code>file_name</code></em> in the system help domain
+(<a class="link" href="libgnome-gnome-program.html#GNOME-FILE-DOMAIN-HELP--CAPS"><span class="type">GNOME_FILE_DOMAIN_HELP</span></a>) and it's app_id.  This domain is determined when
+the library is compiled.  If a matching file cannot be found, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> is
+returned and <em class="parameter"><code>error</code></em> is set.
+</p>
+<p>
+Please note that this only displays system help.  To display help files
+for an application, you will want to use <a class="link" href="libgnome-gnome-help.html#gnome-help-display" title="gnome_help_display ()"><code class="function">gnome_help_display()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> The current application object, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> for the default one.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>doc_id</code></em> :</span></p></td>
+<td> The name of the help file relative to the system's help domain
+(<a class="link" href="libgnome-gnome-program.html#GNOME-FILE-DOMAIN-HELP--CAPS"><span class="type">GNOME_FILE_DOMAIN_HELP</span></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
+<td> The name of the help document to display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>link_id</code></em> :</span></p></td>
+<td> Can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>. If set, refers to an anchor or section id within the
+requested document.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> instance that will hold the specifics of any error which
+occurs during processing, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise (in which case <em class="parameter"><code>error</code></em> will
+contain the actual error).
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_help_display_desktop_with_env ()">
+<a name="gnome-help-display-desktop-with-env"></a><h3>gnome_help_display_desktop_with_env ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_help_display_desktop_with_env (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *doc_id,
+                                                         const char *file_name,
+                                                         const char *link_id,
+                                                         char **envp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Like <a class="link" href="libgnome-gnome-help.html#gnome-help-display-desktop" title="gnome_help_display_desktop ()"><code class="function">gnome_help_display_desktop()</code></a>, but the the contents of <em class="parameter"><code>envp</code></em>
+will become the url viewer's environment rather than inheriting
+from the parents environment.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> The current application object, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> for the default one.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>doc_id</code></em> :</span></p></td>
+<td> The name of the help file relative to the system's help domain
+(<a class="link" href="libgnome-gnome-program.html#GNOME-FILE-DOMAIN-HELP--CAPS"><span class="type">GNOME_FILE_DOMAIN_HELP</span></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
+<td> The name of the help document to display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>link_id</code></em> :</span></p></td>
+<td> Can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>. If set, refers to an anchor or section id within the
+requested document.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>envp</code></em> :</span></p></td>
+<td> child's environment, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> to inherit parent's.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> instance that will hold the specifics of any error which
+occurs during processing, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise (in which case <em class="parameter"><code>error</code></em> will
+contain the actual error).
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" title="gnome_help_display_uri ()">
+<a name="gnome-help-display-uri"></a><h3>gnome_help_display_uri ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_help_display_uri              (const char *help_uri,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Displays <em class="parameter"><code>help_uri</code></em> in the user's preferred viewer. You should never need to
+call this function directly in code, since it is just a wrapper for
+<a class="link" href="libgnome-gnome-url.html#gnome-url-show" title="gnome_url_show ()"><code class="function">gnome_url_show()</code></a> and consequently the viewer used to display the results
+depends upon the scheme of the URI (so it is not strictly a help-only
+function).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>help_uri</code></em> :</span></p></td>
+<td> The URI to display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> instance that will hold the specifics of any error which
+occurs during processing, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise (in which case <em class="parameter"><code>error</code></em> will
+contain the actual error).
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_help_display_uri_with_env ()">
+<a name="gnome-help-display-uri-with-env"></a><h3>gnome_help_display_uri_with_env ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_help_display_uri_with_env     (const char *help_uri,
+                                                         char **envp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Like <a class="link" href="libgnome-gnome-help.html#gnome-help-display-uri" title="gnome_help_display_uri ()"><code class="function">gnome_help_display_uri()</code></a>, but the the contents of <em class="parameter"><code>envp</code></em>
+will become the help viewer's environment rather than inheriting
+from the parents environment.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>help_uri</code></em> :</span></p></td>
+<td> The URI to display.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>envp</code></em> :</span></p></td>
+<td> child's environment, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> to inherit parent's.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> instance that will hold the specifics of any error which
+occurs during processing, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> on success, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise (in which case <em class="parameter"><code>error</code></em> will
+contain the actual error).
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

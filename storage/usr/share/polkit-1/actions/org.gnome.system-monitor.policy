@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>The GNOME Project</vendor>
+  <vendor_url>http://online.gnome.org/application?id=gnome-system-monitor</vendor_url>
+  <icon_name>utilities-system-monitor</icon_name>
+
+  <action id="org.gnome.system-monitor.change-priority">
+    <description>Change priority of a process owned by another user</description>
+    <message>Changing the priority of a process owned by another user requires privileges</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.gnome.system-monitor.increase-own-priority">
+    <description>Increase the priority of a processes</description>
+    <message>Increasing the priority of one of your own processes requires privileges</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_self_keep</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.gnome.system-monitor.kill">
+    <description>Kill a process owned by another user</description>
+    <message>Killing a process owned by another user requires privileges</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+  </action>
+  
+</policyconfig>

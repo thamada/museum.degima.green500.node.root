@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>proctime</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libgtop Reference Manual">
+<link rel="up" href="libgtop-lib.html" title="Libgtop Library Reference">
+<link rel="prev" href="libgtop-procuid.html" title="procuid">
+<link rel="next" href="libgtop-signal.html" title="signal">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="libgtop-white-paper.html" title="White paper">
+<link rel="chapter" href="libgtop-lib.html" title="Libgtop Library Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgtop-procuid.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="libgtop-lib.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libgtop Reference Manual</th>
+<td><a accesskey="n" href="libgtop-signal.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgtop-proctime.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgtop-proctime.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="proctime">
+<a name="libgtop-proctime"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgtop-proctime.top_of_page"></a>proctime</span></h2>
+<p>proctime</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgtop-proctime.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glibtop/proctime.h&gt;
+
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-START-TIME--CAPS" title="GLIBTOP_PROC_TIME_START_TIME">GLIBTOP_PROC_TIME_START_TIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-RTIME--CAPS" title="GLIBTOP_PROC_TIME_RTIME">GLIBTOP_PROC_TIME_RTIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-UTIME--CAPS" title="GLIBTOP_PROC_TIME_UTIME">GLIBTOP_PROC_TIME_UTIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-STIME--CAPS" title="GLIBTOP_PROC_TIME_STIME">GLIBTOP_PROC_TIME_STIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-CUTIME--CAPS" title="GLIBTOP_PROC_TIME_CUTIME">GLIBTOP_PROC_TIME_CUTIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-CSTIME--CAPS" title="GLIBTOP_PROC_TIME_CSTIME">GLIBTOP_PROC_TIME_CSTIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-TIMEOUT--CAPS" title="GLIBTOP_PROC_TIME_TIMEOUT">GLIBTOP_PROC_TIME_TIMEOUT</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-IT-REAL-VALUE--CAPS" title="GLIBTOP_PROC_TIME_IT_REAL_VALUE">GLIBTOP_PROC_TIME_IT_REAL_VALUE</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-FREQUENCY--CAPS" title="GLIBTOP_PROC_TIME_FREQUENCY">GLIBTOP_PROC_TIME_FREQUENCY</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-XCPU-UTIME--CAPS" title="GLIBTOP_PROC_TIME_XCPU_UTIME">GLIBTOP_PROC_TIME_XCPU_UTIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-PROC-TIME-XCPU-STIME--CAPS" title="GLIBTOP_PROC_TIME_XCPU_STIME">GLIBTOP_PROC_TIME_XCPU_STIME</a>
+#define             <a class="link" href="libgtop-proctime.html#GLIBTOP-MAX-PROC-TIME--CAPS" title="GLIBTOP_MAX_PROC_TIME">GLIBTOP_MAX_PROC_TIME</a>
+                    <a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a>;
+void                <a class="link" href="libgtop-proctime.html#glibtop-get-proc-time" title="glibtop_get_proc_time ()">glibtop_get_proc_time</a>               (<a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);
+#define             <a class="link" href="libgtop-proctime.html#glibtop-get-proc-time-r" title="glibtop_get_proc_time_r">glibtop_get_proc_time_r</a>
+void                <a class="link" href="libgtop-proctime.html#glibtop-get-proc-time-l" title="glibtop_get_proc_time_l ()">glibtop_get_proc_time_l</a>             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);
+void                <a class="link" href="libgtop-proctime.html#glibtop-get-proc-time-p" title="glibtop_get_proc_time_p ()">glibtop_get_proc_time_p</a>             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);
+void                <a class="link" href="libgtop-proctime.html#glibtop-get-proc-time-s" title="glibtop_get_proc_time_s ()">glibtop_get_proc_time_s</a>             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgtop-proctime.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgtop-proctime.details"></a><h2>Details</h2>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_START_TIME">
+<a name="GLIBTOP-PROC-TIME-START-TIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_START_TIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_START_TIME	0
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_RTIME">
+<a name="GLIBTOP-PROC-TIME-RTIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_RTIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_RTIME		1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_UTIME">
+<a name="GLIBTOP-PROC-TIME-UTIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_UTIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_UTIME		2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_STIME">
+<a name="GLIBTOP-PROC-TIME-STIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_STIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_STIME		3
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_CUTIME">
+<a name="GLIBTOP-PROC-TIME-CUTIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_CUTIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_CUTIME	4
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_CSTIME">
+<a name="GLIBTOP-PROC-TIME-CSTIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_CSTIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_CSTIME	5
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_TIMEOUT">
+<a name="GLIBTOP-PROC-TIME-TIMEOUT--CAPS"></a><h3>GLIBTOP_PROC_TIME_TIMEOUT</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_TIMEOUT	6
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_IT_REAL_VALUE">
+<a name="GLIBTOP-PROC-TIME-IT-REAL-VALUE--CAPS"></a><h3>GLIBTOP_PROC_TIME_IT_REAL_VALUE</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_IT_REAL_VALUE	7
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_FREQUENCY">
+<a name="GLIBTOP-PROC-TIME-FREQUENCY--CAPS"></a><h3>GLIBTOP_PROC_TIME_FREQUENCY</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_FREQUENCY	8
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_XCPU_UTIME">
+<a name="GLIBTOP-PROC-TIME-XCPU-UTIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_XCPU_UTIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_XCPU_UTIME	9
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROC_TIME_XCPU_STIME">
+<a name="GLIBTOP-PROC-TIME-XCPU-STIME--CAPS"></a><h3>GLIBTOP_PROC_TIME_XCPU_STIME</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_TIME_XCPU_STIME	10
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MAX_PROC_TIME">
+<a name="GLIBTOP-MAX-PROC-TIME--CAPS"></a><h3>GLIBTOP_MAX_PROC_TIME</h3>
+<pre class="programlisting">#define GLIBTOP_MAX_PROC_TIME		11
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_proc_time">
+<a name="glibtop-proc-time"></a><h3>glibtop_proc_time</h3>
+<pre class="programlisting">typedef struct {
+	guint64	flags;
+	guint64 start_time;	/* start time of process --
+				 * seconds since 1-1-70 */
+	guint64 rtime;		/* real time accumulated by process */
+	guint64 utime;		/* user-mode CPU time accumulated by process */
+	guint64 stime;		/* kernel-mode CPU time accumulated by process */
+	guint64 cutime;		/* cumulative utime of process and
+				 * reaped children */
+	guint64 cstime;		/* cumulative stime of process and
+				 * reaped children */
+	guint64 timeout;	/* The time (in jiffies) of the process's
+				 * next timeout */
+	guint64 it_real_value;	/* The time (in jiffies) before the
+				 * next SIGALRM is sent to the process
+				 * due to an interval timer. */
+	guint64 frequency;	/* Tick frequency. */
+	guint64 xcpu_utime [GLIBTOP_NCPU];	/* utime and stime for all CPUs on */
+	guint64 xcpu_stime [GLIBTOP_NCPU];	/* SMP machines. */
+} glibtop_proc_time;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_time ()">
+<a name="glibtop-get-proc-time"></a><h3>glibtop_get_proc_time ()</h3>
+<pre class="programlisting">void                glibtop_get_proc_time               (<a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);</pre>
+<p>
+Please note that under Linux, <span class="type">start_time</span> value may be strange.
+Linux kernel defines <span class="type">INITIAL_JIFFIES</span> which implies a time
+shift. Because <span class="type">INITIAL_JIFFIES</span> is not user-space defined,
+we cannot use it to compute accurate <em class="parameter"><code>code</code></em>{start_time}. On Linux2.6,
+<span class="type">INITIAL_JIFFIES</span> is 300 so <span class="type">start_time</span> is 
+always 3s different from real start time of the given process. You 
+may also get shift results if your system clock is not synchronised 
+with your hardware clock. See <span class="command"><strong>man hwclock</strong></span>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td> Process id to get the user and tty information
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_time_r">
+<a name="glibtop-get-proc-time-r"></a><h3>glibtop_get_proc_time_r</h3>
+<pre class="programlisting">#define             glibtop_get_proc_time_r</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_time_l ()">
+<a name="glibtop-get-proc-time-l"></a><h3>glibtop_get_proc_time_l ()</h3>
+<pre class="programlisting">void                glibtop_get_proc_time_l             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_time_p ()">
+<a name="glibtop-get-proc-time-p"></a><h3>glibtop_get_proc_time_p ()</h3>
+<pre class="programlisting">void                glibtop_get_proc_time_p             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_time_s ()">
+<a name="glibtop-get-proc-time-s"></a><h3>glibtop_get_proc_time_s ()</h3>
+<pre class="programlisting">void                glibtop_get_proc_time_s             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proctime.html#glibtop-proc-time" title="glibtop_proc_time">glibtop_proc_time</a> *buf,
+                                                         pid_t pid);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

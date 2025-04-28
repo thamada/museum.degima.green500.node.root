@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 2. Using SystemTap</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="index.html" title="SystemTap Beginners Guide" /><link rel="prev" href="intro-systemtap-vs-others.html" title="1.2. SystemTap Capabilities" /><link rel="next" href="cross-compiling.html" title="2.2. Generating Instrumentation for Other Computers" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="intro-systemtap-vs-others.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="cross-compiling.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="chapter" title="Chapter 2. Using SystemTap" id="using-systemtap" lang="en-US"><div class="titlepage"><div><div><h2 class="title">Chapter 2. Using SystemTap</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="using-systemtap.html#using-setup">2.1. Installation and Setup</a></span></dt><dd><dl><dt><span class="section"><a href="using-systemtap.html#installproper">2.1.1. Installing SystemTap</a></span></dt><dt><span class="section"><a href="using-systemtap.html#install-kinfo">2.1.2. Installing Required Kernel Information RPMs</a></span></dt><dt><span class="section"><a href="using-systemtap.html#testing">2.1.3. Initial Testing</a></span></dt></dl></dd><dt><span class="section"><a href="cross-compiling.html">2.2. Generating Instrumentation for Other Computers</a></span></dt><dt><span class="section"><a href="using-usage.html">2.3. Running SystemTap Scripts</a></span></dt><dd><dl><dt><span class="section"><a href="using-usage.html#flight-recorder">2.3.1. SystemTap Flight Recorder Mode</a></span></dt></dl></dd></dl></div><a id="id728839" class="indexterm"></a><div class="para">
+		This chapter instructs users how to install SystemTap, and provides an introduction on how to run SystemTap scripts.
+	</div><div xml:lang="en-US" class="section" title="2.1. Installation and Setup" id="using-setup" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h2 class="title" id="using-setup">2.1. Installation and Setup</h2></div></div></div><a id="id728808" class="indexterm"></a><a id="id728797" class="indexterm"></a><div class="para">
+		To deploy SystemTap, you need to install the SystemTap packages along with the corresponding set of <code class="filename">-devel</code>, <code class="filename">-debuginfo</code> and <code class="filename">-debuginfo-common</code> packages for your kernel. If your system has multiple kernels installed, and you wish to use SystemTap on more than one kernel kernel, you will need to install the <code class="filename">-devel</code> and <code class="filename">-debuginfo</code> packages for <span class="emphasis"><em>each</em></span> of those kernel versions.
+	</div><div class="para">
+		These procedures will be discussed in detail in the following sections.
+	</div><div class="important" title="Important"><div class="admonition_header"><h2>Important</h2></div><div class="admonition"><div class="para">
+			Many users confuse <code class="filename">-debuginfo</code> with <code class="filename">-debug</code>. Remember that the deployment of SystemTap requires the installation of the <code class="filename">-debuginfo</code> package of the kernel, not the <code class="filename">-debug</code> version of the kernel.
+		</div></div></div><div class="section" title="2.1.1. Installing SystemTap" id="installproper"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="installproper">2.1.1. Installing SystemTap</h3></div></div></div><div class="para">
+			To deploy Systemtap, you will need to to install the following RPMs:
+		</div><a id="id728726" class="indexterm"></a><a id="id728684" class="indexterm"></a><a id="id728706" class="indexterm"></a><a id="id728696" class="indexterm"></a><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+					<code class="filename">systemtap</code>
+				</div></li><li class="listitem"><div class="para">
+					<code class="filename">systemtap-runtime</code>
+				</div></li></ul></div><div class="para">
+			Assuming that <code class="command">yum</code> is installed in the system, these two rpms can be installed with <code class="command">yum install systemtap systemtap-runtime</code>. Note that before you can use SystemTap, you will still need to install the required kernel information RPMs.
+		</div></div><div class="section" title="2.1.2. Installing Required Kernel Information RPMs" id="install-kinfo"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="install-kinfo">2.1.2. Installing Required Kernel Information RPMs</h3></div></div></div><a id="id728638" class="indexterm"></a><a id="id728633" class="indexterm"></a><a id="id728626" class="indexterm"></a><a id="id728616" class="indexterm"></a><a id="id728608" class="indexterm"></a><a id="id728596" class="indexterm"></a><div class="para">
+			SystemTap needs information about the kernel in order to place instrumentation in it (i.e. probe it). This information also allows SystemTap to generate the code for the instrumentation. This information is contained in the matching <code class="filename">-devel</code>, <code class="filename">-debuginfo</code>, and <code class="filename">-debuginfo-common</code> packages for your kernel. The necessary <code class="filename">-devel</code> and <code class="filename">-debuginfo</code> packages for the ordinary "vanilla" kernel are as follows:
+		</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+					<code class="filename">kernel-debuginfo</code>
+				</div></li><li class="listitem"><div class="para">
+					<code class="filename">kernel-debuginfo-common</code>
+				</div></li><li class="listitem"><div class="para">
+					<code class="filename">kernel-devel</code>
+				</div></li></ul></div><div class="para">
+			Likewise, the necessary packages for the PAE kernel would be <code class="filename">kernel-PAE-debuginfo</code>, <code class="filename">kernel-PAE-debuginfo-common</code>, and <code class="filename">kernel-PAE-devel</code>.
+		</div><a id="id674888" class="indexterm"></a><a id="id674878" class="indexterm"></a><a id="id674862" class="indexterm"></a><a id="id674858" class="indexterm"></a><div class="para">
+			To determine what kernel your system is currently using, use:
+		</div><pre class="screen">
+uname -r
+</pre><div class="para">
+			For example, if you wish to use SystemTap on kernel version <code class="filename">2.6.18-53.el5</code> on an i686 machine, then you would need to download and install the following RPMs:
+		</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+					<code class="filename">kernel-debuginfo-2.6.18-53.1.13.el5.i686.rpm</code>
+				</div></li><li class="listitem"><div class="para">
+					<code class="filename">kernel-debuginfo-common-2.6.18-53.1.13.el5.i686.rpm</code>
+				</div></li><li class="listitem"><div class="para">
+					<code class="filename">kernel-devel-2.6.18-53.1.13.el5.i686.rpm</code>
+				</div></li></ul></div><div class="important" title="Important"><div class="admonition_header"><h2>Important</h2></div><div class="admonition"><div class="para">
+				The version, variant, and architecture of the <code class="filename">-devel</code>, <code class="filename">-debuginfo</code> and <code class="filename">-debuginfo-common</code> packages must match the kernel you wish to probe with SystemTap <span class="emphasis"><em>exactly</em></span>.
+			</div></div></div><div class="para">
+			The easiest way to install the required kernel information packages is through <code class="command">yum install</code> and <code class="command">debuginfo-install</code>. <code class="command">debuginfo-install</code> is included with later versions of the <code class="filename">yum-utils</code> package (for example, version 1.1.10), and also requires an appropriate <code class="command">yum</code> repository from which to download and install <code class="command">-debuginfo</code>/<code class="filename">-debuginfo-common</code> packages.
+		</div><div class="para">
+			Most of the required kernel packages can be found at <a href="http://download.fedoraproject.org/pub/fedora/linux/releases/">http://download.fedoraproject.org/pub/fedora/linux/releases/</a>. Configure <code class="command">yum</code> accordingly by adding a new "debug" <code class="command">yum</code> repository file under <code class="filename">/etc/yum.repos.d</code> containing the following lines:
+		</div><pre class="programlisting">
+[fedora-debuginfo]
+name=Fedora $releasever - $basearch - Debug
+failovermethod=priority
+baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$basearch/debug/
+enabled=1
+</pre><div class="para">
+			After configuring <code class="command">yum</code> with the appropriate repository, you can now install the required <code class="filename">-devel</code>, <code class="filename">-debuginfo</code>, and <code class="filename">-debuginfo-common</code> packages for your kernel. To install the corresponding packages for a specific kernel, run the following commands:
+		</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+					<code class="command">yum install <em class="replaceable"><code>kernelname</code></em>-devel-<em class="replaceable"><code>version</code></em></code>
+				</div></li><li class="listitem"><div class="para">
+					<code class="command">debuginfo-install <em class="replaceable"><code>kernelname</code></em>-<em class="replaceable"><code>version</code></em></code>
+				</div></li></ul></div><div class="para">
+			Replace <code class="command"><em class="replaceable"><code>kernelname</code></em></code> with the appropriate kernel variant name (for example, <code class="filename">kernel-PAE</code>), and <code class="command"><em class="replaceable"><code>version</code></em></code> with the target kernel's version. For example, to install the required kernel information packages for the <code class="command">kernel-PAE-2.6.18-53.1.13.el5</code> kernel, run:
+		</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+					<code class="command">yum install kernel-PAE-devel-2.6.18-53.1.13.el5</code>
+				</div></li><li class="listitem"><div class="para">
+					<code class="command">debuginfo-install kernel-PAE-2.6.18-53.1.13.el5</code>
+				</div></li></ul></div><div class="para">
+			If you do not have <code class="command">yum</code> and <code class="command">yum-utils</code> installed (and you are unable to install them), you will have to manually download and install the required kernel information packages. To generate the URL from which to download the required packages, use the following script:
+		</div><a id="id740702" class="indexterm"></a><a id="id2179992" class="indexterm"></a><div class="formalpara"><h5 class="formalpara" id="id740832">fedoradebugurl.sh</h5>
+				
+<pre class="programlisting">
+#! /bin/bash
+echo -n "Enter nvr of kernel-debuginfo (e.g. 2.6.25-14.fc9.x86_64) " ; \
+read NVR; \
+BASE=`uname -m` ; \
+NVR=`echo $NVR | sed s/.$BASE//` ; \
+VERSION=`echo $NVR | awk -F- '{print $1}'` ; \
+RELEASE=`echo $NVR | awk -F- '{print $2}'` ; \
+echo "http://kojipkgs.fedoraproject.org/\
+packages/kernel/$VERSION/$RELEASE/$BASE/"
+
+</pre>
+			</div><div class="para">
+			Once you have manually downloaded the required packages to the machine, install the RPMs by running <code class="command">rpm --force -ivh <em class="replaceable"><code>package_names</code></em></code>.
+		</div></div><div class="section" title="2.1.3. Initial Testing" id="testing"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="testing">2.1.3. Initial Testing</h3></div></div></div><a id="id667079" class="indexterm"></a><a id="id656663" class="indexterm"></a><a id="id2224780" class="indexterm"></a><div class="para">
+			If you are currently using the kernel you wish to probe with SystemTap, you can immediately test whether the deployment was successful. If not, you will need to reboot and load the appropriate kernel.
+		</div><div class="para">
+			To start the test, run the command <code class="command">stap -v -e 'probe vfs.read {printf("read performed\n"); exit()}'</code>. This command simply instructs SystemTap to print <code class="computeroutput">read performed</code> then exit properly once a virtual file system read is detected. If the SystemTap deployment was successful, you should get output similar to the following:
+		</div><pre class="screen">
+Pass 1: parsed user script and 45 library script(s) in 340usr/0sys/358real ms.
+Pass 2: analyzed script: 1 probe(s), 1 function(s), 0 embed(s), 0 global(s) in 290usr/260sys/568real ms.
+Pass 3: translated to C into "/tmp/stapiArgLX/stap_e5886fa50499994e6a87aacdc43cd392_399.c" in 490usr/430sys/938real ms.
+Pass 4: compiled C into "stap_e5886fa50499994e6a87aacdc43cd392_399.ko" in 3310usr/430sys/3714real ms.
+Pass 5: starting run.
+read performed
+Pass 5: run completed in 10usr/40sys/73real ms.
+</pre><div class="para">
+			The last three lines of the output (i.e. beginning with <code class="computeroutput">Pass 5</code>) indicate that SystemTap was able to successfully create the instrumentation to probe the kernel, run the instrumentation, detect the event being probed (in this case, a virtual file system read), and execute a valid handler (print text then close it with no errors).
+		</div></div></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="intro-systemtap-vs-others.html"><strong>Prev</strong>1.2. SystemTap Capabilities</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="cross-compiling.html"><strong>Next</strong>2.2. Generating Instrumentation for Other Compute...</a></li></ul></body></html>

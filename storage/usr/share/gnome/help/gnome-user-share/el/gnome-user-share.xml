@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.26">
+<!ENTITY app "gnome-user-share">
+]>
+<article id="index" lang="el">
+  <articleinfo>
+	 <title>Εγχειρίδιο κοινής χρήσης αρχείων</title>
+	 <copyright>
+		<year>2009</year>
+		<holder>Red Hat, Inc.</holder>
+         </copyright>
+
+	 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+	 <authorgroup>
+           <author role="maintainer">
+             <firstname>Matthias</firstname>
+             <surname>Clasen</surname>
+           </author>
+	 </authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+		<revision>
+		  <revnumber>1.0</revnumber>
+		  <date>2009</date>
+		  <revdescription>
+			 <para role="author">Matthias Clasen <email>mclasen@redhat.com</email></para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Αυτό το εγχειρίδιο περιγράφει την έκδοση 2.26 του gnome-user-share.</releaseinfo>
+	 <legalnotice>
+		<title>Ανάδραση</title>
+		<para>Για να αναφέρετε ένα σφάλμα ή να κάνετε μια πρόταση σχετικά με την εφαρμογή gnome-user-share ή αυτό το εγχειρίδιο, ακολουθήστε τις οδηγίες στη <ulink url="ghelp:user-guide?feedback-bugs" type="help">Σελίδα ανάδρασης του GNOME</ulink>.</para>
+	 </legalnotice>
+    <abstract role="description">
+      <para>Το gnome-user-share είναι μια υπηρεσία συνεδρίας που καθιστά εύκολη την κοινή χρήση αρχείων μεταξύ πολλών υπολογιστών.</para>
+    </abstract>
+  </articleinfo>
+  <indexterm><primary>gnome-user-share</primary></indexterm>
+  <indexterm><primary>κοινή χρήση αρχείων</primary></indexterm>
+  <indexterm><primary>κοινή χρήση</primary></indexterm>
+
+  <sect1 id="gnome-user-share-intro">
+	 <title>Εισαγωγή</title>
+	 <para>Το gnome-user-share είναι μια υπηρεσία που εξάγει τα περιεχομένα του φακέλου <filename>Δημόσιο</filename> του αρχικού (προσωπικού) σας καταλόγου, ώστε να μπορούν να προσπελασθούν εύκολα από άλλους υπολογιστές στο ίδιο τοπικό δίκτυο. Στους άλλους υπολογιστές, ο κοινόχρηστος φάκελος θα εμφανίζεται με ένα όνομα όπως 'κοινόχρηστα αρχεία του <replaceable>user</replaceable>' στο παράθυρο Δίκτυο του περιηγή αρχείων <application>nautilus</application>, όπου το <replaceable>user</replaceable> θα έχει αντικατασταθεί από το όνομα χρήστη σας.</para>
+	 <para>Το gnome-user-share χρησιμοποιεί ένα εξυπηρετητή WebDAV για κάνει κοινόχρηστο το φάκελο <filename>Δημόσιο</filename> και κοινοποιεί την κοινή χρήση στο τοπικό δίκτυο χρησιμοποιώντας το mDNS.</para>
+         <para>Επιλέον, το gnome-user-share μπορεί να κάνει τα κοινόχρηστα αρχεία διαθέσιμα με ObexFTP μέσω Bluetooth, και να λαμβάνει αρχεία που αποστέλλονται στον υπολογιστή σας μέσω Bluetooth με το ObexPush.</para>
+  </sect1>
+
+  <sect1 id="gnome-user-share-getting-started">
+    <title>Ξεκινώντας</title>
+
+    <sect2 id="gnome-user-share-start">
+       <title>Εκκίνηση του gnome-user-share</title>
+
+       <para>
+         The gnome-user-share service is normally started by <application>gnome-session</application> when you log in. You can change this by opening <menuchoice><guimenu>Preferences</guimenu><guimenu>Startup Applications</guimenu></menuchoice> in the <guimenu>System</guimenu> menu, and modifying the 'User Sharing' entry in the list of startup programs.
+       </para>
+
+       <para>Για να ρυθμίσετε διάφορες παραμέτρους της κοινής χρήσης αρχείων, χρησιμοποιείστε τις Προτιμήσεις κοινής χρήσης, που βρίσκονται στο μενού <guimenu>Σύστημα</guimenu> στο <guimenu>Προτιμήσεις</guimenu> <guimenu>Κοινή χρήση προσωπικών αρχείων</guimenu>.</para>
+       <figure id="file-sharing-preferences">
+         <title>Προτιμήσεις κοινής χρήσης αρχείων</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/file-sharing-preferences.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+ 
+     </sect2>
+     <sect2 id="gnome-user-share-enabling-sharing">
+       <title>Ενεργοποίηση κοινής χρήσης αρχείων μέσω του δικτύου</title>
+       <para>Ανοίξτε τις Προτιμήσεις κοινής χρήσης αρχείων από το <menuchoice><guimenu>Προτιμήσεις</guimenu><guimenu>Κοινή χρήση αρχείων</guimenu></menuchoice> στο μενού <guimenu>Σύστημα</guimenu>.</para>
+       <figure id="sharing-over-the-network">
+         <title>Κοινή χρήση αρχείων μέσω δικτύου</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-the-network.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Για να ενεργοποιήσετε την κοινή χρήση αρχείων μέσω  WebDAV, χρησιμοποιήστε το κουτάκι <guilabel>Κοινή χρήση δημόσιων αρχείων στο δίκτυο</guilabel>. Όταν είναι ενεργή η κοινή χρήση αρχείων, οι έλεγχοι για προστασία με κωδικό επιτρέπουν να ορισθεί ένας κωδικός πρόσβασης, ο οποίος πρέπει να ορισθεί πριν ένας χρήστης σε άλλο υπολογιστή μπορεί να προσπελάσει τα κοινόχρηστα αρχεία. <note><para>Μερικές διαμορφώσεις του τείχους προστασίας στον τοπικό υπολογιστή μπορεί να προκαλέσουν προβλήματα στην δημοσιοποίηση και την πρόσβαση στα κοινόχρηστα αρχεία. Συμβουλευτείτε το διαχειριστή του συστήματός σας για περισσότερες λεπτομέρειες.</para></note><itemizedlist>
+           <listitem>
+              <para>Επιλέξτε <guilabel>Ποτέ</guilabel> για να επιτρέψετε σε όλους να διαβάζουν ή να γράφουν ελεύθερα αρχεία στον κοινόχρηστο φάκελο.</para>
+           </listitem>
+           <listitem>
+              <para>Επιλέξτε <guilabel>Πάντα</guilabel> για να ζητείται ο κωδικός πρόσβασης για προβολή ή εγγραφή αρχείων στον κοινόχρηστο φάκελο.</para>
+           </listitem>
+           <listitem>
+              <para>Επιλέξτε <guilabel>Κατά την εγγραφή αρχείων</guilabel> για να επιτρέψετε σε όλους να διαβάζουν ελεύθερα αρχεία του κοινόχρηστου φακέλου αλλά να ζητείται ο κωδικός πρόσβασης κατά την εγγραφή αρχείων.</para>
+           </listitem>
+         </itemizedlist><note><para>Όταν ορίζετε κωδικό πρόσβασης, πρέπει να τον δώσετε σε όλους τους χρήστες που επιθυμείτε να έχουν πρόσβαση στα κοινόχρηστα αρχεία. Επομένως, θα πρέπει να χρησιμοποιήσετε διαφορετικό κωδικό από άλλους κωδικούς που τυχόν χρησιμοποιείτε.</para></note></para>  
+     </sect2>
+
+     <sect2 id="gnome-user-share-enabling-bluetooth">
+       <title>Ενεργοποίηση κοινής χρήσης αρχείων μέσω Bluetooth</title>
+       <para>Ανοίξτε τις Προτιμήσεις κοινής χρήσης αρχείων από το <menuchoice><guimenu>Προτιμήσεις</guimenu><guimenu>Κοινή χρήση αρχείων</guimenu></menuchoice> στο μενού <guimenu>Σύστημα</guimenu>.</para>
+       <figure id="sharing-over-bluetooth">
+         <title>Κοινή χρήση αρχείων μέσω Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Για να ενεργοποιήσετε την κοινή χρήση αρχείων μέσω Bluetooth, χρησιμοποιήστε το κουτί <guilabel>Κοινή χρήση δημόσιων αρχείων μέσω Bluetooth</guilabel>. Για να επιτρέψετε σε απομακρυσμένες συσκευές Bluetooth να διαγράφουν αρχεία στον κοινόχρηστο φάκελό σας, χρησιμοποιήστε το κουτάκι <guilabel>Επιτρέπεται η διαγραφή αρχείων από απομακρυσμένες συσκευές</guilabel>. Για να επιτρέψετε σε απομακρυσμένες συσκευές Bluetooth να προσπελάσουν τα κοινόχρηστα αρχεία σας ακόμα και αν δεν είναι συζευγμένες με τον υπολογιστή σας, απο-επιλέξτε το κουτάκι <guilabel>Υποχρεωτική σύζευξη των απομακρυσμένων συσκευών με αυτό τον υπολογιστή</guilabel>. <note><para>Όταν επιτρέπετε την πρόσβαση μη συζευγμένων απομακρυσμένων συσκευών στα κοινόχρηστα αρχεία σας, οποιοσδήποτε με κινητό τηλέφωνο που έχει ενεργοποιημένο το Bluetooth και βρίσκεται στην εμβέλεια του υπολογιστή σας μπορεί να προσπελάσει και πιθανώς να τροποποιήσει τα κοινόχρηστα αρχεία σας.</para></note></para>
+     </sect2>
+
+     <sect2 id="gnome-user-share-bluetooth-receiving">
+       <title>Λήψη αρχείων μέσω Bluetooth</title>
+       <para>Ανοίξτε τις Προτιμήσεις κοινής χρήσης αρχείων από το <menuchoice><guimenu>Προτιμήσεις</guimenu><guimenu>Κοινή χρήση αρχείων</guimenu></menuchoice> στο μενού <guimenu>Σύστημα</guimenu>.</para>
+       <figure id="receiving-over-bluetooth">
+         <title>Λήψη αρχείων μέσω Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/receiving-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Για να επιτρέψετε σε απομακρυσμένες συσκευές Bluetooth να στέλνουν αρχεία στον υπολογιστή σας, επιλέξτε το <guilabel>Λήψη αρχείων μέσω Bluetooth  στο φάκελο Λήψεις</guilabel>. Τα ληφθέντα αρχεία θα αποθηκεύνοται στο φάκελο <filename>Λήψεις</filename> στον προσωπικό σας κατάλογο. Όταν είναι ενεργοποιημένη η λήψη αρχείων, η επιλογή <guilabel>Αποδοχή αρχείων</guilabel> σας επιτρέπει να καθορίσετε σε ποιες απομακρυσμένες συσκευές επιτρέπεται η αποστολή αρχείων.</para>
+        <para>Χρησιμοποιήστε το <guilabel>Ειδοποίηση για ληφθέντα αρχεία</guilabel> για να επιλέξετε αν θέλετε να ειδοποιείστε όποτε λαμβάνεται ένα αρχείο μέσω Bluetooth.</para>
+     </sect2>
+  </sect1>
+
+</article>

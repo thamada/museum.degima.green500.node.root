@@ -1,0 +1,376 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>cpu</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libgtop Reference Manual">
+<link rel="up" href="libgtop-lib.html" title="Libgtop Library Reference">
+<link rel="prev" href="libgtop-msg-limits.html" title="msg_limits">
+<link rel="next" href="libgtop-swap.html" title="swap">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="libgtop-white-paper.html" title="White paper">
+<link rel="chapter" href="libgtop-lib.html" title="Libgtop Library Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgtop-msg-limits.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="libgtop-lib.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libgtop Reference Manual</th>
+<td><a accesskey="n" href="libgtop-swap.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgtop-cpu.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgtop-cpu.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="cpu">
+<a name="libgtop-cpu"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgtop-cpu.top_of_page"></a>cpu</span></h2>
+<p>cpu</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgtop-cpu.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glibtop/cpu.h&gt;
+
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-TOTAL--CAPS" title="GLIBTOP_CPU_TOTAL">GLIBTOP_CPU_TOTAL</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-USER--CAPS" title="GLIBTOP_CPU_USER">GLIBTOP_CPU_USER</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-NICE--CAPS" title="GLIBTOP_CPU_NICE">GLIBTOP_CPU_NICE</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-SYS--CAPS" title="GLIBTOP_CPU_SYS">GLIBTOP_CPU_SYS</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-IDLE--CAPS" title="GLIBTOP_CPU_IDLE">GLIBTOP_CPU_IDLE</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-FREQUENCY--CAPS" title="GLIBTOP_CPU_FREQUENCY">GLIBTOP_CPU_FREQUENCY</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-TOTAL--CAPS" title="GLIBTOP_XCPU_TOTAL">GLIBTOP_XCPU_TOTAL</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-USER--CAPS" title="GLIBTOP_XCPU_USER">GLIBTOP_XCPU_USER</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-NICE--CAPS" title="GLIBTOP_XCPU_NICE">GLIBTOP_XCPU_NICE</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-SYS--CAPS" title="GLIBTOP_XCPU_SYS">GLIBTOP_XCPU_SYS</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-IDLE--CAPS" title="GLIBTOP_XCPU_IDLE">GLIBTOP_XCPU_IDLE</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-FLAGS--CAPS" title="GLIBTOP_XCPU_FLAGS">GLIBTOP_XCPU_FLAGS</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-IOWAIT--CAPS" title="GLIBTOP_CPU_IOWAIT">GLIBTOP_CPU_IOWAIT</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-IRQ--CAPS" title="GLIBTOP_CPU_IRQ">GLIBTOP_CPU_IRQ</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-CPU-SOFTIRQ--CAPS" title="GLIBTOP_CPU_SOFTIRQ">GLIBTOP_CPU_SOFTIRQ</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-IOWAIT--CAPS" title="GLIBTOP_XCPU_IOWAIT">GLIBTOP_XCPU_IOWAIT</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-IRQ--CAPS" title="GLIBTOP_XCPU_IRQ">GLIBTOP_XCPU_IRQ</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-XCPU-SOFTIRQ--CAPS" title="GLIBTOP_XCPU_SOFTIRQ">GLIBTOP_XCPU_SOFTIRQ</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-MAX-CPU--CAPS" title="GLIBTOP_MAX_CPU">GLIBTOP_MAX_CPU</a>
+#define             <a class="link" href="libgtop-cpu.html#GLIBTOP-NCPU--CAPS" title="GLIBTOP_NCPU">GLIBTOP_NCPU</a>
+                    <a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a>;
+void                <a class="link" href="libgtop-cpu.html#glibtop-get-cpu" title="glibtop_get_cpu ()">glibtop_get_cpu</a>                     (<a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);
+#define             <a class="link" href="libgtop-cpu.html#glibtop-get-cpu-r" title="glibtop_get_cpu_r">glibtop_get_cpu_r</a>
+void                <a class="link" href="libgtop-cpu.html#glibtop-get-cpu-l" title="glibtop_get_cpu_l ()">glibtop_get_cpu_l</a>                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);
+void                <a class="link" href="libgtop-cpu.html#glibtop-get-cpu-p" title="glibtop_get_cpu_p ()">glibtop_get_cpu_p</a>                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);
+void                <a class="link" href="libgtop-cpu.html#glibtop-get-cpu-s" title="glibtop_get_cpu_s ()">glibtop_get_cpu_s</a>                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgtop-cpu.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgtop-cpu.details"></a><h2>Details</h2>
+<div class="refsect2" title="GLIBTOP_CPU_TOTAL">
+<a name="GLIBTOP-CPU-TOTAL--CAPS"></a><h3>GLIBTOP_CPU_TOTAL</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_TOTAL	0
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_USER">
+<a name="GLIBTOP-CPU-USER--CAPS"></a><h3>GLIBTOP_CPU_USER</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_USER	1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_NICE">
+<a name="GLIBTOP-CPU-NICE--CAPS"></a><h3>GLIBTOP_CPU_NICE</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_NICE	2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_SYS">
+<a name="GLIBTOP-CPU-SYS--CAPS"></a><h3>GLIBTOP_CPU_SYS</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_SYS		3
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_IDLE">
+<a name="GLIBTOP-CPU-IDLE--CAPS"></a><h3>GLIBTOP_CPU_IDLE</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_IDLE	4
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_FREQUENCY">
+<a name="GLIBTOP-CPU-FREQUENCY--CAPS"></a><h3>GLIBTOP_CPU_FREQUENCY</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_FREQUENCY	5
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_TOTAL">
+<a name="GLIBTOP-XCPU-TOTAL--CAPS"></a><h3>GLIBTOP_XCPU_TOTAL</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_TOTAL	6
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_USER">
+<a name="GLIBTOP-XCPU-USER--CAPS"></a><h3>GLIBTOP_XCPU_USER</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_USER	7
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_NICE">
+<a name="GLIBTOP-XCPU-NICE--CAPS"></a><h3>GLIBTOP_XCPU_NICE</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_NICE	8
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_SYS">
+<a name="GLIBTOP-XCPU-SYS--CAPS"></a><h3>GLIBTOP_XCPU_SYS</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_SYS	9
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_IDLE">
+<a name="GLIBTOP-XCPU-IDLE--CAPS"></a><h3>GLIBTOP_XCPU_IDLE</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_IDLE	10
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_FLAGS">
+<a name="GLIBTOP-XCPU-FLAGS--CAPS"></a><h3>GLIBTOP_XCPU_FLAGS</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_FLAGS	11
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_IOWAIT">
+<a name="GLIBTOP-CPU-IOWAIT--CAPS"></a><h3>GLIBTOP_CPU_IOWAIT</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_IOWAIT	12
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_IRQ">
+<a name="GLIBTOP-CPU-IRQ--CAPS"></a><h3>GLIBTOP_CPU_IRQ</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_IRQ		13
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CPU_SOFTIRQ">
+<a name="GLIBTOP-CPU-SOFTIRQ--CAPS"></a><h3>GLIBTOP_CPU_SOFTIRQ</h3>
+<pre class="programlisting">#define GLIBTOP_CPU_SOFTIRQ	14
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_IOWAIT">
+<a name="GLIBTOP-XCPU-IOWAIT--CAPS"></a><h3>GLIBTOP_XCPU_IOWAIT</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_IOWAIT	15
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_IRQ">
+<a name="GLIBTOP-XCPU-IRQ--CAPS"></a><h3>GLIBTOP_XCPU_IRQ</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_IRQ	16
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_XCPU_SOFTIRQ">
+<a name="GLIBTOP-XCPU-SOFTIRQ--CAPS"></a><h3>GLIBTOP_XCPU_SOFTIRQ</h3>
+<pre class="programlisting">#define GLIBTOP_XCPU_SOFTIRQ	17
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MAX_CPU">
+<a name="GLIBTOP-MAX-CPU--CAPS"></a><h3>GLIBTOP_MAX_CPU</h3>
+<pre class="programlisting">#define GLIBTOP_MAX_CPU		18
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_NCPU">
+<a name="GLIBTOP-NCPU--CAPS"></a><h3>GLIBTOP_NCPU</h3>
+<pre class="programlisting">#define GLIBTOP_NCPU		32
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_cpu">
+<a name="glibtop-cpu"></a><h3>glibtop_cpu</h3>
+<pre class="programlisting">typedef struct {
+	guint64	flags;
+	guint64 total;				/* GLIBTOP_CPU_TOTAL		*/
+	guint64 user;				/* GLIBTOP_CPU_USER		*/
+	guint64 nice;				/* GLIBTOP_CPU_NICE		*/
+	guint64 sys;				/* GLIBTOP_CPU_SYS		*/
+	guint64 idle;				/* GLIBTOP_CPU_IDLE		*/
+	guint64 iowait;				/* GLIBTOP_CPU_IOWAIT		*/
+	guint64 irq;				/* GLIBTOP_CPU_IRQ		*/
+	guint64 softirq;			/* GLIBTOP_CPU_SOFTIRQ		*/
+	guint64 frequency;			/* GLIBTOP_CPU_FREQUENCY	*/
+	guint64 xcpu_total [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_TOTAL		*/
+	guint64 xcpu_user [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_USER		*/
+	guint64 xcpu_nice [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_NICE		*/
+	guint64 xcpu_sys  [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_SYS		*/
+	guint64 xcpu_idle [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_IDLE		*/
+	guint64 xcpu_iowait [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_IOWAIT		*/
+	guint64 xcpu_irq [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_IRQ		*/
+	guint64 xcpu_softirq  [GLIBTOP_NCPU];	/* GLIBTOP_XCPU_SOFTIRQ		*/
+	guint64 xcpu_flags;	                /* GLIBTOP_XCPU_IDLE		*/
+} glibtop_cpu;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_cpu ()">
+<a name="glibtop-get-cpu"></a><h3>glibtop_get_cpu ()</h3>
+<pre class="programlisting">void                glibtop_get_cpu                     (<a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);</pre>
+<p>
+Get the CPU usage.
+</p>
+<p>
+All CPU units are measured in <span class="type">jiffies</span> which are normally
+1/100th of a second (in which case <span class="type">frequency</span> equals 100),
+but can also be in any other unit. To get seconds, divide them by 
+<span class="type">frequency</span>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td> A location to return the CPU usage.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_cpu_r">
+<a name="glibtop-get-cpu-r"></a><h3>glibtop_get_cpu_r</h3>
+<pre class="programlisting">#define             glibtop_get_cpu_r</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_cpu_l ()">
+<a name="glibtop-get-cpu-l"></a><h3>glibtop_get_cpu_l ()</h3>
+<pre class="programlisting">void                glibtop_get_cpu_l                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_cpu_p ()">
+<a name="glibtop-get-cpu-p"></a><h3>glibtop_get_cpu_p ()</h3>
+<pre class="programlisting">void                glibtop_get_cpu_p                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_cpu_s ()">
+<a name="glibtop-get-cpu-s"></a><h3>glibtop_get_cpu_s ()</h3>
+<pre class="programlisting">void                glibtop_get_cpu_s                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-cpu.html#glibtop-cpu" title="glibtop_cpu">glibtop_cpu</a> *buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

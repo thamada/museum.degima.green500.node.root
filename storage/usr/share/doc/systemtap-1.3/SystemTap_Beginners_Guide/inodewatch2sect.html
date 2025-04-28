@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.2.6. Monitoring Changes to File Attributes</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="mainsect-disk.html" title="4.2. Disk" /><link rel="prev" href="inodewatchsect.html" title="4.2.5. Monitoring Reads and Writes to a File" /><link rel="next" href="ioblktimesect.html" title="4.2.7. Periodically Print I/O Block Time" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="inodewatchsect.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="ioblktimesect.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="4.2.6. Monitoring Changes to File Attributes" id="inodewatch2sect" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="inodewatch2sect">4.2.6. Monitoring Changes to File Attributes</h3></div></div></div><a id="id2221626" class="indexterm"></a><a id="id2179178" class="indexterm"></a><a id="id666246" class="indexterm"></a><a id="id664492" class="indexterm"></a><a id="id2221651" class="indexterm"></a><div class="para">
+		This section describes how to monitor if any processes are changing the attributes of a targeted file, in real time.
+	</div><div class="formalpara" id="inodewatch2"><h5 class="formalpara">inodewatch2-simple.stp</h5>
+			
+<pre class="programlisting">
+global ATTR_MODE = 1&#13;
+&#13;
+probe kernel.function("inode_setattr") {&#13;
+  dev_nr = $inode-&gt;i_sb-&gt;s_dev&#13;
+  inode_nr = $inode-&gt;i_ino&#13;
+&#13;
+  if (dev_nr == ($1 &lt;&lt; 20 | $2) # major/minor device&#13;
+      &amp;&amp; inode_nr == $3&#13;
+      &amp;&amp; $attr-&gt;ia_valid &amp; ATTR_MODE)&#13;
+    printf ("%s(%d) %s 0x%x/%u %o %d\n",&#13;
+      execname(), pid(), probefunc(), dev_nr, inode_nr, $attr-&gt;ia_mode, uid())&#13;
+}&#13;
+
+</pre>
+		</div><div class="para">
+		Like <a class="xref" href="inodewatchsect.html#inodewatch" title="inodewatch-simple.stp">inodewatch-simple.stp</a> from <a class="xref" href="inodewatchsect.html" title="4.2.5. Monitoring Reads and Writes to a File">Section 4.2.5, “Monitoring Reads and Writes to a File”</a>, <a class="xref" href="inodewatch2sect.html#inodewatch2" title="inodewatch2-simple.stp">inodewatch2-simple.stp</a> takes the targeted file's device number (in integer format) and <code class="command">inode</code> number as arguments. For more information on how to retrieve this information, refer to <a class="xref" href="inodewatchsect.html" title="4.2.5. Monitoring Reads and Writes to a File">Section 4.2.5, “Monitoring Reads and Writes to a File”</a>.
+	</div><div class="para">
+		The output for <a class="xref" href="inodewatch2sect.html#inodewatch2" title="inodewatch2-simple.stp">inodewatch2-simple.stp</a> is similar to that of <a class="xref" href="inodewatchsect.html#inodewatch" title="inodewatch-simple.stp">inodewatch-simple.stp</a>, except that <a class="xref" href="inodewatch2sect.html#inodewatch2" title="inodewatch2-simple.stp">inodewatch2-simple.stp</a> also contains the attribute changes to the monitored file, as well as the ID of the user responsible (<code class="command">uid()</code>). <a class="xref" href="inodewatch2sect.html#inodewatch2output" title="Example 4.11. inodewatch2-simple.stp Sample Output">Example 4.11, “inodewatch2-simple.stp Sample Output”</a> shows the output of <a class="xref" href="inodewatch2sect.html#inodewatch2" title="inodewatch2-simple.stp">inodewatch2-simple.stp</a> while monitoring <code class="filename">/home/joe/bigfile</code> when user <code class="computeroutput">joe</code> executes <code class="command">chmod 777 /home/joe/bigfile</code> and <code class="command">chmod 666 /home/joe/bigfile</code>.
+	</div><div class="example" title="Example 4.11. inodewatch2-simple.stp Sample Output" id="inodewatch2output"><h6>Example 4.11. <a class="xref" href="inodewatch2sect.html#inodewatch2" title="inodewatch2-simple.stp">inodewatch2-simple.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+chmod(17448) inode_setattr 0x800005/6011835 100777 500
+chmod(17449) inode_setattr 0x800005/6011835 100666 500
+</pre></div></div><br class="example-break" /></div><ul class="docnav"><li class="previous"><a accesskey="p" href="inodewatchsect.html"><strong>Prev</strong>4.2.5. Monitoring Reads and Writes to a File</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="ioblktimesect.html"><strong>Next</strong>4.2.7. Periodically Print I/O Block Time</a></li></ul></body></html>

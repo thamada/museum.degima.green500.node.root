@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy for Linux/x86 (vers 1st November 2003), see www.w3.org">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>Installing the ATI Proprietary Linux Driver</title>
+  <meta name="GENERATOR" content="OpenOffice.org 1.1.0 (Linux)">
+  <meta name="CREATED" content="20031216;10043800">
+  <meta name="CHANGED" content="20031216;10431200">
+  <style type="text/css">
+  <!--
+        .readthis { background-color: #ECECEC; }
+        -->
+  </style>
+</head>
+
+<body lang="en-US" dir="ltr">
+<table bgcolor="#FFFFFF"><tr><td>
+
+  <p><font size="+1"><b><a name="top"></a>Installation Instructions<br>
+  for the ATI Proprietary Linux Driver</b></font></p>
+  <hr>
+
+  <p><b>Contents</b></p>
+
+  <ul>
+    <li><a href="#preparation">Before you install</a></li>
+    <li><a href="#rpminstall">Installation using RPM</a></li>
+    <li><a href="#issues">Possible Installation Issues</a></li>
+    <li><a href="#advanced">Advanced Installation Topics</a></li>
+  </ul>
+
+  <p><a name="preparation"></a>&nbsp;</p>
+
+  <p><b>Before you install</b></p>
+
+  <p>Make sure the following software is already installed on your system:</p>
+
+  <ul>
+    <li>glibc version 2.2 or 2.3</li>
+    <li>one of the following X Window Systems</li>
+    <ul>
+      <li>XFree86 version 4.3.0</li>
+      <li>XOrg 6.8.x, 6.9.x, 7.0.x</li>
+    </ul>
+  </ul>
+
+  <p>Download the correct ATI driver package for the X server version you have installed. If you are not sure which, you may download and run the following script to make sure:</p>
+
+  <ul>
+    <li><a href="http://www2.ati.com/drivers/Check.sh">Check.sh</a></li>
+  </ul>
+
+  <p><a name="rpminstall"></a>&nbsp;</p>
+
+  <p><b>Installation using RPM</b></p>
+
+  <p>For each of these steps you will have to be logged on as the <code>root</code> user.</p>
+
+  <ol>
+    <li>
+      <p><code>cd</code> to the directory containing the ATI Driver rpm package</p>
+    </li>
+
+    <li>
+      <p>Issue the following command:</p>
+
+      <blockquote>
+        <code>rpm -Uh --force &lt;ati_package_name&gt;.rpm</code>
+      </blockquote>
+
+      <p>Note any error messages that may occur while installing (see below)</p>
+    </li>
+
+    <li>
+      <p>Run the <code>fglrxconfig</code> utility to configure the driver</p>
+
+      <ul>
+        <li>Answer the questions as prompted</li>
+
+        <li>When asked to generate an XF86Config file, answer <code>y</code></li>
+      </ul>
+    </li>
+
+    <li>
+      <p>Restart and log into X-Windows</p>
+    </li>
+
+    <li>
+      <p>Run <code>fglrxinfo</code> to verify the driver is installed correctly</p>
+    </li>
+  </ol>
+
+  <p>If the OpenGL vendor string is "ATI Technologies Inc", then your ATI drivers are installed and configured correctly.</p>
+
+  <p>Otherwise, if <code>fglrxinfo</code> indicates that software rendering is being used, then you may want to repeat the steps listed above, while paying careful attention to the following:</p>
+
+  <ul>
+    <li>Any error messages during install (see below)</li>
+
+    <li>All answers given during <code>fglrxconfig</code></li>
+  </ul>
+
+  <p><a name="issues"></a>&nbsp;</p>
+
+  <p><b>The following messages may appear while installing</b></p>
+
+  <ul>
+  	<li><a href="articles/4478.html">&quot;Warning: loading fglrx.o will taint the kernel&quot;</a></li>
+    <li><a href="articles/4475.html">&quot;no kernel module build environment&quot;</a></li>
+    <li><a href="articles/nomembercount.html">"structure has no member named `count'" message during RPM install</a></li>
+    <li><a href="articles/4479.html">&quot;conflicts with file from package XFree86-Mesa-libGL-4.3.0-2&quot;</a></li>
+    <li><a href="articles/4480.html">&quot;The QT based control panel application did not load in any version&quot;</a></li>
+    <li><a href="articles/4481.html">unresolved symbols</a></li>
+  </ul>
+
+  <p><a name="advanced"></a>&nbsp;</p>
+
+  <p><b>Advanced Installation Topics</b></p>
+
+  <p>How can I:</p>
+
+  <ul>
+    <li><a href="articles/4482.html">remove the ATI Proprietary Linux Driver from my system?</a></li>
+	<li><a href="articles/4483.html">enable AGP Support in Linux?</a></li>
+    <li><a href="articles/4484.html">build and install a kernel module for the ATI Proprietary Linux Driver?</a></li>
+	<li><a href="articles/4485.html">configure multiple monitors in Linux?</a></li>
+  </ul>
+
+  <p>&nbsp;</p>
+</td></tr></tble>
+</body>
+</html>

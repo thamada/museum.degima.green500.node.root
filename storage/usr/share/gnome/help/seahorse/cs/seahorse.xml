@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY appversion "2.28.x">
+<!ENTITY manrevision "3.1">
+<!ENTITY date "July 2005">
+<!ENTITY app "Passwords and Encryption Keys">
+<!ENTITY daemon "<application>seahorse-daemon</application>">
+<!ENTITY project "Seahorse">
+<!ENTITY key "<glossterm>key</glossterm>">
+<!ENTITY website "http://www.gnome.org/projects/seahorse/">
+]>
+<article id="index" lang="cs">
+	<articleinfo>
+		<title>Příručka k aplikaci Hesla a šifrovací klíče</title>
+		<copyright>
+			<year>2005, 2006, 2007, 2008, 2009</year>
+			<holder>Jacob Perkins a Adam Schreiber</holder>
+		</copyright><copyright><year>2009</year><holder>Marek Černocký (marek@manet.cz)</holder></copyright>
+		<publisher role="maintainer">
+			<publishername>Projekt Seahorse</publishername>
+		</publisher>
+		<!-- link to document containig the legal notice of GNU FDL  -->
+		  <legalnotice id="legalnotice">
+	<para>Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License, verze 1.1 nebo jakékoli další verze vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu jménem <ulink type="help" url="ghelp:fdl">GNU Free Documentation License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou.</para>
+         <para>Tato příručka je součástí kolekce příruček GNOME, distribuovaných pod licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, musíte přiložit kopii licence dle popisu v sekci 6 dané licence.</para>
+
+	<para>Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s velkým písmenem na začátku.</para>
+
+	<para>DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <orderedlist>
+		<listitem>
+		  <para>DOKUMENT JE POSKYTOVÁN V PODOBĚ „JAK JE“ BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE</para>
+		</listitem>
+		<listitem>
+		  <para>ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+		<authorgroup>
+			<author>
+				<firstname>Jacob</firstname>
+				<surname>Perkins</surname>
+				<affiliation>
+					<orgname>Projekt Seahorse</orgname>
+					<!--
+					<address>
+						<email>jap1@users.sourceforge.net</email>
+					</address>
+					-->
+				</affiliation>
+			</author>
+			<author>
+				<firstname>Adam</firstname>
+				<surname>Schreiber</surname>
+				<affiliation>
+					<orgname>Projekt Seahorse</orgname>
+					<address>
+						<email>sadam@clemson.edu</email>
+					</address>
+				</affiliation>
+			</author>
+			<author>
+				<firstname>Paul</firstname>
+				<surname>Cutler</surname>
+				<affiliation>
+					<orgname>Dokumentační projekt GNOME</orgname>
+					<address>
+						<email>pcutler@foresightlinux.org</email>
+					</address>
+				</affiliation>
+			</author>
+		</authorgroup>
+		<releaseinfo revision="2.28" role="draft">
+		</releaseinfo>
+		<publisher role="maintainer">
+			<publishername>Projekt Seahorse</publishername>
+		</publisher>
+		<publisher role="maintainer">
+			<publishername>Dokumentační projekt GNOME</publishername>
+		</publisher>
+		<revhistory>
+			<revision>
+				<revnumber>Příručka V2.11.0 k aplikaci Hesla a šifrovací klíče</revnumber>
+				<date>Květen 2009</date>
+				<revdescription>
+					<para role="author">Paul Cutler <email>pcutler@foresightlinux.org</email></para>
+				</revdescription>	
+			</revision>
+			<revision>
+				<revnumber>Příručka V0.10.1 k aplikaci Hesla a šifrovací klíče</revnumber>
+				<date>Srpen 2008</date>
+				<revdescription>
+					<para role="author">Adam Schreiber <email>sadam@clemson.edu</email></para>
+				</revdescription>	
+			</revision>
+			<revision>
+				<revnumber>Příručka V0.9.1 k aplikaci Hesla a šifrovací klíče</revnumber>
+				<date>Listopad 2006</date>
+				<revdescription>
+					<para role="author">Milo Casagrande <email>milo_casagrande@yahoo.it</email></para>
+				</revdescription>	
+			</revision>
+			<revision>
+				<revnumber>Příručka V0.9.0 k aplikaci Hesla a šifrovací klíče</revnumber>
+				<date>Červenec 2005</date>
+				<revdescription>
+					<para role="author">Adam Schreiber <email>sadam@clemson.edu</email></para>
+					<para role="publisher">Projekt Seahorse</para>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>Příručka V0.7.0 k aplikaci Hesla a šifrovací klíče</revnumber>
+				<date>Únor 2003</date>
+				<revdescription>
+					<para role="author">Jacob Perkins</para>
+					<para role="publisher">Projekt Seahorse</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+		<releaseinfo>Tato příručka popisuje aplikaci Hesla a šifrovací klíče ve verzi 2.28.x</releaseinfo>
+		<legalnotice>
+			<title>Ohlasy</title>
+			<para>Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci <application>Hesla a šifrovací klíče</application> nebo této příručce, postupujte dle instrukcí na stránce <ulink url="ghelp:gnome-feedback" type="help">Stránka s ohlasy na GNOME</ulink>.</para>
+		</legalnotice>
+
+		<abstract role="description">
+			<para><application>Hesla a šifrovací klíče</application> je aplikace pro správu šifrovacích klíčů v pracovním prostředí GNOME.</para>
+		</abstract> 		
+
+	</articleinfo>
+
+	<indexterm zone="index">
+		<primary>Seahorse</primary>
+	</indexterm>
+
+	<indexterm zone="index">
+		<primary>seahorse</primary>	
+	</indexterm>
+
+	<indexterm zone="index">
+		<primary>Šifrovací klíče</primary>
+	</indexterm>
+	
+	<!-- ============= Introduction ============================== -->
+
+  <sect1 id="introduction">
+    <title>Úvod</title>
+    <para>Aplikaci <application>Hesla a šifrovací klíče</application> můžete použít k vytváření a správě klíčů <acronym>PGP</acronym> a <acronym>SSH</acronym>.</para>
+    <para>Aplikace <application>Hesla a šifrovací klíče</application> poskytuje uživatelské rozhraní k mnoha funkcím <ulink url="http://www.gnupg.org" type="http">Gnu Privacy Guard (GPG)</ulink> a integraci s různými komponentami pracovního prostředí <ulink url="http://www.gnome.org">GNOME</ulink>.</para>
+			<para>S aplikací <application>Hesla a šifrovací klíče</application> můžete: <itemizedlist>
+				
+				<listitem>
+					<para>Vytvářet a spravovat klíče PGP a SSH</para>
+				</listitem>
+				<listitem>
+					<para>Exportovat a importovat klíče PGP a SSH</para>
+				</listitem>
+				<listitem>
+					<para>Sdílet své klíče s ostatními</para>
+				</listitem>
+				</itemizedlist></para>
+	</sect1>
+
+	<!-- ============= Getting Started ============================== -->
+	  
+	<sect1 id="seahorse-getting-started">
+		<title>Začínáme</title>
+		<sect2 id="seahorse-start">
+			<title>Spouštění aplikace <application>Hesla a šifrovací klíče</application></title>
+			<para>Aplikaci <application>Hesla a šifrovací klíče</application> můžete spustit následujícími způsoby:</para>
+			<variablelist>
+				<varlistentry>
+					<term>Nabídka <guimenu>Aplikace</guimenu></term>
+					<listitem>
+						<para>Zvolte <menuchoice><guisubmenu>Příslušenství</guisubmenu><guimenuitem>Hesla a šifrovací klíče</guimenuitem></menuchoice>.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Příkazový řádek</term>
+					<listitem>
+						<para>Napište <command>seahorse</command> a zmáčkněte <keycap>Return</keycap>.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+
+		<sect2 id="seahorse-when-start">
+			<title>Když spustíte <application>Hesla a šifrovací klíče</application></title>
+			<para>Když spustíte aplikaci <application>Hesla a šifrovací klíče</application>, zobrazí se okno <guilabel>Hesla a šifrovací klíče</guilabel>.</para>
+			
+			<figure id="seahorse-window">
+			<title>Okno aplikace <application>Hesla a šifrovací klíče</application></title>
+			<screenshot>
+				<mediaobject>
+					<imageobject>
+					<imagedata fileref="figures/seahorse-window.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase>Ukazuje okno aplikace <application>Hesla a šifrovací klíče</application></phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+			</figure>
+			
+			<para>Okno aplikace <application>Hesla a šifrovací klíče</application> obsahuje následující části:</para>
+			
+	    <variablelist>
+		<varlistentry><term>Panel nabídek</term>
+		    <listitem>
+			<para>Nabídky v panelu nabídek obsahují všechny funkce, které potřebujete pro práci v aplikaci <application>Hesla a šifrovací klíče</application>.</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Panel nástrojů</term>
+		    <listitem>
+			<para>Panel nástrojů můžete použít k rychlému přístupu k nejčastěji používaným funkcím.</para>
+		    </listitem>	
+		</varlistentry> 		
+		<varlistentry><term>Karty s klíči a hesly</term>
+  		    <listitem>
+			<para>Poskytuje přístup ke klíčům a heslům v klíčence.</para>
+  		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Volby při prvním spuštění</term>
+  		    <listitem>
+			<para>Poskytuje rychlý přístup k neužitečnějším funkcím pro uživatele, kteří aplikaci spustili poprvé. Můžete zde najít:</para>
+			<itemizedlist>
+			    <listitem>
+				<para>Procházení nápovědy</para>
+			    </listitem>
+			    <listitem>
+				<para>Import klíčů do klíčenky</para>
+			    </listitem>
+			    <listitem>
+				<para>Vytvoření nového klíče</para>
+			    </listitem>
+			</itemizedlist>
+		    </listitem>
+		</varlistentry>
+	    </variablelist>
+	</sect2>
+    </sect1>
+	
+	<!-- ============= Creating OpenPGP Keys ============================== -->	
+
+  <sect1 id="pgp-generate">
+    <title>Vytváření klíčů OpenPGP</title>
+    <para>OpenPGP je volně přístupný protokol na šifrování e-mailů s pomocí veřejného klíče založený na <acronym>PGP</acronym>. Definuje standardní formáty pro šifrované správy, podpisy, soukromé klíče a certifikáty pro výměnu veřejných klíčů.</para>
+    <para>Šifrování veřejným klíčem je koncept, který používá dva klíče: <emphasis>veřejný klíč</emphasis>, který můžete dát komukoliv, s kým chcete komunikovat a <emphasis>soukromý klíč</emphasis>, který je soukromý a musí zůstat bezpečně schovaný.</para>
+    <para>Vytvoření klíčů OpenPGP: <orderedlist>
+	<listitem>
+	  <para>Zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Nový</guimenuitem></menuchoice>.</para>
+	</listitem>
+	<listitem>
+	  <para>Vyberte <guilabel>Klíč PGP</guilabel> a klikněte na  <guibutton>Pokračovat</guibutton>.</para>
+	</listitem>
+	<listitem>
+	  <para>Zadejte celé své jméno (jméno a příjmení), svoji e-mailovou adresu a některé doplňující údaje. Můžete pro klíč také nastavit pokročilé volby: viz dále.</para>
+	</listitem>
+	<listitem>
+	  <para>Kliknutím na <guibutton>Vytvořit</guibutton> vytvoříte nový pár klíčů.</para>
+	</listitem>
+	<listitem>
+	  <para>Otevře se dialogové okno <guilabel>Heslo pro nový klíč PGP</guilabel>. Zadejte dvakrát ověřovací frázi pro nový klíč.</para>
+	</listitem>
+      </orderedlist></para>
+    <tip>
+      <para>Když si budete vybírat ověřovací frázi, měli byste dodržet stejná pravidla, jako při vytváření silného hesla. Hlavní rozdíl mezi heslem a ověřovací frází je v tom, že pro ověřovací frázi jsou platnými znaky i mezery.</para>				
+    </tip>
+    
+    <sect2 id="seahorse-pgp-advanced-mode">
+      <title>Pokročilé možnosti</title>
+      <para>Rozbalte část <guibutton>Pokročilé možnosti</guibutton>, abyste mohli pro klíč zadat následující volby:</para>
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Typ šifrování</guilabel></term>
+	  <listitem>
+	    <para>V tomto poli se určuje šifrovací algoritmus použitý ke generování klíčů.</para>
+	    <variablelist>
+	      <varlistentry>
+		<term><acronym>DSA</acronym> ElGamal</term>
+		<listitem>
+		  <para>Tato volba je doporučená, protože umožňuje šifrovat, dešifrovat, podepisovat a ověřovat podle potřeby.</para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term><acronym>DSA</acronym></term>
+		<listitem>
+		  <para>Umožňuje pouze podepisování.</para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term><acronym>RSA</acronym></term>
+		<listitem>
+		  <para>Umožňuje pouze podepisování.</para>
+		</listitem>
+	      </varlistentry>
+	    </variablelist>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Síla klíče (v bitech)</guilabel></term>
+	  <listitem>
+	    <para>Udává délku klíče v bitech. Delší klíč je bezpečnější za předpokladu, že použijete silnou ověřovací frázi. Na druhou stranu, provádění operací s delším klíčem vyžaduje více času než s kratším. Přijatelné hodnoty jsou mezi 1024 a 4096 bitů. Doporučené je použít minimálně 2048 bitů.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Datum propadnutí platnosti</guilabel></term>
+	  <listitem>
+	    <para>Jedná se o den, kdy klíč přestane být použitelný pro operace šifrování a podepisování. Rozumnou dobou pro nastavení je 6 měsíců. Po uplynutí této doby budete buď muset datum propadnutí posunout nebo vygenerovat nový klíč nebo podklíč.</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+	
+	<!-- ============= Creating SSH Keys ============================== -->	
+	
+	<sect1 id="ssh-generate">
+	<title>Vytváření klíčů pro Secure Shell</title>
+	<para>Secure Shell (<acronym>SSH</acronym>) je způsob přihlašování ke vzdáleným počítačům za účelem spouštění příkazů na těchto počítačích. Klíče SSH se používají v ověřovacích systémech založených na klíči jako alternativa k výchozímu systému ověřování heslem. Při ověřování založeném na klíči není zapotřebí ručně psát ověřovací heslo.</para>
+	<para>Klíče Secure Shellu sestávají ze dvou klíčů: <emphasis>soukromého klíče</emphasis>, který musí být uložený v bezpečí, a <emphasis>veřejného klíče</emphasis>, který můžete nahrát na kterýkoliv počítač, ke kterému potřebujete přístup.</para>
+    <para>Vytvoření klíče pro Secure Shell:</para>
+    <orderedlist>
+      <listitem>
+        <para>Zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Nový</guimenuitem></menuchoice>.</para>
+      </listitem>
+      <listitem>
+        <para>Vyberte <guilabel>Klíč Secure Shellu</guilabel> a klikněte na tlačítko <guibutton>Pokračovat</guibutton>.</para>
+      </listitem>
+      <listitem>
+        <para>Zadejte popis, k čemu se bude klíč používat. Můžete použít svoji e-mailovou adresu nebo něco jiného vystihujícího účel. Můžete pro klíč také nastavit pokročilé volby, viz dále.</para>
+      </listitem>
+      <listitem>
+        <para>Klikněte na <guibutton>Pouze vytvořit klíč</guibutton>, aby se vytvořil nový klíč, nebo na <guibutton>Vytvořit a nastavit</guibutton>, aby se vytvořil klíč a nastavil další počítač, který jej použije pro ověřování.</para>
+      </listitem>
+      <listitem>
+        <para>Otevře se dialogové okno <guilabel>Ověřovací fráze pro nový klíč Secure Shellu</guilabel>. Zadejte dvakrát ověřovací frázi pro svůj nový klíč.</para>
+			<tip>
+				<para>Když si budete vybírat ověřovací frázi, měli byste dodržet stejná pravidla, jako při vytváření silného hesla. Hlavní rozdíl mezi heslem a ověřovací frází je v tom, že pro ověřovací frázi jsou platnými znaky i mezery.</para>				
+			</tip>
+      </listitem>
+    </orderedlist>
+    
+
+		
+		<sect2 id="seahorse-ssh-advanced-options">
+		<title>Pokročilé možnosti</title>
+			<para>Rozbalte část <guibutton>Pokročilé možnosti</guibutton>, abyste mohli pro nový klíč zadat následující volby:</para>
+		
+			<variablelist>
+			<varlistentry>
+				<term><guilabel>Typ šifrování</guilabel></term>
+				<listitem>
+				<para>Toto pole určuje šifrovací algoritmus použitý pro generování klíče.</para>
+				<variablelist>
+					<varlistentry>
+						<term><acronym>RSA</acronym></term>
+						<listitem>
+							<para>Pro vytváření klíče SSH použít algoritmus <emphasis>Rivest-ShamirAdleman</emphasis> (<acronym>RSA</acronym>). Tato volba je upřednostňovaná a bezpečnější.</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><acronym>DSA</acronym></term>
+						<listitem>
+							<para>Pro vytváření klíče SSH použít <emphasis>Digital Signature Algorithm</emphasis> (<acronym>DSA</acronym>).</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Síla klíče (v bitech)</guilabel></term>
+				<listitem>
+				<para>Udává délku klíče v bitech. Delší klíč je bezpečnější za předpokladu, že použijete silnou ověřovací frázi. Na druhou stranu, provádění operací s delším klíčem vyžaduje více času než s kratším. Přijatelné hodnoty jsou mezi 1024 a 4096 bitů. Doporučené je použít minimálně 2048 bitů.</para>
+				</listitem>
+			</varlistentry>
+			</variablelist>
+		</sect2>
+	</sect1>
+	
+	<!-- ============= OpenPGP Key Properties ============================== -->	
+
+	<sect1 id="seahorse-key-properties">
+		<title>Vlastnosti klíčů OpenPGP</title>
+		<para>Popisy v této kapitole platí pro všechny klíče OpenPGP.</para>
+		
+		<para>Pokud si chcete prohlédnut vlastnosti klíče <acronym>PGP</acronym>: <itemizedlist>
+			<listitem>
+				<para>V hlavním okně vyberte klíč <acronym>PGP</acronym>.</para>
+			</listitem>
+			<listitem>
+				<para>Dvojitě na něj klikněte nebo na panelu nástrojů zvolte <guilabel>Vlastnosti</guilabel>.</para> 
+			</listitem>
+			<listitem>
+				<para>Zvolte kartu <guilabel>Detaily</guilabel>.</para>
+			</listitem>
+		</itemizedlist></para>
+
+	<sect2 id="pgp-public-key-properties">
+		<title id="pgp-private-key-properties">Vlastnosti</title>
+		<para>
+		<variablelist>
+			<varlistentry>
+				<term><guilabel>Otisk klíče</guilabel></term>
+				<listitem>
+					<para>Otisk klíče je unikátní řetězec znaků, který jednoznačně klíč identifikuje.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>ID klíče</guilabel></term>
+				<listitem>
+					<para>ID klíče je podobné otisku klíče. Akorát že ID klíče obsahuje pouze posledních 8 znaků z otisku klíče. Většinou je možné identifikovat klíč pouze pomocí ID klíče, ale sem tam se může stát, že dva klíče mohou mít stejné ID.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Typ</guilabel></term>
+				<listitem>
+					<para>Určuje šifrovací algoritmus použitý k vygenerování klíče. Klíče DSA lez použít pouze k podepsání. Klíče ElGamal jsou použitelné pro šifrování.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Vytvořen</guilabel></term>
+				<listitem>
+					<para>Ukazuje datum, kdy byl klíč vytvořený.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Vyprší</guilabel></term>
+				<listitem>
+				<para>Ukazuje datum, od kterého už se klíč nemůže používat.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Síla</guilabel></term>
+				<listitem>
+					<para>Ukazuje délku klíče v bitech. Obecně lze říci, že čím delší klíč, tím lepší bezpečnost zaručuje. <note>
+							<para>Ale i dostatečně dlouhý klíč může být nevhodný k použití, pokud zvolíte slabou ověřovací frázi.</para>
+						</note></para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		</para>
+	</sect2>
+
+	<sect2 id="change-owner-trust">
+		<title>Důvěryhodnost</title>
+		<para>Důvěryhodnost je indikátorem, jak jistí jste si způsobilostí osoby korektně rozšiřovat rozsah důvěry. Když stojíte před problémem, že klíč nemáte podepsaný, budou určující pro platnost osobního klíče podpisy, které jste sesbírali a jak moc věříte nebo nevěříte lidem, kteří tyto podpisy vytvářeli. Standardně vyžaduje neznámý klíč 3 podpisy s částečnou důvěryhodností nebo 1 plně důvěryhodný podpis.</para>
+		<itemizedlist>
+			<listitem><para><guilabel>Neznámá</guilabel>: Nedokážete posoudit schopnost osoby podepisovat korektně klíče.</para></listitem>
+			<listitem><para><guilabel>Žádná</guilabel>: Tato osoba nemůže klíče korektně podepisovat.</para></listitem>
+			<listitem><para><guilabel>Částečná</guilabel>: Tato osoba před podepsání zkontroluje fotografické ID, ale nutně nezkoumá ostatní ID.</para></listitem>
+			<listitem><para><guilabel>Plná</guilabel>: Tato osoba zkoumá navzájem a všechny fotografické ID osoby, před jejím podepsáním (např. podepisují pouze klíče, které skutečně náleží osobě, která žádá o podpis).</para></listitem>
+			<listitem><para><guilabel>Bezmezná</guilabel>: Tato úroveň důvěryhodnosti by měla být přiřazená vašim vlastním klíčům.</para></listitem>
+		</itemizedlist>
+	</sect2>
+
+	<sect2 id="disable-key">
+		<title>Povolování a zakazování klíčů</title>
+		<para>Když je klíč povolený, může být použitý na provádění šifrovacích operací. Když je klíč zakázaný, nelze je použít na šifrování nebo vytváření ověřovacích podpisů.</para>
+	</sect2>
+
+	<sect2 id="change-expires">
+		<title>Datum propadnutí platnosti</title>
+		<para>Jakmile platnost klíče vyprší, klíč nemůže být nadále používán k provádění operací s klíčem. Posunutím data propadnutí dál do budoucna klíč znovu nabude platnosti. Dobrým zvykem v praxi je mít hlavní klíč, jehož platnost nikdy nekončí a více podklíčů, který mají datum propadnutí nastavené a jsou podepsané hlavním klíčem.</para>
+	</sect2>
+
+	<sect2 id="userid-properties">
+		<title>Více ID uživatele</title>
+		<para>Více ID uživatele dovoluje použít s jedním klíčem více identit a e-mailových adres.</para>
+		<para>ID uživatele má obvykle tvar: <programlisting>Jméno (komentář) &lt;e-mailová adresa&gt;</programlisting></para>
+			
+		<sect3 id="add-uid">
+			<title>Přidávání ID uživatele</title>
+				<para>Přidání ID uživatele je dobré, pokud chcete mít jednu identitu pro pracovní záležitosti a druhou pro své přátele.</para>
+				<para>Když chcete ke klíči přidat ID uživatele: <itemizedlist>
+						<listitem>
+							<para>V hlavním okně vyberte klíč.</para>
+						</listitem>
+						<listitem>
+							<para>Dvojitě na něj klikněte nebo zvolte na panelu nástrojů <guibutton>Vlastnosti</guibutton>.</para>
+						</listitem>
+						<listitem>
+							<para>Zvolte kartu <guilabel>Jména a podpisy</guilabel>.</para>
+						</listitem>
+						<listitem>
+							<para>Klikněte na tlačítko <guibutton>Přidat jméno</guibutton>.</para>
+						</listitem>
+					</itemizedlist></para>
+				<para>Po provedení předchozích kroků spatříte dialogové okno, které musíte vyplnit. Jednotlivá pole jsou objasněná dále.</para>
+				<variablelist>
+					<varlistentry>
+						<term><guilabel>Celé jméno</guilabel></term>
+						<listitem>
+							<para>Zadejte své celé jméno ve tvaru <programlisting>&lt;jméno&gt; &lt;příjmení&gt;</programlisting> Prostřední jméno nebo počáteční iniciála jsou volitelné.</para>
+							<para>
+								<note>
+									<para>Do tohoto pole musíte zadat minimálně 5 znaků.</para>
+								</note> 
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>E-mail</guilabel></term>
+						<listitem>
+							<para>Podle vaší e-mailové adresy většina lidí hledá váš klíč na serverech s klíči nebo u dalších poskytovatelů klíčů. Před pokračováním se proto ujistěte, že jste ji zadali správně.</para>
+							<para>
+								<note>
+									<para>Měla by být ve tvaru <programlisting><replaceable>&lt;jméno_uživatele&gt;</replaceable>@<replaceable>&lt;nazev_domény&gt;</replaceable></programlisting></para>
+								</note>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Komentář klíče</guilabel></term>
+						<listitem>
+							<para>Pole s komentářem lze použít k zadání doplňujících informací k zobrazovanému jménu vašeho nového ID. Na některých serverech lze tyto informace použít na vyhledání klíče.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</sect3>
+		</sect2>
+
+    <sect2 id="photoid-properties">
+      <title>Fotografické ID</title>
+      <para>Fotografické ID umožňuje vlastníkovi klíče připojit ke klíči jednu nebo více svých fotografií. Tyto identity lze podepsat podobně jako normální ID uživatelů. Fotografické ID musí být ve formátu JPEG a je doporučené, aby nebyly větší než 240×288 pixelů.</para>
+      <para>Pokud vybraný obrázek není v požadovaném formátu nebo velikosti, může aplikace <application>Hesla a šifrovací klíče</application> jeho velikost změnit a převést jej z formátu, který je podporovaný  knihovnou <acronym>GDK</acronym>.</para>
+    </sect2>
+		
+		<sect2 id="change-passphrase">
+			<title>Změna ověřovací fráze</title>
+			<para>Když chcete změnit ověřovací frázi náležející klíči: <itemizedlist>
+					<listitem>
+						<para>V hlavním okně vyberte klíč.</para>
+					</listitem>
+					<listitem>
+						<para>Dvojitě na něj klikněte nebo na panelu nástrojů zvolte <guilabel>Vlastnosti</guilabel>.</para>
+					</listitem>
+					<listitem>
+						<para>Klikněte na tlačítko <guibutton>Změnit heslo</guibutton>.</para>
+					</listitem>
+				</itemizedlist></para>
+			<para>Zadejte novou ověřovací frázi a klikněte na <guibutton>OK</guibutton>.</para>
+		</sect2>
+
+		<sect2 id="delete">
+			<title>Mazání klíče</title>
+			<para>Pokud chcete klíč z vaší klíčenky vymazat: <itemizedlist>
+				<listitem>
+					<para>V hlavním okně vyberte klíč.</para>
+				</listitem>
+				<listitem>
+					<para>Klikněte na něj pravým tlačítkem a zvolte <guilabel>Smazat</guilabel> nebo zvolte <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Smazat</guimenuitem></menuchoice>.</para>
+				</listitem>
+				</itemizedlist></para>
+			<note>
+				<para>Můžete mazat své osobní klíče, důvěryhodné klíče a ostatní nasbírané klíče.</para>		
+			</note> 
+		</sect2>
+	</sect1>
+	
+	<!-- ============= OpenPGP Properties ============================== -->	
+		
+	<sect1 id="subkey-properties">
+		<title>Vlastnosti podklíčů OpenPGP</title>
+		<para>Každý klíč OpenPGP má jeden hlavní klíč, který se používá pouze k podepisování. Podklíče se používají k šifrování i podepisování. Pokud dojde ke kompromitaci podklíče, nemusíte díky tomu zneplatnit svůj hlavní klíč.</para>
+		<variablelist>
+		<varlistentry>
+			<term><guilabel>ID</guilabel></term>
+			<listitem>
+				<para>To je identifikátor podklíče.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Typ</guilabel></term>
+			<listitem>
+				<para>Ukazuje šifrovací algoritmus použitý k vygenerování podklíče. Klíče <acronym>DSA</acronym> se mohou použít pouze k podepisování. Klíče ElGamal se používají k šifrování, zatímco klíče <acronym>RSA</acronym> se používají k podepisování nebo šifrování.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Vytvořen</guilabel></term>
+			<listitem>
+				<para>Ukazuje datum, kdy byl klíč vytvořený.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Vyprší</guilabel></term>
+			<listitem>
+				<para>Ukazuje datum, od kterého už se klíč nemůže používat.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Stav</guilabel></term>
+			<listitem>
+				<para>Ukazuje stav klíče.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Síla</guilabel></term>
+			<listitem>
+				<para>Ukazuje délku klíče v bitech. Obecně lze říci, že čím delší klíč, tím lepší zabezpečení poskytuje. <note>
+						<para>Ale i dostatečně dlouhý klíč může být nevhodný k použití, pokud zvolíte slabou ověřovací frázi.</para>
+					</note></para>
+			</listitem>
+		</varlistentry>
+		</variablelist>
+		
+		<sect2 id="add-subkey">
+			<title>Přidávání podklíčů</title>
+			<para>Pokud chcete do klíče přidat podklíč, tak v části <guilabel>Podklíče</guilabel> klikněte na tlačítko <guibutton>Přidat</guibutton>.</para>
+			<para>Po provedení předchozích kroků spatříte dialogové okno, které musíte vyplnit. Jednotlivá pole jsou objasněná dále.</para>
+			<variablelist>
+			<varlistentry>
+				<term>Typ klíče</term>
+				<listitem>
+					<para>Určuje šifrovací algoritmus použitý k vygenerování podklíče.</para>
+				<variablelist>
+				<varlistentry>
+					<term><acronym>DSA</acronym></term>
+					<listitem>
+						<para>K vytvoření podklíče použít <emphasis>Digital Signature Algorithm</emphasis> (<acronym>DSA</acronym>). Tímto podklíčem se může pouze podepisovat.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>ElGamal</term>
+					<listitem>
+						<para>K vytvoření podklíče použít algoritmus <emphasis>ElGamal</emphasis>. Tímto podklíčem se může pouze šifrovat.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>RSA</term>
+					<listitem>
+						<para>K vytvoření podklíče použít algoritmus <emphasis>Rivest-Shamir Adleman</emphasis> (<acronym>RSA</acronym>). Tímto podklíčem můžete podepisovat nebo šifrovat, ale musíte mít vytvořené dva různé podklíče.</para>
+					</listitem>
+				</varlistentry>
+				</variablelist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Délka klíče</term>
+				<listitem>
+					<para>Určuje délku podklíče v bitech. Obecně platí, že čím delší klíč, tím lepší bezpečnost.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Datum propadnutí platnosti</term>
+				<listitem>
+					<para>Určuje datum, po jehož vypršení se klíč již nemůže použít.</para>
+				</listitem>
+			</varlistentry>
+			</variablelist>
+		</sect2>
+
+		<sect2 id="change-subkey-expires">
+			<title>Změna data propadnutí podklíče</title>
+			<para>Pokud chcete u podklíče změnit datum, kdy vyprší jeho platnost, vyberte daný podklíč v části <guilabel>Podklíče</guilabel> a následně: <itemizedlist>
+				<listitem>
+					<para>Klikněte vlevo na tlačítko <guibutton>Vypršet</guibutton>.</para>
+				</listitem>
+				<listitem>
+					<para>V dialogovém okně vyberte nové datum propadnutí nebo zapněte <guilabel>Nevyprší nikdy</guilabel>, pokud nemá být žádné omezující datum nastavené.</para>
+				</listitem>
+				</itemizedlist></para>
+		</sect2>
+
+		<sect2 id="revoke-subkey">
+			<title>Zneplatnění podklíče</title>
+			<para>Pokud chcete podklíč zneplatnit, vyberte jej v části <guilabel>Podklíče</guilabel> a následně: <itemizedlist>
+				<listitem>
+					<para>Klikněte vlevo na tlačítko <guibutton>Odvolat</guibutton>.</para>
+				</listitem>
+				<listitem>
+					<para>Vyberte důvod, proč podklíč zneplatňujete:</para>
+					<para>
+					<variablelist>
+						<varlistentry>
+							<term>Bez důvodu</term>
+							<listitem>
+								<para>Není žádný konkrétní důvod k zneplatnění klíče.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Kompromitovaný</term>
+							<listitem>
+								<para>Klíč byl kompromitován.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Nahrazen</term>
+							<listitem>
+								<para>Klíč byl nahrazen jiným klíčem.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Nepoužívá se</term>
+							<listitem>
+								<para>Klíč se již nadále nepoužívá.</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Zadejte popis, proč klíč zneplatňujete.</para>
+				</listitem>
+				<listitem>
+					<para>Klikněte na tlačítko <guibutton>Odvolat</guibutton>.</para>
+				</listitem>
+				</itemizedlist></para>
+			<note>
+				<para>Zneplatnění podklíče se projeví okamžitě.</para>
+			</note>
+		</sect2>
+
+		<sect2 id="delete-subkey">
+			<title>Mazání podklíče</title>
+			<para>Pokud chcete podklíč smazat, vyberte je v části <guilabel>Podklíče</guilabel> a následně: <itemizedlist>
+				<listitem>
+					<para>Klikněte vlevo na tlačítko <guibutton>Smazat</guibutton>.</para>
+				</listitem>
+				</itemizedlist></para>
+		</sect2>
+	</sect1>
+
+	<!-- ============= SSH Key Properties ============================== -->
+
+	<sect1 id="ssh-key-properties">
+	    <title>Vlastnosti klíčů Secure Shellu</title>
+	    <para>Popisy v této kapitole platí pro všechny klíče <acronym>SSH</acronym>.</para>
+	    <para>Když si chcete prohlédnou vlastnosti klíče <acronym>SSH</acronym>: <itemizedlist>
+			<listitem>
+				<para>V hlavním okně vyberte klíč Secure Shellu.</para>
+			</listitem>
+			<listitem>
+				<para>Dvojitě na něj klikněte nebo na panelu nástrojů zvolte <guilabel>Vlastnosti</guilabel>.</para> 
+			</listitem>
+			<listitem>
+				<para>Zvolte kartu <guilabel>Detaily</guilabel>.</para>
+			</listitem>
+		</itemizedlist></para>
+
+	<sect2 id="properties">
+		<title>Vlastnosti</title>
+		<para>
+		<variablelist>
+		<varlistentry>
+			<term><guilabel>Otisk klíče</guilabel></term>
+			<listitem>
+				<para>Otisk klíče je unikátní řetězec znaků, který jednoznačně klíč identifikuje.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Algoritmus</guilabel></term>
+			<listitem>
+				<para>Ukazuje šifrovací algoritmus použitý k vygenerování klíče.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Umístění</guilabel></term>
+			<listitem>
+				<para>Jedná se o místo, kam byl uložen <emphasis>soukromý klíč</emphasis>.</para>
+		</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Síla</guilabel></term>
+			<listitem>
+				<para>Ukazuje délku klíče v bitech. Obecně lze říci, že čím delší klíč, tím lepší bezpečnost zaručuje. <note>
+					<para>Ale i dostatečně dlouhý klíč může být nevhodný k použití, pokud zvolíte slabou ověřovací frázi.</para>
+				</note></para>
+			</listitem>
+		</varlistentry>
+		</variablelist>
+		</para>
+	</sect2>
+
+	<sect2 id="delete-ssh-key">
+		<title>Mazání klíče Secure Shellu</title>
+		<para>Pokud chcete smazat klíč Secure Shellu: <itemizedlist>
+				<listitem>
+				<para>V hlavním okně vyberte klíč <acronym>SSH</acronym>.</para>
+			</listitem>
+			<listitem>
+				<para>Klikněte na něm pravým tlačítkem a zvolte <guilabel>Smazat</guilabel> nebo zvolte <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Smazat</guimenuitem></menuchoice>.</para>
+			</listitem>
+			</itemizedlist></para>
+	</sect2>
+	</sect1>
+	
+	<!-- ============= Importing Keys ============================== -->	
+
+        <sect1 id="import">
+		<title>Importování klíčů</title>
+		<para>Pokud hodláte importovat klíče, tak zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Importovat</guimenuitem></menuchoice> a v dialogu pro výběr souboru vyberte soubor, který obsahuje nejméně jeden veřejný klíč zakódovaný do ASCII.</para>
+		<para>Import lze také provést vložením klíče do aplikace <application>Hesla a šifrovací klíče</application> ze schránky: <itemizedlist>
+		<listitem>
+			<para>Vyberte blok textu představující klíč zakódovaný v ASCII.</para>
+		</listitem>
+		<listitem>
+			<para>Zkopírujte jej do schránky.</para>
+		</listitem>
+		<listitem>
+			<para>Zvolte <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Vložit</guimenuitem></menuchoice>.</para>
+		</listitem>
+		</itemizedlist></para>
+	</sect1>
+	
+	<!-- ============= Exporting Keys ============================== -->	
+
+	<sect1 id="export">
+		<title>Exportování klíčů</title>
+		<para>Pokud chcete klíče exportovat, vyberte je v hlavním okně a zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Exportovat</guimenuitem></menuchoice>.</para>
+		<para>Klíče také můžete exportovat jejich vložením do schránky v podobě bloku textu s klíčem zakódovaným v ASCII: <itemizedlist>
+			<listitem>
+				<para>Vyberte v hlavním okně klíče.</para>
+			</listitem>
+			<listitem>
+				<para>Zvolte <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Kopírovat</guimenuitem></menuchoice>.</para>
+			</listitem>
+		</itemizedlist></para>
+	</sect1>
+
+	
+	<!-- ============= Signing a Key ============================== -->	
+
+	<sect1 id="sign">
+		<title>Podepisování klíče</title>
+		<para>Podepsání klíče jiné osoby znamená, že dáváte této osobě svoji důvěru. Před podepsáním klíče musíte pečlivě zkontrolovat otisk klíče, abyste si byl jist, že klíč náleží k dané osobě.</para>
+		<para>Když chcete podepsat klíč ve své klíčence: <itemizedlist>
+				<listitem>
+				<para>Vyberte na kartě <guilabel>Důvěryhodné klíče</guilabel> nebo <guilabel>Ostatní nasbírané klíče</guilabel> klíč, který chcete podepsat.</para>
+				</listitem>
+				<listitem>
+				<para>Zvolte <guibutton>Podepsat klíč</guibutton> na panelu nástrojů nebo <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Podepsat klíč</guimenuitem></menuchoice>.</para>
+				</listitem>
+				<listitem>
+				<para>Zvolte, jak pečlivě byl klíč zkontrolován.</para>
+				</listitem>
+				<listitem>
+				<para>Určete, zda je podpis určený pouze pro vaši místní klíčenku a zda může být váš podpis odvolán.</para>
+				</listitem>
+				<listitem>
+				<para>Klikněte na tlačítko <guibutton>Podepsat</guibutton>.</para>
+				</listitem>
+			</itemizedlist></para>
+	</sect1>
+	
+	<!-- ============= Preferences ============================== -->	
+  
+  <sect1 id="prefs">
+    <title>Předvolby</title>
+    <para>Tato kapitola popisuje předvolby, které lze v aplikaci <application>Hesla a šifrovací klíče</application> nastavit zvolením <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Předvolby</guimenuitem></menuchoice> v hlavní nabídce.</para>
+
+        <sect2 id="keyring">
+        	<title>Klíčenky s hesly</title>
+        	<sect3>
+        	    <title>Vytváření klíčenek</title>
+            	<para>Pokud hodláte vytvořit novou klíčenku, tak zvolte v nabídce <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Nový</guimenuitem></menuchoice> a vyberte <guibutton>Klíčenka hesel</guibutton>. Zadejte název nové klíčenky a stiskněte Enter.</para>
+        	</sect3>
+        	<sect3>
+        	    <title>Změna hesel klíčenek</title>
+            	<para>Pokud hodláte změnit heslo na odemykání klíčenky, tak nejprve vyberte odpovídající klíčenku a pak zmáčkněte tlačítko <guibutton>Změnit heslo</guibutton>. Budete dotázání na staré heslo v textovém poli <guilabel>Staré heslo</guilabel>, na nové heslo v textovém poli <guilabel>Heslo</guilabel> a na potvrzení nového hesla v textovém poli <guilabel>Potvrďte heslo</guilabel>. Zmáčknutím tlačítka <guibutton>Změnit</guibutton> se nastavení potvrdí k použití. Pokud bylo staré heslo zadané v pořádku, objeví se zpráva informující o úspěšné operaci. Pokud staré heslo nebylo správné, budete vyzváni, abyste jej zadali správně.</para>
+        	</sect3>
+        	<sect3>
+        	    <title>Odstraňování klíčenek</title>
+        	    <para>Pokud chcete odstranit klíčenku, nejdříve příslušnou klíčenku vyberte, a poté v nabídce zvolte <menuchoice><guimenu>Upravit</guimenu><guimenuitem>Smazat</guimenuitem></menuchoice>.</para>
+        	</sect3>
+        </sect2>
+
+    <sect2 id="key-servers">
+	<title>Servery s klíči</title>
+	<para>Udržujte své i další klíče aktuální pomocí pravidelné synchronizace klíčů se vzdálenými servery s klíči. Synchronizace zajistí, abyste měli nejnovější podpisy vytvořené na všech svých klíčích a tak byl rozsah důvěry použitelnější.</para>
+	<para>Aplikace <application>Hesla a šifrovací klíče</application> poskytuje podporu pro servery s klíči HKP a LDAP. </para>
+	<variablelist>
+	  <varlistentry>
+	    <term><emphasis>Servery HKP</emphasis></term>
+	    <listitem>
+	      <para>Servery s klíči HKP jsou založené na obyčejných webových serverech, jako například populární <ulink url="hkp://pgp.mit.edu:11371" type="hkp">hkp://pgp.mit.edu:11371</ulink>, rovněž dostupný na <ulink url="http://pgp.mit.edu" type="http">http://pgp.mit.edu</ulink>.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><emphasis>Servery <acronym>LDAP</acronym></emphasis></term>
+	    <listitem>
+	      <para>Servery s klíči <acronym>LDAP</acronym> jsou méně obvyklé, ale zase používají k obsluze klíčů standardní protokol LDAP. Dobrým serverem LDAP je <ulink url="ldap://keyserver.pgp.com" type="ldap">ldap://keyserver.pgp.com</ulink>.</para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+      </sect2>
+
+      <sect2 id="key-sharing">
+	<title>Sdílení klíčů</title>
+	<para>Sdílení klíčů je poskytováno pomocí DNS-SD, také známého jako Bonjour nebo Rendevous. Povolením sdílení klíče se místní klíčenka aplikace <application>Hesla a sdílení klíčů</application> s veřejnými klíči uživatelů přidá do dialogu vzdálené hledání. Použití takového místního „serveru s klíči“ bude rychlejší než přístup k vzdáleným serverům.</para>
+      </sect2>
+  </sect1>
+  
+	<!-- ============= About ============================== -->  
+      
+    <sect1 id="about">
+    <title>O aplikaci Hesla a šifrovací klíče</title>
+    <para>Aplikace <application>Hesla a šifrovací klíče</application>, k ní přidružené zásuvné moduly, applet předvoleb a applet na panel se souhrnně nazývají Seahorse (mořský koník). Seahorse napsal Jacob Perkins. Současnými správci jsou Stef Walter a Adam Schreiber. Tuto příručku napsal Adam Schreiber. Webové stránky projektu navrhl Jim Pharis. Pokud chcete více informací o projektu Seahorse, navštivte prosím <ulink url="http://www.gnome.org/projects/seahorse/" type="http">webovou stránku Seahorse</ulink>.</para>
+    <para>Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k této aplikaci nebo této příručce, postupujte dle instrukcí v <ulink url="ghelp:user-guide?feedback-bugs" type="help">Kapitole Ohlasy v Uživatelské příručce GNOME</ulink>.</para>
+    <para>Tento program je šířen podle ustanovení GNU General Public License, vydávané Free Software Foundation; a to buď verze 2 této licence anebo (podle vlastního uvážení) kterékoliv pozdější verze. <ulink url="ghelp:gpl" type="help">Kopie této licence</ulink> je součástí této dokumentace nebo ji můžete najít v souboru COPYING přiloženém ke zdrojovým kódům tohoto programu. </para>
+  </sect1>
+</article>

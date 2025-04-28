@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Fedora_12_Boot_Time" lang="es-ES">
+	<title>Momento del Arranque de Fedora 12</title>
+	<remark>This beat is located here: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Boot">https://fedoraproject.org/wiki/Docs/Beats/Boot</ulink></remark>
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-ext4">
+		<title>GRUB con soporte ext4</title>
+		<para>
+			Originalmente Fedora&nbsp;9 ofrecía soporte experimental para sistemas de archivos ext4, y Fedora&nbsp;11 lo ofrecía por defecto. Sin embargo, en esa versión, <application>GRUB</application> no tenía soporte para sistemas de archivos ext4, y por ello, era necesaria una partición diferente en donde alojarlo, formateada para poder recibir sistemas de archivos ext2 o ext3. Ahora, Fedora&nbsp;12 incluye una versión actualizada del <application>GRUB</application>, con soporte para ext4. Y esto también es posible mediante la utilización de <application>Anaconda</application> (el programa instalador de Fedora).
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-Dracut">
+		<title>Dracut &mdash; nuevo sistema de arranque</title>
+		<para>
+			Hasta Fedora&nbsp;10, el sistema de arranque utilizado para iniciar Fedora (<firstterm>initial ram disk</firstterm>, o <firstterm>initrd</firstterm>) era monolítico, muy específico para la distribución que se esté utilizando y no ofrecía demasiada flexibilidad. Este será reemplazado por <application>Dracut</application>, un disco de inicio ram con un campo de acción basado en eventos, diseñado para funcionar independientemente de la distribución utilizada. También ha sido adoptado por el sistema operativo XO del proyecto OLPC derivado de Fedora. Los módulos OLPC para <application>Dracut</application> se encuentran disponibles en el repositorio de Fedora. Son bienvenidas todas las opiniones y las pruebas realizadas a su desempeño.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-KMS">
+		<title>Inicio gráfico más rápido y suave</title>
+		<para>
+			Ahora, también en los sistemas NVIDIA se encuentra activo por defecto <firstterm>Kernel Mode Setting</firstterm> (KMS), gracias al controlador <application>Nouveau</application>. Originalmente, Fedora&nbsp;10 ofrecía soporte para KMS sólo para algunos modelos de tarjetas gráficas ATI. En Fedora&nbsp;11, esta característica fue extendida también para las tarjetas Intel. Y en esta versión, se ha extendido aún más de manera de poder ofrecer soporte también a las tarjetas NVIDIA.
+		</para>
+		<para>
+			Gracias a esta novedad, usted podrá disfrutar de un inicio gráfico agradable y veloz en casi cualquier sistema, a través de <application>plymouth</application>, el sistema de arranque gráfico desarrollado en Fedora.
+		</para>
+	</section>
+
+</section>
+
+

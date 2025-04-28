@@ -1,0 +1,2780 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY appversion "2.10.10">
+<!ENTITY manualversion "2.10.10">
+<!ENTITY date "October 2006">
+<!ENTITY appname "gThumb">
+<!ENTITY app "<application>gThumb</application>">
+<!-- replace version above with actual application version number --><!--  Template Version: 1.0.1  (do not remove this line) -->]>
+<!-- =============Document Header ============================= -->
+<article id="index" lang="zh_CN"> <!-- please do not change the id -->
+
+  <articleinfo>
+    <title><application>gThumb</application> 手册 2.10.10 版</title>
+    <copyright>
+      <year>2001</year>
+      <year>2002</year>
+      <year>2003</year>
+      <year>2004</year>
+      <year>2006</year>
+      <holder>Paolo Bacchilega</holder>
+    </copyright><copyright><year>2009.</year><holder>Zhang Miao (mymzhang@gmail.com)</holder></copyright>
+
+    <!-- translators: uncomment this:
+
+    <copyright>
+     <year>2000</year>
+     <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+    </copyright>
+
+    -->
+
+    <!-- An address can be added to the publisher information.  If a role is
+     not specified, the publisher/author is the same for all versions of the
+     document.  -->
+    <publisher>
+      <publishername>GNOME 文档项目</publishername>
+    </publisher>
+
+       <legalnotice id="legalnotice">
+         <para>对于本文档的复制、分发和／或修改必须遵循自由软件基金会 (Free Software Foundation) 发布的 GNU 自由文档许可证 (GFDL) 版本 1.1 或更高版本，该许可证没有固定的部分、没有封面和背页文本。您可以在此<ulink type="help" url="ghelp:fdl">链接</ulink>上或在随本手册一起分发的 COPYING-DOCS 文件中找到 GFDL 的副本。</para>
+          <para>本手册是在 GFDL 许可之下分发的 GNOME 手册集合的一部分。如果想要单独分发此手册，可以在手册中添加该许可证的一份副本然后分发，如该许可证的第 6 部分所述。</para>
+ 
+         <para>各个公司使用的许多用于区别它们产品和服务的名称都声明为商标。在所有的 GNOME 文档以及 GNOME 文档项目的成员中，这些名称都是以全大写字母或首字母大写显示，从而表明它们是商标。</para>
+ 
+         <para>本文档以及文档的修改版本都是在遵循 GNU 自由文档许可证的条款下提供，这表示具有以下含义：<orderedlist>
+                 <listitem>
+                   <para>文档按“原样”提供，不提供任何明示或暗示的保证，包括但不限于：文档或文档的修改版本没有适销性方面的缺陷、适合特定目的的适用性，以及没有侵权行为。您将自行承担本文档以及文档修改版本的质量、准确性以及性能方面的风险。如果任何文档或文档修改版本存在缺陷，您(而不是最初的编写者、作者或撰写人)将承担所有必需的服务、维修或更正的费用。此免责声明是本许可证的重要组成部分。如果不接受此免责声明，那么您就没有权利使用任何文档或文档的修改版本；并且</para>
+                 </listitem>
+                 <listitem>
+                   <para>无论在任何情况以及在任何法律理论下，本文档或文档修改版本的作者、最初的编写者、任何撰写人或任何分发者，或者任意这些方的任何提供者都不对任何人由于使用本"文档或文档修改版本引起或带来的任何直接的、间接的、特殊的、偶然的或继发的损失承担任何民事(包括疏忽)、合同或其它方面的责任，这些损失包括但不限于信誉损失、工作停止、计算机失败或故障，或任何以及所有其它损失或由此引发的或与之相关的损失，即使这些方已被告知存在出现此类损失的可能性时也是如此。</para>
+                 </listitem>
+           </orderedlist></para>
+   </legalnotice>
+ 
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Paolo</firstname>
+	<surname>Bacchilega</surname>
+	<affiliation>
+	  <address> <email>paolo.bacchilega@libero.it</email> </address>
+        </affiliation>
+      </author>
+      <author>
+	<firstname>Alexander</firstname>
+	<surname>Kirillov</surname>
+	<affiliation>
+	  <orgname>GNOME 文档项目</orgname>
+	  <address> <email>kirillov@math.sunysb.edu</email> </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+    <!-- do not put authorname in the header except in copyright - use
+         section "authors" below -->
+    <revhistory>
+      <revision>
+	<revnumber>2.10.10</revnumber>
+	<date>2006 年 10 月</date>
+	<revdescription>
+	  <para role="author">Paolo Bacchilega</para>
+	  <para role="publisher">GNOME 文档项目</para>
+	</revdescription>
+      </revision>
+    </revhistory>
+
+
+    <!-- this is version of manual, not application -->
+    <releaseinfo>这是描述 2.10.10 版 gThumb 的手册</releaseinfo>
+    <abstract role="description"><para><application>gThumb</application>是一个 GNOME 环境下图像查看和浏览器</para></abstract>
+  </articleinfo>
+
+  <indexterm>
+    <primary>gThumb</primary>
+  </indexterm>
+  <indexterm>
+    <primary>图像浏览器</primary>
+  </indexterm>
+  <indexterm>
+    <secondary>查看器</secondary>
+  </indexterm>
+
+  <!-- ============= Document Body ============================= -->
+
+  <!-- ============= Introduction ============================== -->
+
+  <sect1 id="intro">
+    <title>简介</title>
+    <para>
+      <application>gThumb</application> is an image viewer and browser
+      written for the GNOME environment.  It lets you browse your hard disk,
+      showing you thumbnails of image files and view single images
+      of many different formats.
+    </para>
+    <para>最常见的图像格式为 JPEG and GIF。JPEG 格式非常适用于中等大小和较大的图像，因为它在保持高图像质量的同时具有高压缩率。GIF 格式用于网页显示小动画或小的静态图像。另一个重要的图像格式是 PNG，该格式在 Unix 平台非常常见，被认为是 GIF 的替代格式。</para>
+    <para><application>gThumb</application> 支持所有的这类格式以及其他格式，它也能显示 GIF 动画。</para>
+    <para><application>gThumb</application> 不仅可以查看图像还具有许多其他的特性，如添加图像备注，以一览表的形式组织图像，打印图像，查看幻灯片，设置桌面背景，等等。</para>
+  </sect1>
+
+  <!-- ============= Getting Started ==============================  -->
+  <sect1 id="gthumb-getting-started">
+  <title>开始</title>
+  <para>本部分提供如何开始使用 <application>gThumb</application> 的信息，并描述其主窗口界面。</para>
+  <sect2 id="get-start">
+    <title>启动 <application>gThumb</application></title>
+    <para>您可以通过以下方式启动<application>gThumb</application>：</para>
+      <variablelist>
+        <varlistentry>
+          <term><guimenu>应用程序</guimenu> 菜单</term>
+          <listitem>
+            <para>选择<menuchoice><guisubmenu>图像</guisubmenu><guimenuitem>gThumb</guimenuitem></menuchoice>。</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>命令行</term>
+          <listitem>
+            <para>输入<command>gthumb</command>，然后按<keycap>回车</keycap>。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    <para>如果从命令行启动 <application>gThumb</application>，可指定以下选项：</para>
+      <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+          <colspec colname="COLSPEC0" colwidth="50.00*"/>
+          <colspec colname="COLSPEC1" colwidth="50.00*"/>
+          <thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>命令</para></entry>
+              <entry colname="COLSPEC1" align="left">
+                <para>说明</para></entry>
+            </row>
+          </thead>
+          <tbody>
+            <row valign="top">
+              <entry><para><command>gthumb <replaceable>文件夹</replaceable></command></para></entry>
+              <entry align="left"><para>在指定文件夹启动<application>gThumb</application></para></entry>
+            </row>
+            <row valign="top">
+              <entry><para><command>gthumb <replaceable>name.jpg</replaceable></command></para></entry>
+              <entry align="left"><para>查看图像 <filename>name.jpg</filename>。</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para><command>gthumb <replaceable>*.jpg</replaceable></command></para></entry>
+              <entry align="left"><para>查看所有扩展名为 <filename>.jpg</filename> 的图像。</para></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+
+  </sect2>
+  <sect2 id="gthumb-main-window">
+  <title>当启动 <application>gThumb</application> 时</title>
+    <para>当您启动 <application>gThumb</application> 会显示如下窗口：<figure id="main-win-fig">
+    <title>主窗口</title>
+    <screenshot>
+      <screeninfo>主窗口</screeninfo>
+      <graphic format="PNG" fileref="figures/main-win.png" srccredit="Me"/>
+    </screenshot>
+    </figure>  <application>gThumb</application><guilabel>窗口</guilabel> 包含如下元素：<variablelist>
+      <varlistentry> <term>菜单栏</term>
+        <listitem>
+          <para>菜单栏中的菜单包含了您在 <application>gThumb</application> 中可以使用的所有命令</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry> <term>工具栏</term>
+        <listitem>
+           <para>工具栏包含了可从菜单栏访问命令的一个子集。</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry> <term>位置栏</term>
+        <listitem>
+          <para>位置栏包含当前文件夹名称。</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry> <term>文件夹列表</term>
+      <listitem>
+        <para>文件夹列表显示了包含在当前文件夹中的子文件夹。</para>
+      </listitem>
+      </varlistentry>
+      <varlistentry> <term>图像列表</term>
+      <listitem>
+        <para>显示当前文件夹中图像的图像列表。</para>
+      </listitem>
+      </varlistentry>
+      <varlistentry> <term>状态栏</term>
+      <listitem>
+        <para>在状态栏上，您可以看到：<orderedlist>
+	    <listitem>
+              <para>包含在当前文件夹中的图像总数和它们的总大小。</para>
+	    </listitem>
+	    <listitem>
+	      <para>选择图像的数目和它们的大小。</para>
+	    </listitem>
+	    <listitem>
+	      <para>some properties of the currently focused image.</para>
+	    </listitem>
+	  </orderedlist></para>
+      </listitem>
+      </varlistentry>
+    </variablelist></para>
+  </sect2>
+  </sect1>
+
+  <!-- ============= Browsing Folders ==============================  -->
+  <sect1 id="gthumb-browsing">
+  <title>浏览文件夹</title>
+    <para>浏览器选项可以在<guilabel>首选项</guilabel>对话框的 <xref linkend="preferences-browser"/> 中找到。</para>
+    <para>浏览文件夹的键盘快捷方式在 <xref linkend="gthumb-TBL-keyword-shortcuts-browser"/>中有叙述。</para>
+    <sect2 id="gthumb-change-folder">
+    <title>改变文件夹</title>
+    <para>若要改变文件夹，有两种方式：<orderedlist>
+	<listitem>
+	  <para>在文件夹列表中点击文件夹名称。</para>
+        </listitem>
+        <listitem>
+	  <para>位置项处输入文件夹名。</para>
+        </listitem>
+      </orderedlist></para>
+    <para>当使用位置项时，可按<keycombo><keycap>TAB</keycap></keycombo>以自动补全文件夹名，这会简化长名称的输入。您可以按<keycombo><keycap>Ctrl</keycap><keycap>L</keycap></keycombo>将输入焦点移动到位置项。</para>
+    <para>转到先前访问的文件夹，您可以使用工具栏 <guilabel>后退</guilabel>按钮。</para>
+    <para>其他的导航命令位于<menuchoice><guimenu>查看</guimenu><guisubmenu>转到</guisubmenu></menuchoice>菜单。</para>
+  </sect2>
+  <sect2 id="gthumb-sort">
+  <title>排列图像</title>
+    <para>以不同顺序排列图像，使用<guimenu>查看</guimenu><guimenuitem>菜单中的排列图像</guimenuitem>子菜单，使用<keycombo><keycap>Ctrl</keycap><keycap>R</keycap></keycombo>重新载入当前文件夹，键入<keycombo><keycap>T</keycap></keycombo>查看或隐藏图像列表中的缩略图。</para>
+  </sect2>
+  <sect2 id="gthumb-bookmarks">
+  <title>将文件夹添加到书签</title>
+  <para>
+      Frequently used folders can be added to the bookmark list for rapid
+      access.  Just go to the folder you want to add to the bookmarks and
+      press <keycombo action="simul"><keycap>Ctrl</keycap><keycap>D</keycap>
+      </keycombo> or use the command
+      <menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Add
+      Bookmark</guimenuitem></menuchoice>.
+      To remove or rearrange bookmarks in a different order use the
+      <menuchoice><guimenu>Bookmarks</guimenu><guimenuitem>Edit
+      Bookmarks</guimenuitem></menuchoice> command.
+  </para>
+  </sect2>
+  </sect1>
+  <sect1 id="gthumb-folders">
+    <title>操作文件夹</title>
+    <para><application>gThumb</application> 提供管理文件夹的功能。 <note>
+        <title>警告</title>
+        <para>强烈推荐用 <application>gThumb</application> 移动复制图像文件夹。这是因为，如果用 <application>gThumb</application> 移动复制图像文件夹，图像备注会保存。但如果用文件管理器或其他程序移动复制文件夹，备注会丢失。</para>
+      </note></para>
+    <sect2 id="gthumb-create-folder">
+    <title>创建文件夹</title>
+    <para>要创建新文件夹，进行如下步骤：<orderedlist>
+      <listitem>
+        <para>转到新文件夹创建处位置的文件夹。</para>
+      </listitem>
+      <listitem>
+        <para>选择 <menuchoice><guimenu>文件</guimenu><guimenuitem>新文件夹</guimenuitem></menuchoice> 显示<guilabel>新文件夹</guilabel> 对话框。</para>
+      </listitem>
+      <listitem>
+        <para>输入新的文件夹名称。</para>
+      </listitem>
+      <listitem>
+        <para>点击 <guibutton>创建</guibutton>。<application>gThumb</application>创建新的文件夹。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-open-folder">
+    <title>打开文件夹</title>
+    <para>以文件管理器打开文件夹，需进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转到您想要打开的文件夹。</para>
+      </listitem>
+      <listitem>
+        <para>选择 <menuchoice><guimenu>文件</guimenu><guisubmenu>文件夹</guisubmenu><guimenuitem>用文件管理器打开</guimenuitem></menuchoice>。<application>gThumb</application> 将会用文件管理器打开文件夹。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-rename-folder">
+    <title>重命名文件夹</title>
+    <para>重命名文件夹，需进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转到您要重命名的文件夹。</para>
+      </listitem>
+      <listitem>
+        <para>选择<menuchoice><guimenu>文件</guimenu><guisubmenu>文件夹</guisubmenu><guimenuitem>重命名</guimenuitem></menuchoice> 会显示<guilabel>重命名文件夹</guilabel> 对话框。</para>
+      </listitem>
+      <listitem>
+        <para>输入新的文件夹名称。</para>
+      </listitem>
+      <listitem>
+        <para>点击 <guibutton>重命名</guibutton>。<application>gThumb</application>重命名文件夹。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-move-to-trash-folder">
+    <title>删除文件夹</title>
+    <para>删除文件夹，需进行如下步骤：<orderedlist>
+      <listitem>
+        <para>转到您要删除的文件夹。</para>
+      </listitem>
+      <listitem>
+        <para>选择 <menuchoice><guimenu>文件</guimenu><guisubmenu>文件夹</guisubmenu><guimenuitem>移至回收站</guimenuitem></menuchoice>。<application>gThumb</application> 移动文件夹到系统回收站。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-copy-folder">
+    <title>复制文件夹</title>
+    <para>复制文件夹到一个不同的位置，进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转到您要复制的文件夹。</para>
+      </listitem>
+      <listitem>
+        <para>选择 <menuchoice><guimenu>文件</guimenu><guisubmenu>文件夹</guisubmenu><guimenuitem>复制</guimenuitem></menuchoice> 显示 <guilabel>复制文件夹</guilabel> 对话框。</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>复制文件夹</guilabel>对话框用于选择目标文件夹。您可以在<guilabel>文件夹</guilabel>项中键入文件夹名，或点击 <guibutton>浏览</guibutton>从磁盘中选择文件夹。<guilabel>最近使用的</guilabel>列表包含了最近指定目标文件夹列表，同时<guilabel>书签</guilabel> 列表包含您添加为标签的文件夹。在这些列表中点击一个文件夹以在<guilabel>文件夹</guilabel> 项中插入文件夹名称。</para>
+      </listitem>
+      <listitem>
+        <para>点击<guibutton>Ok</guibutton>。<application>gThumb</application>复制文件夹到目标文件夹。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-move-folder">
+    <title>移动文件夹</title>
+    <para>移动文件夹到不同的位置，进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转到您要移动的文件夹。</para>
+      </listitem>
+      <listitem>
+        <para>选择 <menuchoice><guimenu>文件</guimenu><guisubmenu>文件夹</guisubmenu><guimenuitem>移动</guimenuitem></menuchoice> 以显示 <guilabel>移动文件夹</guilabel> 对话框。</para>
+      </listitem>
+      <listitem>
+        <para><guilabel>移动文件夹</guilabel>对话框用于选择目标文件夹。您可以在<guilabel>文件夹</guilabel>项中键入文件夹名，或点击 <guibutton>浏览</guibutton>从磁盘中选择文件夹。<guilabel>最近使用的</guilabel>列表包含了最近指定目标文件夹列表，同时<guilabel>书签</guilabel> 列表包含您添加为标签的文件夹。在这些列表中点击一个文件夹以在<guilabel>文件夹</guilabel> 项中插入文件夹名称。</para>
+      </listitem>
+      <listitem>
+        <para>点击<guibutton>确定</guibutton>。<application>gThumb</application> 移动文件夹到指定文件夹。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  </sect1>
+
+  <!-- ============= Viewing ================================== -->
+  <sect1 id="gthumb-image-viewing">
+  <title>查看图像</title>
+  <para>查看图像的键盘快捷键在 <xref linkend="gthumb-TBL-keyword-shortcuts-viewer"/>中有叙述。</para>
+  <sect2 id="gthumb-view-images">
+  <title>查看图像</title>
+    <para>
+      In order to view an image just click on its thumbnail and the image will
+      be visualized in the viewer pane.  If the image doesn't fit the viewer
+      pane you can give more space to the viewer hiding the browser, this can
+      be accomplished double-clicking on the thumbnails or pressing the
+      <keycap>Return</keycap> key, pressing it
+      again the browser will be displayed again.
+      Another way of viewing a big image is to view it in full screen
+      mode, type <keycombo><keycap>F</keycap></keycombo> to
+      activate/disactivate the full screen mode.
+    </para>
+    <para>鼠标操作：</para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0"><colspec colname="COLSPEC0" colwidth="30.65*"/>
+        <colspec colname="COLSPEC1" colwidth="69.35*"/>
+        <tbody>
+          <row>
+            <entry>
+              <para>按住左键并移动鼠标</para></entry>
+            <entry>
+              <para>移动图像。</para></entry>
+          </row>
+          <row>
+            <entry>
+              <para>左点击</para></entry>
+            <entry>
+              <para>显示下一幅图像。</para></entry>
+          </row>
+          <row>
+            <entry>
+              <para>中击</para></entry>
+            <entry>
+              <para>显示上一幅图像。</para></entry>
+          </row>
+          <row>
+            <entry>
+              <para>右击</para></entry>
+            <entry>
+              <para>弹出图像菜单。</para></entry>
+          </row>
+        </tbody>
+        </tgroup>
+      </informaltable>
+    <para>
+      Another way of moving images is by the navigation button :
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/nav-button.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+      located in the
+      right bottom corner of the viewer window when the images does not fit
+      in the window.  Clicking and holding this
+      button will show you a preview of the image.  Moving the mouse you will
+      move the image to the desired position.
+    </para>
+   </sect2>
+   <sect2 id="gthumb-view-prop">
+   <title>查看图像属性</title>
+     <para>查看图像属性，进行以下步骤：<orderedlist>
+          <listitem>
+            <para>选择图像。</para>
+          </listitem>
+          <listitem>
+            <para>选择 <menuchoice><guimenu>文件</guimenu><guimenuitem>属性</guimenuitem></menuchoice>。<application>gThumb</application> 显示 <guilabel>属性</guilabel> 对话框。</para>
+          </listitem>
+        </orderedlist></para>
+   </sect2>
+  <!-- ============= EXIF ================================== -->
+  <sect2 id="gthumb-exif">
+  <title>查看图像 EXIF 数据</title>
+  <para>查看图像附加的 exif 数据，使用<guilabel>属性</guilabel> 对话框(<xref linkend="gthumb-view-prop"/>) 或进行以下步骤：<orderedlist>
+        <listitem><para>选择图像。</para></listitem>
+        <listitem><para>按<keycap>回车</keycap>或双击图像以查看它。</para></listitem>
+        <listitem><para>选择 <menuchoice><guimenu>查看</guimenu><guisubmenu>查看/隐藏</guisubmenu><guimenuitem>图像注释</guimenuitem></menuchoice>或按 <keycap>I</keycap>。<application>gThumb</application> 显示 exif 数据。</para></listitem>
+     </orderedlist></para>
+  </sect2>
+  </sect1>
+
+  <!-- ============= working with images ================================== -->
+  <sect1 id="gthumb-image-working">
+  <title>操作图像</title>
+   <sect2 id="gthumb-alter-images">
+   <title>更改图像</title>
+      <para>当前文件可以以多种方式更改。用于更改图像的命令位于<guimenu>图像</guimenu> 菜单中。</para>
+      <informaltable frame="topbot">
+        <tgroup cols="2" colsep="0" rowsep="0"><colspec colname="COLSPEC0" colwidth="30.65*"/>
+        <colspec colname="COLSPEC1" colwidth="69.35*"/>
+        <tbody>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>增强</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>调整颜色水平增益图像。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>调整大小</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>改变图像尺寸进行放大或缩小。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>裁剪</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>裁剪图像。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guisubmenu>变换</guisubmenu>
+		<guimenuitem>右旋转</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>顺时针旋转图像 90 度。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guisubmenu>变换</guisubmenu>
+		<guimenuitem>向左旋转</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>逆时针旋转图像 90 度。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guisubmenu>变换</guisubmenu>
+		<guimenuitem>翻转</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>
+	        Create a mirror image by reflecting the image scanlines
+		in the vertical direction.
+	      </para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guisubmenu>变换</guisubmenu>
+		<guimenuitem>镜像</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>
+	        Create a mirror image by reflecting the image scanlines
+		in the horizontal direction (as in a mirror).
+	      </para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>去色</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>以黑白色查看图像。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>反色</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>以反色查看图像。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>色彩平衡</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>改变色彩平衡。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>色调-饱和度</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>改变图像色调，明度和饱和度。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>红眼去除</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>
+	        Remove red eyes caused by poor flashes.
+		See <xref linkend="gthumb-redeye"/> for more information.
+	      </para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>亮度-对比度</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>改变图像亮度和对比度。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guimenuitem>色调分离</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>减少颜色数。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guisubmenu>自动</guisubmenu>
+		<guimenuitem>Equalize Histogram</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>均一化图像直方图以增益图像。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guisubmenu>自动</guisubmenu>
+		<guimenuitem>Normalize</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>
+	        Automatically normalize the contrast.
+	      </para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <menuchoice>
+		<guisubmenu>自动</guisubmenu>
+		<guimenuitem>对比度扩展</guimenuitem>
+	        </menuchoice>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>
+	        Automatically stretch the contrast.
+	      </para>
+	    </entry>
+	  </row>
+	</tbody>
+      </tgroup>
+      </informaltable>
+      <para>当图像被更改时，在图像文件名旁会显示标签“[modified]”。<note>
+        <title>注意</title>
+        <para>注意这些更改不会变动图像文件。如果您想要查看初始图像，只需再次点击缩略图或者使用 <menuchoice><guimenu>文件</guimenu><guimenuitem>还原</guimenuitem></menuchoice>命令。</para>
+      </note></para>
+      <para>您可以保存已经更改的图像，更多信息参见<xref linkend="gthumb-save-images"/>。</para>
+    <sect3 id="gthumb-redeye">
+    <title>红眼去除</title>
+      <para>
+      Many inexpensive cameras have a flash that is too close to the camera lens.
+      As a result, the light from the flash may travel from the camera and be partially
+      reflected by a subject's retina right back into the camera lens. This causes
+      "redeye".
+      </para>
+      <para><application>gThumb</application>提供了一个工具以移除这类不想看到的红眼。当查看带有红眼的图像时，选择<menuchoice><guimenu>图像</guimenu><guimenuitem>红眼移除</guimenuitem></menuchoice>。会启动一个新窗口。移动鼠标指针到红眼区域上，在它附近点击。这会移除红色区域，并替换为黑色。如果您不满意这项结果，只需点击<guibutton>撤销</guibutton>以还原先前的改变。(点击 <guibutton>取消</guibutton>将放弃所有更改并关闭窗口。) 一旦您满意该结果，您可以点击更多的红眼区域，或者点击<guibutton>保存</guibutton> 或 <guibutton>应用</guibutton> 关闭窗口。</para>
+      <para>如果您点击<guibutton>应用</guibutton>，使用<menuchoice><guimenu>图像</guimenu><guimenuitem>红眼移除</guimenuitem></menuchoice>后图像必须以通常方式重新保存。参见<xref linkend="gthumb-save-images"/> 以获取更多信息。</para>
+      <para><guibutton>放大</guibutton>、<guibutton>缩小</guibutton>、<guibutton>实际大小</guibutton>、and <guibutton>缩放至合适大小</guibutton>按钮允许您缩放至满意大小。鼠标滚轮也能用于缩放。</para>
+    </sect3>
+    </sect2>
+    <sect2 id="gthumb-save-images">
+    <title>保存图像</title>
+      <para>保存图像，需进行以下步骤：<orderedlist>
+        <listitem>
+           <para>显示图像。</para>
+        </listitem>
+        <listitem>
+           <para>更改图像(在 <xref linkend="gthumb-alter-images"/>中有叙述)。当然这步是可选的。</para>
+        </listitem>
+        <listitem>
+            <para>选择<menuchoice><guimenu>文件</guimenu><guimenuitem>另存为</guimenuitem></menuchoice>。</para>
+        </listitem>
+        <listitem>
+            <para>选择文件名并点击<guibutton>确定</guibutton>。</para>
+        </listitem>
+        <listitem>
+           <para><application>gThumb</application>显示格式对话框，您可以选定文件格式选项。一旦确认选项，点击<guibutton>确定</guibutton>。<application>gThumb</application>保存图像。</para>
+        </listitem>
+      </orderedlist></para>
+    </sect2>
+
+  <sect2 id="gthumb-image-open">
+  <title>用其他程序打开一系列的图像</title>
+  <para>用其他程序打开一系列图像，需进行如下步骤：<orderedlist>
+      <listitem>
+        <para>转到图像所在的文件夹或一览表。</para>
+      </listitem>
+      <listitem>
+        <para>选取图像，并选择<menuchoice><guimenu>文件</guimenu><guimenuitem>打开方式</guimenuitem></menuchoice>，显示 <guilabel>打开</guilabel> 对话框。</para>
+      </listitem>
+      <listitem>
+        <para>从<guilabel>可用程序</guilabel>列表，或从<guilabel>最近使用程序</guilabel>列表中选择程序；或者在<guilabel>应用程序</guilabel>项中键入命令。</para>
+      </listitem>
+      <listitem>
+        <para>点击<guibutton>打开</guibutton>。<application>gThumb</application>打开图像。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+
+  <sect2 id="gthumb-image-rename">
+  <title>重命名图像</title>
+  <para>重命名图像文件名，需进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转向图像所在的文件夹或目录。</para>
+      </listitem>
+      <listitem>
+        <para>选择图像，并选择<menuchoice><guimenu>编辑</guimenu><guimenuitem>重命名</guimenuitem></menuchoice>。</para>
+      </listitem>
+      <listitem>
+        <para>键入新的文件名并点击<guibutton>重命名</guibutton>。<application>gThumb</application>重命名图像文件名。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+
+  <sect2 id="gthumb-image-delete">
+  <title>删除一系列图像</title>
+  <para>删除一系列图像，需进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转到图像所在的文件夹或一览表。</para>
+      </listitem>
+      <listitem>
+        <para>选定图像并选择<menuchoice><guimenu>编辑</guimenu><guimenuitem>移动到回收站</guimenuitem></menuchoice>。<application>gThumb</application>删除图像(移动图像至系统回收站)。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+
+  <sect2 id="gthumb-image-copy">
+  <title>复制一系列图像</title>
+  <para>复制一系列图像，需进行如下步骤：<orderedlist>
+      <listitem>
+        <para>转到图像所在的文件夹或一览表。</para>
+      </listitem>
+      <listitem>
+        <para>选定图像并选择<menuchoice><guimenu>编辑</guimenu><guimenuitem>拷贝</guimenuitem></menuchoice>并显示<guilabel>选择 目标文件夹</guilabel> 对话框。</para>
+      </listitem>
+      <listitem>
+        <para>从<guilabel>最近使用</guilabel>列表中，或从<guilabel>书签</guilabel>列表中选择文件夹；或者在<guilabel>文件夹</guilabel> 项中键入文件夹名。</para>
+      </listitem>
+      <listitem>
+        <para>点击<guibutton>确定</guibutton>。<application>gThumb</application> 复制图像。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+
+  <sect2 id="gthumb-image-move">
+  <title>移动一系列图像</title>
+  <para>移动一系列图像，需进行如下步骤：<orderedlist>
+      <listitem>
+        <para>转到图像所在的文件夹或一览表。</para>
+      </listitem>
+      <listitem>
+        <para>选定图像并选择 <menuchoice><guimenu>编辑</guimenu><guimenuitem>移动</guimenuitem></menuchoice>，显示<guilabel>选择目标文件夹</guilabel>对话框。</para>
+      </listitem>
+      <listitem>
+        <para>从<guilabel>最近使用</guilabel>列表中，或从<guilabel>书签</guilabel>列表中选择文件夹；或者在<guilabel>文件夹</guilabel> 项中键入文件夹名。</para>
+      </listitem>
+      <listitem>
+        <para>点击<guibutton>确定</guibutton>。<application>gThumb</application>移动图像。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+
+  <!-- ============= Print ================================== -->
+  <sect2 id="gthumb-print-images">
+  <title>打印一系列图像</title>
+  <para>打印一系列图像，要进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转到图像所在的文件夹或一览表。</para>
+      </listitem>
+      <listitem>
+        <para>选择图像并选择<menuchoice><guimenu>文件</guimenu><guimenuitem>打印</guimenuitem></menuchoice>。</para>
+      </listitem>
+      <listitem>
+        <para>在<guilabel>打印</guilabel>对话框中有两个标签：<guilabel>布局</guilabel>和 <guilabel>纸张细节</guilabel>。</para>
+        <para>根据<guilabel>布局</guilabel>标签，您可以 <itemizedlist>
+        <listitem>
+          <para>选择每页图像数。</para>
+        </listitem>
+        <listitem>
+          <para>包含图像备注。</para>
+        </listitem>
+        <listitem>
+          <para>通过点击旋转图像。</para>
+        </listitem>
+        <listitem>
+          <para>通过点击鼠标左键并拖拽以移动图像。</para>
+        </listitem>
+        <listitem>
+          <para>调整图像大小。</para>
+        </listitem>
+        <listitem>
+          <para>将页面上的图像置于中央，使用<guibutton>置于页面中央</guibutton>按钮。</para>
+        </listitem>
+        </itemizedlist></para>
+        <para> From the <guilabel>Paper Details</guilabel> tag you can
+        <itemizedlist>
+        <listitem>
+          <para>Choose the paper format.</para>
+        </listitem>
+        <listitem>
+          <para>Choose the paper orientation.</para>
+        </listitem>
+        </itemizedlist>
+        </para>
+      </listitem>
+      <listitem>
+        <para>当您做好打印准备时，点击<guibutton>打印</guibutton>。<application>gThumb</application> 打印图像。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  </sect1>
+
+  <!-- ============= Comments ================================== -->
+  <sect1 id="gthumb-comments">
+  <title>备注</title>
+  <para>备注是附加于图像的信息。<note>
+      <title>警告</title>
+      <para>备注并不包含在图像文件中，它们为单独存放。这意味着如果用其他程序移动图像或文件夹，备注会丢失。</para>
+    </note><note>
+      <title>FOR EXPERTS</title>
+      <para>图像备注保存在图像文件夹的子文件夹中，名为<filename>.comments</filename>。</para>
+    </note></para>
+  <sect2 id="gthumb-comment-add">
+  <title>添加备注</title>
+  <para>对图像添加备注，选定图像并选择 <menuchoice><guimenu>编辑</guimenu><guimenuitem>编辑评论</guimenuitem></menuchoice> 或键入<keycombo><keycap>C</keycap></keycombo>。</para>
+  <para>
+    Comments are structured in various parts :
+    <itemizedlist>
+      <listitem>
+        <para><guilabel>备注</guilabel>：描述图像的自由文本。</para>
+      </listitem>
+      <listitem>
+        <para>
+	  <guilabel>Place</guilabel>: the place the picture represents.
+        </para>
+      </listitem>
+      <listitem>
+        <para><guilabel>日期</guilabel>：图片拍摄日期。</para>
+      </listitem>
+    </itemizedlist>
+  </para>
+  <para>
+    Image comments are displayed in the image list in italic text above the
+    image filename.  If the comment is too long the simbol "[..]" is
+    appended to the displayed part of the comment to signal you that
+    the comment is not entirely visible, to view the whole comment use
+    the image properties dialog that can be displayed using the
+    <menuchoice><guimenu>File</guimenu><guimenuitem>Properties
+    </guimenuitem></menuchoice> command or pressing
+    <keycombo><keycap>I</keycap></keycombo>.
+  </para>
+    <!-- ==== Figure ==== -->
+    <figure id="comment-in-list-fig">
+      <title>图像备注</title>
+      <screenshot>
+        <screeninfo>图像备注</screeninfo>
+        <graphic format="PNG" fileref="figures/comment.png" srccredit="Me"/>
+      </screenshot>
+    </figure>
+    <!-- ==== End of Figure ==== -->
+
+  <sect3 id="gthumb-comment-add-multi">
+  <title>添加备注到许多图像</title>
+  <para>对多幅图像添加备注，选取图像并选择 <menuchoice><guimenu>编辑</guimenu><guimenuitem>编辑备注</guimenuitem></menuchoice>或者键入<keycombo><keycap>C</keycap></keycombo>。</para>
+  <para>
+    The <guilabel>Comment</guilabel> dialog will fill in the fields
+    that have the same value for all the images leaving all other
+    fields empty.
+  </para>
+  <para>
+    You can activate the <guilabel>Save only changed fields
+    </guilabel> option (which is active by default) to change one or more
+    fields of many comments leaving all other fields unchanged.
+  </para>
+  </sect3>
+  </sect2>
+  <sect2 id="gthumb-comment-delete">
+  <title>移除备注</title>
+  <para>移除备注，需进行以下步骤：<orderedlist>
+      <listitem>
+        <para>转到图像所在的文件夹或一览表。</para>
+      </listitem>
+      <listitem>
+        <para>选择图像，选择<menuchoice><guimenu>编辑</guimenu><guimenuitem>移除注释</guimenuitem></menuchoice>。 <application>gThumb</application> 移除注释。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-comment-view">
+  <title>查看图像备注</title>
+  <para>查看图像备注，需使用<guilabel>属性</guilabel>对话框 (<xref linkend="gthumb-view-prop"/>) 或者进行如下步骤：<orderedlist>
+        <listitem><para>选择图像。</para></listitem>
+        <listitem><para>按<keycap>回车</keycap>或双击图像以查看它。</para></listitem>
+        <listitem><para>按 <keycap>I</keycap> 或选择 <menuchoice><guimenu>查看</guimenu><guisubmenu>显示/隐藏</guisubmenu><guimenuitem>图像注释</guimenuitem></menuchoice>。 <application>gThumb</application>显示图像注释。</para></listitem>
+     </orderedlist></para>
+  </sect2>
+  </sect1>
+
+  <!-- ============= Categories ================================== -->
+  <sect1 id="gthumb-categories">
+  <title>分类</title>
+  <para>
+    Categories are keywords assigned to images and can be used to perform fine
+    grained searches as described in <xref linkend="gthumb-finding"/>.
+    <note>
+      <title>警告</title>
+      <para>分类并不包含在图像文件中，它们是单独存放的。这意味着如果用其他程序移除图像或文件夹，备注会丢失。</para>
+    </note>
+    <note>
+      <title>FOR EXPERTS</title>
+      <para>分类保存在图像文件夹的子文件夹<filename>.comments</filename>中，与图像备注保存位置相同。</para>
+    </note>
+  </para>
+  <sect2 id="gthumb-categories-add">
+  <title>对一系列图像指定分类</title>
+  <para>添加备注到一系列图像，需进行以下备注：<orderedlist>
+      <listitem>
+        <para>选取图像，并选择<menuchoice><guimenu>编辑</guimenu><guimenuitem>一览表</guimenuitem></menuchoice>。<application>gThumb</application> 会显示<guilabel>目录</guilabel> 对话框。</para>
+      </listitem>
+      <listitem>
+	<para>检查<guilabel>可用分类</guilabel>列表中的分类。您可以点击<guilabel>新建</guilabel>按钮创建新分类，点击 <guilabel>移除</guilabel>按钮从列表中移除分类。</para>
+      </listitem>
+      <listitem>
+        <para>点击<guibutton>保存</guibutton>。<application>gThumb</application>对图像指定分类。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-categories-add-to-folder">
+  <title>对文件夹指定分类</title>
+  <para>
+    Instead of assigning categories to single images you can assign them
+    to a folder, this is equivalent to assign the categories to all the images
+    contained in the folder and in all of its subfolders.
+  </para>
+  <para>添加分类到文件夹，需进行以下步骤：<orderedlist>
+      <listitem>
+        <para>Go to the parent folder in order to visualize the folder name
+	in the folder list pane, right-click on the folder name and
+	select the <menuchoice><guimenuitem>Categories</guimenuitem>
+        </menuchoice> command; alternatively go to the folder and select
+	the <menuchoice><guimenu>File</guimenu><guisubmenu>Folder</guisubmenu>
+        <guimenuitem>Categories</guimenuitem></menuchoice> commands.  In both
+        cases <application>gThumb</application> shows the <guilabel>Categories</guilabel> dialog.</para>
+      </listitem>
+      <listitem>
+	<para>检查<guilabel>可用分类</guilabel>列表中的分类。您可以点击<guilabel>新建</guilabel>按钮创建新分类，点击 <guilabel>移除</guilabel>按钮从列表中移除分类。</para>
+      </listitem>
+      <listitem>
+        <para>点击<guibutton>确定</guibutton>。<application>gThumb</application>对文件夹指定分类。</para>
+      </listitem>
+    </orderedlist></para>
+  </sect2>
+  <sect2 id="gthumb-categories-remove">
+  <title>移除一幅图像或一个文件夹的分类</title>
+  <para>
+    To remove categories from a series of images or a folder perform the
+    same steps as described above an uncheck the categories you want
+    to remove, the click on <guibutton>Ok</guibutton> to confirm the
+    operation.
+  </para>
+  </sect2>
+  </sect1>
+
+  <!-- ============= Catalogs ================================== -->
+  <sect1 id="catalogs">
+  <title>目录</title>
+  <para>
+    Catalogs lets you organize images without moving them from a folder to
+    another, think of them as "playlists" for images.
+  </para>
+  <para>一览表可以组织为图库。图库类似文件夹，能够容纳一览表和其他库。</para>
+  <para>
+  <note>
+  <title>警告</title>
+  <para>
+    Catalogs are not updated when you move images, if you want a more flexible
+    catalog you can use the searches described in <xref linkend="gthumb-find"/>,
+    searches are catalogs with search criteria attached, after moving
+    images you can redo the search to get the catalog updated.
+  </para>
+  </note>
+  <note>
+  <title>FOR EXPERTS</title>
+  <para>目录保存在<filename>$(HOME)/.gnome2/gthumb/collections</filename> 文件夹。</para>
+  </note>
+  </para>
+    <sect2 id="gthumb-catalog-view">
+    <title>查看一览表的列表</title>
+        <para>查看一览表的列表，需进行以下步骤：<orderedlist>
+        <listitem>
+          <para>按 <keycombo><keycap>Alt</keycap><keycap>2</keycap></keycombo> 或选择 <menuchoice><guimenu>查看</guimenu><guimenuitem>一览表</guimenuitem></menuchoice>。</para>
+        </listitem>
+        </orderedlist></para>
+    </sect2>
+    <sect2 id="gthumb-catalog-view-content">
+    <title>查看一览表</title>
+        <para>查看一览表的内容，需进行以下步骤：<orderedlist>
+        <listitem>
+          <para>设置一览表视图(在 <xref linkend="gthumb-catalog-view"/> 中有描述).</para>
+        </listitem>
+        <listitem>
+          <para>在一览表的名字上点击以选择它。</para>
+        </listitem>
+       </orderedlist></para>
+       <para>如果您要转到图像文件夹，选取图像并使用 <menuchoice><guimenu>查看</guimenu><guisubmenu>转到</guisubmenu><guimenuitem>转到图像文件夹 </guimenuitem></menuchoice>命令，或者按<keycombo action="simul"><keycap>Alt</keycap><keycap>End</keycap></keycombo>。<application>gThumb</application>将会显示图像文件夹并滚动图像列表以便使图像可见。</para>
+    </sect2>
+    <sect2 id="gthumb-catalog-add">
+    <title>添加图像到一览表中</title>
+      <para>添加一系列图像到一览表中，进行以下步骤：<orderedlist>
+      <listitem>
+        <para>选取您要添加到一览表中的图像，选择<menuchoice><guimenu>编辑</guimenu><guimenuitem> 添加到一览表</guimenuitem></menuchoice>。</para>
+      </listitem>
+      <listitem>
+        <para>选择一个已存在的一览表或创建一个新的一览表。</para>
+      </listitem>
+      <listitem>
+        <para>选择<guibutton>确定</guibutton>。 <application>gThumb</application>添加选定的图像到目录中。</para>
+      </listitem>
+    </orderedlist></para>
+    </sect2>
+    <sect2 id="gthumb-catalog-delete">
+    <title>从一览表中移除图像</title>
+      <para>从目录中移除图像，进行以下步骤：<orderedlist>
+        <listitem>
+          <para>设置一览表视图(在 <xref linkend="gthumb-catalog-view"/> 中有描述).</para>
+        </listitem>
+        <listitem>
+          <para>选择一览表。</para>
+        </listitem>
+        <listitem>
+         <para>选取您要删除的图像，选择<menuchoice><guimenu>编辑</guimenu><guimenuitem> 从一览表中移除</guimenuitem></menuchoice>。<application>gThumb</application>从一览表移除图像。</para>
+        </listitem>
+      </orderedlist></para>
+    </sect2>
+    <sect2 id="gthumb-catalog-create">
+    <title>创建一览表</title>
+        <para>创建一览表，需进行以下步骤：<orderedlist>
+        <listitem>
+          <para>设置一览表视图(在 <xref linkend="gthumb-catalog-view"/> 中有描述).</para>
+        </listitem>
+        <listitem>
+          <para>选择<menuchoice><guimenu>文件</guimenu><guimenuitem>新建目录</guimenuitem></menuchoice>。</para>
+        </listitem>
+        <listitem>
+          <para>输入目录名，点击<guibutton>确定</guibutton>。<application>gThumb</application> 创建一览表。</para>
+        </listitem>
+        </orderedlist></para>
+    </sect2>
+    <sect2 id="gthumb-catalog-rename">
+    <title>重命名，移除或移动一览表</title>
+        <para>重命名，移除或移动一览表，需进行以下步骤：<orderedlist>
+        <listitem>
+          <para>设置一览表视图(在 <xref linkend="gthumb-catalog-view"/> 中有描述).</para>
+        </listitem>
+        <listitem>
+          <para>选择一览表。</para>
+        </listitem>
+        <listitem>
+          <para>Choose the corrisponding command in the
+	  <menuchoice><guimenu>File</guimenu><guisubmenu>Catalog</guisubmenu></menuchoice>
+	  menu, or use the context menu that can be displayed pressing
+	  the right mouse button on the name of the catalog in the
+	  catalog list.</para>
+        </listitem>
+        </orderedlist></para>
+    </sect2>
+    <sect2 id="gthumb-library-create">
+    <title>To Create a Library of Catalogs</title>
+        <para> To create a library of catalogs, perform the
+        following steps:
+        <orderedlist>
+        <listitem>
+          <para>设置一览表视图(在 <xref linkend="gthumb-catalog-view"/> 中有描述).</para>
+        </listitem>
+        <listitem>
+          <para>选择<menuchoice><guimenu>文件</guimenu><guimenuitem>新建图库</guimenuitem></menuchoice>。</para>
+        </listitem>
+        <listitem>
+          <para>输入图库名，点击 <guibutton>确定</guibutton>。<application>gThumb</application>创建图库。</para>
+        </listitem>
+        </orderedlist>
+        </para>
+    </sect2>
+  </sect1>
+
+  <!-- ============= Find ================================== -->
+
+  <sect1 id="gthumb-finding">
+    <title>查找图像</title>
+    <sect2 id="gthumb-find">
+    <title>查找图像</title>
+      <para>查找硬盘的图像，选择<menuchoice><guimenu>编辑</guimenu><guimenuitem>查找</guimenuitem></menuchoice>。<application>gThumb</application> 显示<guilabel>查看</guilabel>对话框。</para>
+     <sect3 id="gthumb-simple-search">
+     <title>进行简单搜索</title>
+      <para>
+	From the <guilabel>Find</guilabel> dialog
+	you can specify a file name or a pattern in the <guilabel>File name
+	</guilabel> entry.
+      </para>
+      <para>例子：<informaltable frame="all"><tgroup cols="2" colsep="1" rowsep="1"><colspec colname="COLSPEC0" colwidth="50.00*"/><colspec colname="COLSPEC1" colwidth="50.00*"/><thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>值</para></entry>
+              <entry colname="COLSPEC1" align="left">
+                <para>说明</para></entry>
+            </row>
+          </thead><tbody>
+            <row valign="top">
+              <entry><para>
+                <userinput>foo.jpg</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 搜寻文件名为<filename>foo.jpg</filename>的图像</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>
+                <userinput>*.png</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 查找<filename>png</filename> 扩展名的图像。</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>
+                <userinput>*.gif; *.jpg</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 搜寻扩展名为 <filename>gif</filename> 或 <filename>jpg</filename> 的图像。</para></entry>
+            </row>
+          </tbody></tgroup></informaltable></para>
+        <para>
+          Click on <guibutton>Search</guibutton> to start the search.
+	  Once the search has finished you will see the list of images
+	  that matches your search, if you want to see these images
+	  click on <guibutton>View</guibutton>, if you want to make another
+	  search click on <guibutton>New Search</guibutton>.
+	</para>
+	<para>
+	  If you choose to view the images, a catalog named <guilabel>Search
+	  Results</guilabel> will be created and visualized automatically.
+	  A catalog created in this way has a special icon, a magnifier, this
+	  is
+	  because on this type of catalogs you can perform two more operations:
+	  <guibutton>Edit Search</guibutton> and <guibutton>Redo Search
+	  </guibutton>.
+
+	  These operations can be selected from the
+	  <menuchoice><guimenu>File</guimenu><guisubmenu>Catalog</guisubmenu></menuchoice>
+	  menu, or from the menu that pops up when pressing the right
+	  mouse button on the catalog name.
+        </para>
+        <para>
+	  The <guilabel>Edit Search</guilabel> command lets you re-edit
+	  the search rules, while <guilabel>Redo Search</guilabel> lets
+	  you restart the search, at the end of the search you can
+	  decide whether to save the result in the catalog or not.
+        </para>
+      </sect3>
+
+      <sect3 id="gthumb-other-search-opt">
+      <title>其他搜索选项</title>
+          <variablelist>
+	  <varlistentry>
+            <term><guilabel>开始位置</guilabel></term>
+	    <listitem>
+	      <para>搜索开始处的文件夹位置。</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+            <term><guilabel>包含子文件夹</guilabel></term>
+	    <listitem>
+	      <para>
+	        Whether to search even in the sub folders.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+            <term><guilabel>备注</guilabel></term>
+	    <listitem>
+	     <para>图像备注必须包含的短语列表。</para>
+      <para>例子：</para>
+      <para>
+      <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+          <colspec colname="COLSPEC0" colwidth="50.00*"/>
+          <colspec colname="COLSPEC1" colwidth="50.00*"/>
+          <thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>值</para></entry>
+              <entry colname="COLSPEC1" align="left">
+                <para>说明</para></entry>
+            </row>
+          </thead>
+          <tbody>
+            <row valign="top">
+              <entry><para>
+                <userinput>paolo</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 搜索注释中有“paolo”的图像。</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>
+                <userinput>我的生日</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 搜索注释中有“paolo”的图像。</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>
+                <userinput>假日；罗马</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 搜索注释中有“假日”或“罗马”的图像。 </para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>
+                <userinput>罗马假日；我的生日</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application>搜索注释中有“罗马假日”或“我的生日”的图像。</para></entry>
+            </row>
+
+          </tbody>
+        </tgroup>
+      </informaltable>
+
+	     </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+            <term><guilabel>位置</guilabel></term>
+	    <listitem>
+	    <para>备注位置字段必须包含的短语列表。</para>
+         <para>例子：</para>
+
+         <para>
+      <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+          <colspec colname="COLSPEC0" colwidth="50.00*"/>
+          <colspec colname="COLSPEC1" colwidth="50.00*"/>
+          <thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>值</para></entry>
+              <entry colname="COLSPEC1" align="left">
+                <para>说明</para></entry>
+            </row>
+          </thead>
+          <tbody>
+            <row valign="top">
+              <entry><para>
+                <userinput>罗马</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 搜寻位置字段中有“罗马”的图像。</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>
+                <userinput>巴黎；罗马；伦敦</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 搜寻位置字段中有“巴黎”、“罗马”或“伦敦”的图像。位置字段。</para></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+            </para>
+	  </listitem>
+
+	  </varlistentry>
+	  <varlistentry>
+	    <!-- -->
+            <term><guilabel>日期</guilabel></term>
+	    <listitem>
+	    <para>
+	      The criteria the date field of the comment must respect:
+
+	    <itemizedlist>
+	      <listitem>
+	        <para><guilabel>任何</guilabel>：忽略日期字段。</para>
+              </listitem>
+
+	      <listitem>
+	        <para>
+	        <guilabel>before, equal to, after</guilabel>: the date must be  less recent, equal to or more recent than the date specified.
+	        </para>
+              </listitem>
+
+	    </itemizedlist>
+
+	    </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <!-- -->
+            <term><guilabel>分类</guilabel></term>
+	    <listitem>
+	    <para>
+	    The list of categories an images must belong to.
+	    Categories can be added to images using the
+	    <menuchoice><guimenu>Edit</guimenu><guimenuitem>Categories</guimenuitem></menuchoice>
+	    command or pressing
+	    <keycombo><keycap>K</keycap></keycombo>.
+            </para>
+	    <para>
+	      You can choose to search for images that belongs to all
+	      the specified categories or at least to one of them,
+	      checking the corresponding option.
+	    </para>
+            <para>例子：</para>
+      <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+          <colspec colname="COLSPEC0" colwidth="50.00*"/>
+          <colspec colname="COLSPEC1" colwidth="50.00*"/>
+          <thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>值</para></entry>
+              <entry colname="COLSPEC1" align="left">
+                <para>说明</para></entry>
+            </row>
+          </thead>
+          <tbody>
+            <row valign="top">
+              <entry><para>
+                <userinput>家庭</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 将会搜寻关键词中有“家庭”的图像。f</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>
+                <userinput>我；家庭</userinput>
+              </para></entry>
+              <entry align="left"><para><application>gThumb</application> 查找关键词列表中有“家庭” 与/或 “我”的图像。</para></entry>
+            </row>
+
+          </tbody>
+        </tgroup>
+      </informaltable>
+	    </listitem>
+	  </varlistentry>
+          </variablelist>
+        <para>
+          <note>
+            <title>注意</title>
+            <para>
+              If you use more than one criteria images must respect
+              all of them.
+            </para>
+          </note>
+          <note>
+            <title>注意</title>
+            <para>搜索总是不区分大小写。</para>
+          </note>
+        </para>
+      </sect3>
+
+     </sect2>
+     <sect2 id="gthumb-find-dup">
+     <title>查找重复图像</title>
+     <para>查找重复图像，需选择<menuchoice><guimenu>编辑</guimenu><guimenuitem>查找重复</guimenuitem></menuchoice>。</para>
+     </sect2>
+  </sect1>
+
+  <!-- ============= Slideshow ================================== -->
+
+    <sect1 id="slideshow">
+      <title>幻灯片播放</title>
+      <para>
+        You can start a slide show of the images in the current folder by
+	pressing <keycombo action="simul"><keycap>s</keycap></keycombo> or
+	selecting the <menuchoice><guimenu>View
+	</guimenu><guimenuitem>Slide Show</guimenuitem></menuchoice> menu item.
+        To stop the slide show press <keycombo action="simul">
+	<keycap>S</keycap></keycombo> again.
+      </para>
+      <para>
+        If the current selection contains two or more images the slide show will
+        be done only with the selected images, otherwise all of the images in
+        the current folder or catalog will be showed.
+      </para>
+      <para>进入/退出全屏模式不会停止幻灯播放。如果 <guilabel>切换到全屏</guilabel> 选项被选定，那么幻灯播放会以全屏模式开始，并以全屏模式结束播放。</para>
+      <para>如果您改变文件夹或重新载入当前文件夹，幻灯片播放会被打断。</para>
+      <para>您可通过幻灯片放映工具和全屏模式来做演示。有两种演示方式:自动演示和手动演示。</para>
+      <sect2 id="gthumb-auto-presentation">
+      <title>如何做一个自动演示</title>
+      <para>要做一个自动演示，进行以下步骤：</para>
+      <orderedlist>
+        <listitem>
+          <para>转到包含要演示图像所在的文件夹或一览表。</para>
+        </listitem>
+        <listitem>
+          <para>Select the images you want to view in the slideshow, or select
+          none to view all the images in the current folder or catalog.
+          </para>
+        </listitem>
+        <listitem>
+          <para>按<keycombo action="simul"><keycap>S</keycap></keycombo> 或选择<menuchoice><guimenu>查看</guimenu><guimenuitem>幻灯片播放 </guimenuitem></menuchoice>。<application>gThumb</application> 开始自动演示图像。</para>
+        </listitem>
+      </orderedlist>
+      <para>停止演示，按<keycombo action="simul"><keycap>S</keycap></keycombo> 或 <keycombo action="simul"><keycap>Q</keycap></keycombo> 或 <keycombo action="simul"><keycap>Esc</keycap></keycombo>。</para>
+      <para>幻灯播放方式可以通过 <xref linkend="preferences-slideshow"/>中<guilabel>首选项</guilabel>对话框进行个性化定义</para>
+      </sect2>
+      <sect2 id="gthumb-manual-presentation">
+      <title>如何做一个手动演示</title>
+      <para>做一个手动演示，进行如下步骤：</para>
+      <orderedlist>
+        <listitem>
+          <para>转到包含要演示图像所在的文件夹或一览表。</para>
+        </listitem>
+        <listitem>
+          <para>选择您想要开始演示的图像。</para>
+        </listitem>
+        <listitem>
+          <para>按<keycombo action="simul"><keycap>F</keycap></keycombo>。<application>gThumb</application> 以全屏模式显示图像。</para>
+        </listitem>
+        <listitem>
+          <para>按下<keycombo action="simul"><keycap>空格</keycap></keycombo>或<keycombo action="simul"><keycap>N</keycap></keycombo>。 <application>gThumb</application>显示下一幅图像。</para>
+        </listitem>
+        <listitem>
+          <para>按<keycombo action="simul"><keycap>BackSpace</keycap></keycombo> 或 <keycombo action="simul"><keycap>B</keycap></keycombo>。<application>gThumb</application> 显示上一幅图像。</para>
+        </listitem>
+      </orderedlist>
+      <para>停止演示，按<keycombo action="simul"><keycap>Q</keycap></keycombo> 或 <keycombo action="simul"><keycap>Esc</keycap></keycombo>。</para>
+      </sect2>
+    </sect1>
+
+  <!-- ============= Tools ================================== -->
+  <sect1 id="gthumb-tools">
+  <title>高级工具</title>
+
+    <sect2 id="gthumb-wallpaper">
+      <title>设置桌面壁纸</title>
+      <para>如果您要保存图像为桌面壁纸，选取图像，并选择菜单<menuchoice><guimenu>工具</guimenu><guisubmenu>设置图像为壁纸</guisubmenu></menuchoice>。此菜单包含以下项目：<itemizedlist>
+	  <listitem>
+	    <para><guilabel>置于中央</guilabel>：图像将会被置于屏幕中央。</para>
+	  </listitem>
+	  <listitem>
+	    <para><guilabel>平铺</guilabel>：图像将会想地板砖一样平铺在屏幕上。</para>
+	  </listitem>
+	  <listitem>
+	    <para><guilabel>比例缩放</guilabel>：图像会保持纵横比按比例缩放以填充屏幕。</para>
+	  </listitem>
+	  <listitem>
+	    <para><guilabel>拉伸</guilabel>：图像会被缩放以适合屏幕，若需要会改变比例。</para>
+	  </listitem>
+	</itemizedlist></para>
+      <para>如果您要恢复旧的壁纸，选择<menuchoice><guimenu>工具</guimenu><guisubmenu>设置图像为壁纸</guisubmenu><guimenuitem>恢复</guimenuitem></menuchoice>。</para>
+    </sect2>
+    <sect2 id="gthumb-rotate-jpeg">
+      <title>以无损质量方式旋转图像</title>
+      <para>
+        Usually if you want to rotate an image you have to open the image with
+        an editor, rotate the image, and then save it.  This works well for
+        image formats such as PNG or GIF, but results in a loss of
+        quality for JPEG images. (The rotation functions in
+	<menuchoice><guimenu>Image</guimenu><guimenuitem>Transform</guimenuitem>
+	</menuchoice> operate this way - with loss.)
+      </para>
+      <para>如果您要无损质量的旋转 JPEG 图像，选定要旋转的图像，并选择<menuchoice><guimenu>工具</guimenu><guimenuitem>旋转图像</guimenuitem></menuchoice>。 <application>gThumb</application>显示<guilabel>旋转对象</guilabel>对话框。</para>
+      <para>点击 <guibutton>应用</guibutton>以应用改变。点击<guibutton>应用</guibutton>后文件会自动保存。</para>
+      <para>
+        If you check the <guilabel>Apply to all images</guilabel>
+        option, the rotation is applied to the
+        currently displayed image as well as to all the remaining
+        images you have selected;
+        otherwise, once the rotation has been performed on the current
+        image, the next image in the selection is displayed, and you can
+        choose another type of rotation.
+      <note>
+        <title>注意</title>
+        <para>如果选择包含一些非 JPEG 格式图像，它们也会旋转。 (尽管如此，并不是所有文件格式都支持。)</para>
+      </note>
+      </para>
+      <para>
+        In general, there are two ways to rotate a JPEG image. The first way
+        is to re-arrange the pixels inside the image file, using a "physical"
+        transform. The second way is to leave the image data alone, and simply
+        change the value of the Exif orientation tag inside the header of the JPEG file.
+        Not all JPEG files have Exif tags however, and not all applications
+        support them. If your image does not have Exif tags, the pixels will
+        be re-arranged inside the image file automatically, since that is the only
+        possible method.
+      </para>
+      <para>
+        If your image has an Exif orientation tag, and the <guilabel>Apply physical transform</guilabel>
+        checkbox is enabled, the physical transform will be used to re-arrange the image
+        data, and the Exif orientation tag will be reset to its default value
+        of "top left".
+      </para>
+      <para>
+        If your image has an Exif orientation tag, and the <guilabel>Apply physical transform</guilabel>
+        checkbox is not enabled, then only the orientation tag will be changed. The
+        raw image data itself will not be transformed.
+      <note>
+        <title>注意</title>
+        <para>
+        For maximum compatibility with other applications, it is recommended that
+        the <guilabel>Apply physical transform</guilabel> checkbox normally be enabled
+        in both the rotation and import dialogs.
+        </para>
+      </note>
+      </para>
+      <para>The physical transform of pixel data inside the JPEG file will not
+        degrade image quality (that is, it is lossless) under most conditions.
+        However, if the image dimensions (height and width) are not both multiples
+        of 8, some data corruption will occur along one or two of the edges of the
+        image. If there is an Exif orientation tag, you can avoid this problem
+        by disabling the <guilabel>Apply physical transform</guilabel> checkbox.
+        If you must use the physical transform approach with
+        images whose dimensions are not multiples of 8, <application>gThumb</application> will allow you to
+        proceed despite with possible image distortion, but it will also ask if you
+        would like the trim the image slightly (by up to 7 columns and/or rows
+        of pixels) to remove the problem areas.
+      </para>
+    </sect2>
+    <sect2 id="gthumb-reset-exif">
+      <title>Resetting the Exif Orientation Tag</title>
+      <para>
+        The previous section describes how JPEG images can be rotated using two
+        methods (physical transforms or Exif orientation tag changes). <application>gThumb</application> supports
+        both methods properly as of version 2.9.0. Some previous versions
+        of <application>gThumb</application> auto-rotated images improperly when importing, by performing
+        a physical transformation without resetting the Exif orientation tag
+        to "top-left". These previous versions ignored the orientation tag when
+        displaying the images, so no problem was apparent (although the problem
+        was visible if other image viewers were used to view the same images).
+        Versions 2.9.0 and later respect this tag, so the incorrect rotation will be visible.
+      </para>
+      <para>
+        The <guilabel>Reset Exif orientation tag</guilabel> tool is provided to fix
+        this problem. Simply select the affected images, and apply the
+        <guilabel>Reset Exif orientation tag</guilabel> tool. This will reset
+        the Exif orientation tag to "top-left".
+      </para>
+    </sect2>
+    <sect2 id="gthumb-convert-format">
+      <title>转换图像格式</title>
+      <para>要转换图像格式，选择要转换的图像，选择 <menuchoice><guimenu>工具</guimenu><guimenuitem>转换格式</guimenuitem></menuchoice>。</para>
+      <para><guilabel>转换格式</guilabel> 对话框提供以下选项：<itemizedlist>
+        <listitem>
+          <para><guilabel>图像类型</guilabel>：这是您要进行转换后的图像格式。</para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Overwrite mode</guilabel>: a converted image has the
+	    same name of the original image except for the extension which is
+	    determined by the new format, so an image with the new name
+	    can already exist in the destination folder. This option lets you
+	    decide what to do when such a case occurs.  If you choose
+	    <guilabel>skip</guilabel> the new image won't be created;
+	    <guilabel>rename</guilabel> will ask you to specify a new name;
+	    <guilabel>ask</guilabel> will ask you whether to overwrite the
+	    old image or not and <guilabel>overwrite</guilabel> will
+	    overwrite the old image without asking.
+          </para>
+        </listitem>
+        <listitem>
+          <para><guilabel>移除原始图像</guilabel>：让您移除原始图像。如果图像因为错误没有转换，它将不会被移除。</para>
+        </listitem>
+	</itemizedlist></para>
+      <para>要进行转换，点击 <guibutton>转换</guibutton>。</para>
+    </sect2>
+    <sect2 id="gthumb-scale-series">
+      <title>比例按缩放一系列图像</title>
+      <para>
+        To scale multiple images downwards in size,
+        select the images you want to scale and choose
+        <menuchoice><guimenu>Tools</guimenu><guimenuitem>Scale
+	Images</guimenuitem></menuchoice>.
+      </para>
+      <para><guilabel>按比例缩放图像</guilabel>对话框提供以下选项：<itemizedlist>
+        <listitem>
+          <para>
+            <guilabel>Width</guilabel>: The desired maximum width of the scaled
+	    images.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Height</guilabel>: The desired maximum height of the scaled
+            images.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Keep aspect ratio</guilabel>: If this checkbox is not
+            enabled, the image may be stretched by different factors in the
+	    horizontal and vertical directions, in order to achieve both
+	    the specified width and height. This may result in a distorted
+	    image. If this checkbox is enabled, the image will be scaled
+	    by the same factor in both directions. The scaling factor will
+	    be calculated such that the output width and height are both
+	    equal to or less than the values specified in the <guilabel>Width</guilabel>
+	    and <guilabel>Height</guilabel> boxes, respectively.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Image type</guilabel>: this is the format you want to
+            save the scaled images as.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <guilabel>Overwrite mode</guilabel>: a scaled image has the
+            same name of the original image except for the extension which is
+            determined by the new format, so an image with the new name
+            can already exist in the destination folder. This option lets you
+            decide what to do when such a case occurs.  If you choose
+            <guilabel>skip</guilabel> the new image won't be created;
+            <guilabel>rename</guilabel> will ask you to specify a new name;
+            <guilabel>ask</guilabel> will ask you whether to overwrite the
+            old image or not and <guilabel>overwrite</guilabel> will
+            overwrite the old image without asking.
+          </para>
+        </listitem>
+        <listitem>
+          <para><guilabel>移除原始图像</guilabel>：让您移除原始图像。如果图像因为错误没有转换，它将不会被移除。</para>
+        </listitem>
+        </itemizedlist></para>
+      <para>进行按比例缩放操作，需点击<guibutton>缩放</guibutton>。</para>
+    </sect2>
+    <sect2 id="gthumb-rename-series">
+      <title>重命名一系列图像</title>
+      <para>指定一个名称模板重命名一系列图像，选择 <menuchoice><guimenu>工具</guimenu><guimenuitem>重命名系列图像</guimenuitem></menuchoice>。</para>
+      <para>
+        The name template is simply a name that must be used for all
+        of the images,  furthermore you can use some special characters
+        to make the new names differ each other:
+      </para>
+        <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+          <colspec colname="COLSPEC0" colwidth="50.00*"/>
+          <colspec colname="COLSPEC1" colwidth="50.00*"/>
+          <thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>符号</para></entry>
+              <entry colname="COLSPEC1" align="left">
+                <para>描述</para></entry>
+            </row>
+          </thead>
+          <tbody>
+            <row valign="top">
+              <entry>
+                <para><keycap>#</keycap></para></entry>
+              <entry align="left">
+                <para>This symbol will be replaced with
+                the value of a counter that increments itself by 1
+	        passing from one image to another.  If you specify
+	        this symbols in sequence you'll get leading zeros if the
+	        counter value has a lesser number of digits, for example ###
+	        will produce the sequence: 001, 002, 003, etc..</para></entry>
+            </row>
+            <row valign="top">
+              <entry>
+                <para><keycap>%f</keycap></para></entry>
+              <entry align="left">
+                <para>此符号将会替换为图像原始名称，包含扩展名。</para></entry>
+            </row>
+            <row valign="top">
+              <entry>
+                <para><keycap>%e</keycap></para></entry>
+              <entry align="left">
+                <para>该符号将被替换为图像原始文件名的扩展名。</para></entry>
+            </row>
+            <row valign="top">
+              <entry>
+                <para><keycap>%d</keycap></para></entry>
+              <entry align="left">
+                <para>本符号会被替换为图像更改日期。</para></entry>
+            </row>
+            <row valign="top">
+              <entry>
+                <para><keycap>%s</keycap></para></entry>
+              <entry align="left">
+                <para>本符号会被替换为图像尺寸。</para></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>对话框底部的列表将会显示文件名如何被重命名。</para>
+      <para>重命名图像，点击<guibutton>重命名</guibutton>。</para>
+      <para>
+        If the renaming of an image can overwrite an already existing
+        image you will be asked how to proceed,  five options are
+        available: overwrite the image; do not overwrite the image;
+        always overwrite; never overwrite; specify a new name.
+      </para>
+    </sect2>
+    <sect2 id="gthumb-change-date">
+      <title>改变图像日期</title>
+      <para>如果您要改变一系列图像的最后更改日期，选取图像并选择<menuchoice><guimenu> 工具</guimenu><guimenuitem>改变日期</guimenuitem></menuchoice>。</para>
+      <para>选择新的日期。</para>
+      <para>点击<guibutton>确定</guibutton>。<application>gThumb</application>改变日期。</para>
+    </sect2>
+    <sect2 id="gthumb-index-image">
+      <title>创建索引图像</title>
+      <para>
+        An index image is an image that contains small previews of a series of
+	images.  If you want to create an index image select the images you
+	want to insert and choose
+	<menuchoice><guimenu>Tools</guimenu><guimenuitem>Create Index
+	Image</guimenuitem></menuchoice>.
+      </para>
+    </sect2>
+    <sect2 id="gthumb-web-album">
+      <title>创建网络相册</title>
+       <para>
+         To create a web album, view a folder or a catalog and select the images
+	 that you want to include in your album. (The usual selection methods apply -
+	 you can click to select one image, shift+click or shift+arrow to expand
+	 the selection continuously, ctrl+click to add images one at time, ctrl+A
+	 to select everything.) Then use the <menuchoice><guimenu>Tools</guimenu>
+	 <guimenuitem>Create Web Album</guimenuitem></menuchoice> function.
+       </para>
+       <para>
+	 The web album will be generated in the  <guilabel>Destination</guilabel>
+	 folder. The starting page of the album will be given by the
+	 <guilabel>Index file</guilabel> setting - "index.html" is typically
+	 used.
+       </para>
+       <para>
+	 All web albums will consist of one or more "index pages" (which show
+	 a series of small thumbnail images) and one or more "image pages"
+	 (which show a single image at a time). If the <guilabel>Copy originals
+	 to destination</guilabel> checkbox is enabled, the photo shown in the
+	 image pages will link to a copy of the original image. If you
+	 click this link, the raw image will be loaded in your browser (with
+	 no accompanying HTML).
+       </para>
+       <para>如果需要，若图像超过<guilabel>如果大于则改变大小</guilabel>框中设定的尺寸，图像会被按比例缩小。</para>
+       <para>
+	 The number of thumbnail images shown on each index page of the web
+	 album is controlled by the <guilabel>Size</guilabel> row and column
+	 boxes. Alternatively, all images can be forced onto a single index
+	 page by enabling the <guilabel>use a single index page</guilabel>
+	 checkbox.
+       </para>
+       <para>
+	 Most themes will respect the row and column settings that you specify,
+	 because they are based on HTML tables. However other themes (the BestFit
+	 theme for example) use Cascading Style Sheets that automatically space
+	 the images to make the best possible use of space. (If you resize the
+	 browser window, the images will re-position themselves!) These themes
+	 will not respect the row and column settings, but they will keep the
+	 total number of images per index page to a maximum of ROW x COLUMNS
+	 (unless the <guilabel>use a single index page</guilabel> checkbox is
+	 enabled).
+       </para>
+       <para>
+         A <guilabel>Header</guilabel> and <guilabel>Footer</guilabel> may be
+	 defined. These labels will appear at the top and bottom of every page
+	 in the album.  HTML markup may be used in headers and footers, as long
+	 every '&gt;', '&lt;', and '&amp;' character is preceeded by a
+	 backslash.  For example, "&lt;hr/&gt;" must be written as
+	 "\&lt;hr/\&gt;".  Also, the sequence "%d" will be replaced by the
+	 current date.  To make a literal backslash ('\') or percent symbol
+	 ('%') appear in the output, it must be entered as "\\" or "%%" in the
+	 header or footer fields.
+       </para>
+       <para>
+	 A <guilabel>Theme</guilabel> must be specified. The <guilabel>Theme</guilabel>
+	 controls the overall appearance of your web album. To select a
+         <guilabel>Theme</guilabel>, press the <guibutton>...</guibutton> button
+	 and select one from the list. The <guilabel>Thumbnail Caption</guilabel>
+	 and <guilabel>Image Caption</guilabel> dialogs allow you to specify
+	 what textual information (photo date, image size, camera model, etc)
+	 will be displayed next to each image in the index and image pages,
+	 respectively.
+       </para>
+    </sect2>
+    <sect2 id="gthumb-import-photos">
+      <title>从数码相机导入相片</title>
+       <para>从数码相机导入相片，需选择<menuchoice><guimenu>文件</guimenu><guimenuitem>导入相片</guimenuitem></menuchoice>。</para>
+       <para>
+         Several options are presented in the
+         <menuchoice><guimenu>File</guimenu><guimenuitem>Import Photos
+         </guimenuitem></menuchoice> dialog.
+       </para>
+       <para>
+         The destination folder can be selected through the
+         <guilabel>Destination</guilabel> box. The photos will
+         be imported into a sub-folder of the <guilabel>Destination</guilabel>
+         folder. The name of the sub-folder is set by the
+         <guilabel>Film</guilabel> box. If no "Film" folder is specified,
+         a sub-folder name consisting of the import data and time will
+         be automatically generated.
+       </para>
+       <para>
+         <guilabel>Categories</guilabel> can be specified for the imported
+         photos using the <guilabel>Categories</guilabel> box.
+       </para>
+       <para>
+         If the <guilabel>Delete imported images from the camera</guilabel>
+         checkbox is enabled, the photos will be deleted from the camera
+         after they have been imported.
+       </para>
+       <para>
+         <application>gThumb</application> will rename the images (in numerical re-order) when they
+ 	 are imported, unless the
+         <guilabel>Keep original filenames</guilabel> checkbox is selected.
+       </para>
+       <para>
+         If the <guilabel>Rotate images physically</guilabel> checkbox is selected,
+         and the imported photo contains an Exif orientation tag, the image data
+         will be physically transformed (losslessly) so that the viewed image
+         looks the same as before but the orientation tag is reset to "top left".
+         If this checkbox is not enabled, the image data and the orientation tag
+         are both left unchanged. The image will be displayed identically by
+         gthumb for both possibilities, but for maximum compatibility with other
+         applications this checkbox should be enabled.
+       </para>
+       <sect3 id="gthumb-select-camera">
+	<title>选择照相机型号</title>
+         <para>当你启动<menuchoice><guimenu>文件</guimenu><guimenuitem>导入相片 </guimenuitem></menuchoice> 对话框，<application>gThumb</application> 应当自动检测到您的相机(如果相机已经开启)。 在对话框中会显示一个相机图标。如果没有检测到，会显示一个带有“X”的相机图标。</para>
+         <para>
+         If the wrong camera has been detected, click the camera icon to select
+         a different one. A drop-down box listing all auto-detected cameras will
+         be shown. If the <guilabel>Use manual selection instead</guilabel> checkbox
+         is enabled, the user can manually set the camera model and port.
+         </para>
+       </sect3>
+    </sect2>
+    <sect2 id="gthumb-write-to-cd">
+      <title>将图像写入 CD 或 DVD</title>
+       <para>将一系列图像写入 CD 或 DVD，需进行以下步骤：<orderedlist>
+        <listitem>
+          <para>选择您要写入的图像，选择<menuchoice><guimenu>文件</guimenu><guimenuitem>写入 CD </guimenuitem></menuchoice>，<application>gThumb</application>会显示<guilabel>写入 CD</guilabel>对话框。</para>
+        </listitem>
+        <listitem>
+          <para>Click on <guilabel>Current folder</guilabel> if you want to
+            write all of the images in the current folder and its subfolders.
+            Click on <guilabel>Selected images</guilabel> to write the current
+            selection only.
+          </para>
+        </listitem>
+        <listitem>
+          <para>Click on <guibutton>Ok</guibutton>. <application>gThumb</application>, after preparing the
+            images for CD/DVD writing, displays the <filename>burn:///</filename>
+            location with <guilabel>Nautilus</guilabel>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>点击<guilabel>写入 CD</guilabel> 工具栏按钮或者选择<menuchoice><guimenu>文件</guimenu><guimenuitem>写入 CD </guimenuitem></menuchoice>。图像被写入 CD 或 DVD。</para>
+        </listitem>
+       </orderedlist></para>
+    </sect2>
+  </sect1>
+
+ <!-- ============= Preferences ================================== -->
+ <sect1 id="preferences">
+  <title>首选项</title>
+  <para>配置 <application>gThumb</application>，需通过选择<menuchoice><guimenu>编辑</guimenu><guisubmenu>首选项</guisubmenu></menuchoice>打开<guilabel>首选项</guilabel>对话框。</para>
+  <para>此对话框包含 4 个在下面详细描述的标签页。在对话框窗口的底部，您会发现如下按钮：</para>
+  <itemizedlist>
+    <listitem>
+      <para><guibutton>帮助</guibutton>：显示本手册。</para>
+    </listitem>
+    <listitem>
+      <para><guibutton>关闭</guibutton>：关闭对话框。</para>
+    </listitem>
+  </itemizedlist>
+  <para>
+    Keep in mind that when you change an option it will automatically
+    applied,  this is why there is no <guibutton>Ok</guibutton> or
+    <guibutton>Apply</guibutton> button.
+  </para>
+
+<!-- ########### General Tab ################## -->
+    <sect2 id="preferences-general">
+      <title>常规标签页</title>
+      <para>此标签页允许您设置以下选项：</para>
+      <itemizedlist>
+	<listitem>
+	<para>选择<application>gThumb</application> 主窗口的布局，即目录列表窗口的位置，图像(缩略图)列表窗口，和图像查看器主窗口。</para>
+	</listitem>
+	<listitem>
+	  <para>工具栏类型</para>
+	</listitem>
+	<listitem>
+	  <para>启动时显示的目录</para>
+	</listitem>
+	<listitem>
+	  <para>当一个图像或目录将被删除时，是否要求确认。</para>
+	</listitem>
+	<listitem>
+	  <para>是否要询问保存已更改的图像。</para>
+	</listitem>
+      </itemizedlist>
+    </sect2>
+
+<!-- ########### Browser Tab ################## -->
+    <sect2 id="preferences-browser">
+      <title>浏览器标签页</title>
+      <para>在此标签栏中，您可以配置以下选项：</para>
+      <variablelist>
+        <!-- ########### -->
+	<varlistentry>
+	  <term><guilabel>显示文件名</guilabel></term>
+	  <listitem>
+	    <para>该选项控制<application>gThumb</application>是否显示图像文件名。</para>
+	  </listitem>
+	</varlistentry>
+        <!-- ########### -->
+	<varlistentry>
+	  <term><guilabel>显示注释</guilabel></term>
+	  <listitem>
+	    <para>This option controls whether
+	    <application>gThumb</application> should show comments
+	    (including date and place) in the image list. By default,
+	    <application>gThumb</application> shows the comment as a caption under the
+	    thumbnail.
+	    </para>
+	  </listitem>
+	</varlistentry>
+        <!-- ########### -->
+	<varlistentry>
+	  <term><guilabel>显示缩略图</guilabel></term>
+	  <listitem>
+	    <para>此选项(您只需按 <keycombo><keycap>T</keycap></keycombo>便能启用它) 控制<application>gThumb</application>是否显示缩略图。</para>
+	  </listitem>
+	</varlistentry>
+        <!-- ########### -->
+	<varlistentry>
+	  <term><guilabel>其他</guilabel></term>
+	  <listitem>
+	    <para>Here you can choose whether to change folder by
+	    doing a single or a double click on the folder name.  The
+	    single click can be useful if you are used to quickly browse your
+	    hard disk searching for images.  The default behaviour is to
+	    follow the Nautilus file manager policy.
+	    Furthermore you can select whether
+	    <application>gThumb</application> should determine image
+	    type by looking at the file extension or by looking at the
+	    file content. Determining file type from the content is
+	    more reliable (some applications may create files with
+	    extension not matching the actual file type) but
+	    slower. If you have a fast system, select <guilabel>Determine
+	    image type from content</guilabel>.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+    </sect2>
+<!-- ########### Viewer Tab ################## -->
+    <sect2 id="preferences-viewer">
+      <title>查看器标签栏</title>
+      <para>此标签栏包含查看器窗口的选项：</para>
+      <variablelist>
+        <!-- ########### -->
+	<varlistentry>
+	  <term><guilabel>载入图像后</guilabel></term>
+	  <listitem>
+	    <para>Controls initial zoom level to use for an
+	    image.
+	    </para>
+	  </listitem>
+	</varlistentry>
+        <!-- ########### -->
+	<varlistentry>
+	  <term><guilabel>透明度类型</guilabel></term>
+	  <listitem>
+	    <para>Controls the background used for partly transparent
+	    images. By default the transparent part of the image is
+	    replaced the window background color,that is the
+	    <guilabel>none</guilabel> option.
+	    </para>
+	  </listitem>
+	</varlistentry>
+        <!-- ########### -->
+        <varlistentry>
+          <term><guilabel>缩放质量</guilabel></term>
+          <listitem>
+            <para>This controls the method used for showing rescaled
+            image. Possible choices are high quality (slow on old
+            machines or when viewing big images) and low
+            quality (always fast).
+            </para>
+          </listitem>
+        </varlistentry>
+        <!-- ########### -->
+	<varlistentry>
+	  <term><guilabel>使用下一幅/上一幅后滚动条位置</guilabel></term>
+	  <listitem>
+	    <para>
+	    Depending on the selected zoom level, your images may be larger than the
+	    display window. If this happens, vertical and/or horizontal scrollbars will
+	    be present, allowing you to view different areas of your image.
+	    </para>
+	    <para>
+	    When you navigate from one image to another using the Next/Previous
+	    controls, the positions of the scrollbars can be retained, or they can be
+	    reset to the default position.
+	    </para>
+	    <para>
+	    If you are viewing pages of scanned text, for example, you will probably want to
+	    set this to <guilabel>Reset to top-left of image</guilabel>, so that the
+            top of the page is shown when you move to a new image.
+            </para>
+	    <para>
+	    If you are trying to compare small areas on several large images
+	    (perhaps to compare similar images taken at different times, such
+	    as photos taken in a "continuous" mode on a digital camera, or
+	    satellite images of the same area at different dates)
+	    then the <guilabel>Keep same position</guilabel> mode is probably more
+	    appropriate for you.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+    </sect2>
+<!-- ########### Slide Show Tab ################## -->
+    <sect2 id="preferences-slideshow">
+      <title>幻灯播放标签页</title>
+      <para>
+	This tab contains the options controlling slide show mode
+	(which you can start by selecting
+	<menuchoice><guimenu>Tools</guimenu>
+	<guisubmenu>Slide Show</guisubmenu></menuchoice> or by using
+	<keycombo><keycap>S</keycap></keycombo>
+	shortcut). The options include direction (forward/backwards/random),
+	and delay between images. You can also specify whether the
+	slide show should wrap around (i.e., after showing the last
+	image start again form the beginning) and automatically switch
+	to fullscreen mode.
+      </para>
+     </sect2>
+
+<!-- ########### Hot Keys Tab ################## -->
+    <sect2 id="preferences-hotkeys">
+      <title>热键标签页</title>
+      <para>
+	This tab contains the shell script definitions that control the 
+	hot keys 0-9 on the numeric keypad.
+      </para>
+      <para>
+	When a user presses one of these keys, an external shell script 
+	will be launched. Certain codes can be including in the script.
+	These codes will be replaced by <application>gThumb</application> when the script is actually
+	launched, as follows:
+      </para>
+      <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+          <colspec colname="COLSPEC0" colwidth="20.00*"/>
+          <colspec colname="COLSPEC1" colwidth="80.00*"/>
+          <thead>
+            <row valign="top">
+              <entry colname="COLSPEC0">
+                <para>Code</para></entry>
+              <entry colname="COLSPEC1" align="left">
+                <para>说明</para></entry>
+            </row>
+          </thead>
+          <tbody>
+            <row valign="top">
+              <entry><para>%F</para></entry>
+	      <entry align="left"><para>all selected filenames on one line, space delimited</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>%f</para></entry>
+              <entry align="left"><para>a single filename, including path</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>%n</para></entry>
+              <entry align="left"><para>a single filename, including path, with no extension</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>%e</para></entry>
+              <entry align="left"><para>a single extension (starting with a period)</para></entry>
+            </row>
+            <row valign="top">
+              <entry><para>%p</para></entry>
+              <entry align="left"><para>单个文件的母文件夹</para></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+      <para>
+	Scripts with the %F code will be executed just once, regardless of the number of files selected.
+	All other scripts will be executed once per selected file.
+      </para>
+      <para>提供了数个默认的脚本。如果需要，它们可以替换。默认脚本的解释如下：</para>
+      <itemizedlist>
+	  <listitem>
+	    <para>
+		<command>gimp %F &amp;</command>
+            </para>
+	    <para>
+		This script tells the GNU Image Manipulation Program (gimp) to open
+	        all of the select files. This is most efficient if we include all of
+	 	the filenames on one line, rather than calling <command>gimp</command>
+		once for each file, so we have used the %F code.
+	    </para>
+          </listitem>
+          <listitem>
+            <para>
+                <command>convert %f -font Helvetica -pointsize 20 -fill white -box '#00000080' -gravity South -annotate +0+5 ' Copyright 2007, Your Name Here ' %n-copyright%e</command>
+            </para>
+            <para>
+                This script makes a copy of your image file, and adds a copyright notice
+                to it. The "convert" command is part of the ImageMagick package. If the
+                original file is named sample.jpg, the new file will be named sample-copyright.jpg.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                <command>mkdir -p %p/approved ; cp %f %p/approved/</command>
+            </para>
+            <para>该脚本创建一个“approved”新子文件夹(如果它不存在的话)。然后它复制选定文件到“approved”子文件夹。</para>
+          </listitem>
+          <listitem>
+            <para>
+                <command>uuencode %f %f | mail -s Photos your@emailaddress.com</command>
+            </para>
+            <para>
+                This script encodes images files in a format suitable for email attachments,
+                and then emails each photo to the specified address. One email per photo is sent.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+                <command>rm ~/myarchive.zip; zip -j ~/myarchive %F</command>
+            </para>
+            <para>该脚本会将一个已存在的 zip 文件(如果存在)重写为一个包含选定图像的新 zip 文件。</para>
+          </listitem>
+          <listitem>
+            <para>
+                <command>rm ~/myarchive.zip; zip -j ~/myarchive %F; uuencode ~/myarchive.zip ~/myarchive.zip | mail -s Photos your@emailaddress.com</command>
+            </para>
+            <para>
+                This combines the previous two scripts, so that the selected images are combined into
+                a single zip file, which is then emailed.
+            </para>
+          </listitem>
+      </itemizedlist>
+     </sect2>
+
+  </sect1>
+
+  <!-- ============= Keyboard Shortcuts ================================== -->
+  <sect1 id="shortcuts">
+  <title>快速参考：键盘快捷键</title>
+  <para><xref linkend="gthumb-TBL-keyword-shortcuts-browser"/>, <xref linkend="gthumb-TBL-keyword-shortcuts-viewer"/>, <xref linkend="gthumb-TBL-keyword-shortcuts-other"/> and <xref linkend="gthumb-TBL-keyword-shortcuts-fullscreen"/> provide a quick
+    reference for all of the <application>gThumb</application> keyword shortcuts.  Look in the
+    menus for other shortcuts.</para>
+  <para>
+      <table id="gthumb-TBL-keyword-shortcuts-browser" frame="topbot">
+      <title>遍览文件夹的键盘快捷键</title>
+      <tgroup cols="3" colsep="1" rowsep="1">
+      	<colspec colname="COLSPEC0" colwidth="50*"/>
+	<colspec colname="COLSPEC1" colwidth="50*"/>
+	<colspec colname="COLSPEC2" colwidth="50*"/>
+	<thead>
+	  <row valign="top" rowsep="1">
+	    <entry colname="COLSPEC0">
+	    	<para>键盘快捷键</para></entry>
+	    <entry colname="COLSPEC1">
+                <para>描述</para></entry>
+            <entry colname="COLSPEC2">
+                <para>全屏模式下可用</para></entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row valign="top">
+            <entry>
+	      <para><keycombo><keycap>n</keycap></keycombo> 或 <keycombo action="simul"><keycap>空格</keycap></keycombo> 或 <keycombo action="simul"><keycap>Page Down</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>查看下一幅图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para><keycombo action="simul"><keycap>b</keycap></keycombo> 或<keycombo><keycap>Backspace</keycap></keycombo> 或 <keycombo action="simul"><keycap>Page Up</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>查看前一幅图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Home</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>查看下一幅图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>End</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>查看最后一幅图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para><keycombo action="simul"><keycap>Alt</keycap><keycap>Home </keycap></keycombo> 或 <keycombo action="simul"><keycap>h</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>转到您的 home 文件夹。</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row>
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Alt</keycap><keycap>Left
+		</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>转到先前访问的文件夹。</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row>
+            <entry>
+	      <para><keycombo action="simul"><keycap>Alt</keycap><keycap>Up </keycap></keycombo> 或 <keycombo action="simul"><keycap>u</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>Go up one level.</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>Esc</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Interrupt thumbnails creation.</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row>
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Ctrl</keycap><keycap>D</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>添加当前位置到书签。</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Return</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>显示/隐藏浏览器。</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>q</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Change the image properties pane content or
+	      display the pane if it is not visible.</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Ctrl</keycap><keycap>1</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Set the image preview as the image properties pane
+	      content or hide the pane if this content type is already
+	      visible.</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Ctrl</keycap><keycap>2</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Set the image exif data as the image properties pane
+	      content or hide the pane if this content type is already
+	      visible.</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Ctrl</keycap><keycap>3</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Set the image comment as the image properties pane
+	      content or hide the pane if this content type is already
+	      visible.</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row>
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>t</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>查看/隐藏缩略图。</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>F2</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>重命名当前图像。</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>o</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>用一个程序打开选定图像。</para>
+	    </entry>
+            <entry>
+	      <para>否</para>
+	    </entry>
+	  </row>
+          <row rowsep="0">
+            <entry>
+              <para>
+                <keycombo><keycap>g</keycap></keycombo>
+              </para>
+            </entry>
+            <entry>
+              <para>用 GIMP 打开选定的图像，如果 GIMP 已安装。</para>
+            </entry>
+            <entry>
+              <para>否</para>
+            </entry>
+          </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>删除键</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>删除选定图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	</tbody>
+      </tgroup>
+      </table>
+  </para>
+
+  <para>
+  </para>
+
+    <table id="gthumb-TBL-keyword-shortcuts-viewer" frame="topbot">
+    <title>查看图像的键盘快捷键</title>
+    <tgroup cols="3" colsep="1" rowsep="1">
+      	<colspec colname="COLSPEC0" colwidth="50*"/>
+	<colspec colname="COLSPEC1" colwidth="50*"/>
+	<colspec colname="COLSPEC2" colwidth="50*"/>
+	<thead>
+	  <row valign="top">
+	    <entry colname="COLSPEC0">
+              <para>键盘快捷键</para></entry>
+	    <entry colname="COLSPEC1">
+              <para>描述</para></entry>
+	    <entry colname="COLSPEC2">
+              <para>全屏模式下可用</para></entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row valign="top">
+            <entry>
+	      <para><keycombo><keycap>v</keycap></keycombo> 或 <keycombo><keycap>f</keycap></keycombo> 或 <keycombo><keycap>F11</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>设置/取消全屏模式。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para><keycombo><keycap>+</keycap></keycombo> 或者 <keycombo><keycap>=</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>放大。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>-</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>缩小。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para><keycombo><keycap>1</keycap></keycombo> 或 <keycombo><keycap>z</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>实际大小。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>x</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>缩放至适合窗口。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>l</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>反转图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>m</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Mirror the image.</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>r</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Rotate the image clockwise of 90 degrees without saving.</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>e</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Rotate the image counter-clockwise of 90 degrees without saving.</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>]</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Rotate and save the image clockwise of 90 degrees.  The rotation is lossless for jpeg images.</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>[</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Rotate and save the image counter-clockwise of 90 degrees.  The rotation is lossless for jpeg images.</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>a</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>开始/停止动画</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>j</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>查看暂停动画的下一帧。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+	        <keycombo><keycap>方向键</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>滚动图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row>
+            <entry>
+	      <para>
+	        <keycombo action="simul"><keycap>Shift</keycap><keycap>方向键</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>Scroll the image faster.</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	</tbody>
+     </tgroup>
+   </table>
+
+  <para>
+  </para>
+
+  <table id="gthumb-TBL-keyword-shortcuts-other" frame="topbot">
+    <title>其他键盘快捷方式。</title>
+    <tgroup cols="3" colsep="0" rowsep="0">
+      	<colspec colname="COLSPEC0" colwidth="50*"/>
+	<colspec colname="COLSPEC1" colwidth="50*"/>
+	<colspec colname="COLSPEC2" colwidth="50*"/>
+	<thead>
+	  <row valign="top" rowsep="1">
+	    <entry colname="COLSPEC0">
+                <para>键盘快捷键</para></entry>
+	    <entry colname="COLSPEC1">
+                <para>描述</para></entry>
+            <entry colname="COLSPEC2">
+                <para>全屏模式下可用</para></entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row valign="top">
+            <entry>
+	      <para>
+		<keycombo><keycap>s</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>开始/停止幻灯片。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>c</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>添加备注到选定图像。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>k</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>对选定图像指定分类。</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>i</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>隐藏/显示图像备注和属性</para>
+	    </entry>
+            <entry>
+	      <para>是</para>
+	    </entry>
+	  </row>
+	</tbody>
+     </tgroup>
+  </table>
+  <para>
+  </para>
+  <table id="gthumb-TBL-keyword-shortcuts-fullscreen" frame="topbot">
+    <title>Keyboard shortcuts available exclusively in fullscreen mode</title>
+    <tgroup cols="2" colsep="0" rowsep="0">
+      	<colspec colwidth="20.00*"/>
+	<colspec colwidth="20.00*"/>
+	<thead>
+	  <row rowsep="1">
+	    <entry><para>键盘快捷键</para></entry>
+	    <entry><para>描述</para></entry>
+	  </row>
+	</thead>
+	<tbody>
+	  <row rowsep="0">
+            <entry>
+	      <para>
+		<keycombo><keycap>p</keycap></keycombo>
+	      </para>
+	    </entry>
+            <entry>
+	      <para>暂停/恢复幻灯片。</para>
+	    </entry>
+	  </row>
+	  <row rowsep="0">
+            <entry>
+	      <para><keycombo><keycap>Escape</keycap></keycombo>  或 <keycombo><keycap>f</keycap></keycombo> 或 <keycombo><keycap>v</keycap></keycombo> 或 <keycombo><keycap>F11</keycap></keycombo> 或 <keycombo><keycap>q</keycap></keycombo></para>
+	    </entry>
+            <entry>
+	      <para>退出全屏模式。</para>
+	    </entry>
+	  </row>
+	</tbody>
+     </tgroup>
+  </table>
+  </sect1>
+
+</article>

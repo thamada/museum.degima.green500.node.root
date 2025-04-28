@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Using the ATI Proprietary Linux Driver</TITLE>
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+</head>
+<body>
+
+<FONT SIZE=+1>
+<P><B>3D Graphics acceleration not available with 
+ALL&nbsp;IN&nbsp;WONDER&nbsp;RADEON&nbsp;8500DV</B></P>
+</FONT>
+
+<p>This information applies to the following:</p>
+<ul>
+    <li>ATI Proprietary Linux Driver</li> 
+    <li>ALL IN WONDER RADEON 8500DV</li> 
+</ul>
+
+<p>The system starts and 2D applications run fine, but 3D graphics will appear unusually slow on ALL IN WONDER RADEON 8500DV using the ATI Proprietary Linux driver.</p>
+
+<p>Applications that absolutely require hardware acceleration may display an error message or simply crash.</p>
+
+<p>Utilities such as <tt>glxinfo</tt> will report that Direct Rendering (hardware 3D acceleration) is not available and that the &quot;Mesa GLX Indirect&quot; (Software) renderer will be used instead.</p>
+
+<p>The ALL IN WONDER RADEON 8500DV appears to be detected correctly according to <tt>/var/log/XFree86.0.log</tt> as follows:</p>
+
+<blockquote>
+<pre>
+(--) fglrx(0): Chipset: "ATI R200 BB (R8500)" (Chipset = 0x4242)
+(--) fglrx(0): (PciSubVendor = 0x1002, PciSubDevice = 0x02aa)
+(--) fglrx(0): board vendor info: original ATI grafics adapter
+...
+(II) fglrx(0): board/chipset is supported by this driver (original ATI board)
+</pre>
+</blockquote>
+
+<p>And yet the following error message appears further along in <tt>/var/log/XFree86.0.log</tt>:</p>
+
+<blockquote>
+<pre>
+(EE) fglrx(0): DRIScreenInit failed!
+(WW) fglrx(0): ***********************************************
+(WW) fglrx(0): * DRI initialization failed!                  *
+(WW) fglrx(0): * (maybe driver kernel module missing or bad) *
+(WW) fglrx(0): * 2D acceleraton available (MMIO)             *
+(WW) fglrx(0): * no 3D acceleration available                *
+(WW) fglrx(0): ********************************************* *
+</pre>
+</blockquote>
+
+<p>This issue has been resolved in <a href="http://www.ati.com/support/driver.html">ATI Proprietary Linux Driver version 3.14</a> and later.</p>
+
+<p>&nbsp;</p>
+</body>
+</html>

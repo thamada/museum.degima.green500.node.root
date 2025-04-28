@@ -1,0 +1,248 @@
+This file describes significant change from
+qt-x11-immodule-bc-qt3.3.2-20040623.
+
+Differences from previous release
+(qt-x11-immodule-unified-qt3.3.3-20040819) are itemized with '+'
+sign. Search it to track incremental change.
+
+****************************************************************************
+*                           For users                                      *
+****************************************************************************
+
+General
+-------
+
++ A strange character inversion problem on some input methods has been
+  fixed
+
+
+Input methods
+-------------
+
+- Added "simple" input method which provides dead/multi key composing
+  for latin languages
+
+
+User Interface
+--------------
+
+- Added input method selection menu in the context menu of text
+  widgets
+
+
+Configuration
+-------------
+
++ default IM configuration feature of qtconfig has been disabled in BC
+  mode. This is a political change to avoid the confusion about input
+  method configuration in accordance with GTK+ environment.
+
+  See following discussion for further information.
+
+  http://freedesktop.org/pipermail/immodule-qt/2004-August/000416.html
+
+- Added new environment variables QT_IM_SWITCHER and QT_IM_MODULE to
+  set user's favorite input method as default. See README.immodule for
+  examples.
+
+
+Build & Install
+---------------
+
++ configure options have been changed for internal reasons. See 'How
+  to install' section of README.immodule
+
+- This version of immodule requires corresponding version of each
+  input method plugins (i.e. update your additional input method
+  plugins)
+
+- Plugin directory has been changed from $QTDIR/plugins/input/ to
+  $QTDIR/plugins/inputmethods/. Delete old directory.
+
+- Some codes have been changed to allow compiling against Qt 3.2.x or
+  earlier.
+
+
+****************************************************************************
+*                          For develpers                                   *
+****************************************************************************
+
+Documents
+---------
+
+- Almost description of QInputContext and QInputContextPlugin has been
+  filled. Feel free to ask obscure things at our mailinglist.
+
+
+New features
+------------
+
+- Pluggable input method switcher
+
+  Now we can write input method switcher as an ordinary input method
+  plugin. The two plugins 'imsw-multi' and 'imsw-none' are provided as
+  default. But the architecture needs more discussion about whether
+  the design is right or not. Join the discussion.
+
+- Pluggable popup menu
+
+  Any input method can provide its own popup menu. See
+  http://freedesktop.org/pipermail/immodule-qt/2004-August/000266.html
+  for further information.
+
+- QInputContext proxying
+
+  Some methods of QInputContext have been changed to enable
+  QInputContext proxying. This feature is required to implement
+  pluggable input method switcher.
+
+
+General
+-------
+
++ QInputContext has been source compatible with Qt4 version. Basic
+  input method plugin can be source compatible without #ifdef. Only
+  pluggable popup menu requires #ifdef'ed different code. In addition,
+  be careful about use of classes that is deprecated in Qt4.
+
+- Our two development tree for Qt3 'Binary Compatible' and 'ALL' have
+  been merged into this unified source tree. The source tree is called
+  'Unified' patch.
+
+- 'dead keys' for latin languages have been added into Qt::Key
+
+- Added plugins/src/inputmethods directory to build input method
+  plugins within the Qt source tree. The directory name 'inputmethods'
+  is intended to be compatible with Qt/Embedded. Install directory
+  name is still kept as 'input' for backward compatibility
+
+- Changed XIM input method to a plugin instead of directly link into
+  libqt
+
+- Plugin directory has been changed from $QTDIR/plugins/input/ to
+  $QTDIR/plugins/inputmethods/. Replace install directory with new
+  one.
+
+- Fixed some bugs in previous qt-x11-immodule-bc-qt3.3.2-20040623. See
+  following log for more detail.
+
+  * src/kernel/qwidget_x11.cpp
+    - (destroyInputContext): Replace the code with original Simplified
+      API patch. See the comment to recognize the original intention
+    - (focusInputContext): Fix a condition to call qic->setFocus() as
+      originally written. See added comment to recognize the original
+      intention
+
+- QLocale dependency has been removed to be compiled on Qt 3.2.x or
+  earlier
+
+- Many internal improvements and cleanups
+
+
+API Changes in qt-x11-immodule-unified-qt3.3.3-20040910
+-------------------------------------------------------
++ QInputContext
+
+  * QInputContext()
+
+    Added 'parent' arg to be compatible with Qt4. Since the arg
+    defaults to 0, no modification of plugins are required.
+
+  * language()
+  * identifierName()
+
+    Return type of these two methods have been changed from QCString
+    which is deprecated in Qt4 to QString to make plugins source
+    compatible with Qt4.
+
+  * addActionsTo()
+
+    New method for Qt4 text widget developer
+
+
+API Changes in qt-x11-immodule-unified-qt3.3.3-20040812
+-------------------------------------------------------
+
+- QInputContext proxying
+
+  QInputContext have been changed as follows to enable QInputContext
+  proxying.
+
+  1. Use signal to deliver QIMEvent instead of explicit
+     postEvent(). This enables QIMEvent proxying and better platform
+     abstraction. Corresponding slot is created as
+     QApplication::imEventReceived().
+
+  2. Move some methods of QInputContext to public from protected or
+     private. This enables that proxy-IM can access slave methods.
+
+  3. Make some methods of QInputContext virtual. This enables
+     overriding the methods as proxy
+
+  4. Rename QInputContext::name() to identifierName() to avoid
+     conflicting with QObject::name()
+
+
+- QInputContext
+
+  * language()
+
+    New method to indicate current language
+
+  * menus()
+
+    New method for the pluggable popup menu feature
+
+  * addMenusTo()
+
+    New method for text widget developer
+
+  * deletionRequested()
+
+    New signal to request deletion of this instance. This is added for
+    fatal error handling
+
+  * identifierName()
+
+    This replaces name() of previous API to avoid conflicting with
+    QObject::name(), and to distinguish the role from displayName()
+
+  * filterEvent()
+
+    Turn the argument into const. See
+    http://freedesktop.org/pipermail/immodule-qt/2004-August/000335.html
+    for further information
+
+  * isComposing
+  * isPreeditRelocationEnabled
+
+    Move to public from protected to allow proxying
+
+  * setFocusWidget
+  * setHolderWidget
+  * releaseComposingWidget
+
+    Move to public from private to allow proxying
+
+  * focusWidget
+  * holderWidget
+
+    - Make public from protected to allow proxying
+    - Make virtual to allow overriding the method as proxy
+
+- QInputContextPlugin
+
+  * languages()
+
+    New method which returns what languages are supported by the
+    QInputContext instance
+
+  * displayName()
+
+    New method which returns a user friendly i18n-ized name of the
+    QInputContext instance
+
+  * description()
+
+    New method which returns a i18n-ized brief description of the
+    QInputContext instance

@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Performance Tuning</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Server Settings"
+HREF="httpd-server-settings.html"><LINK
+REL="NEXT"
+TITLE="Saving Your Settings"
+HREF="httpd-saving-settings.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="httpd-server-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-saving-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="HTTPD-TUNING-SETTINGS"
+></A
+>Chapter 6. Performance Tuning</H1
+><P
+>	Click on the <B
+CLASS="GUILABEL"
+>Performance Tuning</B
+> tab to configure
+	the maximum number of child server processes you want and to configure
+	the Apache HTTP Server options for client connections. The default settings for
+	these options are appropriate for most situations. Altering these
+	settings may affect the overall performance of your Web server.
+      </P
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-TUNING"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-tuning.png"></P
+></DIV
+><P
+><B
+>Figure 6-1. Performance Tuning</B
+></P
+></DIV
+><P
+>	Set <B
+CLASS="GUILABEL"
+>Max Number of Connections</B
+> to the maximum number
+	of simultaneous client requests that the server will handle. For each
+	connection, a child <TT
+CLASS="COMMAND"
+>httpd</TT
+> process is created. After
+	this maximum number of process is reached, no one else will be able to
+	connect to the Web server until a child server process is freed. You can
+	not set this value to higher than 256 without recompiling.  This
+	option corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#maxclients"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>MaxClients</TT
+></A
+>
+	directive.
+      </P
+><P
+>	<B
+CLASS="GUILABEL"
+>Connection Timeout</B
+> defines, in seconds, the amount
+	of time that your server will wait for receipts and transmissions during
+	communications. Specifically, <B
+CLASS="GUILABEL"
+>Connection Timeout</B
+>
+	defines how long your server will wait to receive a GET request, how
+	long it will wait to receive TCP packets on a POST or PUT request and
+	how long it will wait between ACKs responding to TCP packets. By
+	default, <B
+CLASS="GUILABEL"
+>Connection Timeout</B
+> is set to 300 seconds,
+	which is appropriate for most situations.  This option corresponds to
+	the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#timeout"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>TimeOut</TT
+></A
+>
+	directive.
+      </P
+><P
+>	Set the <B
+CLASS="GUILABEL"
+>Max requests per connection</B
+> to the maximum
+	number of requests allowed per persistent connection. The default value
+	is 100, which should be appropriate for most situations.  This option
+	corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#maxrequestsperchild"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>MaxRequestsPerChild</TT
+></A
+>
+	directive.
+      </P
+><P
+>	If you check the <B
+CLASS="GUILABEL"
+>Allow unlimited requests per
+	connection</B
+> option, the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#maxkeepaliverequests"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>MaxKeepAliveRequests</TT
+></A
+>
+	directive to 0, and unlimited requests are allowed.
+      </P
+><P
+>	If you uncheck the <B
+CLASS="GUILABEL"
+>Allow Persistent Connections</B
+>
+	option, the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#keepalive"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>KeepAlive</TT
+></A
+>
+	directive is set to false. If you check it, the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#keepalive"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>KeepAlive</TT
+></A
+>
+	directive is set to true, and the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#keepalivetimeout"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>KeepAliveTimeout</TT
+></A
+>
+	directive is set to the number that is selected as the
+	<B
+CLASS="GUILABEL"
+>Timeout for next Connection</B
+> value. This directive
+	sets the number of seconds your server will wait for a subsequent
+	request, after a request has been served, before it closes the
+	connection. Once a request has been received, the <B
+CLASS="GUILABEL"
+>Connection
+	Timeout</B
+> value applies instead.
+      </P
+><P
+>	Setting the <B
+CLASS="GUILABEL"
+>Persistent Connections</B
+> to a high value
+	may cause a server to slow down, depending on how many users are trying
+	to connect to it. The higher the number, the more server processes
+	waiting for another connection from the last client that connected to
+	it.
+      </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="httpd-server-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-saving-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Server Settings</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Saving Your Settings</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,29 @@
+From a459d9116cb493c9aeaf14d9d538e7a9eb75067e Mon Sep 17 00:00:00 2001
+From: Eli Cohen <eli@mellanox.co.il>
+Date: Thu, 11 Nov 2010 15:30:11 +0200
+Subject: [PATCH] mlx4: Fix IBoE link state
+
+Make use of netif_carrier_ok() instead of netif_running() which is more
+appropriate to report link state.
+
+Signed-off-by: Eli Cohen <eli@mellanox.co.il>
+---
+ drivers/infiniband/hw/mlx4/main.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/drivers/infiniband/hw/mlx4/main.c b/drivers/infiniband/hw/mlx4/main.c
+index 92222d2..41e507d 100644
+--- a/drivers/infiniband/hw/mlx4/main.c
++++ b/drivers/infiniband/hw/mlx4/main.c
+@@ -288,7 +288,7 @@ static int eth_link_query_port(struct ib_device *ibdev, u8 port,
+ 
+ 	tmp = iboe_get_mtu(ndev->mtu);
+ 	props->active_mtu = tmp ? min(props->max_mtu, tmp) : IB_MTU_256;
+-	props->state		= netif_running(ndev) &&  netif_oper_up(ndev) ?
++	props->state		= netif_carrier_ok(ndev) &&  netif_oper_up(ndev) ?
+ 					IB_PORT_ACTIVE : IB_PORT_DOWN;
+ 	props->phys_state	= state_to_phys_state(props->state);
+ 
+-- 
+1.7.3.2
+

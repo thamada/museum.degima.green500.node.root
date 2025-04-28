@@ -1,0 +1,56 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Chapter&#160;13.&#160;Signal Tapset</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="up" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="prev" href="re209.html" title="probe::kprocess.release"><link rel="next" href="re210.html" title="probe::signal.send"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&#160;13.&#160;Signal Tapset</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re209.html">Prev</a>&#160;</td><th width="60%" align="center">&#160;</th><td width="20%" align="right">&#160;<a accesskey="n" href="re210.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&#160;13.&#160;Signal Tapset"><div class="titlepage"><div><div><h2 class="title"><a name="signal.stp"></a>Chapter&#160;13.&#160;Signal Tapset</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="refentrytitle"><a href="re210.html"><span>probe::signal.send</span></a></span><span class="refpurpose"> &#8212; 
+  Signal being sent to a process
+ </span></dt><dt><span class="refentrytitle"><a href="re211.html"><span>probe::signal.send.return</span></a></span><span class="refpurpose"> &#8212; 
+     Signal being sent to a process completed
+ </span></dt><dt><span class="refentrytitle"><a href="re212.html"><span>probe::signal.checkperm</span></a></span><span class="refpurpose"> &#8212; 
+     Check being performed on a sent signal
+ </span></dt><dt><span class="refentrytitle"><a href="re213.html"><span>probe::signal.checkperm.return</span></a></span><span class="refpurpose"> &#8212; 
+     Check performed on a sent signal completed
+ </span></dt><dt><span class="refentrytitle"><a href="re214.html"><span>probe::signal.wakeup</span></a></span><span class="refpurpose"> &#8212; 
+     Sleeping process being wakened for signal
+ </span></dt><dt><span class="refentrytitle"><a href="re215.html"><span>probe::signal.check_ignored</span></a></span><span class="refpurpose"> &#8212; 
+     Checking to see signal is ignored
+ </span></dt><dt><span class="refentrytitle"><a href="re216.html"><span>probe::signal.check_ignored.return</span></a></span><span class="refpurpose"> &#8212; 
+     Check to see signal is ignored completed
+ </span></dt><dt><span class="refentrytitle"><a href="re217.html"><span>probe::signal.force_segv</span></a></span><span class="refpurpose"> &#8212; 
+     Forcing send of SIGSEGV
+ </span></dt><dt><span class="refentrytitle"><a href="re218.html"><span>probe::signal.force_segv.return</span></a></span><span class="refpurpose"> &#8212; 
+     Forcing send of SIGSEGV complete
+ </span></dt><dt><span class="refentrytitle"><a href="re219.html"><span>probe::signal.syskill</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a process
+ </span></dt><dt><span class="refentrytitle"><a href="re220.html"><span>probe::signal.syskill.return</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal completed
+ </span></dt><dt><span class="refentrytitle"><a href="re221.html"><span>probe::signal.sys_tkill</span></a></span><span class="refpurpose"> &#8212; 
+     Sending a kill signal to a thread
+ </span></dt><dt><span class="refentrytitle"><a href="re222.html"><span>probe::signal.systkill.return</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a thread completed
+ </span></dt><dt><span class="refentrytitle"><a href="re223.html"><span>probe::signal.sys_tgkill</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a thread group
+ </span></dt><dt><span class="refentrytitle"><a href="re224.html"><span>probe::signal.sys_tgkill.return</span></a></span><span class="refpurpose"> &#8212; 
+     Sending kill signal to a thread group completed
+ </span></dt><dt><span class="refentrytitle"><a href="re225.html"><span>probe::signal.send_sig_queue</span></a></span><span class="refpurpose"> &#8212; 
+     Queuing a signal to a process
+ </span></dt><dt><span class="refentrytitle"><a href="re226.html"><span>probe::signal.send_sig_queue.return</span></a></span><span class="refpurpose"> &#8212; 
+     Queuing a signal to a process completed
+ </span></dt><dt><span class="refentrytitle"><a href="re227.html"><span>probe::signal.pending</span></a></span><span class="refpurpose"> &#8212; 
+     Examining pending signal
+ </span></dt><dt><span class="refentrytitle"><a href="re228.html"><span>probe::signal.pending.return</span></a></span><span class="refpurpose"> &#8212; 
+     Examination of pending signal completed
+ </span></dt><dt><span class="refentrytitle"><a href="re229.html"><span>probe::signal.handle</span></a></span><span class="refpurpose"> &#8212; 
+     Signal handler being invoked
+ </span></dt><dt><span class="refentrytitle"><a href="re230.html"><span>probe::signal.handle.return</span></a></span><span class="refpurpose"> &#8212; 
+     Signal handler invocation completed
+ </span></dt><dt><span class="refentrytitle"><a href="re231.html"><span>probe::signal.do_action</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing a signal action
+ </span></dt><dt><span class="refentrytitle"><a href="re232.html"><span>probe::signal.do_action.return</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing a signal action completed
+ </span></dt><dt><span class="refentrytitle"><a href="re233.html"><span>probe::signal.procmask</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing blocked signals
+ </span></dt><dt><span class="refentrytitle"><a href="re234.html"><span>probe::signal.procmask.return</span></a></span><span class="refpurpose"> &#8212; 
+     Examining or changing blocked signals completed
+ </span></dt><dt><span class="refentrytitle"><a href="re235.html"><span>probe::signal.flush</span></a></span><span class="refpurpose"> &#8212; 
+     Flushing all pending signals for a task
+ </span></dt></dl></div><p>
+      This family of probe points is used to probe signal activities.
+      It contains the following probe points:
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re209.html">Prev</a>&#160;</td><td width="20%" align="center">&#160;</td><td width="40%" align="right">&#160;<a accesskey="n" href="re210.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"><span>probe::kprocess.release</span>&#160;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&#160;<span>probe::signal.send</span></td></tr></table></div></body></html>

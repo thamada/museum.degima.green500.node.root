@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelMultipart</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="MIME.html" title="MIME Objects">
+<link rel="prev" href="camel-CamelMimePart.html" title="CamelMimePart">
+<link rel="next" href="camel-CamelMultipartSigned.html" title="CamelMultipartSigned">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-CamelMimePart.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="MIME.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelMultipartSigned.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelMultipart.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelMultipart.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelMultipart">
+<a name="camel-CamelMultipart"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelMultipart.top_of_page"></a>CamelMultipart</span></h2>
+<p>CamelMultipart</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelMultipart.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+struct              <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a>;
+<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *    <a class="link" href="camel-CamelMultipart.html#camel-multipart-new" title="camel_multipart_new ()">camel_multipart_new</a>                 (void);
+void                <a class="link" href="camel-CamelMultipart.html#camel-multipart-add-part" title="camel_multipart_add_part ()">camel_multipart_add_part</a>            (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *part);
+void                <a class="link" href="camel-CamelMultipart.html#camel-multipart-add-part-at" title="camel_multipart_add_part_at ()">camel_multipart_add_part_at</a>         (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *part,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> index);
+void                <a class="link" href="camel-CamelMultipart.html#camel-multipart-remove-part" title="camel_multipart_remove_part ()">camel_multipart_remove_part</a>         (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *part);
+<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *     <a class="link" href="camel-CamelMultipart.html#camel-multipart-remove-part-at" title="camel_multipart_remove_part_at ()">camel_multipart_remove_part_at</a>      (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> index);
+<a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *     <a class="link" href="camel-CamelMultipart.html#camel-multipart-get-part" title="camel_multipart_get_part ()">camel_multipart_get_part</a>            (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> index);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="camel-CamelMultipart.html#camel-multipart-get-number" title="camel_multipart_get_number ()">camel_multipart_get_number</a>          (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart);
+void                <a class="link" href="camel-CamelMultipart.html#camel-multipart-set-boundary" title="camel_multipart_set_boundary ()">camel_multipart_set_boundary</a>        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *boundary);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="camel-CamelMultipart.html#camel-multipart-get-boundary" title="camel_multipart_get_boundary ()">camel_multipart_get_boundary</a>        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart);
+void                <a class="link" href="camel-CamelMultipart.html#camel-multipart-set-preface" title="camel_multipart_set_preface ()">camel_multipart_set_preface</a>         (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *preface);
+void                <a class="link" href="camel-CamelMultipart.html#camel-multipart-set-postface" title="camel_multipart_set_postface ()">camel_multipart_set_postface</a>        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *postface);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelMultipart.html#camel-multipart-construct-from-parser" title="camel_multipart_construct_from_parser ()">camel_multipart_construct_from_parser</a>
+                                                        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         struct _CamelMimeParser *parser);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelMultipart.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelMultipart.details"></a><h2>Details</h2>
+<div class="refsect2" title="struct CamelMultipart">
+<a name="CamelMultipart"></a><h3>struct CamelMultipart</h3>
+<pre class="programlisting">struct CamelMultipart {
+	CamelDataWrapper parent_object;
+
+	GList *parts;
+	gchar *preface;
+	gchar *postface;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_new ()">
+<a name="camel-multipart-new"></a><h3>camel_multipart_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *    camel_multipart_new                 (void);</pre>
+<p>
+Create a new <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_add_part ()">
+<a name="camel-multipart-add-part"></a><h3>camel_multipart_add_part ()</h3>
+<pre class="programlisting">void                camel_multipart_add_part            (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *part);</pre>
+<p>
+Appends the part to the multipart object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> to add
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_add_part_at ()">
+<a name="camel-multipart-add-part-at"></a><h3>camel_multipart_add_part_at ()</h3>
+<pre class="programlisting">void                camel_multipart_add_part_at         (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *part,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> index);</pre>
+<p>
+Adds the part to the multipart object after the <em class="parameter"><code>index</code></em>'th
+element. If <em class="parameter"><code>index</code></em> is greater than the number of parts, it is
+equivalent to <a class="link" href="camel-CamelMultipart.html#camel-multipart-add-part" title="camel_multipart_add_part ()"><span class="type">camel_multipart_add_part</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> to add
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>index</code></em> :</span></p></td>
+<td> index to add the multipart at
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_remove_part ()">
+<a name="camel-multipart-remove-part"></a><h3>camel_multipart_remove_part ()</h3>
+<pre class="programlisting">void                camel_multipart_remove_part         (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *part);</pre>
+<p>
+Removes <em class="parameter"><code>part</code></em> from <em class="parameter"><code>multipart</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>part</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart"><span class="type">CamelMimePart</span></a> to remove
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_remove_part_at ()">
+<a name="camel-multipart-remove-part-at"></a><h3>camel_multipart_remove_part_at ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *     camel_multipart_remove_part_at      (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> index);</pre>
+<p>
+Remove the indicated part from the multipart object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>index</code></em> :</span></p></td>
+<td> a zero-based index indicating the part to remove
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the removed part. Note that it is <a class="link" href="camel-CamelObject.html#camel-object-unref" title="camel_object_unref ()"><span class="type">camel_object_unref</span></a>'ed
+before being returned, which may cause it to be destroyed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_get_part ()">
+<a name="camel-multipart-get-part"></a><h3>camel_multipart_get_part ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelMimePart.html#CamelMimePart" title="struct CamelMimePart">CamelMimePart</a> *     camel_multipart_get_part            (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> index);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>index</code></em> :</span></p></td>
+<td> a zero-based index indicating the part to get
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the indicated subpart, or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_get_number ()">
+<a name="camel-multipart-get-number"></a><h3>camel_multipart_get_number ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               camel_multipart_get_number          (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the number of subparts in <em class="parameter"><code>multipart</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_set_boundary ()">
+<a name="camel-multipart-set-boundary"></a><h3>camel_multipart_set_boundary ()</h3>
+<pre class="programlisting">void                camel_multipart_set_boundary        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *boundary);</pre>
+<p>
+Sets the message boundary for <em class="parameter"><code>multipart</code></em> to <em class="parameter"><code>boundary</code></em>. This should
+be a string which does not occur anywhere in any of <em class="parameter"><code>multipart</code></em>'s
+subparts. If <em class="parameter"><code>boundary</code></em> is <code class="literal">NULL</code>, a randomly-generated boundary will
+be used.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>boundary</code></em> :</span></p></td>
+<td> the message boundary, or <code class="literal">NULL</code>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_get_boundary ()">
+<a name="camel-multipart-get-boundary"></a><h3>camel_multipart_get_boundary ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       camel_multipart_get_boundary        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the boundary
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_set_preface ()">
+<a name="camel-multipart-set-preface"></a><h3>camel_multipart_set_preface ()</h3>
+<pre class="programlisting">void                camel_multipart_set_preface         (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *preface);</pre>
+<p>
+Set the preface text for this multipart.  Will be written out infront
+of the multipart.  This text should only include US-ASCII strings, and
+be relatively short, and will be ignored by any MIME mail client.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>preface</code></em> :</span></p></td>
+<td> the multipart preface
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_set_postface ()">
+<a name="camel-multipart-set-postface"></a><h3>camel_multipart_set_postface ()</h3>
+<pre class="programlisting">void                camel_multipart_set_postface        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *postface);</pre>
+<p>
+Set the postfix text for this multipart.  Will be written out after
+the last boundary of the multipart, and ignored by any MIME mail
+client.
+</p>
+<p>
+Generally postface texts should not be sent with multipart messages.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>postface</code></em> :</span></p></td>
+<td> multipat postface
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_multipart_construct_from_parser ()">
+<a name="camel-multipart-construct-from-parser"></a><h3>camel_multipart_construct_from_parser ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_multipart_construct_from_parser
+                                                        (<a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart">CamelMultipart</a> *multipart,
+                                                         struct _CamelMimeParser *parser);</pre>
+<p>
+Construct a multipart from a parser.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>multipart</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMultipart.html#CamelMultipart" title="struct CamelMultipart"><span class="type">CamelMultipart</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parser</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelMimeParser.html#CamelMimeParser" title="struct CamelMimeParser"><span class="type">CamelMimeParser</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">0</code> on success or <code class="literal">-1</code> on fail
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

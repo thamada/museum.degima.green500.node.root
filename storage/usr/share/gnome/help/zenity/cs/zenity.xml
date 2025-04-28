@@ -1,0 +1,1086 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY author1 "Sun">
+<!ENTITY author2 "Java Desktop System Documentation Team">
+<!ENTITY publisher "Sun Microsystems, Inc.">
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY appversion "2.6.0">
+<!ENTITY app "<application>Zenity</application>">
+<!ENTITY appname "Zenity">
+<!ENTITY date "August 2004">
+<!ENTITY manrevision "2.0">
+]>
+<!-- ================ Document Header ================= -->
+<article id="index" lang="cs">
+
+  <articleinfo>
+    <title>Příručka k aplikaci Zenity</title>
+    <subtitle>Příručka V2.0 k aplikaci Zenity</subtitle>
+    <copyright>
+	    <year>2003</year>
+	    <year>2004</year>
+	    <holder>Sun Microsystems, Inc.</holder>
+    </copyright><copyright><year>2009</year><holder>Marek Černocký (marek@manet.cz)</holder></copyright>
+
+    <!-- Translators: uncomment this
+    <copyright>
+	    <year>2004</year>
+	    <holder>ME_THE_TRANSLATOR</holder>
+    </copyright>
+    -->
+
+    <publisher>
+	    <publishername>Sun Microsystems, Inc.</publishername>
+    </publisher>
+
+      <legalnotice id="legalnotice">
+	<para>Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License, verze 1.1 nebo jakékoli další verze vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu jménem <ulink type="help" url="ghelp:fdl">GNU Free Documentation License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou.</para>
+         <para>Tato příručka je součástí kolekce příruček GNOME, distribuovaných pod licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, musíte přiložit kopii licence dle popisu v sekci 6 dané licence.</para>
+
+	<para>Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s velkým písmenem na začátku.</para>
+
+	<para>DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <orderedlist>
+		<listitem>
+		  <para>DOKUMENT JE POSKYTOVÁN V PODOBĚ „JAK JE“ BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE</para>
+		</listitem>
+		<listitem>
+		  <para>ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+
+    <authorgroup>
+      <author>
+        <firstname>Sun</firstname>
+        <surname>Dokumentační tým Java Desktop System</surname>
+        <affiliation><orgname>Sun Microsystems, Inc.</orgname></affiliation>
+      </author>
+      <author role="maintainer">
+        <firstname>Glynn</firstname>
+        <surname>Foster</surname>
+        <affiliation>
+          <orgname>Dokumentační projekt GNOME</orgname>
+        </affiliation>
+      </author>
+      <editor>
+        <firstname>Nicholas</firstname>
+        <surname>Curran</surname>
+        <affiliation>
+          <orgname>Dokumentační projekt GNOME</orgname>
+        </affiliation>
+      </editor>
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>Příručka V2.0 k aplikaci Zenity</revnumber>
+        <date>Srpen 2004</date>
+        <revdescription>
+          <para role="author">Dokumentační tým Sun Java Desktop System</para>
+          <para role="publisher">Sun Microsystems, Inc.</para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>Příručka V1.0 k aplikaci Zenity</revnumber>
+        <date>Leden 2003</date>
+        <revdescription>
+          <para role="author">Glynn Foster</para>
+          <para role="publisher">Dokumentační projekt GNOME</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <releaseinfo>Tato příručka popisuje aplikaci Zenity ve verzi 2.6.0.</releaseinfo>
+
+    <legalnotice>
+	    <title>Ohlasy</title>
+	    <para>Pokud chcete zaslat náměty a připomínky, použijte následující přímý odkaz na <ulink url="ghelp:gnome-feedback" type="help">Stránku s ohlasy</ulink>.</para>
+<!-- Translators may also add here feedback address for translations -->
+
+    </legalnotice>
+    <abstract role="description">
+            <para>Zenity je přepsaný gdialog, což je port GNOME aplikace dialog, která slouží k zobrazování dialogových oken z příkazové řádky a skriptů shellu.</para>
+    </abstract>
+  </articleinfo>
+  
+  <indexterm>
+    <primary>příkaz zenity</primary>
+  </indexterm>
+  <indexterm>
+    <primary>tvůrce dialogových oken</primary>
+  </indexterm>
+<!-- ================ Document Body ================= -->
+
+<!-- ==== Introduction ====== -->
+
+  <sect1 id="zenity-introduction">
+    <title>Úvod</title>
+
+    <para>Aplikace <application>Zenity</application> vám umožňuje vytvářet následující typy jednoduchých dialogových oken:</para>
+
+    <itemizedlist>
+        <listitem><para>Kalendář</para></listitem>
+	<listitem><para>Výběr souboru</para></listitem>
+	<listitem><para>Seznam</para></listitem>
+	<listitem><para>Oznamovací ikona</para></listitem>
+        <listitem><para>Zpráva</para>
+            <itemizedlist>
+	        <listitem><para>Chybové hlášení</para></listitem>
+		<listitem><para>Informační hlášení</para></listitem>
+		<listitem><para>Dotaz</para></listitem>
+		<listitem><para>Varovné hlášení</para></listitem>
+	    </itemizedlist>
+	</listitem>
+	<listitem><para>Ukazatel průběhu</para></listitem>
+        <listitem><para>Textový vstup</para></listitem>
+	<listitem><para>Textová informace</para></listitem>
+    </itemizedlist>
+
+  </sect1>
+
+<!-- ==== Usage ====== -->
+
+  <sect1 id="zenity-usage">
+    <title>Použití</title>
+
+    <para>Pokud píšete skripty, můžete využít aplikaci <application>Zenity</application> k vytváření jednoduchých dialogových oken, díky čemuž můžete graficky komunikovat s uživatelem. Využití je pro následující dva účely:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Můžete vytvořit dialogové okno k získání informací od uživatele. Například se můžete uživatele dotázat na datum pomocí výběru z dialogového okna s kalendářem nebo na název souboru pomocí dialogového okna pro výběr souboru.</para>
+      </listitem>
+      <listitem>
+        <para>Můžete vytvořit dialogové okno pro sdělení informace uživateli. Například můžete použít dialogové okno s ukazatelem průběhu k informování o stavu operace nebo dialogové okno s varovnou zprávou k upozornění uživatele.</para>
+      </listitem>
+    </itemizedlist>
+    <para>
+	When the user closes the dialog, <application>Zenity</application> prints the text produced by the dialog to standard output.
+    </para>
+
+    <note>
+      <para>Při zapisování příkazů <application>Zenity</application> se ujistěte, že máte všechny argumenty uzavřené do uvozovek.</para>
+      <para>Například, používejte: <screen><userinput><command>zenity --calendar --title="Plánovač svátků"</command></userinput></screen> Nepoužívejte: <screen><userinput><command>zenity --calendar --title=Plánovač svátků</command></userinput></screen></para>
+      <para>Pokud uvozovky nepoužijete, můžete získat nepředvídatelné výsledky.</para>
+    </note>
+
+    <sect2 id="zenity-usage-mnemonics">
+      <title>Horké klávesy</title>
+	<para>Horké klávesy jsou klávesy, které vám umožňují provádět činnost z klávesnice místo abyste museli použít myš k výběru z nabídky nebo dialogového okna. Každá horká klávesa je symbolizovaná podtržením příslušného písmene v položce nabídky nebo dialogového okna.</para>
+	<para>Některá dialogová okna <application>Zenity</application> podporují horké klávesy. Pokud chcete určit, že některý znak má fungovat jako horká klávesa, umístěte před něj podtržítko. Následující příklad ukazuje, jak určit jako horkou klávesu znak „Z“</para>
+	<screen><userinput>"_Změnit název"</userinput></screen>
+    </sect2>
+
+    <sect2 id="zenity-usage-exitcodes">
+      <title>Návratové kódy</title>
+    <para><application>Zenity</application> vrací následující návratové kódy:</para>
+
+    <informaltable frame="all">
+      <tgroup cols="2" colsep="1" rowsep="1">
+        <colspec colname="COLSPEC0" colwidth="50*"/>
+        <colspec colname="COLSPEC1" colwidth="50*"/>
+        <thead>
+          <row valign="top">
+            <entry colname="COLSPEC0">
+              <para>Návratový kód</para></entry>
+            <entry colname="COLSPEC1">
+              <para>Popis</para></entry>
+          </row>
+        </thead>
+        <tbody>
+          <row valign="top">
+            <entry>
+              <para><varname>0</varname></para>
+            </entry>
+            <entry>
+              <para>Uživatel zmáčkl buď <guibutton>OK</guibutton> nebo <guibutton>Zavřít</guibutton>.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>1</varname></para>
+            </entry>
+            <entry>
+              <para>Uživatel buď zmáčkl <guibutton>Zrušit</guibutton> nebo použil ovládací prvky okna k zavření dialogu.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>-1</varname></para>
+            </entry>
+            <entry>
+              <para>Vyskytla se neznámá chyba.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>5</varname></para>
+            </entry>
+            <entry>
+              <para>Dialogové okno bylo zavřeno, protože vypršel časový limit.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    </sect2>
+
+
+  <!-- ==== General Options ====== -->
+
+  <sect2 id="zenity-usage-general-options">
+    <title>Všeobecné přepínače</title>
+
+    <para>Všechna dialogová okna <application>Zenity</application> podporují následující všeobecné přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--title</option>=<replaceable>název</replaceable></term>
+	<listitem>
+	  <para>Určuje název dialogového okna.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--window-icon</option>=<replaceable>cesta_k_ikoně</replaceable></term>
+	<listitem>
+	  <para>Určuje ikonu, která se zobrazí v záhlaví dialogového okna. K dispozici jsou také 4 předdefinované ikony dostupné pomocí klíčových slov „info“ (informace), „warning“ (varování), „question“ (dotaz) a „error“ (chyba).</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--width</option>=<replaceable>šířka</replaceable></term>
+	<listitem>
+	  <para>Určuje šířku dialogového okna.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--height</option>=<replaceable>výška</replaceable></term>
+	<listitem>
+	  <para>Určuje výšku dialogového okna.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--timeout</option>=<replaceable>časový_limit</replaceable></term>
+	<listitem>
+	  <para>Určuje časový limit v sekundách, po kterém se dialog zavře.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== Miscellaneous Options ====== -->
+
+  <sect2 id="zenity-help-options">
+    <title>Přepínače nápovědy</title>
+
+    <para><application>Zenity</application> poskytuje následující přepínače pro nápovědu:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--help</option></term>
+	<listitem>
+	  <para>Zobrazí zkrácenou nápovědu.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--help-all</option></term>
+	<listitem>
+	  <para>Zobrazí celou nápovědu pro všechny typy dialogových oken.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-general</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro všeobecné přepínače dialogových oken.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-calendar</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna s kalendářem.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-entry</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna na vkládání údajů.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-error</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna s chybovým hlášením.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-info</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna s informačním hlášením.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-file-selection</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna na výběr souboru.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-list</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna se seznamem.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-notification</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače oznamovací ikony.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-progress</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna s ukazatele průběhu.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-question</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna s dotazem.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-warning</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna s varovným hlášením.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-text-info</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače dialogového okna s informačním textem.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-misc</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro různé přepínače.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-gtk</option></term>
+	<listitem>
+	  <para>Zobrazí nápovědu pro přepínače GTK+.</para>
+	</listitem>
+      </varlistentry>
+ 
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== Miscellaneous Options ====== -->
+
+  <sect2 id="zenity-miscellaneous-options">
+    <title>Různé přepínače</title>
+
+    <para><application>Zenity</application> také poskytuje následující různorodé přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--about</option></term>
+	<listitem>
+	  <para>Zobrazí dialogové okno <guilabel>O aplikaci Zenity</guilabel>, které obsahuje informace o verzi <application>Zenity</application>, informace o autorských právech a informace o vývojářích.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--version</option></term>
+	<listitem>
+	  <para>Zobrazí číslo verze aplikace <application>Zenity</application>.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== GTK+ Options ====== -->
+
+  <sect2 id="zenity-gtk-options">
+    <title>Přepínače GTK+</title>
+
+    <para>Aplikace <application>Zenity</application> podporuje standardní přepínače GTK+. Více informací o přepínačích GTK+ získáte spuštěním příkazu <command>zenity -?</command>.</para>
+
+  </sect2>
+
+<!-- ==== Environment variables ==== -->
+
+  <sect2 id="zenity-environment-variables">
+    <title>Environment Variables</title>
+
+    <para>
+      Normally, <application>Zenity</application> detects the terminal window from which it was launched
+      and keeps itself above that window.  This behavior can be disabled by
+      unsetting the <envar>WINDOWID</envar> environment variable.
+    </para>
+
+  </sect2>
+
+  </sect1>
+<!-- ==== Calendar Options ====== -->
+
+  <sect1 id="zenity-calendar-options">
+    <title>Dialogové okno s kalendářem</title>
+
+    <para>
+        Use the <option>--calendar</option> option to create a calendar dialog. <application>Zenity</application> returns the selected date to standard output. If no date is specified on the command line, the dialog uses the current date.
+    </para>
+    <para>Dialogové okno s kalendářem podporuje následující přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>text</replaceable></term>
+	<listitem>
+	  <para>Určuje text, který se v dialogovém okně s kalendářem zobrazí.</para>
+	</listitem>
+      </varlistentry>
+     	
+      <varlistentry>
+        <term><option>--day</option>=<replaceable>den</replaceable></term>
+	<listitem>
+	  <para>Určuje den, který bude v kalendáři vybraný. <replaceable>den</replaceable> musí být číslo v rozmezí 1 až 31 včetně.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--month</option>=<replaceable>měsíc</replaceable></term>
+	<listitem>
+	  <para>Určuje měsíc, který bude v kalendáři vybraný. <replaceable>měsíc</replaceable> musí být číslo v rozmezí 1 až 12 včetně.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--year</option>=<replaceable>rok</replaceable></term>
+	<listitem>
+	  <para>Určuje rok, který bude v kalendáři vybraný.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--date-format</option>=<replaceable>formát</replaceable></term>
+	<listitem>
+	  <para>Určuje formát, v jakém má dialogové okno s kalendářem vrátit vybrané datum. Výchozí formát je daný vaším národním prostředím. <replaceable>formát</replaceable> musí být formát, který akceptuje funkce <command>strftime</command>, např. <literal>%A %d/%m/%y</literal>.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno s kalendářem: <programlisting>
+        #!/bin/sh
+
+
+        if zenity --calendar \
+        --title="Výběr data" \
+        --text="Vyberte datum kliknutím v kalendáři." \
+        --day=10 --month=8 --year=2004
+          then echo $?
+          else echo "Žádné datum nebylo vybráno"
+        fi
+      </programlisting></para>
+
+    <figure id="zenity-calendar-screenshot">
+      <title>Příklad dialogového okna s kalendářem</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+              <imagedata fileref="figures/zenity-calendar-screenshot.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+              <phrase><application>Zenity</application> ukázka dialogového okna s kalendářem</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+   </figure>
+													  
+  </sect1>
+
+
+<!-- ==== File Selection Options ====== -->
+
+  <sect1 id="zenity-file-selection-options">
+    <title>Dialogové okno na výběr souboru</title>
+
+    <para>
+	Use the <option>--file-selection</option> option to create a file selection dialog. <application>Zenity</application> returns the selected files or directories to standard 
+        output. The default mode of the file selection dialog is open.
+    </para>
+    <para>Dialogové okno na výběr souboru podporuje následující přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--filename</option>=<replaceable>název_souboru</replaceable></term>
+	<listitem>
+	  <para>Určuje soubor nebo složku, kteří budou vybraní po prvním spuštění dialogového okna.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--multiple</option></term>
+	<listitem>
+	  <para>Umožní v dialogovém okně vybrat více souborů naráz.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--directory</option></term>
+	<listitem>
+	  <para>Umožní v dialogovém okně pouze výběr složek.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--save</option></term>
+	<listitem>
+	  <para>Přepne dialogové okno na výběr souboru do režimu save (uložit).</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--separator</option>=<replaceable>oddělovač</replaceable></term>
+	<listitem>
+	  <para>Určuje řetězec, který se použije k oddělení jednotlivých názvů souborů ve vráceném seznamu.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno na výběr souboru: <programlisting>
+        #!/bin/sh
+
+        FILE=`zenity --file-selection --title="Výběr souboru"`
+
+        case $? in
+                 0)
+                        echo "Vybrán soubor „$FILE“.";;
+                 1)
+                        echo "Nebyl vybrán žádný soubor.";;
+                -1)
+                        echo "Nebyl vybrán žádný soubor.";;
+        esac
+      </programlisting></para>
+
+    <figure id="zenity-fileselection-screenshot">
+      <title>Příklad dialogového okna na výběr souboru</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-fileselection-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> ukázka dialogového okna na výběr souboru</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Notification Options ====== -->
+  <sect1 id="zenity-notification-options">
+    <title>Oznamovací ikona</title>
+
+    <para>
+    </para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>text</replaceable></term>
+	<listitem>
+	  <para>Určuje text, který se zobrazí v oznamovací oblasti.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Následující příklad skriptu ukazuje, jak vytvořit oznamovací ikonu: <programlisting>
+        #!/bin/sh
+
+        zenity --notification\
+          --window-icon="info" \
+          --text="Jsou k dispozici důležité aktualizace!"
+      </programlisting></para>
+
+    <figure id="zenity-notification-screenshot">
+      <title>Příklad oznamovací ikony </title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+              <imagedata fileref="figures/zenity-notification-screenshot.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+              <phrase><application>Zenity</application> ukázka oznamovací ikony</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+   </figure>
+													  
+  </sect1>
+
+<!-- ==== List Options ====== -->
+
+  <sect1 id="zenity-list-options">
+    <title>Dialogové okno se seznamem</title>
+
+    <para>
+	Use the <option>--list</option> option to create a list dialog. <application>Zenity</application> returns the entries in the first column of text of selected rows to standard output.
+    </para>
+
+    <para>Data pro dialogové okno se musí zadat sloupec po sloupci, řádek po řádku. Data lze dialogovému oknu předat i přes standardní vstup. Každá položka musí být oddělená znakem nového řádku.</para>
+
+    <para>Pokud použijete přepínače <option>--checklist</option> nebo <option>--radiolist</option>, musí každý řádek začínat buď hodnotou „TRUE“ (bude zaškrtnuté) nebo „FALSE“ (nebude zaškrtnuté).</para>
+
+    <para>Dialogové okno se seznamem podporuje následující přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--column</option>=<replaceable>sloupec</replaceable></term>
+	<listitem>
+	  <para>Určuje záhlaví sloupců zobrazených v seznamu. Přepínač <option>--column</option> musíte zadat opakovaně zvlášť pro každý ze sloupců, které chcete v seznamu zobrazit.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--checklist</option></term>
+	<listitem>
+	  <para>Určuje, že první sloupec v seznamu bude obsahovat zaškrtávací pole.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--radiolist</option></term>
+	<listitem>
+	  <para>Určuje, že první sloupec v seznamu bude obsahovat skupinový přepínač.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--editable</option></term>
+	<listitem>
+	  <para>Povolit v zobrazených položkách provádění úprav.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--separator</option>=<replaceable>oddělovač</replaceable></term>
+	<listitem>
+	  <para>Určuje řetězec použitý jako oddělovač vybraných položek seznamu, které dialogové okno vrátí.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--print-column</option>=<replaceable>sloupec</replaceable></term>
+	<listitem>
+	  <para>Určuje sloupec, který se má z vybraného řádku vracet. Výchozí hodnota je „1“. Pokud chcete vrátit všechny sloupce seznamu, můžete použít hodnotu „ALL“.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno se seznamem: <programlisting>
+        #!/bin/sh
+
+        zenity --list \
+          --title="Vyberte chybu, kterou chcete zobrazit" \
+          --column="Číslo chyby" --column="Priorita" --column="Popis" \
+            992383 Normální "GtkTreeView se hroutí při výběru více položek" \
+            293823 Vysoká "Slovník GNOME neumí pracovat s proxy" \
+            393823 Kritická "Úprava nabídek nefunguje v GNOME 2.0"
+      </programlisting></para>
+
+    <figure id="zenity-list-screenshot">
+      <title>Příklad dialogového okna se seznamem</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-list-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> ukázka dialogového okna se seznamem</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Message Options ====== -->
+
+  <sect1 id="zenity-message-options">
+    <title>Dialogové okno s hlášením</title>
+
+    <para>Aplikace <application>Zenity</application> umí vytvářet čtyři typy dialogových oken s hlášením:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Chybové hlášení</para>
+      </listitem>
+      <listitem>
+        <para>Informační hlášení</para>
+      </listitem>
+      <listitem>
+        <para>Dotaz</para>
+      </listitem>
+      <listitem>
+        <para>Varovné hlášení</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>U každého z typů použijte přepínač <option>--text</option> k zadání textu, který se má v dialogovém okně zobrazit.</para>
+
+    <sect2 id="zenity-error-dialog">
+      <title>Dialogové okno s chybovým hlášením</title>
+
+      <para>K vytvoření dialogového okna s chybovým hlášením použijte přepínač <option>--error</option>.</para>
+
+      <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno s chybovým hlášením: <programlisting>
+          #!/bin/bash
+
+          zenity --error \
+          --text="Nelze najít /var/log/syslog."
+        </programlisting></para>
+
+      <figure id="zenity-error-screenshot">
+        <title>Příklad dialogového okna s chybovým hlášením</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-error-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> ukázka dialogového okna s chybovým hlášením</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-info-dialog">
+      <title>Dialogové okno s informačním hlášením</title>
+
+      <para>K vytvoření dialogového okna s informačním hlášením použijte přepínač <option>--info</option>.</para>
+
+      <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno s informačním hlášením: <programlisting>
+          #!/bin/bash
+
+          zenity --info \
+          --text="Sloučení dokončeno. Aktualizovány 3 z 10 souborů."
+        </programlisting></para>
+
+      <figure id="zenity-information-screenshot">
+        <title>Příklad dialogového okna s informačním hlášením</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-information-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> ukázka dialogového okna s informačním hlášením</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-question-dialog">
+      <title>Dialogové okno s dotazem</title>
+
+      <para>K vytvoření dialogového okna s dotazem použijte přepínač <option>--question</option>.</para>
+
+      <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno s dotazem: <programlisting>
+          #!/bin/bash
+
+          zenity --question \
+          --text="Opravdu chcete pokračovat?"
+        </programlisting></para>
+
+      <figure id="zenity-question-screenshot">
+        <title>Příklad dialogového okna s dotazem</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-question-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> ukázka dialogového okna s dotazem</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-warning-dialog">
+      <title>Dialogové okno s varovným hlášením</title>
+
+      <para>K vytvoření dialogového okna s varovným hlášením použijte přepínač <option>--warning</option>.</para>
+
+      <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno s varovným hlášením: <programlisting>
+          #!/bin/bash
+        
+          zenity --warning \
+          --text="Odpojte kabel napájení, abyste předešli poškození."
+        </programlisting></para>
+
+      <figure id="zenity-warning-screenshot">
+        <title>Příklad dialogového okna s varovným hlášením</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-warning-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> ukázka dialogového okna s varovným hlášením</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+  </sect1>
+
+<!-- ==== Progress Options ====== -->
+
+  <sect1 id="zenity-progress-options">
+    <title>Dialogové okno s ukazatelem průběhu</title>
+
+    <para>K vytvoření dialogového okna s ukazatelem průběhu použijte přepínač <option>--progress</option>.</para>
+
+    <para>Aplikace <application>Zenity</application> čte data ze standardního vstupu řádek po řádku. Když řádek začíná znakem #, provede se aktualizace textu pomocí textu na zbytku tohoto řádku. Když řádek obsahuje pouze číslo, aktualizují se procenta ukazatele.</para>
+	
+    <para>Dialogové okno s ukazatelem průběhu podporuje následující přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>text</replaceable></term>
+	<listitem>
+	  <para>Určuje text, který se má v dialogovém okně zobrazit.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--percentage</option>=<replaceable>procenta</replaceable></term>
+	<listitem>
+	  <para>Určuje počáteční stav procent, na které se má ukazatel průběhu nastavit.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--auto-close</option></term>
+	<listitem>
+	  <para>Zavřít dialogové okno po dosažení 100%.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--pulsate</option></term>
+	<listitem>
+	  <para>Určuje, že ukazatel průběhu bude pulzovat, dokud se ze standardního vstupu nenačte znak EOF (konce souboru).</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno s ukazatelem průběhu: <programlisting>
+        #!/bin/sh
+        (
+        echo "10" ; sleep 1
+        echo "# Aktualizuje se evidence e-mailů" ; sleep 1
+        echo "20" ; sleep 1
+        echo "# Restartují se úlohy cronu" ; sleep 1
+        echo "50" ; sleep 1
+        echo "Tento řádek se bude ignorovat" ; sleep 1
+        echo "75" ; sleep 1
+        echo "# Restartuje se systém" ; sleep 1
+        echo "100" ; sleep 1
+        ) |
+        zenity --progress \
+          --title="Aktualizace systémové evidence" \
+          --text="Prohledává se evidence e-mailů..." \
+          --percentage=0
+
+        if [ "$?" = -1 ] ; then
+                zenity --error \
+                  --text="Aktualizace přerušena."
+        fi
+
+      </programlisting></para>
+
+    <figure id="zenity-progress-screenshot">
+      <title>Příklad dialogového okna s ukazatelem průběhu</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-progress-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> ukázka dialogového okna s ukazatelem průběhu</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Text Entry Options ====== -->
+
+  <sect1 id="zenity-text-entry-options">
+    <title>Dialogové okno na vkládání údajů</title>
+
+    <para>
+        Use the <option>-entry</option> option to create a text entry dialog. <application>Zenity</application> returns the contents of the text entry to standard output. 
+    </para>	
+    <para>Dialogové okno na vkládání údajů podporuje následující přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>text</replaceable></term>
+	<listitem>
+	  <para>Určuje text, který se má v dialogovém okně zobrazit.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--entry-text</option>=<replaceable>text</replaceable></term>
+	<listitem>
+	  <para>Určujte text, který se má zobrazit ve vstupním poli dialogového okna.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--hide-text</option></term>
+	<listitem>
+	  <para>Skrýt text ve vstupním poli dialogového okna.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno na vkládání údajů: <programlisting>
+        #!/bin/sh
+
+        if zenity --entry \
+        --title="Zadání údajů" \
+        --text="Zadejte své heslo:" \
+        --entry-text "heslo" \
+        --hide-text
+          then echo $?
+          else echo "Heslo nebylo zadáno"
+        fi
+      </programlisting></para>
+
+    <figure id="zenity-entry-screenshot">
+      <title>Příklad dialogového okna na vkládání údajů</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-entry-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> ukázka dialogového okna na vkládání údajů</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </sect1>
+
+<!-- ==== Text Information Options ====== -->
+
+  <sect1 id="zenity-text-options">
+    <title>Dialogové okno s informačním textem</title>
+
+    <para>K vytvoření dialogového okna s informačním textem použijte přepínač <option>--text-info</option>.</para>
+	
+    <para>Dialogové okno s informačním textem podporuje následující přepínače:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--filename</option>=<replaceable>název_souboru</replaceable></term>
+	<listitem>
+	  <para>Určuje soubor, ze kterého se má do dialogového okna načíst text.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--editable</option></term>
+        <listitem>
+          <para>Allows the displayed text to be edited. The edited text is returned to standard output when the dialog is closed.</para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Následující příklad skriptu ukazuje, jak vytvořit dialogové okno s informačním textem: <programlisting>
+        #!/bin/sh
+
+        FILE=`zenity --file-selection \
+          --title="Výběr souboru"`
+
+        case $? in
+                 0)
+                        zenity --text-info \
+                          --title=$FILE \
+                          --filename=$FILE \
+                          --editable 2&gt;/tmp/tmp.txt;;
+                 1)
+                        echo "Nebyl vybrán žádný soubor.";;
+                -1)
+                        echo "Nebyl vybrán žádný soubor.";;
+        esac
+      </programlisting></para>
+
+    <figure id="zenity-text-screenshot">
+      <title>Příklad dialogového okna s informačním textem</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-text-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> ukázka dialogového okna s informačním textem</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+</article>

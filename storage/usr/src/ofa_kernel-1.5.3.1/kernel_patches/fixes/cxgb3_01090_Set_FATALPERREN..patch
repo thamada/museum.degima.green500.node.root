@@ -1,0 +1,22 @@
+commit e05e6a397c65ac9a31ce799cf85157f2d85f45b7
+Author: Casey Leedom <leedom@chelsio.com>
+Date:   Thu Sep 2 13:07:30 2010 +0000
+
+    cxgb3: Set FATALPERREN.
+    
+    Signed-off-by: Dimitris Michailidis <dm@chelsio.com>
+    Signed-off-by: Casey Leedom <leedom@chelsio.com>
+    Signed-off-by: David S. Miller <davem@davemloft.net>
+
+diff --git a/drivers/net/cxgb3/t3_hw.c b/drivers/net/cxgb3/t3_hw.c
+index 427c451..14a5664 100644
+--- a/drivers/net/cxgb3/t3_hw.c
++++ b/drivers/net/cxgb3/t3_hw.c
+@@ -3569,6 +3569,7 @@ int t3_init_hw(struct adapter *adapter, u32 fw_params)
+ 	t3_write_reg(adapter, A_PM1_TX_MODE, 0);
+ 	chan_init_hw(adapter, adapter->params.chan_map);
+ 	t3_sge_init(adapter, &adapter->params.sge);
++	t3_set_reg_field(adapter, A_PL_RST, 0, F_FATALPERREN);
+ 
+ 	t3_write_reg(adapter, A_T3DBG_GPIO_ACT_LOW, calc_gpio_intr(adapter));
+ 

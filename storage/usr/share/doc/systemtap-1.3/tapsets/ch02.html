@@ -1,0 +1,143 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Chapter&#160;2.&#160;Context Functions</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="up" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="prev" href="ch01.html" title="Chapter&#160;1.&#160;Introduction"><link rel="next" href="re01.html" title="function::print_regs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&#160;2.&#160;Context Functions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch01.html">Prev</a>&#160;</td><th width="60%" align="center">&#160;</th><td width="20%" align="right">&#160;<a accesskey="n" href="re01.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&#160;2.&#160;Context Functions"><div class="titlepage"><div><div><h2 class="title"><a name="context_stp"></a>Chapter&#160;2.&#160;Context Functions</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="refentrytitle"><a href="re01.html"><span>function::print_regs</span></a></span><span class="refpurpose"> &#8212; 
+  Print a register dump.
+ </span></dt><dt><span class="refentrytitle"><a href="re02.html"><span>function::execname</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the execname of a target process (or group of processes).
+ </span></dt><dt><span class="refentrytitle"><a href="re03.html"><span>function::pid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re04.html"><span>function::tid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the thread ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re05.html"><span>function::ppid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the process ID of a target process's parent process.
+ </span></dt><dt><span class="refentrytitle"><a href="re06.html"><span>function::pgrp</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the process group ID of the current process.
+ </span></dt><dt><span class="refentrytitle"><a href="re07.html"><span>function::sid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the session ID of the current process.
+ </span></dt><dt><span class="refentrytitle"><a href="re08.html"><span>function::pexecname</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the execname of a target process's parent process.
+ </span></dt><dt><span class="refentrytitle"><a href="re09.html"><span>function::gid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the group ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re10.html"><span>function::egid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the effective gid of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re11.html"><span>function::uid</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the user ID of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re12.html"><span>function::euid</span></a></span><span class="refpurpose"> &#8212; 
+     Return the effective uid of a target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re13.html"><span>function::is_myproc</span></a></span><span class="refpurpose"> &#8212; 
+     Determines if the current probe point has occurred in the user's own process.
+ </span></dt><dt><span class="refentrytitle"><a href="re14.html"><span>function::cpu</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the current cpu number.
+ </span></dt><dt><span class="refentrytitle"><a href="re15.html"><span>function::pp</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the active probe point.
+ </span></dt><dt><span class="refentrytitle"><a href="re16.html"><span>function::registers_valid</span></a></span><span class="refpurpose"> &#8212; 
+     Determines validity of <code class="function">register</code> and <code class="function">u_register</code> in current context.
+ </span></dt><dt><span class="refentrytitle"><a href="re17.html"><span>function::user_mode</span></a></span><span class="refpurpose"> &#8212; 
+     Determines if probe point occurs in user-mode.
+ </span></dt><dt><span class="refentrytitle"><a href="re18.html"><span>function::is_return</span></a></span><span class="refpurpose"> &#8212; 
+     Whether the current probe context is a return probe.
+ </span></dt><dt><span class="refentrytitle"><a href="re19.html"><span>function::target</span></a></span><span class="refpurpose"> &#8212; 
+     Return the process ID of the target process.
+ </span></dt><dt><span class="refentrytitle"><a href="re20.html"><span>function::module_name</span></a></span><span class="refpurpose"> &#8212; 
+     The module name of the current script.
+ </span></dt><dt><span class="refentrytitle"><a href="re21.html"><span>function::stp_pid</span></a></span><span class="refpurpose"> &#8212; 
+     The process id of the stapio process.
+ </span></dt><dt><span class="refentrytitle"><a href="re22.html"><span>function::stack_size</span></a></span><span class="refpurpose"> &#8212; 
+     Return the size of the kernel stack.
+ </span></dt><dt><span class="refentrytitle"><a href="re23.html"><span>function::stack_used</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the amount of kernel stack used.
+ </span></dt><dt><span class="refentrytitle"><a href="re24.html"><span>function::stack_unused</span></a></span><span class="refpurpose"> &#8212; 
+     Returns the amount of kernel stack currently available.
+ </span></dt><dt><span class="refentrytitle"><a href="re25.html"><span>function::uaddr</span></a></span><span class="refpurpose"> &#8212; 
+     User space address of current running task. EXPERIMENTAL.
+ </span></dt><dt><span class="refentrytitle"><a href="re26.html"><span>function::cmdline_args</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch command line arguments from current process
+ </span></dt><dt><span class="refentrytitle"><a href="re27.html"><span>function::cmdline_arg</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch a command line argument.
+ </span></dt><dt><span class="refentrytitle"><a href="re28.html"><span>function::cmdline_str</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch all command line arguments from current process
+ </span></dt><dt><span class="refentrytitle"><a href="re29.html"><span>function::env_var</span></a></span><span class="refpurpose"> &#8212; 
+     Fetch environment variable from current process
+ </span></dt><dt><span class="refentrytitle"><a href="re30.html"><span>function::print_stack</span></a></span><span class="refpurpose"> &#8212; 
+  Print out kernel stack from string.
+ </span></dt><dt><span class="refentrytitle"><a href="re31.html"><span>function::sprint_stack</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack for kernel addresses from string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re32.html"><span>function::probefunc</span></a></span><span class="refpurpose"> &#8212; 
+     Return the probe point's function name, if known.
+ </span></dt><dt><span class="refentrytitle"><a href="re33.html"><span>function::probemod</span></a></span><span class="refpurpose"> &#8212; 
+     Return the probe point's kernel module name.
+ </span></dt><dt><span class="refentrytitle"><a href="re34.html"><span>function::modname</span></a></span><span class="refpurpose"> &#8212; 
+     Return the kernel module name loaded at the address.
+ </span></dt><dt><span class="refentrytitle"><a href="re35.html"><span>function::symname</span></a></span><span class="refpurpose"> &#8212; 
+     Return the kernel symbol associated with the given address.
+ </span></dt><dt><span class="refentrytitle"><a href="re36.html"><span>function::symdata</span></a></span><span class="refpurpose"> &#8212; 
+     Return the kernel symbol and module offset for the address.
+ </span></dt><dt><span class="refentrytitle"><a href="re37.html"><span>function::usymname</span></a></span><span class="refpurpose"> &#8212; 
+  Return the symbol of an address in the current task. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re38.html"><span>function::usymdata</span></a></span><span class="refpurpose"> &#8212; 
+     Return the symbol and module offset of an address. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re39.html"><span>function::print_ustack</span></a></span><span class="refpurpose"> &#8212; 
+     Print out stack for the current task from string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re40.html"><span>function::sprint_ustack</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack for the current task from string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re41.html"><span>function::print_backtrace</span></a></span><span class="refpurpose"> &#8212; 
+  Print stack back trace
+ </span></dt><dt><span class="refentrytitle"><a href="re42.html"><span>function::sprint_backtrace</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack back trace as string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re43.html"><span>function::backtrace</span></a></span><span class="refpurpose"> &#8212; 
+     Hex backtrace of current stack
+ </span></dt><dt><span class="refentrytitle"><a href="re44.html"><span>function::task_backtrace</span></a></span><span class="refpurpose"> &#8212; 
+     Hex backtrace of an arbitrary task
+ </span></dt><dt><span class="refentrytitle"><a href="re45.html"><span>function::caller</span></a></span><span class="refpurpose"> &#8212; 
+     Return name and address of calling function
+ </span></dt><dt><span class="refentrytitle"><a href="re46.html"><span>function::caller_addr</span></a></span><span class="refpurpose"> &#8212; 
+     Return caller address
+ </span></dt><dt><span class="refentrytitle"><a href="re47.html"><span>function::print_ubacktrace</span></a></span><span class="refpurpose"> &#8212; 
+  Print stack back trace for current task. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re48.html"><span>function::sprint_ubacktrace</span></a></span><span class="refpurpose"> &#8212; 
+     Return stack back trace for current task as string. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re49.html"><span>function::print_ubacktrace_brief</span></a></span><span class="refpurpose"> &#8212; 
+     Print stack back trace for current task. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re50.html"><span>function::ubacktrace</span></a></span><span class="refpurpose"> &#8212; 
+     Hex backtrace of current task stack. EXPERIMENTAL!
+ </span></dt><dt><span class="refentrytitle"><a href="re51.html"><span>function::task_current</span></a></span><span class="refpurpose"> &#8212; 
+  The current task_struct of the current task.
+ </span></dt><dt><span class="refentrytitle"><a href="re52.html"><span>function::task_parent</span></a></span><span class="refpurpose"> &#8212; 
+     The task_struct of the parent task.
+ </span></dt><dt><span class="refentrytitle"><a href="re53.html"><span>function::task_state</span></a></span><span class="refpurpose"> &#8212; 
+     The state of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re54.html"><span>function::task_execname</span></a></span><span class="refpurpose"> &#8212; 
+     The name of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re55.html"><span>function::task_pid</span></a></span><span class="refpurpose"> &#8212; 
+     The process identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re56.html"><span>function::pid2task</span></a></span><span class="refpurpose"> &#8212; 
+     The task_struct of the given process identifier.
+ </span></dt><dt><span class="refentrytitle"><a href="re57.html"><span>function::pid2execname</span></a></span><span class="refpurpose"> &#8212; 
+     The name of the given process identifier.
+ </span></dt><dt><span class="refentrytitle"><a href="re58.html"><span>function::task_tid</span></a></span><span class="refpurpose"> &#8212; 
+     The thread identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re59.html"><span>function::task_gid</span></a></span><span class="refpurpose"> &#8212; 
+     The group identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re60.html"><span>function::task_egid</span></a></span><span class="refpurpose"> &#8212; 
+     The effective group identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re61.html"><span>function::task_uid</span></a></span><span class="refpurpose"> &#8212; 
+     The user identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re62.html"><span>function::task_euid</span></a></span><span class="refpurpose"> &#8212; 
+     The effective user identifier of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re63.html"><span>function::task_prio</span></a></span><span class="refpurpose"> &#8212; 
+     The priority value of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re64.html"><span>function::task_nice</span></a></span><span class="refpurpose"> &#8212; 
+     The nice value of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re65.html"><span>function::task_cpu</span></a></span><span class="refpurpose"> &#8212; 
+     The scheduled cpu of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re66.html"><span>function::task_open_file_handles</span></a></span><span class="refpurpose"> &#8212; 
+     The number of open files of the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re67.html"><span>function::task_max_file_handles</span></a></span><span class="refpurpose"> &#8212; 
+     The max number of open files for the task.
+ </span></dt><dt><span class="refentrytitle"><a href="re68.html"><span>function::pn</span></a></span><span class="refpurpose"> &#8212; 
+  Returns the active probe name.
+ </span></dt></dl></div><p>
+      The context functions provide additional information about where
+      an event occurred.
+      These functions can provide information such as a backtrace to 
+      where the event occurred
+      and the current register values for the processor.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch01.html">Prev</a>&#160;</td><td width="20%" align="center">&#160;</td><td width="40%" align="right">&#160;<a accesskey="n" href="re01.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&#160;1.&#160;Introduction&#160;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&#160;<span>function::print_regs</span></td></tr></table></div></body></html>

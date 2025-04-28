@@ -1,0 +1,1816 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BonoboUIComponent</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="LibBonoboUI API Reference Manual">
+<link rel="up" href="bonobo-ui.html" title="Bonobo UI">
+<link rel="prev" href="libbonoboui-bonobo-window.html" title="bonobo-window">
+<link rel="next" href="libbonoboui-bonobo-ui-container.html" title="BonoboUIContainer">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Object Hierarchy">
+<link rel="chapter" href="bonobo-controls.html" title="Controls">
+<link rel="chapter" href="bonobo-ui.html" title="Bonobo UI">
+<link rel="chapter" href="bonobo-support-utilities.html" title="Supporting Classes">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbonoboui-bonobo-window.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="bonobo-ui.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">LibBonoboUI API Reference Manual</th>
+<td><a accesskey="n" href="libbonoboui-bonobo-ui-container.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbonoboui-bonobo-ui-component.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libbonoboui-bonobo-ui-component.description" class="shortcut">Description</a>
+                 | 
+                <a href="#libbonoboui-bonobo-ui-component.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#libbonoboui-bonobo-ui-component.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="BonoboUIComponent">
+<a name="libbonoboui-bonobo-ui-component"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbonoboui-bonobo-ui-component.top_of_page"></a>BonoboUIComponent</span></h2>
+<p>BonoboUIComponent — A UI interface that handles UI merging for a component</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbonoboui-bonobo-ui-component.synopsis"></a><h2>Synopsis</h2>
+<a name="BonoboUIComponent"></a><pre class="synopsis">
+                    <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent-struct" title="BonoboUIComponent">BonoboUIComponent</a>;
+                    <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponentPrivate" title="BonoboUIComponentPrivate">BonoboUIComponentPrivate</a>;
+void                (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIListenerFn" title="BonoboUIListenerFn ()">*BonoboUIListenerFn</a>)               (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         Bonobo_UIComponent_EventType type,
+                                                         const char *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerbFn" title="BonoboUIVerbFn ()">*BonoboUIVerbFn</a>)                   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data,
+                                                         const char *cname);
+                    <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponentClass" title="BonoboUIComponentClass">BonoboUIComponentClass</a>;
+<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-construct" title="bonobo_ui_component_construct ()">bonobo_ui_component_construct</a>       (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *name);
+<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-new" title="bonobo_ui_component_new ()">bonobo_ui_component_new</a>             (const char *name);
+<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-new-default" title="bonobo_ui_component_new_default ()">bonobo_ui_component_new_default</a>     (void);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set-name" title="bonobo_ui_component_set_name ()">bonobo_ui_component_set_name</a>        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *name);
+const char *        <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-get-name" title="bonobo_ui_component_get_name ()">bonobo_ui_component_get_name</a>        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set-container" title="bonobo_ui_component_set_container ()">bonobo_ui_component_set_container</a>   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         Bonobo_UIContainer container,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-unset-container" title="bonobo_ui_component_unset_container ()">bonobo_ui_component_unset_container</a> (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         CORBA_Environment *opt_ev);
+Bonobo_UIContainer  <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-get-container" title="bonobo_ui_component_get_container ()">bonobo_ui_component_get_container</a>   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-add-verb" title="bonobo_ui_component_add_verb ()">bonobo_ui_component_add_verb</a>        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerbFn" title="BonoboUIVerbFn ()">BonoboUIVerbFn</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-add-verb-full" title="bonobo_ui_component_add_verb_full ()">bonobo_ui_component_add_verb_full</a>   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-remove-verb" title="bonobo_ui_component_remove_verb ()">bonobo_ui_component_remove_verb</a>     (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-remove-verb-by-closure" title="bonobo_ui_component_remove_verb_by_closure ()">bonobo_ui_component_remove_verb_by_closure</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-add-listener" title="bonobo_ui_component_add_listener ()">bonobo_ui_component_add_listener</a>    (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *id,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIListenerFn" title="BonoboUIListenerFn ()">BonoboUIListenerFn</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-add-listener-full" title="bonobo_ui_component_add_listener_full ()">bonobo_ui_component_add_listener_full</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *id,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-remove-listener" title="bonobo_ui_component_remove_listener ()">bonobo_ui_component_remove_listener</a> (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-remove-listener-by-closure" title="bonobo_ui_component_remove_listener_by_closure ()">bonobo_ui_component_remove_listener_by_closure</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set" title="bonobo_ui_component_set ()">bonobo_ui_component_set</a>             (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *xml,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set-translate" title="bonobo_ui_component_set_translate ()">bonobo_ui_component_set_translate</a>   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *xml,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set-tree" title="bonobo_ui_component_set_tree ()">bonobo_ui_component_set_tree</a>        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-node.html#BonoboUINode" title="BonoboUINode">BonoboUINode</a> *node,
+                                                         CORBA_Environment *ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-rm" title="bonobo_ui_component_rm ()">bonobo_ui_component_rm</a>              (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         CORBA_Environment *ev);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-path-exists" title="bonobo_ui_component_path_exists ()">bonobo_ui_component_path_exists</a>     (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         CORBA_Environment *ev);
+CORBA_char *        <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-get" title="bonobo_ui_component_get ()">bonobo_ui_component_get</a>             (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> recurse,
+                                                         CORBA_Environment *opt_ev);
+<a class="link" href="libbonoboui-bonobo-ui-node.html#BonoboUINode" title="BonoboUINode">BonoboUINode</a> *      <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-get-tree" title="bonobo_ui_component_get_tree ()">bonobo_ui_component_get_tree</a>        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> recurse,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-object-set" title="bonobo_ui_component_object_set ()">bonobo_ui_component_object_set</a>      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         Bonobo_Unknown control,
+                                                         CORBA_Environment *opt_ev);
+Bonobo_Unknown      <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-object-get" title="bonobo_ui_component_object_get ()">bonobo_ui_component_object_get</a>      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-widget-set" title="bonobo_ui_component_widget_set ()">bonobo_ui_component_widget_set</a>      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *widget,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-freeze" title="bonobo_ui_component_freeze ()">bonobo_ui_component_freeze</a>          (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-thaw" title="bonobo_ui_component_thaw ()">bonobo_ui_component_thaw</a>            (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set-prop" title="bonobo_ui_component_set_prop ()">bonobo_ui_component_set_prop</a>        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *prop,
+                                                         const char *value,
+                                                         CORBA_Environment *opt_ev);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-get-prop" title="bonobo_ui_component_get_prop ()">bonobo_ui_component_get_prop</a>        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *prop,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set-status" title="bonobo_ui_component_set_status ()">bonobo_ui_component_set_status</a>      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *text,
+                                                         CORBA_Environment *opt_ev);
+                    <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerb" title="BonoboUIVerb">BonoboUIVerb</a>;
+#define             <a class="link" href="libbonoboui-bonobo-ui-component.html#BONOBO-UI-VERB--CAPS" title="BONOBO_UI_VERB()">BONOBO_UI_VERB</a>                      (name,cb)
+#define             <a class="link" href="libbonoboui-bonobo-ui-component.html#BONOBO-UI-VERB-DATA--CAPS" title="BONOBO_UI_VERB_DATA()">BONOBO_UI_VERB_DATA</a>                 (name,cb,data)
+#define             <a class="link" href="libbonoboui-bonobo-ui-component.html#BONOBO-UI-UNSAFE-VERB--CAPS" title="BONOBO_UI_UNSAFE_VERB()">BONOBO_UI_UNSAFE_VERB</a>               (name,cb)
+#define             <a class="link" href="libbonoboui-bonobo-ui-component.html#BONOBO-UI-UNSAFE-VERB-DATA--CAPS" title="BONOBO_UI_UNSAFE_VERB_DATA()">BONOBO_UI_UNSAFE_VERB_DATA</a>          (name,cb,data)
+#define             <a class="link" href="libbonoboui-bonobo-ui-component.html#BONOBO-UI-VERB-END--CAPS" title="BONOBO_UI_VERB_END">BONOBO_UI_VERB_END</a>
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-add-verb-list" title="bonobo_ui_component_add_verb_list ()">bonobo_ui_component_add_verb_list</a>   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerb" title="BonoboUIVerb">BonoboUIVerb</a> *list);
+void                <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-add-verb-list-with-data" title="bonobo_ui_component_add_verb_list_with_data ()">bonobo_ui_component_add_verb_list_with_data</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerb" title="BonoboUIVerb">BonoboUIVerb</a> *list,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="libbonoboui-bonobo-ui-component.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/libbonobo/libbonobo-bonobo-object.html#BonoboObject"
+>BonoboObject</a>
+         +----BonoboUIComponent
+</pre>
+</div>
+<div class="refsect1" title="Signals">
+<a name="libbonoboui-bonobo-ui-component.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent-exec-verb" title='The "exec-verb" signal'>exec-verb</a>"                                      : Run First
+  "<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent-ui-event" title='The "ui-event" signal'>ui-event</a>"                                       : Run First
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbonoboui-bonobo-ui-component.description"></a><h2>Description</h2>
+<p>
+The BonoboUIComponent is the client side portion of the UI merging scheme.
+It should be implemented by any component that wishes to merge menus / UI.
+The Component object is neccessary to receive notifications from the
+associated <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>. Notifications come in two forms - verbs and
+events. Verbs have an associated ( non translated ) name that is used to
+match them with callbacks. Events have an associated ( non translated ) id
+that does the same thing. Events pass a state string. Events are used for
+eg. toggle buttons, Verbs are used for eg. Menu items.
+</p>
+<p>
+Mostly you don't need to bother with creating your own BonoboUIComponent,
+if you implement a Control eg. a BonoboUIComponent is created at Control
+construction time and can be accessed thus:
+  </p>
+<div class="example">
+<a name="id2742908"></a><p class="title"><b>Example 4. Using the UI Component associated with a control</b></p>
+<div class="example-contents"><pre class="programlisting">
+/*
+ * For the format of the XML see bonobo/doc/xml-ui.txt
+ * For a standard template to base your UI on see bonobo/doc/std-ui.xml
+ */
+const char my_ui_elements [] =
+	"&gt;placeholder name=\"FileOps\"&lt;"
+	"	&gt;menuitem name=\"Foo\" verb=\"FileFoo\" _label=\"Foo!\""
+	"	 _tip=\"do some foo thing\"/&lt;"
+	"&gt;/placeholder&lt;";
+static void
+control_activate_cb (BonoboControl *object,
+                     gboolean       state,
+ 		     gpointer       user_data)
+{
+	BonoboUIComponent *ui_component;
+	/* Get UIComponent from control */
+	ui_component = bonobo_control_get_ui_component (control);
+	if (state) /* Activate */
+		bonobo_ui_component_set_translate (
+			ui_component, "/menu/File", my_ui_elements, NULL);
+	else /* De-activate */
+		bonobo_ui_component_unset_container (ui_component);
+}
+static void
+verb_foo_cb (BonoboUIComponent *ui_container,
+             gpointer           user_data,
+	     const              char *cname)
+{
+	BonoboControl *control = user_data;
+	g_print ("FileFoo !\n");
+}
+static BonoboUIVerb my_ui_verbs[] = {
+	BONOBO_UI_VERB ("FileFoo", verb_foo_cb),
+	BONOBO_UI_VERB_END
+};
+BonoboObject *
+create_ui_control (void)
+{
+	BonoboControl     *control;
+	BonoboUIComponent *ui_component;
+	GtkWidget         *widget;
+	control = bonobo_control_new ((widget = gtk_widget_new_label ("Hello World")));
+	/* Automaticaly associate the remote UIContainer for us on activate */
+	bonobo_control_set_automerge (control, TRUE);
+	ui_component = bonobo_control_get_ui_component (control);
+	/* Register the verbs with the UI Component */
+	bonobo_ui_component_add_verb_list_with_data (
+		ui_component, my_ui_verbs, control);
+	gtk_signal_connect (GTK_OBJECT (control), "activate",
+	                    GTK_SIGNAL_FUNC (control_activate_cb), NULL);
+	gtk_widget_show (widget);
+	return BONOBO_OBJECT (control);
+}
+    </pre></div>
+</div>
+<p><br class="example-break">
+This sets up the UI, associates a 'FileFoo' verb with a callback, and
+on control activation merges the UI elements into a standard path
+in the file menu.
+</p>
+<p>
+There are several standard placeholders that it is important for
+containers to implement, basing your UI on the doc/std-ui.xml is
+a very good starting point. Also in the above example the _label
+and _tip are not cmd / widget separated - for more information read
+doc/ui-xml.txt.
+</p>
+<p>
+Most applications will should not use the BonoboUIComponent in this
+way, there is a <code class="function">bonobo_ui_util_set_ui</code> that does
+the translation, help menu build, insertion etc. from an installed
+XML file. The above example is complete except for translation, which
+is extremely important. Here is a better activate function:
+  </p>
+<div class="example">
+<a name="id2743003"></a><p class="title"><b>Example 5. A better way to create your UI</b></p>
+<div class="example-contents"><pre class="programlisting">
+static void
+control_activate_cb (BonoboControl *object,
+                     gboolean       state,
+		     gpointer       user_data)
+{
+	BonoboUIComponent *ui_component;
+	/* Get UIComponent from control */
+	ui_component = bonobo_control_get_ui_component (control);
+	if (state) /* Activate */
+		/*
+		 * Use a helper function to setup your UI from a file:
+		 */
+		bonobo_ui_util_set_ui (
+			ui_component, MY_COMPILE_TIME_PREFIX,
+			"GNOME_MyApp.ui", "my-app");
+	else /* De-activate */
+		bonobo_ui_component_unset_container (ui_component);
+}
+    </pre></div>
+</div>
+<p><br class="example-break">
+  In this example "GNOME_MyApp.ui" is the correctly namespaced UI
+xml filename, ( see doc/NAMESPACE to register your name ), and
+"my-app" is the gnome application name, from which a path to your
+installed help files can be deduced.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbonoboui-bonobo-ui-component.details"></a><h2>Details</h2>
+<div class="refsect2" title="BonoboUIComponent">
+<a name="BonoboUIComponent-struct"></a><h3>BonoboUIComponent</h3>
+<pre class="programlisting">typedef struct _BonoboUIComponent BonoboUIComponent;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BonoboUIComponentPrivate">
+<a name="BonoboUIComponentPrivate"></a><h3>BonoboUIComponentPrivate</h3>
+<pre class="programlisting">typedef struct _BonoboUIComponentPrivate BonoboUIComponentPrivate;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BonoboUIListenerFn ()">
+<a name="BonoboUIListenerFn"></a><h3>BonoboUIListenerFn ()</h3>
+<pre class="programlisting">void                (*BonoboUIListenerFn)               (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         Bonobo_UIComponent_EventType type,
+                                                         const char *state,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>state</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BonoboUIVerbFn ()">
+<a name="BonoboUIVerbFn"></a><h3>BonoboUIVerbFn ()</h3>
+<pre class="programlisting">void                (*BonoboUIVerbFn)                   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data,
+                                                         const char *cname);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cname</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BonoboUIComponentClass">
+<a name="BonoboUIComponentClass"></a><h3>BonoboUIComponentClass</h3>
+<pre class="programlisting">typedef struct {
+	BonoboObjectClass          parent_class;
+
+	POA_Bonobo_UIComponent__epv epv;
+
+	gpointer dummy[6];
+
+	/* Signals */
+	void (*exec_verb) (BonoboUIComponent *comp,
+			   const char        *cname);
+
+	void (*ui_event)  (BonoboUIComponent *comp,
+			   const char        *path,
+			   Bonobo_UIComponent_EventType type,
+			   const char        *state);
+	/* Virtual XML Methods */
+	void (*freeze)    (BonoboUIComponent *component,
+			   CORBA_Environment *opt_ev);
+
+	void (*thaw)      (BonoboUIComponent *component,
+			   CORBA_Environment *opt_ev);
+
+	void (*xml_set)   (BonoboUIComponent *component,
+			   const char        *path,
+			   const char        *xml,
+			   CORBA_Environment *ev);
+
+	CORBA_char *(*xml_get) (BonoboUIComponent *component,
+				const char        *path,
+				gboolean           recurse,
+				CORBA_Environment *ev);
+
+	void (*xml_rm)    (BonoboUIComponent *component,
+			   const char        *path,
+			   CORBA_Environment *ev);
+
+	void (*set_prop)  (BonoboUIComponent *component,
+			   const char        *path,
+			   const char        *prop,
+			   const char        *value,
+			   CORBA_Environment *opt_ev);
+	
+	gchar *(*get_prop) (BonoboUIComponent *component,
+			    const char        *path,
+			    const char        *prop,
+			    CORBA_Environment *opt_ev);
+
+	gboolean (*exists) (BonoboUIComponent *component,
+			    const char        *path,
+			    CORBA_Environment *ev);
+} BonoboUIComponentClass;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_construct ()">
+<a name="bonobo-ui-component-construct"></a><h3>bonobo_ui_component_construct ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * bonobo_ui_component_construct       (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *name);</pre>
+<p>
+Construct the UI component with name <em class="parameter"><code>name</code></em></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> the name of the UI component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a constructed UI component or NULL on error
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_new ()">
+<a name="bonobo-ui-component-new"></a><h3>bonobo_ui_component_new ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * bonobo_ui_component_new             (const char *name);</pre>
+<p>
+Create a new UI component with the specified name</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> the name of the UI component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new UI component 
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_new_default ()">
+<a name="bonobo-ui-component-new-default"></a><h3>bonobo_ui_component_new_default ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * bonobo_ui_component_new_default     (void);</pre>
+<p>
+Create a UI component with a unique default name
+constructed from various available system properties.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new UI component
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_set_name ()">
+<a name="bonobo-ui-component-set-name"></a><h3>bonobo_ui_component_set_name ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_set_name        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *name);</pre>
+<p>
+Set the <em class="parameter"><code>name</code></em> of the UI <em class="parameter"><code>component</code></em></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the UI component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> the new name
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_get_name ()">
+<a name="bonobo-ui-component-get-name"></a><h3>bonobo_ui_component_get_name ()</h3>
+<pre class="programlisting">const char *        bonobo_ui_component_get_name        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the UI component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the name of the UI <em class="parameter"><code>component</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_set_container ()">
+<a name="bonobo-ui-component-set-container"></a><h3>bonobo_ui_component_set_container ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_set_container   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         Bonobo_UIContainer container,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This associates this <em class="parameter"><code>component</code></em> with a remote <em class="parameter"><code>container</code></em>
+object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>container</code></em> :</span></p></td>
+<td> a remote container object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_unset_container ()">
+<a name="bonobo-ui-component-unset-container"></a><h3>bonobo_ui_component_unset_container ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_unset_container (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This dis-associates the <em class="parameter"><code>component</code></em> from its associated
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_get_container ()">
+<a name="bonobo-ui-component-get-container"></a><h3>bonobo_ui_component_get_container ()</h3>
+<pre class="programlisting">Bonobo_UIContainer  bonobo_ui_component_get_container   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the associated remote container
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_add_verb ()">
+<a name="bonobo-ui-component-add-verb"></a><h3>bonobo_ui_component_add_verb ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_add_verb        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerbFn" title="BonoboUIVerbFn ()">BonoboUIVerbFn</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Add a verb to the UI component, that can be invoked by
+the container.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component to add it to
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cname</code></em> :</span></p></td>
+<td> the programmatic name of the verb
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fn</code></em> :</span></p></td>
+<td> the callback function for invoking it
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> the associated user data for the callback
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_add_verb_full ()">
+<a name="bonobo-ui-component-add-verb-full"></a><h3>bonobo_ui_component_add_verb_full ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_add_verb_full   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);</pre>
+<p>
+Add a verb to the UI component, that can be invoked by
+the container.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component to add it to
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cname</code></em> :</span></p></td>
+<td> the programmatic name of the verb
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_remove_verb ()">
+<a name="bonobo-ui-component-remove-verb"></a><h3>bonobo_ui_component_remove_verb ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_remove_verb     (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname);</pre>
+<p>
+Remove a verb by it's unique name</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component to add it to
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cname</code></em> :</span></p></td>
+<td> the programmatic name of the verb
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_remove_verb_by_closure ()">
+<a name="bonobo-ui-component-remove-verb-by-closure"></a><h3>bonobo_ui_component_remove_verb_by_closure ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_remove_verb_by_closure
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);</pre>
+<p>
+remove any verb handled by <em class="parameter"><code>fn</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component to add it to
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_add_listener ()">
+<a name="bonobo-ui-component-add-listener"></a><h3>bonobo_ui_component_add_listener ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_add_listener    (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *id,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIListenerFn" title="BonoboUIListenerFn ()">BonoboUIListenerFn</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+Add a listener for stateful events.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component to add it to
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> the programmatic name of the id
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fn</code></em> :</span></p></td>
+<td> the callback function for invoking it
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> the associated user data for the callback
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_add_listener_full ()">
+<a name="bonobo-ui-component-add-listener-full"></a><h3>bonobo_ui_component_add_listener_full ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_add_listener_full
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *id,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);</pre>
+<p>
+Add a listener for stateful events.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component to add it to
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> the programmatic name of the id
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_remove_listener ()">
+<a name="bonobo-ui-component-remove-listener"></a><h3>bonobo_ui_component_remove_listener ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_remove_listener (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *cname);</pre>
+<p>
+Remove any listener by its unique id</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component to add it to
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cname</code></em> :</span></p></td>
+<td> the programmatic name of the id
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_remove_listener_by_closure ()">
+<a name="bonobo-ui-component-remove-listener-by-closure"></a><h3>bonobo_ui_component_remove_listener_by_closure ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_remove_listener_by_closure
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GClosure"
+>GClosure</a> *closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_set ()">
+<a name="bonobo-ui-component-set"></a><h3>bonobo_ui_component_set ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_set             (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *xml,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+Set the <em class="parameter"><code>xml</code></em> fragment into the remote <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>'s tree
+attached to <em class="parameter"><code>component</code></em> at the specified <em class="parameter"><code>path</code></em>
+</p>
+<p>
+If you see blank menu items ( or just separators ) it's
+likely that you should be using <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-set-translate" title="bonobo_ui_component_set_translate ()"><span class="type">bonobo_ui_component_set_translate</span></a>
+which substantialy deprecates this routine.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>xml</code></em> :</span></p></td>
+<td> the xml to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_set_translate ()">
+<a name="bonobo-ui-component-set-translate"></a><h3>bonobo_ui_component_set_translate ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_set_translate   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *xml,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This routine parses the XML strings, and converts any:
+_label="Hello World" type strings into the translated,
+and encoded format expected by the remote <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>xml</code></em> :</span></p></td>
+<td> the non translated xml to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_set_tree ()">
+<a name="bonobo-ui-component-set-tree"></a><h3>bonobo_ui_component_set_tree ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_set_tree        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-node.html#BonoboUINode" title="BonoboUINode">BonoboUINode</a> *node,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+Set the <em class="parameter"><code>xml</code></em> fragment into the remote <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>'s tree
+attached to <em class="parameter"><code>component</code></em> at the specified <em class="parameter"><code>path</code></em></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>node</code></em> :</span></p></td>
+<td> the <a class="link" href="libbonoboui-bonobo-ui-node.html#BonoboUINode" title="BonoboUINode"><span class="type">BonoboUINode</span></a> representation of an xml tree to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_rm ()">
+<a name="bonobo-ui-component-rm"></a><h3>bonobo_ui_component_rm ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_rm              (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+This routine removes a chunk of the XML tree in the
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a> associated with <em class="parameter"><code>component</code></em> pointed
+to by <em class="parameter"><code>path</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_path_exists ()">
+<a name="bonobo-ui-component-path-exists"></a><h3>bonobo_ui_component_path_exists ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            bonobo_ui_component_path_exists     (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set the property on
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE if the path exists in the container.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_get ()">
+<a name="bonobo-ui-component-get"></a><h3>bonobo_ui_component_get ()</h3>
+<pre class="programlisting">CORBA_char *        bonobo_ui_component_get             (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> recurse,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This routine fetches a chunk of the XML tree in the
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a> associated with <em class="parameter"><code>component</code></em> pointed
+to by <em class="parameter"><code>path</code></em>. If <em class="parameter"><code>recurse</code></em> then the child nodes of <em class="parameter"><code>path</code></em>
+are returned too, otherwise they are not.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to get
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>recurse</code></em> :</span></p></td>
+<td> whether to get child nodes of <em class="parameter"><code>path</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an XML string (CORBA allocated)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_get_tree ()">
+<a name="bonobo-ui-component-get-tree"></a><h3>bonobo_ui_component_get_tree ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-ui-node.html#BonoboUINode" title="BonoboUINode">BonoboUINode</a> *      bonobo_ui_component_get_tree        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> recurse,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This routine fetches a chunk of the XML tree in the
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a> associated with <em class="parameter"><code>component</code></em> pointed
+to by <em class="parameter"><code>path</code></em>. If <em class="parameter"><code>recurse</code></em> then the child nodes of <em class="parameter"><code>path</code></em>
+are returned too, otherwise they are not.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to get
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>recurse</code></em> :</span></p></td>
+<td> whether to get child nodes of <em class="parameter"><code>path</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> an <a class="link" href="libbonoboui-bonobo-ui-node.html#BonoboUINode" title="BonoboUINode"><span class="type">BonoboUINode</span></a> XML representation
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_object_set ()">
+<a name="bonobo-ui-component-object-set"></a><h3>bonobo_ui_component_object_set ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_object_set      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         Bonobo_Unknown control,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This registers the <em class="parameter"><code>control</code></em> CORBA object into the
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a> associated with this <em class="parameter"><code>component</code></em> at
+the specified <em class="parameter"><code>path</code></em>. This is most often used to associate
+controls with a certain path.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> a CORBA object reference
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_object_get ()">
+<a name="bonobo-ui-component-object-get"></a><h3>bonobo_ui_component_object_get ()</h3>
+<pre class="programlisting">Bonobo_Unknown      bonobo_ui_component_object_get      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This returns the <em class="parameter"><code>control</code></em> CORBA object registered with the
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a> associated with this <em class="parameter"><code>component</code></em> at
+the specified <em class="parameter"><code>path</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the associated remote CORBA object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_widget_set ()">
+<a name="bonobo-ui-component-widget-set"></a><h3>bonobo_ui_component_widget_set ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_widget_set      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *widget,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_freeze ()">
+<a name="bonobo-ui-component-freeze"></a><h3>bonobo_ui_component_freeze ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_freeze          (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This increments the freeze count on the associated
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>, (if not already frozen) this means that
+a batch of update operations can be performed without a
+re-render penalty per update.
+</p>
+<p>
+NB. if your GUI is frozen / not updating you probably have a
+freeze / thaw reference leak/</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_thaw ()">
+<a name="bonobo-ui-component-thaw"></a><h3>bonobo_ui_component_thaw ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_thaw            (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This decrements the freeze count on the remote associated
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>, (if frozen). This means that a batch
+of update operations can be performed without a re-render
+penalty per update.
+</p>
+<p>
+NB. if your GUI is frozen / not updating you probably have a
+freeze / thaw reference leak/</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_set_prop ()">
+<a name="bonobo-ui-component-set-prop"></a><h3>bonobo_ui_component_set_prop ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_set_prop        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *prop,
+                                                         const char *value,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This helper function sets an XML property ( or attribute )
+on the XML node pointed at by <em class="parameter"><code>path</code></em>. It does this by
+a read / modify / write process. If you find yourself
+doing this a lot, you need to consider batching this process.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set the property on
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> the property name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> the property value
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_get_prop ()">
+<a name="bonobo-ui-component-get-prop"></a><h3>bonobo_ui_component_get_prop ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             bonobo_ui_component_get_prop        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *path,
+                                                         const char *prop,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This helper function fetches an XML property ( or attribute )
+from the XML node pointed at by <em class="parameter"><code>path</code></em> in the <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>
+associated with <em class="parameter"><code>component</code></em></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
+<td> the path to set the property on
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prop</code></em> :</span></p></td>
+<td> the property name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> the (optional) CORBA exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the xml property value or NULL - free with g_free.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_set_status ()">
+<a name="bonobo-ui-component-set-status"></a><h3>bonobo_ui_component_set_status ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_set_status      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const char *text,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+This sets the contents of the status bar to <em class="parameter"><code>text</code></em> in the
+remote <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a> associated with <em class="parameter"><code>component</code></em>.
+This is done by setting the contents of the /status/main
+node.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td> the new status text
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BonoboUIVerb">
+<a name="BonoboUIVerb"></a><h3>BonoboUIVerb</h3>
+<pre class="programlisting">typedef struct {
+	const char    *cname;
+	BonoboUIVerbFn cb;
+	gpointer       user_data;
+	gpointer       dummy;
+} BonoboUIVerb;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_UI_VERB()">
+<a name="BONOBO-UI-VERB--CAPS"></a><h3>BONOBO_UI_VERB()</h3>
+<pre class="programlisting">#define BONOBO_UI_VERB(name,cb)                  { (name), (cb), NULL   }
+</pre>
+<p>
+This declares and fills a BonoboUIVerb structure suitable for
+use in constructing a lost of verbs to add with
+bonobo_ui_component_add_verb_list_with_data.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>the verb name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td>the callback function.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_UI_VERB_DATA()">
+<a name="BONOBO-UI-VERB-DATA--CAPS"></a><h3>BONOBO_UI_VERB_DATA()</h3>
+<pre class="programlisting">#define BONOBO_UI_VERB_DATA(name,cb,data)        { (name), (cb), (data) }
+</pre>
+<p>
+This declares and fills a BonoboUIVerb structure suitable for
+use in constructing a lost of verbs to add with
+bonobo_ui_component_add_verb_list.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>the verb name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td>the callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>some associated user_data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_UI_UNSAFE_VERB()">
+<a name="BONOBO-UI-UNSAFE-VERB--CAPS"></a><h3>BONOBO_UI_UNSAFE_VERB()</h3>
+<pre class="programlisting">#define BONOBO_UI_UNSAFE_VERB(name,cb)           { (name), ((BonoboUIVerbFn)(cb)), NULL   }
+</pre>
+<p>
+As BONOBO_UI_VERB, but unsafely casts <em class="parameter"><code>cb</code></em> to the correct type
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>the verb name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td>the callback function.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_UI_UNSAFE_VERB_DATA()">
+<a name="BONOBO-UI-UNSAFE-VERB-DATA--CAPS"></a><h3>BONOBO_UI_UNSAFE_VERB_DATA()</h3>
+<pre class="programlisting">#define BONOBO_UI_UNSAFE_VERB_DATA(name,cb,data) { (name), ((BonoboUIVerbFn)(cb)), (data) }
+</pre>
+<p>
+As BONOBO_UI_VERB_DATA, but unsafely casts <em class="parameter"><code>cb</code></em> to the correct type
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>the verb name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td>the callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>some associated user_data
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_UI_VERB_END">
+<a name="BONOBO-UI-VERB-END--CAPS"></a><h3>BONOBO_UI_VERB_END</h3>
+<pre class="programlisting">#define BONOBO_UI_VERB_END                       { NULL, NULL, NULL }
+</pre>
+<p>
+The terminator BonoboUIVerb structure for a list of BonoboUIVerbs.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_add_verb_list ()">
+<a name="bonobo-ui-component-add-verb-list"></a><h3>bonobo_ui_component_add_verb_list ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_add_verb_list   (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerb" title="BonoboUIVerb">BonoboUIVerb</a> *list);</pre>
+<p>
+Add a list of verbs with no associated user_data, you probably
+want <a class="link" href="libbonoboui-bonobo-ui-component.html#bonobo-ui-component-add-verb-list-with-data" title="bonobo_ui_component_add_verb_list_with_data ()"><span class="type">bonobo_ui_component_add_verb_list_with_data</span></a></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td> the list of verbs.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_ui_component_add_verb_list_with_data ()">
+<a name="bonobo-ui-component-add-verb-list-with-data"></a><h3>bonobo_ui_component_add_verb_list_with_data ()</h3>
+<pre class="programlisting">void                bonobo_ui_component_add_verb_list_with_data
+                                                        (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component,
+                                                         const <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerb" title="BonoboUIVerb">BonoboUIVerb</a> *list,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+This is a helper function to save registering verbs individualy
+it allows registration of a great batch of verbs at one time
+in a list of <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIVerb" title="BonoboUIVerb"><span class="type">BonoboUIVerb</span></a> terminated by <a class="link" href="libbonoboui-bonobo-ui-component.html#BONOBO-UI-VERB-END--CAPS" title="BONOBO_UI_VERB_END"><span class="type">BONOBO_UI_VERB_END</span></a></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td> the component
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td> the list of verbs
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> the user data passed to the verb callbacks
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="libbonoboui-bonobo-ui-component.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "exec-verb" signal'>
+<a name="BonoboUIComponent-exec-verb"></a><h3>The <code class="literal">"exec-verb"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *bonobouicomponent,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>             *arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>           user_data)              : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bonobouicomponent</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "ui-event" signal'>
+<a name="BonoboUIComponent-ui-event"></a><h3>The <code class="literal">"ui-event"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *bonobouicomponent,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>             *arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>               arg2,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>             *arg3,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>           user_data)              : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bonobouicomponent</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg3</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="See Also">
+<a name="libbonoboui-bonobo-ui-component.see-also"></a><h2>See Also</h2>
+<p>
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>, <a class="xref" href="libbonoboui-bonobo-ui-util.html" title="bonobo-ui-util"><span class="refentrytitle"><a name="libbonoboui-bonobo-ui-util.top_of_page"></a>bonobo-ui-util</span>(3)</a>, <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a>
+</p>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

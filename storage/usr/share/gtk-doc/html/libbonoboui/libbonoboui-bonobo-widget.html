@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BonoboWidget</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="LibBonoboUI API Reference Manual">
+<link rel="up" href="bonobo-ui.html" title="Bonobo UI">
+<link rel="prev" href="bonobo-ui.html" title="Bonobo UI">
+<link rel="next" href="libbonoboui-bonobo-window.html" title="bonobo-window">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Object Hierarchy">
+<link rel="chapter" href="bonobo-controls.html" title="Controls">
+<link rel="chapter" href="bonobo-ui.html" title="Bonobo UI">
+<link rel="chapter" href="bonobo-support-utilities.html" title="Supporting Classes">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="bonobo-ui.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="bonobo-ui.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">LibBonoboUI API Reference Manual</th>
+<td><a accesskey="n" href="libbonoboui-bonobo-window.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbonoboui-bonobo-widget.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libbonoboui-bonobo-widget.description" class="shortcut">Description</a>
+                 | 
+                <a href="#libbonoboui-bonobo-widget.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#libbonoboui-bonobo-widget.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+</td></tr>
+</table>
+<div class="refentry" title="BonoboWidget">
+<a name="libbonoboui-bonobo-widget"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbonoboui-bonobo-widget.top_of_page"></a>BonoboWidget</span></h2>
+<p>BonoboWidget — Simplified embedding of widgets in Bonobo.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbonoboui-bonobo-widget.synopsis"></a><h2>Synopsis</h2>
+<a name="BonoboWidget"></a><pre class="synopsis">
+                    <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget-struct" title="BonoboWidget">BonoboWidget</a>;
+                    <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidgetPrivate" title="BonoboWidgetPrivate">BonoboWidgetPrivate</a>;
+                    <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidgetClass" title="BonoboWidgetClass">BonoboWidgetClass</a>;
+Bonobo_Unknown      <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-get-objref" title="bonobo_widget_get_objref ()">bonobo_widget_get_objref</a>            (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control" title="bonobo_widget_new_control ()">bonobo_widget_new_control</a>           (const char *moniker,
+                                                         Bonobo_UIContainer uic);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control-from-objref" title="bonobo_widget_new_control_from_objref ()">bonobo_widget_new_control_from_objref</a>
+                                                        (Bonobo_Control control,
+                                                         Bonobo_UIContainer uic);
+<a class="link" href="libbonoboui-bonobo-control-frame.html#BonoboControlFrame">BonoboControlFrame</a> * <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-get-control-frame" title="bonobo_widget_get_control_frame ()">bonobo_widget_get_control_frame</a>    (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw);
+Bonobo_UIContainer  <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-get-ui-container" title="bonobo_widget_get_ui_container ()">bonobo_widget_get_ui_container</a>      (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw);
+void                (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidgetAsyncFn" title="BonoboWidgetAsyncFn ()">*BonoboWidgetAsyncFn</a>)              (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *widget,
+                                                         CORBA_Environment *ev,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control-async" title="bonobo_widget_new_control_async ()">bonobo_widget_new_control_async</a>     (const char *moniker,
+                                                         Bonobo_UIContainer uic,
+                                                         <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidgetAsyncFn" title="BonoboWidgetAsyncFn ()">BonoboWidgetAsyncFn</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *      <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-construct-control-from-objref" title="bonobo_widget_construct_control_from_objref ()">bonobo_widget_construct_control_from_objref</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw,
+                                                         Bonobo_Control control,
+                                                         Bonobo_UIContainer uic,
+                                                         CORBA_Environment *ev);
+<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *      <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-construct-control" title="bonobo_widget_construct_control ()">bonobo_widget_construct_control</a>     (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw,
+                                                         const char *moniker,
+                                                         Bonobo_UIContainer uic,
+                                                         CORBA_Environment *ev);
+void                <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-set-property" title="bonobo_widget_set_property ()">bonobo_widget_set_property</a>          (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *control,
+                                                         const char *first_prop,
+                                                         ...);
+void                <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-get-property" title="bonobo_widget_get_property ()">bonobo_widget_get_property</a>          (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *control,
+                                                         const char *first_prop,
+                                                         ...);
+#define             <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-get-uih" title="bonobo_widget_get_uih()">bonobo_widget_get_uih</a>               (w)
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="libbonoboui-bonobo-widget.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"
+>GInitiallyUnowned</a>
+         +----<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkObject.html"
+>GtkObject</a>
+               +----<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a>
+                     +----<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkContainer.html"
+>GtkContainer</a>
+                           +----<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkBin.html"
+>GtkBin</a>
+                                 +----BonoboWidget
+</pre>
+</div>
+<div class="refsect1" title="Implemented Interfaces">
+<a name="libbonoboui-bonobo-widget.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+BonoboWidget implements
+ AtkImplementorIface and  <a
+href="http://library.gnome.org/devel/gtk/unstable/gtk-gtkbuildable.html#GtkBuildable"
+>GtkBuildable</a>.</p>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbonoboui-bonobo-widget.description"></a><h2>Description</h2>
+<p>
+  Bonobo component embedding for hydrocephalic imbeciles.
+</p>
+<p>
+  Pure cane sugar.
+</p>
+<p>
+  This purpose of BonoboWidget is to make container-side use of Bonobo
+  as easy as pie.  This widget has two functions:
+  </p>
+<div class="orderedlist"><ol class="orderedlist" type="1">
+<li class="listitem">
+<p>
+        Provide a simple wrapper for embedding Controls.  Embedding
+        controls is already really easy, but BonoboWidget reduces the
+        work from about 5 lines to 1.  To embed a given control, just
+        do:
+        </p>
+<div class="informalexample"><pre class="programlisting">
+       bw = bonobo_widget_new_control ("id for control", toplevel_ui_handler);
+       gtk_container_add (some_container, bw);
+          </pre></div>
+<p>
+      </p>
+<p>
+        You are free to make the 2nd (UIContainer) argument to
+        <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control" title="bonobo_widget_new_control ()"><code class="function">bonobo_widget_new_control()</code></a> be CORBA_OBJECT_NIL.
+      </p>
+</li>
+<li class="listitem">
+<p>
+        To provide an extremely simple wrapper for using Monikers. In
+      fact all BonoboWidget use uses the OAFIID: moniker to activate
+      its sub-components. However monikers (<span class="type">bonobo-moniker-util</span>) are
+      far more powerful than this:
+        </p>
+<div class="informalexample"><pre class="programlisting">
+	         bw = bonobo_widget_new_control ("file:/demo/a.jpeg", toplevel_ui_handler);
+          </pre></div>
+<p>
+	will launch an application that can render a jpeg as a control,
+      usualy the Eye Of Gnome (EOG), and embed it as a control.
+      </p>
+</li>
+</ol></div>
+<p>
+</p>
+<p>
+   There are also functions for fetching and setting values in the
+   Control PropertyBag, but the use of these functions is
+   discouraged.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbonoboui-bonobo-widget.details"></a><h2>Details</h2>
+<div class="refsect2" title="BonoboWidget">
+<a name="BonoboWidget-struct"></a><h3>BonoboWidget</h3>
+<pre class="programlisting">typedef struct _BonoboWidget BonoboWidget;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BonoboWidgetPrivate">
+<a name="BonoboWidgetPrivate"></a><h3>BonoboWidgetPrivate</h3>
+<pre class="programlisting">typedef struct _BonoboWidgetPrivate BonoboWidgetPrivate;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BonoboWidgetClass">
+<a name="BonoboWidgetClass"></a><h3>BonoboWidgetClass</h3>
+<pre class="programlisting">typedef struct {
+	GtkBinClass	 bin_class;
+
+	gpointer dummy[4];
+} BonoboWidgetClass;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_get_objref ()">
+<a name="bonobo-widget-get-objref"></a><h3>bonobo_widget_get_objref ()</h3>
+<pre class="programlisting">Bonobo_Unknown      bonobo_widget_get_objref            (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bw</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_new_control ()">
+<a name="bonobo-widget-new-control"></a><h3>bonobo_widget_new_control ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         bonobo_widget_new_control           (const char *moniker,
+                                                         Bonobo_UIContainer uic);</pre>
+<p>
+This function is a simple wrapper for easily embedding controls
+into applications.  It will launch the component identified by <em class="parameter"><code>id</code></em>
+and will return it as a GtkWidget.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>moniker</code></em> :</span></p></td>
+<td> A Moniker describing the object to be activated 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uic</code></em> :</span></p></td>
+<td> Bonobo_UIContainer for the launched object or CORBA_OBJECT_NIL
+if there is no need of menu / toolbar merging.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+><span class="type">GtkWidget</span></a> that is bound to the Bonobo Control. 
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_new_control_from_objref ()">
+<a name="bonobo-widget-new-control-from-objref"></a><h3>bonobo_widget_new_control_from_objref ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         bonobo_widget_new_control_from_objref
+                                                        (Bonobo_Control control,
+                                                         Bonobo_UIContainer uic);</pre>
+<p>
+This function is a simple wrapper for easily embedding controls
+into applications.  This function is used when you have already
+a CORBA object reference to an IDL:Bonobo/Control:1.0 (the
+<em class="parameter"><code>control</code></em>) argument.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A CORBA Object reference to an IDL:Bonobo/Control:1.0
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uic</code></em> :</span></p></td>
+<td> Bonobo_UIContainer for the launched object or CORBA_OBJECT_NIL
+if there is no need of menu / toolbar merging.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the <em class="parameter"><code>control</code></em> wrapped as a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+><span class="type">GtkWidget</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_get_control_frame ()">
+<a name="bonobo-widget-get-control-frame"></a><h3>bonobo_widget_get_control_frame ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-control-frame.html#BonoboControlFrame">BonoboControlFrame</a> * bonobo_widget_get_control_frame    (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw);</pre>
+<p>
+Every IDL:Bonobo/Control:1.0 needs to be placed inside an
+IDL:Bonobo/ControlFrame:1.0.  This returns the BonoboControlFrame
+object that wraps the Control in the <em class="parameter"><code>bonobo_widget</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bw</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The BonoboControlFrame associated with the <em class="parameter"><code>bonobo_widget</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_get_ui_container ()">
+<a name="bonobo-widget-get-ui-container"></a><h3>bonobo_widget_get_ui_container ()</h3>
+<pre class="programlisting">Bonobo_UIContainer  bonobo_widget_get_ui_container      (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bw</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the CORBA object reference to the Bonobo_UIContainer
+associated with the <em class="parameter"><code>bonobo_widget</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BonoboWidgetAsyncFn ()">
+<a name="BonoboWidgetAsyncFn"></a><h3>BonoboWidgetAsyncFn ()</h3>
+<pre class="programlisting">void                (*BonoboWidgetAsyncFn)              (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *widget,
+                                                         CORBA_Environment *ev,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_new_control_async ()">
+<a name="bonobo-widget-new-control-async"></a><h3>bonobo_widget_new_control_async ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         bonobo_widget_new_control_async     (const char *moniker,
+                                                         Bonobo_UIContainer uic,
+                                                         <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidgetAsyncFn" title="BonoboWidgetAsyncFn ()">BonoboWidgetAsyncFn</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+This method creates a widget, returns it to the user, and
+asynchronously activates a control to insert into the widget.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>moniker</code></em> :</span></p></td>
+<td> A Moniker describing the object to be activated 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uic</code></em> :</span></p></td>
+<td> Bonobo_UIContainer for the launched object or CORBA_OBJECT_NIL
+if there is no need of menu / toolbar merging.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fn</code></em> :</span></p></td>
+<td> a callback function called when the activation has happend
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> user data to be passed back to the callback.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a (temporarily) empty Widget to be filled with the
+control later
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_construct_control_from_objref ()">
+<a name="bonobo-widget-construct-control-from-objref"></a><h3>bonobo_widget_construct_control_from_objref ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *      bonobo_widget_construct_control_from_objref
+                                                        (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw,
+                                                         Bonobo_Control control,
+                                                         Bonobo_UIContainer uic,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+This is a constructor function.  Only usable for wrapping and
+derivation of new objects.  For normal use, please refer to
+<a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control-from-objref" title="bonobo_widget_new_control_from_objref ()"><span class="type">bonobo_widget_new_control_from_objref</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bw</code></em> :</span></p></td>
+<td> A BonoboWidget to construct
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A CORBA Object reference to an IDL:Bonobo/Control:1.0
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uic</code></em> :</span></p></td>
+<td> Bonobo_UIContainer for the launched object or CORBA_OBJECT_NIL
+if there is no need of menu / toolbar merging.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td> a CORBA exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget"><span class="type">BonoboWidget</span></a> (the <em class="parameter"><code>bw</code></em>)
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_construct_control ()">
+<a name="bonobo-widget-construct-control"></a><h3>bonobo_widget_construct_control ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *      bonobo_widget_construct_control     (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *bw,
+                                                         const char *moniker,
+                                                         Bonobo_UIContainer uic,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+This is a constructor function.  Only usable for wrapping and
+derivation of new objects.  For normal use, please refer to
+<a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control" title="bonobo_widget_new_control ()"><span class="type">bonobo_widget_new_control</span></a>.
+</p>
+<p>
+This function will unref the passed in <em class="parameter"><code>bw</code></em> in case it cannot launch
+the component and return <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> in such a case.  Otherwise it returns
+the <em class="parameter"><code>bw</code></em> itself.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bw</code></em> :</span></p></td>
+<td> A BonoboWidget to construct
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>moniker</code></em> :</span></p></td>
+<td> A Moniker describing the object to be activated 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uic</code></em> :</span></p></td>
+<td> Bonobo_UIContainer for the launched object or CORBA_OBJECT_NIL
+if there is no need of menu / toolbar merging.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td> a CORBA exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget"><span class="type">BonoboWidget</span></a> or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_set_property ()">
+<a name="bonobo-widget-set-property"></a><h3>bonobo_widget_set_property ()</h3>
+<pre class="programlisting">void                bonobo_widget_set_property          (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *control,
+                                                         const char *first_prop,
+                                                         ...);</pre>
+<p>
+This is a utility function used to set a number of properties
+in the Bonobo Control in <em class="parameter"><code>control</code></em>.
+</p>
+<p>
+This function takes a variable list of arguments that must be NULL
+terminated.  Arguments come in tuples: a string (for the argument
+name) and the data type that is to be transfered.  The
+implementation of the actual setting of the PropertyBag values is
+done by the <a
+href="/usr/share/gtk-doc/html/libbonobo/libbonobo-bonobo-property-bag-client.html#bonobo-property-bag-client-setv"
+><code class="function">bonobo_property_bag_client_setv()</code></a> function).
+</p>
+<p>
+This only works for BonoboWidgets that represent controls (ie,
+that were returned by <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control-from-objref" title="bonobo_widget_new_control_from_objref ()"><code class="function">bonobo_widget_new_control_from_objref()</code></a> or
+<a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control" title="bonobo_widget_new_control ()"><code class="function">bonobo_widget_new_control()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget"><span class="type">BonoboWidget</span></a> that represents an IDL:Bonobo/Control:1.0
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_prop</code></em> :</span></p></td>
+<td> first property name to set.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_get_property ()">
+<a name="bonobo-widget-get-property"></a><h3>bonobo_widget_get_property ()</h3>
+<pre class="programlisting">void                bonobo_widget_get_property          (<a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget">BonoboWidget</a> *control,
+                                                         const char *first_prop,
+                                                         ...);</pre>
+<p>
+This is a utility function used to get a number of properties
+in the Bonobo Control in <em class="parameter"><code>control</code></em>.
+</p>
+<p>
+This function takes a variable list of arguments that must be NULL
+terminated.  Arguments come in tuples: a string (for the argument
+name) and a pointer where the data will be stored.  The
+implementation of the actual setting of the PropertyBag values is
+done by the <a
+href="/usr/share/gtk-doc/html/libbonobo/libbonobo-bonobo-property-bag-client.html#bonobo-property-bag-client-setv"
+><code class="function">bonobo_property_bag_client_setv()</code></a> function).
+</p>
+<p>
+This only works for BonoboWidgets that represent controls (ie,
+that were returned by <a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control-from-objref" title="bonobo_widget_new_control_from_objref ()"><code class="function">bonobo_widget_new_control_from_objref()</code></a> or
+<a class="link" href="libbonoboui-bonobo-widget.html#bonobo-widget-new-control" title="bonobo_widget_new_control ()"><code class="function">bonobo_widget_new_control()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget"><span class="type">BonoboWidget</span></a> that represents an IDL:Bonobo/Control:1.0
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_prop</code></em> :</span></p></td>
+<td> first property name to set.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_widget_get_uih()">
+<a name="bonobo-widget-get-uih"></a><h3>bonobo_widget_get_uih()</h3>
+<pre class="programlisting">#define bonobo_widget_get_uih(w) bonobo_widget_get_ui_container (w)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>w</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="See Also">
+<a name="libbonoboui-bonobo-widget.see-also"></a><h2>See Also</h2>
+<p>
+   Object activation happens with <a
+href="/usr/share/gtk-doc/html/libbonobo/libbonobo-bonobo-moniker-util.html#bonobo-get-object"
+><code class="function">bonobo_get_object()</code></a>.
+</p>
+<p>
+   <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a>, <a class="link" href="libbonoboui-bonobo-control-frame.html#BonoboControlFrame"><span class="type">BonoboControlFrame</span></a>, <a
+href="/usr/share/gtk-doc/html/libbonobo/libbonobo-bonobo-object.html#BonoboObject"
+><span class="type">BonoboObject</span></a>, <span class="type">BonoboView</span>,
+   <span class="type">BonoboEmbeddable</span>, <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer"><span class="type">BonoboUIContainer</span></a>, <a
+href="/usr/share/gtk-doc/html/libbonobo/libbonobo-bonobo-item-container.html#BonoboItemContainer"
+><span class="type">BonoboItemContainer</span></a>.
+</p>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

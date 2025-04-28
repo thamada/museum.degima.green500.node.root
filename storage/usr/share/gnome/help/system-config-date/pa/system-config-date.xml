@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="pa"><title>ਸਮਾਂ ਅਟੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਟੂਲ</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2007-11-22</date><revremark>ਸ਼ੁਰੂਆਤੀ ਵਰਜਨ</revremark></revision><revision><revnumber>1.0.1</revnumber><date>2008-01-17</date><revremark>DocBook XML ਜਾਂਚ ਠੀਕ ਤਰਾਂ ਬਣਾਓ</revremark></revision><revision><revnumber>1.0.2</revnumber><date>2008-01-18</date><revremark>ਦਸਤਾਵੇਜ਼ ਸੰਖੇਪ ਬਾਹਰੀ ਬਣਾਓ</revremark></revision><revision><revnumber>1.0.3</revnumber><date>2008-03-12</date><revremark>ਜਿੱਥੇ ਲੋੜ ਹੋਵੇ ਮੇਨੂ-ਚੋਣ ਇਕਾਈਆਂ ਵਰਤੋ</revremark></revision></revhistory><abstract role="description"><para><application>ਸਮਾਂ ਅਤੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਦ</application> ਉਪਭੋਗੀਆਂ ਨੂੰ ਸਿਸਟਮ ਮਿਤੀ ਅਤੇ ਸਮਾਂ ਤਬਦੀਲ ਕਰਨ ਲਈ, ਸਿਸਟਮ ਦੁਆਰਾ ਸਮਾਂ ਜੋਨ ਸੰਰਚਿਤ ਕਰਨ ਲਈ, ਅਤੇ ਨੈੱਟਵਰਕ ਟਾਈਮ ਪਰੋਟੋਕਾਲ (NTP) ਡੈਮਨ ਨੂੰ ਸਿਸਟਮ ਘੜੀ ਅਤੇ ਸਮਾਂ ਸਰਵਰ ਨਾਲ ਸਮਕਾਲੀ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ।</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup><copyright><year>2009</year><holder>ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ (aalam@users.sf.net)</holder></copyright></articleinfo><indexterm significance="normal"><primary><command>timetool</command>
+		</primary><see>ਸਮਾਂ ਅਟੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਟੂਲ</see></indexterm><para><application>ਸਮਾਂ ਅਤੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਦ</application> ਉਪਭੋਗੀਆਂ ਨੂੰ ਸਿਸਟਮ ਮਿਤੀ ਅਤੇ ਸਮਾਂ ਤਬਦੀਲ ਕਰਨ ਲਈ, ਸਿਸਟਮ ਦੁਆਰਾ ਸਮਾਂ ਜੋਨ ਸੰਰਚਿਤ ਕਰਨ ਲਈ, ਅਤੇ ਨੈੱਟਵਰਕ ਟਾਈਮ ਪਰੋਟੋਕਾਲ (NTP) ਡੈਮਨ ਨੂੰ ਸਿਸਟਮ ਘੜੀ ਅਤੇ ਸਮਾਂ ਸਰਵਰ ਨਾਲ ਸਮਕਾਲੀ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ।</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>ਸਮਾਂ ਅਟੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਟੂਲ</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>ਸਮਾਂ ਅਟੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਟੂਲ</see></indexterm><indexterm significance="normal"><primary><command>dateconfig</command> 
+        </primary><see>ਸਮਾਂ ਅਟੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਟੂਲ</see></indexterm><para>ਤੁਹਾਨੂੰ <application>X</application> ਵਿੰਡੋ ਸਿਸਟਮ ਚਲਾਉਣਾ ਪਵੇਗਾ ਅਤੇ ਸਮਾਂ ਅਤੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ ਸੰਦ ਵਰਤਣ ਲਈ ਪਰਬੰਧਕੀ ਅਧਿਕਾਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ। ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਉਣ ਲਈ ਤਿੰਨ ਤਰੀਕੇ ਹਨ:</para><itemizedlist><listitem><para>ਡੈਸਕਟਾਪ ਤੋਂ, <menuchoice><guimenu>ਪੈਨਲ ਉੱਪਰ ਮੁੱਖ ਮੇਨੂ ਤੇ ਜਾਓ ("f" ਆਈਕਾਨ ਨਾਲ ਮੇਨੂ)</guimenu><guisubmenu>ਸਿਸਟਮ</guisubmenu><guisubmenu>ਪਰਬੰਧਨ</guisubmenu><guimenuitem>ਮਿਤੀ &amp; ਸਮਾਂ</guimenuitem></menuchoice></para></listitem><listitem><para>ਡੈਸਕਟਾਪ ਤੋਂ, ਸੰਦ-ਪੱਟੀ ਵਿੱਚ ਤੇਜ਼ ਉਪਭੋਗੀ ਤਬਦੀਲੀ ਐਪਲਿਟ ਉੱਪਰ ਸੱਜਾ-ਕਲਿੱਕ ਕਰੋ ਅਤੇ <guimenu>ਮਿਤੀ ਅਤੇ ਸਮਾਂ ਸੋਧ</guimenu> ਚੁਣੋ।</para></listitem><listitem><para>ਸ਼ੈੱਲ ਪਰੌਂਪਟ ਤੇ <command>system-config-date</command>, <command>system-config-time</command>, ਜਾਂ <command>dateconfig</command> ਕਮਾਂਡ ਟਾਈਪ ਕਰੋ (ਉਦਾਹਰਨ ਲਈ, ਇੱਕ <application>XTerm</application> ਜਾਂ ਇੱਕ <application>GNOME</application> ਟਰਮੀਨਲ)।</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>ਸਮਾਂ ਅਤੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ</title><indexterm significance="normal"><primary>ਸਮਾਂ ਸੰਰਚਨਾ</primary></indexterm><indexterm significance="normal"><primary>ਮਿਤੀ ਸੰਰਚਨਾ</primary></indexterm><para>ਜਿਵੇਂ <xref linkend="dateconfig-time-date"/> ਵਿੱਚ ਵੇਖਾਇਆ ਗਿਆ, ਪਹਿਲਾਂ ਟੈਬ ਵਿੰਡੋ ਸਿਸਟਮ ਮਿਤੀ ਅਤੇ ਸਮਾਂ ਸੰਰਚਿਤ ਕਰਨ ਲਈ ਹੈ।</para><figure float="0" id="dateconfig-time-date"><title>ਸਮਾਂ ਅਤੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>ਸਮਾਂ ਅਤੇ ਮਿਤੀ ਵਿਸ਼ੇਸ਼ਤਾ</para></textobject></mediaobject></figure><para>ਮਿਤੀ ਤਬਦੀਲ ਕਰਨ ਲਈ, ਮਹੀਨਾ ਤਬਦੀਲ ਕਰਨ ਲਈ ਮਹੀਨੇ ਦੇ ਸੱਜੇ ਅਤੇ ਖੱਬੇ ਪਾਸੇ ਤੀਰ ਵਰਤੋ, ਸਾਲ ਤਬਦੀਲ ਕਰਨ ਲਈ ਸਾਲ ਦੇ ਸੱਜੇ ਤੇ ਖੱਬੇ ਪਾਸੇ ਦੇ ਤੀਰ ਵਰਤੋ, ਅਤੇ ਹਫਤੇ ਦਾ ਦਿਨ ਤਬਦੀਲ ਕਰਨ ਲਈ ਦਿਨ ਤੇ ਕਲਿੱਕ ਕਰੋ।</para><para>ਸਮਾਂ ਤਬਦੀਲ ਕਰਨ ਲਈ, <guilabel>ਸਮਾਂ</guilabel> ਸ਼ੈਕਸ਼ਨ ਵਿੱਚ <guilabel>ਘੰਟੇ</guilabel>, <guilabel>ਮਿੰਟ</guilabel>, ਅਤੇ <guilabel>ਸਕਿੰਟ</guilabel> ਦੇ ਪਾਸੇ ਉੱਪਰ ਅਤੇ ਥੱਲੇ ਵਾਲੇ ਤੀਰ ਵਰਤੋ।</para><para>ਇਸ ਤੋਂ ਉਲਟ, ਤੁਸੀਂ ਮਿਤੀ ਅਤੇ ਸਮਾਂ ਤਬਦੀਲ ਕਰਨ ਲਈ ਕੀਬੋਰਡ ਵੀ ਵਰਤ ਸਕਦੇ ਹੋ। ਵਾਰਤਾਲਾਪਾਂ ਵਿੱਚ ਜਾਣ ਲਈ <keycap>Tab</keycap> ਅਤੇ <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> ਵਰਤੋਂ। ਕੈਲੰਡਰ ਵਾਰਤਾਲਾਪ, ਤੁਸੀਂ ਸਾਲ ਤਬਦੀਲ ਕਰਨ ਲਈ <keycombo><keycap>Ctrl</keycap><keycap>Up</keycap></keycombo> ਅਤੇ <keycombo><keycap>Ctrl</keycap><keycap>Down</keycap></keycombo>, ਮਹੀਨਾਂ ਤਬਦੀਲ ਕਰਨ ਲਈ <keycombo><keycap>Ctrl</keycap><keycap>Left</keycap></keycombo> ਅਤੇ <keycombo><keycap>Ctrl</keycap><keycap>Right</keycap></keycombo> ਅਤੇ ਤੀਰ ਵਾਲੀ ਕੁੰਜੀ ਅਤੇ <keycap>Space</keycap> ਨੂੰ ਮਿਤੀ ਚੁਣਨ ਅਤੇ ਸੈੱਟ ਕਰਨ ਲਈ ਵਰਤ ਸਕਦੇ ਹੋ। ਘੰਟੇ, ਮਿੰਟ ਅਤੇ ਸਕਿੰਟ ਵਾਰਤਾਲਾਪ ਵਿੱਚ, ਮੁੱਲ ਤਬਦੀਲ ਕਰਨ ਲਈ <keycap>Up</keycap> ਅਤੇ <keycap>Down</keycap> ਵਰਤੋ।</para><para>ਮਿਤੀ ਅਤੇ ਸਮੇਂ, NTP ਡੈਮਨ ਸੈਟਿੰਗ, ਅਤੇ ਸਮਾਂ ਜੋਨ ਸੈਟਿੰਗ ਵਿੱਚ ਕੀਤੀ ਤਬਦੀਲੀ ਲਾਗੂ ਕਰਨ ਲਈ <guibutton>ਠੀਕ</guibutton> ਬਟਨ ਦਬਾਓ। ਇਸ ਨਾਲ ਪਰੋਗਰਾਮ ਵੀ ਬੰਦ ਹੋ ਜਾਂਦਾ ਹੈ।</para></section>
+	<section id="s1-dateconfig-ntp"><title>ਨੈੱਟਵਰਕ ਟਾਈਮ ਪਰੋਟੋਕਾਲ (NTP) ਵਿਸ਼ੇਸ਼ਤਾ</title><indexterm significance="normal"><primary>ਸਮਾਂ ਸੰਰਚਨਾ</primary><secondary>NTP ਸਰਵਰ ਨਾਲ ਸਮਕਾਲੀ</secondary></indexterm><indexterm significance="normal"><primary>ਨੈੱਟਵਰਕ ਸਮਾਂ ਪਰੋਟੋਕਾਲ</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>ਸੰਰਚਨਾ ਕਰਨੀ</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para>ਜਿਵੇਂ <xref linkend="dateconfig-ntp"/> ਵਿੱਚ ਦਿੱਤਾ ਹੈ, ਦੂਜੀ ਟੈਬ ਵਿੰਡੋ NTP ਸੰਰਚਨਾ ਲਈ ਹੈ।</para><figure float="0" id="dateconfig-ntp"><title>NTP ਵਿਸ਼ੇਸ਼ਤਾ</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>NTP ਵਿਸ਼ੇਸ਼ਤਾ</para></textobject></mediaobject></figure><para>ਨੈੱਟਵਰਕ ਟਾਈਮ ਪਰੋਟੋਕਾਲ (NTP) ਡੈਮਨ ਸਿਸਟਮ ਘੜੀ ਨੂੰ ਇੱਕ ਰਿਮੋਟ ਸਮਾਂ ਸਰਵਰ ਜਾਂ ਸਮਾਂ ਸਰੋਤ ਨਾਲ ਸਮਕਾਲੀ ਕਰਦਾ ਹੈ। ਐਪਲੀਕੇਸ਼ਨ ਤੁਹਾਨੂੰ ਇੱਕ NTP ਡੈਮਨ ਨੂੰ ਤੁਹਾਡੀ ਸਿਸਟਮ ਘੜੀ ਨੂੰ ਰਿਮੋਟ ਸਰਵਰ ਨਾਲ ਸਮਕਾਲੀ ਕਰਨ ਲਈ ਮਦਦ ਕਰਦਾ ਹੈ। ਇਸ ਵਿਸ਼ੇਸ਼ਤਾ ਨੂੰ ਯੋਗ ਕਰਨ ਲਈ, <guibutton>ਨੈੱਟਵਰਕ ਟਾਈਮ ਪਰੋਟੋਕਾਲ ਯੋਗ</guibutton> ਚੁਣੋ। ਇਸ ਨਾਲ <guilabel>NTP ਸਰਵਰ</guilabel> ਸੂਚੀ ਅਤੇ ਹੋਰ ਚੋਣਾਂ ਯੋਗ ਹੋ ਜਾਂਦੀਆਂ ਹਨ। ਤੁਸੀਨ ਪਹਿਲਾਂ ਨਿਰਧਾਰਤ ਕੀਤਾ ਇੱਕ ਸਰਵਰ ਚੁਣ ਸਕਦੇ ਹੋ, ਪਹਿਲਾਂ ਨਿਰਧਾਰਤ ਸਰਵਰ ਸੋਧ ਕਰਨ ਲਈ <guibutton>ਸੋਧ</guibutton> ਦਬਾਓ ਜਾਂ ਇੱਕ ਨਵਾਂ ਸਰਵਰ ਨਾਂ ਚੁਣੋ <guibutton>ਸ਼ਾਮਿਲ</guibutton> ਦਬਾ ਕੇ। ਤੁਹਾਡਾ ਸਿਸਟਮ NTP ਸਰਵਰ ਨਾਲ ਸਮਕਾਲਤਾ ਚਾਲੂ ਨਹੀਂ ਕਰਦਾ ਜਦੋਂ ਤੱਕ ਤੁਸੀਂ <guibutton>ਠੀਕ</guibutton> ਨਹੀਂ ਦਬਾਉਂਦੇ। <guibutton>ਠੀਕ</guibutton> ਦਬਾਉਣ ਤੋਂ ਬਾਅਦ, ਸਰੰਚਨਾ ਸੰਭਾਲੀ ਜਾਂਦੀ ਹੈ ਅਤੇ NTP ਡੈਮਨ ਚਾਲੂ ਹੋ ਜਾਂਦਾ ਹੈ (ਜਾਂ ਮੁੜ-ਚਾਲੂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਜੇ ਪਹਿਲਾਂ ਚੱਲ ਰਿਹਾ ਹੋਵੇ)।</para><para>ਮਿਤੀ ਅਤੇ ਸਮੇਂ, NTP ਡੈਮਨ ਸੈਟਿੰਗ, ਅਤੇ ਸਮਾਂ ਜੋਨ ਸੈਟਿੰਗ ਵਿੱਚ ਕੀਤੀ ਤਬਦੀਲੀ ਲਾਗੂ ਕਰਨ ਲਈ <guibutton>ਠੀਕ</guibutton> ਬਟਨ ਦਬਾਓ। ਇਸ ਨਾਲ ਪਰੋਗਰਾਮ ਵੀ ਬੰਦ ਹੋ ਜਾਂਦਾ ਹੈ।</para></section>
+	<section id="s1-dateconfig-time-zone"><title>ਸਮਾਂ ਖੇਤਰ ਸੰਰਚਨਾ</title><indexterm significance="normal"><primary>ਸਮਾਂ ਖੇਤਰ ਸੰਰਚਨਾ</primary></indexterm><para>ਜਿਵੇਂ ਕਿ <xref linkend="dateconfig-timezone"/> ਵਿੱਚ ਵੇਖਾਇਆ ਹੈ, ਤੀਜੀ ਟੈਬ ਵਿੰਡੋ ਸਿਸਟਮ ਸਮਾਂ ਜੋਨ ਸੰਰਚਨਾ ਲਈ ਹੈ।</para><para>ਸਿਸਟਮ ਸਮਾਂ ਜੰਨ ਸੰਰਚਨਾ ਕਰਨ ਲਈ, <guilabel>ਸਮਾਂ ਜੋਨ</guilabel> ਟੈਬ ਦਬਾਓ। ਸਮਾਂ ਜੋਨ ਮੈਪ ਵਰਤ ਕੇ ਜਾਂ ਮੈਪ ਦੇ ਥੱਲੇ ਸੂਚੀ ਵਿੱਚੋਂ ਲੋੜੀਂਦਾ ਸਮਾਂ ਜੋਨ ਵਰਤ ਕੇ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ। ਮੈਪ ਵਰਤਣ ਲਈ, ਇਸ ਤੇ ਕਲਿੱਕ ਕਰੋ ਤਾਂ ਕਿ ਤੁਹਾਡੇ ਸਮਾਂ ਜੋਨ ਦਾ ਸ਼ਹਿਰ ਚੁਣਿਆ ਜਾ ਸਕੇ। ਇੱਕ ਲਾਲ <guilabel>X</guilabel> ਦਿਸਦਾ ਹੈ ਅਤੇ ਸਮਾਂ ਜੋਮ ਚੋਣ ਮੈਪ ਦੇ ਥੱਲੇ ਸੂਚੀ ਵਿੱਚ ਤਬਦੀਲ ਹੋ ਜਾਂਦੀ ਹੈ। ਤੁਸੀਨ ਜ਼ੂਮ ਲੈਵਲ ਤਬਦੀਲ ਕਰ ਲਈ ਮੈਪ ਦੇ ਖੱਬੇ ਪਾਸੇ ਸਲਾਈਡਰ ਵੀ ਵਰਤ ਸਕਦੇ ਹੋ।</para><para>ਇਸ ਤੋਂ ਉਲਟ, ਤੁਸੀਂ ਮੈਪ ਦੇ ਥੱਲੇ ਸੂਚੀ ਵੀ ਚੁਣ ਸਕਦੇ ਹੋ। ਇਸੇ ਤਰਾਂ ਮੈਪ ਤੁਹਾਨੂੰ ਸ਼ਹਿਰ ਚੁਣਨ ਤੋਂ ਪਹਿਲਾਂ ਖੇਤਰ ਚੁਣਨ ਦੀ ਮਦਦ ਕਰਦਾ ਹੈ, ਹੁਣ ਸਮਾਂ ਜੋਨਾਂ ਦੀ ਸੂਚੀ ਲੜੀਵਾਰ ਹੈ, ਸ਼ਹਿਰ ਅਤੇ ਦੇਸ਼ ਆਪਣੀ ਜਾਣਕਾਰੀ ਸਮੇਤ ਗਰੁੱਪਬੱਧ ਕੀਤੇ ਹਨ। ਗੈਰ-ਭੂਗੋਲਿਕ ਸਮਾਂ ਜੋਨ ਖਾਸ ਕਮਿਊਨਿਟੀ ਦੀ ਲੋੜ ਕਰਕੇ ਸ਼ਾਮਿਲ ਕੀਤੇ ਗਏ ਹਨ।</para><para>ਤਬਦੀਲੀਆਂ ਲਾਗੂ ਕਰਨ ਲਈ ਅਤੇ ਪਰੋਗਰਾਮ ਬਦੰ ਕਰਨ ਲਈ <guibutton>ਠੀਕ</guibutton> ਦਬਾਓ।</para><figure float="0" id="dateconfig-timezone"><title>ਸਮਾਂ-ਖੇਤਰ ਵਿਸ਼ੇਸ਼ਤਾ</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>ਸਮਾਂ-ਖੇਤਰ ਵਿਸ਼ੇਸ਼ਤਾ</para></textobject></mediaobject></figure><para>ਜੇ ਤੁਹਾਡੀ ਸਿਸਟਮ ਘੜੀ UTC ਵਰਤਣ ਲਈ ਸੈੱਟ ਕੀਤੀ ਹੈ, <guibutton>ਸਿਸਟਮ ਘੜੀ UTC ਵਰਤਦੀ ਹੈ</guibutton> ਚੋਂ ਚੁਣੋ। UTC ਦਾ ਮਤਲਬ ਹੈ <firstterm>ਯੂਨੀਵਰਸਲ ਟਾਈਮ ਕੋਓਰਡੀਨੇਟਡ</firstterm>, ਗਰੀਨਵਿੱਚ ਮੀਨ ਟਾਈਮ (GMT) ਵੀ ਕਹਿੰਦੇ ਹਨ। ਹੋਰ ਸਮਾਂ ਜੋਨ UTC ਵਿੱਚ ਜੋੜ ਕੇ ਜਾਂ ਘਟਾ ਕੇ ਪਤਾ ਕੀਤੇ ਜਾਂਦੇ ਹਨ।</para></section>
+</article>

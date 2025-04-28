@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>3.2. SystemTap Scripts</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="understanding-how-systemtap-works.html" title="Chapter 3. Understanding How SystemTap Works" /><link rel="prev" href="understanding-how-systemtap-works.html" title="Chapter 3. Understanding How SystemTap Works" /><link rel="next" href="systemtapscript-handler.html" title="3.2.2. Systemtap Handler/Body" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="understanding-how-systemtap-works.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="systemtapscript-handler.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="3.2. SystemTap Scripts" id="scripts" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h2 class="title" id="scripts">3.2. SystemTap Scripts</h2></div></div></div><a id="id722726" class="indexterm"></a><a id="id722716" class="indexterm"></a><div class="para">
+		For the most part, SystemTap scripts are the foundation of each SystemTap session. SystemTap scripts instruct SystemTap on what type of information to collect, and what to do once that information is collected.
+	</div><a id="id722701" class="indexterm"></a><a id="id722687" class="indexterm"></a><a id="id722672" class="indexterm"></a><a id="id722658" class="indexterm"></a><a id="id722644" class="indexterm"></a><a id="id722630" class="indexterm"></a><div class="para">
+		As stated in <a class="xref" href="understanding-how-systemtap-works.html" title="Chapter 3. Understanding How SystemTap Works">Chapter 3, <i>Understanding How SystemTap Works</i></a>, SystemTap scripts are made up of two components: <span class="emphasis"><em>events</em></span> and <span class="emphasis"><em>handlers</em></span>. Once a SystemTap session is underway, SystemTap monitors the operating system for the specified events and executes the handlers as they occur.
+	</div><div class="note" title="Note"><div class="admonition_header"><h2>Note</h2></div><div class="admonition"><a id="id722597" class="indexterm"></a><a id="id722582" class="indexterm"></a><a id="id722568" class="indexterm"></a><div class="para">
+			An event and its corresponding handler is collectively called a <span class="emphasis"><em>probe</em></span>. A SystemTap script can have multiple probes.
+		</div><div class="para">
+			A probe's handler is commonly referred to as a <span class="emphasis"><em>probe body</em></span>.
+		</div></div></div><div class="para">
+		In terms of application development, using events and handlers is similar to instrumenting the code by inserting diagnostic print statements in a program's sequence of commands. These diagnostic print statements allow you to view a history of commands executed once the program is run.
+	</div><div class="para">
+		SystemTap scripts allow insertion of the instrumentation code without recompilation of the code and allows more flexibility with regard to handlers. Events serve as the triggers for handlers to run; handlers can be specified to record specified data and print it in a certain manner.
+	</div><div class="formalpara" id="scriptformats"><h5 class="formalpara">Format</h5><a id="id722502" class="indexterm"></a><a id="id722507" class="indexterm"></a><a id="id722490" class="indexterm"></a><a id="id722476" class="indexterm"></a>
+			SystemTap scripts use the file extension <code class="filename">.stp</code>, and contains probes written in the following format:
+		</div><pre class="screen">
+probe	<em class="replaceable"><code>event</code></em> {<em class="replaceable"><code>statements</code></em>}
+</pre><div class="para">
+		SystemTap supports multiple events per probe; multiple events are delimited by a comma (<code class="command">,</code>). If multiple events are specified in a single probe, SystemTap will execute the handler when any of the specified events occur.
+	</div><a id="id722441" class="indexterm"></a><a id="id722424" class="indexterm"></a><a id="id722408" class="indexterm"></a><div class="para">
+		Each probe has a corresponding <em class="firstterm">statement block</em>. This statement block is enclosed in braces (<code class="command">{ }</code>) and contains the statements to be executed per event. SystemTap executes these statements in sequence; special separators or terminators are generally not necessary between multiple statements.
+	</div><div class="note" title="Note"><div class="admonition_header"><h2>Note</h2></div><div class="admonition"><div class="para">
+			Statement blocks in SystemTap scripts follow the same syntax and semantics as the C programming language. A statement block can be nested within another statement block.
+		</div></div></div><a id="id722368" class="indexterm"></a><a id="id722354" class="indexterm"></a><a id="id722340" class="indexterm"></a><div class="para">
+		Systemtap allows you to write functions to factor out code to be used by a number of probes. Thus, rather than repeatedly writing the same series of statements in multiple probes, you can just place the instructions in a <em class="firstterm">function</em>, as in:
+	</div><pre class="screen">
+function <em class="replaceable"><code>function_name</code></em>(<em class="replaceable"><code>arguments</code></em>) {<em class="replaceable"><code>statements</code></em>}
+probe <em class="replaceable"><code>event</code></em> {<em class="replaceable"><code>function_name</code></em>(<em class="replaceable"><code>arguments</code></em>)}
+</pre><div class="para">
+		The <code class="command"><em class="replaceable"><code>statements</code></em></code> in <em class="replaceable"><code>function_name</code></em> are executed when the probe for <em class="replaceable"><code>event</code></em> executes. The <em class="replaceable"><code>arguments</code></em> are optional values passed into the function.
+	</div><div class="important" title="Important"><div class="admonition_header"><h2>Important</h2></div><div class="admonition"><div class="para">
+			<a class="xref" href="scripts.html" title="3.2. SystemTap Scripts">Section 3.2, “SystemTap Scripts”</a> is designed to introduce readers to the basics of SystemTap scripts. To understand SystemTap scripts better, it is advisable that you refer to <a class="xref" href="useful-systemtap-scripts.html" title="Chapter 4. Useful SystemTap Scripts">Chapter 4, <i>Useful SystemTap Scripts</i></a>; each section therein provides a detailed explanation of the script, its events, handlers, and expected output.
+		</div></div></div><div class="section" title="3.2.1. Event" id="systemtapscript-events"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="systemtapscript-events">3.2.1. Event</h3></div></div></div><a id="id722246" class="indexterm"></a><div class="para">
+			SystemTap events can be broadly classified into two types: <em class="firstterm">synchronous</em> and <em class="firstterm">asynchronous</em>.
+		</div><div class="formalpara"><h5 class="formalpara" id="id722222">Synchronous Events</h5><a id="id722217" class="indexterm"></a><a id="id722207" class="indexterm"></a>
+				A <em class="firstterm">synchronous</em> event occurs when any process executes an instruction at a particular location in kernel code. This gives other events a reference point from which more contextual data may be available.
+			</div><a id="id722185" class="indexterm"></a><a id="id722175" class="indexterm"></a><div class="para">
+			Examples of synchronous events include:
+		</div><div class="variablelist"><dl><dt class="varlistentry"><span class="term">syscall.<em class="replaceable"><code>system_call</code></em></span></dt><dd><a id="id722145" class="indexterm"></a><a id="id722131" class="indexterm"></a><div class="para">
+						The entry to the system call <em class="replaceable"><code>system_call</code></em>. If the exit from a syscall is desired, appending a <code class="command">.return</code> to the event monitor the exit of the system call instead. For example, to specify the entry and exit of the system call <code class="command">close</code>, use <code class="command">syscall.close</code> and <code class="command">syscall.close.return</code> respectively.
+					</div></dd><dt class="varlistentry"><span class="term">vfs.<em class="replaceable"><code>file_operation</code></em></span></dt><dd><a id="id722080" class="indexterm"></a><a id="id722066" class="indexterm"></a><div class="para">
+						The entry to the <em class="replaceable"><code>file_operation</code></em> event for Virtual File System (VFS). Similar to <code class="command">syscall</code> event, appending a <code class="command">.return</code> to the event monitors the exit of the <em class="replaceable"><code>file_operation</code></em> operation.
+					</div></dd><dt class="varlistentry"><span class="term">kernel.function("<em class="replaceable"><code>function</code></em>")</span></dt><dd><a id="id721999" class="indexterm"></a><a id="id721985" class="indexterm"></a><div class="para">
+						The entry to the kernel function <em class="replaceable"><code>function</code></em>. For example, <code class="command">kernel.function("sys_open")</code> refers to the "event" that occurs when the kernel function <code class="command">sys_open</code> is called by any thread in the system. To specify the <span class="emphasis"><em>return</em></span> of the kernel function <code class="command">sys_open</code>, append the <code class="command">return</code> string to the event statement; i.e. <code class="command">kernel.function("sys_open").return</code>.
+					</div><a id="id721949" class="indexterm"></a><a id="id721939" class="indexterm"></a><a id="id721932" class="indexterm"></a><div class="para">
+						When defining probe events, you can use asterisk (<code class="literal">*</code>) for wildcards. You can also trace the entry or exit of a function in a kernel source file. Consider the following example:
+					</div><div class="example" title="Example 3.1. wildcards.stp" id="wildcards"><h6>Example 3.1. wildcards.stp</h6><div class="example-contents"><pre class="programlisting">
+probe kernel.function("*@net/socket.c") { }
+probe kernel.function("*@net/socket.c").return { }
+</pre></div></div><br class="example-break" /><div class="para">
+						In the previous example, the first probe's event specifies the entry of ALL functions in the kernel source file <code class="filename">net/socket.c</code>. The second probe specifies the exit of all those functions. Note that in this example, there are no statements in the handler; as such, no information will be collected or displayed.
+					</div></dd><dt class="varlistentry"><span class="term">kernel.trace("<em class="replaceable"><code>tracepoint</code></em>")</span></dt><dd><a id="id721870" class="indexterm"></a><a id="id721864" class="indexterm"></a><a id="id721838" class="indexterm"></a><div class="para">
+						The static probe for <em class="replaceable"><code>tracepoint</code></em>. Recent kernels (2.6.30 and newer) include instrumentation for specific events in the kernel. These events are statically marked with tracepoints. One example of a tracepoint available in systemtap is <code class="command">kernel.trace("kfree_skb")</code> which indicates each time a network buffer is freed in the kernel.
+					</div></dd><dt class="varlistentry"><span class="term">module("<em class="replaceable"><code>module</code></em>").function("<em class="replaceable"><code>function</code></em>")</span></dt><dd><a id="id721806" class="indexterm"></a><a id="id721783" class="indexterm"></a><div class="para">
+						Allows you to probe functions within modules. For example:
+					</div><div class="example" title="Example 3.2. moduleprobe.stp" id="eventsmodules"><h6>Example 3.2. moduleprobe.stp</h6><div class="example-contents"><pre class="programlisting">
+probe module("ext3").function("*") { }
+probe module("ext3").function("*").return { }
+</pre></div></div><br class="example-break" /><div class="para">
+						The first probe in <a class="xref" href="scripts.html#eventsmodules" title="Example 3.2. moduleprobe.stp">Example 3.2, “moduleprobe.stp”</a> points to the entry of <span class="emphasis"><em>all</em></span> functions for the <code class="filename">ext3</code> module. The second probe points to the exits of all functions for that same module; the use of the <code class="command">.return</code> suffix is similar to <code class="command">kernel.function()</code>. Note that the probes in <a class="xref" href="scripts.html#eventsmodules" title="Example 3.2. moduleprobe.stp">Example 3.2, “moduleprobe.stp”</a> do not contain statements in the probe handlers, and as such will not print any useful data (as in <a class="xref" href="scripts.html#wildcards" title="Example 3.1. wildcards.stp">Example 3.1, “wildcards.stp”</a>).
+					</div><div class="para">
+						A system's kernel modules are typically located in <code class="filename">/lib/modules/<em class="replaceable"><code>kernel_version</code></em></code>, where <em class="replaceable"><code>kernel_version</code></em> refers to the currently loaded kernel version. Modules use the file name extension <code class="filename">.ko</code>.
+					</div></dd></dl></div><div class="formalpara"><h5 class="formalpara" id="id721704">Asynchronous Events</h5><a id="id721699" class="indexterm"></a><a id="id721689" class="indexterm"></a>
+				<em class="firstterm">Asynchronous</em> events are not tied to a particular instruction or location in code. This family of probe points consists mainly of counters, timers, and similar constructs.
+			</div><div class="para">
+			Examples of asynchronous events include:
+		</div><div class="variablelist"><dl><dt class="varlistentry"><span class="term">begin</span></dt><dd><a id="id659920" class="indexterm"></a><a id="id659918" class="indexterm"></a><div class="para">
+						The startup of a SystemTap session; i.e. as soon as the SystemTap script is run.
+					</div></dd><dt class="varlistentry"><span class="term">end</span></dt><dd><a id="id659891" class="indexterm"></a><a id="id659882" class="indexterm"></a><div class="para">
+						The end of a SystemTap session.
+					</div></dd><dt class="varlistentry"><span class="term">timer events</span></dt><dd><a id="id659853" class="indexterm"></a><a id="id659843" class="indexterm"></a><div class="para">
+						An event that specifies a handler to be executed periodically. For example:
+					</div><div class="example" title="Example 3.3. timer-s.stp" id="timer"><h6>Example 3.3. timer-s.stp</h6><div class="example-contents"><pre class="programlisting">
+probe timer.s(4)
+{
+  printf("hello world\n")
+}
+</pre></div></div><br class="example-break" /><div class="para">
+						<a class="xref" href="scripts.html#timer" title="Example 3.3. timer-s.stp">Example 3.3, “timer-s.stp”</a> is an example of a probe that prints <code class="command">hello world</code> every 4 seconds. Note that you can also use the following timer events:
+					</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+								<code class="command">timer.ms(<em class="replaceable"><code>milliseconds</code></em>)</code>
+							</div></li><li class="listitem"><div class="para">
+								<code class="command">timer.us(<em class="replaceable"><code>microseconds</code></em>)</code>
+							</div></li><li class="listitem"><div class="para">
+								<code class="command">timer.ns(<em class="replaceable"><code>nanoseconds</code></em>)</code>
+							</div></li><li class="listitem"><div class="para">
+								<code class="command">timer.hz(<em class="replaceable"><code>hertz</code></em>)</code>
+							</div></li><li class="listitem"><div class="para">
+								<code class="command">timer.jiffies(<em class="replaceable"><code>jiffies</code></em>)</code>
+							</div></li></ul></div><div class="para">
+						When used in conjunction with other probes that collect information, timer events allows you to print out get periodic updates and see how that information changes over time.
+					</div></dd></dl></div><div class="important" title="Important"><div class="admonition_header"><h2>Important</h2></div><div class="admonition"><div class="para">
+				SystemTap supports the use of a large collection of probe events. For more information about supported events, refer to <code class="command">man stapprobes</code>. The <em class="citetitle">SEE ALSO</em> section of <code class="command">man stapprobes</code> also contains links to other <code class="command">man</code> pages that discuss supported events for specific subsystems and components.
+			</div></div></div></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="understanding-how-systemtap-works.html"><strong>Prev</strong>Chapter 3. Understanding How SystemTap Works</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="systemtapscript-handler.html"><strong>Next</strong>3.2.2. Systemtap Handler/Body</a></li></ul></body></html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_SERVICES_DISTRO_SPECIFICS SYSTEM "system-config-services-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_SERVICES_TOOL "Services Configuration Tool">
+<!ENTITY SYSTEM_CONFIG_SERVICES_INVOCATION '
+    <indexterm significance="normal">
+        <primary><command>system-config-services</command>
+        </primary>
+        <see>&SYSTEM_CONFIG_SERVICES_TOOL;</see>
+    </indexterm>
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_SERVICES_TOOL;. To start the application on the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Services</guimenuitem></menuchoice>.
+    </para>
+'>
+<!ENTITY SYSTEM_CONFIG_SERVICES_ABSTRACT SYSTEM "system-config-services-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_SERVICES_CONTENT SYSTEM "system-config-services-content.xml">
+]>
+<article lang="te"><title>సేవలకు యాక్సెస్‌ను నియంత్రిస్తుంది</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2008-01-30</date></revision><revision><revnumber>1.1</revnumber><date>2008-03-05</date></revision><revision><revnumber>1.1.1</revnumber><date>2008-03-12</date></revision></revhistory><abstract role="description"><para>మీ సిస్టమ్‌కు భద్రతను సమకూర్చడం అనునది చాలా ముఖ్యమైంది, మరియు ఈ కర్తవ్యము నిర్వహించుటకు వొక మార్గమేమిటంటే మీ సిస్టమ్‌ సేవలకు యాక్సెస్‌ను జాగ్రత్తగా నిర్వహించుట. మీ సిస్టమ్ కొన్ని సేవలకు వొపెన్ యాక్సెస్‌ను అందించవలసి రావచ్చు (ఉదాహరణకు, మీరు వెబ్ సేవికను నడుపుతుంటే <command>httpd</command>). ఏమైనప్పటికీ, మీరు సేవ అందించవలసిన అవసరము లేకుంటే, మీరు బగ్ బారిన పడకుండా వుండుటకు దానిని ఆఫ్ చేయుట మంచిది.</para><para>సిస్టమ్ సేవలకు యాక్సెస్‌ను నిర్వహించుటకు చాలా విభిన్న మార్గాలు వున్నాయి. ఏ నిర్వహణా పద్దతి వుపయోగించాలో అనునది యెంచుకొనుటకు, మీ సేవపై, మరియు సిస్టమ్ ఆకృతీకరణపై, లైనక్సు అనుభవంపై ఆధారపడి నిర్ణయించుకోండి.</para><para>సేవకు యాక్సెస్‌ను తిరస్కరించుటకు సులువైన మార్గము దానిని ఆఫ్ చేయుట. <command>xinetd</command> మరియు <filename>/etc/rc.d/init.d</filename> నందలి సేవల హైరార్చీ (SysV సేవలగాకూడా తెలుపబడతాయి) <application>సేవల ఆకృతీకరణ సాధనము</application> ద్వారా ఆకృతీకరించవచ్చును.</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup></articleinfo>    <para>మీ సిస్టమ్‌కు భద్రతను సమకూర్చడం అనునది చాలా ముఖ్యమైంది, మరియు ఈ కర్తవ్యము నిర్వహించుటకు వొక మార్గమేమిటంటే మీ సిస్టమ్‌ సేవలకు యాక్సెస్‌ను జాగ్రత్తగా నిర్వహించుట. మీ సిస్టమ్ కొన్ని సేవలకు వొపెన్ యాక్సెస్‌ను అందించవలసి రావచ్చు (ఉదాహరణకు, మీరు వెబ్ సేవికను నడుపుతుంటే <command>httpd</command>). ఏమైనప్పటికీ, మీరు సేవ అందించవలసిన అవసరము లేకుంటే, మీరు బగ్ బారిన పడకుండా వుండుటకు దానిని ఆఫ్ చేయుట మంచిది.</para><para>సిస్టమ్ సేవలకు యాక్సెస్‌ను నిర్వహించుటకు చాలా విభిన్న మార్గాలు వున్నాయి. ఏ నిర్వహణా పద్దతి వుపయోగించాలో అనునది యెంచుకొనుటకు, మీ సేవపై, మరియు సిస్టమ్ ఆకృతీకరణపై, లైనక్సు అనుభవంపై ఆధారపడి నిర్ణయించుకోండి.</para><para>సేవకు యాక్సెస్‌ను తిరస్కరించుటకు సులువైన మార్గము దానిని ఆఫ్ చేయుట. <command>xinetd</command> మరియు <filename>/etc/rc.d/init.d</filename> నందలి సేవల హైరార్చీ (SysV సేవలగాకూడా తెలుపబడతాయి) <application>సేవల ఆకృతీకరణ సాధనము</application> ద్వారా ఆకృతీకరించవచ్చును.</para>
+
+
+    <indexterm significance="normal"><primary><command>system-config-services</command>
+        </primary><see>సేవల ఆకృతీకరణ సాధనము</see></indexterm><para>సేవల ఆకృతీకరణ సాధనమును వుపయోగించుటకు మీరు <application>X</application> విండో సిస్టమ్ నడుపుతూ వుండాలి మరియు root అనుమతులను కలిగివుండాలి. డెస్కుటాప్‌పై అనువర్తనమును ప్రారంభించుటకు, <menuchoice><guimenu>ప్యానల్ పైని ముఖ్యమెనూ ("f" ప్రతిమతో వున్న మెనూ)</guimenu>నందలి <guisubmenu>సిస్టమ్</guisubmenu><guisubmenu>నిర్వహణ</guisubmenu><guimenuitem>సేవలు</guimenuitem></menuchoice>కు వెళ్ళుము.</para>
+
+
+	<section id="s1-services-serviceconf"><title><application>సేవల ఆకృతీకరణ సాధనము</application></title><indexterm significance="normal"><primary><application>సేవల ఆకృతీకరణ సాధనము</application></primary></indexterm><para><filename>/etc/rc.d/init.d</filename> డైరెక్టరీ నందలి ఏ SysV సేవలు బూట్ సమయమందు (రన్‌లెవల్సు 3,4, మరియు 5 కొరకు) ప్రారంభించాలో మరియు ఏ command&gt;xinetd</para><figure float="0" id="fig-serviceconf"><title><application>సేవల ఆకృతీకరణ సాధనము</application></title><mediaobject><imageobject><imagedata fileref="images/system-config-services.png" format="PNG"/></imageobject><textobject><para>నెట్వర్కు సేవలను ఆకృతీకరించుట</para></textobject></mediaobject></figure><para><application>సేవల ఆకృతీకరణ సాధనము</application> అనునది <filename>/etc/rc.d/init.d</filename> డైరెక్టరీనుండి వచ్చు సేవలను అదేవిధంగా <command>xinetd</command> ద్వారా నియంత్రించబడే సేవలను జాబితా చేస్తుంది. సేవయొక్క వివరణను మరియు దాని స్థితిని ప్రదర్శించుటకు అనువర్తనము యెడమప్రక్కని జాబితాలోని సేవనామము పై నొక్కండి. ఒకవేళ సేవ SysV సేవ అయితే, స్థితి విండో సేవ ప్రస్తుతం నడుస్తోందో లేదో చూపుతుంది.</para><para>ఒక సేవను తక్షణమే ప్రారంభించుటకు, ఆపుటకు, లేదా పునఃప్రారంభించుటకు, జాబితానుండి సేవను యెంపికచేసి సాధనపట్టీపై తగు బటన్‌ను నొక్కండి (లేదా కావలసిన చర్యను <guimenu>సేవ</guimenu> పుల్‌డౌన్ మెనూనుండి యెంచుకొనుము). ఒకవేళ సేవ <command>xinetd</command> సేవ అయితే, చర్యా బటన్లు అచేతనము చేయబడతాయి యెంచేతంటే అవి స్వతంత్రముగా ప్రారంభించబడలేవు మరియు ఆపబడలేవు.</para><note><title>గమనిక</title><para>మీరు <command>xinetd</command> సేవల మార్పులను దాచినప్పుడు, <command>xinetd</command> తిరిగిలోడు చేయబడుతుంది, మరియు మార్పులు తక్షణమే వర్తించబడతాయి. మీరు యితర సేవల మార్పులను దాచినప్పుడు, రన్‌లెవల్ తిరిగిఆకృతీకరించ బడుతుంది, అయితే మార్పులు తక్షణమే ఆపాదించబడవు.</para></note><para>
+            To enable a service, select the service in the list and click on one of the <guibutton>Enable</guibutton>, <guibutton>Disable</guibutton> or (to enable a SysV service in other than the default runlevels) <guibutton>Customize</guibutton> buttons in the toolbar or choose the equivalent action from the <guimenu>Service</guimenu> menu. In the case of a SysV service, the runlevel configuration is changed, but the runlevel is not restarted; thus, the changes do not take place immediately.
+		</para><para>
+			As an example: If you disable the <command>httpd</command> service, the runlevel configuration changes so that <command>httpd</command> is not started at boot time. However, the current runlevel is not reinitialized, so <command>httpd</command> is still running. Select one of following options at this point:
+		</para><orderedlist continuation="restarts" inheritnum="ignore"><listitem><para>
+					Stop the <command>httpd</command> service — Stop the service by selecting it from the list and clicking the <guibutton>Stop</guibutton> button. The status of the service will be updated accordingly.
+				</para></listitem><listitem><para>
+					Reinitialize the runlevel — Reinitialize the runlevel by going to a shell prompt and typing the command <command>telinit <replaceable>x</replaceable></command> (where <replaceable>x</replaceable> is the runlevel number; for example, 3.). This option is recommended if you enable or disable multiple services and want to activate the changes immediately.
+				</para></listitem><listitem><para>
+					Do nothing else — You do not have to stop the <command>httpd</command> service. You can wait until the system is rebooted for the service to stop. The next time the system is booted, the runlevel is initialized without the <command>httpd</command> service running.
+				</para></listitem></orderedlist></section>
+</article>

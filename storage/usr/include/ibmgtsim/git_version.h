@@ -1,0 +1,1 @@
+#define IBMGTSIM_CODE_VERSION ""

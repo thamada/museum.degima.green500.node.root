@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Security" lang="zh-CN">
+	<title>安&#x200B;全&#x200B;性&#x200B;</title>
+	<remark>这&#x200B;个 beat位&#x200B;于&#x200B;：<ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Security">https://fedoraproject.org/wiki/Docs/Beats/Security</ulink></remark>
+	<para>
+		这&#x200B;一&#x200B;章&#x200B;记&#x200B;述 Fedora 的&#x200B;各&#x200B;种&#x200B;安&#x200B;全&#x200B;性&#x200B;项&#x200B;目&#x200B;。&#x200B;
+	</para>
+	<section id="sect-Release_Notes-Security-Lower_process_capabilities">
+		<title>低&#x200B;处&#x200B;理&#x200B;能&#x200B;力&#x200B;</title>
+		<para>
+			以&#x200B;root用&#x200B;户&#x200B;运&#x200B;行&#x200B;的&#x200B;守&#x200B;护&#x200B;进&#x200B;程&#x200B;经&#x200B;过&#x200B;审&#x200B;核&#x200B;和&#x200B;补&#x200B;丁&#x200B;，开&#x200B;始&#x200B;以&#x200B;低&#x200B;处&#x200B;理&#x200B;能&#x200B;力&#x200B;运&#x200B;行&#x200B;。&#x200B;这&#x200B;降&#x200B;低&#x200B;了&#x200B;使&#x200B;用&#x200B;这&#x200B;些&#x200B;守&#x200B;护&#x200B;进&#x200B;程&#x200B;提&#x200B;升&#x200B;权&#x200B;限&#x200B;的&#x200B;风&#x200B;险&#x200B;。&#x200B;此&#x200B;外&#x200B;，卷&#x200B;影&#x200B;文&#x200B;件&#x200B;权&#x200B;限&#x200B;更&#x200B;改&#x200B;为&#x200B;<literal>000</literal>，<filename>$PATH</filename>下&#x200B;的&#x200B;一&#x200B;些&#x200B;目&#x200B;录&#x200B;权&#x200B;限&#x200B;设&#x200B;置&#x200B;为&#x200B;<literal>555</literal>，以&#x200B;防&#x200B;止&#x200B;守&#x200B;护&#x200B;进&#x200B;程&#x200B;在&#x200B;没&#x200B;有&#x200B;<literal>DAC_OVERRIDE</literal>时&#x200B;访&#x200B;问&#x200B;卷&#x200B;影&#x200B;文&#x200B;件&#x200B;或&#x200B;向&#x200B;<filename>$PATH</filename>目&#x200B;录&#x200B;写&#x200B;入&#x200B;内&#x200B;容&#x200B;。&#x200B;
+		</para>
+		<para>
+			当&#x200B;有&#x200B;人&#x200B;入&#x200B;侵&#x200B;系&#x200B;统&#x200B;时&#x200B;，除&#x200B;非&#x200B;他&#x200B;们&#x200B;提&#x200B;高&#x200B;了&#x200B;自&#x200B;己&#x200B;的&#x200B;权&#x200B;限&#x200B;，否&#x200B;则&#x200B;一&#x200B;般&#x200B;做&#x200B;不&#x200B;了&#x200B;太&#x200B;多&#x200B;事&#x200B;情&#x200B;。&#x200B;此&#x200B;特&#x200B;性&#x200B;降&#x200B;低&#x200B;了&#x200B;可&#x200B;用&#x200B;来&#x200B;提&#x200B;升&#x200B;权&#x200B;限&#x200B;的&#x200B;攻&#x200B;击&#x200B;目&#x200B;标&#x200B;数&#x200B;量&#x200B;。&#x200B;如&#x200B;果&#x200B;root进&#x200B;程&#x200B;不&#x200B;包&#x200B;括&#x200B;所&#x200B;有&#x200B;能&#x200B;力&#x200B;，那&#x200B;么&#x200B;他&#x200B;们&#x200B;也&#x200B;很&#x200B;难&#x200B;破&#x200B;坏&#x200B;系&#x200B;统&#x200B;。&#x200B;
+		</para>
+		<para>
+			由&#x200B;于&#x200B;拥&#x200B;有&#x200B;root uid的&#x200B;进&#x200B;程&#x200B;可&#x200B;向&#x200B;几&#x200B;乎&#x200B;所&#x200B;有&#x200B;的&#x200B;文&#x200B;件&#x200B;写&#x200B;入&#x200B;并&#x200B;且&#x200B;可&#x200B;以&#x200B;读&#x200B;取&#x200B;<filename>/etc/shadow file</filename>，因&#x200B;此&#x200B;这&#x200B;些&#x200B;进&#x200B;程&#x200B;仍&#x200B;可&#x200B;能&#x200B;会&#x200B;破&#x200B;坏&#x200B;系&#x200B;统&#x200B;。&#x200B;然&#x200B;而&#x200B;如&#x200B;果&#x200B;将&#x200B;系&#x200B;统&#x200B;强&#x200B;化&#x200B;使&#x200B;得&#x200B;root需&#x200B;要&#x200B;<literal>DAC_OVERRIDE</literal>能&#x200B;力&#x200B;，那&#x200B;么&#x200B;能&#x200B;够&#x200B;破&#x200B;坏&#x200B;系&#x200B;统&#x200B;的&#x200B;进&#x200B;程&#x200B;只&#x200B;剩&#x200B;少&#x200B;数&#x200B;。&#x200B;这&#x200B;不&#x200B;会&#x200B;对&#x200B;管&#x200B;理&#x200B;能&#x200B;力&#x200B;造&#x200B;成&#x200B;影&#x200B;响&#x200B;，因&#x200B;为&#x200B;它&#x200B;们&#x200B;都&#x200B;拥&#x200B;有&#x200B;包&#x200B;括&#x200B;<literal>DAC_OVERRIDE</literal>在&#x200B;内&#x200B;的&#x200B;完&#x200B;整&#x200B;权&#x200B;限&#x200B;。&#x200B;因&#x200B;此&#x200B;即&#x200B;使&#x200B;有&#x200B;人&#x200B;成&#x200B;功&#x200B;入&#x200B;侵&#x200B;了&#x200B;一&#x200B;个&#x200B;root进&#x200B;程&#x200B;，也&#x200B;很&#x200B;难&#x200B;利&#x200B;用&#x200B;此&#x200B;进&#x200B;程&#x200B;做&#x200B;出&#x200B;更&#x200B;多&#x200B;破&#x200B;坏&#x200B;。&#x200B;
+		</para>
+		<para>
+			强&#x200B;化&#x200B;的&#x200B;系&#x200B;统&#x200B;应&#x200B;该&#x200B;有&#x200B;类&#x200B;似&#x200B;的&#x200B;权&#x200B;限&#x200B;：<literal>555</literal> <filename>/bin</filename>, <literal>555</literal> <filename>/lib</filename>, <literal>000</literal> <filename>/etc/shadow</filename>等&#x200B;。&#x200B;当&#x200B;前&#x200B;范&#x200B;围&#x200B;是&#x200B;覆&#x200B;盖&#x200B;<filename>$PATH</filename>变&#x200B;量&#x200B;下&#x200B;的&#x200B;目&#x200B;录&#x200B;、&#x200B;库&#x200B;目&#x200B;录&#x200B;、&#x200B;<filename>/boot</filename>及&#x200B;<filename>/root</filename>。&#x200B;此&#x200B;方&#x200B;案&#x200B;不&#x200B;但&#x200B;不&#x200B;会&#x200B;影&#x200B;响&#x200B;SELinux，而&#x200B;且&#x200B;会&#x200B;对&#x200B;其&#x200B;进&#x200B;行&#x200B;补&#x200B;充&#x200B;。&#x200B;因&#x200B;为&#x200B;这&#x200B;些&#x200B;能&#x200B;力&#x200B;属&#x200B;于&#x200B;DAC controls，而&#x200B;它&#x200B;们&#x200B;首&#x200B;先&#x200B;决&#x200B;定&#x200B;是&#x200B;否&#x200B;允&#x200B;许&#x200B;访&#x200B;问&#x200B;。&#x200B;
+		</para>
+	</section>
+
+</section>
+
+

@@ -1,0 +1,21 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>function::sprint_stack</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="up" href="ch02.html" title="Chapter&#160;2.&#160;Context Functions"><link rel="prev" href="re30.html" title="function::print_stack"><link rel="next" href="re32.html" title="function::probefunc"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center"><span>function::sprint_stack</span></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re30.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;2.&#160;Context Functions</th><td width="20%" align="right">&#160;<a accesskey="n" href="re32.html">Next</a></td></tr></table><hr></div><div class="refentry" title="function::sprint_stack"><a name="API-sprint-stack"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>function::sprint_stack &#8212; 
+     Return stack for kernel addresses from string. EXPERIMENTAL!
+ </p></div><div class="refsynopsisdiv" title="Synopsis"><h2>Synopsis</h2><pre class="programlisting">
+    sprint_stack:string(stk:string)
+</pre></div><div class="refsect1" title="Arguments"><a name="id557157"></a><h2>Arguments</h2><div class="variablelist"><dl><dt><span class="term"><em class="parameter"><code>stk</code></em></span></dt><dd><p>
+     String with list of hexadecimal (kernel) addresses.
+    </p></dd></dl></div></div><div class="refsect1" title="Description"><a name="id557183"></a><h2>Description</h2><p>
+   Perform a symbolic lookup of the addresses in the given string,
+   which is assumed to be the result of a prior call to <code class="function">backtrace</code>.
+   </p><p>
+
+   Returns a simple backtrace from the given hex string. One line per
+   address. Includes the symbol name (or hex address if symbol
+   couldn't be resolved) and module name (if found). Includes the
+   offset from the start of the function if found, otherwise the
+   offset will be added to the module (if found, between
+   brackets). Returns the backtrace as string (each line terminated by
+   a newline character).  Note that the returned stack will be
+   truncated to MAXSTRINGLEN, to print fuller and richer stacks use
+   print_stack.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re30.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="re32.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"><span>function::print_stack</span>&#160;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&#160;<span>function::probefunc</span></td></tr></table></div></body></html>

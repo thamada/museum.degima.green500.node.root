@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.26">
+<!ENTITY app "gnome-user-share">
+]>
+<article id="index" lang="it">
+  <articleinfo>
+	 <title>Manuale di Condivisione di file personali</title>
+	 <copyright>
+		<year>2009</year>
+		<holder>Red Hat, Inc.</holder>
+         </copyright><copyright><year>2009</year><holder>Sergio Durzu (sergio.durzu@ildeposito.org)</holder></copyright>
+
+	 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+	 <authorgroup>
+           <author role="maintainer">
+             <firstname>Matthias</firstname>
+             <surname>Clasen</surname>
+           </author>
+	 </authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+		<revision>
+		  <revnumber>1.0</revnumber>
+		  <date>2009</date>
+		  <revdescription>
+			 <para role="author">Matthias Clasen <email>mclasen@redhat.com</email></para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Questo manuale riguarda la versione 2.26 di Condivisione di file personali</releaseinfo>
+	 <legalnotice>
+		<title>Commenti</title>
+		<para>Per segnalare un bug o fornire un suggerimento riguardo lo strumento Condivisione di file personali, seguire le istruzioni contenute nella <ulink url="ghelp:user-guide?feedback-bugs" type="help">pagina dei commenti di GNOME</ulink>.</para>
+	 </legalnotice>
+    <abstract role="description">
+      <para>L'applicazione Condivisione di file personali è un servizio di sessione che abilita una facile condivisione di file tra diversi computer.</para>
+    </abstract>
+  </articleinfo>
+  <indexterm><primary>gnome-user-share</primary></indexterm>
+  <indexterm><primary>condivisione file</primary></indexterm>
+  <indexterm><primary>condivisione</primary></indexterm>
+
+  <sect1 id="gnome-user-share-intro">
+	 <title>Introduzione</title>
+	 <para>L'applicazione gnome-user-share un servizio di sessione che esporta i contenuti della cartella <filename>Pubblici</filename> nella cartella home dell'utente, così che possano essere facilmente accessibili da altri computer nella stessa rete locale. Negli altri computer, la cartella condivisa sarà visualizzata nella finestra di Rete di <application>Nautilus</application> con un nome del tipo «file pubblici di <replaceable>utente</replaceable>», dove <replaceable>utente</replaceable> sarà sostituito dal nome dell'utente.</para>
+	 <para>L'applicazione gnome-user-share di file personali utilizza un server WebDAV per condividere la cartella <filename>Pubblici</filename> e notifica la condivisione nella rete locale utilizzando mDNS.</para>
+         <para>Inoltre, l'applicazione Condivisione di file personali può rendere disponibili i file condivisi via ObexFTP tramite Bluetooth e ricevere file che sono mandati al computer tramite Bluetooth con ObexPush.</para>
+  </sect1>
+
+  <sect1 id="gnome-user-share-getting-started">
+    <title>Per iniziare</title>
+
+    <sect2 id="gnome-user-share-start">
+       <title>Avviare Condivisione di file personali</title>
+
+       <para>
+         The gnome-user-share service is normally started by <application>gnome-session</application> when you log in. You can change this by opening <menuchoice><guimenu>Preferences</guimenu><guimenu>Startup Applications</guimenu></menuchoice> in the <guimenu>System</guimenu> menu, and modifying the 'User Sharing' entry in the list of startup programs.
+       </para>
+
+       <para>Per configurare i diversi aspetti della condivisione di file, modificare le preferenze di condivisione dei file, che possono essere trovate nel menù <menuchoice><guimenu>Sistema</guimenu><guimenu>Preferenze</guimenu><guimenu>Condivisione file personali</guimenu></menuchoice>.</para>
+       <figure id="file-sharing-preferences">
+         <title>Preferenze di condivisione dei file</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/file-sharing-preferences.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+ 
+     </sect2>
+     <sect2 id="gnome-user-share-enabling-sharing">
+       <title>Abilitare la condivisione di file attraverso la rete</title>
+       <para>Aprire Preferenze di condivisione dei file personali scegliendo <menuchoice><guimenu>Preferenze</guimenu><guimenu>Condivisione di file personali</guimenu></menuchoice> dal menù <guimenu>Sistema</guimenu>.</para>
+       <figure id="sharing-over-the-network">
+         <title>Condividere file attraverso la Rete</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-the-network.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Per abilitare la condivisione di file tramite WebDAV, utilizzare la casella di spunta <guilabel>Condividere file pubblici sulla rete</guilabel>. Quando la condivisione dei file è abilitata, le opzioni per la protezione della password permettono di impostare una password che deve essere specificata prima che un utente di un altro computer abbia l'autorizzazione ad accedere ai file condivisi. <note><para>Alcune configurazioni del firewall del computer potrebbero causare problemi alla notifica, come all'accesso ai file condivisi. Consultare l'amministratore del sistema per ulteriori dettagli.</para></note><itemizedlist>
+           <listitem>
+              <para>Selezionare <guilabel>Mai</guilabel> per permettere a tutti di leggere o scrivere file nella cartella condivisa.</para>
+           </listitem>
+           <listitem>
+              <para>Selezionare <guilabel>Sempre</guilabel> per richiedere la password per leggere o scrivere file nella cartella condivisa.</para>
+           </listitem>
+           <listitem>
+              <para>Selezionare <guilabel>Quando scrivere i file</guilabel> per permettere a tutti di leggere liberamente i file nella cartella condivisa e per richiedere la password per scrivere i file.</para>
+           </listitem>
+         </itemizedlist><note><para>Quando si imposta una password, si dovrà fornire la password a tutti gli utenti a cui si vuole dare accesso ai file condivisi. Pertanto, si dovrebbe usare una password diversa rispetto alle altre password utilizzate.</para></note></para>  
+     </sect2>
+
+     <sect2 id="gnome-user-share-enabling-bluetooth">
+       <title>Abilitare la condivisione dei file tramite Bluetooth</title>
+       <para>Aprire Preferenze di condivisione dei file personali scegliendo <menuchoice><guimenu>Preferenze</guimenu><guimenu>Condivisione di file personali</guimenu></menuchoice> dal menù <guimenu>Sistema</guimenu>.</para>
+       <figure id="sharing-over-bluetooth">
+         <title>Condividere file attraverso Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Per abilitare la condivisione dei file tramite Bluetooth, utilizzare la casella di spunta <guilabel>Condividere i file pubblici tramite Bluetooth</guilabel>. Per permettere ai dispositivi Bluetooth di eliminare file dalla cartella condivisa, utilizzare la casella di spunta <guilabel>Permetti ai dispositivi remoti di eliminare file</guilabel>. Per permettere ai dispositivi Bluetooth di accedere ai file condivisi anche quando non sono associati al computer, utilizzare la casella di spunta <guilabel>Richiedere ai dispositivi remoti di associarsi con questo computer</guilabel>. <note><para>Quando si permette a dispositivi remoti non associati di accedere ai file condivisi, chiunque con un telefono cellulare con il Bluetooth attivo nelle vicinanze del computer può accedere e forse modificare i file condivisi.</para></note></para>
+     </sect2>
+
+     <sect2 id="gnome-user-share-bluetooth-receiving">
+       <title>Ricevere file tramite Bluetooth</title>
+       <para>Aprire Preferenze di condivisione dei file personali scegliendo <menuchoice><guimenu>Preferenze</guimenu><guimenu>Condivisione di file personali</guimenu></menuchoice> dal menù <guimenu>Sistema</guimenu>.</para>
+       <figure id="receiving-over-bluetooth">
+         <title>Ricevere file tramite Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/receiving-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Per permettere a dispositivi Bluetooth remoti di mandare file al computer, utilizzare la casella di spunta <guilabel>Ricevere file nella cartella Scaricati tramite bluetooth</guilabel>. I file ricevuti saranno memorizzati nella cartella <filename>Scaricati</filename>, nella cartella home dell'utente. Quando la ricezione di file è abilitata, la selezione <guilabel>Accettare file</guilabel> permette di indicare quali dispositivi remoti hanno il permesso di mandare file. <itemizedlist>
+            <listitem>
+              <para>Selezionare <guilabel>Sempre</guilabel> per permettere a qualsiasi dispositivo remoto di mandare file.</para>
+            </listitem>
+            <listitem>
+              <para>Selezionare <guilabel>Solo per dispositivi associati</guilabel> per accettare file solo da dispositivi associati. <note><para>I dispositivi associati sono quelli che sono stati connessi al computer e per cui è stato necessario inserire un codice PIN per connettervisi.</para></note></para>
+            </listitem>
+            <listitem>
+              <para>Selezionare <guilabel>Solo per dispositivi associati e sicuri</guilabel> per accettare file solo da dispositvi associati. <note><para>I dispositivi possono essere segnati come sicuri nella sezione <guilabel>Dispositivi conosciuti</guilabel> delle <application>Proprietà Bluetooth</application>.</para></note></para>
+            </listitem>
+          </itemizedlist></para>
+        <para>Utilizzare la casella di spunta <guilabel>Notificare riguardo i file ricevuti</guilabel> per scegliere se si vuole ricevere una notifica quando si è ricevuto un file tramite Bluetooth.</para>
+     </sect2>
+  </sect1>
+
+</article>

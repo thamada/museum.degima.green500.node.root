@@ -1,0 +1,250 @@
+             Open Fabrics Enterprise Distribution (OFED)
+                    SDP in OFED 1.5.3 Release Notes
+
+                          March 2011
+
+
+
+===============================================================================
+Table of Contents
+===============================================================================
+1. Overview
+2. Bug Fixes and Enhancements since OFED 1.5.3
+3. ZCopy
+4. Known Issues
+5. Verification Applications/Flows/Tests
+6. Module Parameters
+
+===============================================================================
+1. Overview
+===============================================================================
+Sockets Direct Protocol (SDP) is an InfiniBand byte-stream transport protocol 
+that provides TCP stream semantics. Capable of utilizing InfiniBand's advanced 
+protocol offload capabilities, SDP can provide lower latency, higher bandwidth, 
+and lower CPU utilization than IPoIB or 
+Ethernet running some sockets-based applications.
+
+SDP in OFED is at GA level for OFED 1.5.3
+
+===============================================================================
+2. Main Features and Changes
+===============================================================================
+- Adde IPv6 support
+- Added support for Inline and blueflame
+- Improved stability issues
+- Bug fixes
+
+===============================================================================
+2. Bug Fixes and Enhancements since OFED 1.5.2
+===============================================================================
+* Cleanups
+    - Added support for 2.6.34 / 2.6.36.
+
+* Bug Fixes
+    - Fixed compilation problems on 32 bit hosts
+    - Do not compile in debug mode when not asked.
+    - Improved recovery from errors.
+
+* Enhancements
+    - more statistics in /proc/sdpstats
+    - added debugfs for sdp:
+     	- sdpprf was moved from /proc to debugfs/sdp
+    	- debugfs/<socket_id> - Socket history
+
+		
+===============================================================================
+3. ZCopy
+===============================================================================		
+- ZCopy is enabled by default for blocks larger than 64K. ZCopy can be disabled 
+  by setting the module paramter sdp_zcopy_thresh to zero or to any other value 
+  by setting it to another non zero value.
+
+- ZCOPY mode gives good performance for large blocks with very small cpu 
+  utilization. When in use, all messages longer than 'sdp_zcopy_thresh' bytes 
+  in length will cause the user space buffer to be pinned and the data sent 
+  directly from the original buffer. This results in less CPU usage and on many 
+  systems in enhanced bandwidth.
+  ZCOPY is most efficient with multi stream jobs and it performs better as the 
+  message size increases.
+  The default 64K value for 'sdp_zcopy_thresh' is sometimes too low for some 
+  systems. You must experiment with your hardware to select the best value.
+
+- ZCOPY vs BCOPY:
+  ZCOPY performance is more efficient in weak cpu and multi streams, whereas 
+  BCOPY is more efficient in single stream.		
+				
+===============================================================================
+4. Known Issues
+===============================================================================
+- SDP is at beta level on Infinihost HCA family
+
+- Occasionally, socket bind fails when using EINVAL. Although TCP socket is binded
+  successfully, SDP is occupied, thus causing the socket bind failure. 
+  See Bugzilla 2159 and Bugzilla 2160
+
+- When SO_REUSEADDR is set, only a single socket can be bind to the IP_ANY and a
+  specific port. TCP limitation, unless one of the sockets is listening.
+
+- BUG 1331 - Although TCP allows connecting to IP_ANY - 0.0.0.0
+  (as a destination address!), SDP does not allow connecting to the IP_ANY 
+  and rejects the connection.
+
+- BUG 1444 - The setsockopt(SO_RCVBUF) is not functional in sdp socket. 
+  To limit top system wide sdp memory usage for recv, 
+  use the module parameter top_mem_usage.
+
+- Each SDP socket currently consumes up to 2 MBytes of memory. If this value
+  is high for your installation, it is possible to trade off performance
+  for lower memory utilization per socket by reducing the value of the
+  "rcvbuf_scale" module parameter (default: 16).
+
+  Note: The minimum legal value for the "rcvbuf_scale" module is 1.
+        At this parameter value, each socket will consume approximately 128 KBytes.
+
+- Small message size performance is low when messages are sent by client
+  at a rate lower than the rate at which they are consumed by server,
+  and when TCP_CORK is not set. This is observed, for example, with iperf
+  benchmark. 
+  Workaround: Set the TCP_CORK socket option
+  to ensure data is sent in at least 32K byte chunks.
+
+- Performance is low on 32-bit kernels, as SDP utilizes high memory
+  to ease memory pressure. 
+  Workaround: Move to a 64-bit kernel if the application remains a 32-bit one.
+
+- By default, SDP utilizes a 2 Kbyte MTU size.  This may cause PCI-X cards
+  using Mellanox Technologies "Infinihost" HCAs to experience low bandwidth.
+  Workaround:  Reset the MTU size to 1K in this situation, using either of
+  the two methods below:
+
+  1. Activate the "tavor quirk" workaround in opensm:
+     a. Create an opensm options cache file (/var/cache/osm/opensm.opts):
+          > opensm --cache-options -o
+     b. Add the following line to /var/cache/osm/opensm.opts:
+          enable_quirks TRUE
+     c. Rerun opensm using your usual command line options to activate
+        the opensm quirk option.
+
+  2. Activate the "tavor quirk" workaround in cma:
+       set the tavor_quirk module parameter of the rdma_cm module to value 1
+       (default: 0).
+
+- When waiting for RX, the driver first polls, arms interrupt and then goes to
+  sleep. Polling duration could be set by recv_poll module parameter. The
+  higher this value is, the higher the CPU utilization is, and the number of
+  interrupts is lower.
+  This should be fine tuned according to the specific environment and
+  application latency.
+
+- When using SDP over RoCE, and the peer has a card that does not support RoCE 
+  a delay in the connection establishment may occur.
+
+- BUG2185 - Occasionally, accessing /proc/net/sdpstats, causes kernel
+  panic.
+
+- When using SDP with an application that has one of set-user-ID or 
+  set-group-ID bits on, these parameters MUST be added to the libsdp.so as well.
+  for further information, please see the man ld.so file.
+  
+===============================================================================
+5. Verification Applications/Flows/Tests
+===============================================================================
+- ssh/sshd
+- wget/netscape/firefox/apache                  
+- netpipe               
+- netperf             
+- LTP socket tests
+- iperf-2.0.2         
+- ttcp
+- openmpi
+- openmpi + Intel MPI benchmarks
+- Threaded and forking echo client server examples
+- Various Java client server applications (SUN:jre, BEA:jrockit/WebLogic, GNU:gij/gcj)
+- Many UNIX utilities to verify that pre-load did not harm the applications
+
+===============================================================================
+6. Module Parameters
+===============================================================================
+
+General
+-------
+sdp_link_layer_ib_only:
+	Supports only link layer of type InfiniBand. 
+	It is useful when not using SDP over RoCE.
+
+sdp_debug_level:
+	Enables connection establishment and teardown debug tracing.
+
+sdp_data_debug_level:
+	Enables datapath debug tracing. If set to 1, it shows only packets >1. 
+	To enable debugging of data path, compile driver with CONFIG_SDP_DEBUG_DATA.
+	
+
+recv_poll:
+	Enables poll receiving before arming the interrupt. Set a higher value
+	to decrease the number of RX interrupts. Consequently, the CPU
+	utilization will be higher.
+
+sdp_keepalive_time:
+	Default idle time in seconds before keepalive probe sent.
+
+Resources
+---------
+rcvbuf_initial_size:
+	Receives buffer initial size in bytes.
+
+rcvbuf_scale:
+	Not in use
+
+top_mem_usage:
+	Top system wide sdp memory usage for recv (in MB).
+
+max_large_sockets:
+	Not in use
+
+sdp_fmr_pool_size:
+	Number of FMRs to allocate for pool
+
+sdp_fmr_dirty_wm:
+	Watermark to flush fmr pool
+
+Thresholds
+----------
+sdp_inline_thresh:
+	Inline copy threshold. effective to new sockets only; 0=Off.
+
+sdp_zcopy_thresh:
+	Zero copy using RDMA threshold; 0=Off.
+	If smaller than page size, set to page size.
+
+Interrupt hardware moderation:
+------------------------------
+sdp_rx_coal_target:
+	Target number of bytes to coalesce with interrupt moderation.
+
+sdp_rx_coal_time:
+	rx coal time (jiffies).
+
+sdp_rx_rate_low:
+	rx_rate low (packets/sec).
+
+sdp_rx_coal_time_low:
+	low moderation usec.
+
+sdp_rx_rate_high:
+	rx_rate high (packets/sec).
+
+sdp_rx_coal_time_high:
+	high moderation usec.
+
+sdp_rx_rate_thresh:
+	rx rate thresh ().
+
+sdp_sample_interval:
+	sample interval (jiffies).
+
+hw_int_mod_count:
+	Forced hw int moderation val. -1 for auto (packets). 0 to disable.
+
+hw_int_mod_usec:
+	Forced hw int moderation val. -1 for auto (usec). 0 to disable.

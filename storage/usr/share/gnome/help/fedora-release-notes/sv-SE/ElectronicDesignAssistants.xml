@@ -1,0 +1,454 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Electronic_Design_Automation" lang="sv-SE">
+	<title>Automatisering av elektronikdesign</title>
+	 <remark>Denna nyhet finns här: <ulink type="http" url="https://fedoraproject.org/wiki/Documentation_EDA_Beat">https://fedoraproject.org/wiki/Documentation_EDA_Beat</ulink></remark>
+	<para>
+		<indexterm>
+			<primary>Automatisering av elektronikdesign</primary>
+		</indexterm>
+		 <indexterm>
+			<primary>Fedoras elektroniklabb</primary>
+		</indexterm>
+		 Denna avdelning skissar ändringarna i Fedoras elektroniklabb i Fedora 12. Observera att ett antal program i FEL kan användas av flera grupper. Dessa specifika program beskrivs inom avsnitten Kretsdesign (som inkluderar simulering och PCB-layout) och Inbäddad utveckling i dessa noteringar.
+	</para>
+	<section>
+		<title>Kodgranskning i samarbete</title>
+		<para>
+			<indexterm>
+				<primary>Kodgranskning i samarbete</primary>
+			</indexterm>
+			 En av de många sidorna av digital hårdvarudesign innefattar spårandet av många filer som skall skickas till olika EDA-verktyg. De slutliga rapporterna eller nätlistorna analyseras noggrannt och loggas som en del av signeringsmetodiken. Varje företag spårar dessa projektberoende filer i en vald katalogstruktur och i ett visst versionshanteringssystem.
+		</para>
+		<para>
+			Vi har inkluderat en effektivt och pålitligt kodgranskningslösning i Fedorasamlingen. Denna trac-baserade metod för granskning av kollegor kommer också hjälpa till att skapa länkar och skarvlösa referenser mellan felrapporter, uppgifter, ändringar och filer. Projektkoordinatörer kommer ha en mer realistisk överblick över det pågående projektet och kunna spåra framstegen väldigt enkelt avseende olika milstenar och tidsgränser.
+		</para>
+	</section>
+	
+	<section>
+		<title>Eclipse standardutvecklingsmiljö</title>
+		<para>
+			<indexterm>
+				<primary>Eclipse standardutvecklingsmiljö</primary>
+				<secondary>Automatisering av elektronikdesign</secondary>
+			</indexterm>
+			 Med hjälp och stöd från Fedoras Eclipsegrupp blir Eclipse FEL:s primära integrerade utvecklingsmiljö för HDL IP-utveckling och dokumentation. Denna anpassning är gjort för att vidmakthålla sann interoperabilitet mellan verktyg som erbjuds av olika leverantörer av inbäddad programvara.
+		</para>
+		<para>
+			Följande insticksmoduler som tillhandahålls som standard av Fedoras elektroniklabbplatform kommer förbättra: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						framändedesign
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						automatgenerering av dokumentation och underhåll av professionella datablad
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Perl/Tcl-skript (Perlmoduler som de kom från FEL10)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						versionsstyrningsprojekt
+					</para>
+				</listitem>
+			</itemizedlist>
+			<table frame="all" id="tbl-FEL-Eclipse-Plugins">
+				<title>Valda Eclipseinsticksmoduler för hårdvarudesign</title>
+				<indexterm>
+					<primary>eclipse-veditor</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-eclox</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-texlipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-cdt</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-dltk-tcl</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-epic</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-subclipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-egit</primary>
+				</indexterm>
+				<tgroup cols="2">
+					<thead>
+						<row>
+							<entry>
+								Paket
+							</entry>
+							<entry>
+								Beskrivning
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								eclipse-veditor
+							</entry>
+							<entry>
+								Hjälper digitala IC-designers/FPGA-designers att utveckla Verilog/VHDL-kod i Eclipse. Ger fel- och varningsmeddelanden i realtid om skrivfel, saknade signler, onödiga signaler m.m.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-eclox
+							</entry>
+							<entry>
+								Om vhdl-koden har kommentarer i doxygenstil kan en pdf atuomatgenereras och användas antingen under interna möten eller skickas till kunden.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-texlipse
+							</entry>
+							<entry>
+								Eftersom pdf:en genereras med latex kommer texlipse-insticksmodulen ge någon ytterligare formatformatering och enkelhet att skapa pdf. Att skapa en pdf görs nu med bara Ctrl-S istället för ett manuellt klickande som man skulle behöva göra i kile. Därmed kommer kile tas bort från FEL:s livedvd.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-cdt
+							</entry>
+							<entry>
+								Ger utvecklingsverktyg för inbäddad C och C++
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-dltk-tcl
+							</entry>
+							<entry>
+								Tcl-skript kan underhållas vid sidan av HDL-koden.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-epic
+							</entry>
+							<entry>
+								Perlskript kan underhållas vid sidan av HDL-koden.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-subclipse
+							</entry>
+							<entry>
+								Lägger till Subversionintegration till Eclipses integrerade utvecklingsmiljö
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-egit
+							</entry>
+							<entry>
+								Lägger till integration med distribuerad versionskontroll med GIT till Eclipse integrerade utvecklingsmiljö
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+	</section>
+	
+	<section>
+		<title>Analog ASIC-design</title>
+		<variablelist>
+			<varlistentry>
+				<term>toped</term>
+				<listitem>
+					<indexterm>
+						<primary>toped</primary>
+					</indexterm>
+					<para>
+						Uppdaterat till konsolideringsutgåvan 0.9.4. Fedorapaketet Toped sätter variabeln $TPD_GLOBAL till /usr/share/toped som standard så att användaren kan köra toped direkt.
+					</para>
+					<para>
+						Graham Petley och Krustev Svilen har tillhandahållit 2 TELL-filer som en demonstration av hur toped kan interagera med Pharosc standardceller via topeds GDSII- och CIF-parsrar.
+					</para>
+					<para>
+						Noterbart 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Ny grafisk renderare som snabbar upp utridandet upp till 3,5 gånger. Kräver openGL version 1.4 (F-11 använder 1.3, men detta är inte ett problem) och Virtual Buffer Objects. Den kommer användas som en grund för framtida grafiska effekter.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Den gamla renderaren finns kvar för att täcka grafikdrivrutiner som implementerar äldre openGL-versioner och i synnerhet virtuella skrivbord.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Hastigheten har också förbättrats signifikant.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Uppdateringar och rättningar i de externa gränssnitten. Särskilt GDSII.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Nytt verktyg för att convertera Virtuoso© technology-filer till TELL.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									TDT-formatet uppdaterat med nya poster. Versionen uppdaterad till 0.7.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									TDT-formatet uppdaterat med nya poster. Versionen uppdaterad till 0.7.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Ytterligare uppdateringar av anpassningar av användargränssnittet - verktygsrader.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Uppdateringar i den interna hanteringen av cellreferenser. Som ett resultat hanteras lager 0 som ett normalt lager nu.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+					<warning>
+						<title>Gamla Topedutgåvor kommer inte kunna läsa TDT-filer som produceras av denna utgåva. </title>
+						<para>
+							Det finns en viss mängd kod som ännu inte lagts in i huvudutvecklingsstammen, inklusive parsern av calibre-felrapporter. Förslaget är att göra det efter denna utgåva. En del funktioner fördröjdes istället för att offra stabilitet i detta läge.
+						</para>
+					</warning>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Magic</term>
+				<listitem>
+					<indexterm>
+						<primary>magic</primary>
+					</indexterm>
+					<indexterm>
+						<primary>magic-doc</primary>
+					</indexterm>
+					<para>
+						Fedora Magic har uppdaterats till 8.0.54.
+					</para>
+					<para>
+						Fedorapaketet Magic har sin dokumentation i ett separat paket som heter: <package>magic-doc</package>. Det senare innehåller några exempel på scmos och handledningar. Avancerade Magic VLSI-användare bör också vara intresserade av att läsa dokumentationen igen för att få reda på de finare detaljerna som serien 8.0 för med sig.
+					</para>
+					<para>
+						Funktioner: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									konturvektortypsnitt (tack vare projektet freefont), och strävan att rensa upp en mängd problem som var associerade med etiketter i Magic.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Hela displayen, hanteringen, OpenGL är fullständiga.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Innehåller några "cifoutput"-operatorer att användas med det nya kommandot "civ paint", för att hantera layout med booleska operatorer.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Hastigheten vid körning har förbättrats.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Två ytterligare menyer har lagt till för ruthantering och textinställningar.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Electric</term>
+				<listitem>
+					<indexterm>
+						<primary>electric</primary>
+					</indexterm>
+					<para>
+						<package>electric</package> har uppdaterats till 8.09.
+					</para>
+					<para>
+						Observera att eftersom de flesta av electric-användarna använder tredjeparts insticksmoduler som på grund av licensinkompatibiliteter med Fedora inte kan läggas till av FEL. Givet det förstår Fedoras elektroniklabbsgrupp att det skulle göra sönder interoperabiliteten med användarnas insticksmoduler att släppa en ny uppströmsversion. Därför kommer nya versioner av electric att först komma till förrådet updates-testing.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>Digital design</title>
+		<variablelist>
+			<varlistentry>
+				<term>Dinotrace</term>
+				<listitem>
+					<indexterm>
+						<primary>dinotrace</primary>
+					</indexterm>
+					<para>
+						Dinotrace, som är ny i Fedora &PROVIDER;, är en vågformsvisare som förstår Verilogs värdeändringsdumpar, ASCII och andra spårningsformat.
+					</para>
+					<para>
+						Det tillåter placering av markörer, markering av signaler, sökning, utskrift och har andra egenskaper som är överlägsna många kommersiella vågformsvisare.
+					</para>
+					<para>
+						Dinotrace är optimerad för snabb felsökning. Med VTRACE kommer ett simuleringsfel automatiskt att placera markörer där fel uppträder och lägga till kommentarer som är synliga i vågformsvisaren. Fyra musklick och felen kommer markeras i loggfilerna, och värdena på signaler vid felet kommer att synas i källkoden.
+					</para>
+					<para>
+						Fedora levererar också <code>dinotrace-mode</code> för emacs som <package>emacs-dinotrace-mode</package>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>eqntott</term>
+				<listitem>
+					<indexterm>
+						<primary>eqntott</primary>
+					</indexterm>
+					<para>
+						<package>eqntott</package> konverterar booleska logiska uttryck till sanningstabeller som är användbara för att förbereda indata till paketet espresso för logikminimering, konvertering av logiska uttryck till enklare former och för att skapa sanningstabeller. <package>eqntott</package> är ny i Fedora &PRODVER;.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>expresso-ab</term>
+				<listitem>
+					<indexterm>
+						<primary>expresso-ab</primary>
+					</indexterm>
+					<para>
+						<package>espresso</package>, som är ny i Fedora &PRODVER;, tar som indata en tvånivårepresentation av tvåvärda (eller mångvärda) booleska funktioner, och producerar en minimal likvärdig representation. Det är ett verktyg för minimering av boolesk logik.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Verilator</term>
+				<listitem>
+					<indexterm>
+						<primary>verilator</primary>
+					</indexterm>
+					<para>
+						Verilator är den snabbaste fria Verilog HDL-simulatorn. Den kompilerar syntetiserbar Verilog, plus en del PSL-, SystemVerilog- och Synthesis-försäkringar till C++ eller SystemC-kod. Den är konstruerad för stora projekt där hög simulieringsprestanda är en viktig egenskap, och är särskilt väl lämpad för att skapa exekverbara modeller av CPU:er grupper som designar inbäddade program.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>vrq</term>
+				<listitem>
+					<indexterm>
+						<primary>vrq</primary>
+					</indexterm>
+					<para>
+						VRQ är en modulär verilog-parser som stödjer insticksverktyg för att bearbeta verilog. Flera verktyg kan anropas på ett sammankopplat sätt inom en enda körning av vrq. Det är en generell framändeparser med stöd för anpassningsbara bakändesinsticksverktyg.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Alliance</term>
+				<listitem>
+					<indexterm>
+						<primary>Alliance</primary>
+					</indexterm>
+					<para>
+						Fedora Alliance CVS utvecklingsförråd fick sin 100:e patch i augusti 2009, med hänsyn till stabilitet på 64 arkitekturer och vi är glada att de uppströma har använt alla våra rättningar för alliance. Vi har även byggt denna nya utgåva för alla Fedorastödda testförråd och EPEL-5:s testförråd. Det finns även ett nytt grafiskt gränssnitt <package>xgra</package> som kommer med denna nya utgåva och är en grafvisare.
+					</para>
+					<para>
+						Vi kommer inte ersätta Alliance VLSI med herb (som stöddes för att vara en avgrening av alliance) i Fedora. Före F-11:s släpptes var herb-utvecklingen aktiv men dog ut efter att F-11 släppts. Eftersom Alliance VLSI är aktiv uppströms och mottaglig för våra önskemål finns det för närvarande inget giltigt skäl till att låta alliance utgå till förmån för herb.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>Perlskript för hårdvarudesign</title>
+		<variablelist>
+			<varlistentry>
+				<term>perl-SystemPerl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-SystemPerl</primary>
+					</indexterm>
+					<para>
+						Detta är ett nytt paket i Fedora &PRODVER;.
+					</para>
+					<para>
+						SystemPerl är en version av språket SystemC. Det är konstruerat för att expandera text så att onödig upprepning i språket minimeras. Genom att använda sp_preproc kan SystemPerl-filer expanderas till C++-filer vid kompileringstillfället, eller expanderas på plats för att göra dem till giltiga fristående SystemC-filer.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>perl-Verilog-Perl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-Verilog-Perl</primary>
+					</indexterm>
+					<para>
+						<package>perl-Verilog-Perl</package> har uppdaterats till 3.123. Bland de nya funktionerna finns: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Förbättrad varning när "do" används som identifierare.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Fixade skyddade preprocessoridentifierare, fel 106.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Fixade kompileringsfel med Perl 5.8.8, rt48226.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Fixade kompileringsfel med Perl 5.8.0 med callbackgen.
+								</para>
+							</listitem>
+						</itemizedlist>
+						<warning>
+							<para>
+								perl-Verilog-Perl ersätter perl-Verilog. Fedoraanvändare råds att justera sina hemgjorda Perl-skript därefter.
+							</para>
+						</warning>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+</section>
+
+

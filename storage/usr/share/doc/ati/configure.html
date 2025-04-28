@@ -1,0 +1,406 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.2  (Linux)">
+	<META NAME="CREATED" CONTENT="20050803;10311200">
+	<META NAME="CHANGED" CONTENT="20050808;16172800">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P STYLE="border-top: none; border-bottom: 1.10pt double #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.03in; padding-left: 0in; padding-right: 0in">
+<BR><BR>
+</P>
+<P STYLE="border-top: none; border-bottom: 1.10pt double #000000; border-left: none; border-right: none; padding-top: 0in; padding-bottom: 0.03in; padding-left: 0in; padding-right: 0in">
+<FONT SIZE=4><B>Driver Behavior and Configuration<BR></B></FONT><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+<P><B>Contents</B></P>
+<UL>
+	<LI><P><A HREF="#monitor config">Monitor Configuration</A></P>
+</UL>
+<UL>
+	<LI><P><A HREF="#mode selection">Mode Selection</A></P>
+	<LI><P><A HREF="#refresh rate selection">Refresh Rate Selection</A></P>
+	<LI><P><A HREF="#data dictionary">Appendix: Glossary</A></P>
+	<LI><P><A HREF="#Appendix config">Appendix: Configuration File
+	Specifics</A></P>
+</UL>
+<P><A NAME="monitor config"></A><B>Monitor Configuration</B></P>
+<P STYLE="font-weight: medium; line-height: 100%">The driver supports
+the following monitor configurations. 
+</P>
+<UL>
+	<LI><P STYLE="font-weight: medium; line-height: 100%">Single Head:
+	Single monitor operation only. If a second monitor is connected, it
+	remains dark. This is the only available display mode setting if you
+	have only one monitor connected. This is further the only mode Quad
+	Buffer Stereo (&quot;Active Stereo&quot;) is working. 
+	</P>
+</UL>
+<UL>
+	<LI><P STYLE="font-weight: medium; line-height: 100%">Clone: The
+	contents of the primary monitor are duplicated on the second
+	monitor. If one monitor cannot display the selected resolution, a
+	lower resolution is automatically selected for this monitor. The
+	original resolution is used then as it was specified as the virtual
+	resolution. This means the second screen will do panning when the
+	mouse moves ahead. The configuration file contains only one Screen
+	section and one Monitor section. The Monitor specific data for the
+	secondary display is handled by the Hsync2, Vrefresh2, and Mode2
+	options. Custom modes are only applied to the the primary display.</P>
+</UL>
+<UL>
+	<LI><P STYLE="font-weight: medium; line-height: 100%">Big Desktop:
+	There is a single big frame buffer that gets split either
+	horizontally or vertically and each half is sent to a single
+	monitor. The configuration file contains only one Screen section and
+	one Monitor section. The Monitor specific data for the secondary
+	display is handled by the Hsync2, Vrefresh2, and Mode2 options.
+	Custom modes are only applied to the primary display.</P>
+	<LI><P STYLE="line-height: 100%">Mirror: Both displays are driven by
+	the primary CRTC and they operate at the same display mode. When two
+	monitors have different capabilities, the mode validation will fall
+	back to the highest common mode that can be supported by both
+	monitors. Note that in some cases two displays cannot be driven by
+	the same CRTC, then two controllers will automatically be used.</P>
+	<LI><P STYLE="line-height: 100%">Dual Head: In this mode, the X
+	server is configured to have two screens on two different channels
+	of the same adapter. In other words in the configuration file there
+	will be two Monitor sections and two Screen sections. This will
+	create two independent desktops managed by the window manager. Since
+	the DRI module has problems with Xinerama the driver does not
+	support extended desktop with Xinerama. 
+	</P>
+</UL>
+<P STYLE="line-height: 100%">By default any physically connected
+display will be initialized under Clone mode (if possible) in display
+priority order during X server startup. This behavior can be
+overridden through the use of the ForceMonitors feature.
+ForceMonitors can be used to set all specified displays to enabled or
+disabled regardless of physical connection. For example, suppose a
+CRT and a DFP are physically connected. It is possible through
+ForceMonitors to disable the DFP and force STV to on. The STV could
+then be physically connected at a later time for viewing. When using
+ForceMonitors with an unconnected CRT the default behavior will be to
+initialize the display in 1024x768 resolution. Since the monitor is
+not connected the EDID information cannot be determined, as a result
+the driver initializes the display safe mode. In order to override
+this behavior a custom mode or custom sync ranges must be set for
+this CRT display.</P>
+<P STYLE="line-height: 100%">The driver supports any combination of
+two connected displays, such as CRT/DFP, CRT/STV, CRT/CRT, etc. More
+then two connected displays may operate correctly but is not
+officially supported at this time. The assignment of primary and
+secondary display is done through priority order, which is LCD, DFP
+on internal TMDS, DFP2, DFP on external TMDS, STV, CV, CRT on primary
+DAC, and CRT on secondary DAC respectively. In order to determine
+which displays are connected examine the var/log/XFree86.0.log (or
+Xorg.0.log) file and look for the Display1 through DisplayN tags.
+These tags will describe which displays have been detected and the
+respective hardware component that they have been attached to. Using
+the information in the log file and the priority sequence the primary
+and secondary displays can be derived. 
+</P>
+<P STYLE="line-height: 100%">When configuring the TVOUT it is
+important to set the TVFormat to the correct local broadcast
+standard. By default this value will be determined by the video BIOS
+but it is most likely has been assigned NTSC. 
+</P>
+<P><A NAME="mode selection"></A><B>Mode Selection</B></P>
+<P>By default all VESA modes, EDID modes, and custom modes will be
+enumerated for mode selection. A custom mode is defined as a mode
+specified by a Modeline in the Monitor section of the configuration
+file. Custom modes take precedence over all other types of modes. If
+a custom mode exists at a particular resolution then only custom
+modes can be set at that resolution. Custom modes and custom sync range can only be applied
+to DFP and CRT displays. In the case of Dual Head each Monitor
+section will only have visibility of its own custom modes. If a CRT
+display is connected and it does not have EDID information then this
+display is enabled in 1024x768. To override this behavior use of
+custom sync ranges or a custom modes must be employed. 
+</P>
+<P STYLE="font-weight: medium">The set of all modes that will be
+enumerated is determined by the value of Modes and/or Mode2 depending
+on the DesktopSetup. Note, the Modes setting is specified in the
+Display sub-section whereas the Mode2 option is specified in the
+Device section of the configuration file. The driver only supports
+modes named by the following format, “&lt;width&gt;x&lt;height&gt;”.
+For example, “1024x768” is a valid mode and “bob” or “1024
+x 768” are invalid mode names. If the first mode in the mode
+listing is not the largest specified mode then the X server will
+start as a virtual desktop with pan and scan. 
+</P>
+<P><A NAME="refresh rate selection"></A><B>Refresh Rate Selection</B></P>
+<P STYLE="font-weight: medium">The PreferredVRefresh setting is used
+to limit the maximum refresh rate that will be chosen when changing
+modes. For example, if the resolution 1024x768 has 5 different
+vertical refreshes, namely 100, 90, 80, 70, and 60, and the
+PreferredVRefresh is 85 then a refresh rate of 80 Hz will be chosen
+for this resolution. The default PreferredVRefresh is 85 Hz.</P>
+<P STYLE="font-weight: medium">If custom refresh rates have been set
+then they will override any refresh rate information obtained from
+the EDID. Custom refresh rates should be used in the case of non-ddc
+monitors or monitors with incorrect EDID data. The easiest way to
+force the setting of a particular mode is to use a custom mode.</P>
+<P STYLE="font-weight: medium">Custom modes can will also effect the
+way in which refresh rates are selected. If there is a custom mode
+set then the highest refresh rate at the custom mode resolution will
+be chosen. This behavior only comes into effect when there is more
+then one custom mode specified at a particular resolution. For
+example, if two custom modes are specified at 1024x768, one is 60 Hz
+and the other is 120 Hz, the 120 Hz mode will be chosen. 
+</P>
+<P><A NAME="data dictionary"></A><B>Appendix: Glossary</B></P>
+<TABLE WIDTH=854 BORDER=1 CELLPADDING=5 CELLSPACING=0>
+	<COL WIDTH=192>
+	<COL WIDTH=640>
+	<TR BGCOLOR="#99cccc">
+		<TD WIDTH=192>
+			<H3>Name</H3>
+		</TD>
+		<TD WIDTH=640>
+			<H3>Definition</H3>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P STYLE="font-weight: medium">EDID</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Extended Display Identification Data. Most modern displays will
+			include EDID data such as sync ranges, modes, and other
+			miscellaneous data.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>CRTC</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Hardware block on the ASIC which drives the display.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P STYLE="font-weight: medium">VESA</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Video Electronics Standards Association. Defines a set of modes
+			called VESA modes.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>DFP</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Digital Flat Panel.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>LVDS</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Low Voltage Differential Signaling. Used for laptop flat panel
+			displays (LCD).</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>CRT</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Cathode Ray Tube.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>STV</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>S-Video out for TV.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>TMDS</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Transmission Minimized Differential Signaling. Used for desktop
+			flat panel displays (DFP).</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>DAC</P>
+		</TD>
+		<TD WIDTH=640>
+			<P>Digital to Analog Converter. Connected to a CRTC hardware
+			block.</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+<P><B>Appendix: Configuration File Specifics</B></P>
+<P>The listed options are to be specified in the Device section of
+the configuration file with the following syntax:</P>
+<P STYLE="font-weight: medium">Option “&lt;option name&gt;”
+“&lt;option value&gt;” 
+</P>
+<P STYLE="font-weight: medium">Ex: Option “DesktopSetup” “c”</P>
+<TABLE WIDTH=854 BORDER=1 CELLPADDING=5 CELLSPACING=0>
+	<COL WIDTH=192>
+	<COL WIDTH=131>
+	<COL WIDTH=499>
+	<TR BGCOLOR="#99cccc">
+		<TD WIDTH=192>
+			<H3>Option Keyword</H3>
+		</TD>
+		<TD WIDTH=131>
+			<H3 ALIGN=CENTER>Parameter Type</H3>
+		</TD>
+		<TD WIDTH=499>
+			<H3>Description</H3>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>PreferredVRefresh</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>Integer</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>This option sets the maximum preferred refresh rate when the X
+			server starts or when xrandr is used to change modes. 
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>DesktopSetup 
+			</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>String 
+			</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>Define desktop setup (dual-screen mode, clone mode,
+			horizontal/vertical big desktop). The old method of using a hex
+			value to represent DesktopSetup is deprecated. The new method is
+			to use one of the following arguments {c, h, v, m, s, hr, vr, sr}.
+			For example, Option DesktopSetup “c” would be used to set
+			clone mode. (Note: c=clone, m = mirror, h = horizontal, v=
+			vertical, s=single, r=reversed). Note: DesktopSetup only applies
+			when there is only one screen configured for the card (otherwise
+			it is the dual head case).</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>ForceMonitors</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>String 
+			</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>Describe all displays that are to be enabled and/or disabled
+			regardless of physical connection. The arguments allowed include
+			one or more members of the following set { crt1, crt2, lvds, tv,
+			tmds1, tmds2, tmds2i, nocrt1, nocrt2, nolvds, notv, notmds1,
+			notmds2, notmds2i }. For example, Option ForceMonitors “crt1,
+			notv” would be used to force CRT1 on and TVOUT off.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>Mode2 
+			</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>String 
+			</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>Define secondary display resolution. For example, Option Mode2
+			“1024x768, 800x600, 640x480” would be used to suggest a
+			resolution for the secondary display. The resolutions presented
+			first in the list are given highest priority. 
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>HSync2 
+			</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>String 
+			</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>Define secondary display horizontal sync range in clone mode.
+			For example, Option HSync2 “50-75” would be used to override
+			the horizontal sync range to the given value on the secondary
+			display. By default the horizontal sync range is determined by the
+			EDID data or by sensible defaults. Typically, this option is
+			utilized in lieu of valid EDID data.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>VRefresh2 
+			</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>String 
+			</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>Define secondary display vertical refresh range in clone mode.
+			For example, Option VRefresh2 “50-75” would be used to
+			override the vertical refresh rate on the secondary display.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>TVFormat 
+			</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>String 
+			</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>Define TV-out broadcast standard. Valid arguments include of
+			the following set {NTSC-M, NTSC-JPN, , PAL-B, PAL-COMB-N, PAL-D,
+			PAL-G, PAL-I, PAL-K, PAL-K1, PAL-L, PAL-M, PAL-N, PAL-SECAM-D,
+			PAL-SECAM-K, PAL-SECAM-K1, PAL-SECAM-L}. For example, Option
+			TVFormat “NTSC-JPN” would be used to set the NTSC Japan TV
+			format.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=192>
+			<P>TVStandard</P>
+		</TD>
+		<TD WIDTH=131>
+			<P ALIGN=CENTER>String</P>
+		</TD>
+		<TD WIDTH=499>
+			<P>Define TV display priorities. The arguments allowed are exactly
+			one of the following set {VIDEO, SCART, YUV}.</P>
+		</TD>
+	</TR>
+</TABLE>
+<HR>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

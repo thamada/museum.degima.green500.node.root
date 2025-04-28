@@ -1,0 +1,37 @@
+diff --git a/drivers/infiniband/hw/qib/qib_iba7322.c b/drivers/infiniband/hw/qib/qib_iba7322.c
+index 4130b91..3bdcb02 100644
+--- a/drivers/infiniband/hw/qib/qib_iba7322.c
++++ b/drivers/infiniband/hw/qib/qib_iba7322.c
+@@ -6037,9 +6037,16 @@ static void qsfp_7322_event(struct work_struct *work)
+ 	 * even on failure to read cable information.  We don't
+ 	 * get here for QME, so IS_QME check not needed here.
+ 	 */
+-	le2 = (!ret && qd->cache.atten[1] >= qib_long_atten &&
+-	       !ppd->dd->cspec->r1 && QSFP_IS_CU(qd->cache.tech)) ?
+-		LE2_5m : LE2_DEFAULT;
++	if (!ret && !ppd->dd->cspec->r1) {
++		if (QSFP_IS_ACTIVE_FAR(qd->cache.tech))
++			le2 = LE2_QME;
++		else if (qd->cache.atten[1] >= qib_long_atten &&
++			 QSFP_IS_CU(qd->cache.tech))
++			le2 = LE2_5m;
++		else
++			le2 = LE2_DEFAULT;
++	} else
++		le2 = LE2_DEFAULT;
+ 	ibsd_wr_allchans(ppd, 13, (le2 << 7), BMASK(9, 7));
+ 	qib_cdbg(INIT, "IB%u:%u set LE2=%u\n", ppd->dd->unit,
+ 		 ppd->port, le2);
+diff --git a/drivers/infiniband/hw/qib/qib_qsfp.h b/drivers/infiniband/hw/qib/qib_qsfp.h
+index cab8570..0ab081d 100644
+--- a/drivers/infiniband/hw/qib/qib_qsfp.h
++++ b/drivers/infiniband/hw/qib/qib_qsfp.h
+@@ -79,6 +79,8 @@
+ extern const char *const qib_qsfp_devtech[16];
+ /* Active Equalization includes fiber, copper full EQ, and copper near Eq */
+ #define QSFP_IS_ACTIVE(tech) ((0xA2FF >> ((tech) >> 4)) & 1)
++/* Active Equalization includes fiber, copper full EQ, and copper far Eq */
++#define QSFP_IS_ACTIVE_FAR(tech) ((0x32FF >> ((tech) >> 4)) & 1)
+ /* Attenuation should be valid for copper other than full/near Eq */
+ #define QSFP_HAS_ATTEN(tech) ((0x4D00 >> ((tech) >> 4)) & 1)
+ /* Length is only valid if technology is "copper" */

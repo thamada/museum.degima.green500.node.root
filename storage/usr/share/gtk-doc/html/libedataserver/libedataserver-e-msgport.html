@@ -1,0 +1,1335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>e-msgport</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="up" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="prev" href="libedataserver-e-memory.html" title="e-memory">
+<link rel="next" href="libedataserver-EProxy.html" title="EProxy">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libedataserver-e-memory.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution-Data-Server Manual: Utilities (libedataserver)</th>
+<td><a accesskey="n" href="libedataserver-EProxy.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libedataserver-e-msgport.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libedataserver-e-msgport.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="e-msgport">
+<a name="libedataserver-e-msgport"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libedataserver-e-msgport.top_of_page"></a>e-msgport</span></h2>
+<p>e-msgport</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libedataserver-e-msgport.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a>;
+                    <a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a>;
+#define             <a class="link" href="libedataserver-e-msgport.html#E-DLIST-INITIALISER--CAPS" title="E_DLIST_INITIALISER()">E_DLIST_INITIALISER</a>                 (l)
+void                <a class="link" href="libedataserver-e-msgport.html#e-dlist-init" title="e_dlist_init ()">e_dlist_init</a>                        (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *v);
+<a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        <a class="link" href="libedataserver-e-msgport.html#e-dlist-addhead" title="e_dlist_addhead ()">e_dlist_addhead</a>                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *n);
+<a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        <a class="link" href="libedataserver-e-msgport.html#e-dlist-addtail" title="e_dlist_addtail ()">e_dlist_addtail</a>                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *n);
+<a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        <a class="link" href="libedataserver-e-msgport.html#e-dlist-remove" title="e_dlist_remove ()">e_dlist_remove</a>                      (<a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *n);
+<a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        <a class="link" href="libedataserver-e-msgport.html#e-dlist-remhead" title="e_dlist_remhead ()">e_dlist_remhead</a>                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);
+<a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        <a class="link" href="libedataserver-e-msgport.html#e-dlist-remtail" title="e_dlist_remtail ()">e_dlist_remtail</a>                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-dlist-empty" title="e_dlist_empty ()">e_dlist_empty</a>                       (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-dlist-length" title="e_dlist_length ()">e_dlist_length</a>                      (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);
+                    <a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a>;
+                    <a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a>;
+<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *           <a class="link" href="libedataserver-e-msgport.html#em-cache-new" title="em_cache_new ()">em_cache_new</a>                        (time_t timeout,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gsize"
+>gsize</a> nodesize,
+                                                         <a
+href="../glib/glib-Miscellaneous-Utility-Functions.html#GFreeFunc"
+>GFreeFunc</a> nodefree);
+void                <a class="link" href="libedataserver-e-msgport.html#em-cache-destroy" title="em_cache_destroy ()">em_cache_destroy</a>                    (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc);
+<a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *       <a class="link" href="libedataserver-e-msgport.html#em-cache-lookup" title="em_cache_lookup ()">em_cache_lookup</a>                     (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);
+<a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *       <a class="link" href="libedataserver-e-msgport.html#em-cache-node-new" title="em_cache_node_new ()">em_cache_node_new</a>                   (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);
+void                <a class="link" href="libedataserver-e-msgport.html#em-cache-node-unref" title="em_cache_node_unref ()">em_cache_node_unref</a>                 (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *n);
+void                <a class="link" href="libedataserver-e-msgport.html#em-cache-add" title="em_cache_add ()">em_cache_add</a>                        (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *n);
+void                <a class="link" href="libedataserver-e-msgport.html#em-cache-clear" title="em_cache_clear ()">em_cache_clear</a>                      (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc);
+                    <a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a>;
+                    <a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a>;
+<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *          <a class="link" href="libedataserver-e-msgport.html#e-msgport-new" title="e_msgport_new ()">e_msgport_new</a>                       (void);
+void                <a class="link" href="libedataserver-e-msgport.html#e-msgport-destroy" title="e_msgport_destroy ()">e_msgport_destroy</a>                   (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-msgport-fd" title="e_msgport_fd ()">e_msgport_fd</a>                        (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);
+struct PRFileDesc * <a class="link" href="libedataserver-e-msgport.html#e-msgport-prfd" title="e_msgport_prfd ()">e_msgport_prfd</a>                      (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);
+void                <a class="link" href="libedataserver-e-msgport.html#e-msgport-put" title="e_msgport_put ()">e_msgport_put</a>                       (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *msg);
+<a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *              <a class="link" href="libedataserver-e-msgport.html#e-msgport-wait" title="e_msgport_wait ()">e_msgport_wait</a>                      (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);
+<a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *              <a class="link" href="libedataserver-e-msgport.html#e-msgport-get" title="e_msgport_get ()">e_msgport_get</a>                       (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);
+void                <a class="link" href="libedataserver-e-msgport.html#e-msgport-reply" title="e_msgport_reply ()">e_msgport_reply</a>                     (<a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *msg);
+                    <a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a>;
+enum                <a class="link" href="libedataserver-e-msgport.html#e-thread-t" title="enum e_thread_t">e_thread_t</a>;
+void                (<a class="link" href="libedataserver-e-msgport.html#EThreadFunc" title="EThreadFunc ()">*EThreadFunc</a>)                      (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *           <a class="link" href="libedataserver-e-msgport.html#e-thread-new" title="e_thread_new ()">e_thread_new</a>                        (<a class="link" href="libedataserver-e-msgport.html#e-thread-t" title="enum e_thread_t">e_thread_t</a> type);
+void                <a class="link" href="libedataserver-e-msgport.html#e-thread-destroy" title="e_thread_destroy ()">e_thread_destroy</a>                    (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e);
+void                <a class="link" href="libedataserver-e-msgport.html#e-thread-set-queue-limit" title="e_thread_set_queue_limit ()">e_thread_set_queue_limit</a>            (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> limit);
+void                <a class="link" href="libedataserver-e-msgport.html#e-thread-set-msg-lost" title="e_thread_set_msg_lost ()">e_thread_set_msg_lost</a>               (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EThreadFunc" title="EThreadFunc ()">EThreadFunc</a> destroy,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="libedataserver-e-msgport.html#e-thread-set-msg-destroy" title="e_thread_set_msg_destroy ()">e_thread_set_msg_destroy</a>            (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EThreadFunc" title="EThreadFunc ()">EThreadFunc</a> destroy,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="libedataserver-e-msgport.html#e-thread-set-reply-port" title="e_thread_set_reply_port ()">e_thread_set_reply_port</a>             (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *reply_port);
+void                <a class="link" href="libedataserver-e-msgport.html#e-thread-set-msg-received" title="e_thread_set_msg_received ()">e_thread_set_msg_received</a>           (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EThreadFunc" title="EThreadFunc ()">EThreadFunc</a> received,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="libedataserver-e-msgport.html#e-thread-put" title="e_thread_put ()">e_thread_put</a>                        (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *msg);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-thread-busy" title="e_thread_busy ()">e_thread_busy</a>                       (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e);
+                    <a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a>;
+enum                <a class="link" href="libedataserver-e-msgport.html#e-mutex-t" title="enum e_mutex_t">e_mutex_t</a>;
+<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *            <a class="link" href="libedataserver-e-msgport.html#e-mutex-new" title="e_mutex_new ()">e_mutex_new</a>                         (<a class="link" href="libedataserver-e-msgport.html#e-mutex-t" title="enum e_mutex_t">e_mutex_t</a> type);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-mutex-destroy" title="e_mutex_destroy ()">e_mutex_destroy</a>                     (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-mutex-lock" title="e_mutex_lock ()">e_mutex_lock</a>                        (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-mutex-unlock" title="e_mutex_unlock ()">e_mutex_unlock</a>                      (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);
+void                <a class="link" href="libedataserver-e-msgport.html#e-mutex-assert-locked" title="e_mutex_assert_locked ()">e_mutex_assert_locked</a>               (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-e-msgport.html#e-mutex-cond-wait" title="e_mutex_cond_wait ()">e_mutex_cond_wait</a>                   (<a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> cond,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libedataserver-e-msgport.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libedataserver-e-msgport.details"></a><h2>Details</h2>
+<div class="refsect2" title="EDListNode">
+<a name="EDListNode"></a><h3>EDListNode</h3>
+<pre class="programlisting">typedef struct {
+	struct _EDListNode *next;
+	struct _EDListNode *prev;
+} EDListNode;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="EDList">
+<a name="EDList"></a><h3>EDList</h3>
+<pre class="programlisting">typedef struct {
+	struct _EDListNode *head;
+	struct _EDListNode *tail;
+	struct _EDListNode *tailpred;
+} EDList;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="E_DLIST_INITIALISER()">
+<a name="E-DLIST-INITIALISER--CAPS"></a><h3>E_DLIST_INITIALISER()</h3>
+<pre class="programlisting">#define E_DLIST_INITIALISER(l) { (EDListNode *)&amp;l.tail, NULL, (EDListNode *)&amp;l.head }
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>l</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_init ()">
+<a name="e-dlist-init"></a><h3>e_dlist_init ()</h3>
+<pre class="programlisting">void                e_dlist_init                        (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *v);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>v</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_addhead ()">
+<a name="e-dlist-addhead"></a><h3>e_dlist_addhead ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        e_dlist_addhead                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *n);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>l</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_addtail ()">
+<a name="e-dlist-addtail"></a><h3>e_dlist_addtail ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        e_dlist_addtail                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *n);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>l</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_remove ()">
+<a name="e-dlist-remove"></a><h3>e_dlist_remove ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        e_dlist_remove                      (<a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *n);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_remhead ()">
+<a name="e-dlist-remhead"></a><h3>e_dlist_remhead ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        e_dlist_remhead                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>l</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_remtail ()">
+<a name="e-dlist-remtail"></a><h3>e_dlist_remtail ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EDListNode" title="EDListNode">EDListNode</a> *        e_dlist_remtail                     (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>l</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_empty ()">
+<a name="e-dlist-empty"></a><h3>e_dlist_empty ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_dlist_empty                       (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>l</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_dlist_length ()">
+<a name="e-dlist-length"></a><h3>e_dlist_length ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_dlist_length                      (<a class="link" href="libedataserver-e-msgport.html#EDList" title="EDList">EDList</a> *l);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>l</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EMCache">
+<a name="EMCache"></a><h3>EMCache</h3>
+<pre class="programlisting">typedef struct _EMCache EMCache;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="EMCacheNode">
+<a name="EMCacheNode"></a><h3>EMCacheNode</h3>
+<pre class="programlisting">typedef struct {
+	struct _EMCacheNode *next, *prev;
+	gchar *key;
+	gint ref_count;
+	time_t stamp;
+} EMCacheNode;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="em_cache_new ()">
+<a name="em-cache-new"></a><h3>em_cache_new ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *           em_cache_new                        (time_t timeout,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gsize"
+>gsize</a> nodesize,
+                                                         <a
+href="../glib/glib-Miscellaneous-Utility-Functions.html#GFreeFunc"
+>GFreeFunc</a> nodefree);</pre>
+<p>
+Setup a new timeout cache.  <em class="parameter"><code>nodesize</code></em> is the size of nodes in the
+cache, and <em class="parameter"><code>nodefree</code></em> will be called to free YOUR content.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>timeout</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>nodesize</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>nodefree</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="em_cache_destroy ()">
+<a name="em-cache-destroy"></a><h3>em_cache_destroy ()</h3>
+<pre class="programlisting">void                em_cache_destroy                    (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc);</pre>
+<p>
+destroy the cache, duh.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>emc</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="em_cache_lookup ()">
+<a name="em-cache-lookup"></a><h3>em_cache_lookup ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *       em_cache_lookup                     (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);</pre>
+<p>
+Lookup a cache node.  once you're finished with it, you need to
+unref it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>emc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="em_cache_node_new ()">
+<a name="em-cache-node-new"></a><h3>em_cache_node_new ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *       em_cache_node_new                   (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);</pre>
+<p>
+Create a new key'd cache node.  The node will not be added to the
+cache until you insert it.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>emc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="em_cache_node_unref ()">
+<a name="em-cache-node-unref"></a><h3>em_cache_node_unref ()</h3>
+<pre class="programlisting">void                em_cache_node_unref                 (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *n);</pre>
+<p>
+unref a cache node, you can only unref nodes which have been looked
+up.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>emc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="em_cache_add ()">
+<a name="em-cache-add"></a><h3>em_cache_add ()</h3>
+<pre class="programlisting">void                em_cache_add                        (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMCacheNode" title="EMCacheNode">EMCacheNode</a> *n);</pre>
+<p>
+Add a cache node to the cache, once added the memory is owned by
+the cache.  If there are conflicts and the old node is still in
+use, then the new node is not added, otherwise it is added and any
+nodes older than the expire time are flushed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>emc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="em_cache_clear ()">
+<a name="em-cache-clear"></a><h3>em_cache_clear ()</h3>
+<pre class="programlisting">void                em_cache_clear                      (<a class="link" href="libedataserver-e-msgport.html#EMCache" title="EMCache">EMCache</a> *emc);</pre>
+<p>
+clear the cache.  just for api completeness.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>emc</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EMsgPort">
+<a name="EMsgPort"></a><h3>EMsgPort</h3>
+<pre class="programlisting">typedef struct _EMsgPort EMsgPort;</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">EMsgPort</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="EMsg">
+<a name="EMsg"></a><h3>EMsg</h3>
+<pre class="programlisting">typedef struct {
+	EDListNode ln;
+	EMsgPort *reply_port;
+	gint flags;
+} EMsg;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">EMsg</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_new ()">
+<a name="e-msgport-new"></a><h3>e_msgport_new ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *          e_msgport_new                       (void);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_destroy ()">
+<a name="e-msgport-destroy"></a><h3>e_msgport_destroy ()</h3>
+<pre class="programlisting">void                e_msgport_destroy                   (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_destroy</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>mp</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_fd ()">
+<a name="e-msgport-fd"></a><h3>e_msgport_fd ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_msgport_fd                        (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_fd</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_prfd ()">
+<a name="e-msgport-prfd"></a><h3>e_msgport_prfd ()</h3>
+<pre class="programlisting">struct PRFileDesc * e_msgport_prfd                      (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_prfd</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_put ()">
+<a name="e-msgport-put"></a><h3>e_msgport_put ()</h3>
+<pre class="programlisting">void                e_msgport_put                       (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *msg);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_put</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>msg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_wait ()">
+<a name="e-msgport-wait"></a><h3>e_msgport_wait ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *              e_msgport_wait                      (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_wait</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_get ()">
+<a name="e-msgport-get"></a><h3>e_msgport_get ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *              e_msgport_get                       (<a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *mp);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_get</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_msgport_reply ()">
+<a name="e-msgport-reply"></a><h3>e_msgport_reply ()</h3>
+<pre class="programlisting">void                e_msgport_reply                     (<a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *msg);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_msgport_reply</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>msg</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EThread">
+<a name="EThread"></a><h3>EThread</h3>
+<pre class="programlisting">typedef struct _EThread EThread;</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">EThread</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum e_thread_t">
+<a name="e-thread-t"></a><h3>enum e_thread_t</h3>
+<pre class="programlisting">typedef enum {
+	E_THREAD_QUEUE = 0,	/* run one by one, until done, if the queue_limit is reached, discard new request */
+	E_THREAD_DROP,		/* run one by one, until done, if the queue_limit is reached, discard oldest requests */
+	E_THREAD_NEW		/* always run in a new thread, if the queue limit is reached, new requests are
+				   stored in the queue until a thread becomes available for it, creating a thread pool */
+} e_thread_t;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_t</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="EThreadFunc ()">
+<a name="EThreadFunc"></a><h3>EThreadFunc ()</h3>
+<pre class="programlisting">void                (*EThreadFunc)                      (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">EThreadFunc</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_new ()">
+<a name="e-thread-new"></a><h3>e_thread_new ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *           e_thread_new                        (<a class="link" href="libedataserver-e-msgport.html#e-thread-t" title="enum e_thread_t">e_thread_t</a> type);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_destroy ()">
+<a name="e-thread-destroy"></a><h3>e_thread_destroy ()</h3>
+<pre class="programlisting">void                e_thread_destroy                    (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_destroy</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_set_queue_limit ()">
+<a name="e-thread-set-queue-limit"></a><h3>e_thread_set_queue_limit ()</h3>
+<pre class="programlisting">void                e_thread_set_queue_limit            (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> limit);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_set_queue_limit</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>limit</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_set_msg_lost ()">
+<a name="e-thread-set-msg-lost"></a><h3>e_thread_set_msg_lost ()</h3>
+<pre class="programlisting">void                e_thread_set_msg_lost               (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EThreadFunc" title="EThreadFunc ()">EThreadFunc</a> destroy,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_set_msg_lost</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_set_msg_destroy ()">
+<a name="e-thread-set-msg-destroy"></a><h3>e_thread_set_msg_destroy ()</h3>
+<pre class="programlisting">void                e_thread_set_msg_destroy            (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EThreadFunc" title="EThreadFunc ()">EThreadFunc</a> destroy,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_set_msg_destroy</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_set_reply_port ()">
+<a name="e-thread-set-reply-port"></a><h3>e_thread_set_reply_port ()</h3>
+<pre class="programlisting">void                e_thread_set_reply_port             (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsgPort" title="EMsgPort">EMsgPort</a> *reply_port);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_set_reply_port</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>reply_port</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_set_msg_received ()">
+<a name="e-thread-set-msg-received"></a><h3>e_thread_set_msg_received ()</h3>
+<pre class="programlisting">void                e_thread_set_msg_received           (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EThreadFunc" title="EThreadFunc ()">EThreadFunc</a> received,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_set_msg_received</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>received</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_put ()">
+<a name="e-thread-put"></a><h3>e_thread_put ()</h3>
+<pre class="programlisting">void                e_thread_put                        (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMsg" title="EMsg">EMsg</a> *msg);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_put</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>msg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_thread_busy ()">
+<a name="e-thread-busy"></a><h3>e_thread_busy ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_thread_busy                       (<a class="link" href="libedataserver-e-msgport.html#EThread" title="EThread">EThread</a> *e);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_thread_busy</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>e</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EMutex">
+<a name="EMutex"></a><h3>EMutex</h3>
+<pre class="programlisting">typedef struct _EMutex EMutex;</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">EMutex</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum e_mutex_t">
+<a name="e-mutex-t"></a><h3>enum e_mutex_t</h3>
+<pre class="programlisting">typedef enum _e_mutex_t {
+	E_MUTEX_SIMPLE,		/* == pthread_mutex */
+	E_MUTEX_REC		/* recursive mutex */
+} e_mutex_t;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_mutex_t</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="e_mutex_new ()">
+<a name="e-mutex-new"></a><h3>e_mutex_new ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *            e_mutex_new                         (<a class="link" href="libedataserver-e-msgport.html#e-mutex-t" title="enum e_mutex_t">e_mutex_t</a> type);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_mutex_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_mutex_destroy ()">
+<a name="e-mutex-destroy"></a><h3>e_mutex_destroy ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_mutex_destroy                     (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_mutex_destroy</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>m</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_mutex_lock ()">
+<a name="e-mutex-lock"></a><h3>e_mutex_lock ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_mutex_lock                        (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_mutex_lock</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>m</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_mutex_unlock ()">
+<a name="e-mutex-unlock"></a><h3>e_mutex_unlock ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_mutex_unlock                      (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_mutex_unlock</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>m</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_mutex_assert_locked ()">
+<a name="e-mutex-assert-locked"></a><h3>e_mutex_assert_locked ()</h3>
+<pre class="programlisting">void                e_mutex_assert_locked               (<a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_mutex_assert_locked</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>m</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_mutex_cond_wait ()">
+<a name="e-mutex-cond-wait"></a><h3>e_mutex_cond_wait ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_mutex_cond_wait                   (<a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> cond,
+                                                         <a class="link" href="libedataserver-e-msgport.html#EMutex" title="EMutex">EMutex</a> *m);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">e_mutex_cond_wait</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cond</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>m</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

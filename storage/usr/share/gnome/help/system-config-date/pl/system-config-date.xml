@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="pl"><title>Narzędzie właściwości czasu i daty</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2007-11-22</date><revremark>Pierwsza wersja</revremark></revision><revision><revnumber>1.0.1</revnumber><date>2008-01-17</date><revremark>Poprawne sprawdzanie XML-a DocBook</revremark></revision><revision><revnumber>1.0.2</revnumber><date>2008-01-18</date><revremark>Zewnętrzny abstrakt dokumentu</revremark></revision><revision><revnumber>1.0.3</revnumber><date>2008-03-12</date><revremark>Użycie elementów wyboru menu tam, gdzie to możliwe</revremark></revision></revhistory><abstract role="description"><para><application>Narzędzie właściwości czasu i daty</application> pozwala użytkownikom na zmienianie daty i czasu systemu, skonfigurowanie strefy czasowej używanej przez system oraz ustawienie demona Sieciowego protokołu czasu (NTP), aby synchronizował zegar systemu z serwerem czasu.</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup><copyright><year>2008</year><holder>Piotr Drąg (piotrdrag@gmail.com)</holder></copyright></articleinfo><indexterm significance="normal"><primary><command>timetool</command>
+		</primary><see>Narzędzie właściwości czasu i daty</see></indexterm><para><application>Narzędzie właściwości czasu i daty</application> pozwala użytkownikom na zmienianie daty i czasu systemu, skonfigurowanie strefy czasowej używanej przez system oraz ustawienie demona Sieciowego protokołu czasu (NTP), aby synchronizował zegar systemu z serwerem czasu.</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>Narzędzie właściwości czasu i daty</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>Narzędzie właściwości czasu i daty</see></indexterm><indexterm significance="normal"><primary><command>dateconfig</command> 
+        </primary><see>Narzędzie właściwości czasu i daty</see></indexterm><para>System <application>X</application> Window musi być uruchomiony, a ty musisz mieć uprawnienia roota, aby użyć Narzędzia właściwości czasu i daty. Są trzy sposoby uruchomienia aplikacji:</para><itemizedlist><listitem><para>Z pulpitu przejdź do <menuchoice><guimenu>menu głównego na panelu (menu z ikoną "f")</guimenu><guisubmenu>System</guisubmenu><guisubmenu>Administracja</guisubmenu><guimenuitem>Data i czas</guimenuitem></menuchoice></para></listitem><listitem><para>Z pulpitu naciśnij prawym przyciskiem na zegarze na pasku narzędziowym i wybierz <guimenuitem>Dostosuj datę i czas</guimenuitem>.</para></listitem><listitem><para>Podaj polecenie <command>system-config-date</command>, <command>system-config-time</command> lub <command>dateconfig</command> w powłoce (na przykład w <application>XTerm</application> lub terminalu <application>GNOME</application>).</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>Właściwości czasu i daty</title><indexterm significance="normal"><primary>konfiguracja czasu</primary></indexterm><indexterm significance="normal"><primary>konfiguracja daty</primary></indexterm><para>Jak pokazano w <xref linkend="dateconfig-time-date"/>, pierwsza karta otwartego okna służy do konfigurowania daty i czasu systemu.</para><figure float="0" id="dateconfig-time-date"><title>Właściwości czasu i daty</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>Właściwości czasu i daty</para></textobject></mediaobject></figure><para>Aby zmienić datę, użyj strzałek po lewej i prawej miesiąca lub roku, aby je zmienić i naciśnij na dniu tygodnia, aby go zmienić.</para><para>Aby zmienić czas, użyj przycisków strzałek w górę i dół obok <guilabel>Godziny</guilabel>, <guilabel>Minuty</guilabel> i <guilabel>Sekundy</guilabel> w sekcji <guilabel>Czas</guilabel>.</para><para>Można też użyć klawiatury, aby zmienić datę i czas. Użyj <keycap>Tab</keycap> i <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo>, aby przenosić się między widgetami. W widgecie kalendarza można użyć <keycombo><keycap>Ctrl</keycap><keycap>W górę</keycap></keycombo> i <keycombo><keycap>Ctrl</keycap><keycap>W dół</keycap></keycombo>, aby zmienić rok, <keycombo><keycap>Ctrl</keycap><keycap>W lewo</keycap></keycombo> i <keycombo><keycap>Ctrl</keycap><keycap>W prawo</keycap></keycombo>, aby zmienić miesiąc, oraz klawisze strzałek i <keycap>Spacji</keycap>, aby wybrać i ustawić datę. W widgetach godziny, minuty i sekundy użyj <keycap>W górę</keycap> oraz <keycap>W dół</keycap>, aby zmienić wartości.</para><para>Naciśniecie przycisku <guibutton>OK</guibutton> zastosuje wszystkie wprowadzone zmiany daty i czasu, ustawienia demona NTP i ustawienia strefy czasowej. Zakończy to także program.</para></section>
+	<section id="s1-dateconfig-ntp"><title>Właściwości Sieciowego protokołu czasu (NTP)</title><indexterm significance="normal"><primary>konfiguracja czasu</primary><secondary>zsynchronizuj z serwerem NTP</secondary></indexterm><indexterm significance="normal"><primary>Sieciowy protokół czasu</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>konfigurowanie</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para>Jak pokazano w <xref linkend="dateconfig-ntp"/>, druga karta otwartego okna służy do konfigurowania NTP.</para><figure float="0" id="dateconfig-ntp"><title>Właściwości NTP</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>Właściwości NTP</para></textobject></mediaobject></figure><para>Demon Sieciowego protokołu czasu (NTP) synchronizuje zegar systemu ze zdalnym serwerem czasu lub źródłem czasu. Aplikacja pozwala na skonfigurowanie zegara systemu ze zdalnym serwerem. Aby włączyć tę funkcję, wybierz <guibutton>Włącz Sieciowy protokół czasu</guibutton>. To włączy listę <guilabel>Serwery NTP</guilabel> i inne opcje. Można włączyć jeden z wcześniej określonych serwerów, zmodyfikować je naciskając <guibutton>Edycja</guibutton> lub dodać nową nazwę serwera naciskając <guibutton>Dodaj</guibutton>. System nie będzie synchronizował z serwerem NTP, dopóki nie naciśniesz <guibutton>OK</guibutton>. Po naciśnięciu <guibutton>OK</guibutton> konfiguracja zostanie zapisana, a demon NTP zostanie uruchomiony (lub uruchomiony ponownie, jeśli jest już uruchomiony).</para><para>Naciśniecie przycisku <guibutton>OK</guibutton> zastosuje wszystkie wprowadzone zmiany daty i czasu, ustawienia demona NTP i ustawienia strefy czasowej. Zakończy to także program.</para></section>
+	<section id="s1-dateconfig-time-zone"><title>Konfiguracja strefy czasowej</title><indexterm significance="normal"><primary>konfiguracja strefy czasowej</primary></indexterm><para>Jak pokazano w <xref linkend="dateconfig-timezone"/>, trzecia karta otwartego okna służy do konfigurowania strefy czasowej systemu.</para><para>Aby skonfigurować strefę czasową, naciśnij kartę <guilabel>Strefa czasowa</guilabel>. Strefa czasowa może być zmieniona używając interaktywnej mapy lub wybierając strefę czasową z listy poniżej mapy. Aby użyć mapy, naciśnij na nią, aby wybrać miasto najbliższe twojego miejsca zamieszkania. Pojawi się czerwony <guilabel>X</guilabel>, a na liście pod mapą zostanie zmieniony wybór strefy. Można użyć paska po lewej stronie mapy, aby zmienić poziom zbliżenia mapy.</para><para>Można też użyć listy poniżej mapy. W ten sam sposób, jak mapa pozwala na wybranie regionu przed wybraniem miasta, lista stref czasowych jest teraz drzewem, z miastami i państwami pogrupowanymi według kontynentów. Niegeograficzne strefy czasowe zostały dodane, aby zaspokoić potrzeby społeczności naukowej.</para><para>Naciśnij <guibutton>OK</guibutton>, aby zastosować zmiany i zakończyć program.</para><figure float="0" id="dateconfig-timezone"><title>Właściwości strefy czasowej</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>Właściwości strefy czasowej</para></textobject></mediaobject></figure><para>Jeśli zegar systemu używa UTC, wybierz opcję <guibutton>Zegar systemowy używa UTC</guibutton>. UTC oznacza <firstterm>Koordynowany czas uniwersalny</firstterm>, znany także jako czas Greenwich (GMT). Inne strefy czasowe są określane przez dodawanie lub odejmowanie godzin z czasu UTC.</para></section>
+</article>

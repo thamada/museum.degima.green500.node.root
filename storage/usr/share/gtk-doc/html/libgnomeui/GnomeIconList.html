@@ -1,0 +1,1801 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GnomeIconList</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="GNOME UI Library Reference Manual">
+<link rel="up" href="deprecated.html" title="Deprecated Modules">
+<link rel="prev" href="GnomeFontPicker.html" title="GnomeFontPicker">
+<link rel="next" href="GnomeIconTextItem.html" title="GnomeIconTextItem">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GNOME UI Library (libgnomeui)">
+<link rel="chapter" href="initialization.html" title="Initialization and Session Management">
+<link rel="chapter" href="application-mgmt.html" title="Application Management">
+<link rel="chapter" href="druids.html" title="Druids">
+<link rel="chapter" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="chapter" href="miscellaneous.html" title="Miscellaneous Utility Functions and Macros">
+<link rel="chapter" href="deprecated.html" title="Deprecated Modules">
+<link rel="chapter" href="libgnomeui-objects.html" title="Object Hierarchy">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GnomeFontPicker.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="deprecated.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME UI Library Reference Manual</th>
+<td><a accesskey="n" href="GnomeIconTextItem.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GnomeIconList.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#GnomeIconList.description" class="shortcut">Description</a>
+                 | 
+                <a href="#GnomeIconList.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#GnomeIconList.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                 | 
+                <a href="#GnomeIconList.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GnomeIconList"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GnomeIconList.top_of_page"></a>GnomeIconList</span></h2>
+<p>GnomeIconList</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GnomeIconList.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnomeui/libgnomeui.h&gt;
+
+enum                <a class="link" href="GnomeIconList.html#GnomeIconListMode" title="enum GnomeIconListMode">GnomeIconListMode</a>;
+                    <a class="link" href="GnomeIconList.html#GnomeIconList-struct" title="GnomeIconList">GnomeIconList</a>;
+GtkWidget *         <a class="link" href="GnomeIconList.html#gnome-icon-list-new" title="gnome_icon_list_new ()">gnome_icon_list_new</a>                 (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> icon_width,
+                                                         GtkAdjustment *adj,
+                                                         int flags);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-construct" title="gnome_icon_list_construct ()">gnome_icon_list_construct</a>           (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> icon_width,
+                                                         GtkAdjustment *adj,
+                                                         int flags);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-hadjustment" title="gnome_icon_list_set_hadjustment ()">gnome_icon_list_set_hadjustment</a>     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         GtkAdjustment *hadj);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-vadjustment" title="gnome_icon_list_set_vadjustment ()">gnome_icon_list_set_vadjustment</a>     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         GtkAdjustment *vadj);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-freeze" title="gnome_icon_list_freeze ()">gnome_icon_list_freeze</a>              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-thaw" title="gnome_icon_list_thaw ()">gnome_icon_list_thaw</a>                (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-insert" title="gnome_icon_list_insert ()">gnome_icon_list_insert</a>              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         const char *icon_filename,
+                                                         const char *text);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-insert-pixbuf" title="gnome_icon_list_insert_pixbuf ()">gnome_icon_list_insert_pixbuf</a>       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         <a
+href="/usr/share/gtk-doc/html/goffice-0.6/goffice-06-gog-renderer.html#GdkPixbuf"
+>GdkPixbuf</a> *im,
+                                                         const char *icon_filename,
+                                                         const char *text);
+int                 <a class="link" href="GnomeIconList.html#gnome-icon-list-append" title="gnome_icon_list_append ()">gnome_icon_list_append</a>              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         const char *icon_filename,
+                                                         const char *text);
+int                 <a class="link" href="GnomeIconList.html#gnome-icon-list-append-pixbuf" title="gnome_icon_list_append_pixbuf ()">gnome_icon_list_append_pixbuf</a>       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/goffice-0.6/goffice-06-gog-renderer.html#GdkPixbuf"
+>GdkPixbuf</a> *im,
+                                                         const char *icon_filename,
+                                                         const char *text);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-clear" title="gnome_icon_list_clear ()">gnome_icon_list_clear</a>               (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-remove" title="gnome_icon_list_remove ()">gnome_icon_list_remove</a>              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="GnomeIconList.html#gnome-icon-list-get-num-icons" title="gnome_icon_list_get_num_icons ()">gnome_icon_list_get_num_icons</a>       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+GtkSelectionMode    <a class="link" href="GnomeIconList.html#gnome-icon-list-get-selection-mode" title="gnome_icon_list_get_selection_mode ()">gnome_icon_list_get_selection_mode</a>  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-selection-mode" title="gnome_icon_list_set_selection_mode ()">gnome_icon_list_set_selection_mode</a>  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         GtkSelectionMode mode);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-select-icon" title="gnome_icon_list_select_icon ()">gnome_icon_list_select_icon</a>         (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-select-all" title="gnome_icon_list_select_all ()">gnome_icon_list_select_all</a>          (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-unselect-icon" title="gnome_icon_list_unselect_icon ()">gnome_icon_list_unselect_icon</a>       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);
+int                 <a class="link" href="GnomeIconList.html#gnome-icon-list-unselect-all" title="gnome_icon_list_unselect_all ()">gnome_icon_list_unselect_all</a>        (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             <a class="link" href="GnomeIconList.html#gnome-icon-list-get-selection" title="gnome_icon_list_get_selection ()">gnome_icon_list_get_selection</a>       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-focus-icon" title="gnome_icon_list_focus_icon ()">gnome_icon_list_focus_icon</a>          (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> idx);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-icon-width" title="gnome_icon_list_set_icon_width ()">gnome_icon_list_set_icon_width</a>      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int w);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-row-spacing" title="gnome_icon_list_set_row_spacing ()">gnome_icon_list_set_row_spacing</a>     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-col-spacing" title="gnome_icon_list_set_col_spacing ()">gnome_icon_list_set_col_spacing</a>     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-text-spacing" title="gnome_icon_list_set_text_spacing ()">gnome_icon_list_set_text_spacing</a>    (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-icon-border" title="gnome_icon_list_set_icon_border ()">gnome_icon_list_set_icon_border</a>     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-separators" title="gnome_icon_list_set_separators ()">gnome_icon_list_set_separators</a>      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         const char *sep);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="GnomeIconList.html#gnome-icon-list-get-icon-filename" title="gnome_icon_list_get_icon_filename ()">gnome_icon_list_get_icon_filename</a>   (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx);
+int                 <a class="link" href="GnomeIconList.html#gnome-icon-list-find-icon-from-filename" title="gnome_icon_list_find_icon_from_filename ()">gnome_icon_list_find_icon_from_filename</a>
+                                                        (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         const char *filename);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-icon-data" title="gnome_icon_list_set_icon_data ()">gnome_icon_list_set_icon_data</a>       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-set-icon-data-full" title="gnome_icon_list_set_icon_data_full ()">gnome_icon_list_set_icon_data_full</a>  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Datasets.html#GDestroyNotify"
+>GDestroyNotify</a> destroy);
+int                 <a class="link" href="GnomeIconList.html#gnome-icon-list-find-icon-from-data" title="gnome_icon_list_find_icon_from_data ()">gnome_icon_list_find_icon_from_data</a> (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="GnomeIconList.html#gnome-icon-list-get-icon-data" title="gnome_icon_list_get_icon_data ()">gnome_icon_list_get_icon_data</a>       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);
+void                <a class="link" href="GnomeIconList.html#gnome-icon-list-moveto" title="gnome_icon_list_moveto ()">gnome_icon_list_moveto</a>              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         double yalign);
+GtkVisibility       <a class="link" href="GnomeIconList.html#gnome-icon-list-icon-is-visible" title="gnome_icon_list_icon_is_visible ()">gnome_icon_list_icon_is_visible</a>     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);
+int                 <a class="link" href="GnomeIconList.html#gnome-icon-list-get-icon-at" title="gnome_icon_list_get_icon_at ()">gnome_icon_list_get_icon_at</a>         (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int x,
+                                                         int y);
+int                 <a class="link" href="GnomeIconList.html#gnome-icon-list-get-items-per-line" title="gnome_icon_list_get_items_per_line ()">gnome_icon_list_get_items_per_line</a>  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);
+<a class="link" href="GnomeIconTextItem.html" title="GnomeIconTextItem">GnomeIconTextItem</a> * <a class="link" href="GnomeIconList.html#gnome-icon-list-get-icon-text-item" title="gnome_icon_list_get_icon_text_item ()">gnome_icon_list_get_icon_text_item</a>  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx);
+<a
+href="/usr/share/gtk-doc/html/libgnomecanvas/GnomeCanvasPixbuf.html"
+>GnomeCanvasPixbuf</a> * <a class="link" href="GnomeIconList.html#gnome-icon-list-get-icon-pixbuf-item" title="gnome_icon_list_get_icon_pixbuf_item ()">gnome_icon_list_get_icon_pixbuf_item</a>
+                                                        (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeIconList.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"
+>GInitiallyUnowned</a>
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkLayout
+                                 +----<a
+href="/usr/share/gtk-doc/html/libgnomecanvas/GnomeCanvas.html"
+>GnomeCanvas</a>
+                                       +----GnomeIconList
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeIconList.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GnomeIconList implements
+ GtkBuildable and  AtkImplementorIface.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeIconList.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="GnomeIconList.html#GnomeIconList-focus-icon" title='The "focus-icon" signal'>focus-icon</a>"                                     : Run First
+  "<a class="link" href="GnomeIconList.html#GnomeIconList-move-cursor" title='The "move-cursor" signal'>move-cursor</a>"                                    : Run Last / Action
+  "<a class="link" href="GnomeIconList.html#GnomeIconList-select-icon" title='The "select-icon" signal'>select-icon</a>"                                    : Run First
+  "<a class="link" href="GnomeIconList.html#GnomeIconList-text-changed" title='The "text-changed" signal'>text-changed</a>"                                   : Run Last
+  "<a class="link" href="GnomeIconList.html#GnomeIconList-toggle-cursor-selection" title='The "toggle-cursor-selection" signal'>toggle-cursor-selection</a>"                        : Run Last / Action
+  "<a class="link" href="GnomeIconList.html#GnomeIconList-unselect-icon" title='The "unselect-icon" signal'>unselect-icon</a>"                                  : Run First
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeIconList.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeIconList.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeIconListMode"></a><h3>enum GnomeIconListMode</h3>
+<pre class="programlisting">typedef enum {
+	GNOME_ICON_LIST_ICONS,
+	GNOME_ICON_LIST_TEXT_BELOW,
+	GNOME_ICON_LIST_TEXT_RIGHT
+} GnomeIconListMode;
+</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeIconListMode</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeIconList-struct"></a><h3>GnomeIconList</h3>
+<pre class="programlisting">typedef struct _GnomeIconList GnomeIconList;</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeIconList</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-new"></a><h3>gnome_icon_list_new ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_icon_list_new                 (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> icon_width,
+                                                         GtkAdjustment *adj,
+                                                         int flags);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Creates a new icon list widget.  The icon columns are allocated a width of
+<em class="parameter"><code>icon_width</code></em> pixels.  Icon captions will be word-wrapped to this width as
+well.
+</p>
+<p>
+If <em class="parameter"><code>flags</code></em> has the <code class="literal">GNOME_ICON_LIST_IS_EDITABLE</code> flag set, then the user will
+be able to edit the text in the icon captions, and the "text_changed" signal
+will be emitted when an icon's text is changed.
+</p>
+<p>
+If <em class="parameter"><code>flags</code></em> has the <code class="literal">GNOME_ICON_LIST_STATIC_TEXT</code> flags set, then the text
+for the icon captions will not be copied inside the icon list; it will only
+store the pointers to the original text strings specified by the application.
+This is intended to save memory.  If this flag is not set, then the text
+strings will be copied and managed internally.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_width</code></em> :</span></p></td>
+<td> Width for the icon columns.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>adj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> A combination of <code class="literal">GNOME_ICON_LIST_IS_EDITABLE</code> and
+<code class="literal">GNOME_ICON_LIST_STATIC_TEXT</code>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a newly-created icon list widget
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-construct"></a><h3>gnome_icon_list_construct ()</h3>
+<pre class="programlisting">void                gnome_icon_list_construct           (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> icon_width,
+                                                         GtkAdjustment *adj,
+                                                         int flags);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_construct</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Constructor for the icon list, to be used by derived classes.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_width</code></em> :</span></p></td>
+<td> Width for the icon columns.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>adj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> A combination of <code class="literal">GNOME_ICON_LIST_IS_EDITABLE</code> and <code class="literal">GNOME_ICON_LIST_STATIC_TEXT</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-hadjustment"></a><h3>gnome_icon_list_set_hadjustment ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_hadjustment     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         GtkAdjustment *hadj);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_hadjustment</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the adjustment to be used for horizontal scrolling.  This is normally
+not required, as the icon list can be simply inserted in a &amp;GtkScrolledWindow
+and scrolling will be handled automatically.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hadj</code></em> :</span></p></td>
+<td> Adjustment to be used for horizontal scrolling.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-vadjustment"></a><h3>gnome_icon_list_set_vadjustment ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_vadjustment     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         GtkAdjustment *vadj);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_vadjustment</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the adjustment to be used for vertical scrolling.  This is normally not
+required, as the icon list can be simply inserted in a &amp;GtkScrolledWindow and
+scrolling will be handled automatically.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vadj</code></em> :</span></p></td>
+<td> Adjustment to be used for horizontal scrolling.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-freeze"></a><h3>gnome_icon_list_freeze ()</h3>
+<pre class="programlisting">void                gnome_icon_list_freeze              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_freeze</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Freezes an icon list so that any changes made to it will not be
+reflected on the screen until it is thawed with <a class="link" href="GnomeIconList.html#gnome-icon-list-thaw" title="gnome_icon_list_thaw ()"><code class="function">gnome_icon_list_thaw()</code></a>.
+It is recommended to freeze the icon list before inserting or deleting
+many icons, for example, so that the layout process will only be executed
+once, when the icon list is finally thawed.
+</p>
+<p>
+You can call this function multiple times, but it must be balanced with the
+same number of calls to <a class="link" href="GnomeIconList.html#gnome-icon-list-thaw" title="gnome_icon_list_thaw ()"><code class="function">gnome_icon_list_thaw()</code></a> before the changes will take
+effect.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>  An icon list.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-thaw"></a><h3>gnome_icon_list_thaw ()</h3>
+<pre class="programlisting">void                gnome_icon_list_thaw                (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_thaw</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Thaws the icon list and performs any pending layout operations.  This
+is to be used in conjunction with <a class="link" href="GnomeIconList.html#gnome-icon-list-freeze" title="gnome_icon_list_freeze ()"><code class="function">gnome_icon_list_freeze()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>  An icon list.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-insert"></a><h3>gnome_icon_list_insert ()</h3>
+<pre class="programlisting">void                gnome_icon_list_insert              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         const char *icon_filename,
+                                                         const char *text);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_insert</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Inserts an icon in the specified icon list.  The icon's image is loaded
+from the specified file, and it is inserted at the <em class="parameter"><code>pos</code></em> index.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>           An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td>           Position at which the new icon should be inserted.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_filename</code></em> :</span></p></td>
+<td> Name of the file that holds the icon's image.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td>          Text to be used for the icon's caption.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-insert-pixbuf"></a><h3>gnome_icon_list_insert_pixbuf ()</h3>
+<pre class="programlisting">void                gnome_icon_list_insert_pixbuf       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         <a
+href="/usr/share/gtk-doc/html/goffice-0.6/goffice-06-gog-renderer.html#GdkPixbuf"
+>GdkPixbuf</a> *im,
+                                                         const char *icon_filename,
+                                                         const char *text);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_insert_pixbuf</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Inserts an icon in the specified icon list.  The icon is created from the
+specified Imlib image, and it is inserted at the <em class="parameter"><code>pos</code></em> index.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>      An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td>      Position at which the new icon should be inserted.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>im</code></em> :</span></p></td>
+<td>       Pixbuf image with the icon image.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_filename</code></em> :</span></p></td>
+<td> Filename of the image file.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td>     Text to be used for the icon's caption.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-append"></a><h3>gnome_icon_list_append ()</h3>
+<pre class="programlisting">int                 gnome_icon_list_append              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         const char *icon_filename,
+                                                         const char *text);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_append</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Appends an icon to the specified icon list.  The icon's image is loaded from
+the specified file, and it is inserted at the <em class="parameter"><code>pos</code></em> index.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>           An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_filename</code></em> :</span></p></td>
+<td> Name of the file that holds the icon's image.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td>          Text to be used for the icon's caption.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-append-pixbuf"></a><h3>gnome_icon_list_append_pixbuf ()</h3>
+<pre class="programlisting">int                 gnome_icon_list_append_pixbuf       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/goffice-0.6/goffice-06-gog-renderer.html#GdkPixbuf"
+>GdkPixbuf</a> *im,
+                                                         const char *icon_filename,
+                                                         const char *text);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_append_pixbuf</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Appends an icon to the specified icon list.  The icon is created from
+the specified Imlib image.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>      An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>im</code></em> :</span></p></td>
+<td>       Pixbuf image with the icon image.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon_filename</code></em> :</span></p></td>
+<td> Filename of the image file.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td>     Text to be used for the icon's caption.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-clear"></a><h3>gnome_icon_list_clear ()</h3>
+<pre class="programlisting">void                gnome_icon_list_clear               (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_clear</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Clears the contents for the icon list by removing all the icons.  If destroy
+handlers were specified for any of the icons, they will be called with the
+appropriate data.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-remove"></a><h3>gnome_icon_list_remove ()</h3>
+<pre class="programlisting">void                gnome_icon_list_remove              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_remove</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Removes the icon at index position <em class="parameter"><code>pos</code></em>.  If a destroy handler was specified
+for that icon, it will be called with the appropriate data.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td> Index of the icon that should be removed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-num-icons"></a><h3>gnome_icon_list_get_num_icons ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               gnome_icon_list_get_num_icons       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_num_icons</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The number of icons in the icon list.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-selection-mode"></a><h3>gnome_icon_list_get_selection_mode ()</h3>
+<pre class="programlisting">GtkSelectionMode    gnome_icon_list_get_selection_mode  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_selection_mode</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>  An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The current selection mode for an icon list.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-selection-mode"></a><h3>gnome_icon_list_set_selection_mode ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_selection_mode  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         GtkSelectionMode mode);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_selection_mode</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the selection mode for an icon list.  The <code class="literal">GTK_SELECTION_MULTIPLE</code> and
+<code class="literal">GTK_SELECTION_EXTENDED</code> modes are considered equivalent.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>  An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mode</code></em> :</span></p></td>
+<td> New selection mode.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-select-icon"></a><h3>gnome_icon_list_select_icon ()</h3>
+<pre class="programlisting">void                gnome_icon_list_select_icon         (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_select_icon</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Selects the icon at the index specified by <em class="parameter"><code>pos</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td> Index of the icon to be selected.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-select-all"></a><h3>gnome_icon_list_select_all ()</h3>
+<pre class="programlisting">void                gnome_icon_list_select_all          (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_select_all</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>   An icon list.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-unselect-icon"></a><h3>gnome_icon_list_unselect_icon ()</h3>
+<pre class="programlisting">void                gnome_icon_list_unselect_icon       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_unselect_icon</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Unselects the icon at the index specified by <em class="parameter"><code>pos</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td> Index of the icon to be unselected.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-unselect-all"></a><h3>gnome_icon_list_unselect_all ()</h3>
+<pre class="programlisting">int                 gnome_icon_list_unselect_all        (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_unselect_all</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>   An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The number of icons in the icon list
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-selection"></a><h3>gnome_icon_list_get_selection ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             gnome_icon_list_get_selection       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_selection</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A list of integers with the indices of the currently selected icons.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-focus-icon"></a><h3>gnome_icon_list_focus_icon ()</h3>
+<pre class="programlisting">void                gnome_icon_list_focus_icon          (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> idx);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_focus_icon</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-icon-width"></a><h3>gnome_icon_list_set_icon_width ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_icon_width      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int w);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_icon_width</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the amount of horizontal space allocated to the icons, i.e. the column
+width of the icon list.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>w</code></em> :</span></p></td>
+<td>   New width for the icon columns.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-row-spacing"></a><h3>gnome_icon_list_set_row_spacing ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_row_spacing     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_row_spacing</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the spacing to be used between rows of icons.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>    An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pixels</code></em> :</span></p></td>
+<td> Number of pixels for inter-row spacing.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-col-spacing"></a><h3>gnome_icon_list_set_col_spacing ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_col_spacing     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_col_spacing</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the spacing to be used between columns of icons.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>    An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pixels</code></em> :</span></p></td>
+<td> Number of pixels for inter-column spacing.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-text-spacing"></a><h3>gnome_icon_list_set_text_spacing ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_text_spacing    (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_text_spacing</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the spacing to be used between an icon's image and its text caption.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>    An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pixels</code></em> :</span></p></td>
+<td> Number of pixels between an icon's image and its caption.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-icon-border"></a><h3>gnome_icon_list_set_icon_border ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_icon_border     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pixels);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_icon_border</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the width of the border to be displayed around an icon's image.  This is
+currently not implemented.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>    An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pixels</code></em> :</span></p></td>
+<td> Number of border pixels to be used around an icon's image.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-separators"></a><h3>gnome_icon_list_set_separators ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_separators      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         const char *sep);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_separators</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Sets the characters that can be used as word separators when doing
+word-wrapping in the icon text captions.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sep</code></em> :</span></p></td>
+<td> String with characters to be used as word separators.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-icon-filename"></a><h3>gnome_icon_list_get_icon_filename ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             gnome_icon_list_get_icon_filename   (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_icon_filename</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td> Index of an <em class="parameter"><code>icon</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The filename of the icon with index <em class="parameter"><code>idx</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-find-icon-from-filename"></a><h3>gnome_icon_list_find_icon_from_filename ()</h3>
+<pre class="programlisting">int                 gnome_icon_list_find_icon_from_filename
+                                                        (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         const char *filename);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_find_icon_from_filename</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>       An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td>  Filename of an icon.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The index of the icon whose filename is <em class="parameter"><code>filename</code></em> or -1 if
+there is no icon with this filename.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-icon-data"></a><h3>gnome_icon_list_set_icon_data ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_icon_data       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_icon_data</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-set-icon-data-full"></a><h3>gnome_icon_list_set_icon_data_full ()</h3>
+<pre class="programlisting">void                gnome_icon_list_set_icon_data_full  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Datasets.html#GDestroyNotify"
+>GDestroyNotify</a> destroy);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_set_icon_data_full</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Associates the <em class="parameter"><code>data</code></em> pointer to the icon at the index specified by <em class="parameter"><code>pos</code></em>.  The
+<em class="parameter"><code>destroy</code></em> argument points to a function that will be called when the icon is
+destroyed, or NULL if no function is to be called when this happens.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>     An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td>     Index of an icon.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>    User data to set on the icon.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
+<td> Destroy notification handler for the icon.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-find-icon-from-data"></a><h3>gnome_icon_list_find_icon_from_data ()</h3>
+<pre class="programlisting">int                 gnome_icon_list_find_icon_from_data (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_find_icon_from_data</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>    An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>   Data pointer associated to an icon.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The index of the icon whose user data has been set to <em class="parameter"><code>data</code></em>,
+or -1 if no icon has this data associated to it.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-icon-data"></a><h3>gnome_icon_list_get_icon_data ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            gnome_icon_list_get_icon_data       (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_icon_data</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td> Index of an icon.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The user data pointer associated to the icon at the index specified
+by <em class="parameter"><code>pos</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-moveto"></a><h3>gnome_icon_list_moveto ()</h3>
+<pre class="programlisting">void                gnome_icon_list_moveto              (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos,
+                                                         double yalign);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_moveto</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Makes the icon whose index is <em class="parameter"><code>pos</code></em> be visible on the screen.  The icon list
+gets scrolled so that the icon is visible.  An alignment of 0.0 represents
+the top of the visible part of the icon list, and 1.0 represents the bottom.
+An icon can be centered on the icon list.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>    An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td>    Index of an icon.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>yalign</code></em> :</span></p></td>
+<td> Vertical alignment of the icon.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-icon-is-visible"></a><h3>gnome_icon_list_icon_is_visible ()</h3>
+<pre class="programlisting">GtkVisibility       gnome_icon_list_icon_is_visible     (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int pos);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_icon_is_visible</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
+<td> Index of an icon.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> Whether the icon at the index specified by <em class="parameter"><code>pos</code></em> is visible.  This
+will be <code class="literal">GTK_VISIBILITY_NONE</code> if the icon is not visible at all,
+<code class="literal">GTK_VISIBILITY_PARTIAL</code> if the icon is at least partially shown, and
+<code class="literal">GTK_VISIBILITY_FULL</code> if the icon is fully visible.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-icon-at"></a><h3>gnome_icon_list_get_icon_at ()</h3>
+<pre class="programlisting">int                 gnome_icon_list_get_icon_at         (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int x,
+                                                         int y);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_icon_at</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>x</code></em> :</span></p></td>
+<td>   X position in the icon list window.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>y</code></em> :</span></p></td>
+<td>   Y position in the icon list window.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The index of the icon that is under the specified coordinates, which
+are relative to the icon list's window.  If there is no icon in that
+position, -1 is returned.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-items-per-line"></a><h3>gnome_icon_list_get_items_per_line ()</h3>
+<pre class="programlisting">int                 gnome_icon_list_get_items_per_line  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_items_per_line</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td> An icon list.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The number of icons that fit in a line or row.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-icon-text-item"></a><h3>gnome_icon_list_get_icon_text_item ()</h3>
+<pre class="programlisting"><a class="link" href="GnomeIconTextItem.html" title="GnomeIconTextItem">GnomeIconTextItem</a> * gnome_icon_list_get_icon_text_item  (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_icon_text_item</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-icon-list-get-icon-pixbuf-item"></a><h3>gnome_icon_list_get_icon_pixbuf_item ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/libgnomecanvas/GnomeCanvasPixbuf.html"
+>GnomeCanvasPixbuf</a> * gnome_icon_list_get_icon_pixbuf_item
+                                                        (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *gil,
+                                                         int idx);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_icon_list_get_icon_pixbuf_item</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gil</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeIconList.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeIconList-focus-icon"></a><h3>The <code class="literal">"focus-icon"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *iconlist,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>           arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)      : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iconlist</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeIconList-move-cursor"></a><h3>The <code class="literal">"move-cursor"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a>   *iconlist,
+                                                        GtkDirectionType arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>         arg2,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>         user_data)      : Run Last / Action</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iconlist</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeIconList-select-icon"></a><h3>The <code class="literal">"select-icon"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *iconlist,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>           arg1,
+                                                        GdkEvent      *event,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)      : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iconlist</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>event</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeIconList-text-changed"></a><h3>The <code class="literal">"text-changed"</code> signal</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            user_function                      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *iconlist,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>           arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>         *arg2,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)      : Run Last</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iconlist</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeIconList-toggle-cursor-selection"></a><h3>The <code class="literal">"toggle-cursor-selection"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *iconlist,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)      : Run Last / Action</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iconlist</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeIconList-unselect-icon"></a><h3>The <code class="literal">"unselect-icon"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeIconList.html" title="GnomeIconList">GnomeIconList</a> *iconlist,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>           arg1,
+                                                        GdkEvent      *event,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)      : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iconlist</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>event</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

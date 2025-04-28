@@ -1,0 +1,161 @@
+%changelog
+* Wed Apr 22 2009  Tim Hockin <thockin@hockin.org>
+  - Bump version to 1.0.10 for release.
+
+* Wed Apr 22 2009  Tim Hockin <thockin@hockin.org>
+  - Add a -C (--clientmax) command line flag to set max number of non-root
+    socket connections. (acpi.c acpid.h acpid.8 event.c)
+  - Set the maximum number of socket clients to 256 by default. (acpid.h)
+  - Close clients that have disconnected. (acpid.c event.c) (Aaron Plattner
+    <aplattner@nvidia.com>)
+  - Give up and exit() if 5 accept() calls fail in a row. (acpid.c)
+
+* Mon Feb 09 2009  Tim Hockin <thockin@hockin.org>
+  - Open /dev/null O_RDWR, rather than O_RDONLY. (acpid.c)
+
+* Tue Oct 28 2008  Tim Hockin <thockin@hockin.org>
+  - Bump version to 1.0.8 for release.
+
+* Sun Oct 26 2008  Tim Hockin <thockin@hockin.org>
+  - Define _GNU_SOURCE. (Makefile) (Ted Felix <http://www.tedfelix.com/>)
+  - Rename a variable to avoid shadowing a global. (event.c) (Ted Felix
+    <http://www.tedfelix.com/>)
+  - Fix typos in man pages. (acpid.8, acpi_listen.8) (Ted Felix
+    <http://www.tedfelix.com/>)
+  - GCC 4.3.2 gives chdir() the _wur attribute (warn unused result). Check
+    for errors. (acpid.c) (Ted Felix <http://www.tedfelix.com/>)
+  - Check for ferror() in parse_file(). (event.c) (Ted Felix
+    <http://www.tedfelix.com/>)
+  - Only read regular files in acpid_read_conf(). (event.c) (Ted Felix
+    <http://www.tedfelix.com/>)
+  - Stop processing ACPI events when a lockfile exists (from Debian).
+    (acpid.8, acpid.c, acpid.h) (Ted Felix <http://www.tedfelix.com/>)
+
+* Sat Nov 24 2007  Tim Hockin <thockin@hockin.org>
+  - Build with -O2 flag (Makefile).
+  - Add -l (--logevents) option to enable logging of all events.  Due to a
+    number of reports of log flooding (bad ACPI BIOS?) The new default is to
+    NOT log events. (acpid.c acpid.h event.h acpid.8)
+  - Add pidfile support and a -p (--pidfile) option to change the pidfile.
+    Default is /var/run/acpid.pid. (acpid.c acpid.8) (Javier Pello
+    <jpello@users.sourceforge.net>)
+  - Rename ACPI_* constants to ACPID_*. (acpid.c acpi_listen.c)
+  - Remove a bad cast of malloc()'s return value. (event.c)
+  - Add proper make dependencies. (Makefile)
+  - Close client file descriptors on exec(). (acpid.c) (Zdenek Prikryl
+    <zprikryl@redhat.com>)
+
+* Mon Sep 24 2007  Tim Hockin <thockin@hockin.org>
+  - Don't use a mode argument on open("/dev/null") (acpid.c) (Steve Grubb
+    <sgrubb@redhat.com>)
+  - Use GCC "__attribute__((format(printf)))" for acpid_log (acpid.c) (Steve
+    Grubb <sgrubb@redhat.com>)
+  - Fix a shadowed variable name (event.c) (Steve Grubb <sgrubb@redhat.com>)
+  - Fix a leaked fd on error (event.c) (Steve Grubb <sgrubb@redhat.com>)
+  - Fix a signed/unsigned comparison (event.c) (Steve Grubb
+    <sgrubb@redhat.com>)
+  - Compile with more warnings (Makefile) (Steve Grubb <sgrubb@redhat.com>)
+
+* Sat June 30 2007  Tim Hockin <thockin@hockin.org>
+  - Bump version to 1.0.6 for release.
+
+* Thu May 24 2007  Tim Hockin <thockin@hockin.org>
+  - Print event handler output to stdout only in debug mode (acpid.c, event.c).
+  - Update man page for new logging.
+
+* Wed May 23 2007  Tim Hockin <thockin@hockin.org>
+  - Correctly check for malloc() failures (event.c)
+  - Skip editor backup files when scanning for conf files (event.c) (Stefan
+    Seyfried <seife@suse.de>)
+  - Use syslog() for logging (acpid.c, event.c, acpid.h) (Stefan Seyfried
+    <seife@suse.de>)
+
+* Fri Dec 30 2005  Tim Hockin <thockin@hockin.org>
+  - Add a do_detach argument to acpid_cleanup_rules() to avoid closing
+    clients on a HUP (acpid.c, event.c) (Frederic Lepied
+    <flepied@users.sourceforge.net>)
+
+* Sat Sep 24 2005  Tim Hockin <thockin@hockin.org>
+  - Document -f option in the acpid man page (acpid.8)
+
+* Fri Sep 23 2005  Tim Hockin <thockin@hockin.org>
+  - Fix rule and fd leak when clients disconnect on socket (event.c) (Timo
+    Hoenig <thoenig@suse.de>)
+
+* Fri Oct 19 2005  Tim Hockin <thockin@hockin.org>
+  - Use socklen_t for sockets calls (ud_socket.c)
+
+* Sun Oct 24 2004  Tim Hockin <thockin@hockin.org>
+  - Update my own email to not say @sun.com anymore
+
+* Sun Oct 17 2004  Tim Hockin <thockin@hockin.org>
+  - mkdir BINDIR in Makefile
+
+* Sun Oct 17 2004  Tim Hockin <thockin@hockin.org>
+  - set acpi_listen stdout to be line-buffered (Gilles Chanteperdrix
+    <gilles.chanteperdrix@laposte.net>)
+  - detect a closed socket and exit (acpi_listen.c)
+  - detect a closed events file and exit (acpid.c)
+  - print read_line() errors (acpi_listen.c, acpid.c)
+  - added sample battery config and handler (Frank Dietrich
+    <ABLEsoft@gmx.de>)
+  - added sample AC adapter config/handler and hotkey config/handler for
+    Panasonic notebooks (David Bronaugh <dbronaugh@linuxboxen.org>)
+  - prep for 1.0.4 release
+
+* Fri Feb 13 2004  Tim Hockin <thockin@sun.com>
+  - dump debian/ and redhat/ dirs -- too much hassle
+  - change 'make rpm' to 'make dist'
+  - minor Makefile cleanup
+  - README cleanup
+  - prep for 1.0.3 release
+
+* Thu Dec 18 2003  Tim Hockin <thockin@sun.com>
+  - unblock signals before exec()ing a handler
+  - remove odd 'been_here' from signals_handled() (debug artifact?)
+
+* Mon Nov 24 2003  Tim Hockin <thockin@sun.com>
+  - add -c, --count option to acpi_listen (Luca Capello <luca.pca.it>)
+  - add -t, --time option to acpi_listen (Luca Capello <luca.pca.it>)
+  - return a meaningful value if we break out of the main loop (acpi_listen.c)
+  - break out usage() from handle_cmdline() (acpi_listen.c)
+
+* Mon Nov 17 2003  Tim Hockin <thockin@sun.com>
+  - Decouple logging to stdout from foregrounding
+  - Add acpi_listen (source and man)
+  - Add ud_connect()
+  - Remove (euid == 0) check
+  - ifdef the bad-kernel checking - it consumes a byte of data!
+
+* Fri Nov 14 2003  Tim Hockin <thockin@sun.com>
+  - Add -f option (run in foreground)
+
+* Tue May 13 2003  Tim Hockin <thockin@sun.com>
+  - Fixed a dumb bug with %e expansion for commands
+  - Add COPYING file
+  - Add TODO file
+
+* Fri Mar 15 2002  Tim Hockin <thockin@sun.com>
+  - Updated RPM spec with patch from sun for chkconfig on/off
+  - Add Changelog, make 'make rpm' use it.
+  - 1.0.1
+
+* Wed Mar 13 2002  Tim Hockin <thockin@sun.com>
+  - Fixed logging bug - not appending to log (O_APPEND needed)
+  - Fix 'make install' to not need root access
+  - Fix RPM spec to not need root
+
+* Thu Sep 6 2001 Tim Hockin <thockin@sun.com>
+  - 1.0.0
+
+* Thu Aug 16 2001  Tim Hockin <thockin@sun.com>
+  - Added commandline options to actions
+
+* Wed Aug 15 2001  Tim Hockin <thockin@sun.com>
+  - Added UNIX domain socket support
+  - Changed /etc/acpid.d to /etc/acpid/events
+
+* Mon Aug 13 2001  Tim Hockin <thockin@sun.com>
+  - added changelog
+  - 0.99.1-1
+

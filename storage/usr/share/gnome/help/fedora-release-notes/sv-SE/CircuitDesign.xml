@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Circuit_Design" lang="sv-SE">
+	<title>Kretsdesign</title>
+	<indexterm>
+		<primary>Kretsdesign</primary>
+		<secondary>Avsnitt</secondary>
+	</indexterm>
+	<para>
+		Fedora &PRODVER; innehåller en komplett uppsättning program för schemakonstruktion, kretssimulering och kretskortslayout. De följande är de större ändringarna av dessa program. En fullständig lista över ändringar finns i slutet av detta dokument.
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>geda</term>
+			<listitem>
+				<indexterm>
+					<primary>geda</primary>
+				</indexterm>
+				<para>
+					In Fedora 12, är sviten <package>geda</package>, som tidigare var paketerad som ett antal individuella program, nu tillgänglig som ett enda, komplett paket.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>gspiceui</term>
+			<listitem>
+				<indexterm>
+					<primary>gspiceui</primary>
+				</indexterm>
+				<para>
+					Fedoras <package>gspiceui</package> är nu kompilerad under <package>wxgtk</package> 2.8 istället för den gamla <package>wxgtk</package> 2.6. Detta förbättrar GSpiceUIis grafiska gränssnitt. GSpiceUI inkluderar saknade opamp-3.sym till /usr/share/gEDA/sym/misc/ (katalog med symboler för geda). 
+					<note>
+						<title>PPC64</title>
+						<para>
+							GSpiceUI är inte tillgänglig på Fedora stödda PPC64-arkitektur på grund av att gwave saknas för den arkitekturen.
+						</para>
+					</note>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>kicad</term>
+			<listitem>
+				<indexterm>
+					<primary>kicad</primary>
+				</indexterm>
+				<para>
+					Fedora 12 inkluderar den senaste versionen av <package>kicad</package>package &gt; som innehåller ett stort antal av smärre felrättningar och förbättringar av användbarheten. För en komplett beskrivning av de många ändringarna, se ändringsloggen uppströms på <ulink type="http" url="http://www.lis.inpg.fr/realise_au_lis/kicad/"></ulink>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>ngspice</term>
+			<listitem>
+				<indexterm>
+					<primary>ngspice</primary>
+				</indexterm>
+				<para>
+					<package>ngspice</package> har uppdaterats till omarbetning 19. 
+					<itemizedlist>
+						<listitem>
+							<para>
+								Minneshantering: lagade minnesläckor (Fel 514484 - Ett långt varningsmeddelande)
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Integration av espicefelrättningar och -förbättringar
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Felrättningar i plottningar och kommandoradsgränssnittet.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Omarbetning av BSim-modeller, integration av EPFL-EKV modell V2.63, ADMS modeller mextram, hicum0 hicum2.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Fedoras ngspice har modifierats för att acceptera anrop från Xcircuits TCL-gränssnitt.
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>tclspice</term>
+			<listitem>
+				<indexterm>
+					<primary>tclspice</primary>
+				</indexterm>
+				<para>
+					<package>tclspice</package> är nytt i Fedora &PRODVER;.
+				</para>
+				<para>
+					Före ngspice-rework-19 har Fedora betraktat <package>tclspice</package>s stabilitet för bräcklig. Exampel på <package>tclspice</package> kan ses via <command>rpm -qd tclspice</command>.
+				</para>
+				<para>
+					Tclspice ger Fedoraanvändare utökade möjligheter till design med blandade signaler via dess TCL-bakände. Eftersom Fedora också tillhandahåller verktyg för boolesk hantering (förklaras i följande avsnitt) har Fedoraanvändare fullgod materiel för att spinna sina egna blandade signals-EDA-insticksmoduler.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>xcircuit</term>
+			<listitem>
+				<indexterm>
+					<primary>xcircuit</primary>
+				</indexterm>
+				<para>
+					<package>xcircuit</package> har uppdaterats till version 3.6.161. Värt att notera är: 
+					<itemizedlist>
+						<listitem>
+							<para>
+								Stöd för flera fönster för schematisk layout.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								En fullständig omarbetning av tangent-funktionsbindningsrutinerna och mekanismerna för att anropa funktioner påverkades.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Flera tillägg och rättningar behöver göras för att få flerfönsterimplementationen att fungera ordentligt.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Sättet bibliotek hanteras genom att göra en distinktion mellan bibliotekssidor och filer med begreppet "technology namespaces" har förbättrats. Varje objekt har ett namn som är sammansatt av ett "technology prefix", ett dubbelkolon ("::") och objektets namn. Varje biblioteksfil deklarerar ett tekniknamn som används som prifixet för alla objekt i den filen. Prefixen används av XCircuit för att spåra vilka objekt som kom från vilken fil, oberoende av bibliotekssidan till vilken de lästes in. Stöd tillagt för att ledningar anslutna till symbolben fortsätter vara ansluta när symbolen flyttas. Det expanderas också vid funktionen "Attach-to" som gör att ledningar kan anslutas (halv)automatiskt till benetiketter eller symbolben. Nyckelmakrot för "attach-to" (tangent "A") kan också användas som funktionen "wire" (tangent "w") för att starta en ledning med sin startpunkt ansluten till ett symbolben eller en benetikett.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Sättet informationsetiketter för kretskort hanteras har ändrats från version 2.6.66.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Hastigheten vid körning har förbättrats.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Fedoras ngspice har modifierats för att acceptera anrop från Xcircuits TCL-gränssnitt.
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>
+
+

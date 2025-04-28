@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN" "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY GFDL SYSTEM "fdl-appendix.xml">
+<!ENTITY appversion "0.10">
+<!ENTITY manrevision "0.1">
+<!ENTITY date "May 2009">
+<!ENTITY app "Kerberos Network Authentication Dialog">
+<!ENTITY application "<application>&app;</application>">
+]>
+<!--
+      (Do not remove this comment block.)
+  Template Maintained by the GNOME Documentation Project:
+	  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 12, 2002
+-->
+<!--
+      (Do not remove this comment block.)
+  Version: 0.0.1
+  Last modified: May 22, 2009
+  Maintainers:
+               Guido Günther  <agx@sigxcpu.org>
+  Translators:
+               (translators put your name and email here)
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="es">
+ <!-- please do not change the id; for translations, change lang to -->
+ <!-- appropriate code -->
+
+ <articleinfo>
+  <title>Manual del <application>Diálogo de autenticación de red de Kerberos</application></title>
+  <abstract role="description">
+   <para>El Diálogo de autenticación de red de Kerberos monitoriza y refresca sus tiques de Kerberos.</para>
+  </abstract>
+  <copyright>
+   <year>2009</year>
+   <holder>Guido Günther</holder>
+  </copyright><copyright><year>2009</year><holder>Jorge González (jorgegonz@svn.gnome.org)</holder></copyright>
+
+  <!-- translators: uncomment this:
+
+  <copyright>
+  <year>2000</year>
+  <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+ </copyright>
+
+  -->
+  <!-- An address can be added to the publisher information.  If a role is
+  not specified, the publisher/author is the same for all versions of the
+  document.  -->
+  <publisher role="maintainer">
+   <publishername>Guido Günther</publishername>
+  </publisher>
+
+    <legalnotice id="legalnotice">
+	<para>Se otorga permiso para copiar, distribuir y/o modificar este documento bajo los términos de la Licencia de Documentación Libre de GNU, Versión 1.1 o cualquier otra versión posterior publicada por la Free Software Foundation; sin Secciones Invariantes ni Textos de Cubierta Delantera ni Textos de Cubierta Trasera. Puede encontrar una copia de la licencia GFDL en este <ulink type="help" url="ghelp:fdl">enlace</ulink> o en el archivo COPYING-DOCS distribuido con este manual.</para>
+         <para>Este manual es parte de una colección de manuales de GNOME distribuido bajo la GFDL. Si quiere distribuir este manual por separado de la colección, puede hacerlo añadiendo una copia de la licencia al manual, tal como se describe en la sección 6 de la licencia.</para>
+
+	<para>Muchos de los nombres utilizados por las empresas para distinguir sus productos y servicios se consideran marcas comerciales. Cuando estos nombres aparezcan en la documentación de GNOME, y siempre que se haya informado a los miembros del Proyecto de documentación de GNOME de dichas marcas comerciales, los nombres aparecerán en mayúsculas o con las iniciales en mayúsculas.</para>
+
+	<para>ESTE DOCUMENTO Y LAS VERSIONES MODIFICADAS DEL MISMO SE PROPORCIONAN SEGÚN LAS CONDICIONES ESTABLECIDAS EN LA LICENCIA DE DOCUMENTACIÓN LIBRE DE GNU (GFDL) Y TENIENDO EN CUENTA QUE: <orderedlist>
+		<listitem>
+		  <para>EL DOCUMENTO SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO, NI EXPLÍCITA NI IMPLÍCITA INCLUYENDO, SIN LIMITACIÓN, GARANTÍA DE QUE EL DOCUMENTO O VERSIÓN MODIFICADA DE ÉSTE CAREZCA DE DEFECTOS COMERCIALES, SEA ADECUADO A UN FIN CONCRETO O INCUMPLA ALGUNA NORMATIVA. TODO EL RIESGO RELATIVO A LA CALIDAD, PRECISIÓN Y UTILIDAD DEL DOCUMENTO O SU VERSIÓN MODIFICADA RECAE EN USTED. SI CUALQUIER DOCUMENTO O VERSIÓN MODIFICADA DE AQUÉL RESULTARA DEFECTUOSO EN CUALQUIER ASPECTO, USTED (Y NO EL REDACTOR INICIAL, AUTOR O CONTRIBUYENTE) ASUMIRÁ LOS COSTES DE TODA REPARACIÓN, MANTENIMIENTO O CORRECCIÓN NECESARIOS. ESTA RENUNCIA DE GARANTÍA ES UNA PARTE ESENCIAL DE ESTA LICENCIA. NO SE AUTORIZA EL USO DE NINGÚN DOCUMENTO NI VERSIÓN MODIFICADA DE ÉSTE POR EL PRESENTE, SALVO DENTRO DEL CUMPLIMIENTO DE LA RENUNCIA;Y</para>
+		</listitem>
+		<listitem>
+		  <para>EN NINGUNA CIRCUNSTANCIA NI SEGÚN NINGÚN ARGUMENTO LEGAL, SEA POR MOTIVOS CULPOSOS (INCLUIDA LA NEGLIGENCIA), CONTRACTUALES O DE OTRO TIPO, NI EL AUTOR, NI EL REDACTOR INICIAL, NI CUALQUIER COLABORADOR, NI CUALQUIER DISTRIBUIDOR DEL DOCUMENTO O VERSIÓN MODIFICADA DEL MISMO, NI CUALQUIER PROVEEDOR DE CUALQUIERA DE DICHAS PARTES, SERÁN RESPONSABLES, ANTE NINGÚN TERCERO, DE NINGÚN DAÑO O PERJUICIO DIRECTO, INDIRECTO, ESPECIAL, INCIDENTAL O CONSIGUIENTE DE NINGÚN TIPO, INCLUIDOS, SIN LIMITACIÓN, LOS DAÑOS POR PÉRDIDA DE FONDO DE COMERCIO, INTERRUPCIÓN DEL TRABAJO, FALLO O MAL FUNCIONAMIENTO INFORMÁTICO, NI CUALQUIER OTRO DAÑO O PÉRDIDA DERIVADOS DEL USO DEL DOCUMENTO Y LAS VERSIONES MODIFICADAS DEL MISMO, O RELACIONADO CON ELLO, INCLUSO SI SE HABÍA COMUNICADO A AQUELLA PARTE LA POSIBILIDAD DE TALES DAÑOS.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+
+  <authorgroup>
+   <author>
+    <firstname>Jonathan</firstname>
+    <surname>Blandford</surname>
+    <email>rjb@redhat.com</email>
+   </author>
+   <author role="maintainer">
+    <firstname>Guido</firstname>
+    <surname>Günther</surname>
+    <email>agx@sigxcpu.org</email>
+   </author>
+   <!-- This is appropriate place for other contributors: translators,
+   maintainers,  etc. Commented out by default.
+   <othercredit role="translator">
+   <firstname>Latin</firstname>
+   <surname>Translator 1</surname>
+   <affiliation>
+   <orgname>Latin Translation Team</orgname>
+   <address> <email>translator@gnome.org</email> </address>
+  </affiliation>
+   <contrib>Latin translation</contrib>
+  </othercredit>
+   -->
+  </authorgroup>
+
+  <!-- The revision numbering system for GNOME manuals is as follows: -->
+  <!-- * the revision number consists of two components -->
+  <!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
+  <!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
+  <!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
+  <!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
+  <!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
+  <!-- to V3.0, and so on. -->
+
+  <revhistory>
+   <revision>
+    <revnumber>2.0</revnumber>
+    <date>Mayo de 2009</date>
+    <revdescription>
+     <para role="author">Guido Günther <email>agx@sigxcpu.org</email></para>
+    </revdescription>
+   </revision>
+  </revhistory>
+  <releaseinfo>Este manual describe cómo usar el Diálogo de autenticación de red de Kerberos para gestionar sus tiques de Kerberos.</releaseinfo>
+  <legalnotice>
+   <title>Comentarios</title>
+   <para>Para informar de un fallo, o hacer alguna sugerencia concerniente a este paquete o este manual use el <ulink url="http://bugzilla.gnome.org" type="http">Bugzilla de GNOME</ulink>.</para>
+   <!-- Translators may also add here feedback address for translations -->
+  </legalnotice>
+ </articleinfo>
+
+ <!-- ============= Document Body ============================= -->
+ <!-- ============= Introduction ============================== -->
+ <section id="intro">
+  <title>Introducción</title>
+  <indexterm>
+    <primary><application>Diálogo de autenticación de red de Kerberos</application></primary>
+    <secondary>Manual</secondary>
+    <tertiary>krb5-auth-dialog</tertiary>
+  </indexterm>
+
+   <para>El Diálogo de autenticación de red de Kerberos es una miniaplicación para el <systemitem>Escritorio GNOME</systemitem> que monitoriza y actualiza sus tiques de Kerberos. Muestra recordatorios cuando un tique está a punto de caducar.</para>
+   <para>Una vez que haya adquirido un tique de Kerberos (a través de GDM o de la miniaplicación en si) la miniaplicación gestionará la renovación del tique hasta que caduque. También se puede usar para destruir (quitar) la caché de credenciales, adquirir un tique con diferentes opciones o cambiar a otro principal.</para>
+ </section>
+
+<section id="using">
+  <title>Uso</title>
+  <para>El <application>Diálogo de autenticación de red de Kerberos</application> generalmente se inicia al iniciar GNOME, pero puede iniciar manualmente el <application>Diálogo de autenticación de red de Kerberos</application> ejecutando:</para>
+  <variablelist>
+    <varlistentry>
+      <term>Línea de comandos</term>
+      <listitem>
+	<para>Escriba <command>krb5-auth-dialog --always</command> después pulse <keycap>Intro</keycap>:</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+  <para>El icono de la bandeja indicará uno de estos tres estados:</para>
+
+  <section id="trayicon-valid">
+    <title>Tique de Kerberos válido</title>
+    <para>Tiene un tique Kerberos válido que se puede usar para autenticarse en servicios de red.</para>
+    <figure>
+      <title>Tique de Kerberos válido</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/trayicon-valid.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+ </section>
+
+  <section id="trayicon-expiring">
+    <title>Tique de Kerberos a punto de caducar</title>
+    <para>El tique de Kerberos está a punto de caducar pero aún se puede usar para autenticarse en servicios de red.</para>
+    <figure>
+      <title>Tique de Kerberos a punto de caducar</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/trayicon-expiring.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+ </section>
+  <section id="trayicon-expired">
+    <title>Tique de Kerberos caducado</title>
+    <para>Su Kerberos ya no es válido (ej. ha caducado). Ya no se puede usar para autenticarse en servicios de red. Esto no es un problema si la aplicación que requiere Kerberos sabe pedir un tique nuevo a través del <application>Diálogo de autenticación de red de Kerberos</application>. En caso de que no sepa, puede pulsar con el botón izquierdo del ratón sobre la aplicación e introducir de nuevo su contraseña.</para>
+    <figure>
+      <title>Tique de Kerberos caducado</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/trayicon-expired.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+ </section>
+</section>
+
+<section id="notify">
+  <title>Mensajes de notificación</title>
+  <para>Se pueden mostrar las siguientes notificaciones cuando se ha iniciado el Diálogo de autenticación de red de Kerberos.</para>
+
+ <section id="notify-valid">
+    <title>Credenciales de Kerberos válidas</title>
+    <para>Acaba de adquirir un tique de Kerberos válido que puede usar para autenticarse en servicios de red.</para>
+    <figure>
+      <title>Notificación cuando las credenciales Kerberos se hacen válidas</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/ka-valid.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+ </section>
+
+ <section id="notify-expiring">
+    <title>Credenciales de Kerberos a punto de caducar</title>
+    <para>Sus credenciales de Kerberos están a punto de caducar. Puede pulsar con el botón izquierdo del ratón en la miniaplicación de la bandeja del sistema para actualizarlas.</para>
+    <figure>
+      <title>Notificación cuando las credenciales de Kerberos van a caducar</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/ka-expiring.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+ </section>
+
+ <section id="notify-expired">
+    <title>Credenciales de Kerberos caducadas</title>
+    <para>Sus credenciales de Kerberos acaban de caducar. Ya no se pueden usar para autenticarse en servicios de red.</para>
+    <figure>
+      <title>Notificación cuando las credenciales de Kerberos han caducado</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/ka-expired.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+ </section>
+</section>
+
+<section id="preferences">
+  <title>Preferencias</title>
+  <para>Puede establecer sus preferencias seleccionando «Preferencias» del menú contextual de la miniaplicación o seleccionando «Autenticación de red» en el <application>Centro de control</application>. <table frame="topbot" id="tbl-principal-prefs"><title>Preferencias del principal de Kerberos</title><tgroup cols="2" colsep="1" rowsep="1"><colspec colwidth="19.21*"/><colspec colwidth="46.79*"/><thead>
+          <row>
+            <entry colsep="0" rowsep="1">
+              <para>Elemento de diálogo</para>
+            </entry>
+            <entry colsep="0" rowsep="1">
+              <para>Descripción</para>
+            </entry>
+          </row>
+        </thead><tbody>
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>Principal de Kerberos</guilabel>
+              </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>El principal de Kerberos que usar. Déjelo vacío para usar su nombre de usuario actual. Si cambia este ajuste tendrá que destruir la caché de credenciales antes de que este ajuste tenga efecto.</para>
+            </entry>
+          </row>
+
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>ID de usuario de PKINIT</guilabel>
+              </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>El identificador público/privado/certificado del principal. Déjelo vacío si no está usando PKINIT. Para activarlo usando un token de seguridad añada la ruta a la biblioteca pkcs11, ej: «PKCS11:/usr/lib/opensc/opensc-pkcs11.so»</para>
+            </entry>
+          </row>
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>Anclas PKINIT</guilabel>
+              </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>Ruta a los certificados CA usados como anclas de confianza para PKINIT. Sólo debe establecerlo si no se ha establecido globalmente en <filename>/etc/krb5.conf</filename>.</para>
+            </entry>
+          </row>
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>reenvibale</guilabel>
+              </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>Indica si el tique de Kerberos solicitado debe ser reenviable. Indica si el tique de Kerberos solicitado debe renovarse. Cambiar este ajuste requiere que se vuelva a autenticar pulsando con el botón izquierdo del ratón en el icono de la bandeja del sistema e introduzca su contraseña.</para>
+            </entry>
+          </row>
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>renovable</guilabel>
+              </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>Indica si el tique de Kerberos solicitado debe renovarse. Cambiar este ajuste requiere que se vuelva a autenticar pulsando con el botón izquierdo del ratón en el icono de la bandeja del sistema e introduzca su contraseña.</para>
+            </entry>
+          </row>
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>vía proxy</guilabel>
+	      </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>Indica si el tique de Kerberos solicitado de debería pasar a través de un proxy. Para cambiar este ajuste necesita volver a autenticarse pulsando con el botón izquierdo del ratón en el icono de la bandeja e introducir su contraseña.</para>
+            </entry>
+          </row>
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>Advertir ... minutos antes de que caduque</guilabel>
+              </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>Se enviarán notificaciones acerca de sus credenciales a punto de caducar esos minutos antes de que caduquen.</para>
+            </entry>
+          </row>
+          <row>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>
+                <guilabel>Mostrar icono de la bandeja</guilabel>
+              </para>
+            </entry>
+            <entry colsep="0" rowsep="0" valign="top">
+              <para>Indica si se debe mostrar el icono de la bandeja del sistema. Desactivar el icono de la bandeja del sistema también desactivará las notificaciones, en su lugar se mostrará el diálogo de contraseña.</para>
+            </entry>
+          </row>
+	</tbody></tgroup></table></para>
+</section>
+
+</article>

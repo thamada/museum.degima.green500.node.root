@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY author1 "Sun">
+<!ENTITY author2 "Java Desktop System Documentation Team">
+<!ENTITY publisher "Sun Microsystems, Inc.">
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY appversion "2.6.0">
+<!ENTITY app "<application>Zenity</application>">
+<!ENTITY appname "Zenity">
+<!ENTITY date "August 2004">
+<!ENTITY manrevision "2.0">
+]>
+<!-- ================ Document Header ================= -->
+<article id="index" lang="da">
+
+  <articleinfo>
+    <title>Manual til Zenity</title>
+    <subtitle>Manual til skrivebordsprogrammet Zenity, V2.0</subtitle>
+    <copyright>
+	    <year>2003</year>
+	    <year>2004</year>
+	    <holder>Sun Microsystems, Inc.</holder>
+    </copyright>
+
+    <!-- Translators: uncomment this
+    <copyright>
+	    <year>2004</year>
+	    <holder>ME_THE_TRANSLATOR</holder>
+    </copyright>
+    -->
+
+    <publisher>
+	    <publishername>Sun Microsystems, Inc.</publishername>
+    </publisher>
+
+      <legalnotice id="legalnotice">
+	<para>Der gives tilladelse til at kopiere, distribuere og/eller ændre dette dokument under betingelserne i GNU Free Documentation License (GFDL), version 1.1 eller enhver nyere version, udgivet af Free Software Foundation uden invariante afsnit, uden forsidetekster, og uden bagsidetekster. Du kan finde en kopi af GFDL'en her: <ulink type="help" url="ghelp:fdl">link</ulink>, eller i filen COPYING-DOCS der distribueres med denne manual.</para>
+         <para>Denne manual er en del af GNOME-manualsamlingen distribueret under GFDL. Hvis du vil distribuere denne manual separat fra denne samling, kan du gøre det ved at tilføje en kopi af licensen til manualen, som beskrevet i sektion 6 af licensen.</para>
+
+	<para>Mange af navnene brugt af firmaer til at skelne deres produkter og tjenester er registrerede varemærker. Der hvor disse navne optræder i GNOME-dokumentationen, og medlemmerne af GNOME-dokumentationsprojektet er blevet gjort opmærksomme på disse varemærker, er navnene skrevet med store bogstaver eller store forbogstaver.</para>
+
+	<para>DETTE DOKUMENT OG MODIFICEREDE VERSIONER GØRES TILGÆNGELIGT UNDER BETINGELSERNE I GNU FREE DOCUMENTATION LICENSE UNDER DEN FORUDSÆTNING AT: <orderedlist>
+		<listitem>
+		  <para>DETTE DOKUMENT GØRES TILGÆNGELIGT SÅDAN SOM DET ER, UDEN NOGEN FORM FOR GARANTI, HVERKEN UDTALT ELLER ANTYDET, DERIBLANDT, UDEN BEGRÆNSNINGER, GARANTIER OM AT DOKUMENTET ELLER ÆNDREDE VERSIONER AF DOKUMENTET ER FRIT FOR DEFEKTER, PASSENDE TIL ET BESTEMT FORMÅL ELLER IKKE-KRÆNKENDE. DU HÆFTER SELV FOR HELE RISIKOEN VEDRØRENDE KVALITET, KORREKTHED OG YDELSE FOR DOKUMENTET ELLER ÆNDREDE VERSIONER AF DOKUMENTET. SKULLE ET DOKUMENT, ELLER EN ÆNDRET VERSION AF ET DOKUMENT VISE SIG AT VÆRE DEFEKT PÅ EN HVILKEN SOM HELST MÅDE, HÆFTER DU FOR BETALING FOR EVENTUEL NØDVENDIG SERVICE, REPARATION ELLER KORREKTION (OG IKKE HVERKEN DEN OPRINDELIGE FORFATTER, SKRIBENT ELLER NOGEN ANDEN BIDRAGYDER). DENNE ERKLÆRING OM GARANTIFORBEHOLD ER EN ESSENTIEL DEL AF DENNE LICENS. INGEN BRUG AF NOGET DOKUMENT ELLER ÆNDRET VERSION AF DOKUMENTET ER AUTORISERET HERUNDER BORTSET FRA DENNE FORBEHOLDSERKLÆRING; OG</para>
+		</listitem>
+		<listitem>
+		  <para>UNDER INGEN OMSTÆNDIGHEDER OG UNDER INGEN JURIDISK TEORI, UANSET OM DET ER EN BEVIDST SKADENDE HANDLING (INKLUSIVE UFORSVARLIGHED) ELLER PÅ HVILKEN SOM HELST ANDEN MÅDE, KAN FORFATTEREN, SKRIBENT, BIDRAGYDERE, DISTRIBUTØRER ELLER FORSYNER AF DETTE DOKUMENT ELLER MODIFICEREDE VERSIONER GØRES ANSVARLIG OVERFOR NOGEN PERSON FOR NOGEN DIREKTE, INDIREKTE, SPECIEL, TILFÆLDIG ELLER FØLGENDE SKADE PÅFØRT NOGEN INKLUSIVE, UDEN BEGRÆNSNING, SKADE SOM FØLGE AF TAB AF RYGTE, ARBEJDSSTOP, COMPUTER-FEJL ELLER -SVIGT, ELLER ENHVER ANDEN FORM FOR SKADE ELLER TAB SOM ER OPSTÅET I FORBINDELSE MED BRUG AF DETTE DOKUMENT ELLER MODIFICEREDE VERSIONER HERAF, SELV HVIS EN SÅDAN PART HAR VÆRET INFORMERET OM MULIGHEDEN FOR SÅDANNE SKADER.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+
+    <authorgroup>
+      <author>
+        <firstname>Sun</firstname>
+        <surname>Java Desktop System Documentation Team</surname>
+        <affiliation><orgname>Sun Microsystems, Inc.</orgname></affiliation>
+      </author>
+      <author role="maintainer">
+        <firstname>Glynn</firstname>
+        <surname>Foster</surname>
+        <affiliation>
+          <orgname>GNOME-dokumentationsprojektet</orgname>
+        </affiliation>
+      </author>
+      <editor>
+        <firstname>Nicholas</firstname>
+        <surname>Curran</surname>
+        <affiliation>
+          <orgname>GNOME-dokumentationsprojektet</orgname>
+        </affiliation>
+      </editor>
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>Manual til skrivebordsprogrammet Zenity, V2.0</revnumber>
+        <date>August 2004</date>
+        <revdescription>
+          <para role="author">Sun Java Desktop System Documentation Team</para>
+          <para role="publisher">Sun Microsystems, Inc.</para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>Zenity-manual V1.0</revnumber>
+        <date>Januar 2003</date>
+        <revdescription>
+          <para role="author">Glynn Foster</para>
+          <para role="publisher">GNOME-dokumentationsprojektet</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <releaseinfo>Denne manual beskriver version 2.6.0 af Zenity.</releaseinfo>
+
+    <legalnotice>
+	    <title>Tilbagemelding</title>
+	    <para>Hvis du vil sende tilbagemeldinger, så følg vejledningen på <ulink url="ghelp:gnome-feedback" type="help">feedbacksiden</ulink>.</para>
+<!-- Translators may also add here feedback address for translations -->
+
+    </legalnotice>
+    <abstract role="description">
+            <para>Zenity er en omskrivning af gdialog, en GNOME-specifik udgave af dialog, som lader dig vise dialogbokse fra kommandolinjen eller skalscripts.</para>
+    </abstract>
+  </articleinfo>
+  
+  <indexterm>
+    <primary>zenity-kommando</primary>
+  </indexterm>
+  <indexterm>
+    <primary>dialogvinduesopretter</primary>
+  </indexterm>
+<!-- ================ Document Body ================= -->
+
+<!-- ==== Introduction ====== -->
+
+  <sect1 id="zenity-introduction">
+    <title>Introduktion</title>
+
+    <para><application>Zenity</application> lader dig oprette følgende typer af simple dialogvinduer:</para>
+
+    <itemizedlist>
+        <listitem><para>Kalender</para></listitem>
+	<listitem><para>Filvælger</para></listitem>
+	<listitem><para>Liste</para></listitem>
+	<listitem><para>Påmindelsesikon</para></listitem>
+        <listitem><para>Meddelelse</para>
+            <itemizedlist>
+	        <listitem><para>Fejl</para></listitem>
+		<listitem><para>Information</para></listitem>
+		<listitem><para>Spørgsmål</para></listitem>
+		<listitem><para>Advarsel</para></listitem>
+	    </itemizedlist>
+	</listitem>
+	<listitem><para>Statusbjælke</para></listitem>
+        <listitem><para>Tekstfelt</para></listitem>
+	<listitem><para>Tekstinformation</para></listitem>
+    </itemizedlist>
+
+  </sect1>
+
+<!-- ==== Usage ====== -->
+
+  <sect1 id="zenity-usage">
+    <title>Brug</title>
+
+    <para>Hvis du skriver et script, kan du bruge <application>Zenity</application> til at oprette simple dialogvinduer, der interagerer grafisk med brugeren på følgende vis:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Du kan oprette et dialogvindue for at indhente information fra brugeren. For eksempel kan du bede brugeren om at vælge en dato fra et kalendervindue, eller om at vælge en fil fra en filvælger.</para>
+      </listitem>
+      <listitem>
+        <para>Du kan oprette et dialogvindue for at vise information til brugeren. For eksempel kan du bruge en statusbjælke til at angive status for en operation, eller vise en advarsel til brugeren.</para>
+      </listitem>
+    </itemizedlist>
+    <para>Når brugeren lukker dialogvinduet, vil <application>Zenity</application> udskrive teksten, der blev produceret af vinduet, til standard output.</para>
+
+    <note>
+      <para>Når du skriver <application>Zenity</application>-kommandoer, så sikr dig, at du skriver anførselstegn omkring hvert argument.</para>
+      <para>Brug for eksempel: <screen><userinput><command>zenity --calendar --title="Planer for ferie"</command></userinput></screen> Brug ikke: <screen><userinput><command>zenity --calendar --title=Planer for ferie</command></userinput></screen></para>
+      <para>Hvis du ikke bruger anførselstegn, kan du få uventede resultater.</para>
+    </note>
+
+    <sect2 id="zenity-usage-mnemonics">
+      <title>Genvejstaster</title>
+	<para>En genvejstast er en tast, der lader dig foretage en handling ved hjælp af tastaturet, frem for at bruge musen til at vælge en kommando fra en menu eller et dialogvindue. Hver genvejstast markeres ved et understreget tegn i en menu eller ved et dialogvalgmulighed.</para>
+	<para>Visse <application>Zenity</application>-dialogvinduer understøtter genvejstaster. Genvejstaster angives ved at placere en bundstreg umiddelbart før det tegn, der svarer til genvejstasten, i dialogteksten. Følgende eksempel viser hvordan man angiver bogstavet "C" som genvejstast:</para>
+	<screen><userinput>"_Vælg et navn".</userinput></screen>
+    </sect2>
+
+    <sect2 id="zenity-usage-exitcodes">
+      <title>Afslutningskoder</title>
+    <para><application>Zenity</application> returnerer følgende afslutningskoder:</para>
+
+    <informaltable frame="all">
+      <tgroup cols="2" colsep="1" rowsep="1">
+        <colspec colname="COLSPEC0" colwidth="50*"/>
+        <colspec colname="COLSPEC1" colwidth="50*"/>
+        <thead>
+          <row valign="top">
+            <entry colname="COLSPEC0">
+              <para>Afslutningskode</para></entry>
+            <entry colname="COLSPEC1">
+              <para>Beskrivelse</para></entry>
+          </row>
+        </thead>
+        <tbody>
+          <row valign="top">
+            <entry>
+              <para><varname>0</varname></para>
+            </entry>
+            <entry>
+              <para>Brugeren har trykket enten <guibutton>O.k.</guibutton> eller <guibutton>Luk</guibutton>.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>1</varname></para>
+            </entry>
+            <entry>
+              <para>Brugeren har trykket enten <guibutton>Annullér</guibutton> eller brugt vinduesfunktionerne til at lukke dialogvinduet.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>-1</varname></para>
+            </entry>
+            <entry>
+              <para>Der opstod en uventet fejl.</para>
+            </entry>
+          </row>
+          <row valign="top">
+            <entry>
+              <para><varname>5</varname></para>
+            </entry>
+            <entry>
+              <para>Dialogvinduet er blevet lukket, fordi tiden er løbet ud.</para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+
+    </sect2>
+
+
+  <!-- ==== General Options ====== -->
+
+  <sect2 id="zenity-usage-general-options">
+    <title>Generelle tilvalg</title>
+
+    <para>Alle <application>Zenity</application>-dialogvinduer understøtter følgende generelle tilvalg:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--title</option>=<replaceable>titel</replaceable></term>
+	<listitem>
+	  <para>Angiver titel på et dialogvindue.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--window-icon</option>=<replaceable>ikonsti</replaceable></term>
+	<listitem>
+	  <para>Angiver det ikon, der skal vises i dialogvinduets ramme. Der er fire standardikoner, der kan bruges ved at angive følgende nøgleord: "info", "warning", "question" eller "error".</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--width</option>=<replaceable>bredde</replaceable></term>
+	<listitem>
+	  <para>Angiver dialogvinduets bredde.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--height</option>=<replaceable>højde</replaceable></term>
+	<listitem>
+	  <para>Angiver dialogvinduets højde.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--timeout</option>=<replaceable>tidsudløb</replaceable></term>
+	<listitem>
+	  <para>Angiver tidsudløbet i sekunder, hvorefter dialogvinduet lukkes.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== Miscellaneous Options ====== -->
+
+  <sect2 id="zenity-help-options">
+    <title>Hjælpetilvalg</title>
+
+    <para><application>Zenity</application> stiller følgende hjælpetilvalg til rådighed:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--help</option></term>
+	<listitem>
+	  <para>Viser en kort hjælpetekst.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--help-all</option></term>
+	<listitem>
+	  <para>Viser den fulde hjælpetekst for alle dialogvinduer.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-general</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til de generelle dialogtilvalg.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-calendar</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst for kalenderdialogvinduets tilvalg.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-entry</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst for tilvalg til tekstindtastningsfelter.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-error</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst for tilvalg til dialogvinduer med fejlmeddelelser.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-info</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst for tilvalg til dialogvinduer med informationsmeddelelser.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-file-selection</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til filvælgerdialogvinduer.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-list</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til listedialogvinduer.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-notification</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til påmindelsesikoner.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-progress</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til statusbjælkedialogvinduer.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-question</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til spørgsmålsdialogvinduer.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-warning</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til advarselsdialogvinduer.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-text-info</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til informationsdialogvinduer.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-misc</option></term>
+	<listitem>
+	  <para>Viser hjælpetekst til diverse tilvalg.</para>
+	</listitem>
+      </varlistentry>
+ 
+      <varlistentry>
+        <term><option>--help-gtk</option></term>
+	<listitem>
+	  <para>Viser hjælp til GTK+-tilvalg.</para>
+	</listitem>
+      </varlistentry>
+ 
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== Miscellaneous Options ====== -->
+
+  <sect2 id="zenity-miscellaneous-options">
+    <title>Diverse tilvalg</title>
+
+    <para><application>Zenity</application> stiller yderligere følgende "diverse" tilvalg til rådighed:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--about</option></term>
+	<listitem>
+	  <para>Viser dialogvinduet <guilabel>Om Zenity</guilabel>, som indeholder versionsinformation, ophavsretsinformation samt udviklerinformation om <application>Zenity</application>.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--version</option></term>
+	<listitem>
+	  <para>Viser versionsnummeret for denne udgave af <application>Zenity</application>.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
+
+<!-- ==== GTK+ Options ====== -->
+
+  <sect2 id="zenity-gtk-options">
+    <title>GTK+-tilvalg</title>
+
+    <para><application>Zenity</application> understøtter standard-GTK+-tilvalgene. Kør kommandoen <command>zenity -?</command> for at få yderligere information om GTK+-tilvalg.</para>
+
+  </sect2>
+
+<!-- ==== Environment variables ==== -->
+
+  <sect2 id="zenity-environment-variables">
+    <title>Miljøvariable</title>
+
+    <para>Normalt vil <application>Zenity</application> detektere terminalvinduet, hvorfra det er blevet kørt, og holde sit eget vindue over dette vindue. Denne opførsel kan slås fra ved at nulstille miljøvariablen <envar>WINDOWID</envar>.</para>
+
+  </sect2>
+
+  </sect1>
+<!-- ==== Calendar Options ====== -->
+
+  <sect1 id="zenity-calendar-options">
+    <title>Kalenderdialogvindue</title>
+
+    <para>Brug <option>--calendar</option>-tilvalget til at oprette et kalenderdialogindue. <application>Zenity</application> returnerer den valgte dato til standard output. Hvis ingen dato angives på kommandolinjen, bruger dialogvinduet den aktuelle dato.</para>
+    <para>Kalenderdialogvinduet understøtter følgende tilvalg:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>tekst</replaceable></term>
+	<listitem>
+	  <para>Angiver teksten, der vises i kalenderdialogvinduet.</para>
+	</listitem>
+      </varlistentry>
+     	
+      <varlistentry>
+        <term><option>--day</option>=<replaceable>dag</replaceable></term>
+	<listitem>
+	  <para>Angiver den dag, der markeres i kalenderdialogvinduet. <replaceable>dag</replaceable> skal være et tal mellem 1 og 31 inklusive.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--month</option>=<replaceable>måned</replaceable></term>
+	<listitem>
+	  <para>Angiver måneden, der markeres i kalenderdialogvinduet. <replaceable>måned</replaceable> skal være et tal mellem 1 og 12, inklusive.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--year</option>=<replaceable>år</replaceable></term>
+	<listitem>
+	  <para>Angiver året, der markeres i kalenderdialogvinduet.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--date-format</option>=<replaceable>format</replaceable></term>
+	<listitem>
+	  <para>Angiver formatet, der returneres fra kalenderdialogen efter datoen er blevet valgt. Standardformatet afhænger af regionaldata. <replaceable>format</replaceable> skal være et format, som accepteres af <command>strftime</command>-funktionen, såsom <literal>%A %d/%m/%y</literal>.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Følgende eksempelscript viser, hvordan man opretter et kalenderdialogvindue: <programlisting>
+        #!/bin/sh
+
+
+        if zenity --calendar \
+        --title="Vælg en dato" \
+        --text="Klik på den dato, du vil vælge." \
+        --day=10 --month=8 --year=2004
+          then echo $?
+          else echo "Ingen dato valgt"
+        fi
+      </programlisting></para>
+
+    <figure id="zenity-calendar-screenshot">
+      <title>Eksempel på kalenderdialog</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+              <imagedata fileref="figures/zenity-calendar-screenshot.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+              <phrase><application>Zenity</application> calendar dialog example</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+   </figure>
+													  
+  </sect1>
+
+
+<!-- ==== File Selection Options ====== -->
+
+  <sect1 id="zenity-file-selection-options">
+    <title>Filvælgerdialogvindue</title>
+
+    <para>Brug tilvalget <option>--file-selection</option> til at oprette et filvælgerdialogvidue. <application>Zenity</application> returnerer de valgte filer eller mapper til standard output. Standardtilstanden for filvælgeren er åbn.</para>
+    <para>Filvælgerdialogvinduer understøtter følgende tilvalg:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--filename</option>=<replaceable>filnavn</replaceable></term>
+	<listitem>
+	  <para>Angiver den fil eller mappe, som er valgt i filvælgeren, når dialogvinduet først vises.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--multiple</option></term>
+	<listitem>
+	  <para>Tillader valg af flere filnavne i filvælgeren.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--directory</option></term>
+	<listitem>
+	  <para>Tillader kun valg af mapper i filvælgeren.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--save</option></term>
+	<listitem>
+	  <para>Sæt filvælgerdialogen til gemmetilstand.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--separator</option>=<replaceable>skilletegn</replaceable></term>
+	<listitem>
+	  <para>Angiver strengen, der bruges til at dele listen af returnerede filnavne.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Det følgende eksempelscript viser, hvordan man opretter et filvælgerdialogvindue: <programlisting>
+        #!/bin/sh
+
+        FILE=`zenity --file-selection --title="Vælg en fil"`
+
+        case $? in
+                 0)
+                        echo "\"$FILE\" valgt.";;
+                 1)
+                        echo "Ingen fil valgt.";;
+                -1)
+                        echo "Ingen fil valgt.";;
+        esac
+      </programlisting></para>
+
+    <figure id="zenity-fileselection-screenshot">
+      <title>Eksempel med filvælgerdialogvindue</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-fileselection-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> file selection dialog example</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Notification Options ====== -->
+  <sect1 id="zenity-notification-options">
+    <title>Påmindelsesikon</title>
+
+    <para>
+    </para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>tekst</replaceable></term>
+	<listitem>
+	  <para>Angiver teksten, der vises i påmindelsesområdet.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Følgende eksempelscript viser, hvordan man opretter et påmindelsesikon: <programlisting>
+        #!/bin/sh
+
+        zenity --notification\
+          --window-icon="info" \
+          --text="Der er nødvendige systemopdateringer!"
+      </programlisting></para>
+
+    <figure id="zenity-notification-screenshot">
+      <title>Eksempel på påmindelsesikon</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+              <imagedata fileref="figures/zenity-notification-screenshot.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+              <phrase><application>Zenity</application> notification icon example</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+   </figure>
+													  
+  </sect1>
+
+<!-- ==== List Options ====== -->
+
+  <sect1 id="zenity-list-options">
+    <title>Listedialogvindue</title>
+
+    <para>Brug tilvalget <option>--list</option> til at oprette et listedialogvindue. <application>Zenity</application> returnerer elementerne i første kolonne af teksten i de valgte rækker til standard output.</para>
+
+    <para>Data for dialogvinduet skal angives kolonne efter kolonne, række efter række. Data kan gives til dialogen gennem standard input. Hvert element skal adskilles af et linjeskiftstegn.</para>
+
+    <para>Hvis du bruger tilvalget <option>--checklist</option> eller <option>--radiolist</option>, skal hver række starte med enten "TRUE" eller "FALSE".</para>
+
+    <para>Listedialogvinduet understøtter følgende tilvalg:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--column</option>=<replaceable>kolonne</replaceable></term>
+	<listitem>
+	  <para>Angiver kolonneoverskrifterne, der vises i listedialogvinduet. Du skal angive et <option>--column</option>-tilvalg for hver kolonne, du vil have vist i dialogvinduet.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--checklist</option></term>
+	<listitem>
+	  <para>Angiver at første kolonne i listedialogvinduet indeholder afkrydsningsfelter.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--radiolist</option></term>
+	<listitem>
+	  <para>Angiver at første kolonne i listedialogvinduet indeholder radiofelter.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--editable</option></term>
+	<listitem>
+	  <para>Tillader redigering af de viste elementer.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--separator</option>=<replaceable>skilletegn</replaceable></term>
+	<listitem>
+	  <para>Angiver den streng, der bruges når listedialogvinduet returnerer de valgte elementer.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--print-column</option>=<replaceable>kolonne</replaceable></term>
+	<listitem>
+	  <para>Angiver den kolonne, der skal udskrives når der vælges. Standardkolonnen er "1". "ALL" kan bruges til at udskrive alle kolonner i listen.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Følgende eksempelscript viser, hvordan et listedialogvindue oprettes: <placeholer-1/></para>
+
+    <figure id="zenity-list-screenshot">
+      <title>Eksempel med listedialogvindue</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-list-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> list dialog example</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Message Options ====== -->
+
+  <sect1 id="zenity-message-options">
+    <title>Meddelelsesdialogvinduer</title>
+
+    <para><application>Zenity</application> kan oprette fire typer af meddelelsesdialogvinduer:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Fejl</para>
+      </listitem>
+      <listitem>
+        <para>Information</para>
+      </listitem>
+      <listitem>
+        <para>Spørgsmål</para>
+      </listitem>
+      <listitem>
+        <para>Advarsel</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>For hver type, kan du bruge tilvalget <option>--text</option> til at angive den tekst, der vises i dialogvinduet.</para>
+
+    <sect2 id="zenity-error-dialog">
+      <title>Fejldialogvindue</title>
+
+      <para>Brug tilvalget <option>--error</option> til at oprette et fejldialogvindue.</para>
+
+      <para>Det følgende eksempelscript viser, hvordan man opretter et fejldialogvindue: <programlisting>
+          #!/bin/bash
+
+          zenity --error \
+          --text="Kunne ikke finde /var/log/syslog."
+        </programlisting></para>
+
+      <figure id="zenity-error-screenshot">
+        <title>Eksempel på fejldialogvindue</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-error-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> error dialog example</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-info-dialog">
+      <title>Informationsdialogvindue</title>
+
+      <para>Brug tilvalget <option>--info</option> til at oprette et informationsdialogvindue.</para>
+
+      <para>Følgende eksempelscript viser hvordan et informationsdialogvindue oprettes: <programlisting>
+          #!/bin/bash
+
+          zenity --info \
+          --text="Sammenfletning fuldført. Opdaterede 3 af 10 filer."
+        </programlisting></para>
+
+      <figure id="zenity-information-screenshot">
+        <title>Eksempel på informationsdialogvindue</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-information-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> information dialog example</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-question-dialog">
+      <title>Spørgsmålsdialogvindue</title>
+
+      <para>Brug tilvalget <option>--question</option> til at oprette et spørgsmålsdialogvindue.</para>
+
+      <para>Følgende eksempel viser, hvordan et spørgsmålsdialogvindue oprettes: <programlisting>
+          #!/bin/bash
+
+          zenity --question \
+          --text="Er du sikker på, at du vil fortsætte?"
+        </programlisting></para>
+
+      <figure id="zenity-question-screenshot">
+        <title>Eksempel på spørgsmålsdialogvindue</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-question-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> question dialog example</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+    <sect2 id="zenity-warning-dialog">
+      <title>Advarselsdialogvindue</title>
+
+      <para>Brug tilvalget <option>--warning</option> til at oprette et advarselsdialogvindue.</para>
+
+      <para>Følgende eksempelscript viser, hvordan et advarselsdialogvindue oprettes: <programlisting>
+          #!/bin/bash
+        
+          zenity --warning \
+          --text="Træk strømkablet ud for at undgå elektrisk stød."
+        </programlisting></para>
+
+      <figure id="zenity-warning-screenshot">
+        <title>Eksempel på advarselsdialogvindue</title>
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/zenity-warning-screenshot.png" format="PNG"/>
+	    </imageobject>
+	    <textobject>
+	      <phrase><application>Zenity</application> warning dialog example</phrase>
+	    </textobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+    </sect2>
+
+  </sect1>
+
+<!-- ==== Progress Options ====== -->
+
+  <sect1 id="zenity-progress-options">
+    <title>Dialogvindue med statusbjælke</title>
+
+    <para>Brug tilvalget <option>--progress</option> til at oprette et dialogvindue med en statusbjælke.</para>
+
+    <para><application>Zenity</application> læser data linjevis fra standard input. Hvis en linje starter med #, vil teksten blive opdateret med den efterfølgende tekst på den pågældende linje. Hvis en linje kun indeholder et tal, vil vil procenttallet blive opdateret med dette tal.</para>
+	
+    <para>Statusbjælkedialogvinduet understøtter følgende tilvalg:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>tekst</replaceable></term>
+	<listitem>
+	  <para>Angiver teksten, der vises i statusbjælkedialogvinduet.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--percentage</option>=<replaceable>procentdel</replaceable></term>
+	<listitem>
+	  <para>Angiver det procenttal, der fra starten vises i statusbjælkedialogvinduet.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term><option>--auto-close</option></term>
+	<listitem>
+	  <para>Lukker statusbjælken, når den har nået 100%.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--pulsate</option></term>
+	<listitem>
+	  <para>Angiver at statusbjælken pulserer indtil der læses et EOF-tegn fra standard input.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Følgende eksempelscript viser, hvordan et dialogvindue med en statusbjælke oprettes: <programlisting>
+        #!/bin/sh
+        (
+        echo "10" ; sleep 1
+        echo "# Opdaterer e-postlogge" ; sleep 1
+        echo "20" ; sleep 1
+        echo "# Nulstiller cron-jobs" ; sleep 1
+        echo "50" ; sleep 1
+        echo "Denne linje bliver blot ignoreret" ; sleep 1
+        echo "75" ; sleep 1
+        echo "# Genstarter systemet" ; sleep 1
+        echo "100" ; sleep 1
+        ) |
+        zenity --progress \
+          --title="Opdaterer systemlogge" \
+          --text="Scanner e-postlogge..." \
+          --percentage=0
+
+        if [ "$?" = -1 ] ; then
+                zenity --error \
+                  --text="Opdatering afbrudt."
+        fi
+
+      </programlisting></para>
+
+    <figure id="zenity-progress-screenshot">
+      <title>Eksempel på dialogvindue med statusbjælke</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-progress-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> progress dialog example</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+<!-- ==== Text Entry Options ====== -->
+
+  <sect1 id="zenity-text-entry-options">
+    <title>Tekstfelt</title>
+
+    <para>Brug tilvalget <option>-entry</option> til at oprette et dialogvindue med et tekstindtastningsfelt. <application>Zenity</application> returnerer indholdet af tekstfeltet på standard output.</para>	
+    <para>Tekstfeltsdialogvinduet understøtter følgende tilvalg:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--text</option>=<replaceable>tekst</replaceable></term>
+	<listitem>
+	  <para>Angiver teksten, der vises i dialogvinduet.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--entry-text</option>=<replaceable>tekst</replaceable></term>
+	<listitem>
+	  <para>Angiver teksten, der vises i tekstfeltets indtastningsfelt.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--hide-text</option></term>
+	<listitem>
+	  <para>Skjuler teksten i tekstfeltet.</para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Følgende eksempel viser, hvordan man opretter et dialogvindue med et tekstindtastingsfelt: <programlisting>
+        #!/bin/sh
+
+        if zenity --entry \
+        --title="Tilføj et tekstfelt" \
+        --text="Indtast din _adgangskode:" \
+        --entry-text "adgangskode" \
+        --hide-text
+          then echo $?
+          else echo "Ingen adgangskode valgt"
+        fi
+      </programlisting></para>
+
+    <figure id="zenity-entry-screenshot">
+      <title>Eksempel på dialogvindue med et tekstindtastningsfelt</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-entry-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> text entry dialog example</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+  </sect1>
+
+<!-- ==== Text Information Options ====== -->
+
+  <sect1 id="zenity-text-options">
+    <title>Tekstinformationsdialogvindue</title>
+
+    <para>Brug tilvalget <option>--text-info</option> til at oprette et dialogvindue med tekstinformation.</para>
+	
+    <para>Tekstinformationsdialogvinduet understøtter følgende tilvalg:</para>
+
+    <variablelist>
+
+      <varlistentry>
+        <term><option>--filename</option>=<replaceable>filnavn</replaceable></term>
+	<listitem>
+	  <para>Angiver en fil, der indlæses i tekstinformationsdialogvinduet.</para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><option>--editable</option></term>
+        <listitem>
+          <para>Tillader redigering af den viste tekst. Den redigerede tekst returneres til standard output, når dialogvinduet lukkes.</para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+
+    <para>Følgende eksempelscript viser, hvordan et tekstinformationsdialogvindue oprettes: <programlisting>
+        #!/bin/sh
+
+        FILE=`zenity --file-selection \
+          --title="Vælg en fil"`
+
+        case $? in
+                 0)
+                        zenity --text-info \
+                          --title=$FILE \
+                          --filename=$FILE \
+                          --editable 2&gt;/tmp/tmp.txt;;
+                 1)
+                        echo "Ingen fil valgt.";;
+                -1)
+                        echo "Ingen fil valgt.";;
+        esac
+      </programlisting></para>
+
+    <figure id="zenity-text-screenshot">
+      <title>Eksempel på dialogvindue med tekstinformation</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/zenity-text-screenshot.png" format="PNG"/>
+	  </imageobject>
+	  <textobject>
+	    <phrase><application>Zenity</application> text information dialog example</phrase>
+	  </textobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect1>
+
+</article>

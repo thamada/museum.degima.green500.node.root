@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Security" lang="es-ES">
+	<title>Seguridad</title>
+	<remark>This beat is located here: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Security">https://fedoraproject.org/wiki/Docs/Beats/Security</ulink></remark>
+	<para>
+		Esta sección enfoca varios items de seguridad desde Fedora.
+	</para>
+	<section id="sect-Release_Notes-Security-Lower_process_capabilities">
+		<title>Capacidades de proceso disminuídas</title>
+		<para>
+			Los demonios que corren como root fueron revisados y parchados para correr con menos capacidades de cprocesamiento. Esto reduce la deseabilidad de usar estos demonios para la escalada de privilegios. Además, los permisos del archivo shadow se cambiaron a <literal>000</literal> y varios directorios en <filename>$PATH</filename> se pusieron a <literal>555</literal> para evitar que los demonios con <literal>DAC_OVERRIDE</literal> puedan acceder el archivo shadow o escribir en directorios <filename>$PATH</filename>.
+		</para>
+		<para>
+			Cuando alguien ataca un sistema, normalmente no pueden hacer mucho a menos que escalen en los privilegios. Esta característica reduce el número de destinos de ataque que se pueden usar para escalar privilegios. Si los procesos root no tienen todas las capacidades, será más dificil usarlos para subvertir el sistema.
+		</para>
+		<para>
+			Los procesos con el uid de root pueden todavía dañar el sistema, debido a que pueden escribir casi en cualquier archivo y, por supuesto, leer el archivo <filename>/etc/shadow</filename>. Sin embargo, si el sistema está protegido para que root necesite la capacidad <literal>DAC_OVERRIDE</literal>, entonces sólo una cantidad limitada de procesos podrán dañar su sistema. Esto no afectará cualquier habilidad del administrador porque siempre obtienen los privilegios completos que incluyen a <literal>DAC_OVERRIDE</literal>. Por lo tanto, aún si alguien consiguió atacar con éxito un proceso de root, ahora es más difícil sacar ventaja de ello.
+		</para>
+		<para>
+			Un sistema asegurado tendría permisos como: <literal>555</literal> <filename>/bin</filename>, <literal>555</literal> <filename>/lib</filename>, <literal>000</literal> <filename>/etc/shadow</filename> y así sucesivamente. El ámbito actual es cubrir los directorios de ka varuabke <filename>$PATH</filename>, los directorios de bibliotecas, <filename>/boot</filename>, y <filename>/root</filename>. Este esquema no afecta a SELinux en ninguna forma y lo complementa dado que sus capacidades son controles DAC y tienen el primer voto en el proceso de permitir el acceso.
+		</para>
+	</section>
+
+</section>
+
+

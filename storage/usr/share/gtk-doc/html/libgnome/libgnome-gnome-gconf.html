@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>gnome-gconf</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GNOME Library Reference Manual">
+<link rel="up" href="ch02.html" title="Configuration">
+<link rel="prev" href="ch02.html" title="Configuration">
+<link rel="next" href="ch03.html" title="Displaying Help and External Info">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="libgnome.html" title="Part I. GNOME Library (libgnome)">
+<link rel="chapter" href="ch01.html" title="Initializing Applications and Starting Programs">
+<link rel="chapter" href="ch02.html" title="Configuration">
+<link rel="chapter" href="ch03.html" title="Displaying Help and External Info">
+<link rel="chapter" href="ch04.html" title="Miscellaneous">
+<link rel="chapter" href="ch05.html" title="Lower Level Interactions">
+<link rel="chapter" href="ch06.html" title="Deprecated Modules">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch02.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch02.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME Library Reference Manual</th>
+<td><a accesskey="n" href="ch03.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgnome-gnome-gconf.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgnome-gnome-gconf.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="gnome-gconf">
+<a name="libgnome-gnome-gconf"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgnome-gnome-gconf.top_of_page"></a>gnome-gconf</span></h2>
+<p>gnome-gconf — Provides access to the gconf module.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgnome-gnome-gconf.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnome/libgnome.h&gt;
+
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="libgnome-gnome-gconf.html#gnome-gconf-get-gnome-libs-settings-relative" title="gnome_gconf_get_gnome_libs_settings_relative ()">gnome_gconf_get_gnome_libs_settings_relative</a>
+                                                        (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *subkey);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="libgnome-gnome-gconf.html#gnome-gconf-get-app-settings-relative" title="gnome_gconf_get_app_settings_relative ()">gnome_gconf_get_app_settings_relative</a>
+                                                        (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *subkey);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgnome-gnome-gconf.description"></a><h2>Description</h2>
+<p>
+The gconf module provides a means for storing configuration parameters in a
+directory-like structure. This module supplies a couple of convenience wrappers
+for the most common ways an application will use gconf.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgnome-gnome-gconf.details"></a><h2>Details</h2>
+<div class="refsect2" title="gnome_gconf_get_gnome_libs_settings_relative ()">
+<a name="gnome-gconf-get-gnome-libs-settings-relative"></a><h3>gnome_gconf_get_gnome_libs_settings_relative ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             gnome_gconf_get_gnome_libs_settings_relative
+                                                        (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *subkey);</pre>
+<p>
+Gets the full key name for a GNOME desktop specific
+setting for a specific application. Those keys are used to store application-specific
+configuration, for example the history of a GnomeEntry. This
+config space should only be used by libraries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>subkey</code></em> :</span></p></td>
+<td> key part below the gnome desktop settings directory
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>  A newly allocated string
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_gconf_get_app_settings_relative ()">
+<a name="gnome-gconf-get-app-settings-relative"></a><h3>gnome_gconf_get_app_settings_relative ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             gnome_gconf_get_app_settings_relative
+                                                        (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *subkey);</pre>
+<p>
+Gets the full key name for an application specific
+setting.  That is "/apps/&lt;application_id&gt;/<em class="parameter"><code>subkey</code></em>".</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> pointer or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> for the default
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>subkey</code></em> :</span></p></td>
+<td> key part below the gnome desktop settings directory
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>  A newly allocated string
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

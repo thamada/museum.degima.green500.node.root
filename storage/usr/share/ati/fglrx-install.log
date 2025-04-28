@@ -1,0 +1,32 @@
+[Message] Kernel Module : Trying to install a precompiled kernel module.
+[Message] Kernel Module : Precompiled kernel module version mismatched.
+[Message] Kernel Module : Found kernel module build environment, generating kernel module now.
+AMD kernel module generator version 2.1
+doing Makefile based build for kernel 2.6.x and higher
+rm -rf *.c *.h *.o *.ko *.a .??* *.symvers
+make -C /lib/modules/2.6.32.26-175.fc12.x86_64/build SUBDIRS=/lib/modules/fglrx/build_mod/2.6.x modules
+make[1]: Entering directory `/usr/src/kernels/2.6.32.26-175.fc12.x86_64'
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/firegl_public.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_acpi.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_agp.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_debug.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_ioctl.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_io.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_pci.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_str.o
+  CC [M]  /lib/modules/fglrx/build_mod/2.6.x/kcl_wait.o
+  LD [M]  /lib/modules/fglrx/build_mod/2.6.x/fglrx.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /lib/modules/fglrx/build_mod/2.6.x/fglrx.mod.o
+  LD [M]  /lib/modules/fglrx/build_mod/2.6.x/fglrx.ko
+make[1]: Leaving directory `/usr/src/kernels/2.6.32.26-175.fc12.x86_64'
+build succeeded with return value 0
+duplicating results into driver repository...
+done.
+You must change your working directory to /lib/modules/fglrx
+and then call ./make_install.sh in order to install the built module.
+- recreating module dependency list
+- trying a sample load of the kernel modules
+done.
+[Reboot] Kernel Module : dracut

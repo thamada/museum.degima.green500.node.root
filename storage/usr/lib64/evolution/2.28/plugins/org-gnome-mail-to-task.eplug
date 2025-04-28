@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e-plugin-list>
+  <e-plugin type="shlib" location="/usr/lib64/evolution/2.28/plugins/liborg-gnome-mail-to-task.so" id="org.gnome.evolution.plugin.mailToTask" name="Mail-to-Task">
+    <description>Convert a mail message to a task.</description>
+    <author name="Rodrigo Moya" email="rodrigo@novell.com"/>
+
+    
+    <hook class="org.gnome.evolution.mail.popup:1.0">
+      <menu target="select" id="org.gnome.evolution.mail.folderview.popup">
+	<item visible="many" type="item" path="70.mail_to_event1" icon="appointment-new" enable="many" activate="org_gnome_mail_to_event" label="Create an _Event"></item>
+	<item visible="many" type="item" path="70.mail_to_event2" icon="stock_new-meeting" enable="one" activate="org_gnome_mail_to_meeting" label="Create a _Meeting"></item>
+	<item visible="many" type="item" path="70.mail_to_event3" icon="stock_todo" enable="many" activate="org_gnome_mail_to_task" label="Create a _Task"></item>
+	<item visible="many" type="item" path="70.mail_to_event4" icon="stock_insert-note" enable="many" activate="org_gnome_mail_to_memo" label="Create a Mem_o"></item>
+      </menu>
+    </hook>
+    <hook class="org.gnome.evolution.mail.bonobomenu:1.0">
+      <menu target="select" id="org.gnome.evolution.mail.browser">
+	
+	<ui file="/usr/lib64/evolution/2.28/plugins/org-gnome-mail-to-task.xml"/>
+	<item verb="ConvertEvent" type="item" path="/commands/ConvertEvent" enable="many" activate="org_gnome_mail_to_event_menu"/>
+	<item verb="ConvertMeeting" type="item" path="/commands/ConvertMeeting" enable="one" activate="org_gnome_mail_to_meeting_menu"/>
+	<item verb="ConvertTask" type="item" path="/commands/ConvertTask" enable="many" activate="org_gnome_mail_to_task_menu"/>
+	<item verb="ConvertMemo" type="item" path="/commands/ConvertMemo" enable="many" activate="org_gnome_mail_to_memo_menu"/>
+      </menu>
+    </hook>
+    
+  </e-plugin>
+</e-plugin-list>

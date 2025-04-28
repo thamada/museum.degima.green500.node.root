@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+
+<section id="sect-Release_Notes-Architecture_Specific_Notes">
+	<title>Architecture Specific Notes</title>
+	<remark>This beat is located here: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific">https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific</ulink></remark>
+	<para>
+		This section provides notes that are specific to the supported hardware architectures of Fedora.
+	</para>
+
+	<section id="sect-Release_Notes-Architecture_Specific_Notes_686">
+	  <title>32-bit base changed to i686</title>
+	  <para>
+	    Fedora 11 has i586 as the base 32-bit x86 architecture.
+	  </para>
+	  <para>
+	    For Fedora 12, we are switching to i686 as the base
+	    architecture (including CMOV), and optimize for Atom
+	    processors.
+	  </para>
+	  <para>
+	    This means we will loose support for the following CPU families:
+	    <itemizedlist>
+	      <listitem><para>Intel i586 (all)</para></listitem>
+	      <listitem><para>National Semiconductor Geode
+	        processors</para></listitem>
+	      <listitem><para>VIA C3 (Ezra and Samuel Cores)</para></listitem>
+	      <listitem><para>AMD Geode GX</para></listitem>
+	    </itemizedlist>
+	  </para>
+	  <para>
+	    AMD Geode LX (as used in the OLPC XO laptop) and later
+	    Geode NX processors should still work. Those interested
+	    are, of course, welcome to set up a secondary arch for
+	    older processors
+	  </para>
+	  <para>
+	    Benefits:
+	    <itemizedlist>
+	      <listitem><para>
+		Faster binaries on mainstream architectures (Pentium
+		M, Via C7, all 64-bit arches, Atom)
+	      </para></listitem>
+	      <listitem><para>
+		Realistically, we don't support i586 as a practical
+		matter. Enforce that more logically.
+	      </para></listitem>
+	      <listitem><para>
+		Fewer kernel builds 
+	      </para></listitem>
+	    </itemizedlist>
+	  </para>
+	</section>
+<!--	<xi:include href="ArchSpecific-PPC.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
+	<xi:include href="ArchSpecific-x86.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
+	<xi:include href="ArchSpecific-x86_64.xml" xmlns:xi="http://www.w3.org/2001/XInclude"></xi:include>
+-->
+
+	
+</section>
+
+

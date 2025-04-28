@@ -1,0 +1,1462 @@
+Version 2.28.3
+~~~~~~~~~~~~~~
+Released: 2010-06-08
+
+* Translations
+ - Updated Marathi Translations (Sandeep Shedmake)
+ - Many translation updates from the Red Hat translation team (Ankit Patel)
+
+* Bugfix:
+ - Set the update viewer cancel button to be initially insensitive (Jonathan Conder)
+ - Don't show the selected packages as deps of the to be updated packages (Richard Hughes)
+ - Ensure we detect and use x11 to fix the compile when linking with --as-needed (Richard Hughes)
+ - Update the Free Software Foundation address (Richard Hughes)
+ - When we ask to logout, actually logout, rather than shutdown (Richard Hughes)
+ - Don't hide the restart status icon just because the daemon exited (Richard Hughes)
+ - Don't check for updates every day when the user had specified 'Never' (Richard Hughes)
+ - Allow the user to select the GPG key information to be able to verify it (Richard Hughes)
+ - Check if we got an invalid pixbuf to prevent a crash (Richard Hughes)
+ - Fix the error when the user clicks the about menu item (Richard Hughes)
+ - Fix a crash where the desktop file that was installed has no root directory (Richard Hughes)
+ - Use /proc/%i/exe instead of cmdline when getting the exec of a sender (Richard Hughes)
+
+Version 2.28.2
+~~~~~~~~~~~~~~
+Released: 2009-12-07
+
+* Translations
+ - Added Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Simplified Chinese translation (Wei Mingzhi)
+
+* Bugfix:
+ - Don't cache the length of the deps array if we are removing items from it (Richard Hughes, Marcin Banasiak)
+ - Always show the search type menu icons. Fixes rh#530595 (Richard Hughes)
+ - Remove the original package from the dep-confirmation screen (Richard Hughes)
+ - Ignore generic errors such as 'Failed' and do not show UI in this case (Richard Hughes)
+ - Only wait 3 seconds (not 60) when we get the updates changed signal (Richard Hughes)
+ - Use the desktop icon when we unselect the installed application in gpk-application. Fixes fd#25098 (Richard Hughes)
+
+Version 2.28.1
+~~~~~~~~~~~~~~
+Released: 2009-10-19
+
+* Translations
+ - Updated German translation (Christian Kirbach)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Italian translation (Gianvito Cavasoli)
+ - Updated Arabic translation (Khaled Hosny)
+ - Updated Simplified Chinese translation (Wei Mingzhi)
+
+* Bugfix:
+ - Fix thinko in spinner cell renderer's render (Bastien Nocera)
+ - Don't escape the desktop summary in the run dialog. Fixes #596010 (Richard Hughes)
+ - Simulate removal for PackageKit >= 0.5.2 to fix removing packages (Richard Hughes)
+ - Ignore cleanup and finished packages when we a simulating remove or install (Richard Hughes)
+ - If command line contains (deleted) the original binary is invalid. Fixes rh#524873 (Richard Hughes)
+ - Never show the role text in the GpkWatch tooltip (Richard Hughes)
+ - Only show 'and n other security updates' when there are no updates to list. Fixes rh#527149 (Richard Hughes)
+ - Run the helpers with interaction 'hide-finished,hide-warnings' as we are handling failure (Richard Hughes)
+ - Don't show the the 'all updates installed' dialog if we've just shown the restart required dialog (Richard Hughes)
+ - Dont segfault if error_local is not set (Scott Reeves)
+ - Call gpk_dbus_task_install_files when installing local files (Scott Reeves)
+
+Version 2.28.0
+~~~~~~~~~~~~~~
+Released: 2009-09-21
+
+* Translations
+ - Updated Romanian translation (Alexandru Szasz)
+ - Updated Portuguese translation (António Lima)
+ - Updated British English translation (Bruce Cowan)
+ - Updated Italian translation (Gianvito Cavasoli)
+ - Updated Polish translation (Piotr Drąg)
+
+* Bugfix:
+ - Only show installing and updating packages in the GpkHelperDepsUpdate UI (Richard Hughes)
+ - Add a --enable-small-form-factor which disables the auto-maximise code by default. Fixes #23888 (Richard Hughes)
+ - Connect to the correct signal name for gnome-session idle detection (Richard Hughes)
+
+Version 2.27.92
+~~~~~~~~~~~~~~~
+Released: 2009-09-07
+
+* Translations
+ - Updated Punjabi translation (A S Alam)
+ - Updated German translation (Christian Kirbach)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Hungarian translation (Gabor Kelemen)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updated Greek translation (Jennie Petoumenou)
+ - Updated German translation (Mario Blättermann)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* New Features:
+ - Add simulation of installed files if the backend support it (Richard Hughes)
+
+* Bugfix:
+ - Remove useless ALL_X_LIBS from configure.ac and make xsltproc mandatory (Mounir Lamouri)
+ - Swap round two translated strings to be correct (Richard Hughes)
+ - Fix the help buttons by ensuring the relation seriesid is unique (Richard Hughes)
+ - Fix build on ARM. Fixes #593177 (Richard Hughes)
+ - Don't show duplicate package names in the reboot tooltip (Richard Hughes)
+ - Fix a typo where the codec dialog would have no text (Richard Hughes)
+ - Fix a small memory leak and possible crash in the firmware code (Richard Hughes)
+ - Fix a possible crash if X is misbehaving (Richard Hughes)
+ - Fix a possible crash in the service pack code (Richard Hughes)
+ - Fix make check, but don't add new translatables, and reuse an existing string
+
+Version 2.27.91
+~~~~~~~~~~~~~~~
+Released: 2009-08-24
+
+* Translations
+ - Updated Bengali India Translation (Runa Bhattacharjee)
+ - Updated Telugu Translation (krishnababu k)
+ - Updated Assamese translation (Amitakhya Phukan)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Hungarian translation (Gabor Kelemen)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updated Spanish translation (Jorge González)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Russian translation (Leonid Kanter)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updated Polish translation (Piotr Drąg)
+
+* New Features:
+ - Show the notifications pointing at the status icon when possible (Richard Hughes)
+ - Copy 'strict' option to configure to add -Werror from PackageKit (Anders F Bjorklund)
+ - Watch /dev/.udev/firmware-missing for changes so we pick up hotplug requests too (Richard Hughes)
+ - Add the pk-device-rebind functionality to replug hardware (Richard Hughes)
+
+* Bugfix:
+ - Wrap license in about dialogue (Christian Persch)
+ - Remove markup from .ui files (Gabor Kelemen)
+ - Add accelerator. Fixes #590999 (Gabor Kelemen)
+ - Only return the newest packages for mime, fonts and codec helpers. Fixes rh#514879 (Richard Hughes)
+ - Only install the newest native-arch package when using the session methods. Fixes rh#509569 (Richard Hughes)
+ - Don't show a modal dialog when the user cancels the file install (Richard Hughes)
+ - Egg update to fix compile on FreeBSD (Richard Hughes)
+ - Reduce in weight X-GNOME-Autostart-Phase desktop files (Richard Hughes)
+ - Ignore hidden desktop files when we show the list of new applications (Richard Hughes)
+ - Only run the update if the dep check was successful (Richard Hughes)
+ - Don't show the auth-failure dialog in the update viewer (Richard Hughes)
+ - Show errors when using the firmware client, don't just silently fail (Richard Hughes)
+ - Add CanStop and CanRestart methods on the ConsoleKit helper (Richard Hughes)
+ - Never use a title on a modal error dialog (Richard Hughes)
+ - Check in more places if a user is able to restart (Richard Hughes)
+ - Add application/x-deb to the list of files we try to open (Richard Hughes)
+ - Improve the firmware code when multiple devices are requesting the same files (Richard Hughes)
+ - Resize the deps list in a better way. Fixes rh#517662 (Richard Hughes)
+ - Don't show a single menu item for the left click on the updates star (Richard Hughes)
+ - Only show the on-battery warning only if we would have performed the update (Richard Hughes)
+ - Don't allow double click on a help item. Fixes rh#518854 (Richard Hughes)
+ - Change the firmware 'Do not show again' to a 'Ignore devices' button (Richard Hughes)
+
+Version 2.27.5
+~~~~~~~~~~~~~~
+Released: 2009-08-03
+
+* Translations
+ - Updated Punjabi translation (A S Alam)
+ - Updated Portuguese translation (António Lima)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updated German doc translation (Mario Blättermann)
+ - Updated German translation (Mario Blättermann)
+ - Updated Hebrew translation (Mark Krapivner)
+
+* New Features:
+ - Port all the code to using PolicyKit1 rather than PolicyKit (Richard Hughes)
+ - Reduce the size displayed as the package is downloaded in the update viewer (Richard Hughes)
+ - Scroll to the package being processed in the update list. Fixes rh#510984 (Richard Hughes)
+
+* Bugfix:
+ - Don't unconditionally force on NEWEST filtering in the update viewer (Richard Hughes)
+ - Fix compile with old versions of PackageKit (Richard Hughes)
+ - Fix up few translations to include trailing full stop. Fixes fd#22745 (Richard Hughes)
+ - Don't do the update check as soon as the UpdatesChanged signal is recieved (Richard Hughes)
+ - Don't flash the gpk-repo UI when we enable or disable repos. Fixes half of rh#510730 (Richard Hughes)
+ - Check the language tags before trying to parse them. Fixes fd#22792 (Richard Hughes)
+ - Ensure we re-set the proxy when packagekitd re-appears on the bus (Richard Hughes)
+ - When doing queries automatically, don't spam them with locking failure messages. Fixes gnome#588698 (Richard Hughes)
+ - Build a private library and link that to reduce the size of the package by 300kb (Richard Hughes)
+ - Don't set the package view insensitive when doing searches, and add a delay to prevent flicker. Fixes rh#510730 (Richard Hughes)
+ - Make some of the libnotify bubbles more sane (Richard Hughes)
+ - Don't show (0) in the update viewer if there is nothing to download (Richard Hughes)
+ - Don't show the 'Update System Now' link in the update dropdown, the user should use the update viewer (Richard Hughes)
+ - Add in different translations for encode, decode and unknown. Fixes rh#497737 (Richard Hughes)
+ - Make the arch filter a single tickbox, not an option group (Richard Hughes)
+ - Don't print the package list when we have a RestartRequired of a security type (Richard Hughes)
+ - Add some missing punctuation in some of the restart strings (Richard Hughes)
+ - Reduce the size of two of the messagebox titles (Richard Hughes)
+ - Add a 'Selected packages' group in add/remove programs like kpackagekit (Richard Hughes)
+ - Use the correct icon in the panel when restarts are required (Richard Hughes)
+ - Actually make the gnome-session code work by using the correct callback signatures (Richard Hughes)
+ - We don't require DeviceKit, so don't check for it. Fixes bgo#590157 (Richard Hughes)
+ - Only return the newest packages for mime, fonts and codec helpers and to perhaps fix rh#514879 (Richard Hughes)
+
+Version 2.27.3
+~~~~~~~~~~~~~~
+Released: 2009-06-01
+
+* Translations
+ - Updated Gurmukhi translation (A S Alam)
+ - Updated Punjabi translation (A S Alam)
+ - Updated Assamese translation (Amitakhya Phukan)
+ - Updated Portuguese translation (António Lima)
+ - Updated German translation (Mario Blättermann)
+ - Updated German help file translation (Mario Blättermann, Hendrik Richter)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updated Polish translation (Piotr Drąg)
+ - Updated Bengali India translation (Runa Bhattacharjee)
+ - Updated Marathi translation (Sandeep Shedmake)
+ - Updated Kannada translation (Runa Bhattacharjee)
+ - Updated Gujarati Translation (Sweta Kothari)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+ - Updated Simplified Chinese translation (Wei Mingzhi)
+ - Updated Tamil translation (ifelix)
+ - Updated Telugu translation (krishnababu k)
+
+* New Features:
+ - Add a link to gpk-log in gpk-application (Christoph Wickert)
+ - Enable nice build output on automake1.11 (Richard Hughes)
+ - Enable the warning GSEAL_ENABLE and fix up build failures (Richard Hughes)
+ - Check for dependancies before downloading updates in the update viewer (Richard Hughes)
+ - Add --parent-window options to the client tools so they are set transient in gpk-application (Richard Hughes)
+
+* Bugfix:
+ - Include <locale.h> in gpk-update-viewer.c (Jaap A. Haitsma)
+ - Use gtk_show_uri instead of deprecated gnome-open (Jaap A. Haitsma)
+ - Don't use English enumerated values in GConf, instead use seconds (Richard Hughes)
+ - Check packages content-type before sending them to the daemon (Richard Hughes)
+ - Add a tooltip to the package entry box in the service pack creator (Richard Hughes)
+ - Fix a double free when we fail to find packages (Richard Hughes)
+ - Show normal updates in the update viewer severity column (Richard Hughes)
+ - Populate the manpage package names correctly (Richard Hughes)
+ - Force intltool to recognise .ui files as gettext/glade files (Richard Hughes)
+ - Set the GpkHelperRun window to be modal. Fixes rh#506010 (Richard Hughes)
+ - Connect to gnome-session to get the idle status, not gnome-screensaver (Richard Hughes)
+ - Don't show a generic icon when we have messages (Richard Hughes)
+ - Get rid of the 'Display Notification' section in the preferences pane (Richard Hughes)
+ - Don't try to update previously added deps to be installed in the update viewer (Richard Hughes)
+ - Fix mnemonic conflict in gpk-application (Richard Hughes)
+ - When the user clicks hide, do so until the session is restarted. Fixes rh#507062 (Richard Hughes)
+ - Move a few GConf keys to the correct places (Richard Hughes)
+ - Add preference to be able to see every PackageKit transaction, even if it's active (Richard Hughes)
+ - Don't ignore the user pressing escape to dismiss a GpkHelperChooser (Richard Hughes)
+ - Use small form factor mode when the window is nearly as big as the display (Richard Hughes)
+ - Don't use a large package screen on notebooks with small displays (Richard Hughes)
+ - Use the newest filter by default in the update viewer. Fixes rh#508505 (Richard Hughes)
+ - Use better wording when a package sent RequireRestart (Richard Hughes)
+ - Don't include the size column in the Status column. Fixes rh#509067 (Richard Hughes)
+ - Run all the packages after install, not just the selected package (Richard Hughes)
+ - Clear the run list when we setup a new GpkHelperRun. Fixes fd#22489 (Richard Hughes)
+ - Use a PkPackageList in gpk-appliction to store the package list (Richard Hughes)
+ - If the use has set get-updates policy to never, then ignore updates-changed events. Fixes rh#509104 (Richard Hughes)
+ - Fix up a translation string. Fixes fd#22623 (Richard Hughes)
+ - Don't connect to key press _and_ release in gpk-log. Fixes rh#509636 (Richard Hughes)
+
+Version 2.27.2
+~~~~~~~~~~~~~~
+Released: 2009-06-01
+
+* Translations
+ - Added German translation (Mario Blättermann)
+ - Added Ukraininan translation (Maxim V. Dziumanenko)
+ - Updated Punjabi translation (A S Alam)
+ - Updated Bulgarian translation (Alexander Shopov)
+ - Updated Portuguese translation (António Lima)
+ - Updated Traditional Chinese translation (Chao-Hsiung Liao)
+ - Updated Spanish translation (Daniel Mustieles, Jorge Gonzalez)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Hungarian translation (Gabor Kelemen)
+ - Updated Brazilian Portuguese Translation (Igor Pires Soares)
+ - Updated Russian translation (Leonid Kanter)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updated Greek translation (Nikos Charonitakis)
+ - Updated Polish translation (Piotr Drąg, Tomasz Dominikowski)
+ - Updated Marathi Translation (Sandeep Shedmake)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+ - Updated Simplified Chinese translation (Wei Mingzhi)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updated Danish translation (Mads Lundby)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* New Features:
+ - Replace GpkCellRendererProgress with GpkCellRendererSpinner in the update viewer (Matthias Clasen)
+ - Set a busy cursor in the update viewer when the transaction is not cancellable (Richard Hughes)
+ - Warn when we use the update viewer when on mobile broadband (Richard Hughes)
+ - Remove libsexy requirement, and raise our GTK+ dep to 2.15.0 (Richard Hughes)
+ - Raise our dep on GIO to 2.18.0 (Richard Hughes)
+ - Add a hard dep on libunique 1.0.0 (Richard Hughes)
+ - Remove the old update viewer, and rename gpk-update-viewer2 to gpk-update-viewer (Richard Hughes)
+ - Convert glade files into GtkBuilder files, and drop the libglade dep completely (Richard Hughes)
+ - Remove the legacy org.freedesktop.PackageKit session interface (Richard Hughes)
+ - Use PkClient rather than GpkClient in gpk-application (Richard Hughes)
+ - Add UI helpers for media changing (Richard Hughes)
+ - Add media change functionality into gpk-application (Richard Hughes)
+ - Remove GpkClient and move to a 99% asyncronous model of operation (Richard Hughes)
+ - Add DOAP project description (Richard Hughes)
+
+* Bugfix:
+ - Use the busy cursor when we are in a transaction, not just when we cannot cancel (Matthias Clasen)
+ - Make the install button the default widget in the update viewer (Matthias Clasen)
+ - Make typeahead search work in the update list (Matthias Clasen)
+ - Add a silly hack until we get some metadata about animated icon sizes (Matthias Clasen)
+ - Only get the distro upgrades in the update viewer if we support it (Richard Hughes)
+ - Make the tooltip past and present tense in the update viewer, and also add a downloaded icon (Richard Hughes)
+ - When we launch the update viewer manually, ensure we set the title text correctly (Richard Hughes)
+ - Allow the user to resize the gpk-log dialog. Fixes rh#493934 (Richard Hughes)
+ - Do the find callback when we paste text into the add-remove software window. Fixes rh#492160 (Richard Hughes)
+ - If we have force-login set to true, never repeat the startup check even if it fails (Richard Hughes)
+ - Don't show cancel and close in the update viewer. Inspired from a patch from Jon McCann (Richard Hughes)
+ - Preload all the common GConf keys in the update icon (Richard Hughes)
+ - Never show the checkbox for the search welcome. Fixes rh#496024 (Richard Hughes)
+ - Add a commits file taken from Nautilus, and autogenerate the ChangeLog (Richard Hughes)
+ - Denote the size column in the update viewer to belong to the status column (Richard Hughes)
+ - Set the size value to zero when we get an info update (Richard Hughes)
+ - Add a completed modal dialog at the end of a successful update, rather than just quitting (Richard Hughes)
+ - Show the package name in the repo-signature dialog. Fixes fd#21236 (Richard Hughes)
+ - Use libcanberra to do event sounds when we succeed in doing an update (Richard Hughes)
+ - Don't re-get the update list after a failed install, just undisable the checkboxes. Fixes rh#496870 (Richard Hughes)
+ - Enable autocode for compiler defines in the markdown parser. Fixes rh#497162 (Richard Hughes)
+ - Only select the package item after all the results have appeared (Richard Hughes)
+ - Add another helper to cope with deps from the update process (Richard Hughes)
+ - Don't inhibit to gnome-power-manager, use gnome-session (Richard Hughes)
+ - Use DeviceKit-power rather than gnome-power-manager to get the on-battery status (Richard Hughes)
+ - Pop up a modal dialog if any of the methods in gpk-install-foo fail. Fixes rh#500237 (Richard Hughes)
+ - Provide some #ifdef compatibility so that git master GPK can build with >= 0.4.4 PK (Richard Hughes)
+ - Export InstallCatalogs on the session bus. Fixes rh#502562 (Richard Hughes)
+ - Don't show a long list of packages in the catalog install screen, instead use a scrollable package list (Richard Hughes)
+ - Refresh the system package list if it does not exist in the service pack creation tool. Fixes rh#502589 (Richard Hughes)
+ - Remove GpkSmartIcon and use GpkStatusIcon directly (Richard Hughes)
+ - Only show the monitor icon when the task is no longer connected to the bus but running (Richard Hughes)
+ - Inhibit the icon in GpkCheckUpdate rather than having last-set policy. Fixes rh#492005 (Richard Hughes)
+ - Add a loading string when loading details in the update viewer (William Jon McCann)
+ - Fix the window icon, title, and some inconsistent text in the update viewer (William Jon McCann)
+ - Don't critically warn when we have no packages selected after install (Richard Hughes)
+
+Version 2.27.1
+~~~~~~~~~~~~~~
+Released: 2009-03-30
+
+* Translations
+ - Added Romanian translation (Alex Szasz)
+ - Update Punjabi Translation (A S Alam)
+ - Update Portuguese translation (António Lima)
+ - Update Spanish translation (Daniel Mustieles)
+ - Update Swedish translation (Daniel Mustieles)
+ - Update Hungarian translation (Gabor Kelemen)
+ - Update Brazilian Portuguese translation (Igor Pires Soares)
+ - Update Spanish manual translation (Jorge Gonzalez)
+ - Update Norwegian bokmål translation (Kjartan Maraas)
+ - Update Telugu Translation (Krishnababu K)
+ - Update Marathi Translation (Sandeep Shedmake)
+ - Update Finnish translation (Ville-Pekka Vainio)
+ - Update Simplified Chinise translation (Wei Mingzhi)
+
+* New Features:
+ - Switch gnome-packagekit to the GNOME release guidelines and version numbers (Richard Hughes)
+ - Provide tooltips for the icons in the new update viewer (Richard Hughes)
+ - Add a new menu item 'Select security updates' to the new update viewer. Fixes rh#491713 (Richard Hughes)
+ - Hide the update icon notification when the update viewer is opened (Richard Hughes)
+ - Switch the default update viewer to gpk-update-viewer2 (Richard Hughes)
+
+* Bugfix:
+ - Fix some window icons in gpk-repo (Matthias Clasen)
+ - Don't set the default widget to the install button when we reconsider. Fixes rh#492645 (Matthias Clasen)
+ - Don't scroll to the downloading object, it makes Matthias sick (Richard Hughes)
+ - Fix the MimeType entry of gpk-install-catalog. Fixes rh#489473 (Richard Hughes)
+ - Set an icon for gpk-backend-status. Fixes fd#20681 (Richard Hughes)
+ - Make gpk-applcation file list resizable, and a good default size. Fixes rh#490334 (Richard Hughes)
+ - Don't use newline as a paragraph spacer in the Markdown parser (Richard Hughes)
+ - The changelog data is markup formatted, so use the markdown parser before displaying (Richard Hughes)
+ - Don't escape markdown code sections, and enable autocode for certain special words (Richard Hughes)
+ - Make the new update viewer respond to PkControl::updates-changed and update the update list (Richard Hughes)
+ - Set an initial size of the update viewer using gpk_window_set_size_request. Fixes rh#491422 (Richard Hughes)
+ - Wrap the header text to allow the new update viewer to be made much smaller (Richard Hughes)
+ - Don't resize the main window when no updates are available, use a modal window. Fixes rh#491708 (Richard Hughes)
+ - If the new update viewer is running in a transaction when it's closed, just hide the window (Richard Hughes)
+ - Don't set the model with finished, as working round it in the CellRenderer breaks things (Richard Hughes)
+ - Allow gpk-update-icon to be run in XFCE. Fixes rh#491104 (Richard Hughes)
+ - Set the update viewer title properly when there are no updates. Fixes rh#492096 (Richard Hughes)
+ - After we've applied updates, close the UI rather than getting the new update list. Fixes rh#491710 (Richard Hughes)
+
+Version 0.4.5
+~~~~~~~~~~~~~
+Released: 2009-03-09
+
+* Translations
+ - Updated Portuguese translation (António Lima)
+ - Updated Spanish translation (Daniel Mustieles, Jorge Gonzalez)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Brazilian Portuguese translation (Igor Soares)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Dutch translation (Reinout van Schouwen)
+ - Updated Polish translation (Tomasz Dominikowski)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* New Features:
+ - Merge in a new update viewer with a very different UI (Richard Hughes)
+
+* Bugfix:
+ - Allow markup in the error dialog message (Richard Hughes)
+ - Disable the polling in GpkAnimatedIcon if the widget is disabled (Richard Hughes)
+ - Don't check for local for all the GUI tools, so we can use vncviewer (Richard Hughes)
+ - Correct some of the strings we show the user about the restart mode (Richard Hughes)
+
+Version 0.4.4
+~~~~~~~~~~~~~
+Released: 2009-02-23
+
+* Translations
+ - Added Simplified Chinese translation (Wei Mingzhi)
+ - Added Portuguese translation (Antonio Lima)
+ - Updated Swedish translation (Daniel Nylander)
+
+* Bugfix:
+ - Small improvement on PK_ROLE_ENUM_SEARCH_DETAILS (Daniel Nicoletti)
+ - Fix compile failure with gcc-4.4.0 and old versions of glib2 (Richard Hughes)
+ - Correct the specification in that we shouldn't send the provide name encoded
+   with the provides prefix, as this is distro specific (Richard Hughes)
+ - Don't show the filter UI when we offer applications to install (Richard Hughes)
+ - Bump the required version of PackageKit to 0.4.4 now we are turning on
+   lots of compiler warnings (Richard Hughes)
+ - Use GTK 2.15.x new GtkEntry features to remove dep on libsexy (Richard Hughes)
+ - Fix infinite recursion when we try to format invalid markdown. Fixes rh#486334 (Richard Hughes)
+ - Provide a GConf key to allow ignoring some daemon messages (Richard Hughes)
+ - Change the update viewer UI to be 'Ignore this update' not 'Ignore this package' (Richard Hughes)
+ - When we loose network and have updates, hide the icon as we can't do the updates (Richard Hughes)
+
+Version 0.4.3
+~~~~~~~~~~~~~
+Released: 2009-02-02
+
+* Translations
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Brazilian Portuguese translation (Og Maciel)
+
+* New Features:
+ - Don't spam the user with PackageManager messages, queue them and show another
+   menu item on the info status icon (Richard Hughes)
+
+* Bugfix:
+ - Fix typo in Russian translation. Fixes rh#481479 (Leonid Kanter)
+ - Don't infer precision we don't have when printing an estimated time (Richard Hughes)
+ - Make sure we set the icon and text of the client dialog after setup is called,
+   not before. Fixes rh#480908 (Richard Hughes)
+ - Stop abusing a PkPackageList as a list to store package_id's, as the PkInfoEnum
+   changes when we do a filter change. Fixes rh#481123 (Richard Hughes)
+ - Reset the client when we monitor a tid, else we ignore the second request when
+   the fist is running (Richard Hughes)
+ - When the user switches the task to monitor, re-use the existing monitor rather
+   than using a new window. Fixes half of rh#481293 (Richard Hughes)
+ - Disable the 'Apply updates' button when none are selected. Fixes fd#19779 (Richard Hughes)
+ - Ensure we select the first entry in the details treeview after we've got
+   the update list. Fixes fd#19780 (Richard Hughes)
+ - We don't use a PkControl action in gpk-update-viewer anymore, use the GpkClient
+   cancel method (Richard Hughes)
+ - Hook up the distro upgrade notification actions (Scott Reeves)
+
+Version 0.4.2
+~~~~~~~~~~~~~
+Released: 2009-01-19
+
+* Translations
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Brazilian Portuguese (Igor Pires Soares)
+ - Updated Spanish translation (Jorge Gonzalez)
+ - Updated Polish translation (Tomasz Dominikowski)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Russian translation (Leonud Kanter)
+
+* New Features:
+ - Show the remaining time in the client UI if it's available (Richard Hughes)
+
+* Bugfix:
+ - Don't retry a policy action if the previous one failed (Richard Hughes)
+ - Drop obsolete InstallPackageNames definition (Richard Hughes)
+ - Use gtk_window_set_default_size() to set the window size so the user can
+   still resize it a little (Richard Hughes)
+ - Reduce the weight of autostart desktop files to avoid showing hidden entries
+   in the run dialog (Richard Hughes)
+ - Allow pattern matches in the banned firmware list (Richard Hughes)
+ - Add intel microcode to the banned firmware list (Richard Hughes)
+ - Lots of translation bugfixes found by Andre Klapper. Fixes gnome#19564 (Richard Hughes)
+ - Show the package that caused the restart required signal in the icon tooltip (Richard Hughes)
+ - Add a keyboard shortcut to the 'Continue Anyway' button when running an
+   application as root. Fixes fd#19595 (Richard Hughes)
+ - Clear the 'updates are being installed' notification if the update finishes
+   before the notification times out. Fixes novell#407347 (Richard Hughes)
+ - Use scrollbars in the description, and set the hbox to a fixed size to avoid
+   flicker. Fixes fd#19633 (Jens Knutson)
+ - Increase the anti-flicker timout when getting the package details to prevent
+   flicker when scrolling through packages
+ - Call gpk_check_privileged_user in the update viewer (Scott Reeves)
+ - Dont reference already freed pointer when help is not installed (Scott Reeves)
+
+Version 0.4.1
+~~~~~~~~~~~~~
+Released: 2009-01-08
+
+* Translations
+ - Added Kannada translation (Andre Klapper)
+ - Added Spanish language help screenshots (Jorge Gonzalez)
+ - Updated German translation (Andre Klapper)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Greek help translation (Evgenia Petoumenou)
+ - Updated Greek translation (Evgenia Petoumenou)
+ - Updated Hungarian translation (Gabor Kelemen)
+ - Updated Spanish translation (Jorge Gonzalez, Daniel Mustieles)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updated Brazilian Portuguese translation (Michel Recondo)
+
+* New Features:
+ - Add an option to the prefs dialog to prevent checking for updates when
+   using mobile broadband connections (Richard Hughes)
+ - Allow the admin to restrict getting updates when on WiFi connections (Richard Hughes)
+ - Set the default search mode to details (not name) and preserve the search
+   type in GConf if changed in the UI (Richard Hughes)
+ - Add a simple markdown parser (Richard Hughes)
+ - Add dbus_default_interaction and dbus_enforced_interaction GConf keys and
+   some documentation (Richard Hughes)
+ - Send different errors when we fail a method on the session DBus interface (Richard Hughes)
+ - Support setting timeouts via the interaction mode from the DBus interface (Richard Hughes)
+
+* Bugfix:
+ - Add quit and contents accelerators in gpk-application (Matthias Clasen)
+ - Define a macro directory so we work with newer versions of libtool (Richard Hughes)
+ - Don't use gtk_dialog_get_action_area on gtk < 2.14 (Richard Hughes)
+ - Fix compile on F9 as gio is linked in explicitly (Richard Hughes)
+ - Make the confirm interaction more granular (Richard Hughes)
+ - When the restart mode is session then offer logout, rather than restart. Fixes RH#475781 (Richard Hughes)
+ - Truncate description fields greater than 1024 bytes in size to fix rh#475947 (Richard Hughes)
+ - We should do idle network actions on ONLINE (wireless or unknown) and FAST (ethernet) (Richard Hughes)
+ - Make sure the update description headers are top aligned, not centered (Richard Hughes)
+ - Use the markdown parser in gpk-application and gpk-update-viewer (Richard Hughes)
+ - Don't keep spinning the animation if the backend fails to send an update detail signal (Richard Hughes)
+ - Fix a small icon leak when showing the generic window with a custom icon (Richard Hughes)
+ - Fix two small memory leaks when installing fonts (Richard Hughes)
+ - Put the security updates in an array before we show the notification else
+   the number on the session critical notification is wrong (Richard Hughes)
+ - Output update descriptions with valid escaping to fix some descriptions (Richard Hughes)
+ - Fix a crash in gpk-application when doing run multiple times (Richard Hughes)
+ - Make error dialog resizable when error details are being shown. Fixes RH#478378 (Richard Hughes)
+ - Allow copy pasting of the update text in the update viewer (Richard Hughes)
+
+Version 0.4.0
+~~~~~~~~~~~~~
+Released: 2008-12-09
+
+* Translations
+ - Added Traditional Chinese translation(Hong Kong) (Chao-Hsiung Liao)
+ - Added Traditional Chinese translation(Taiwan) (Chao-Hsiung Liao)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Italian translation (Gianvito Cavasoli)
+ - Updated Catalan translation (Gil Forcada)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updated Danish translation (Kenneth Nielsen)
+
+* New Features:
+ - Add InstallFonts to the session DBUS interface (Richard Hughes)
+ - Add a key to gnome-settings-daemon GConf so we can load the gtk module (Richard Hughes)
+ - Add a fontconfig dep for the new font code (Richard Hughes)
+ - Show the menu path in Add/Remove programs when we install new software (Sylvain Baubeau)
+ - Add two prototype interfaces to make the session interface more sane (Richard Hughes)
+
+* Bugfix:
+ - Show the 'Force Install' button on the unsigned dialog UI (Richard Hughes)
+ - Fix the self tests in GpkCommon (Richard Hughes)
+ - Set the dialog type up in a setup function, and then present it like a normal
+   window -- fixes funny icons in different places (Richard Hughes)
+ - Don't clear the list in gpk-repo when the list is refreshed, just update it in place.
+   Use the same approach in gpk-log. Fixed first part of fd#18733 (Richard Hughes)
+ - Don't abort with an error if we are using small form factor mode (Richard Hughes)
+ - Convert the iso639 language codes to localised language names (Richard Hughes)
+ - Add ISO639-2B language names to the language hash also (Richard Hughes)
+ - Don't emit a critical warning if the desktop file contains invalid markup (Richard Hughes)
+ - Set the run window modal over the parent window to fix rh#475046 (Richard Hughes)
+ - Set an interaction mode in gpk-application when we refresh the package lists to
+   avoid getting an empty window (Richard Hughes)
+ - Set the run window modal over the parent window to fix rh#475046 (Richard Hughes)
+ - Don't send signal during object init - upper layers need to hook up first (Scott Reeves)
+
+Version 0.3.11
+~~~~~~~~~~~~~~
+Released: 2008-11-24
+
+* Translations
+ - Added Danish translation (Jan Madsen)
+ - Updated Spanish help translation (Daniel Mustieles)
+ - Updated Hungarian translation (Gabor Kelemen)
+ - Updated Italian translation (Gianvito Cavasoli)
+ - Updated Spanish translation (Jorge Gonzalez)
+ - Updated Czech translation (Marek Lisy)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updated Polish translation (Tomasz Dominikowski)
+ - Updated Polish help translation (Tomasz Dominikowski)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* New Features:
+ - Show the user and executable used for a transaction in gpk-log (Richard Hughes)
+ - Use PkDesktop rather than PkExtra so we can do cleverer things with the
+   desktop file results (Richard Hughes)
+
+* Bugfix:
+ - Prefix the libnotify widget title with a 'Package Manager' prefix so the
+   user has some idea what service it's coming from (Richard Hughes)
+ - Initialise the libnotify subsystem before it's attempted to create
+   notifications in GpkClient (Richard Hughes)
+ - Ensure we set the GpkClientDialog properly when doing a repo signature (Richard Hughes)
+ - Fix a crash if the user installs two bits of software in gpk-application and
+   runs neither of them (Richard Hughes)
+ - Don't show GPG in the client dialogs. Also make the unsigned packages UI less scary. (Richard Hughes)
+ - Make the root windows of the glade files be GtkDialog type, not GtkWindow (Richard Hughes)
+ - Don't overwrite CPPFLAGS in the configure check for g_file_make_directory_with_parents (Richard Hughes)
+ - Fix compile problem on x86_64 - missing header (Scott Reeves)
+ - Remove unused code (Scott Reeves)
+ - Adapt example to latest api (Sebastian Heinlein)
+ - Python widgets: Adapt latest API changes and introduce an error class (Sebastian Heinlein)
+ - Python widgets: Add a PackageKitPackageDialog and a high level PackageKitInstaller (Sebastian Heinlein)
+ - Python client: Do not make the window parent insensitive. This should be done
+   by the application (Sebastian Heinlein)
+ - Python widgets: Set the progress bar to 100% when the transaction is complete (Sebastian Heinlein)
+ - Python client: Add (install|remove)_by_name methods to the installer (Sebastian Heinlein)
+ - Python client: The progress dialog's run method returns the exit state of the transaction (Sebastian Heinlein)
+ - Python client: Handle return values correctly (Sebastian Heinlein)
+
+Version 0.3.10
+~~~~~~~~~~~~~~
+Released: 2008-11-10
+
+* Translations
+ - Added Marathi Translation (Sandeep Shedmake)
+ - Added Oriya Translation (Manoj Kumar Giri)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Norwegian Bokmal translation (Kjartan Maraas)
+ - Updated Brazilian Portuguese translation (Leonardo Ferreira Fontenelle)
+ - Updated Hebrew Translation (Mark Krapivner)
+ - Updated Polish translation (Tomasz Dominikowski)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* New Features:
+ - Add InstallCatalog for applications to use in the session (Jan Niklas Hasse)
+ - Add InstallPackageNames so we can install multiple packages in one call (Richard Hughes)
+ - Allow pressing escape to clear the preferences capplet (Richard Hughes)
+ - Add a IsPackageInstalled() method for Anjunta (Richard Hughes)
+ - Add Python GTK widgets (Sebastian Heinlein)
+
+* Bugfix:
+ - Use g_mkdir_with_parents when a new enough GIO is not available (Debarshi Ray)
+ - Fix up a few strings after a translation review (Nils Philippsen)
+ - Fix the size request of gpk-application to fix rh#467987 (Richard Hughes)
+ - Fix a lot of translations, and use translator comments where possible (Richard Hughes)
+ - Fix the interaction when installing local files by only showing the copy
+   dialog for non-native paths. Also add a confirm dialog when the files
+   were installed correctly. Fixes rh#469275 (Richard Hughes)
+ - Don't free the value when doing InstallPackageNames(). Fixes fd#18327 (Richard Hughes)
+ - Remove the autocompletion and menu choice GTK options in gpk-application (Richard Hughes)
+ - Don't print a critical warning when not on a session (Richard Hughes)
+ - Allow users to run tools as root after a stern security warning as just
+   closing is slightly rude. Fixes rh#469539 (Richard Hughes)
+ - Make the signature required window modal over the client dialog (Richard Hughes)
+ - Add a quit menu item under the system group in gpk-application (Richard Hughes)
+ - Don't use bullets when there is only one item in the list. Fixes rh#469966 (Richard Hughes)
+ - Don't show the non-local warning for the update icon on a terminal client,
+   just for other applications (Richard Hughes)
+ - Python widgets: Make the progress dialog wider by default (Sebastian Heinlein)
+ - Python widgets: Import the client module in the example only (Sebastian Heinlein)
+ - Python widgets: Show the role of the transaction in the progress window (Sebastian Heinlein)
+
+Version 0.3.9
+~~~~~~~~~~~~~
+Released: 2008-10-27
+
+* Translations
+ - Added Kannada Translation (Shankar Prasad)
+ - Added Telugu translation (Krishnababu Krothapalli)
+ - Added Assamese Translation (Amitakhya Phukan)
+ - Added Malayalam translation (Ani Peter)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Hungarian translation (Gabor Kelemen)
+ - Updated Italian translation (Gianvito Cavasoli)
+ - Updated Bengali India Translation (Runa Bhattacharjee)
+
+* New Features:
+ - Make the filter textbox in gpk-log act as search as you type, and allow
+   columns to be sorted (Richard Hughes)
+
+* Bugfix:
+ - Enforce a delay when the system state changes to fix RH#467746 (Richard Hughes)
+ - Don't show 'untitled window' when we review updates and then update them (Richard Hughes)
+ - Don't set resizable FALSE when operating in small form factor mode (Richard Hughes)
+ - When we process the update list, sort it by the package name. Fixes one
+   half of rh#467582 (Richard Hughes)
+ - Filter out the same package with multiple architectures from the security popop.
+   Fixes the second half of #467582 (Richard Hughes)
+ - Don't show the filter textbox when we show the Run UI in gpk-application (Richard Hughes)
+
+Version 0.3.8
+~~~~~~~~~~~~~~
+Released: 2008-10-20
+
+* Translations
+ - Added Tamil Translation (I. Felix)
+ - Added Bengali India Translation (Runa Bhattacharjee)
+ - Added Gujarati Translation (Sweta Kothari)
+ - Added Hindi India Translation (Rajesh Ranjan)
+ - Updated Swedish translation (Daniel Nylander)
+ - Updated Brazilian Portuguese translation (Djavan Fagundes and Vladimir Melo)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updated Hebrew Translation (Mark Krapivner)
+ - Update Polish help file translation (Piotr Drąg)
+ - Update Polish translation (Piotr Drąg)
+
+* New Features:
+ - Add service pack icon (Mike Langlie)
+ - Check if the GUI programs are being used on local and active consoles (Richard Hughes)
+ - Add a GConf key to allow the user to force confirmation when there are no
+   dependencies. Default to not showing the UI like before (Richard Hughes)
+ - Add a view menu item to expose the autocomplete and menu type GConf settings (Richard Hughes)
+
+* Bugfix:
+ - Don't add an exclaimation mark when there are no updates. Fixes fd#17253 (Richard Hughes)
+ - When we get an error without a window in GpkClient, provide a link to
+   'Show details' so the user can get a half decent error report (Richard Hughes)
+ - Properly escape the quotes in gpk-application, rather than just converting it
+   to markup to fix rh#459155 (Richard Hughes)
+ - Don't crash gpk-application if a package contains no files (Richard Hughes)
+ - If the search term matched exactly, then select it in the package results (Richard Hughes)
+ - Don't continue to bug the user with libnotify popups if they are ignoring a
+   security update and the number of updates does not change (Richard Hughes)
+ - When getting the package list in gpk-service-pack, query the backend (Richard Hughes)
+ - Don't use a prefix icon names for icons, just use the executable name (Richard Hughes)
+ - Don't force large window sizes so we work on the eee and OLPC. Fixes rh#444198 (Richard Hughes)
+ - The upstream name is packagekit-glib now, not packagekit (Richard Hughes)
+ - Error dialog needs a non NULL message (Scott Reeves)
+
+Version 0.3.7
+~~~~~~~~~~~~~~
+Released: 2008-10-13
+
+* Translations
+ - Updated Punjabi Translation (Amanpreet Singh Alam)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Spanish translation (Jorge Gonzalez)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Italian translation (Luca Ferretti)
+
+* New Features:
+ - Add the facility to get a custom group list using GetCategories (Richard Hughes)
+ - Show tooltips of the group descriptions if returned (Richard Hughes)
+ - Add gpk-service-pack application to enable the user to create service packs
+   without using the command line (Richard Hughes)
+ - Rework the gpk-log program so that it's useful and HIG compliant (Richard Hughes)
+ - Allow downloading more than one package to a service pack (Richard Hughes)
+ - Provide a confirmation dialog box when we make selections in Add/Remove programs,
+   but have not clicked apply when we quit (Richard Hughes)
+
+* Bugfix:
+ - Don't hang the GUI when we fail to install a service pack for some reason (Richard Hughes)
+ - Fix the bug where GetUpdates is unconditionally run at startup.
+   Provide an option in GConf for power users who want this. Fixes RH#461825 (Richard Hughes)
+ - Watch for GConf keys to change so we can reassess actions based on policy,
+   rather than waiting for a re-login to get settings (Richard Hughes)
+ - Set an interaction mode when using GpkClient to get the file list.
+   Fixes rh#466387 (Richard Hughes)
+ - The mime type of a service pack is x-servicepack, not x-pack (Richard Hughes)
+
+Version 0.3.6
+~~~~~~~~~~~~~~
+Released: 2008-10-06
+
+* Translations
+ - Updated Finnish translation (Ilkka Tuohela)
+
+* New Features:
+ - Add pk-action-removing and pk-action-cleanup animated icons (Mike Langlie)
+ - Show vendor specific 'More information' when we fail to find packages (Richard Hughes)
+ - Turn off hardware HAL integration by default (Richard Hughes)
+
+* Bugfix:
+ - Correctly pluralise the codec installer dialogs (Richard Hughes)
+ - Allow double clicking on an application in the run dialog. Fixes fd#17845 (Richard Hughes)
+ - Set the window title if we go from being modal to non-modal (Richard Hughes)
+ - Pass up the exec name, not the application name to GpkClient so we can special case the
+   gstreamer plugin installer, and use window properties instead (Richard Hughes)
+ - Set an interaction mode for the client used in GpkDbus so we don't get a finished dialog (Richard Hughes)
+ - Menu item tooltips should be phrased as imperative verbs (Richard Hughes)
+ - Always force width to avoid the dialog width changing between phases (Richard Hughes)
+ - Mark some more text translatable to fix fd#17899 (Richard Hughes)
+ - Make the search button much smaller (without the icon) to fix fd#17874 (Richard Hughes)
+ - Now we set the locale, don't use PkExtra to set the translation summary (Richard Hughes)
+ - Fix segfault in gpk_package_id_name_version if id was null (Ville-Pekka Vainio)
+ - Fix message in gpk-application if the required query returns no packages (Ville-Pekka Vainio)
+
+Version 0.3.5
+~~~~~~~~~~~~~~
+Released: 2008-09-29
+
+* Translations
+ - Updated Polish translation (Tomasz Dominikowski)
+ - Updated Polish documentation (Tomasz Dominikowski)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated French translation (Ivan Buresi and Robert-André Mauchin)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+
+* New Features:
+ - Add an animated icon for the testing phase (Mike Langlie)
+ - Add a new GConf key to enable certain firmware files to be skipped (Richard Hughes)
+
+* Bugfix:
+ - Set the window title when we do update-system (Richard Hughes)
+ - Define a GConf key that contains a list of banned firmware that will never be
+   searched for (Richard Hughes)
+ - Don't use functions deprecated from GTK (Richard Hughes)
+ - Provide functionality to find the user_time when not set on the DBUS interface (Richard Hughes)
+ - Add the missing role and status icons, and fix the self checks that missed them (Richard Hughes)
+ - Fix setting modality from gpk-update-viewer (Richard Hughes)
+ - When we install multiple applications, make sure we search for all the applications (Richard Hughes)
+ - Set the dialog message to be blank in more places (Richard Hughes)
+ - Don't run interactive self tests when doing make distcheck (Richard Hughes)
+ - Call hardware check in gpk-update-icon (Scott Reeves)
+ - Try to handle multiple hal DeviceAdded events for single plug (Scott Reeves)
+
+Version 0.3.4
+~~~~~~~~~~~~~~
+Released: 2008-09-22
+
+* Translations
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Arabic Translation (Djihed Afifi)
+ - Updated Welsh translation (Iestyn Pryce)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* New Features:
+ - Provide a GConf key that turns on or off precaching of update details (Richard Hughes)
+ - Provide a session-wide way of turning off the intervidual helpers (Richard Hughes)
+ - Add support for prompting the user about needed hardware drivers (Scott Reeves)
+
+* Bugfix:
+ - gtk-cancel and gtk-close should not be marked as translatable (Bob Mauchin)
+ - Pay more attention to the interaction setting when showing dialogs (Richard Hughes)
+ - Use seporate GpkClient GObjects in GpkCheckUpdate (Richard Hughes)
+ - Use the new CANNOT_START_DAEMON error code (Richard Hughes)
+ - Use GpkClientDialog in more places, and get rid of some modal windows (Richard Hughes)
+ - Fix up the PolicyKit name in GpkClientChooser (Richard Hughes)
+ - Fix an invalid free in GpkClientChooser (Richard Hughes)
+ - Make the run chooser modal over the underlying window (Richard Hughes)
+ - Don't automatically get a distro upgrade at startup (Richard Hughes)
+ - Detect all the status enums when selecting an icon (Richard Hughes)
+ - Make gpk_client_set_interaction more powerful by allowing a bitfield to set
+   what dialogs should be shown (Richard Hughes)
+ - Fix notify action for hardware callback (Scott Reeves)
+ - Show device udi in notification (Scott Reeves)
+
+Version 0.3.3
+~~~~~~~~~~~~~~
+Released: 2008-09-16
+
+* Translations
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* New Features:
+ - Add two new icons, pk-collection-available and pk-collection-installed (Mike Langlie)
+ - Add pk-package-blocked icon for blocked packages (Richard Hughes)
+ - Add a --timed-exit parameter so we can do memory profiling (Richard Hughes)
+ - If the installed applications have an application icon, use it in gpk-application (Richard Hughes)
+ - Add InstallGStreamerCodecs to the session interface (Richard Hughes)
+ - Change the session dbus interface to support sending a xid and timestamp so
+   we can do focus stealing and modal windows correctly (Richard Hughes)
+ - Add a new GObject to GpkClient to abstract out the window interactions (Richard Hughes)
+ - Add a test script to install codecs with a XID and timestamp (Richard Hughes)
+
+* Bugfix:
+ - Don't make blocked selectable in the gpk-update-viewer tool (Richard Hughes)
+ - Add some images into the help file to make it more interesting (Richard Hughes)
+ - Only clear the last data details and show the spinner if it takes a little while,
+   else we flicker the display too much (Richard Hughes)
+ - Convert the codec installer dbus interface from as to a(ss) as suggested by davidz (Richard Hughes)
+ - Add a function gpk_error_dialog_modal_with_time so we can deal with focus stealing (Richard Hughes)
+ - Don't ignore collection packages in gpk-application (Richard Hughes)
+ - Fix a number of memory leaks in the client tools (Richard Hughes)
+ - Add two new methods: gpk_client_set_parent_xid() and gpk_client_update_timestamp() so
+   we can fix focus stealing and modal windows (Richard Hughes)
+ - Support INFO_ENUM_COLLECTION_INSTALLED and INFO_ENUM_COLLECTION_AVAILABLE (Richard Hughes)
+ - Add a new confirm dialog for the codec and mime type searching (Richard Hughes)
+ - Don't show the finshed UI when using gpk-application (Richard Hughes)
+
+Version 0.3.2
+~~~~~~~~~~~~~~
+Released: 2008-09-08
+
+* Translations
+ - Updated Spanish translation (Daniel Mustieles)
+ - Brazilian Portuguese translation updated (Igor Pires Soares)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+
+* Bugfix:
+ - Don't present the user with ok/cancel dialogs, instead use the verb (Richard Hughes)
+ - Use the correct system-search icon name in gpk-application (Richard Hughes)
+ - Correct the orientation of the shadow in the pk-update-high icons (Richard Hughes)
+ - Fix the GType name clash as suggested by Rob Taylor (Richard Hughes)
+ - Show the 'install firmware' bubble only if the firmware is available (Richard Hughes)
+ - Add text for new error enum. Fixes rh#459870 (Robin Norwood)
+
+Version 0.3.1
+~~~~~~~~~~~~~~
+Released: 2008-08-27
+
+* New:
+ - Support all the PkMessage types (Richard Hughes)
+ - Add UI to set the interval for checking for distro upgrades (Richard Hughes)
+ - Detect when we need a distro upgrade (Richard Hughes)
+
+* Bugfix:
+ - Fix a spelling error from Resolved to Resolving (Daniel Nicoletti)
+ - Fix the shadow in the refresh cache animation. Fixes fd#17236 (Michael Monreal)
+ - Add some new text for GetDistroUpgrades and the new group enums (Richard Hughes)
+
+Version 0.3.0
+~~~~~~~~~~~~~~
+Released: 2008-08-18
+
+* Translations
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Updates Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Russian translation (Leonid Kanter)
+ - Updated Hebrew translation (Mark Krapivner)
+ - Updates German Translation (Patrick Niklaus)
+ - Updated Polish translation (Piotr Drąg)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+ - Updated Polish translation (Wadim Dziedzic)
+ - Updated Occitan translation (Yannig Marchegay)
+
+* New:
+ - Change the client tools to the updated 0.3.x API (Richard Hughes)
+ - Force a pre-cache of all the update detail at startup (Richard Hughes)
+ - Populate the package auto-completion box in gpk-application (Richard Hughes)
+ - Support the new fields in the update details (Richard Hughes)
+ - Allow gpk-install-file to install .pack files (Shishir Goel)
+
+* Bugfix:
+ - Add a blocked update handler (Daniel Nicoletti)
+ - Make some of the glade labels non-translatable (Kjartan Maraas)
+ - Correct some typos found by Andre Klapper (Richard Hughes)
+ - Hide the refresh text if there was less than a day elapsed (Richard Hughes)
+ - Show a the spinner when return to the details, fixes rh#453250 (Richard Hughes)
+ - Stop repeat schedule of query-updates if policy is security (Richard Hughes)
+ - Don't crash if we click the help text in gpk-application (Richard Hughes)
+ - Unify the scrolling UI when installing and removing. Fixes rh#453917 (Richard Hughes)
+ - Limit the size of the balloon at startup about security updates. Fixes rh#453817 (Richard Hughes)
+ - Don't show the depends window when we have no depends (Richard Hughes)
+ - Set the interaction of the UI to always when we are using a helper (Richard Hughes)
+ - Sort the listview as the packages come in to avoid the double flicker (Richard Hughes)
+ - Don't put a window title on a GpkError dialog window (Richard Hughes)
+ - When dep resolving when removing, show the UI. Fixes rh#454399 (Richard Hughes)
+ - Properly parse the update detail so we bullet many more descriptions (Richard Hughes)
+ - Make the file list widget more HIG friendly (Richard Hughes)
+ - Handle GpkAnimatedIcon as a widget, not a GObject (Richard Hughes)
+ - Be more proactive about cancelling timers and animations (Richard Hughes)
+ - Fix 'move depends on uninitialised value' in gpk_client_finished_cb() (Richard Hughes)
+ - Don't show the error details in the libnotify popup (Richard Hughes)
+ - Copy files not readable by root into a shared location. Fixed rh#45609 (Richard Hughes)
+ - Sort out the icons, and use defines for the common ones (Richard Hughes)
+ - Don't hardcode the active, link and clicked-link colour. Fixes rh#458533 (Richard Hughes)
+
+Version 0.2.2
+~~~~~~~~~~~~~~
+Released: 2008-06-05
+
+* Translations
+ - Add Russian translation (Leonid Kanter)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Update polish translation (Wadim Dziedzic)
+ - Updated Hebrew translation (Yair Hershkovitz)
+ - Updated Finnish translation (Ville-Pekka Vainio)
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+
+* New features:
+ - Add three new animated icons (Mike Langlie)
+ - Add installing icons and add into common code for the dialogs to use (Mike Langlie)
+ - Add a Unique GObject that can give single instance capability to the tools (Richard Hughes)
+ - Set the network proxy when we login or whenever the session proxy changes (Richard Hughes)
+ - Don't allow the GTK tools to be run as the root user (Richard Hughes)
+ - Add a simple GtkImage superclass to handle animation from tiles (Richard Hughes)
+ - Show an animated status icon in gpk-client - sometimes things just take too long (Richard Hughes)
+ - Allow users to install and remove multiple packages using gpk-application (Richard Hughes)
+ - Add a check in for malformed descriptions to fix rh#447347 (Richard Hughes)
+ - In GpkNotify use GtkClient rather than PkClient so we get the GPG callback to work (Richard Hughes)
+ - Replace all the usual tags with the bullet symbol in the update viewer (Richard Hughes)
+ - Only show the confirm page when we have succeeded to update packages (Richard Hughes)
+ - Make the update-viewer non-modal and resizable (Richard Hughes)
+ - Give the user a chance to update only the security updates. Fixes rh#448019 (Richard Hughes)
+ - Allow the user to run an application after it has been installed (Richard Hughes)
+
+* Bugfixes:
+ - Stop the animation when we are loading in a new tile to prevent a segfault (Richard Hughes)
+ - Make sure we set a valid error when we return in a failed or cancelled case (Richard Hughes)
+ - Only show the Package() results in if we are not refreshing the cache (Richard Hughes)
+ - Replace duplicate hotkey. Fixes rh#447970 (Richard Hughes)
+ - Don't show a huge maximised confirmation window when we've maximised the chooser (Richard Hughes)
+ - Support the new format ::UpdateDetail() obsoletes and updates (Richard Hughes)
+ - When we remove, we want to get the required packages, not the dependant ones (Richard Hughes)
+ - When GtkClient is waiting, we could potentially re-use the GpkClient object (Richard Hughes)
+ - Don't allow GetUpdates() to be called from two different callbacks (Richard Hughes)
+ - Fix the remove software 'Other software depends on...' window (Richard Hughes)
+ - Ignore cancellation errors in gpk-update-viewer (Richard Hughes)
+ - Don't make GTK sort the gpk-update-viewer list (Richard Hughes)
+ - Make the visited link status only mark the correct link as visited. Fixes rh#446739 (Richard Hughes)
+ - Make the gpk-client window resize (aka, jump around) less (Richard Hughes)
+ - Don't double up notifications. fixed rh#448116 (Richard Hughes)
+
+Version 0.2.1
+~~~~~~~~~~~~~~
+Released: 2008-05-09
+
+* Caveats
+ - Some of the client tools still have bugs. Much better than the 0.2.0 release.
+
+* Translations
+ - Update Spanish translation (Daniel Mustieles)
+
+* New features:
+ - Make gpk-update-viewer use GpkClient for getting the updates and refreshing the cache - this
+   means we get the GPG and EULA callbacks for free (Richard Hughes)
+ - Don't let the progress window jump around by ensuring it's always set to at least 3 lines (Richard Hughes)
+ - Ask the user to confirm they want to install local files (Richard Hughes)
+ - gpk-install-local-file can now install more than one file at once. fixes rh#439662 (Richard Hughes)
+
+* Bugfixes:
+ - Cleanup our handling of gtk-mainloops (Richard Hughes)
+ - Make gpk-update-viewer integrate with the new GpkClient code better (Richard Hughes)
+
+Version 0.2.0
+~~~~~~~~~~~~~~
+Released: 2008-05-06
+
+* Cool new stuff
+ - Session service for trivial installation
+ - Tons of new help
+ - New faster transaction DBUS interface
+ - EULA and GPG signature callback support
+
+* Caveats
+ - This is the first (read: unstable) release of a new codebase - 0.1.11 is more stable.
+ - Most of the UI tools have trivial regressions due to the new interface work.
+ - There's a ton of new functionality that has only had light testing.
+ - Importing multiple GPG keys or EULAs in one transaction breaks horribly.
+
+* Translations
+ - Updated Brazilian Portuguese translation (Igor Pires Soares)
+ - Fixed strange english sentence (Mario Danic)
+ - Updated Spanish translation (Daniel Mustieles)
+
+* New features:
+ - Add some better icons for an available package (Mike Langlie)
+ - Convert all the tools for the big .Transaction API break (Richard Hughes)
+ - Add a context menu in gpk-update-viewer to select or unselect all the updates. Fixes rh#441010 (Richard Hughes)
+ - Show a checkbox for repo details in gpk-repo (Richard Hughes)
+ - Add a prompt when packages have to be added to an install (Richard Hughes)
+ - Check for get_depends, and skip if it can't be done (Richard Hughes)
+ - Allow gpg signatures to be imported when using GpkClient (Richard Hughes)
+ - Add a clever error modal box that can display a details expander (Richard Hughes)
+ - Add some simple man pages for the client tools (Richard Hughes)
+ - Set the tooltip for the homepage button to where we are actually going. Fixes rh#442230 (Richard Hughes)
+ - Set some text in the description about where the package has come from, else you don't know
+   where you are downloading it from. Fixes rh#442543 (Richard Hughes)
+ - Add support for accepting a EULA (Richard Hughes)
+ - Try to make the gpk-log program a bit more sane. first loose the right-hand icons, and only show
+   interesting transactions (success) and interesting actions (Richard Hughes)
+ - Pulse the icon when the update list changes to fix rh#436726 (Richard Hughes)
+ - Add a firmware checker that notices the udev integration file at startup (Richard Hughes)
+ - Try to retry a package as untrusted when it fails with a missing or broken gpg key (Richard Hughes)
+ - Add support for the arch filter in pk-application (Richard Hughes)
+ - Add a simple package chooser widget (Richard Hughes)
+ - Add gpk_client_refresh_cache() so we can do the EULA and GPG callbacks without any hassle (Richard Hughes)
+
+* Bugfixes:
+ - Improve the handling of CK errors (Matthias Clasen)
+ - Use the same window icon for gpk-log as for gpk-update-viewer. Fixes rh #439330 (Matthias Clasen)
+ - Make "never" work in gpk-prefs (Matthias Clasen)
+ - Explain that the update frequencies are only approximate (Matthias Clasen)
+ - Fix crash when cancelling auth after double-click install. Fixes rh#442150 (Matthias Clasen)
+ - Grab default to the close button where it makes sense (Matthias Clasen)
+ - Fix some unref braindamage in gpk-install-package to fix rh#441768 (Richard Hughes)
+ - Cope if there are more than one file that can provide a file (Richard Hughes)
+ - Don't show the 'additional downloads' dialog if there are no packages (Richard Hughes)
+ - When gnome-icon theme is not available, don't crash gpk-update-icon when we try to do the
+   animation. Fixes rh#441062 (Richard Hughes)
+ - Fix the update viewer to properly update the UI if things like rereshing the cache are done
+   using pkcon or the tray icon when the tool is open (Richard Hughes)
+ - Put the find and cancel buttons in a notebook so they are forced to be the same size (Richard Hughes)
+ - When we've done a search, focus back on the text widget (Richard Hughes)
+ - Add the EulaRequired connections to GpkClient (Richard Hughes)
+ - Only sort the package list after the transaction has finished. Fixes rh#441755 (Richard Hughes)
+ - Make sure we repect the users request of ignoring a specific type of notification. fix this
+   properly by adding a check when we go to compose the notification. Fixes rh#442398 (Richard Hughes)
+ - Show the full repo name in gpk-application to fix rh#442647 (Richard Hughes)
+ - Never check for updates when the update policy if 'never'. Fixes rh#442998 (Richard Hughes)
+ - Turn off BASENAME when getting updates, as users are noticing that the updates are only done on
+   the selected package, and not the whole subtype. Fixes rh#443117 (Richard Hughes)
+ - Left align the packages when downloading to fix rh#443210 (Richard Hughes)
+ - Use a custom widget handler to avoid filling the hbuttonboxes manually (Richard Hughes)
+ - Be more HIG friendly with button ordering to fix rh#441852 (Richard Hughes)
+ - Don't use g_main_loop in the gtk-tools, use gtk_main instead (Richard Hughes)
+ - Handle failed updates (when we can't get policykit auth) better - fixes rh#443551 (Richard Hughes)
+ - Allow GpkClient to emit notification windows when running without progress (Richard Hughes)
+ - Make the signature dialogue more HIG friendly (Richard Hughes)
+ - Make the unsigned package warning a little more stern (Richard Hughes)
+ - Use GpkClient rather than GpkProgress so the dialogs look the same. Fixes rh#439189 (Richard Hughes)
+ - Fix text for 'show development repos', and don't show the scrollbar unless we have to (Robin Norwood)
+ - Change 'Repository' to 'Software Source' in a few more places (Robin Norwood)
+ - Patch from Matthias to fix hanging on 'Other' group (Robin Norwood)
+ - Remove 'apply updates when on battery power' checkbox (Robin Norwood)
+ - Make gpk-client.c compile (Robin Norwood)
+ - Fix a segfault when pk_client_requeue does not set error (Robin Norwood)
+
+Version 0.1.11
+~~~~~~~~~~~~~~
+Released: 2008-04-05
+
+* Translations
+ - Updated Finnish translation (Ville-Pekka Vainio)
+ - Updated Polish translation (Artur Flinta)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Greek translation (Giannis Katsampirhs, Nikos Charonitakis)
+
+* New features:
+ - Rename the tools and client GObjects:
+     pk-transaction-viewer   ->   gpk-log
+     pk-update-viewer        ->   gpk-update-viewer
+     pk-update-icon          ->   gpk-update-icon
+     pk-prefs                ->   gpk-prefs
+ - Add some yelp documentation (Rahul Sundaram, Matthias Clasen)
+ - Check for multiple command line targets. rh#440106 (Richard Hughes)
+ - Add a cancel button you can use when removing or adding software (Richard Hughes)
+ - Make double clicking on a line in pk-application install the package (Richard Hughes)
+ - Save and restore some filter settings in gconf for pk-application (Richard Hughes)
+ - Allow the user to manually update the system from the status icon more than once (Richard Hughes)
+ - Add a session dbus interface to pk-update-icon so we can detect other instances (Richard Hughes)
+ - Handle RestartSchedule by starting another gpk-update-icon (Richard Hughes)
+ - Show the help buttons now we have some yelp help (Richard Hughes)
+ - Set the icon size for software sources in pk-application. rh#439783 (Richard Hughes)
+ - Show the blocked packages on the pk-update-viewer finish page (Richard Hughes)
+
+* Bugfixes:
+ - Refresh the search_group entry when changing filters (Richard Hughes)
+ - Remove some markup and make the translations sane (Richard Hughes)
+ - Only show the libnotify message if the client is not still active. rh#439809 (Richard Hughes)
+ - Only connect up task-list-changed when we have created all the other widgets (Richard Hughes)
+ - Don't show the last package when we are doing the test transaction. rh#439808 (Richard Hughes)
+ - Request the data in pk-update-viewer if we go back to the preview window (Richard Hughes)
+ - Fix wording about updating on battery power in pk-prefs (Rahul Sundaram)
+ - Be more anal about checking errors from the PkClient methods (Richard Hughes)
+ - Truncate the tooltip to avoid filling the screen. rh#439414 (Richard Hughes)
+ - Set the correct page for 'Install more updates'. rh#439471 (Richard Hughes)
+
+Version 0.1.10
+~~~~~~~~~~~~~~
+Released: 2008-03-28
+
+* Translations
+ - Updated Polish translation (Artur Flinta)
+ - Updated British English translation (Philip Withnall)
+ - Updated Spanish translation (Daniel Mustieles)
+ - Updated Catalan translation (Gil Forcada)
+ - Updated polish translation (Wadim Dziedzic)
+ - Updated French translation (Robert-André Mauchin and Stéphane Raimbault)
+ - Added Greek translation (Nikos Charonitakis)
+ - Added Finnish translation (Ville-Pekka Vainio)
+
+* New features:
+ - Make the restart computer buttons actually work (Richard Hughes, Matthias Clasen)
+ - Make the package lists sorted in a all applications (Richard Hughes)
+ - Show a status icon when we need to reboot (Richard Hughes)
+ - Convert applications to use PolKitGnomeAction for privileged operations (Matthias Clasen)
+ - Rework the update viewer UI to be a bit friendlier (Matthias Clasen)
+ - Add the time we last updated and since last refresh in pk-update-viewer (Richard Hughes)
+ - Add a boat load of unit tests and fix up all the issues (Richard Hughes)
+ - Add a message if no results were found in pk-application (Richard Hughes)
+ - Add the filters in a menubar for pk-application (Richard Hughes)
+ - Move 'Refresh' button and add a 'View History' button (Matthias Clasen)
+ - Do the GetUpdates in pk-update-viewer when the update list changes (Richard Hughes)
+ - Rewrite pk-install-file to be a more streamlined UI (Matthias Clasen)
+ - Make the refresh cache button actually work in pk-application (Richard Hughes)
+ - Show the status in a statusbar in pk-repo (Richard Hughes)
+ - Redo the search in pk-application if we change a filter setting (Richard Hughes)
+ - Use two lines to show the package summary in the progress dialog (Matthias Clasen)
+ - Add another mimetype, as apache is sending us a different mimetype for skype (Richard Hughes)
+
+* Bugfixes:
+ - Show the same number of updates in the tooltip as the viewer (Richard Hughes)
+ - Make the checkboxes work in pk-update-viewer (Richard Hughes)
+ - Show the skipped packages in the PkNotify UI when we have finished (Richard Hughes)
+ - Fix packing so long author list in pk-backend-status (Scott Reeves)
+ - Don't stretch the pk-update-viewer information pane (Debarshi Ray)
+ - Apply some fixes suggested by sparse (Richard Hughes)
+ - Hide helpless help buttons in applications (Matthias Clasen)
+ - Don't use a non-standard Tango-only icons (Matthias Clasen)
+ - Add progress indication to actions in pk-update-vewer (Matthias Clasen)
+ - Make 'only update security packages' actually do what it should (Richard Hughes)
+ - Give a meaningful errors when we are missing privileges to install local packages (Matthias Clasen)
+ - Rework the pk-update-viewer sequence for installing selected updates (Matthias Clasen)
+ - Make 'don't warn again' buttons in bubbles effective (Matthias Clasen)
+ - Allow the pk-application description to be resized to fix rh#439329 (Richard Hughes)
+ - Don't show Software Transaction Viewer in the menu (Richard Hughes)
+ - Refresh the repo list in pk-repo when we have RepolistChanged (Richard Hughes)
+ - Make the package label ellipsize to avoid continuous window resizing (Matthias Clasen)
+ - Make the cancel button insensitive if it's not going to work in pk-application (Richard Hughes)
+
+Version 0.1.9
+~~~~~~~~~~~~~
+Released: 2008-03-04
+
+* New features:
+ - Add a new icons for a bugfix to make it more obvious (Richard Hughes)
+ - Remove the GtkTextView and replace with a GtkTreeView in p-u-v (Richard Hughes)
+ - Add checkboxes to the update viewer, but can't be changed yet (Richard Hughes)
+ - Display the history viewer as the transaction is progressing (Richard Hughes)
+
+* Bugfixes:
+ - NotShowIn=KDE rather than OnlyShowIn=GNOME so the tools show in XFCE (Richard Hughes)
+ - Cancel useless transactions when the client tool is exited (Richard Hughes)
+ - Use format_secondary_markup properly to avoid a segfault (Richard Hughes)
+ - Cancel old requests in the group pane when moving down the list (Richard Hughes)
+
+Version 0.1.8
+~~~~~~~~~~~~~
+Released: 2008-02-21
+
+* Translations
+ - Updated Occitan translation (Yannig Marchegay)
+ - Updated Arabic translation (Djihed Afifi)
+ - Added Hebrew translation (Yair Hershkovitz)
+ - Add Turkish translation (S.Çağlar Onur)
+
+* Bugfixes:
+ - Wrap the error detail text in pk-update-viewer (Richard Hughes)
+ - Fix return types and missing finalisers in some GObjects (Richard Hughes)
+
+Version 0.1.7
+~~~~~~~~~~~~~
+Released: 2008-02-10
+
+* Translations
+ - Use translations at runtime, plus mark more strings for translation (Luca Ferretti)
+ - Fix a lot of localisation problems (Andre Klapper)
+ - Updated Spanish translation (Jorge Gonzalez)
+ - Updated Occitan translation (Yannig Marchegay)
+
+* New features:
+ - Add a libsexy search type text box (Richard Hughes)
+ - Add a build dependency on libsexy (Richard Hughes)
+ - Use the data from libpackagekit to display the icon and translated summary
+   if this information is available (Richard Hughes)
+ - Add a cancelling state, as cancelling might actually take some time (Richard Hughes)
+ - Alphabetically sort the repository list in pk-repo (Richard Hughes)
+ - Add some update icons with different severity (Richard Hughes)
+
+* Bugfixes:
+ - Convert the glade files to glade-3 format (Richard Hughes)
+ - Add some more detailed error descriptions and display them in a error page
+   not a modal box (Richard Hughes)
+ - Reliably hide the cancel button if we can't do the action (Richard Hughes)
+ - Choose the best (i.e. most important) themed icon in the status area (Richard Hughes)
+ - Add and run a script inspired from Nicu Buculei that saves the svg files as
+   plain svg and vacuumed. The size difference is pretty huge (Richard Hughes)
+ - Fix build by adding #include's for locale.h (Scott Reeves)
+ - GNOME HIG fixes for preferences dialog. Fixes bug #14152 (Luca Ferretti)
+
+Version 0.1.6
+~~~~~~~~~~~~~
+Released: 2008-01-18
+
+* Translations
+ - Added Arabic Translation (Djihed Afifi)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Updated Occitan translation (Yannig Marchegay)
+
+* New features:
+ - Add some more info, status and group enums (Richard Hughes)
+ - Make the update viewer more interactive (Matthias Clasen, Richard Hughes)
+ - Allow clicking on urls/emails in the about dialog (Christopher Aillon)
+ - Turn on line wrapping in the details text view and support the new url
+   parameters (Matthias Clasen)
+
+* Bugfixes:
+ - Handle error in pk-update-viewer (Richard Hughes)
+ - Convert the url field into vendor_url, bugzilla_url, cve_url (Richard Hughes)
+ - Valgrind reported leaks of GladeXML object (Christopher Aillon)
+ - Make pk-transaction-viewer obey icon theme changes (Matthias Clasen)
+
+Version 0.1.5
+~~~~~~~~~~~~~
+Released: 2007-12-21
+
+* Translations
+ - Add Catalan translation (Gil Forcada)
+ - Updated Spanish translation (Javier Mazorra)
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+
+* New features:
+ - Add the free filter to the UI (Richard Hughes)
+ - Add tooltips to pk-update-viewer and pk-application (Robin Norwood)
+ - waf: Add some initial waf files (Daniel G. Siegel)
+
+* Bugfixes:
+ - Format the Message as it may contain markup (Richard Hughes)
+ - Format the Error detail as it may contain markup (Richard Hughes)
+ - Change licence -> license (Robin Norwood)
+ - Fix the icons in lists to follow the icon theme (Matthias Clasen)
+ - Fix off-by-one buglet when determining the number of updates (James Bowes)
+ - Swap tooltip text when button text changes (Robin Norwood)
+ - Fix crash on dbus error (Scott Reeves)
+ - Hide the details fram when we have finished the refresh (Richard Hughes)
+
+~~~~~~~~~~~~~
+Version 0.1.4
+~~~~~~~~~~~~~
+Released: 2007-11-26
+
+* Translations:
+ - Updated es translation (Jorge Gonzalez)
+ - Add sv translation (Daniel Nylander)
+ - Add fr translation (Adrien BUSTANY)
+
+* New features:
+ - Add an 'Update this package now' button to pk-update-viewer (Richard Hughes)
+ - Display messages from the transaction (Richard Hughes)
+
+* Bugfixes
+ - Don't hide the subpercentage widget when we go back to zero percent, it
+   makes the window bounce around (Richard Hughes)
+ - Only show the error libnotify box if the caller has already exited or the
+   method was called without an active window (Richard Hughes)
+ - Hide the homepage button until we get valid Description data (Richard Hughes)
+ - Make the tabs 'Depends on' and 'Required by' (Richard Hughes)
+ - Don't error out if we can't match an enum, just put a message on the
+   console (Richard Hughes)
+ - Query the daemon to get the correct update interval (Richard Hughes)
+
+~~~~~~~~~~~~~
+Version 0.1.3
+~~~~~~~~~~~~~
+Released: 2007-11-10
+
+* Translations:
+ - Add Hungarian translation (Gabor Kelemen)
+ - Add Galician translation (Iván Méndez)
+
+* New features:
+ - Add requires and depends tabs and get rid of the toolbar (Richard Hughes)
+ - Display the update detail in the pk-update-viewer application (Richard Hughes)
+ - Add GNOME, KDE and XFCE icons and use them in the group selector (Richard Hughes)
+ - Add lots of tango themed icons for enumerated status (Richard Hughes)
+ - Confirm removing requires is okay when removing packages (Richard Hughes)
+
+* Bugfixes:
+ - Don't flash the statusbar when we refresh for no reason (Richard Hughes)
+ - Hide the rollback button if we can't do the action (Richard Hughes)
+ - Spin the percentagebar and subpercentagebar on seporate timers, else one
+   just sits at 50% (Richard Hughes)
+
+~~~~~~~~~~~~~
+Version 0.1.2
+~~~~~~~~~~~~~
+Released: 2007-11-01
+
+* Translations:
+ - Add nl translation (Reinout van Schouwen)
+ - Add ja translation (aaron andersen)
+ - Add en translation (Jorge Gonzalez)
+ - Update de_DE translation (Thilo Pfennig)
+ - Update nb translation (Espen Stefansen)
+
+* New features:
+ - Use a promiscuous client to get the finished and error-code from PkClient
+   rather than PkTaskList (Richard Hughes)
+ - Only show the refresh cache icon in the pk-update-icon menu when we are not
+   already updating (Richard Hughes)
+ - Display a help notice in pk-update-viewer informing the user if an update
+   is already in progress (Richard Hughes)
+ - Set the time in the progressbar when we have a good estimate (Richard Hughes)
+
+* Bugfixes
+ - Set focus on entry text at startup in pk-application (Grzegorz Dabrowski)
+ - Add a ton of unit test code in PkCommonGui to fix several potential crasher
+   bugs (Richard Hughes)
+ - Only do the Descriptions and GetFiles when we click the tab, not both
+   unconditionally. Should increase speed, and stop them getting out of sync in
+   the UI (Richard Hughes)
+ - Just use the package name, not the description in PkProgress (Richard Hughes)
+ - Fix the progressbar to be in the statusbar, and add the remaining time
+   statusbar code when we have an ETA available (Richard Hughes)
+ - Hide the search button if we have an invalid search (Richard Hughes)
+ - Cancel any previous GetDescription calls to quicken up browsing of packages
+   in pk-application and to avoid a queue building up (Richard Hughes)
+
+~~~~~~~~~~~~~
+Version 0.1.1
+~~~~~~~~~~~~~
+Released: 2007-10-23
+
+* Translations:
+ - Updated Norwegian bokmål translation (Kjartan Maraas)
+ - Add Polish translation (Piotr Drąg)
+
+* New features:
+ - Show an icon when we are waiting, to give feedback when yum is waiting for a
+   command line tool to release the lock (Richard Hughes)
+ - Connect up the Requires button in the toolbar (Grzegorz Dabrowski)
+ - Add a desktop icon for pk-repo (Richard Hughes)
+
+* Bugfixes
+ - Use the new API in PackageKit to get the cached data (Richard Hughes)
+ - Use a local copy of libgbus to stop the startup race of gnome-power-manager,
+   gnome-screensaver and pk-update-icon from preventing the update icon to show
+   on first login (Richard Hughes)
+ - Spin the progress bar at the same speed between applications (Richard Hughes)
+
+~~~~~~~~~~~~~
+Version 0.1.0
+~~~~~~~~~~~~~
+Released: 2007-10-16
+
+* The first public release of gnome-packagekit!
+* Current applications and tools:
+ - pk-application: A more advanced package browser where you can install,
+   remove and get details about installed and available packages.
+ - pk-update-icon: A session process that checks for updates using PackageKit
+   and optionally applies them automatically.
+ - pk-install-file: A helper to allow rpms and debs to be double clicked and
+   installed with dependencies automatically.
+ - pk-install-package: A helper to allow packages to be installed with a
+   progress UI, for instance openoffice-clipart.
+ - pk-prefs: The preferences tool that sets update checking frequency and other
+   package session preferences.
+ - pk-update-viewer: A simple application to show the updates available, and
+   more information about each update.
+ - pk-backend-status: A development tool to see what capabilities the backend
+   author have provided.
+ - pk-transaction-viewer: A tool that lets you see what was updated, installed
+   or removed and optionally rollback to an old checkpoint.
+ - pk-repo: A tool that lets you enable and disable installed repositories.
+* Some initial translations
+* A simple help file.
+

@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Virtualization" lang="zh-CN">
+	<title>虚&#x200B;拟&#x200B;化&#x200B;</title>
+	<remark>这&#x200B;个 beat 位&#x200B;于&#x200B;：<ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Virtualization">https://fedoraproject.org/wiki/Docs/Beats/Virtualization</ulink></remark>
+	<para>
+		<indexterm>
+			<primary>虚&#x200B;拟&#x200B;化&#x200B;</primary>
+		</indexterm>
+		<indexterm>
+			<primary>KVM</primary>
+		</indexterm>
+		<indexterm>
+			<primary>Xen</primary>
+		</indexterm>
+		<indexterm>
+			<primary>qemu</primary>
+		</indexterm>
+		<indexterm>
+			<primary>gPXE</primary>
+		</indexterm>
+		<indexterm>
+			<primary>libvirt</primary>
+		</indexterm>
+		<indexterm>
+			<primary>libguestfs</primary>
+		</indexterm>
+		<indexterm>
+			<primary>guestfish</primary>
+		</indexterm>
+		 Fedora&nbsp;12中&#x200B;的&#x200B;虚&#x200B;拟&#x200B;化&#x200B;包&#x200B;含&#x200B;重&#x200B;大&#x200B;修&#x200B;改&#x200B;和&#x200B;新&#x200B;特&#x200B;徴&#x200B;，依&#x200B;然&#x200B;继&#x200B;续&#x200B;支&#x200B;持 KVM、&#x200B;Xen 以&#x200B;及&#x200B;许&#x200B;多&#x200B;其&#x200B;它&#x200B;虚&#x200B;拟&#x200B;机&#x200B;器&#x200B;平&#x200B;台&#x200B;。&#x200B;
+	</para>
+	<para>
+		本&#x200B;发&#x200B;行&#x200B;版&#x200B;的&#x200B;KVM和&#x200B;QEMU增&#x200B;加&#x200B;了&#x200B;一&#x200B;系&#x200B;列&#x200B;的&#x200B;新&#x200B;特&#x200B;性&#x200B;。&#x200B;通&#x200B;过&#x200B;加&#x200B;入&#x200B;KSM及&#x200B;KVM大&#x200B;页&#x200B;面&#x200B;备&#x200B;份&#x200B;内&#x200B;存&#x200B;，KVM客&#x200B;户&#x200B;机&#x200B;内&#x200B;存&#x200B;使&#x200B;用&#x200B;及&#x200B;性&#x200B;能&#x200B;都&#x200B;有&#x200B;所&#x200B;提&#x200B;高&#x200B;。&#x200B;qcow2镜&#x200B;像&#x200B;格&#x200B;式&#x200B;的&#x200B;性&#x200B;能&#x200B;大&#x200B;幅&#x200B;提&#x200B;高&#x200B;。&#x200B;增&#x200B;加&#x200B;了&#x200B;对&#x200B;SR-IOV和&#x200B;NIC热&#x200B;插&#x200B;拔&#x200B;支&#x200B;持&#x200B;。&#x200B;gPXE取&#x200B;代&#x200B;etherboot用&#x200B;于&#x200B;客&#x200B;户&#x200B;机&#x200B;PXE的&#x200B;引&#x200B;导&#x200B;。&#x200B;
+	</para>
+	<para>
+		libvirt方&#x200B;面&#x200B;，增&#x200B;加&#x200B;了&#x200B;针&#x200B;对&#x200B;存&#x200B;储&#x200B;管&#x200B;理&#x200B;和&#x200B;网&#x200B;络&#x200B;界&#x200B;面&#x200B;管&#x200B;理&#x200B;的&#x200B;API。&#x200B;libvirt无&#x200B;需&#x200B;权&#x200B;限&#x200B;即&#x200B;可&#x200B;运&#x200B;行&#x200B;QEMU进&#x200B;程&#x200B;。&#x200B;
+	</para>
+	<para>
+		新&#x200B;的&#x200B;库&#x200B;（<application>libguestfs</application>）和&#x200B;交&#x200B;互&#x200B;式&#x200B;工&#x200B;具&#x200B;（<application>guestfish</application>）可&#x200B;读&#x200B;取&#x200B;及&#x200B;修&#x200B;改&#x200B;虚&#x200B;拟&#x200B;机&#x200B;磁&#x200B;盘&#x200B;镜&#x200B;像&#x200B;。&#x200B;
+	</para>
+	<section>
+		<title>内&#x200B;核&#x200B;分&#x200B;页&#x200B;合&#x200B;并&#x200B;及&#x200B;减&#x200B;少&#x200B;客&#x200B;虚&#x200B;拟&#x200B;机&#x200B;的&#x200B;内&#x200B;存&#x200B;用&#x200B;量&#x200B;</title>
+		<para>
+			<indexterm>
+				<primary>KSM</primary>
+			</indexterm>
+			<indexterm>
+				<primary>KVM</primary>
+			</indexterm>
+			<indexterm>
+				<primary>内&#x200B;核&#x200B;</primary>
+			</indexterm>
+			 <firstterm>Kernel SamePage Merging</firstterm> (KSM) 允&#x200B;许&#x200B;完&#x200B;全&#x200B;相&#x200B;同&#x200B;的&#x200B;记&#x200B;忆&#x200B;分&#x200B;页&#x200B;由&#x200B;内&#x200B;核&#x200B;合&#x200B;并&#x200B;成&#x200B;一&#x200B;个&#x200B;分&#x200B;页&#x200B;，并&#x200B;在&#x200B;一&#x200B;个&#x200B;或&#x200B;多&#x200B;个&#x200B;处&#x200B;理&#x200B;器&#x200B;间&#x200B;共&#x200B;享&#x200B;。&#x200B;这&#x200B;项&#x200B;功&#x200B;能&#x200B;让&#x200B;KVM通&#x200B;过&#x200B;杠&#x200B;杆&#x200B;作&#x200B;用&#x200B;，使&#x200B;多&#x200B;个&#x200B;执&#x200B;行&#x200B;相&#x200B;近&#x200B;作&#x200B;业&#x200B;系&#x200B;统&#x200B;的&#x200B;客&#x200B;户&#x200B;虚&#x200B;拟&#x200B;机&#x200B;可&#x200B;以&#x200B;减&#x200B;少&#x200B;内&#x200B;存&#x200B;足&#x200B;迹&#x200B;。&#x200B;由&#x200B;於&#x200B;内&#x200B;存&#x200B;共&#x200B;享&#x200B;，使&#x200B;各&#x200B;个&#x200B;虚&#x200B;拟&#x200B;机&#x200B;合&#x200B;共&#x200B;使&#x200B;用&#x200B;的&#x200B;内&#x200B;存&#x200B;得&#x200B;以&#x200B;减&#x200B;少&#x200B;。&#x200B;
+		</para>
+		<para>
+			详&#x200B;情&#x200B;请&#x200B;参&#x200B;考&#x200B;<ulink url="http://fedoraproject.org/wiki/Features/KSM"></ulink>和&#x200B;<ulink url="http://lwn.net/Articles/306704/"></ulink>
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM巨&#x200B;大&#x200B;记&#x200B;忆&#x200B;分&#x200B;页&#x200B;支&#x200B;持&#x200B;</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>Huge Page Backed memory</secondary>
+			</indexterm>
+			 为&#x200B;KVM客&#x200B;户&#x200B;机&#x200B;启&#x200B;用&#x200B;大&#x200B;页&#x200B;面&#x200B;备&#x200B;份&#x200B;内&#x200B;存&#x200B;是&#x200B;为&#x200B;了&#x200B;减&#x200B;少&#x200B;内&#x200B;存&#x200B;消&#x200B;耗&#x200B;和&#x200B;通&#x200B;过&#x200B;降&#x200B;低&#x200B;CPU缓&#x200B;存&#x200B;压&#x200B;力&#x200B;来&#x200B;提&#x200B;高&#x200B;性&#x200B;能&#x200B;。&#x200B;使&#x200B;用&#x200B;大&#x200B;页&#x200B;面&#x200B;备&#x200B;份&#x200B;内&#x200B;存&#x200B;的&#x200B;KVM客&#x200B;户&#x200B;机&#x200B;用&#x200B;户&#x200B;应&#x200B;该&#x200B;能&#x200B;体&#x200B;会&#x200B;到&#x200B;通&#x200B;过&#x200B;降&#x200B;低&#x200B;主&#x200B;机&#x200B;内&#x200B;存&#x200B;消&#x200B;耗&#x200B;而&#x200B;带&#x200B;来&#x200B;的&#x200B;性&#x200B;能&#x200B;提&#x200B;升&#x200B;。&#x200B;性&#x200B;能&#x200B;提&#x200B;高&#x200B;取&#x200B;决&#x200B;于&#x200B;工&#x200B;作&#x200B;量&#x200B;。&#x200B;虽&#x200B;然&#x200B;客&#x200B;户&#x200B;机&#x200B;使&#x200B;用&#x200B;大&#x200B;页&#x200B;面&#x200B;也&#x200B;有&#x200B;缺&#x200B;点&#x200B;，但&#x200B;是&#x200B;您&#x200B;不&#x200B;必&#x200B;再&#x200B;为&#x200B;客&#x200B;户&#x200B;机&#x200B;交&#x200B;换&#x200B;或&#x200B;增&#x200B;加&#x200B;内&#x200B;存&#x200B;。&#x200B;
+		</para>
+		<para>
+			详&#x200B;情&#x200B;请&#x200B;参&#x200B;考&#x200B;：<ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_Huge_Page_Backed_Memory"></ulink>。&#x200B;
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM NIC 热&#x200B;插&#x200B;拔&#x200B;</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>NIC热&#x200B;插&#x200B;拔&#x200B;</secondary>
+			</indexterm>
+			 在&#x200B;不&#x200B;重&#x200B;启&#x200B;客&#x200B;户&#x200B;机&#x200B;的&#x200B;情&#x200B;况&#x200B;下&#x200B;使&#x200B;用&#x200B;<package>libvirt</package>/<package>virt-manager</package>可&#x200B;将&#x200B;网&#x200B;络&#x200B;连&#x200B;接&#x200B;添&#x200B;加&#x200B;到&#x200B;运&#x200B;行&#x200B;的&#x200B;KVM客&#x200B;户&#x200B;机&#x200B;上&#x200B;。&#x200B;
+		</para>
+		<para>
+			详&#x200B;情&#x200B;请&#x200B;参&#x200B;考&#x200B;：<ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_NIC_Hotplug"></ulink>。&#x200B;
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM qcow2性&#x200B;能&#x200B;</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>qcow2性&#x200B;能&#x200B;</secondary>
+			</indexterm>
+			<package>qemu</package>的&#x200B;本&#x200B;地&#x200B;磁&#x200B;盘&#x200B;镜&#x200B;像&#x200B;文&#x200B;件&#x200B;格&#x200B;式&#x200B;为&#x200B;<command>qcow2</command>。&#x200B;Qcow2为&#x200B;原&#x200B;生&#x200B;镜&#x200B;像&#x200B;提&#x200B;供&#x200B;了&#x200B;增&#x200B;强&#x200B;功&#x200B;能&#x200B;，包&#x200B;括&#x200B;：基&#x200B;本&#x200B;镜&#x200B;像&#x200B;、&#x200B;快&#x200B;照&#x200B;、&#x200B;压&#x200B;缩&#x200B;以&#x200B;及&#x200B;加&#x200B;密&#x200B;。&#x200B;
+		</para>
+		<para>
+			用&#x200B;户&#x200B;通&#x200B;常&#x200B;会&#x200B;禁&#x200B;用&#x200B;主&#x200B;机&#x200B;上&#x200B;的&#x200B;写&#x200B;如&#x200B;缓&#x200B;存&#x200B;以&#x200B;防&#x200B;止&#x200B;客&#x200B;户&#x200B;机&#x200B;的&#x200B;数&#x200B;据&#x200B;受&#x200B;到&#x200B;主&#x200B;机&#x200B;破&#x200B;坏&#x200B;。&#x200B;之&#x200B;前&#x200B;这&#x200B;将&#x200B;会&#x200B;明&#x200B;显&#x200B;降&#x200B;低&#x200B;qcow2镜&#x200B;像&#x200B;中&#x200B;客&#x200B;户&#x200B;机&#x200B;的&#x200B;性&#x200B;能&#x200B;。&#x200B;
+		</para>
+		<para>
+			qcow2磁&#x200B;盘&#x200B;镜&#x200B;像&#x200B;的&#x200B;I/O性&#x200B;能&#x200B;得&#x200B;到&#x200B;很&#x200B;大&#x200B;改&#x200B;进&#x200B;。&#x200B;由&#x200B;于&#x200B;qcow2性&#x200B;能&#x200B;较&#x200B;差&#x200B;而&#x200B;不&#x200B;去&#x200B;使&#x200B;用&#x200B;的&#x200B;用&#x200B;户&#x200B;，现&#x200B;在&#x200B;可&#x200B;以&#x200B;考&#x200B;虑&#x200B;转&#x200B;换&#x200B;并&#x200B;利&#x200B;用&#x200B;该&#x200B;格&#x200B;式&#x200B;提&#x200B;供&#x200B;的&#x200B;针&#x200B;对&#x200B;原&#x200B;生&#x200B;磁&#x200B;盘&#x200B;镜&#x200B;像&#x200B;的&#x200B;特&#x200B;性&#x200B;。&#x200B;
+		</para>
+		<para>
+			详&#x200B;情&#x200B;请&#x200B;参&#x200B;考&#x200B;：<ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_qcow2_Performance"></ulink>和&#x200B;<ulink type="http" url="http://www.gnome.org/~markmc/qcow-image-format.html"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM 穩&#x200B;定&#x200B;客&#x200B;戶&#x200B;端 ABI</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>穩&#x200B;定&#x200B;客&#x200B;戶&#x200B;端 ABI</secondary>
+			</indexterm>
+			 KVM客&#x200B;户&#x200B;机&#x200B;通&#x200B;过&#x200B;硬&#x200B;件&#x200B;模&#x200B;拟&#x200B;平&#x200B;台&#x200B;或&#x200B;者&#x200B;包&#x200B;含&#x200B;此&#x200B;平&#x200B;台&#x200B;的&#x200B;程&#x200B;序&#x200B;二&#x200B;进&#x200B;制&#x200B;接&#x200B;口&#x200B;（例&#x200B;如&#x200B;CPU、&#x200B;APIC、&#x200B;PIT、&#x200B;ACPI表&#x200B;、&#x200B;IDE/USB/VGA控&#x200B;制&#x200B;器&#x200B;、&#x200B;NIC等&#x200B;）得&#x200B;以&#x200B;实&#x200B;现&#x200B;。&#x200B;当&#x200B;QEMU更&#x200B;新&#x200B;至&#x200B;新&#x200B;版&#x200B;本&#x200B;时&#x200B;，此&#x200B;平&#x200B;台&#x200B;的&#x200B;某&#x200B;些&#x200B;层&#x200B;面&#x200B;会&#x200B;因&#x200B;新&#x200B;增&#x200B;的&#x200B;硬&#x200B;件&#x200B;性&#x200B;能&#x200B;而&#x200B;有&#x200B;所&#x200B;变&#x200B;化&#x200B;。&#x200B;这&#x200B;对&#x200B;Windows客&#x200B;户&#x200B;机&#x200B;来&#x200B;说&#x200B;是&#x200B;个&#x200B;问&#x200B;题&#x200B;，因&#x200B;为&#x200B;客&#x200B;户&#x200B;机&#x200B;ABI的&#x200B;变&#x200B;化&#x200B;可&#x200B;能&#x200B;需&#x200B;要&#x200B;重&#x200B;新&#x200B;进&#x200B;行&#x200B;安&#x200B;装&#x200B;。&#x200B;
+		</para>
+		<para>
+			通&#x200B;过&#x200B;QEMU更&#x200B;新&#x200B;，客&#x200B;户&#x200B;虚&#x200B;拟&#x200B;机&#x200B;将&#x200B;使&#x200B;用&#x200B;相&#x200B;同&#x200B;的&#x200B;ABI。&#x200B;
+		</para>
+		<para>
+			详&#x200B;情&#x200B;请&#x200B;参&#x200B;考&#x200B;：<ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_Stable_Guest_ABI"></ulink> and <ulink type="http" url="http://fedoraproject.org/wiki/KVM_Stable_Guest_ABI_Design_Notes"></ulink>。&#x200B;
+		</para>
+	</section>
+	
+	<section>
+		<title>针&#x200B;对&#x200B;虚&#x200B;拟&#x200B;机&#x200B;操&#x200B;作&#x200B;的&#x200B;libguestfs库&#x200B;</title>
+		<para>
+			<indexterm>
+				<primary>libguestfs</primary>
+			</indexterm>
+			<indexterm>
+				<primary>guestfish</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-df</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-inspector</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-cat</primary>
+			</indexterm>
+			 Fedora 11开&#x200B;发&#x200B;周&#x200B;期&#x200B;中&#x200B;很&#x200B;晚&#x200B;才&#x200B;加&#x200B;入&#x200B;的&#x200B;<package>libguestfs</package>，现&#x200B;已&#x200B;成&#x200B;为&#x200B;Fedora 12的&#x200B;正&#x200B;式&#x200B;特&#x200B;性&#x200B;。&#x200B;<package>libguestfs</package>是&#x200B;读&#x200B;取&#x200B;和&#x200B;修&#x200B;改&#x200B;客&#x200B;户&#x200B;机&#x200B;磁&#x200B;盘&#x200B;镜&#x200B;像&#x200B;的&#x200B;库&#x200B;。&#x200B;通&#x200B;过&#x200B;Linux内&#x200B;核&#x200B;及&#x200B;<package>qemu</package>代&#x200B;码&#x200B;，<package>libguestfs</package>可&#x200B;访&#x200B;问&#x200B;Linux和&#x200B;QEMU所&#x200B;能&#x200B;访&#x200B;问&#x200B;的&#x200B;任&#x200B;何&#x200B;客&#x200B;户&#x200B;机&#x200B;文&#x200B;件&#x200B;系&#x200B;统&#x200B;。&#x200B;
+		</para>
+		<para>
+			libguestfs提&#x200B;供&#x200B;了&#x200B;以&#x200B;下&#x200B;工&#x200B;具&#x200B;及&#x200B;增&#x200B;强&#x200B;特&#x200B;性&#x200B;： 
+			<itemizedlist>
+				<listitem>
+					<para>
+						针&#x200B;对&#x200B;OCaml、&#x200B;Perl、&#x200B;Python、&#x200B;Ruby及&#x200B;Java编&#x200B;程&#x200B;语&#x200B;言&#x200B;的&#x200B;绑&#x200B;定&#x200B;。&#x200B;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>guestfish</package> - 为&#x200B;编&#x200B;辑&#x200B;虚&#x200B;拟&#x200B;机&#x200B;文&#x200B;件&#x200B;系&#x200B;统&#x200B;及&#x200B;客&#x200B;户&#x200B;机&#x200B;上&#x200B;执&#x200B;行&#x200B;命&#x200B;令&#x200B;提&#x200B;供&#x200B;交&#x200B;互&#x200B;式&#x200B;shell。&#x200B;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-df</package> -显&#x200B;示&#x200B;虚&#x200B;拟&#x200B;机&#x200B;文&#x200B;件&#x200B;系&#x200B;统&#x200B;的&#x200B;剩&#x200B;余&#x200B;空&#x200B;间&#x200B;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-inspector</package> -显&#x200B;示&#x200B;虚&#x200B;拟&#x200B;机&#x200B;的&#x200B;操&#x200B;作&#x200B;系&#x200B;统&#x200B;版&#x200B;本&#x200B;、&#x200B;内&#x200B;核&#x200B;、&#x200B;驱&#x200B;动&#x200B;、&#x200B;挂&#x200B;载&#x200B;点&#x200B;、&#x200B;应&#x200B;用&#x200B;程&#x200B;序&#x200B;等&#x200B;。&#x200B;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-cat</package> - 从&#x200B;虚&#x200B;拟&#x200B;机&#x200B;内 "Cat" 任&#x200B;意&#x200B;文&#x200B;件&#x200B;。&#x200B;
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>
+			了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/libguestfs"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://libguestfs.org/"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>网&#x200B;络&#x200B;界&#x200B;面&#x200B;管&#x200B;理&#x200B;</title>
+		<para>
+			<indexterm>
+				<primary>libvirt</primary>
+			</indexterm>
+			<indexterm>
+				<primary>虚&#x200B;拟&#x200B;化&#x200B;</primary>
+				<secondary>网&#x200B;络&#x200B;界&#x200B;面&#x200B;管&#x200B;理&#x200B;</secondary>
+			</indexterm>
+			 像&#x200B;桥&#x200B;接&#x200B;、&#x200B;绑&#x200B;定&#x200B;、&#x200B;虚&#x200B;拟&#x200B;局&#x200B;域&#x200B;网&#x200B;以&#x200B;及&#x200B;其&#x200B;合&#x200B;理&#x200B;组&#x200B;合&#x200B;等&#x200B;常&#x200B;用&#x200B;的&#x200B;主&#x200B;机&#x200B;网&#x200B;络&#x200B;配&#x200B;置&#x200B;，现&#x200B;在&#x200B;可&#x200B;由&#x200B;通&#x200B;用&#x200B;网&#x200B;络&#x200B;配&#x200B;置&#x200B;库&#x200B;-netcf来&#x200B;创&#x200B;建&#x200B;。&#x200B;对&#x200B;<package>libvirt</package> API的&#x200B;增&#x200B;强&#x200B;展&#x200B;现&#x200B;了&#x200B;这&#x200B;个&#x200B;通&#x200B;过&#x200B;<package>libvirtd</package>进&#x200B;行&#x200B;主&#x200B;机&#x200B;远&#x200B;程&#x200B;管&#x200B;理&#x200B;的&#x200B;新&#x200B;特&#x200B;性&#x200B;。&#x200B;
+		</para>
+		<para>
+			了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/Network_Interface_Management"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedorahosted.org/netcf/"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://www.libvirt.org/remote.html"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Single Root I/O Virtualizaton</title>
+		<para>
+			<indexterm>
+				<primary>Single Root I/O Virtualizaton</primary>
+			</indexterm>
+			 Single Root I/O虚&#x200B;拟&#x200B;化&#x200B;是&#x200B;一&#x200B;种&#x200B;PCI特&#x200B;性&#x200B;，它&#x200B;允&#x200B;许&#x200B;创&#x200B;建&#x200B;与&#x200B;物&#x200B;理&#x200B;功&#x200B;能&#x200B;资&#x200B;源&#x200B;共&#x200B;享&#x200B;的&#x200B;虚&#x200B;拟&#x200B;功&#x200B;能&#x200B;（VF）。&#x200B;VF设&#x200B;备&#x200B;位&#x200B;于&#x200B;客&#x200B;户&#x200B;虚&#x200B;拟&#x200B;机&#x200B;中&#x200B;并&#x200B;以&#x200B;客&#x200B;户&#x200B;机&#x200B;PCI设&#x200B;备&#x200B;的&#x200B;形&#x200B;式&#x200B;出&#x200B;现&#x200B;。&#x200B;由&#x200B;于&#x200B;客&#x200B;户&#x200B;系&#x200B;统&#x200B;在&#x200B;直&#x200B;接&#x200B;有&#x200B;效&#x200B;地&#x200B;驱&#x200B;动&#x200B;硬&#x200B;件&#x200B;，因&#x200B;此&#x200B;I/O性&#x200B;能&#x200B;与&#x200B;实&#x200B;际&#x200B;硬&#x200B;件&#x200B;性&#x200B;能&#x200B;是&#x200B;一&#x200B;致&#x200B;的&#x200B;。&#x200B;
+		</para>
+		<para>
+			了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/SR-IOV"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://www.pcisig.com/specifications/iov/"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_PCI_Device_Assignment"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>客&#x200B;户&#x200B;端&#x200B;默&#x200B;认&#x200B;使&#x200B;用&#x200B;gPXE</title>
+		<para>
+			<indexterm>
+				<primary>gPXE</primary>
+			</indexterm>
+			<indexterm>
+				<primary>qemu</primary>
+			</indexterm>
+			 QEMU guests now make use of the more modern and currently maintained <package>gpxe</package> rather than the deprecated etherboot tool for PXE booting.
+		</para>
+		<para>
+			了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtgPXE"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://etherboot.org/wiki/index.php"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Virt 权&#x200B;限&#x200B;</title>
+		<para>
+			Changes have been introduced for QEMU/KVM virtual machines to improve host security in the event of a flaw in the QEMU binary.
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					/dev/kvm的&#x200B;权&#x200B;限&#x200B;更&#x200B;新&#x200B;，可&#x200B;让&#x200B;无&#x200B;权&#x200B;限&#x200B;用&#x200B;户&#x200B;使&#x200B;用&#x200B;KVM硬&#x200B;件&#x200B;加&#x200B;速&#x200B;。&#x200B;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					由&#x200B;在&#x200B;本&#x200B;地&#x200B;桌&#x200B;面&#x200B;安&#x200B;装&#x200B;的&#x200B;virt-manager生&#x200B;成&#x200B;的&#x200B;QEMU进&#x200B;程&#x200B;现&#x200B;在&#x200B;以&#x200B;桌&#x200B;面&#x200B;用&#x200B;户&#x200B;身&#x200B;份&#x200B;运&#x200B;行&#x200B;。&#x200B;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					由&#x200B;具&#x200B;有&#x200B;权&#x200B;限&#x200B;的&#x200B;libvirtd守&#x200B;护&#x200B;程&#x200B;序&#x200B;生&#x200B;成&#x200B;的&#x200B;QEMU进&#x200B;程&#x200B;，现&#x200B;在&#x200B;将&#x200B;以&#x200B;无&#x200B;权&#x200B;限&#x200B;帐&#x200B;户&#x200B;运&#x200B;行&#x200B;，用&#x200B;户&#x200B;“&#x200B;qemu”&#x200B;，组&#x200B;“&#x200B;qemu”&#x200B;。&#x200B;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					除&#x200B;了&#x200B;只&#x200B;读&#x200B;/共&#x200B;享&#x200B;磁&#x200B;盘&#x200B;外&#x200B;，libvirtd在&#x200B;虚&#x200B;拟&#x200B;机&#x200B;启&#x200B;动&#x200B;时&#x200B;将&#x200B;把&#x200B;虚&#x200B;拟&#x200B;机&#x200B;上&#x200B;所&#x200B;有&#x200B;磁&#x200B;盘&#x200B;的&#x200B;所&#x200B;有&#x200B;者&#x200B;更&#x200B;改&#x200B;为&#x200B;用&#x200B;户&#x200B;“&#x200B;qemu”&#x200B;，组&#x200B;“&#x200B;qemu”&#x200B;。&#x200B;
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					要&#x200B;恢&#x200B;复&#x200B;之&#x200B;前&#x200B;Fedora中&#x200B;以&#x200B;“&#x200B;root”&#x200B;用&#x200B;户&#x200B;运&#x200B;行&#x200B;QEMU的&#x200B;行&#x200B;为&#x200B;，涉&#x200B;及&#x200B;到&#x200B;/etc/libvirt/qemu.conf文&#x200B;件&#x200B;中&#x200B;的&#x200B;两&#x200B;个&#x200B;配&#x200B;置&#x200B;参&#x200B;数&#x200B;。&#x200B;并&#x200B;不&#x200B;推&#x200B;荐&#x200B;修&#x200B;改&#x200B;。&#x200B;
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;：
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtPrivileges"></ulink>
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	
+	<section>
+		<title>虚&#x200B;拟&#x200B;化&#x200B;存&#x200B;储&#x200B;管&#x200B;理&#x200B;</title>
+		<para>
+			Fibre Channel N_Port ID虚&#x200B;拟&#x200B;化&#x200B;或&#x200B;NPIV允&#x200B;许&#x200B;在&#x200B;单&#x200B;一&#x200B;物&#x200B;理&#x200B;主&#x200B;机&#x200B;总&#x200B;线&#x200B;适&#x200B;配&#x200B;器&#x200B;上&#x200B;创&#x200B;建&#x200B;多&#x200B;个&#x200B;虚&#x200B;拟&#x200B;N_Ports。&#x200B;libvirt节&#x200B;点&#x200B;设&#x200B;备&#x200B;API已&#x200B;扩&#x200B;展&#x200B;可&#x200B;使&#x200B;用&#x200B;NPIV创&#x200B;建&#x200B;和&#x200B;破&#x200B;坏&#x200B;虚&#x200B;拟&#x200B;适&#x200B;配&#x200B;器&#x200B;。&#x200B;
+		</para>
+		<para>
+			The APIs permitting storage discovery and pool creation have been extended to discover and rescan storage on a per-SCSI-host basis. Administrators may now discover, configure, and provision storage for virtual machines without the need for multiple tools.
+		</para>
+		<para>
+			了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtStorageManagement"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://libvirt.org/storage.html"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>其&#x200B;它&#x200B;改&#x200B;进&#x200B;</title>
+		<section>
+			<title>Libvirt Technology 兼&#x200B;容&#x200B;性&#x200B;套&#x200B;件&#x200B;</title>
+			<para>
+				Fedora now includes the libvirt Technology Compatibility Kit (TCK). The TCK is a functional test suite which provides detailed reports on functionality available for each libvirt driver and can be used to quickly identify failures or regressions in the development of Fedora&#39;s virtualization features.
+			</para>
+			<para>
+				了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtTCK"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://libvirt.org/drivers.html"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section>
+			<title>虚&#x200B;拟&#x200B;化&#x200B;技&#x200B;术&#x200B;预&#x200B;览&#x200B;库&#x200B;</title>
+			<para>
+				为&#x200B;喜&#x200B;欢&#x200B;测&#x200B;试&#x200B;最&#x200B;新&#x200B;虚&#x200B;拟&#x200B;化&#x200B;相&#x200B;关&#x200B;软&#x200B;件&#x200B;包&#x200B;的&#x200B;用&#x200B;户&#x200B;建&#x200B;立&#x200B;了&#x200B;虚&#x200B;拟&#x200B;化&#x200B;预&#x200B;览&#x200B;仓&#x200B;库&#x200B;。&#x200B;本&#x200B;仓&#x200B;库&#x200B;目&#x200B;的&#x200B;主&#x200B;要&#x200B;是&#x200B;为&#x200B;了&#x200B;协&#x200B;助&#x200B;测&#x200B;试&#x200B;和&#x200B;早&#x200B;期&#x200B;实&#x200B;验&#x200B;。&#x200B;并&#x200B;不&#x200B;打&#x200B;算&#x200B;为&#x200B;“&#x200B;生&#x200B;产&#x200B;”&#x200B;部&#x200B;署&#x200B;。&#x200B;
+			</para>
+			<para>
+				了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Virtualization_Preview_Repository"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section>
+			<title>Xen 内&#x200B;核&#x200B;支&#x200B;持&#x200B;</title>
+			<para>
+				Fedora 12 的&#x200B;内&#x200B;核&#x200B;支&#x200B;持&#x200B;作&#x200B;为&#x200B;用&#x200B;户&#x200B;机 domU 引&#x200B;导&#x200B;，但&#x200B;还&#x200B;不&#x200B;能&#x200B;作&#x200B;为 dom0 使&#x200B;用&#x200B;，直&#x200B;到&#x200B;上&#x200B;游&#x200B;内&#x200B;核&#x200B;可&#x200B;提&#x200B;供&#x200B;这&#x200B;种&#x200B;支&#x200B;持&#x200B;。&#x200B;这&#x200B;些&#x200B;工&#x200B;作&#x200B;正&#x200B;在&#x200B;进&#x200B;行&#x200B;，并&#x200B;且&#x200B;很&#x200B;有&#x200B;希&#x200B;望&#x200B;在&#x200B;Fedora 13和&#x200B;2.6.33的&#x200B;核&#x200B;心&#x200B;中&#x200B;得&#x200B;到&#x200B;支&#x200B;持&#x200B;。&#x200B;
+			</para>
+			<para>
+				最&#x200B;早&#x200B;可&#x200B;以&#x200B;支&#x200B;持&#x200B;dom0的&#x200B;Fedora发&#x200B;行&#x200B;版&#x200B;是&#x200B;Fedora 8。&#x200B;
+			</para>
+			<para>
+				在 Fedora 12 主&#x200B;机&#x200B;中&#x200B;引&#x200B;导 Xen domU 用&#x200B;户&#x200B;机&#x200B;需&#x200B;要&#x200B;基&#x200B;于&#x200B;xenner的&#x200B;KVM。&#x200B;Xenner将&#x200B;虚&#x200B;拟&#x200B;机&#x200B;内&#x200B;核&#x200B;和&#x200B;小&#x200B;型&#x200B;Xen模&#x200B;拟&#x200B;器&#x200B;当&#x200B;作&#x200B;KVM的&#x200B;虚&#x200B;拟&#x200B;机&#x200B;一&#x200B;起&#x200B;运&#x200B;行&#x200B;。&#x200B;
+			</para>
+			<important>
+				<title>KVM需&#x200B;要&#x200B;宿&#x200B;主&#x200B;系&#x200B;统&#x200B;有&#x200B;硬&#x200B;件&#x200B;虚&#x200B;拟&#x200B;功&#x200B;能&#x200B;。&#x200B;</title>
+				<para>
+					当&#x200B;前&#x200B;没&#x200B;有&#x200B;硬&#x200B;件&#x200B;虚&#x200B;拟&#x200B;化&#x200B;功&#x200B;能&#x200B;的&#x200B;系&#x200B;统&#x200B;不&#x200B;支&#x200B;持 Xen 虚&#x200B;拟&#x200B;机&#x200B;。&#x200B;
+				</para>
+			</important>
+			<para>
+				了&#x200B;解&#x200B;更&#x200B;多&#x200B;信&#x200B;息&#x200B;请&#x200B;参&#x200B;考&#x200B;： 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://sourceforge.net/projects/kvm"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://kraxel.fedorapeople.org/xenner/"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/XenPvops"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/XenPvopsDom0"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+
+	</section>
+
+</section>
+
+

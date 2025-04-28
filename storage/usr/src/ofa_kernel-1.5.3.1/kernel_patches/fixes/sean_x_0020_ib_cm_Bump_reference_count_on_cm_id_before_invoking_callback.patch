@@ -1,0 +1,34 @@
+ib/cm: Bump reference count on cm_id before invoking
+
+When processing a SIDR REQ, the ib_cm allocates a new cm_id.  The refcount
+of the cm_id is initialized to 1.  However, cm_process_work will
+decrement the refcount after invoking all callbacks.  The result is that
+the cm_id will end up with refcount set to 0 by the end of the sidr req
+handler.
+
+If a user tries to destroy the cm_id, the destruction will proceed, under
+the incorrect assumption that no other threads are referencing the cm_id.
+This can lead to a crash when the cm callback thread tries to access
+the cm_id.
+
+This problem was noticed as part of a larger investigation with kernel
+crashes in the rdma_cm when running on a real time OS.
+
+Signed-off-by: Sean Hefty <sean.hefty@intel.com>
+---
+
+ drivers/infiniband/core/cm.c |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+Index: ofed_kernel-fixes/drivers/infiniband/core/cm.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/core/cm.c	2011-02-27 14:57:28.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/core/cm.c	2011-02-27 14:57:37.000000000 +0200
+@@ -3035,6 +3035,7 @@ static int cm_sidr_req_handler(struct cm
+ 		goto out; /* No match. */
+ 	}
+ 	atomic_inc(&cur_cm_id_priv->refcount);
++	atomic_inc(&cm_id_priv->refcount);
+ 	spin_unlock_irq(&cm.lock);
+ 
+ 	cm_id_priv->id.cm_handler = cur_cm_id_priv->id.cm_handler;

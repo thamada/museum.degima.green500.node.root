@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GnomePixmap</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="GNOME UI Library Reference Manual">
+<link rel="up" href="deprecated.html" title="Deprecated Modules">
+<link rel="prev" href="GnomeMessageBox.html" title="GnomeMessageBox">
+<link rel="next" href="GnomePixmapEntry.html" title="GnomePixmapEntry">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GNOME UI Library (libgnomeui)">
+<link rel="chapter" href="initialization.html" title="Initialization and Session Management">
+<link rel="chapter" href="application-mgmt.html" title="Application Management">
+<link rel="chapter" href="druids.html" title="Druids">
+<link rel="chapter" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="chapter" href="miscellaneous.html" title="Miscellaneous Utility Functions and Macros">
+<link rel="chapter" href="deprecated.html" title="Deprecated Modules">
+<link rel="chapter" href="libgnomeui-objects.html" title="Object Hierarchy">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GnomeMessageBox.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="deprecated.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME UI Library Reference Manual</th>
+<td><a accesskey="n" href="GnomePixmapEntry.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GnomePixmap.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#GnomePixmap.description" class="shortcut">Description</a>
+                 | 
+                <a href="#GnomePixmap.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#GnomePixmap.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GnomePixmap"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GnomePixmap.top_of_page"></a>GnomePixmap</span></h2>
+<p>GnomePixmap</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GnomePixmap.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnomeui/libgnomeui.h&gt;
+
+                    <a class="link" href="GnomePixmap.html#GnomePixmapPrivate" title="GnomePixmapPrivate">GnomePixmapPrivate</a>;
+                    <a class="link" href="GnomePixmap.html#GnomePixmap-struct" title="GnomePixmap">GnomePixmap</a>;
+GtkWidget *         <a class="link" href="GnomePixmap.html#gnome-pixmap-new-from-file" title="gnome_pixmap_new_from_file ()">gnome_pixmap_new_from_file</a>          (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);
+GtkWidget *         <a class="link" href="GnomePixmap.html#gnome-pixmap-new-from-file-at-size" title="gnome_pixmap_new_from_file_at_size ()">gnome_pixmap_new_from_file_at_size</a>  (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> width,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> height);
+GtkWidget *         <a class="link" href="GnomePixmap.html#gnome-pixmap-new-from-xpm-d" title="gnome_pixmap_new_from_xpm_d ()">gnome_pixmap_new_from_xpm_d</a>         (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **xpm_data);
+GtkWidget *         <a class="link" href="GnomePixmap.html#gnome-pixmap-new-from-xpm-d-at-size" title="gnome_pixmap_new_from_xpm_d_at_size ()">gnome_pixmap_new_from_xpm_d_at_size</a> (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **xpm_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> width,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> height);
+GtkWidget *         <a class="link" href="GnomePixmap.html#gnome-pixmap-new-from-gnome-pixmap" title="gnome_pixmap_new_from_gnome_pixmap ()">gnome_pixmap_new_from_gnome_pixmap</a>  (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap);
+void                <a class="link" href="GnomePixmap.html#gnome-pixmap-load-file" title="gnome_pixmap_load_file ()">gnome_pixmap_load_file</a>              (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char *filename);
+void                <a class="link" href="GnomePixmap.html#gnome-pixmap-load-file-at-size" title="gnome_pixmap_load_file_at_size ()">gnome_pixmap_load_file_at_size</a>      (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char *filename,
+                                                         int width,
+                                                         int height);
+void                <a class="link" href="GnomePixmap.html#gnome-pixmap-load-xpm-d" title="gnome_pixmap_load_xpm_d ()">gnome_pixmap_load_xpm_d</a>             (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char **xpm_data);
+void                <a class="link" href="GnomePixmap.html#gnome-pixmap-load-xpm-d-at-size" title="gnome_pixmap_load_xpm_d_at_size ()">gnome_pixmap_load_xpm_d_at_size</a>     (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char **xpm_data,
+                                                         int width,
+                                                         int height);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomePixmap.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"
+>GInitiallyUnowned</a>
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkMisc
+                           +----GtkImage
+                                 +----GnomePixmap
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomePixmap.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GnomePixmap implements
+ GtkBuildable and  AtkImplementorIface.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomePixmap.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomePixmap.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomePixmapPrivate"></a><h3>GnomePixmapPrivate</h3>
+<pre class="programlisting">typedef struct _GnomePixmapPrivate GnomePixmapPrivate;</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomePixmapPrivate</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomePixmap-struct"></a><h3>GnomePixmap</h3>
+<pre class="programlisting">typedef struct _GnomePixmap GnomePixmap;</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomePixmap</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-new-from-file"></a><h3>gnome_pixmap_new_from_file ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_pixmap_new_from_file          (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_new_from_file</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Note that the new_from_file functions give you no way to detect errors;
+if the file isn't found/loaded, you get an empty widget.
+to detect errors just do:
+</p>
+<p>
+&lt;programlisting&gt;
+pixbuf = gdk_pixbuf_new_from_file (filename);
+if (pixbuf != NULL) {
+        gpixmap = gtk_image_new_from_pixbuf (pixbuf);
+} else {
+        // handle your error...
+}
+&lt;/programlisting&gt;</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> The filename of the file to be loaded.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A newly allocated <em class="parameter"><code>GnomePixmap</code></em> with the file at <em class="parameter"><code>filename</code></em> loaded.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-new-from-file-at-size"></a><h3>gnome_pixmap_new_from_file_at_size ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_pixmap_new_from_file_at_size  (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *filename,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> width,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> height);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_new_from_file_at_size</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Loads a new <em class="parameter"><code>GnomePixmap</code></em> from a file, and scales it (if necessary) to the
+size indicated by <em class="parameter"><code>height</code></em> and <em class="parameter"><code>width</code></em>.  If either are set to -1, then the
+"natural" dimension of the image is used in place.  See
+<em class="parameter"><code>gnome_pixmap_new_from_file</code></em> for information on error handling.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td> The filename of the file to be loaded.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>width</code></em> :</span></p></td>
+<td> The width to scale the image to.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>height</code></em> :</span></p></td>
+<td> The height to scale the image to.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> value: A newly allocated <em class="parameter"><code>GnomePixmap</code></em> with the file at <em class="parameter"><code>filename</code></em> loaded.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-new-from-xpm-d"></a><h3>gnome_pixmap_new_from_xpm_d ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_pixmap_new_from_xpm_d         (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **xpm_data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_new_from_xpm_d</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Loads a new <em class="parameter"><code>GnomePixmap</code></em> from the <em class="parameter"><code>xpm_data</code></em>, and scales it (if necessary) to
+the size indicated by <em class="parameter"><code>height</code></em> and <em class="parameter"><code>width</code></em>.  If either are set to -1, then the
+"natural" dimension of the image is used in place.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>xpm_data</code></em> :</span></p></td>
+<td> The xpm data to be loaded.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> value: A newly allocated <em class="parameter"><code>GnomePixmap</code></em> with the image from <em class="parameter"><code>xpm_data</code></em> loaded.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-new-from-xpm-d-at-size"></a><h3>gnome_pixmap_new_from_xpm_d_at_size ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_pixmap_new_from_xpm_d_at_size (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **xpm_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> width,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> height);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_new_from_xpm_d_at_size</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Loads a new <em class="parameter"><code>GnomePixmap</code></em> from the <em class="parameter"><code>xpm_data</code></em>, and scales it (if necessary) to
+the size indicated by <em class="parameter"><code>height</code></em> and <em class="parameter"><code>width</code></em>.  If either are set to -1, then the
+"natural" dimension of the image is used in place.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>xpm_data</code></em> :</span></p></td>
+<td> The xpm data to be loaded.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>width</code></em> :</span></p></td>
+<td> The width to scale the image to.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>height</code></em> :</span></p></td>
+<td> The height to scale the image to.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> value: A newly allocated <em class="parameter"><code>GnomePixmap</code></em> with the image from <em class="parameter"><code>xpm_data</code></em> loaded.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-new-from-gnome-pixmap"></a><h3>gnome_pixmap_new_from_gnome_pixmap ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_pixmap_new_from_gnome_pixmap  (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_new_from_gnome_pixmap</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gpixmap</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-load-file"></a><h3>gnome_pixmap_load_file ()</h3>
+<pre class="programlisting">void                gnome_pixmap_load_file              (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char *filename);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_load_file</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gpixmap</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-load-file-at-size"></a><h3>gnome_pixmap_load_file_at_size ()</h3>
+<pre class="programlisting">void                gnome_pixmap_load_file_at_size      (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char *filename,
+                                                         int width,
+                                                         int height);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_load_file_at_size</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gpixmap</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>width</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>height</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-load-xpm-d"></a><h3>gnome_pixmap_load_xpm_d ()</h3>
+<pre class="programlisting">void                gnome_pixmap_load_xpm_d             (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char **xpm_data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_load_xpm_d</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gpixmap</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>xpm_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-pixmap-load-xpm-d-at-size"></a><h3>gnome_pixmap_load_xpm_d_at_size ()</h3>
+<pre class="programlisting">void                gnome_pixmap_load_xpm_d_at_size     (<a class="link" href="GnomePixmap.html" title="GnomePixmap">GnomePixmap</a> *gpixmap,
+                                                         const char **xpm_data,
+                                                         int width,
+                                                         int height);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_pixmap_load_xpm_d_at_size</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gpixmap</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>xpm_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>width</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>height</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

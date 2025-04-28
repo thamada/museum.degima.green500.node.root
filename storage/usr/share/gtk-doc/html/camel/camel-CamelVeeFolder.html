@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelVeeFolder</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="SearchFolders.html" title="Search Folders">
+<link rel="prev" href="SearchFolders.html" title="Search Folders">
+<link rel="next" href="camel-CamelVeeStore.html" title="CamelVeeStore">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="SearchFolders.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="SearchFolders.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelVeeStore.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelVeeFolder.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelVeeFolder.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelVeeFolder">
+<a name="camel-CamelVeeFolder"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelVeeFolder.top_of_page"></a>CamelVeeFolder</span></h2>
+<p>CamelVeeFolder</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelVeeFolder.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a>;
+#define             <a class="link" href="camel-CamelVeeFolder.html#CAMEL-UNMATCHED-NAME--CAPS" title="CAMEL_UNMATCHED_NAME">CAMEL_UNMATCHED_NAME</a>
+<a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *       <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-new" title="camel_vee_folder_new ()">camel_vee_folder_new</a>                (<a class="link" href="camel-CamelStore.html#CamelStore" title="struct CamelStore">CamelStore</a> *parent_store,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *full,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-construct" title="camel_vee_folder_construct ()">camel_vee_folder_construct</a>          (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelStore.html#CamelStore" title="struct CamelStore">CamelStore</a> *parent_store,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *full,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags);
+<a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *       <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-get-location" title="camel_vee_folder_get_location ()">camel_vee_folder_get_location</a>       (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         const struct _CamelVeeMessageInfo *vinfo,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **realuid);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-add-folder" title="camel_vee_folder_add_folder ()">camel_vee_folder_add_folder</a>         (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-remove-folder" title="camel_vee_folder_remove_folder ()">camel_vee_folder_remove_folder</a>      (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-set-folders" title="camel_vee_folder_set_folders ()">camel_vee_folder_set_folders</a>        (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *folders);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-rebuild-folder" title="camel_vee_folder_rebuild_folder ()">camel_vee_folder_rebuild_folder</a>     (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-set-expression" title="camel_vee_folder_set_expression ()">camel_vee_folder_set_expression</a>     (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *expr);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-mask-event-folder-changed" title="camel_vee_folder_mask_event_folder_changed ()">camel_vee_folder_mask_event_folder_changed</a>
+                                                        (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-unmask-event-folder-changed" title="camel_vee_folder_unmask_event_folder_changed ()">camel_vee_folder_unmask_event_folder_changed</a>
+                                                        (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-hash-folder" title="camel_vee_folder_hash_folder ()">camel_vee_folder_hash_folder</a>        (<a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *folder,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> buffer[8]);
+void                <a class="link" href="camel-CamelVeeFolder.html#camel-vee-folder-sync-headers" title="camel_vee_folder_sync_headers ()">camel_vee_folder_sync_headers</a>       (<a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *vf,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelVeeFolder.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelVeeFolder.details"></a><h2>Details</h2>
+<div class="refsect2" title="CamelVeeFolder">
+<a name="CamelVeeFolder"></a><h3>CamelVeeFolder</h3>
+<pre class="programlisting">typedef struct {
+	CamelFolder parent;
+
+	struct _CamelVeeFolderPrivate *priv;
+
+	gchar *expression;	/* query expression */
+
+	guint32 flags;		/* folder open flags */
+
+	CamelFolderChangeInfo *changes;
+	CamelFolderSearch *search;
+
+	/* only set-up if our parent is a vee-store, used also as a flag to
+	 * say that this folder is part of the unmatched folder */
+	struct _CamelVeeStore *parent_vee_store;
+	GHashTable *hashes;
+	GHashTable *loaded;
+	gboolean deleted;
+} CamelVeeFolder;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_UNMATCHED_NAME">
+<a name="CAMEL-UNMATCHED-NAME--CAPS"></a><h3>CAMEL_UNMATCHED_NAME</h3>
+<pre class="programlisting">#define CAMEL_UNMATCHED_NAME "UNMATCHED"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_new ()">
+<a name="camel-vee-folder-new"></a><h3>camel_vee_folder_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *       camel_vee_folder_new                (<a class="link" href="camel-CamelStore.html#CamelStore" title="struct CamelStore">CamelStore</a> *parent_store,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *full,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags);</pre>
+<p>
+Create a new CamelVeeFolder object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent_store</code></em> :</span></p></td>
+<td> the parent CamelVeeStore
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>full</code></em> :</span></p></td>
+<td> the full path to the vfolder.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td> flags of some kind
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A new CamelVeeFolder widget.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_construct ()">
+<a name="camel-vee-folder-construct"></a><h3>camel_vee_folder_construct ()</h3>
+<pre class="programlisting">void                camel_vee_folder_construct          (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelStore.html#CamelStore" title="struct CamelStore">CamelStore</a> *parent_store,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *full,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> flags);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent_store</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>full</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_get_location ()">
+<a name="camel-vee-folder-get-location"></a><h3>camel_vee_folder_get_location ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *       camel_vee_folder_get_location       (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         const struct _CamelVeeMessageInfo *vinfo,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **realuid);</pre>
+<p>
+Find the real folder (and uid)</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vinfo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>realuid</code></em> :</span></p></td>
+<td> if not NULL, set to the uid of the real message, must be
+g_free'd by caller.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_add_folder ()">
+<a name="camel-vee-folder-add-folder"></a><h3>camel_vee_folder_add_folder ()</h3>
+<pre class="programlisting">void                camel_vee_folder_add_folder         (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);</pre>
+<p>
+Adds <em class="parameter"><code>sub</code></em> as a source folder to <em class="parameter"><code>vf</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td> Virtual Folder object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sub</code></em> :</span></p></td>
+<td> source CamelFolder to add to <em class="parameter"><code>vf</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_remove_folder ()">
+<a name="camel-vee-folder-remove-folder"></a><h3>camel_vee_folder_remove_folder ()</h3>
+<pre class="programlisting">void                camel_vee_folder_remove_folder      (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);</pre>
+<p>
+Removed the source folder, <em class="parameter"><code>sub</code></em>, from the virtual folder, <em class="parameter"><code>vf</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td> Virtual Folder object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sub</code></em> :</span></p></td>
+<td> source CamelFolder to remove from <em class="parameter"><code>vf</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_set_folders ()">
+<a name="camel-vee-folder-set-folders"></a><h3>camel_vee_folder_set_folders ()</h3>
+<pre class="programlisting">void                camel_vee_folder_set_folders        (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *folders);</pre>
+<p>
+Set the whole list of folder sources on a vee folder.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>folders</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_rebuild_folder ()">
+<a name="camel-vee-folder-rebuild-folder"></a><h3>camel_vee_folder_rebuild_folder ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_vee_folder_rebuild_folder     (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Rebuild the folder <em class="parameter"><code>sub</code></em>, if it should be.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td> Virtual Folder object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sub</code></em> :</span></p></td>
+<td> source CamelFolder to add to <em class="parameter"><code>vf</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> Exception.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_set_expression ()">
+<a name="camel-vee-folder-set-expression"></a><h3>camel_vee_folder_set_expression ()</h3>
+<pre class="programlisting">void                camel_vee_folder_set_expression     (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *expr);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_mask_event_folder_changed ()">
+<a name="camel-vee-folder-mask-event-folder-changed"></a><h3>camel_vee_folder_mask_event_folder_changed ()</h3>
+<pre class="programlisting">void                camel_vee_folder_mask_event_folder_changed
+                                                        (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sub</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_unmask_event_folder_changed ()">
+<a name="camel-vee-folder-unmask-event-folder-changed"></a><h3>camel_vee_folder_unmask_event_folder_changed ()</h3>
+<pre class="programlisting">void                camel_vee_folder_unmask_event_folder_changed
+                                                        (<a class="link" href="camel-CamelVeeFolder.html#CamelVeeFolder" title="CamelVeeFolder">CamelVeeFolder</a> *vf,
+                                                         <a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *sub);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sub</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_hash_folder ()">
+<a name="camel-vee-folder-hash-folder"></a><h3>camel_vee_folder_hash_folder ()</h3>
+<pre class="programlisting">void                camel_vee_folder_hash_folder        (<a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *folder,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> buffer[8]);</pre>
+<p>
+Create a hash string representing the folder name, which should be
+unique, and remain static for a given folder.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>folder</code></em> :</span></p></td>
+<td>
+@:
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_vee_folder_sync_headers ()">
+<a name="camel-vee-folder-sync-headers"></a><h3>camel_vee_folder_sync_headers ()</h3>
+<pre class="programlisting">void                camel_vee_folder_sync_headers       (<a class="link" href="camel-CamelFolder.html#CamelFolder" title="struct CamelFolder">CamelFolder</a> *vf,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

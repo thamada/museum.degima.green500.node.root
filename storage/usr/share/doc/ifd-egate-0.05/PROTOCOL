@@ -1,0 +1,70 @@
+[ This was mostly written just as Caskiel and myself were figuring out the
+bulk of how the e-gate communicates.  I've tried to also includes of edits
+of things we've learned since then, but refer to the driver source for how 
+things actually work.  --Phil]
+
+In a nutshell, here's what I think the URB's are:
+
+(note that each packet from the host gets a response with the same packet 
+id# sent back, so the action of the packet with these id's depends on 
+whether the URB is going to the egate or the host, thus the 'Send/Confirm' 
+type notation below)
+
+0x80: Send/Confirm APDU
+0x81: Ask/Send SW or Data (egate -> host)
+0x82: Send/Confirm input data (host -> egate)
+0x90: Reset/Confirm Reset
+0x83: Ask/Send ATR
+0xA0: Ask/Send Transaction Status which has these states (or flags?) - 
+0x10, 0x20, and 0x40
+   0x10: means ready to receive or send APDU data (depending on the APDU type)
+   0x20: means I have a SW
+   0x4X: I'm busy, go away for a while (sleep for about 7.33mS and try again)
+         Note that the 'X' nibble seems to be some sort of rolling progress
+         number which 'spins' as the card is working. E.g. generating a key.
+
+Transactions seem to work like this:
+
+btw-right arrow means to egate, left mean from egate.  Square brackets show 
+the data in the payload section of the packet.
+
+-> 0x90 (Reset) []
+<- 0x90 (Confirm) []
+-> 0x83 (Request ATR) []
+<- 0x83 (ATR) [ATR is here]
+
+-> 0x80 (APDU) [APDU data is here]
+<- 0x80 (Ack APDU receipt) []
+-> 0xA0 (Status Request) []
+<- 0xA0 (Ready for Data) [0x10]
+-> 0x82 (APDU Data) [APDU data is here]
+<- 0x82 (Ack APDU Data receipt) []
+-> 0xA0 (Status Request) []
+<- 0xA0 (Busy! Go away) [0x40]
+-> 0xA0 (Status Request) []
+<- 0xA0 (Busy! Go away) [0x41]
+-> 0xA0 (Status Request) []
+<- 0xA0 (Done! SW ready) [0x20]
+-> 0x81 (Ready for Data) []
+<- 0x81 (Data) [SW is here]
+
+Depending on the APDU, the 0x82 in the above sample transaction could look 
+like this if the APDU is a 'read' vs. a write:
+
+-> 0x81 (Ready to read APDU Data) []
+<- 0x81 (APDU Data) [APDU data is here]
+
+Lastly, the busies are rare, but may happen.  The 0xA0 response of 0x10 may 
+also not happen if the APDU doesn't read or write data.  So, it is possible 
+(and seen) that APDU transactions simply look like this:
+
+-> 0x80 (APDU) [APDU data is here]
+<- 0x80 (Ack APDU receipt) []
+-> 0xA0 (Status Request) []
+<- 0xA0 (Done! SW ready) [0x20]
+-> 0x81 (Ready for Data) []
+<- 0x81 (Data) [SW is here]
+
+
+
+Phil

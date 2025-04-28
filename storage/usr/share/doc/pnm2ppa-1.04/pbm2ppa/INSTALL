@@ -1,0 +1,55 @@
+Overview
+--------
+	This file contains some quick notes on installation in general.  For a
+complete step-by-step instruction on how to install pbm2ppa for your
+printer, please see INSTALL-MORE.  (It was written for the 820, but it
+should work for all supported models) Thanks to Michael Buehlmann for
+writing that guide!
+
+Compilation
+-----------
+	To compile, you should simply run 'make' with the series of your
+printer. This will set the default printer to the HP720 series.
+To specify a different default printyer, the following options are supported:
+
+make 720	# for 720 series - e.g. 722C
+make 820	# for 820 series - e.g. 820Cse
+make 1000	# for 1000 series
+
+	If you choose to recompile for a different default  printer series, 
+you must 'make clean' first.  However, the default printer choice
+selected at compilation time can be overridden with e.g., the 
+"pbm2pppa -v  820 ..."	command line option, or specified by e.g., 
+a "version 820" entry in the /etc/pbm2ppa.conf file.
+Type "pbm2ppa -h" to see the list of options.
+
+Installation
+------------
+	Two binaries are created: pbmtpg and pbm2ppa.  pbmtpg is used to
+calibrate your printer (the default calibrations should work okay,
+but you might want to tweak them).  See the CALIBRATION file for details.
+
+	The other binary created, pbm2ppa, is a converter from a PBM
+image to a stream of PPA data that can be sent directly to the printer.
+The PBM image is expected to be 600 dpi, and the paper size
+can be   8.5"x11" (US Letter), 8.5"x14" (US Legal) or A4.  These files can be
+generated with ghostscript.  Both the pbm and pbmraw devices are supported.
+pbmraw is MUCH faster, so use it if you have it available!
+IMPORTANT: the PAPERSIZE option passed to ghostscript must match
+the paper size specified for pbm2ppa.
+Valid papersizes are: "letter" = "us" , "legal" , and "a4" .
+
+Use
+---
+	To print a postscript file with this program, on US Letter
+paper and a HP 710/720 series printer, I use a simple shell script:
+
+cat $1 | gs -sDEVICE=pbm -q -dNOPAUSE -r600  -sPAPERSIZE=letter -sOutputFile=- - | \
+pbm2ppa -s letter -v 720 - - | lpr -l 
+
+Valid printer versions are "720", "820" and "1000".
+
+	You can also set up a printer filter.  See the documentation for
+your print spooler for information on how to do that, or look in
+hp820install.doc for an example lpd print filter for Postscript and text
+files.

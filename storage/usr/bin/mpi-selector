@@ -1,0 +1,876 @@
+#!/usr/bin/env perl
+#
+# Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
+#
+# Simple perl script to effect system-wide and per-user default
+# selections of which MPI implementation to use.
+#
+
+use strict;
+use Getopt::Long;
+use Text::Wrap;
+use File::Copy;
+
+#===========================================================================
+
+=head1 NAME
+
+mpi-selector - A simple site-wide/per-user MPI selection tool for
+clusters with more than one MPI implementation installed.
+
+=head1 SYNOPSIS
+
+=head2 Commands for end users
+
+mpi-selector [options] --list
+
+mpi-selector [options] --set <name>
+
+mpi-selector [options] --unset
+
+mpi-selector [options] --query
+
+mpi-selector [options] --version
+
+=head2 Commands for MPI implementations
+
+mpi-selector [options] --register <name> --source-dir <dir>
+
+mpi-selector [options] --unregister <name>
+
+=head1 DESCRIPTION
+
+The mpi-selector command is a simplistic tool to select one of
+multiple MPI implementations.  mpi-selector allows system
+administrators to set a site-wide default MPI implementation while
+also allowing users to set their own default MPI implementation
+(thereby overriding the system-wide default).
+
+Note that both the site-wide and per-user defaults are independent
+from each other; a system administrator may choose not to have a
+site-wide default while a user may choose to have a personal default
+-- and vice versa.
+
+The system is effected by having system-wide shell startup files that
+looks first at the user's MPI preferences.  If found, the MPI
+implementation indicated by the user's preferences is setup in the
+current environment.  If not found, look for a site-wide default.  If
+found, the MPI implementation indicated in by the site-wide default is
+setup in the current environment.  If not found, exit silently.
+
+=head2 End Users / System Administrators
+
+The mpi-selector command provides four main actions:
+
+=over
+
+=item * List which MPI implementations are available
+
+=item * Set a default (either on a per-user or site-wide basis)
+
+=item * Unset a default (either on a per-user or site-wide basis)
+
+=item * Query what the current default is
+
+=back
+
+A common scenario is that a system administrator sets a site-wide
+default for a supported MPI implementation that most users will use.
+Power users then change their per-user defaults to use a different MPI
+implementation.
+
+Another common scenario is for power users to frequently use
+mpi-selector to swap back and forth between multiple different MPI
+implementations.
+
+B<NOTE:> The mpi-selector command only changes the defaults for I<new>
+shells.  Specifically, after you invoke the mpi-selector command to
+change the default MPI implementation, this change does not take
+effect until you start a new shell.  This is intentional.  See the
+"KNOWN LIMITATIONS" section, below.
+
+=head2 MPI Implementations
+
+MPI implementations register themselves with mpi-selector when they
+are installed and unregister themselves when they are uninstalled.
+Each MPI installation provides two files that setup the environment
+for itself:
+
+=over
+
+=item * mpivars.sh: File sourceable by Bourne-like shells (sh, bash,
+etc.)
+
+=item * mpivars.csh: File sourceable by C-like shells (csh, tcsh,
+etc.)
+
+=back
+
+These files are expected to be in a single directory and "registered"
+with mpi-selector using the I<--register> and I<--source-dir> options.
+mpi-selector will copy these files to its own internal store; it is
+safe to remove the originals after the mpi-selector registration
+completes successfully.
+
+The <name> argument to I<--register> must be simplistic -- it cannot
+contain any shell special characters (not even if they are escaped),
+nor can it contain spaces.  The intent is to provide simple names that
+users can type without escaping or quoting.  Names not conforming to
+these rules will be rejected and the registration will fail.
+
+When an MPI implementation is uninstalled, it should unregister with
+mpi-selector via the I<--unregister> option.
+
+=head1 OPTIONS
+
+--list: List which MPI implementations are available
+
+--no: Assume "no" to any interactive questions asked.
+
+--query: See what the current default is.  If specified with no
+options, whichevery default has precedence -- if any -- will be
+shown.  If specified with I<--user>, only show the per-user default
+(if there is one).  If specified with I<--system>, only show the
+site-wide default (if there is one).
+
+--register: Register a new MPI implementation.  Must be
+combined with the I<--source-dir> option.
+
+--set <name>: Set the default MPI implementation.  May be combined
+with I<--system> or I<--user> (I<--user> is the default and does not
+need to be specified).
+
+--source-dir: Specify the location where F<mpivars.*> files
+should be copied from.  Only meaningful when used with the
+I<--register> option.
+
+--system: When used with I<--set> or I<--unset>, specifies to work
+with the site-wide default (vs. the per-user default).  When used with
+I<--query>, it specifies to specifically query the site-wide default.
+
+--unregister: Unregister an MPI implementation.
+
+--user: When used with I<--set> or I<--unset>, specifies to work with
+the per-user default (vs. the site-wide default).  When used with
+I<--query>, it specifies to specifically query the per-user default.
+
+--unset: Unset the default MPI implementation.  May be combined with
+I<--system> or I<--user> (I<--user> is the default and does not need
+to be explicitly specified).
+
+--verbose: Be verbose.
+
+--version: Return the version of mpi-selector.
+
+--yes: Assume "yes" to any interactive questions asked.
+
+=head1 EXAMPLES
+
+=head2 Examples for End Users / System Administrators
+
+The four main actions that system administrators and end users invoke
+are: listing which MPI implementations are available, setting a
+default, unsetting a default, and querying what the current default
+is.
+
+=head3 Listing which MPI implementations are available
+
+The I<--list> option to the mpi-selector command shows a simple list
+of which MPI implementations are available:
+
+  shell$ mpi-selector --list
+  mympi-1.2.3
+  mympi-4.5.6
+  othermpi-7.8.9
+  shell$
+
+=head3 Setting a default
+
+By default, MPI selections are performed on a per-user basis with the
+I<--set> option, using a name from the list of available MPI
+implementations (which can be obtained via the I<--list> command):
+
+  shell$ mpi-selector --set mympi-4.5.6
+  shell$
+
+Note that the default takes effect in the I<next> shell that is
+started; it does B<NOT> take effect in the current shell!
+
+If a default MPI is already set, setting a new default will cause an
+interactive confirmation prompt.  This interactive prompt can be
+avoided by using the I<--yes> option, which assumes a "yes" answer to
+all questions:
+
+  shell$ mpi-selector --set mympi-4.5.6
+  shell$ mpi-selector --set mympi-4.5.6 --yes
+  shell$
+
+If the I<--system> option is used, the site-wide default is modified
+instead of the per-user default.  Since this option typically reqires
+writing files into protected areas, root access may be required.
+
+  shell# mpi-selector --set mympi-4.5.6 --system
+  shell#
+
+=head3 Unsetting a default
+
+Unset the current default with the I<--unset> option:
+
+  shell$ mpi-selector --unset
+  shell$
+
+Similar to I<--set>, the I<--system> option can be used to unset the
+site-wide default
+
+  shell# mpi-selector --unset --system
+  shell#
+
+=head3 Querying what the current default is
+
+The I<--query> option can be used to see what the current MPI
+implementation is (more specifically, what the MPI implementation
+I<will be> for the next shell that is started).  It indicates both
+which MPI is the default and at what level the default was set
+(per-user vs. site-wide):
+
+  shell$ mpi-selector --set mympi-1.2.3
+  shell$ mpi-selector --query
+  default:mympi-1.2.3
+  level:user
+  shell$
+
+Note that if there is no per-user default, the system default will be
+shown:
+
+  shell# mpi-selector --set othermpi-7.8.9 --system
+
+  shell$ mpi-selector --unset
+  shell$ mpi-selector --query
+  default:othermpi-7.8.9
+  level:system
+  shell$ mpi-selector --set mympi-1.2.3
+  shell$ mpi-selector --query
+  default:mympi-1.2.3
+  level:user
+  shell$
+
+If there is no per-user default and no site-wide default, I<--query>
+will return silently:
+
+  shell$ mpi-selector --query
+  shell$
+
+=head2 Examples for MPI Implementations
+
+Registering and unregistering typically writes files into protected
+areas, and therefore usually requires root access.
+
+If there are no MPI implementations registered, I<--list> will return
+silently:
+
+  shell# mpi-selector --list
+  shell#
+
+An MPI with mpivars.sh and mpivars.csh in /opt/mympi/bin can be
+registered as follows:
+
+  shell# mpi-selector --register mympi-1.2.3 \
+         --source-dir /opt/mympi/bin
+  shell# mpi-selector --list
+  mympi-1.2.3
+  shell#
+
+Note that re-registering the same <name> will cause an interactive
+confirmation prompt; the I<--yes> option can be supplied to assume
+"yes" to all questions asked:
+
+  shell# mpi-selector --list
+  mympi-1.2.3
+  shell# mpi-selector --register mympi-1.2.3 \
+         --source-dir /opt/mympi/bin --yes
+  mympi-1.2.3 is already registered.
+  Overwriting previously registered files.
+  shell# mpi-selector --list
+  mympi-1.2.3
+  shell#
+
+Unregistering is also simple:
+
+  shell# mpi-selector --list
+  mympi-1.2.3
+  shell# mpi-selector --unregister mympi-1.2.3
+  shell# mpi-selector --list
+  shell#
+
+=head2 Registering and Unregistering in RPMs
+
+Registering and unregistering via RPM is unfortunately more
+complicated than it needs to be because of the following issues:
+
+1. Although RPM obeys dependency ordering of "rpm -i a b c".  That is,
+   F<c> will be installed before F<a> if F<a> requires F<c>.
+   Regardless, RPM's must know a) that the mpi-selector command is
+   installed, and b) be able to find it in its path.
+
+2. RPM does not obey dependency ordering of "rpm -e a b c".  That is,
+   F<c> may be uninstalled before F<a>, even if F<a> requires F<c>.
+   Hence, the mpi-select command may disappear before an RPM using the
+   mpi-select command in a scriptlet is uninstalled.
+
+3. "Updating" RPMs will first uninstall the old RPM and then
+   re-install the new one.
+
+Additionally, the staged installations (such as the OFED installer)
+require telling the mpi-selector command additional information so
+that various internal data files can be found.
+
+In general, MPI installations via RPMs should register during the
+%post scriptlet and unregister during the %preun scriptlet (I<not>
+during the %postun scriptlet!).
+
+If RPMs "require" the mpi-selector RPM, they can be assured that the
+mpi-selector command will exist and be installed properly, but they
+still need to be able to find mpi-selector in their PATH.  Hence, if
+mpi-selector is not installed into a default PATH location, the %post
+scriptlet won't be able to find it, and the registration call will
+fail.  The simplest workaround (at least for the moment) is to set the
+PATH to where mpi-selector is installed before installing any RPMs
+that use it.
+
+With that in mind, here is a possible %post scriptlet for
+OFED-installed RPMS:
+
+  mpi-selector --register <name> --source-dir <source_dir> \
+      --yes --silent
+
+Note the following:
+
+1. The I<--yes> option forces an overwrite if, for some reason, a
+   previous MPI of the name name is already registered.
+
+2. The I<--silent> option makes mpi-selector run silently, since RPMs
+   are supposed to install with no output.
+
+Here is a possible %preun scriptlet for OFED-installed RPMs:
+
+  mpi-selector --unregister <name> --yes || \
+      /bin/true > /dev/null 2> /dev/null
+
+Note the following:
+
+1. We use %preun instead of %postun because of RPM's upgrade behavior.
+
+2. Since RPM does not honor dependencies when uninstalling, it is
+   possible that mpi-selector is no longer installed, and therefore
+   the command may fail.  However, since mpi-selector is no longer
+   installed, we don't care that it failed (i.e., there's nothing to
+   unregister from), so just redirect all output to F</dev/null> and
+   ensure that the return code from the overall command is "true" (RPM
+   will abort if any individual scriptlet command fails).
+
+=head1 KNOWN LIMITATIONS
+
+The main known limitation of mpi-selector is that it only affects
+I<future> shells -- running it does not affect the I<current> shell.
+After you run mpi-selector to set a new default MPI (regardless of
+whether it is a system-level or user-specific default), that default
+will not take effect until you start a new shell -- even though
+I<--query> will report the new default.
+
+This behavior is because mpi-selector defaults are I<only> read during
+shell startup.  It was an intentional design decision -- mpi-selector
+is intended to be a simplistic tool, and an all-encompassing solution.
+
+Other solutions for modifying the current environment exist, such as
+the Environment Modules package (L<http://modules.sourceforge.net/>)
+and SoftEnv from Argonne National Laboratory (and probably others).
+Using these tools, you can immediately change the environment of the
+current shell (to include switching to use a different MPI
+implementation).  As such, these already-existing, mature tools are
+better suited for such usage patterns; mpi-selector is not intended to
+replace them.
+
+For rsh/ssh-based parallel environments, switching defaults frequently
+should be done with care.  Specifically, rsh/ssh-based launchers may
+depends on a common environment across all nodes (e.g., to find helper
+executables and/or libraries for a specific MPI).  Consider the
+following example:
+
+  shell$ mpi-selector --set mympi-1.2.3
+  shell$ mpicc my_mpi_app.c -o my_mpi_app
+  shell$ mpirun -np 32 --hostfile myhosts my_mpi_app
+
+While F<my_mpi_app> is starting, it may be dangerous to switch the
+mpi-selector default (perhaps in a different window) because the rsh
+and/or ssh commands currently executing may be relying on finding the
+same MPI implementation on all nodes.  Changing the default I<while>
+the application is launching may cause a different MPI implementation
+to be found on some nodes, thereby causing undefined behavior.
+
+=head1 FILES
+
+$HOME/.mpi-selector Location of per-user default selection
+
+/etc/sysconfig/mpi-selector Location of
+site-wide default selection.
+
+/var/mpi-selector/data/data Directory containing registered MPI
+shell startup files.
+
+=head1 AUTHOR
+
+Written by Jeff Squyres.
+
+=head1 REPORTING BUGS
+
+Send bug reports to the OpenFabrics general mailing list (see
+L<http://www.openfabrics.org/>).  This is a high-volume mailing list,
+so be sure to put "mpi-selector" in the subject to ensure that it is
+not missed.
+
+=head1 COPYRIGHT
+
+Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
+
+This is free software; see the source for copying conditions.  There
+is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+
+=cut
+
+#===========================================================================
+
+# Global variables
+
+my $data_dir = "/var/mpi-selector/data";
+my $sysconfig_dir = "/etc/sysconfig";
+
+my $sysconfig_file = "mpi-selector";
+my $home_file = ".mpi-selector";
+my $mpivars_basename = "mpivars";
+
+
+#===========================================================================
+
+sub show_help {
+    our $silent;
+    my $ret = shift;
+
+    print "$0 options:
+
+Options for MPI implementations:
+
+--register <name>     Register an MPI implementation with the central
+                      mpi-selector database.  Requires use of the
+                      --source-dir option.
+--source-dir <dir>    Used with --register, indicating that <dir> is
+                      where mpivars.sh and mpivars.csh can be found.
+--unregister <name>   Remove an MPI implementation list from the
+                      central mpi-selector database.
+
+Options for system administrators:
+
+--system              When used with the --set and --unset options,
+                      act on the system-wide defaults (vs. the
+                      per-user defaults).  When used with --query, only 
+                      show the site-wide default (if there is one).
+--user                When used with the --set and --unset options,
+                      act on the per-user defaults (vs. the
+                      site-wide defaults).  When used with --query, only 
+                      show the per-user default (if there is one).
+
+Options for users:
+
+--list                Show a list of the currently registered MPI
+                      implementations.
+--set <name>          Set <name> to be the default MPI selection.
+--unset               Remove the default MPI selection.
+--query               Shows the current default MPI selection.
+--yes                 Assume the answer is \"yes\" to any question.
+--no                  Assume the answer is \"no\" to any question.
+--verbose             Be verbose about actions.
+--silent              Print nothing (not even warnings or errors;
+                      overrides --verbose)
+--version             Display the version of $0.
+"
+      if (!$silent);
+    exit($ret);
+}
+
+#===========================================================================
+
+sub make_safe_filename {
+    my $name = shift;
+    $name =~ s/[ :\/\\\*\&\$\#\@\!\t\n\[\]\{\}\(\)]/_/g;
+    return $name;
+}
+
+#===========================================================================
+
+sub error {
+    our $silent;
+    print STDERR wrap("ERROR: ", "       ", @_) . "\n"
+      if (!$silent);
+    exit(1);
+}
+
+
+sub warning {
+    our $silent;
+    print STDERR wrap("WARNING: ", "         ", @_) . "\n"
+      if (!$silent);
+}
+
+
+sub verbose {
+    our $silent;
+    our $verbose_flag;
+    print wrap("", "", @_) . "\n"
+      if ($verbose_flag && !$silent);
+}
+
+#===========================================================================
+
+sub get_yn {
+    my $prompt = shift;
+    my $default = shift;
+
+    if (defined($default)) {
+        if ($default) {
+            $default = 1;
+            $prompt .= " (Y/n) ";
+        } else {
+            $default = 0;
+            $prompt .= " (y/N) ";
+        }
+    } else {
+        $prompt .= " (y/n/) ";
+    }
+
+    while (1) {
+        print $prompt;
+        my $ans = <STDIN>;
+        chomp($ans);
+        if ($ans =~ /y/i) {
+            return 1;
+        } elsif ($ans =~ /n/i) {
+            return 0;
+        } elsif ("" eq $ans) {
+            return $default 
+              if (defined($default));
+        }
+        print "\nPlease choose Y or N\n";
+    }
+}
+
+#===========================================================================
+
+sub do_query {
+    my $file = shift;
+    my $level = shift;
+
+    if (-f $file) {
+        open(FILE, $file);
+        my $name = <FILE>;
+        close(FILE);
+        
+        chomp($name);
+        print "default:$name\nlevel:$level\n";
+        exit(0);
+    }
+}
+
+#===========================================================================
+
+# Set autoflush
+select STDOUT;
+$| = 1;
+
+# Module options
+$Text::Wrap::columns = 76;
+&Getopt::Long::Configure("bundling");
+
+my $help = 0;
+my $register;
+my $source_dir;
+my $unregister;
+my $system = 0;
+my $user = 0;
+my $list = 0;
+my $set;
+my $unset;
+my $yes;
+my $query = 0;
+our $verbose_flag = 0;
+my $version = 0;
+my $no;
+our $silent = 0;
+
+my $ok = Getopt::Long::GetOptions("help|h" => \$help,
+                                  "register=s" => \$register,
+                                  "source-dir=s" => \$source_dir,
+                                  "unregister=s" => \$unregister,
+                                  "system" => \$system,
+                                  "user" => \$user,
+                                  "list" => \$list,
+                                  "set=s" => \$set,
+                                  "unset" => \$unset,
+                                  "query" => \$query,
+                                  "yes|y" => \$yes,
+                                  "verbose" => \$verbose_flag,
+                                  "version" => \$version,
+                                  "no" => \$no,
+                                  "silent" => \$silent,
+                                  );
+
+show_help(1) if (!$ok);
+show_help(0) if ($help);
+$yes = 0
+  if (defined($no));
+error("Can only specify one of --user or --system; not both")
+    if ($user + $system > 1);
+
+#---------------------------------------------------------------------------
+
+# Check for bozo case -- this is a simple script, so let's limit to
+# one action at a time
+
+my $val = defined($register) + defined($unregister) + $list + 
+  defined($set) + defined($unset) + $query + $version;
+if (0 == $val) {
+    print("Nothing to do!\n")
+      if (!$silent);
+    show_help(0);
+}
+if (1 != $val) {
+    print("ERROR: Please only specify one action\n")
+      if (!$silent);
+    show_help(1);
+}
+
+#---------------------------------------------------------------------------
+
+# Version informtion
+
+if ($version) {
+    print "$0 version 1.0.3
+
+Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Written by Jeff Squyres.\n"
+      if (!$silent);
+    exit(0);
+}
+
+#---------------------------------------------------------------------------
+
+# Registration
+
+elsif ($register) {
+    # Check to be sure that they also specified a --source-dir
+    error("--register must be used in conjunction with --source-dir")
+      if (!defined($source_dir));
+
+    # Make sure that the source dir exists
+    error("Cannot read from source directory ($source_dir)")
+      if (! -d $source_dir);
+
+    # Look for the target files in the source dir
+    error("Cannot find both $mpivars_basename.sh and $mpivars_basename.csh in source directorty ($source_dir)")
+      if (! (-f "$source_dir/$mpivars_basename.sh" && 
+             -f "$source_dir/$mpivars_basename.csh"));
+
+    # Only allow simple names, just for simplicity
+    my $mpi_name = make_safe_filename($register);
+    error("Please use a simple registration name that is also valid as a filename; avoid shell meta characters that would need to be escaped (\"$register\" is not suitable)")
+      if ($mpi_name ne $register);
+
+    # Ensure data directory exists
+    if (! -d $data_dir) {
+        system("mkdir -p $data_dir");
+        error("Cannot make mpi-selector data directory ($data_dir)") 
+          if (! -d $data_dir);
+    }
+
+    # See if there's already registered files for this MPI
+    if (-f "$data_dir/$mpi_name.sh" || -f "$data_dir/$mpi_name.csh") {
+        verbose("$mpi_name is already registered.");
+        if (defined($yes)) {
+            if (!$yes) {
+                verbose("NOT overwriting previously registered files");
+                exit(0);
+            }
+        } else { 
+            my $ans = get_yn("Overwrite the previously registered files?", 0);
+            if (!$ans) {
+                verbose("Did NOT overwrite previous files");
+                exit(0);
+            }
+            verbose("Overwriting previously registered files");
+        }
+    }
+
+    # Copy the files over
+    verbose("Registering $mpivars_basename from $source_dir");
+    copy("$source_dir/$mpivars_basename.sh", "$data_dir/$mpi_name.sh") ||
+      error("Unable to copy $mpivars_basename.sh from $source_dir to $data_dir -- aborting");
+    copy("$source_dir/$mpivars_basename.csh", "$data_dir/$mpi_name.csh") ||
+      error("Unable to copy $mpivars_basename.csh from $source_dir to $data_dir -- aborting");
+}
+
+#---------------------------------------------------------------------------
+
+# Unregistration
+
+elsif ($unregister) {
+    # Only allow simple names, just for simplicity
+    my $mpi_name = make_safe_filename($unregister);
+    if ($mpi_name ne $unregister) {
+        error("Please use a simple registration name that is also valid as a filename; avoid shell meta characters that would need to be escaped (\"$register\" is not suitable)");
+    }
+
+    # If the data directory does not exist, there's nothing to do
+    error("Could not find $mpi_name files registered")
+      if (! -d $data_dir);
+
+    # Look for the files in the data directory
+    if (-f "$data_dir/$mpi_name.sh" || -f "$data_dir/$mpi_name.csh") {
+        verbose("Unregistering $mpi_name");
+        unlink("$data_dir/$mpi_name.sh");
+        unlink("$data_dir/$mpi_name.csh");
+
+        warning("Unable to unregister $mpi_name.sh -- file not removed!")
+          if (-f "$data_dir/$mpi_name.sh");
+    } else {
+        warning("No files found to unregister for $mpi_name -- aborting");
+    }
+}
+
+#---------------------------------------------------------------------------
+
+# Listing
+
+elsif ($list) {
+    exit(0)
+      if ($silent);
+
+    if (-d $data_dir) {
+        opendir(DIR, "$data_dir") ||
+          error("Cannot open mpi-selector data directory ($data_dir)");
+        my @names = grep { -f "$data_dir/$_" } readdir(DIR);
+        closedir(DIR);
+
+        # Strip off the .sh/.csh endings
+        my $index;
+        foreach my $n (@names) {
+            $n =~ s/\.sh$//;
+            $n =~ s/\.csh$//;
+            $index->{$n} = 1;
+        }
+        # Sort and print out what's left
+        foreach my $n (sort(keys(%$index))) {
+            print "$n\n";
+        }
+    }
+}
+
+#---------------------------------------------------------------------------
+
+# Setting
+
+elsif ($set) {
+    my $file;
+
+    # Check to see if the specified files exist
+    error("MPI \"$set\" does not seem to be registered -- aborting")
+      if (! -f "$data_dir/$set.sh" && ! -f "$data_dir/$set.csh");
+
+    # Double check that *both* of them exist
+    error("MPI \"$set\" seems to be damaged in the mpi-selector respository (missing one of the shell files).  Default setting not changed.")
+      if (! -f "$data_dir/$set.sh" || ! -f "$data_dir/$set.csh");
+
+    # Which default are we changing?
+    if ($system) {
+        verbose("Setting system-wide default: $set");
+        $file = "$sysconfig_dir/$sysconfig_file";
+        # Ensure that the directory exists
+        system("mkdir -p $sysconfig_dir")
+          if (! -d $sysconfig_dir);
+        error("Could not make mpi-selector defaults directory ($sysconfig_dir)")
+          if (! -d $sysconfig_dir);
+    } else {
+        verbose("Setting user-specific default: $set");
+        $file = "$ENV{HOME}/$home_file";
+    }
+
+    # If the file already exist, prompt if they want to overwrite it
+    if (-f $file) {
+        if (defined($yes)) {
+            if (!$yes) {
+                verbose("NOT overwriting pre-existing default");
+                exit(0);
+            }
+        } else {
+            my $ans = get_yn("Defaults already exist; overwrite them?", 0);
+            if (!$ans) {
+                verbose("Defaults NOT overwritten");
+                exit(0);
+            }
+        }
+        verbose("Overwriting pre-existing default");
+    }
+
+    # Write it
+    open(FILE, ">$file") ||
+      error("Could not write to defaults file ($file) -- aborting");
+    print FILE "$set\n";
+    close(FILE);
+}
+
+#---------------------------------------------------------------------------
+
+# Unsetting
+
+elsif ($unset) {
+    # If system, unlink the sysconfig file
+    if ($system) {
+        verbose("Removing system-wide default");
+        unlink("$sysconfig_dir/$sysconfig_file") ||
+          error("Unable to remove the mpi-selector defaults file! ($sysconfig_dir/$sysconfig_file)");
+        exit(0);
+    }
+
+    # Otherwise, we're unsetting user-level defaults.  So unlink the
+    # file under $HOME
+    my $file;
+    $file = "$ENV{HOME}/$home_file";
+    if (-f $file) {
+        verbose("Removing user-specific default");
+        unlink($file) ||
+          error("Unable to remove user-level default file! ($file)");
+    }
+}
+
+#---------------------------------------------------------------------------
+
+# Querying
+
+elsif ($query) {
+    exit(0)
+      if ($silent);
+
+    my $files = {
+        user => "$ENV{HOME}/$home_file",
+        system => "$sysconfig_dir/$sysconfig_file",
+    };
+
+    do_query($files->{user}, "user")
+        if ($user || !$system);
+    do_query($files->{system}, "system")
+        if ($system || !$user);
+}
+
+# Should never get here
+exit(0);

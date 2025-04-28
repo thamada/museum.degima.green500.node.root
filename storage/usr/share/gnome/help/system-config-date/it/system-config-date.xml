@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="it"><title>Strumento delle proprietà di data e ora</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2007-11-22</date><revremark>Revisione iniziale</revremark></revision><revision><revnumber>1.0.1</revnumber><date>2008-01-17</date><revremark>DocBook XML convalidato correttamente</revremark></revision><revision><revnumber>1.0.2</revnumber><date>2008-01-18</date><revremark>Riassunto esterno al documento</revremark></revision><revision><revnumber>1.0.3</revnumber><date>2008-03-12</date><revremark>Usare elementi del menu a scelta dove possibile</revremark></revision></revhistory><abstract role="description"><para>Lo <application>Strumento delle proprietà di data e ora</application> consente agli utenti di cambiare la data e l'ora di sistema, per configurare il fuso orario usato dal sistema e per impostare il demone Network Time Protocol (NTP) per sincronizzare l'orologio di sistema con un server di orario.</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup><copyright><year>2009. Mario Santagiuliana &lt;mario at marionline.it&gt;, 2009.</year><holder>Pierro Silvio (perplesso82 at gmail.com)</holder></copyright></articleinfo><indexterm significance="normal"><primary><command>timetool</command>
+		</primary><see>Strumento delle proprietà di data e ora</see></indexterm><para>Lo <application>Strumento delle proprietà di data e ora</application> consente agli utenti di cambiare la data e l'ora di sistema, per configurare il fuso orario usato dal sistema e per impostare il demone Network Time Protocol (NTP) per sincronizzare l'orologio di sistema con un server di orario.</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>Strumento delle proprietà di data e ora</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>Strumento delle proprietà di data e ora</see></indexterm><indexterm significance="normal"><primary><command>dateconfig</command> 
+        </primary><see>Strumento delle proprietà di data e ora</see></indexterm><para>Il sistema <application>X Window</application> deve essere in esecuzione e si debbono possedere i privilegi di root per usare lo strumento delle proprietà di data e ora. Ci sono tre modi per avviare l'applicazione:</para><itemizedlist><listitem><para>Dal desktop, andare sul <menuchoice><guimenu>menu principale del pannello (il menu con l'icona "f")</guimenu><guisubmenu>Sistema</guisubmenu><guisubmenu>Amministrazione</guisubmenu><guimenuitem>Data e ora</guimenuitem></menuchoice></para></listitem><listitem><para>Dal desktop, fare click con il tasto destro sull'ora nella barra degli strumenti e selezionare <guimenuitem>Regola data e ora</guimenuitem>.</para></listitem><listitem><para>Inserire il comando <command>system-config-date</command>, <command>system-config-time</command>, o <command>dateconfig</command> nel prompt di shell (per esempio in un <application>XTerm</application> oppure un terminale di <application>GNOME</application>).</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>Proprietà data e ora</title><indexterm significance="normal"><primary>configurazione ora</primary></indexterm><indexterm significance="normal"><primary>configurazione data</primary></indexterm><para>Come mostrato in <xref linkend="dateconfig-ntp"/>, la prima scheda della finestra che appare serve per la configurazione della data e ora di sistema</para><figure float="0" id="dateconfig-time-date"><title>Proprietà data e ora</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>Proprietà data e ora</para></textobject></mediaobject></figure><para>Per cambiare la data, usare le frecce verso destra e sinistra attorno al mese per cambiare mese, usare le frecce verso destra e sinistra attorno all'anno per cambiare anno e fare click sul giorno del mese per cambiare il giorno del mese.</para><para>Per cambiare l'ora, usare le frecce verso sopra e sotto vicino l'<guilabel>ora</guilabel>, <guilabel>Minuti</guilabel> e <guilabel>Secondi</guilabel> nella sezione <guilabel>ora</guilabel>.</para><para>Alternativamente è possibile utilizzare la tastiera per modificare data ed ora. Utilizzare <keycap>Tab</keycap> e <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> per spostarsi tra i widget. All'interno del calendario è possibile utilizzare <keycombo><keycap>Ctrl</keycap><keycap>Up</keycap></keycombo> e <keycombo><keycap>Ctrl</keycap><keycap>Down</keycap></keycombo> per modificare l'anno, <keycombo><keycap>Ctrl</keycap><keycap>Left</keycap></keycombo> e <keycombo><keycap>Ctrl</keycap><keycap>Right</keycap></keycombo> per modificare il mese, le freccie direzionali e <keycap>Space</keycap> per scegliere ed impostare una data. Nei campi di ora, minuti e secondi utilizzare <keycap>Up</keycap> e <keycap>Down</keycap> per modificare i valori.</para><para>Facendo click sul tasto <guibutton>OK</guibutton>, verranno applicate le modifiche alla data e ora, alle impostazioni del demone NTP e alle impostazioni del fuso orario. Inoltre il programma verrà chiuso.</para></section>
+	<section id="s1-dateconfig-ntp"><title>Proprietà del Network Time Protocol (NTP)</title><indexterm significance="normal"><primary>configurazione ora</primary><secondary>sincronizza con il server NTP</secondary></indexterm><indexterm significance="normal"><primary>Network Time Protocol</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>configurazione</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para>Come mostrato in <xref linkend="dateconfig-ntp"/>, la seconda scheda della finestra che appare serve per configurare l'NTP.</para><figure float="0" id="dateconfig-ntp"><title>Proprietà NTP</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>Proprietà NTP</para></textobject></mediaobject></figure><para>Il demone Network Time Protocol (NTP) sincronizza l'orologio di sistema con un server remoto o una fonte temporale. L'applicazione consente di configurare un demone NTP per sincronizzare il sistema con un server remoto. Per abilitare questa opzione, selezionare <guibutton>Abilitare il Network Time Protocol</guibutton>. Ciò abilita la lista di <guilabel>Server NTP</guilabel> e altre opzioni. È possibile selezionare uno dei server preferiti, modificare un server predefinito facendo click sul tasto <guibutton>Modifica</guibutton> o aggiungere un nuovo nome server facendo click su <guibutton>Aggiungi</guibutton>. Il sistema non inizia la sincronizzazione con il server NTP se non viene premuto il tasto <guibutton>OK</guibutton>. Dopo aver premuto il tasto <guibutton>OK</guibutton>, la configurazione viene salvata e viene avviato il demone NTP (o riavviato se già in esecuzione).</para><para>Facendo click sul tasto <guibutton>OK</guibutton>, verranno applicate le modifiche alla data e ora, alle impostazioni del demone NTP e alle impostazioni del fuso orario. Inoltre il programma verrà chiuso.</para></section>
+	<section id="s1-dateconfig-time-zone"><title>Configurazione fuso orario</title><indexterm significance="normal"><primary>configurazione fuso orario</primary></indexterm><para>Come mostrato in <xref linkend="dateconfig-ntp"/>, la terza scheda della finestra che appare serve per configurare il fuso orario.</para><para>Per configurare il fuso orario di sistema, selezionare la scheda <guilabel>Fuso orario</guilabel>. Il fuso orario di sistema può essere cambiato sia usando la mappa interattiva sia selezionando il fuso orario desiderato dalla lista sotto la mappa. Per usare la mappa, fare click su di essa per selezionare la città che indica il fuso orario. Apparirà una <guilabel>X</guilabel> rossa e il fuso orario cambierà nella lista sotto la mappa. È possibile usare lo slider alla destra della mappa per cambiare lo zoom.</para><para>In alternativa, è possibile usare la lista sotto la mappa. Allo stesso modo con cui la mappa fa selezionare una zona prima di scegliere una città, le città e i paesi raggruppati all'interno dei loro continenti. Fusi orari non geografici sono inoltre stati aggiunti agli indirizzi necessari alla comunità scientifica.</para><para>Premere <guibutton>OK</guibutton> per applicare i cambiamenti e uscire dal programma.</para><figure float="0" id="dateconfig-timezone"><title>Proprietà fuso orario</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>Proprietà fuso orario</para></textobject></mediaobject></figure><para>Se l'orologio di sistema è impostato per usare UTC, selezionare l'opzione <guibutton>L'orologio di sistema usa UTC</guibutton>. UTC stà per  <firstterm>Universal Time, Coordinated</firstterm> (Ora Universale Coordinata), meglio nota come Meridiano di Greenwich (GMT). Gli altri fusi orari sono determinati aggiungendo o sottraendo dall'ora UTC.</para></section>
+</article>

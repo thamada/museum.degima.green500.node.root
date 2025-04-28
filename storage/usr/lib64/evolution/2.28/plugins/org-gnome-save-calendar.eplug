@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e-plugin-list>
+    <e-plugin type="shlib" location="/usr/lib64/evolution/2.28/plugins/liborg-gnome-save-calendar.so" id="org.gnome.evolution.save_calendar" name="Save Selected"> 
+	    <author name="Rodrigo Moya" email="rodrigo@novell.com"/>
+		<description>Save a calendar or task list to disk.</description>
+	
+		<hook class="org.gnome.evolution.calendar.popup:1.0">
+			<menu target="source" id="org.gnome.evolution.tasks.source.popup">
+				<item type="item" path="14.save_tasks" icon="document-save" activate="org_gnome_save_tasks" label="_Save to Disk"></item>
+			</menu>
+
+			<menu target="source" id="org.gnome.evolution.calendar.source.popup">
+				<item type="item" path="14.save_calendar" icon="document-save" activate="org_gnome_save_calendar" label="_Save to Disk"></item>
+			</menu>
+
+			<menu target="source" id="org.gnome.evolution.memos.source.popup">
+				<item type="item" path="14.save_memos" icon="document-save" activate="org_gnome_save_memos" label="_Save to Disk"></item>
+			</menu>
+		</hook>
+	</e-plugin>
+</e-plugin-list>

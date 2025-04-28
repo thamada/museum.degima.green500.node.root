@@ -1,0 +1,92 @@
+	     Open Fabrics Enterprise Distribution (OFED)
+		    mthca in OFED 1.5 Release Notes
+			  
+			   December 2009
+
+
+===============================================================================
+Table of Contents
+===============================================================================
+1. Overview
+2. Fixed Bugs since OFED 1.3.1
+3. Bug fixes and enhancements since OFED 1.4
+4. Known Issues
+
+===============================================================================
+1. Overview
+===============================================================================
+mthca is the low level driver implementation for the following Mellanox
+Technologies HCAs: InfiniHost, InfiniHost III Ex and InfiniHost III Lx.
+
+mthca Available Parameters
+--------------------------
+In order to set mthca parameters, add the following line to /etc/modpobe.conf:
+
+	options ib_mthca parameter=<value>
+
+mthca parameters:
+	catas_reset_disable:	disable reset on catastrophic event if nonzero
+				(int)
+	fw_cmd_doorbell:	post FW commands through doorbell page if
+				nonzero (and supported by FW) (int)
+	debug_level:		Enable debug tracing if > 0 (int)
+	msi_x:			attempt to use MSI-X if nonzero (int)
+	tune_pci:		increase PCI burst from the default set by BIOS if nonzero (int)
+	num_qp:			maximum number of QPs per HCA (int)
+	rdb_per_qp:		number of RDB buffers per QP (int)
+	num_cq:			maximum number of CQs per HCA (int)
+	num_mcg:		maximum number of multicast groups per HCA (int)
+	num_mpt:		maximum number of memory protection table entries per HCA (int)
+	num_mtt:		maximum number of memory translation table segments per HCA (int)
+	num_udav:		maximum number of UD address vectors per HCA (int)
+	fmr_reserved_mtts:	number of memory translation table segments reserved for
+				FMR (int)
+	log_mtts_per_seg:	Log2 number of MTT entries per segment (1-5) (int)
+
+===============================================================================
+2. Fixed Bugs
+===============================================================================
+- Fix access to freed memory in catastrophic processing
+  catas_reset() uses pointer to mthca_dev, but mthca_dev is not valid after
+  call __mthca_restart_one().
+
+
+===============================================================================
+3. Bug fixes and enhancements since OFED 1.4
+===============================================================================
+- Added a module parameter (log_mtts_per_seg) for number of MTTs per segment. 
+  This enable to register more memory with the same number of segments.
+- Bring INIT_HCA and other commands timeout into consistency with PRM. This 
+  solve an issue when had more than 2^18 max qp's configured.
+
+===============================================================================
+4. Known Issues
+===============================================================================
+1. A UAR size other than 8MB prevents mthca driver loading. The default UAR
+   size is 8MB. If the size is changed, the following error message will be
+   logged to /var/log/messages upon attempting to load the mthca driver:
+   ib_mthca 0000:04:00.0: Missing UAR, aborting.
+
+2. If a user level application using multicast receives a control signal
+   in the process of detaching from a multicast group, its QP may remain a
+   member of the multicast group (in HCA).
+   Workaround: Destroy the multicast group after detaching the QP from it.
+
+3. In mem-free devices, RC QPs can be created with a maximum of (max_sge - 1)
+   entries only; UD QPs can be created with a maximum of (max_sge - 3) entries.
+
+4. Performance can be degraded due to a wrong BIOS configuration:
+   The PCI Express specification requires the BIOS to set the MaxReadReq
+   register for each HCA card for maximum performance and stability. 
+
+   If you experience bandwidth performance degradation, try forcing the card to
+   behave not according to the PCI Express specification by setting the
+   tune_pci=1 module parameter. This tune_pci=1 assignment was the default
+   setting in OFED 1.0; therefore, it may have masked performance degradation
+   on some systems.
+
+   If tune_pci=1 improves bandwidth, please report the issue to your BIOS
+   vendor. Please note that Mellanox Technologies does not recommend using
+   tune_pci=1 in production systems: working with tune_pci=1 set is untested
+   and is known to trigger instability issues on some platforms.
+

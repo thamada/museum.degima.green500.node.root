@@ -1,0 +1,222 @@
+.TH mpiexec 1 "3/8/2011" " " "MPI"
+.SH NAME
+mpiexec \-  Run an MPI program 
+.SH SYNOPSIS
+.nf
+.fi
+.nf
+mpiexec args executable pgmargs [ : args executable pgmargs ... ]
+.fi
+
+where 
+.I args
+are command line arguments for 
+.I mpiexec
+(see below),
+.I executable
+is the name of an executable MPI program, and 
+.I pgmargs
+are command line arguments for the executable.  Multiple executables
+can be specified by using the colon notation (for MPMD - Multiple Program
+Multiple Data applications).
+
+.SH STANDARD PARAMETERS
+
+
+.PD 0
+.TP
+.B -n num 
+- number of processes
+.PD 1
+.PD 0
+.TP
+.B -host hostname 
+- name of a host (machine, system) on which to run
+.PD 1
+.PD 0
+.TP
+.B -arch architecture_name 
+- name of the computer architecture required
+for this executable
+.PD 1
+.PD 0
+.TP
+.B -wdir working_directory 
+- The working directory to use when running the 
+executable (set before the executable starts)
+.PD 1
+.PD 0
+.TP
+.B -path pathlist 
+- use this to find the executable
+.PD 1
+.PD 0
+.TP
+.B -soft list 
+- comma separated triplets specifying valid numbers of processes
+.PD 1
+.PD 0
+.TP
+.B -file name 
+- implementation-defined specification file
+.PD 1
+.PD 0
+.TP
+.B -configfile name 
+- file containing specifications of host/program, 
+one per line, with # as a comment indicator, e.g., the usual
+mpiexec input, but with ":" replaced with a newline.  That is,
+the configfile contains lines with 
+.I -soft
+, 
+.I -n
+etc.
+.PD 1
+
+
+.SH ENVIRONMENT VARIABLES
+The following environment variables affect the behavior of 
+.I mpiexec
+:
+.PD 0
+.TP
+.B MPIEXEC_UNIVERSE_SIZE 
+- Sets the maximum number of processes to allow.
+.PD 1
+.PD 0
+.TP
+.B MPIEXEC_TIMEOUT 
+- Maximum running time in seconds.  
+.I mpiexec
+will
+terminate MPI programs that take longer than the value specified by
+.I MPIEXEC_TIMEOUT
+\&.
+This version of 
+.I mpiexec
+(forker process manager)
+sets a default timelimit of 3 minutes (180 seconds) since the forker
+process manager is intended for debugging applications.
+.PD 1
+.PD 0
+.TP
+.B MPIEXEC_PREFIX_DEFAULT 
+- If this environment variable is set, output
+to standard output is prefixed by the rank in 
+.I MPI_COMM_WORLD
+of the 
+process and output to standard error is prefixed by the rank and the 
+text 
+.I (err)
+; both are followed by an angle bracket (
+.I >
+).  If
+this variable is not set, there is no prefix.
+.PD 1
+.PD 0
+.TP
+.B MPIEXEC_PREFIX_STDOUT 
+- Set the prefix for output from standard output.
+This is a string containing text and (optionally) the expression 
+.I %d
+;
+if 
+.I %d
+is seen, it is replaced by the rank in 
+.I MPI_COMM_WORLD
+of the 
+process.  If there is more than one 
+.I MPI_COMM_WORLD
+; for example, 
+if 
+.I MPI_Comm_spawn
+is used, the expression 
+.I %w
+is replaced with a
+numeric 
+.B world number
+, assigned by 
+.I mpiexec
+\&.
+The expression 
+.I %%
+
+produces a single percent character.
+.PD 1
+.PD 0
+.TP
+.B MPIEXEC_PREFIX_STDERR 
+- Like 
+.I MPIEXEC_PREFIX_STDOUT
+, but for output from
+standard error.
+.PD 1
+.PD 0
+.TP
+.B MPIEXEC_STDIN_DEST 
+- Sets the destination process for input from standard in,
+by rank in the corresponding 
+.I MPI_COMM_WORLD
+\&.
+
+.PD 1
+.PD 0
+.TP
+.B MPIEXEC_STDOUTBUF 
+- Sets the buffering mode for standard output.  Valid
+values are 
+.I NONE
+(no buffering), 
+.I LINE
+(buffering by lines), and
+.I BLOCK
+(buffering by blocks of characters; the size of the block is
+implementation defined).  The default is 
+.I NONE
+\&.
+
+.PD 1
+.PD 0
+.TP
+.B MPIEXEC_STDERRBUF 
+- Like 
+.I MPIEXEC_STDOUTBUF
+, but for standard error.
+.PD 1
+
+Note that the 
+.I MPIEXEC_PREFIX_xxx
+and 
+.I MPIEXEC_STDIN_DEST
+variables
+are not fully implemented.
+
+.SH STARTUP ENVIRONMENT
+All of the users environment variables are provided to each of the
+created processes.  This is not required by the MPI standard, but
+is often very convenient.
+
+.SH RETURN STATUS
+.I mpiexec
+returns the maximum of the exit status values of all of the
+processes created by 
+.I mpiexec
+\&.
+
+
+.SH NOTES
+A few additional enviroment variables are defined for the use of
+developers and in debugging.  These are
+
+.PD 0
+.TP
+.B MPIEXEC_DEBUG 
+- If set, 
+.I mpiexec
+will write additional information
+about the steps that it is taking.
+.PD 1
+
+
+.SH LOCATION
+mpiexec.txt

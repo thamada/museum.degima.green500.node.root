@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<chapter id="ipc-network">
+  <title>IPC and Networking</title>
+
+<section id="clipboard">
+  <title>Schránka a přetahování</title>
+
+  <para>Se stále se zvyšující frekvencí používání a množstvím dat v různých aplikací narlstá potřeba sdílet objekty a data mezi aplikacemi. GNOME podporuje metody pro přenos dat mezi aplikacemi: operace související s přetahováním a kopírování/vkládání pomocí schránky dostupné napříč systémem. Obojí pracuje napříč mnoha aplikacemi včetně takových, které nepocházejí z projektu GNOME.</para>
+
+  <para>Pokud uživatel kopíruje nějaká data z aplikace, použije se schránka, jejíž vlastnictví si aplikace následně nastaví. Když pak uživatel použije funkci vložení do jiné aplikace, tato aplikace si vyžádá data ze schránky s vlastnictvím první. Práce se schránkou je plně podporována v GTK+.</para>
+
+  <para>Drag and drop operations are similar, but they require the pointer
+  to be tracked and updated as the user moves across potential drop targets.
+  When an application is notified a pointer is moving over it during an
+  active drag, it must update the cursor to indicate whether or not it can
+  accept the drop.  GTK+ provides drag and drop support with a sophisticated
+  API that makes it easy to manage drop targets in your applications.</para>
+
+  <para>Jak schránka tak operace přetahování podporují domluvu o formátu obsahu. Aplikace poskytující data zároveň uvádí informace o dostupných formátech. Aplikace, do které datap utují si může zažádat o nejvhodnější formát. Například při kopírování textu y prohlížeče WWW může textový procesor zpracovat formátování prostřednictvím jazyka HTML zatímco textový editor může obdržet data jako čistý text, bez formátování.</para>
+
+  <para>Meli byste umožnit použití přetažení a schránky pro všechna data se kterými vaše aplikace pracuje. Tyto funkce jsou užitečé nejen pro text: soubory, obrázky a zvuky jsou příklady dat, která lze mezi aplikacemi přenášet. Pokud používáte GTK+, získáváte tím automaticky podporu schránky a přetahování pro všechna textová pole, tlačítka, výběry souborů a ostatní obsažené ovládací prvky rozhraní. Tato API byste měli použít pro jakákoliv data aplikací zpracovávaná.</para>
+
+  <para>Více informací popisují dokumenty  <ulink url="http://www.newplanetsoftware.com/xdnd/">Drag-and-Drop Protocol for the X Window System</ulink>, <ulink url="http://standards.freedesktop.org/clipboards-spec/clipboards-latest.txt">X Clipboard Explanation</ulink> a <ulink url="http://freedesktop.org/wiki/ClipboardManager">The Clipboard Manager Specification</ulink>.</para>
+</section>
+
+<section id="dbus">
+  <title>D-BUS Messaging</title>
+
+  <para>D-Bus is a cross-desktop message bus for sending events between
+  various applications, the desktop, and low-level components of the system.
+  D-Bus provides a simple API for sending messages to particular services
+  and for broadcasting messages to all interested services.  D-Bus enables
+  different types of applications to communicate and integrate with each
+  other and with the desktop, providing better interaction and a richer
+  experience for the user.</para>
+
+  <para>D-Bus provides a session and a system bus.  The session bus is
+  used by applications in a single user session, allowing them to share
+  data and event notifications and to integrate into the user's desktop.
+  For example, movie players can send a D-Bus message to prevent the
+  screensaver from activating when the user is watching a movie.</para>
+
+  <para>The system bus is a single message bus which runs independently of
+  any user sessions.  It can communicate with applications in any session,
+  enabling those applications to interact with system components without
+  dealing with low-level system details.  The system bus is used to provide
+  important functionality that users expect to work on their systems.  For
+  example, the system bus is used to monitor when network interfaces go up
+  or down, when external drives get plugged in, and when laptop batteries
+  are low.</para>
+
+  <para>Technologie D-Bus je společně vyvíjena v rámci projektu <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink>, proto ji můžete použít v různých pracovních prostředích a aplikacích. Protože se jedná o projekt nezávislý na konkrétním pracovním prostředí, můžete technologii využít ke tvorbě přenostileného a všestraného software, který lze hladce integorvat s pracovním prostředím uživatele, nezávisle na tom, o jaké se jedná.</para>
+
+  <para>Více informací o technologii D-Bus popisují dokumenty <ulink url="http://dbus.freedesktop.org/doc/dbus-tutorial.html">Tutoriál D-BUS</ulink> a <ulink url="http://dbus.freedesktop.org/doc/dbus-specification.html">Specifikace D-BUS</ulink>.</para>
+</section>
+
+<section id="bonobo-corba">
+  <title>Bonobo a CORBA</title>
+
+  <para>Bonobo je framework pro tvorbu komponent použitelných v aplikacích. Je postaven na průmyslovém standardu Common Object Request Broker Architecture (CORBA), díky čemuž poskytuje všechny nezbytná rozhraní pro tvorbu a použití "vychovaných" komponent v aplikacích GNOME.</para>
+
+  <para>Komponenty Bonobo mohou být použity v různých situacích a mohou pomoci vytvořit flexibilní a rozšiřitelný software. Příkladem může být komponenta pro přehrávání multimédií, kterou lze vložit do textového procesoru. Efektivně tak lze přidat podporu multimédií aniž s nimi umí aplikace přímo pracovat. Komponenty Bonobo se také využívají pro vkládání appletů do panelu v GNOME, to umožňuje appletům efektivne komunikovat s panelem aniž by byla z pohledu uživatele porušena konzistence rozhraní.</para>
+
+  <para>Komponenty Bonobo nejsou ale omezeny jen na grafické ovládací prvky, využívá jich například Evolution, klient elektornické pošty a nástroj groupware pro GNOME, pro přístup k adresáři a kalendáři uživatele. Díky tomu mohou být uloženy všechny informace na jednom místě a ostatní plikace k nim mohou přistupovat.</para>
+
+  <para>Bonobo is built off of CORBA, allowing components to run in seperate
+  processes.  Components can be written in different languages and run on top
+  of different runtimes; they need only adhere to an interface specified with
+  the Interface Definition Language (IDL).  CORBA's flexible design even allows
+  components to run on seperate machines over a network.</para>
+
+  <para>GNOME poskytuje vlastní rychlou a odlehčenou implementaci COBRA. Nástroje a knihovny dodávané s GNOME dokonce umožňují efektivní psaní komponent v jazyce C, který je často jinými implementacemi COBRA opomíjen. ORBit je úžasně rychlou implementací COBRA.</para>
+
+  <para>Bonobo helps fill the gaps in CORBA, providing the additional
+  interfaces and specifications needed to support consistent components.
+  Although you will rarely need to use CORBA without Bonobo, it can be
+  used directly.  For instance, GNOME's accessibility infastructure uses
+  CORBA to allow assistive tools to inspect and interact with running
+  applications.</para>
+
+  <para>Možná byste chtěli použít Bonobo pro vkládání komplexních grafických komponent do aplikací. Pro většinu potřeb IPC však GNOME postupně přechází na technologii D-Bus, protože její integrace s aplikacemi je považována za jednodušší.</para>
+
+  <para>Více informací o frameworku Bonobo popisuje <ulink url="http://library.gnome.org/devel/libbonobo/stable/">Referenční příručka Libbonobo</ulink> a <ulink url="http://library.gnome.org/devel/libbonoboui/stable/">Referenční příručka LibbonoboUI</ulink>. Další informace týkající se technologie ORBit, implementaci COBRA pro GNOME, obsahuje <ulink url="http://library.gnome.org/devel/ORBit2/stable/">Referenční příručka ORBit2</ulink>.</para>
+</section>
+
+<section id="dns-sd">
+  <title>Zjišťování služeb</title>
+
+  <para>Zjišťování služby DNS, neboli Zeroconf, je technologie umožňující automatické nalezení dostupných služeb v síti. Zeroconf umožňuje uživatelům přistupovat ke zdrojům na síti bez zadání konkrétní adresy nebo nastavování aplikací ručně.</para>
+
+  <para>Zjišťování služby DNS je již používáno na mnoha místech napříč GNOME a v budoucnu je plánováno přidání další podpory. Například <application>Nautilus</application>, správce souborů pro GNOME, používá Zjišťování služby DNS k vyhledání různých souborových serverů v místní síti. <application>Ekiga</application>, aplikace umožňující v GNOME telefonování a videokonference, umožňuje pomocí Zjišťování služby DNS zveřejnit přítomnost uživatele v místní síti stejně jako vyhledat ostatní uživatele.</para>
+
+  <para>Full DNS Service Discovery support is provided by the Avahi library.
+  For more information on Avahi, visit <ulink url="http://avahi.org/">the
+  Avahi web site</ulink>.</para>
+</section>
+
+<section id="xml-web-services">
+  <title>XML a služby WWW</title>
+
+  <para>V dnešním stále více se propojujícím světě potřebuje stále více a více aplikací poskytovat podporu pro různé služby WWW. Někdy služby WWW jen přidávají nějakou funkcionalitu navíc, jindy jsou klíčové pro celou palikaci. Dokonce i aplikace, které po dlouhá léta fungovaly samostatně, našly nová inovativní použití služeb WWW.</para>
+
+  <para>Platforma GNOME poskytuje podporu pro použití služeb WWW ve vašich aplikacích a stejně tak kompletní knihovny pro zpracování, správu a transformaci XML, jazyk WWW.</para>
+
+  <section id="libsoup">
+    <title>SOAP</title>
+
+    <para>With the libsoup library, GNOME provides support for the SOAP,
+    a widely-used protocol for passing XML messages over HTTP.  SOAP allows
+    developers to expose an interface over the web, which can then be used
+    by applications to retrieve information, send data, make transactions,
+    or use any number of other services provided.</para>
+
+    <para>SOAP can be used to search and retrieve information, to interact
+    with an online store, to manage users' accounts on other systems, or for
+    many other purposes.  Web services are being used more and more to provide
+    essential functionality for users, and applications using SOAP can provide
+    a more integrated and featureful user experience.</para>
+
+    <para>The libsoup library contains an HTTP implementation and a set of
+    API for constructing and consuming SOAP messages.  It also allows for
+    secure authentication, so you can use web services to access private
+    accounts over a secure connection. Using libsoup makes it easy to use
+    web services without manually parsing and interpreting the messages
+    sent through SOAP.</para>
+
+    <para>Více informací o libsoup popisuje stránka <ulink url="http://library.gnome.org/devel/libsoup/stable/">libsoup Reference Manual</ulink>.</para>
+  </section>
+
+  <section id="libxml2">
+    <title>XML Processing</title>
+
+    <para>Since its formal introduction in 1998, XML (eXtensible Markup
+    Langauge) has been used in increasingly more applications.  It is used
+    for a wide variety of purposes, from document formats like XHMTL and
+    DocBook to internet protocols like SOAP and Jabber.  XML provides a
+    clean and simple base syntax, allowing applications to focus on their
+    particular needs.</para>
+
+    <para>GNOME ships with the libxml2 library, and uses it extensively
+    throughout the desktop.  The libxml2 library is a fast and fully
+    standards-compliant XML processing library, providing everything you
+    need to use XML in your application.</para>
+
+    <para>The libxml2 library provides a number of different APIs for
+    working with XML, so you can use whatever best suits your application
+    development needs.  In addition to a native tree API, libxml2 also
+    provides the callback-based SAX2 API, streaming XML reader and writer
+    interfaces, and complete support for XPath.</para>
+
+    <para>In addition to DTD support, libxml2 also provides full support
+    for validing documents using RELAX NG, which allows a more flexible
+    validation model while remaining simple to use.  There is also partial
+    support for XML Schema, the new schema language produced by W3C.</para>
+
+    <para>You should use libxml2 whenever you need to work directly with
+    XML in your application.  Using libxml2 ensures that you have fully
+    standards-compliant parsing, processing, and XML output.  This means
+    developers can stop worrying about incompatibilities between
+    applications.</para>
+
+    <para>For more information on libxml2, see <ulink url="http://xmlsoft.org/tutorial/index.html">The Libxml Tutorial</ulink>
+    and <ulink url="http://xmlsoft.org/html/libxml-lib.html">The Reference
+    Manual for libxml2</ulink>.</para>
+  </section>
+
+  <section id="libxslt">
+    <title>Transforming XML with XSLT</title>
+
+    <para>XSLT is an XML-based language for transforming XML into other
+    formats.  XSLT is a template-based language, allowing you to match
+    particular types of XML elements and create output accordingly.
+    Based on XML and XPath, XSLT enables developers to create clean and
+    modularized templates to convert an XML dialect into another format
+    more suitable for the application.</para>
+
+    <para>GNOME ships with the libxslt library, a complete implementation of
+    XSLT.  The libxslt library is built on top of the XML and XPath support
+    in libxml2, allowing it to be fast and fully standards-compliant.</para>
+
+    <para>You should use libxslt if you need to transform XML documents.
+    Although XSLT is not always the right solution for XML processing, it
+    can often simplify development.  Since libxslt allows you to add extension
+    elements and extension functions, you can customize it to fit your
+    application.</para>
+
+    <para>Další informace o libxslt obsahuje referenční příručka <ulink url="http://xmlsoft.org/XSLT/html/index.html">The XSLT C library for Gnome</ulink>.</para>
+  </section>
+</section>
+
+</chapter>

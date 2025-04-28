@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+
+<section id="sect-Release_Notes-Fedora_12_Boot_Time">
+	<title>Fedora 12 Boot Time</title>
+	<remark>This beat is located here: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Boot">https://fedoraproject.org/wiki/Docs/Beats/Boot</ulink></remark>
+	
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-ext4">
+		<title>GRUB with ext4 support</title>
+
+		<para>
+			Fedora&nbsp;9 originally included experimental support for ext4 and Fedora&nbsp;11 included ext4 by default. However, <application>GRUB</application> in that version did not support ext4 and hence required a separate boot partition formatted as ext3 or ext2. Fedora&nbsp;12 now includes a updated version of <application>GRUB</application> with ext4 support. <application>Anaconda</application> (the Fedora installer) will permit this as well.
+		</para>
+	</section>
+
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-Dracut">
+		<title>Dracut &mdash; new booting system</title>
+
+		<para>
+			Up until Fedora&nbsp;10, the boot system (<firstterm>initial ram disk</firstterm> or <firstterm>initrd</firstterm>) used to boot Fedora was monolithic, very distribution-specific and did not provide much flexibility. This will be replaced with <application>Dracut</application>, an initial ram disk with an event-based framework designed to be distribution-independent. It has been also adopted by the Fedora-derived OLPC project's XO operating system. OLPC modules for <application>Dracut</application> are available in the Fedora repository. Early feedback and testing is welcome.
+		</para>
+	</section>
+
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-KMS">
+		<title>Faster and smoother graphical startup</title>
+
+		<para>
+			<firstterm>Kernel Mode Setting</firstterm> (KMS) is now enabled by default on NVIDIA systems as well, through the <application>Nouveau</application> driver. Fedora&nbsp;10 originally included support for KMS, but only for some ATI display cards. In Fedora&nbsp;11, this was extended to Intel cards as well. This release has extended it further to support NVIDIA cards as well.
+		</para>
+
+		<para>
+			As as result of this improvement, you will get a faster and smoother graphical boot on nearly all systems, via the <application>plymouth</application> graphical boot system developed within Fedora.
+		</para>
+	</section>
+
+</section>
+
+

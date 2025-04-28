@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="sv"><title>Verktyg för tid- och datumegenskaper</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2007-11-22</date><revremark>Ursprunglig version</revremark></revision><revision><revnumber>1.0.1</revnumber><date>2008-01-17</date><revremark>Få DocBook-XML att validera ordentligt</revremark></revision><revision><revnumber>1.0.2</revnumber><date>2008-01-18</date><revremark>Gör dokumentsammanfattningen extern</revremark></revision><revision><revnumber>1.0.3</revnumber><date>2008-03-12</date><revremark>Använd menyvalselement där det är tillämpbart</revremark></revision></revhistory><abstract role="description"><para><application>Verktyg för tid- och datumegenskaper</application> låter användaren ändra systemets datum och tid, konfigurera tidszonen systemet använder och att ställa in nätverkstidsprotokolldemonen (NTP) till att synkronisera systemklockan med en tidserver.</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup><copyright><year>2009.</year><holder>Göran Uddeborg (goeran@uddeborg.se)</holder></copyright></articleinfo><indexterm significance="normal"><primary><command>timetool</command>
+		</primary><see>Verktyg för tid- och datumegenskaper</see></indexterm><para><application>Verktyg för tid- och datumegenskaper</application> låter användaren ändra systemets datum och tid, konfigurera tidszonen systemet använder och att ställa in nätverkstidsprotokolldemonen (NTP) till att synkronisera systemklockan med en tidserver.</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>Verktyg för tid- och datumegenskaper</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>Verktyg för tid- och datumegenskaper</see></indexterm><indexterm significance="normal"><primary><command>dateconfig</command> 
+        </primary><see>Verktyg för tid- och datumegenskaper</see></indexterm><para>Du måste köra fönstersystemet <application>X</application> och ha rootpriviliger för att använda verktyget för tid- och datumegenskaper.  Det finns tre sätt att starta programmet:</para><itemizedlist><listitem><para>Från skrivbordet, gå till <menuchoice><guimenu>huvudmenyn på panelen (menyn med "f"-ikonen)</guimenu><guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Datum och tid</guimenuitem></menuchoice></para></listitem><listitem><para>Från skrivbordet, högerklicka på tiden i verktygsraden och välj <guimenuitem>Justera datum och tid</guimenuitem>.</para></listitem><listitem><para>Skriv kommandot <command>system-config-date</command>, <command>system-config-time</command> eller <command>dateconfig</command> vid en skalprompt (till exempel, i en <application>XTerm</application> eller en <application>GNOME</application>-terminal).</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>Tid och datumegenskaper</title><indexterm significance="normal"><primary>tidskonfiguration</primary></indexterm><indexterm significance="normal"><primary>datumkonfiguration</primary></indexterm><para>Som visas i <xref linkend="dateconfig-time-date"/> är det första flikfönstret som dyker upp till för att konfigurera sytemets datum och tid.</para><figure float="0" id="dateconfig-time-date"><title>Tid och datumegenskaper</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>Tid och datumegenskaper</para></textobject></mediaobject></figure><para>För att ändra datum, använd pilarna till vänster och höger om månaden för att ändra månad, pilarna till vänster och höger om året för att åndra år och klicka på veckodagen för att ändra veckodag.</para><para>För att ändra tiden, använd upp- och nerpilknapparna bredvid <guilabel>Timme</guilabel>, <guilabel>Minut</guilabel> och <guilabel>Sekund</guilabel> i avdelningen <guilabel>Tid</guilabel>.</para><para>Alternativt kan du använda tangentbordet för att ändra datum och tid.  Använd <keycap>tab</keycap> och <keycombo><keycap>skift</keycap><keycap>tab</keycap></keycombo> för att flytta mellan widgetar.  I kalender-widgeten kan du använda <keycombo><keycap>ctrl</keycap><keycap>upp</keycap></keycombo> och <keycombo><keycap>ctrl</keycap><keycap>ner</keycap></keycombo> för att ändra året, <keycombo><keycap>ctrl</keycap><keycap>vänster</keycap></keycombo> och <keycombo><keycap>ctrl</keycap><keycap>höger</keycap></keycombo> för att ändra månaden och och piltangenterna och <keycap>mellanslag</keycap> för att välja och ställa in ett datum.  I tim-, minut- och sekund-widgetarna, används <keycap>upp</keycap> och <keycap>ner</keycap> för att ändra värdena.</para><para>Att klicka på knappen <guibutton>OK</guibutton> verkställer eventuella ändringar gjorda av datum och tid, NTP-demoninställningar och tidzonsinställningar.  Det avslutar också programmet.</para></section>
+	<section id="s1-dateconfig-ntp"><title>Egenskaper för nätverkstidsprotokoll (NTP)</title><indexterm significance="normal"><primary>tidskonfiguration</primary><secondary>synkronisera med NTP-server</secondary></indexterm><indexterm significance="normal"><primary>Nätverkstidsprotokoll</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>konfigurering</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para>Som visas i </para><figure float="0" id="dateconfig-ntp"><title>NTP-egenskaper</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>NTP-egenskaper</para></textobject></mediaobject></figure><para>Demonen för nätverkstidsprotokollet (NTP) synkroniserar systemklockan med en fjärrtidserver eller tidkälla.  Programmet låter dig konfigurera en NTP-demon att synkronisera din systemklocka med en fjärrserver.  För att aktivera denna funktion väljs <guibutton>Använd nätverkstidsprotokoll</guibutton>.  Detta aktiverar listan <guilabel>NTP-servrar</guilabel> och andra valmöjligheter.  Du kan välja en av de fördefinierade servrarna, redigera en fördefinierad server genom att klicka på <guibutton>Redigera</guibutton> eller lägga till ett nytt servernamn genom att klicka på <guibutton>Lägg till</guibutton>.  Ditt system börjar inte synkronisera med NTP-servern förrän du klickar på <guibutton>OK</guibutton>.  Efter att du klickat på <guibutton>OK</guibutton> sparas konfigurationen och NTP-demonen startas (eller startas om ifall den redan kör).</para><para>Att klicka på knappen <guibutton>OK</guibutton> verkställer eventuella ändringar gjorda av datum och tid, NTP-demoninställningar och tidzonsinställningar.  Det avslutar också programmet.</para></section>
+	<section id="s1-dateconfig-time-zone"><title>Tidzonskonfiguration</title><indexterm significance="normal"><primary>tidzonskonfiguration</primary></indexterm><para>Som visas i </para><para>För att konfigurera systemtidzonen, klicka på fliken <guilabel>Tidzon</guilabel>.  Tidzonen kan ändras antingen genom att använda den interaktiva kartan eller genom att välja den önskade tidzonen från listan nedanför kartan.  För att använda kartan klickar man i den för att välja den stad som anger din tidzon.  Ett rött <guilabel>X</guilabel> dyker upp och valet av tidzon ändras i listan nedanför kartan.  Du kan använda skjutreglaget till vänster om kartan för att ändra zoomnivå.</para><para>Alternativt kan du också använda listan nedanför kartan.  På samma sätt som kartan låter dig välja en region före valet av stad är listan av tidzoner nu en trädlista, med städer och länder grupperade inom sina respektive kontinenter.  Ej geografiska tidzoner har också lagts till för att möta vetenskapliga behov.</para><para>Klicka på <guibutton>OK</guibutton> för att verkställa ändringarna och avsluta programmet.</para><figure float="0" id="dateconfig-timezone"><title>Tidzonegenskaper</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>Tidzonegenskaper</para></textobject></mediaobject></figure><para>Om din systemklocka är satt att använda UTC, välj då alternativet <guibutton>Systemklockan använder UTC</guibutton>.  UTC står för <firstterm>Universal Time, Coordinated</firstterm>, även känt som Greenwich Mean Time (GMT).  Andra tidzoner definieras genom att lägga till eller ta bort från UTC-tiden.</para></section>
+</article>

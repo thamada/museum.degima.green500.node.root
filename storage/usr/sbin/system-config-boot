@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export PYTHONPATH=/usr/share/system-config-boot
+if [ -n "$DISPLAY" -a -f ${PYTHONPATH}/system-config-boot.py ]; then
+    exec /usr/bin/python /usr/share/system-config-boot/system-config-boot.py "$@"
+else
+    exec /usr/bin/python /usr/share/system-config-boot/system-config-boot-tui.py "$@"
+fi

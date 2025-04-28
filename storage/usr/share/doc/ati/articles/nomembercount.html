@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Using the ATI Proprietary Linux Driver</TITLE>
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><TABLE bgcolor="#FFFFFF"><TR><TD>
+
+<FONT SIZE=+1>
+<P><B>&quot;structure has no member named `count'&quot; message during RPM install</B></P>
+</FONT>
+
+<p>This issue affects the following system configurations:</p>
+<ul>
+<li>ATI Proprietary Linux Driver 3.9.0 or earlier</li>
+<li>Linux kernel version 2.6.6 and later</li>
+</ul>
+
+<p>Current Fedora Core and Mandrake Linux distributions use 2.6.6 and later kernels. Other distributions may also be affected.</p>
+
+During an rpm installation, and again whenever <a href="4484.html">running make.sh to compile the fglrx kernel module</a>, the following message will appear:
+
+<pre>
+/lib/modules/fglrx-3.7.6/build_mod/2.6.x/agpgart_be.c: In function `agp_generic_alloc_page':
+/lib/modules/fglrx-3.7.6/build_mod/2.6.x/agpgart_be.c:1405: structure has no member named `count'
+/lib/modules/fglrx-3.7.6/build_mod/2.6.x/agpgart_be.c: In function `ali_alloc_page':
+/lib/modules/fglrx-3.7.6/build_mod/2.6.x/agpgart_be.c:4416: structure has no member named `count'
+make[2]: *** [/lib/modules/fglrx-3.7.6/build_mod/2.6.x/agpgart_be.o] Error 1
+make[1]: *** [/lib/modules/fglrx-3.7.6/build_mod/2.6.x] Error 2
+make[1]: Leaving directory `/usr/src/linux-2.6.6-mm2'
+make: *** [kmod_build] Error 2
+build succeeded with return value 0
+</pre>
+
+<p>The module build appears to succeed with a return value of 0, but did indeed fail. A "file not found" error message will appear when trying to install the module afterwards.</p>
+
+<p>This issue has been resolved in <a href="http://www.ati.com/support/driver.html">ATI Proprietary Linux Driver version 3.11 and later</a>.</p>
+
+<P>&nbsp;</P>
+
+</TD></TR></TABLE></P>
+</BODY>
+</HTML>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<appendix id="apx-modules">
+  <title>Resumen rápido de módulos</title>
+
+  <para>Este apéndice proporciona un resumen rápido de las bibliotecas incluidas en la plataforma de escritorio y desarrollo GNOME. Las bibliotecas están listadas por módulo con una breve descripción y un enlace para más información en este documento, donde sea posible.</para>
+
+<section id="apx-modules-platform">
+  <title>Módulos de plataforma</title>
+
+  <para>Los módulos en la plataforma de desarrollo GNOME establecen garantías estrictas acerca de la estabilidad del API y ABI. Se garantiza que las aplicaciones desarrolladas sobre los módulos de plataforma podrán ejecutarse sin modificarse durante el ciclo de vida de GNOME 2.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>GConf</term>
+      <listitem><para>GConf proporciona el servicio y las bibliotecas para almacenar y obtener datos de configuración. Se trata sobre GConf en el <xref linkend="gconf"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>ORBit</term>
+      <listitem><para>ORBit es un servidor CORBA rápido y ligero. La arquitectura de componentes de GNOME, Bonobo, está construida sobre CORBA. Se trata sobre CORBA en el <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>atk</term>
+      <listitem><para>ATK proporciona el conjunto de interfaces de accesibilidad que se implementan por otros grupos de herramientas y aplicaciones. Con el uso de las interfaces de ATK, las herramientas de accesibilidad tienen acceso total para ver y controlar aplicaciones en ejecución. Se trata sobre ATK en el <xref linkend="a11y"/>.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gail</term>
+      <listitem><para>GAIL proporciona una implementación de las interfaces ATK para GTK+ y las bibliotecas de GNOME, permitiendo a las herramientas de accesibilidad interactuar con aplicaciones escritas utilizando esas bibliotecas. La accesibilidad se trata en el <xref linkend="a11y"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gio</term>
+      <listitem><para>Parte de GLib, la biblioteca GIO proporciona una API de alto nivel para acceder a archivos y carpetas. Junto con la biblioteca GVFS, proporciona una abstracción del sistema de archivos que permite a las aplicaciones acceder a archivos remotos y locales. GIO está comentada en la <xref linkend="gio"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>glib</term>
+      <listitem><para>GLib proporciona los bloques básicos para construir aplicaciones y bibliotecas escritas en C. Proporciona el sistema de objetos básico usado en GNOME, la implementación del bucle principal, y un gran conjunto de funciones de utilidad para cadenas y estructuras de datos comunes.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-vfs</term>
+      <listitem><para>Gnome-VFS es una biblioteca obsoleta para acceder a archivos y carpetas. GIO y GVFS la reemplazan. El nuevo código debería usar GIO en su lugar.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtk+</term>
+      <listitem><para>Gtk+ es la principal biblioteca empleada para construir interfaces de usuario en las aplicaciones GNOME. Proporciona controles de interfaz de usuario y retrollamadas de señales para controlar interfaces de usuario. Se trata sobre GTK+en la <xref linkend="gtk"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gvfs</term>
+      <listitem><para>GVFS proporciona una implementación de «backend» para GIO, permitiendo acceso a numerosos protocolos con la API GIO. Los desarrolladores no acceden a GVFS directamente. En su lugar, las aplicaciones escritas con GIO usarán automáticamente GVFS en sistemas donde esté activado.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libIDL</term>
+      <listitem><para>libIDL es una biblioteca para analizar sintácticamente los archivos IDL (Interface Definition Language), los cuales son necesarios para los interfaces CORBA. Orbit, la implementación de CORBA de GNOME, usa libIDL. Se trata sobre CORBA en la <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libart_lgpl</term>
+      <listitem><para>libart es una biblioteca gráfica que puede renderizar rutas vectoriales. Se usa en el widget GnomeCanvas.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libbonobo</term>
+      <listitem><para>Bonobo es un marco de trabajo para crear componentes reutilizables para usarlos en aplicaciones GNOME, construidas sobre CORBA. Bonobo se trata en la <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libbonoboui</term>
+      <listitem><para>La biblioteca Bonobo UI proporciona un número de controles de interfaz de usuario usando el marco  de trabajo de componentes Bonobo. Bonobo se trata en la <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libglade</term>
+      <listitem><para>Libglade es una biblioteca para construir interfaces de usuario dinámicamente desde descripciones XML. Libglade permite a los programadores construir sus interfaces de usuario usando una aplicación constructora de interfaces gráficas, y luego importar esas definiciones de interfaz. Libglade se trata en la <xref linkend="libglade"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnome</term>
+      <listitem><para>La biblioteca libgnome proporciona un número de rutinas útiles para construir aplicaciones modernas, incluyendo gestión de sesión, activación de archivos y URI, y mostrar ayuda.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomecanvas</term>
+      <listitem><para>El widget GnomeCanvas proporciona un widget flexible para crear gráficos estructurados interactivos.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeui</term>
+      <listitem><para>La biblioteca libgnomeui proporciona widgets adicionales para aplicaciones. Muchos de los widgets de libgnomeui ya han sido trasladados a GTK+.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxml2</term>
+      <listitem><para>La biblioteca libxml2 proporciona un número de API para trabajar con XML en una forma que cumpla con los estándares. La biblioteca libxml2 se trata en <xref linkend="libxml2"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxslt</term>
+      <listitem><para>La biblioteca libxslt proporciona una implementación rápida y completa de XSLT, un lenguaje para transformar XML. La biblioteca libxslt se trata en <xref linkend="libxslt"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>pango</term>
+      <listitem><para>Pango es la biblioteca básica de texto y manipulación de tipografías usada en aplicaciones GNOME. Tiene un soporte extensivo para diferentes sistemas de escritura usados en todo el mundo. Pango se trata en <xref linkend="pango"/>.</para></listitem>
+    </varlistentry>
+  </variablelist>
+</section>
+
+<section id="apx-modules-desktop">
+  <title>Módulos de escritorio</title>
+
+  <para>No se requiere que los módulos en el escritorio GNOME mantengan las mismas garantías de estabilidad de API y ABI como los módulos en la plataforma, aunque, se intenta mantenerlos relativamente estables. A menudo, los módulos se introducen en el lanzamiento del escritorio para madurar, y luego se trasladan a la plataforma cuando se han estabilizado.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>eel</term>
+      <listitem><para>La biblioteca eel proporciona un número adicional de widgets para usarlos principalmente en <application>Nautilus</application>, el gestor de archivos de GNOME. Muchos de los widgets de eel se han proporcionado desde entonces desde GTK+.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>evolution-data-server</term>
+      <listitem><para>El servidor de datos de Evolution proporciona una ubicación unificada para libretas direcciones e información de calendario, permitiendo que varias aplicaciones compartan los mismos datos. El servidor de Evolution se trata en <xref linkend="address-book-calendar"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-panel</term>
+      <listitem><para>En adición al panel actual, el paquete gnome-panel proporciona las bibliotecas usadas para construir miniaplicaciones de panel para ejecutarse en el panel del usuario. Las miniaplicaciones del Panel se tratan en <xref linkend="panel-applets"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-keyring</term>
+      <listitem><para>El depósito de claves de GNOME, proporciona una forma moderna y segura de almacenar contraseñas de usuario y otros datos sensibles. Las claves se cifran y únicamente se puede acceder a ellas con permiso explícito del usuario. El depósito de claves GNOME se trata en la <xref linkend="keyring"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gstreamer</term>
+      <listitem><para>GStreamer es el potente sistema multimedia que se usa en todo GNOME para reproducir, crear y manipular sonido y vídeo. Se habla de GStreamer en la <xref linkend="multimedia"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtkhtml</term>
+      <listitem><para>La biblioteca gtkhtml proporciona un renderizador HTML ligero con soporte completo para edición de texto enriquecido. Se usa dentro del cliente de correo <application>Evolution</application> para permitir a los usuarios redactar y leer correo HTML.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtksourceview</term>
+      <listitem><para>La biblioteca gtksourceview proporciona un extensión para el widget GtkTextView que soporta el resaltado automático de sintaxis y otras funciones que son útiles para editores de código fuente. Usado en el editor de texto <application>gedit</application>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgail-gnome</term>
+      <listitem><para>GAIL proporciona una implementación de las interfaces ATK para GTK+ y las bibliotecas de GNOME, permitiendo a las herramientas de accesibilidad interactuar con aplicaciones escritas utilizando esas bibliotecas. La accesibilidad se trata en el <xref linkend="a11y"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeprint</term>
+      <listitem><para>La biblioteca libgnomeprint proporciona una implementación del modelo de imagen PostScript y se puede usar para crear renderizados para impresión de alta calidad. La plataforma de impresión de GNOME se trata en la <xref linkend="gnomeprint"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeprintui</term>
+      <listitem><para>La biblioteca libgnomeprintui proporciona un diálogo de impresión estándar, un diálogo de previsualización, y otros controles diversos requeridos para impresión. La plataforma de impresión de GNOME se trata en la <xref linkend="gnomeprint"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgtop</term>
+      <listitem><para>La biblioteca libgtop proporciona una API portable para obtener información acerca de procesos en ejecución. Se usa en la aplicación <application>Monitor del Sistema</application>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>librsvg</term>
+      <listitem><para>La biblioteca librsvg proporciona una implementación de SVG (Scalable Vector Graphics). Se usa en todo el escritorio para renderizar gráficos vectoriales independientemente de la resolución.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libsoup</term>
+      <listitem><para>La biblioteca libsoup proporciona una implementación del protocolo SOAP (Simple Object Access Protocol), así como una implementación HTTP. SOAP se puede usar para construir servicios web dentro de aplicaciones. La biblioteca libsoup se trata en la <xref linkend="libsoup"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libwnck</term>
+      <listitem><para>La biblioteca libwnck proporciona medios para controlar cualquier gestor de ventanas compatible con EWMH, incluyendo <application>Metacity</application>, el gestor de ventanas de GNOME predeterminado. La biblioteca libwnck se trata en la <xref linkend="window-manager"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxklavier</term>
+      <listitem><para>La biblioteca libxklavier proporciona una API de alto nivel para acceder y establecer distribuciones del teclado. Se usa en las <application>Preferencias de teclado</application> para permitir a los usuarios establecer su distribución de teclado y opciones.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>vte</term>
+      <listitem><para>VTE es un widget emulador de terminal para uso en aplicaciones GTK+. Proporciona una API consistente y usa Pango para dibujar el texto, permitiendo mostrar todo el texto internacionalizado. VTE se usa en la aplicación <application>Terminal</application> de GNOME.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>
+
+</appendix>

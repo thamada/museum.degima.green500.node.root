@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.24.0">
+<!ENTITY manrevision "0.2">
+<!ENTITY date "October 2007">
+<!ENTITY app "Mousetweaks">
+<!ENTITY application "<application>&app;</application>">
+<!ENTITY legal SYSTEM "legal.xml">
+]>
+<article id="index" lang="cs">
+  <articleinfo>
+    <title>Příručka Mousetweaks</title>
+
+    <abstract role="description">
+      <para><application>Mousetweaks</application> usnadňuje práci s myší v pracovním prostředí GNOME.</para>
+    </abstract>
+
+    <copyright>
+      <year>2007 - 2009</year>
+
+      <holder>Francesco Fumanti</holder>
+    </copyright><copyright><year>2009</year><holder>Adrian Guniš (andygun696@gmail.com)</holder></copyright>
+
+    
+<legalnotice id="legalnotice">
+  <para>Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License (GFDL), verze 1.3 nebo jakékoli další verze vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopii licence GFDL naleznete pod tímto <ulink type="http" url="http://www.gnu.org/licenses/fdl-1.3.txt">odkazem</ulink> nebo v nejvyšší úrovni adresáře zdrojového balíku Mousetweaks.</para>
+
+  <para>Tato příručka je součástí sbírky příruček GNOME šířených za podmínek licence GNU FDL. Pokud chcete tento dokument šířit odděleně od sbírky, musíte přiložit kopii licence dle popisu v oddílu 6 dané licence.</para>
+
+  <para>Mnoho užívaných jmen určených ke zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s velkým písmenem na začátku.</para>
+
+  <para>DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <orderedlist>
+      <listitem>
+        <para>DOKUMENT JE POSKYTOVÁN V PODOBĚ "JAK JE", BEZ ZÁRUKY JAKÉHOKOLIV DRUHU, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ, NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL, NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, NESETE VY. POKUD JE TENTO DOKUMENT NEBO JEHO UPRAVENÁ VERZE VADNÁ V JAKÉMKOLIV SMYSLU, VY (NIKOLIV PŮVODCE, AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE ODPOVĚDNOST ZA JAKÉKOLIV NÁKLADY NA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ PODLE TÉTO DOHODY POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE</para>
+      </listitem>
+
+      <listitem>
+        <para>ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ.</para>
+      </listitem>
+    </orderedlist></para>
+</legalnotice>
+
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Francesco</firstname>
+
+        <surname>Fumanti</surname>
+
+        <affiliation>
+          <address><email>frfumanti@svn.gnome.org</email> </address>
+        </affiliation>
+      </author>
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+        <revnumber>Verze 2.28</revnumber>
+
+        <date>Září 2009</date>
+
+        <revdescription>
+          <para role="author">Příručka byla přizpůsobena změnám provedeným v mousetweaks pro GNOME 2.28.<email>Francesco Fumanti &lt;frfumanti@svn.gnome.org&gt;</email></para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>verze 2.25.90</revnumber>
+
+        <date>2. únor 2009</date>
+
+        <revdescription>
+          <para role="author">Příručka byla přizpůsobena změnám provedeným v mousetweaks pro GNOME 2.26. Kromě toho byla licence příručky převedena na GFDL 1.3.<email>Francesco Fumanti &lt;frfumanti@svn.gnome.org&gt;</email></para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>verze 2.24</revnumber>
+
+        <date>Červenec 2008</date>
+
+        <revdescription>
+          <para role="author">Obsah příručky byl přizpůsoben změnám provedeným v mousetweaks pro GNOME 2.24.<email>Francesco Fumanti &lt;frfumanti@svn.gnome.org&gt;</email></para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>verze 2.21.5</revnumber>
+
+        <date>Leden 2008</date>
+
+        <revdescription>
+          <para role="author">Obsah příručky byl přizpůsoben změnám provedeným v mousetweaks pro GNOME 2.22. Francesco Fumanti <email>frfumanti@svn.gnome.org</email></para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>verze 0.2</revnumber>
+
+        <date>Listopad 2007</date>
+
+        <revdescription>
+          <para role="author">Obsah příručky byl přizpůsoben výchozímu motivu GNOME - Clearlooks. Tato verze je zahrnuta v Mousetweaks vydání 0.2.6. Francesco Fumanti <email>francesco.fumanti@gmx.net</email></para>
+        </revdescription>
+      </revision>
+
+      <revision>
+        <revnumber>verze 0.1</revnumber>
+
+        <date>Říjen 2007</date>
+
+        <revdescription>
+          <para role="author">První vydání příručky. Francesco Fumanti <email>francesco.fumanti@gmx.net</email></para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <releaseinfo>Tato příručka popisuje nástroje pro zpřístupnění pomocí mousetweaks a jeho grafických uživatelských rozhraní, které se skládají z karty Zpřístupnění v ovládacím panelu Předvolby myši a dvou appletů na panel.</releaseinfo>
+
+    <contrib>Chcete-li podat oznámení o chybě nebo návrh co se týče aplikace Mousetweaks nebo této příručky, navštivte stránku GNOME Bugzilla.</contrib>
+
+    <legalnotice>
+      <title>Ohlasy</title>
+
+      <para>Chcete-li podat oznámení o chybě nebo návrh co se týče <application>modulu mousetweaks</application> (tj.: zpřístupnění myši), jeho uživatelského rozhraní nebo příručky, navštivte stránku <ulink type="http" url="http://bugzilla.gnome.org/">GNOME Bugzilla</ulink>.</para>
+    </legalnotice>
+  </articleinfo>
+
+  <indexterm zone="index">
+    <primary>Mousetweaks</primary>
+  </indexterm>
+
+  <indexterm zone="index">
+    <primary>mousetweaks</primary>
+  </indexterm>
+
+  <sect1 id="mouse-a11y-introduction">
+    <title>Úvod</title>
+
+    <para><application>Mousetweaks</application> usnadňuje práci s myší v pracovním prostředí GNOME. Nabízí uživateli následující funkce:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Simulované podružné kliknutí: umožňuje uživateli provést podružné kliknutí (otevření nabídky) podržením hlavního tlačítka při nehybnosti kurzoru myši.</para>
+      </listitem>
+
+      <listitem>
+        <para>Kliknutí počkáním: umožňuje uživateli provádět různé druhy kliknutí bez stisknutí jakéhokoli <hardware>hardwarového tlačítka</hardware>.</para>
+      </listitem>
+
+      <listitem>
+        <para>Zachycení kurzoru: umožňuje uživateli uzamknout kurzor v předurčené oblasti panelu, dokud jej uživatel neuvolní předdefinovaným stisknutím kláves nebo tlačítkem myši.</para>
+      </listitem>
+    </itemizedlist>
+  </sect1>
+
+  <sect1 id="mouse-a11y-how-to-start-features">
+    <title>Jak spustit funkce</title>
+
+    <para>Simulované podružné kliknutí a Kliknutí počkáním závisí na běhu mousetweaks, ale applet Zachycení kurzoru závisí na panelu GNOME. Tudíž se také liší způsoby, jak je spustit.</para>
+
+    <sect2 id="mouse-a11y-start-ssc">
+      <title>Spuštění funkce Simulované podružné kliknutí</title>
+
+      <para>Funkci Simulované podružné kliknutí můžete spustit dvěma způsoby:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>z grafického uživatelského rozhraní</para>
+        </listitem>
+
+        <listitem>
+          <para>z příkazové řádky</para>
+        </listitem>
+      </itemizedlist>
+
+      <sect3 id="mouse-a11y-start-ssc-by-gui">
+        <title>Spuštění z grafického uživatelského rozhraní</title>
+
+        <para>Grafické uživatelské rozhraní pro spuštění simulovaného podružného kliknutí je umístěno na kartě Zpřístupnění v ovládacím panelu Předvolby myši. Pro jeho otevření zvolte nabídku <menuchoice><guimenu>Systém</guimenu><guisubmenu>Volby</guisubmenu><guimenuitem>Ovládací centrum</guimenuitem></menuchoice>. Po kliknutí na tlačítko Myš v Ovládacím centru se otevře ovládací panel Předvolby myši a po kliknutí na kartu Zpřístupnění uvidíte následující nastavení:</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-tab.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek ovládacího panelu Předvolby myši</para>
+          </textobject>
+        </mediaobject>
+
+        <para>Pro spuštění funkce Simulované podružné kliknutí zaškrtněte zaškrtávací pole s textem:</para>
+
+        <para><quote>Spustit podružné kliknutí podržením hlavního tlačítka</quote></para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-ssc-checkbox.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek zaškrtávacího pole pro spuštění simulovaného podružného kliknutí</para>
+          </textobject>
+        </mediaobject>
+      </sect3>
+
+      <sect3 id="mouse-a11y-start-ssc-by-cli">
+        <title>Spuštění z příkazové řádky</title>
+
+        <para>Pro spuštění funkce Simulované podružné kliknutí z příkazové řádky otevřete <application>Terminál</application> a napište následující:</para>
+
+        <para><command>mousetweaks <parameter>--enable-secondary</parameter></command></para>
+      </sect3>
+    </sect2>
+
+    <sect2 id="mouse-a11y-start-dwell">
+      <title>Spuštění funkce Kliknutí počkáním</title>
+
+      <para>Funkci Kliknutí počkáním můžete spustit třemi způsoby:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>z karty Zpřístupnění v ovládacím panelu Předvolby myši</para>
+        </listitem>
+
+        <listitem>
+          <para>z příkazové řádky</para>
+        </listitem>
+
+        <listitem>
+          <para>přes tlačítko Zapnout/Vypnout na appletu Kliknutí počkáním</para>
+        </listitem>
+      </itemizedlist>
+
+      <sect3 id="mouse-a11y-start-dwell-by-gui">
+        <title>Spuštění z karty Zpřístupnění v ovládacím panelu Předvolby myši</title>
+
+        <para>Grafické uživatelské rozhraní pro spuštění kliknutí počkáním je umístěno na kartě Zpřístupnění v ovládacím panelu Předvolby myši. Pro jeho otevření zvolte nabídku <menuchoice><guimenu>Systém</guimenu><guisubmenu>Volby</guisubmenu><guimenuitem>Ovládací centrum</guimenuitem></menuchoice>. Po kliknutí na tlačítko Myš v Ovládacím centru se otevře ovládací panel Předvolby myši a po kliknutí na kartu Zpřístupnění uvidíte následující nastavení:</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-tab.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek ovládacího panelu Předvolby myši</para>
+          </textobject>
+        </mediaobject>
+
+        <para>Pro spuštění funkce Kliknutí počkáním zaškrtněte zaškrtávací pole s textem:</para>
+
+        <para><quote>Zahájit kliknutí při zastavení pohybu ukazatele</quote></para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-dwell-checkbox.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek zaškrtávacího pole pro spuštění funkce Kliknutí počkáním</para>
+          </textobject>
+        </mediaobject>
+      </sect3>
+
+      <sect3 id="mouse-a11y-start-dwell-by-cli">
+        <title>Spuštění z příkazové řádky</title>
+
+        <para>Pro spuštění funkce Kliknutí počkáním a zobrazení okna typu kliknutí z příkazové řádky otevřete <application>Terminál</application> a napište následující:</para>
+
+        <para><command>mousetweaks <parameter>--enable-dwell --show-ctw</parameter></command></para>
+      </sect3>
+
+      <sect3 id="mouse-a11y-start-dwell-by-panel-applet">
+        <title>Spuštění přes tlačítko Zapnout/Vypnout na appletu Kliknutí počkáním</title>
+
+        <para>Kliknutí počkáním je možné jednoduše spustit podržením kurzoru na krátkou chvíli na tlačítku Zapnout/Vypnout na appletu Kliknutí počkáním. Tlačítko Zapnout/Vypnout poskytuje odezvu vzhledem k uplynulé době tím, že se rámeček začne vyplňovat jinou barvou. Jakmile je rámeček úplně vyplněný, tlačítko ukazuje jeho aktivní stav a kliknutí počkáním je spuštěno.</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-dwell-click-type-applet.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek zobrazující applet Kliknutí počkáním vpravo od nabídek GNOME</para>
+          </textobject>
+        </mediaobject>
+
+        <remark>Chcete-li zjistit informace o instalaci appletu Kliknutí počkáním na panel GNOME, podívejte se do <link linkend="mouse-a11y-start-pointer-capture">Spuštění funkce Zachycení kurzoru</link>, kde se dočtete, jak nainstalovat applet Zachycení kurzoru. Postup pro applet Kliknutí počkáním je podobný.</remark>
+      </sect3>
+    </sect2>
+
+    <sect2 id="mouse-a11y-start-pointer-capture">
+      <title>Spuštění funkce Zachycení kurzoru</title>
+
+      <para>Protože funkce Zachycení kurzoru běží jako applet na panelu, jeho spuštění se musí provést podle pravidel určených pro panel GNOME. Takže pro spuštění funkce Zachycení kurzoru musíte pouze přidat applet na panel a ten bude automaticky běžet.</para>
+
+      <para>Abyste jej mohli přidat na panel, postupujte stejně jako v případě jakéhokoli jiného appletu: pro otevření kontextové nabídky klikněte pravým tlačítkem myši na panel, zvolte  <guimenuitem>Přidat na panel</guimenuitem> a zobrazí se okno se seznamem všech appletů, které je možné nainstalovat na panel GNOME.</para>
+
+      <para>Dvojitým kliknutím na položku <guilabel>Zachycení kurzoru</guilabel> v okně Přidat na panel se applet přidá na panel a bude běžet tak dlouho, dokud nebude z panelu GNOME odstraněn.</para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="mouse-a11y-how-to-stop-features">
+    <title>Jak ukončit funkce</title>
+
+    <para>Podobně jako spuštění funkcí, tak i jejich ukončení závisí na tom, kterou funkci chcete ukončit.</para>
+
+    <sect2 id="mouse-a11y-stop-ssc">
+      <title>Ukončení funkce Simulované podružné kliknutí</title>
+
+      <para>Simulované podružné kliknutí je možné ukončit dvěma způsoby:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Odstraněním háčku z odpovídajícího zaškrtávacího pole v ovládacím panelu <application>Mousetweaks</application>.</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/mouse-a11y-ssc-checkbox.png" format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <para>Obrázek zaškrtávacího pole pro spuštění funkce Simulované podružné kliknutí</para>
+            </textobject>
+          </mediaobject>
+
+          <para>Pro nalezení zaškrtávacího pole se podívejte do sekce <link linkend="mouse-a11y-start-ssc-by-gui">Spuštění funkce Simulované podružné kliknutí z grafického uživatelského rozhraní</link>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Napsáním následujícího příkazu do příkazové řádky:</para>
+
+          <para><command>mousetweaks</command>
+          <parameter>--shutdown</parameter></para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+
+    <sect2 id="mouse-a11y-stop-dwell">
+      <title>Ukončení funkce Kliknutí počkáním</title>
+
+      <para>Kliknutí počkáním je možné ukončit třemi způsoby:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Odstraněním háčku z odpovídajícího zaškrtávacího pole v ovládacím panelu <application>Mousetweaks</application>.</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/mouse-a11y-dwell-checkbox.png" format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <para>Obrázek zaškrtávacího pole pro spuštění funkce Kliknutí počkáním</para>
+            </textobject>
+          </mediaobject>
+
+          <para>Pro nalezení zaškrtávacího pole se podívejte do sekce <link linkend="mouse-a11y-start-dwell-by-gui">Spuštění funkce Kliknutí počkáním z grafického uživatelského rozhraní</link>.</para>
+        </listitem>
+
+        <listitem>
+          <para>Napsáním následujícího příkazu do příkazové řádky:</para>
+
+          <para><command>mousetweaks</command>
+          <parameter>--shutdown</parameter></para>
+        </listitem>
+
+        <listitem>
+          <para>Pokud byl applet Kliknutí počkáním přidán na panel GNOME, lze jej vypnout podržením kurzoru na tlačítku Zapnout/Vypnout.</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/mouse-a11y-dwell-click-type-applet.png" format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <para>Obrázek zobrazující applet Kliknutí počkáním vpravo od nabídek GNOME</para>
+            </textobject>
+          </mediaobject>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+
+    <sect2 id="mouse-a11y-stop-pointer-capture">
+      <title>Ukončení funkce Zachycení kurzoru</title>
+
+      <para>Protože funkce Zachycení kurzoru běží jako applet na panelu, musíte jej ukončit stejným způsobem jako v případě jakéhokoli jiného appletu: je nutné jej odstranit z panelu GNOME. Takže klikněte pravým tlačítkem myši na držátko appletu a z kontextové nabídky zvolte <guimenuitem>Odstranit z panelu</guimenuitem>.</para>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/mouse-a11y-pointer-capture-context-menu.png" format="PNG"/>
+        </imageobject>
+
+        <textobject>
+          <para>Obrázek ukazující oblast zachycení kurzoru (zelená) s kontextovou nabídkou</para>
+        </textobject>
+      </mediaobject>
+
+      <tip>
+        <para>Pokud máte nastaven výchozí motiv GNOME, držátko appletu Zachycení kurzoru vypadá jako dvě svislé tečkované čáry v levé části oblasti zachycení kurzoru.</para>
+      </tip>
+    </sect2>
+  </sect1>
+
+  <sect1 id="mouse-a11y-functions-description">
+    <title>Popis funkcí</title>
+
+    <para>Mousetweaks nabízí uživateli tři funkce zpřístupnění kurzoru. V této sekci najdete jejich popis: <itemizedlist>
+        <listitem>
+          <para><xref linkend="mouse-a11y-ssc-description"/></para>
+        </listitem>
+
+        <listitem>
+          <para><xref linkend="mouse-a11y-dwell-description"/></para>
+        </listitem>
+
+        <listitem>
+          <para><xref linkend="mouse-a11y-pointer-capture-description"/></para>
+        </listitem>
+      </itemizedlist></para>
+
+    <sect2 id="mouse-a11y-ssc-description">
+      <title>Popis funkce Simulované podružné kliknutí</title>
+
+      <para>Když uživatel aktivuje tuto funkci, bude schopen provádět podružné kliknutí pomocí <mousebutton>hlavního tlačítka myši</mousebutton>. Toto je obzvlášť užitečné pro uživatele, kteří mají k dispozici jen jedno <mousebutton>tlačítko myši</mousebutton>.</para>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/mouse-a11y-ssc-delay-slider.png" format="PNG"/>
+        </imageobject>
+
+        <textobject>
+          <para>Obrázek ukazující nastavení související s funkcí Simulované podružné kliknutí.</para>
+        </textobject>
+      </mediaobject>
+
+      <sect3 id="mouse-a11y-ssc-usage">
+        <title>Jak to funguje?</title>
+
+        <para>Předpokládejme, že uživatel má zapnutou funkci Simulované podružné kliknutí.</para>
+
+        <para>K provedení simulovaného podružného kliknutí musí uživatel podržet <mousebutton>hlavní tlačítko myši</mousebutton> stisknuté tak, aby se kurzor po předurčený čas nehýbal. Jakmile tento čas uplyne, provede se simulované podružné kliknutí.</para>
+
+        <para>Zatímco je <mousebutton>hlavní tlačítko myši</mousebutton> stisknuto, mousetweaks začne vyplňovat šipku kurzoru jinou barvou jakožto poskytnutí odezvy, což znamená, že odpočítává čas před provedením simulovaného podružného kliknutí.</para>
+      </sect3>
+
+      <sect3>
+        <title id="mouse-a11y-ssc-delay">Táhlo zpoždění</title>
+
+        <para>Jak dlouho musí uživatel držet stisknuté <mousebutton>hlavní tlačítko myši</mousebutton>, se dá nastavit pomocí táhla <guilabel>Zpoždění</guilabel> umístěného pod zaškrtávacím polem. Pomocí tohoto táhla si může uživatel zvolit zpoždění, které mu bude nejvíce vyhovovat.</para>
+      </sect3>
+
+      <sect3>
+        <title id="mouse-a11y-ssc-motion-treshold">Práh pohybu</title>
+
+        <para>Lidé, kteří mají problém udržet kurzor zcela nehybně, mohou použít táhlo Práh pohybu umístěné pod funkcí Kliknutí počkáním. Toto nastavení přiměje mousetweaks ignorovat nepatrné pohyby myši, takže simulované podružné kliknutí se provede, i když není kurzor zcela nehybný. Chcete-li o tomto zjistit více informací, podívejte se do sekce <link linkend="mouse-a11y-dwell-motion-treshold">Táhlo Práh pohybu z funkce Kliknutí počkáním</link>.</para>
+
+        <note>
+          <para>Táhlo <guilabel>Práh pohybu</guilabel>, které je umístěno pod funkcí <guilabel>Kliknutí počkáním</guilabel>, je účinné také pro funkci <guilabel>Simulované podružné kliknutí</guilabel>, i když je funkce <guilabel>Kliknutí počkáním</guilabel> vypnuta.</para>
+        </note>
+      </sect3>
+
+      <sect3 id="mouse-a11y-ssc-pecularities">
+        <title>Rozdíly oproti normálnímu podružnému kliknutí</title>
+
+        <para>Protože Simulované podružné kliknutí není schopné zrušit <mousebutton>podržení tlačítka myši</mousebutton> po <mousebutton>stisknutí hlavního tlačítka</mousebutton> uživatelem, provede se hlavní kliknutí těsně před podružným kliknutím. Jinými slovy, každému podružnému kliknutí provedenému touto funkcí ihned předchází hlavní kliknutí a toto chování je trochu odlišné oproti normálnímu podružnému kliknutí provedené <mousebutton>pravým tlačítkem myši</mousebutton>. Například:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Na vícenásobných položkách není možné provádět podružné kliknutí, protože hlavní kliknutí provedené před podružným kliknutím zruší výběr položek.</para>
+          </listitem>
+
+          <listitem>
+            <para>Když se provede simulované podružné kliknutí na ikonu koše na panelu, nezobrazí se jen kontextová nabídka, ale otevře se i složka koše. (Dřívější úkon je způsoben podružným kliknutím, pozdější zas hlavním kliknutím provedeným před kliknutím pravým tlačítkem.)</para>
+          </listitem>
+        </itemizedlist>
+
+        <note>
+          <para>Není možné poskytnout seznam všech nestandardních chování, protože to závisí na reakci aplikace přijímající podružné kliknutí provedené po hlavním kliknutí.</para>
+        </note>
+
+        <para>Někteří uživatelé mohou být překvapeni následujícím chováním: není možné provést déletrvající nehybné kliknutí a držení hlavního tlačítka bez toho, aniž by se tím nespustilo podružné kliknutí. Například:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Když se ponechá hlavní tlačítko stisknuté na šipce posuvníku, ten pak po chvíli skočí do dolní části okna. Toto je ve skutečnosti normální chování podružného kliknutí na šipku posuvníku.</para>
+
+            <tip>
+              <para>Pro obejití tohoto chování jednoduše pohněte kurzorem ihned po stisknutí <mousebutton>hlavního tlačítka myši</mousebutton>. Tímto způsobem se simulované podružné kliknutí neprovede.</para>
+            </tip>
+          </listitem>
+        </itemizedlist>
+      </sect3>
+    </sect2>
+
+    <sect2 id="mouse-a11y-dwell-description">
+      <title>Popis funkce Kliknutí počkáním</title>
+
+      <para>Jsou uživatelé, kteří nemohou používat některé hardwarové tlačítko. Aktivováním funkce <guilabel>Kliknutí počkáním</guilabel> získají myš umožňující provádět různé kliknutí bez stisknutí jakéhokoli tlačítka myši. Je možné provádět následující typy kliknutí: kliknutí levým tlačítkem, dvojité kliknutí, táhnutí a kliknutí pravým tlačítkem.</para>
+
+      <note>
+        <para>Když je Kliknutí počkáním aktivní, zůstávají <mousebutton>tlačítka myši</mousebutton> funkční a je stále možné klikat s hardwarovými <mousebutton>tlačítky myši</mousebutton>. Kromě toho, pokud uživatel provede kliknutí s <mousebutton>tlačítkem myši</mousebutton> ve chvíli, kdy běží kliknutí počkáním, funkce kliknutí počkáním se zastaví a neprovede se žádné kliknutí počkáním; pro spuštění nového kliknutí počkáním musí uživatel pohnout a zastavit myš, jak je pro tuto funkci obvyklé.</para>
+      </note>
+
+      <sect3 id="mouse-a11y-dwell-usage">
+        <title>Jak to funguje?</title>
+
+        <para>Pokaždé, když se kurzor zastaví, spustí se kliknutí počkáním. Aby uživatel obdržel odezvu, mousetweaks začne vyplňovat šipku kurzoru jinou barvou, což znamená, že odpočítává čas před provedením kliknutí.</para>
+
+        <para>Jaké kliknutí je dokončeno a jaký typ kliknutí je vybrán, závisí na tom, jaký režim kliknutí počkáním uživatel zvolil. K dispozici jsou dva režimy:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Vybrat typ kliknutí předem</para>
+          </listitem>
+
+          <listitem>
+            <para>Vybrat typ kliknutí pohyby myší</para>
+          </listitem>
+        </itemizedlist>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-dwell-mode-choice.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek ukazující přepínače pro výběr režimu kliknutí</para>
+          </textobject>
+        </mediaobject>
+
+        <para>Pro výběr režimu musí uživatel pouze kliknout na přepínač, který odpovídá jeho volbě.</para>
+
+        <sect4 id="mouse-a11y-dwell-mode-ctw">
+          <title>Automatické provedení kliknutí s předurčeným výběrem typu kliknutí </title>
+
+          <para>Tento režim je aktivní, když uživatel zvolí <guilabel>Vybrat typ kliknutí předem</guilabel>. Takže, jakmile je myš nehybná po dobu předem nastavenou pomocí táhla <guilabel>Zpoždění</guilabel>, systém automaticky provede typ kliknutí, který je vybrán v okně Typ kliknutí zobrazeném zde:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/mouse-a11y-dwell-click-type-window.png" format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <para>Obrázek ukazující okno typu kliknutí</para>
+            </textobject>
+          </mediaobject>
+
+          <para>Pro zobrazení <guimenu>okna typu kliknutí</guimenu> na obrazovce musí uživatel zaškrtnout <application>zaškrtávací pole s textem <quote><guilabel>Zobrazit okno typu kliknutí</guilabel></quote>:</application></para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/mouse-a11y-dwell-ctw-checkbox.png" format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <para>Obrázek ukazující zaškrtávací pole pro zobrazení okna typu kliknutí</para>
+            </textobject>
+          </mediaobject>
+
+          <para>Po provedení kliknutí se automaticky obnoví kliknutí levým tlačítkem. Aby bylo možné zvolit jiný typ kliknutí, musí uživatel automaticky kliknout na <guibutton>tlačítko</guibutton> v <guilabel>okně typu kliknutí</guilabel>, které odpovídá jeho volbě typu kliknutí.</para>
+
+          <para>Místo okna typu kliknutí mohou někteří uživatelé upřednostňovat applet panelu <guilabel>Kliknutí počkáním</guilabel>, který má jisté výhody:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/mouse-a11y-dwell-click-type-applet.png" format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <para>Obrázek zobrazující applet Kliknutí počkáním vpravo od nabídek GNOME</para>
+            </textobject>
+          </mediaobject>
+
+          <para>Použitím appletu <guilabel>Kliknutí počkáním</guilabel>: <itemizedlist>
+              <listitem>
+                <para>Uživatel nepotřebuje <guilabel>okno typu kliknutí</guilabel>, které může být zakryto jinými okny na ploše.</para>
+              </listitem>
+
+              <listitem>
+                <para>Uživatel má přímou cestu, jak spustit a zastavit kliknutí počkáním pomocí tlačítka <guilabel>Zapnout/Vypnout</guilabel> na appletu <guilabel>Kliknutí počkáním</guilabel>. Toto je obzvlášť užitečné pro krátkodobé vypnutí této funkce v případě, že si chcete přečíst nějaký text bez rušení funkcí kliknutí počkáním.</para>
+              </listitem>
+            </itemizedlist></para>
+
+          <para>Pro zobrazení appletu <guilabel>Kliknutí počkáním</guilabel> na panelu GNOME musí uživatel postupovat způsobem obvyklým pro přidávání appletů na panel GNOME. Postup, jak na to, najdete v sekci <link linkend="mouse-a11y-start-pointer-capture">Spuštění funkce Zachycení kurzoru</link>.</para>
+
+          <para>Applety <guilabel>okno typu kliknutí</guilabel> a <guilabel>Kliknutí počkáním</guilabel> lze použít současně nebo každý samostatně.</para>
+        </sect4>
+
+        <sect4 id="mouse-a11y-dwell-mode-gestures">
+          <title>Provedení kliknutí a výběr typu kliknutí pohyby myší</title>
+
+          <para>Tento režim je aktivní, když uživatel zvolí <guilabel>Vybrat typ kliknutí pohyby myší</guilabel>. Takže jakmile je myš nehybná po dobu předem nastavenou pomocí <link linkend="mouse-a11y-dwell-delay">táhla Zpoždění</link>, změní se na chvíli tvar kurzoru; můžeme jej nazývat tvar pohybu:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Pokud uživatel pohne kurzorem při zobrazování tvaru pohybu, provede se kliknutí v místě, kde byl kurzor naposledy nehybný; nakonec se kurzor vrátí do jeho normálního tvaru. Typ provedeného kliknutí závisí na směru pohybu myši. Při pohybu kurzoru se kreslí čára sledující pohyb kurzoru, aby obdržel uživatel odezvu.</para>
+            </listitem>
+
+            <listitem>
+              <para>Pokud uživatel ponechá kurzor nehybný, až se vrátí do jeho normálního tvaru, může uživatel hýbat myší bez provedení kliknutí. Další kliknutí počkáním lze provést při dalším zastavení kurzoru.</para>
+            </listitem>
+          </itemizedlist>
+
+          <para>Uživatel má také možnost nastavit pro typ kliknutí směr pohybu použitím 4 <guimenu>rozbalovacích seznamů</guimenu>:</para>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/mouse-a11y-dwell-gesture-mapping.png" format="PNG"/>
+            </imageobject>
+
+            <textobject>
+              <para>Obrázek ukazující konfigurační možnosti nastavení směru pohybu pro typ kliknutí</para>
+            </textobject>
+          </mediaobject>
+
+          <para>V každém <guimenu>rozbalovacím seznamu</guimenu> je také k dispozici položka <guimenuitem>Vypnuto</guimenuitem>. Uživatel jej může zvolit, pokud nechce, aby se některé typy kliknutí prováděly automaticky. Toto je obzvlášť zajímavé pro uživatele, kteří mají problémy jen s určitými typy kliknutí.</para>
+        </sect4>
+      </sect3>
+
+      <sect3>
+        <title id="mouse-a11y-dwell-delay">Nastavení zpoždění kliknutí</title>
+
+        <para>Pomocí táhla <guilabel>Zpoždění</guilabel> může uživatel nastavit, jak dlouho musí zůstat kurzor nehybný, než se provede kliknutí.</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-dwell-delay-slider.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek ukazující táhlo zpoždění pro kliknutí počkáním</para>
+          </textobject>
+        </mediaobject>
+
+        <note>
+          <para>Nastavení zpoždění kliknutí funguje pouze v souvislosti s funkcí kliknutí počkáním.</para>
+        </note>
+      </sect3>
+
+      <sect3 id="mouse-a11y-dwell-motion-treshold">
+        <title>Nastavení prahu pohybu</title>
+
+        <para>Pro lidi, kteří mají problém udržet myš bez hnutí, je k dispozici táhlo <guilabel>Práh pohybu</guilabel>.</para>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/mouse-a11y-dwell-motion-treshold.png" format="PNG"/>
+          </imageobject>
+
+          <textobject>
+            <para>Obrázek ukazující táhlo prahu pohybu pro kliknutí počkáním</para>
+          </textobject>
+        </mediaobject>
+
+        <para>Když je táhlo nastaveno blíže k hodnotě "Malý", jsou zachyceny i nepatrné pohyby myši; avšak při nastavení blíže k hodnotě "Velký" musí kurzor urazit větší dálku, než je zachycen jako pohyb.</para>
+
+        <note>
+          <para>Nastavení prahu pohybu nefunguje jen pro Kliknutí počkáním, ale i pro Simulované podružné kliknutí, i když je Kliknutí počkáním vypnuto.</para>
+        </note>
+      </sect3>
+    </sect2>
+
+    <sect2 id="mouse-a11y-pointer-capture-description">
+      <title>Popis funkce Zachycení kurzoru</title>
+
+      <para>Jsou lidé, kteří používají ukazovací zařízení nejen pro počítač. Tito lidé by uvítali způsob uzamčení kurzoru do oblasti obrazovky tak, aby mohli používat jejich ukazovací zařízení pro jiné úkoly.</para>
+
+      <para>Takže applet Zachycení kurzoru vytvoří na panelu oblast, do které může uživatel zamknout kurzor, dokud jej neuvolní přednastaveným způsobem.</para>
+
+      <remark>Chcete-li zjistit informace o instalaci appletu Zachycení kurzoru na panel GNOME, podívejte se do <link linkend="mouse-a11y-start-pointer-capture">Spuštění funkce Zachycení kurzoru</link>.</remark>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/mouse-a11y-pointer-capture-context-menu.png" format="PNG"/>
+        </imageobject>
+
+        <textobject>
+          <para>Obrázek ukazující oblast zachycení kurzoru (zelená) s kontextovou nabídkou</para>
+        </textobject>
+
+        <imageobject>
+          <imagedata fileref="figures/mouse-a11y-pointer-capture-locked.png" format="PNG"/>
+        </imageobject>
+
+        <textobject>
+          <para>Obrázek oblasti zachycení kurzoru ve stavu uzamčení kurzoru</para>
+        </textobject>
+      </mediaobject>
+
+      <para>Zvolením <guimenu>Předvolby</guimenu> z kontextové nabídky appletu <guilabel>Zachycení kurzoru</guilabel> otevře uživatel okno s možnostmi appletu <guilabel>Zachycení kurzoru</guilabel>:</para>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/mouse-a11y-pointer-capture-preferences.png" format="PNG"/>
+        </imageobject>
+
+        <textobject>
+          <para>Obrázek ukazující předvolby appletu Zachycení kurzoru</para>
+        </textobject>
+      </mediaobject>
+
+      <para>V okně <guilabel>Předvolby</guilabel> appletu <guilabel>Zachycení kurzoru</guilabel> se nacházejí tři sekce:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>V sekci <guilabel>Zachycení kurzoru</guilabel> může uživatel stanovit, za jakých okolností se kurzor zachytí, když se umístí do oblasti zachycení. Například: pokud je zaškrtnutý modifikátor Ctrl, kurzor se zachytí, když je nad oblastí zachycení a uživatel stiskne modifikační klávesu Ctrl. Pokud není zaškrtnutý žádný modifikátor a tlačítko myši je nastaveno na 0, stačí pro uzamčení  přesunout kurzor do oblasti zachycení.</para>
+
+          <para>Je také možné stanovit kombinaci modifikátorů a tlačítka myši.</para>
+        </listitem>
+
+        <listitem>
+          <para>V sekci <guilabel>Uvolnění kurzoru</guilabel> může uživatel stanovit, jaký modifikátor nebo tlačítko myši uvolní kurzor.</para>
+
+          <para>Je také možné stanovit kombinaci modifikátorů a tlačítka myši.</para>
+        </listitem>
+
+        <listitem>
+          <para>V sekci <guilabel>Velikost oblasti zachycení</guilabel> může uživatel stanovit šířku oblasti zachycení na panelu GNOME.</para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+
+  <sect1 id="mouse-a11y-about">
+    <title>O appletu <application>Mousetweaks</application></title>
+
+    <sect2>
+      <title>Autoři a hostitelské stránky</title>
+
+      <para><application>Mousetweaks</application> je založeno na <ulink type="https" url="https://wiki.ubuntu.com/Accessibility/Specs/MouseTweaks">specifikaci</ulink> uvedené na Launchpadu. Na realizaci se podílel Gerd Kohlberger ( <email>gerdk@svn.gnome.org</email> ) a já ( <email>frfumanti@svn.gnome.org</email> ) jsem pomohl s testováním a organizací.</para>
+
+      <para>Více informací o Mousetweaks můžete najít na stránkách <ulink type="https" url="https://launchpad.net/mousetweaks">Launchpad</ulink> a <ulink url="http://live.gnome.org//Mousetweaks/Home">GNOME Live</ulink>.</para>
+    </sect2>
+
+    <sect2>
+      <title>Ohlasy</title>
+
+      <para>Chcete-li podat oznámení o chybě nebo návrh co se týče modulu <application>mousetweaks</application>, jeho uživatelského rozhraní nebo příručky, navštivte stránku <ulink type="http" url="http://bugzilla.gnome.org/">GNOME Bugzilla</ulink>. Co se týče rozvržení karty Zpřístupnění v ovládacím panelu Předvolby myši, odvolejte se prosím na modul gnome-control-center; cokoli jiného ohledně mousetweaks směřujte na modul mousetweaks.</para>
+    </sect2>
+
+    <sect2>
+      <title>Licence</title>
+
+      <para>Mousetweaks je šířen za podmínek licence GNU General Public License vydané nadací Free Software Foundation, buď verze 3 této licence nebo (dle vlastního uvážení) kterékoliv pozdější verze. Kopii licence naleznete pod tímto <ulink type="http" url="http://www.gnu.org/licenses/gpl-3.0.txt">odkazem</ulink> nebo v souboru COPYING.GPL obsaženém ve zdrojovém kódu tohoto programu.</para>
+
+      <para>Tato příručka je šířena za podmínek licence GNU Free Documentation License vydané nadací Free Software Foundation, buď verze 1.3 této licence nebo (dle vlastního uvážení) kterékoliv pozdější verze. Kopii licence naleznete pod tímto <ulink type="http" url="http://www.gnu.org/licenses/fdl-1.3.txt">odkazem</ulink> nebo v souboru COPYING.FDL obsaženém ve zdrojovém kódu tohoto programu.</para>
+    </sect2>
+  </sect1>
+</article>

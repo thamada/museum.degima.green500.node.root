@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Fedora_Desktop" lang="pl-PL">
+	<title>Pulpit Fedory</title>
+	<remark>Ta treść znajduje się tutaj: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Desktop">https://fedoraproject.org/wiki/Docs/Beats/Desktop</ulink></remark>
+	<section id="sect-Release_Notes-Fedora_Desktop-Spanning_Desktop">
+		<title>Łączenie pulpitu</title>
+		<para>
+			W najnowszej wersji serwera &#39;&#39;&#39;Xorg&#39;&#39;&#39; dołączonej do tego wydania, w przypadku ustawienia dwóch monitorów ekran pulpitu będzie domyślnie rozdzielany między nimi, zamiast używać klonowania ekranu. Upodabnia to do zachowania innych systemów operacyjnych.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-Webcam">
+		<title>Lepsza obsługa kamer internetowych</title>
+		<para>
+			Funkcja lepszej obsługi kamer internetowych dla Fedory&nbsp;10 znacznie ulepszyła obsługę kamer internetowych w systemie Linux. Teraz istnieje biblioteka (<application>libv4l</application>) do dekompresowania różnych własnościowych formatów obrazu w obszarze użytkownika, a prawie wszystkie aplikacje używające kamer internetowych zostały załatane do używania tej biblioteki.
+		</para>
+		<para>
+			Fedora&nbsp;12 zawiera drugą turę ulepszeń obsługi kamer, składającą się z trzech części: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Dużo testowania, naprawiania błędów i ulepszania istniejących sterowników w jądrze.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Dodanie przetwarzania obrazu do biblioteki <application>libv4l</application> w celu uzyskania lepszej jakości obrazu w kamerach nieposiadających tych funkcji w sprzęcie: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Balans bieli
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Korekcja gammy
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Automatyczne dopasowywanie ekspozycji (wzmocnienia)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Rozpoznawanie kamer w laptopach, które są montowane do góry nogami i programowe obracanie obrazu o 180 stopni
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Wyczyszczenie sterowników istniejących poza jądrem, przeniesienie dekompresji do biblioteki <application>libv4l</application> tam, gdzie jest to wymagane i przeniesienie ich do głównego jądra, zwłaszcza następujących: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									qc-usb: kamery oparte na stv0600 (i podobnych), głównie Logitech QuickCam Express (ukończono w jądrze 2.6.29)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									ov51x-jpeg: sterownik ov511(+) i ov518(+) (ukończone w jądrze 2.6.31rc1, bibliotece libv4l-0.6.0)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									qc-usb-messenger: kamery oparte na st6422, głównie modele Logitech QuickCam Messenger (ukończono w jądrze 2.6.31rc1)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									sn9c20x: kamery oparte na sn9c20x, wiele nowych tanich kamer internetowych (ukończono w jądrze 2.6.31rc2)
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-ABRT">
+		<title>ABRT</title>
+		<para>
+			Narzędzie automatycznego zgłaszania błędów <application>ABRT</application> zastępuje narzędzia <application>bug-buddy</application> i <application>kerneloops</application> na pulpicie Fedory&nbsp;12. <application>ABRT</application> posiada rozszerzalną architekturę i może przechwytywać i zgłaszać nie tylko naruszenia ochrony pamięci i awarie jądra, ale także wyjątki języka Python. W porównaniu do <application>bug-buddy</application>, może przechwytywać naruszenia ochrony pamięci w każdym pliku binarnym, nie tylko w aplikacjach GTK+.
+		</para>
+		<para>
+			Jeśli wcześniej ręcznie zmodyfikowano ustawienia <application>GConf</application> dla modułu GTK+ <application>bug-buddy</application>, mogą pojawić się komunikaty ostrzeżeń z aplikacji GTK+, takie jak ten poniższy:
+		</para>
+		
+<screen><computeroutput>Gtk-Message: Wczytanie modułu "gnomebreakpad" nie powiodło się:</computeroutput>
+<computeroutput>libgnomebreakpad.so: nie można otworzyć współdzielonego pliku obiektu: nie ma takiego pliku lub katalogu</computeroutput>
+</screen>
+		<para>
+			Aby zatrzymać te komunikaty, należy wykonać następujące polecenie w terminalu we własnej sesji:
+		</para>
+		
+<screen><command>gconftool-2 --type bool --set /apps/gnome_settings_daemon/gtk-modules/gnomebreakpad false</command>
+</screen>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-GNOME">
+		<title>GNOME 2.28</title>
+		<para>
+			Środowisko <application>GNOME 2.28.1</application> będące częścią tego wydania jest domyślnym środowiskiem używanym na obrazie Live "Desktop" Fedory. Obraz Live "Desktop" jest płytą CD do pobrania, której można użyć do przetestowania nowego środowiska GNOME instalując je lub nie. Obraz może zostać zapisany na płycie CD lub dysku USB flash. Instrukcje można znaleźć na <ulink url="https://fedoraproject.org/wiki/FedoraLiveCD/USBHowTo"></ulink>.
+		</para>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Icons">
+			<title>Ikony w menu i na przyciskach</title>
+			<para>
+				Ikony w menu i na przyciskach nie są domyślnie wyświetlane w środowisku <application>GNOME 2.28</application>. Aby odzyskać poprzedni, bogaty w ikony wygląd, należy wybrać <menuchoice><guimenu>System</guimenu><guimenuitem>Preferencje</guimenuitem><guimenuitem>Wygląd</guimenuitem></menuchoice>, nacisnąć kartę <guilabel>Interfejs</guilabel> i włączyć opcję <guilabel>Wyświetlanie ikon w menu</guilabel>. Nie ma jednakże żadnego interfejsu do włączenia ikon na przyciskach. Aby ustawić odpowiednie klucze GConf zamiast włączania wyświetlania ikon w menu i na przyciskach: 
+<screen><command>gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true</command>
+<command>gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true</command>
+</screen>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Changes">
+			<title>Dodatkowe ulepszenia w środowisku GNOME 2.28</title>
+			<para>
+				W porównaniu do poprzednich wydań Fedory wprowadzono wiele zmian w domyślnej konfiguracji pulpitu GNOME: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							Okno dialogowe preferencji "Okna" nie jest już domyślnie instalowane. Jest jednak ciągle dostępne w pakiecie control-center-extra
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Okno dialogowe preferencji "Menu główne" nie jest już domyślnie instalowane. Jest ciągle dostępne w pakiecie alacarte
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Przełącznik użytkowników został przeniesiony na prawą stronę górnego panelu
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Przycisk "Wyświetl pulpit" został domyślnie usunięty. Można z powrotem dodać ten aplet panelu za pomocą prawego przycisku myszy, wybrania "Dodaj do panelu..." i wybranie "Wyświetl pulpit".
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Liczba obszarów roboczych na "Przełączniku obszarów roboczych" została zmniejszona do dwóch
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Panel dodaje teraz odstępu między apletami i ikonami na obszarze powiadamiania. Odstęp można usunąć za pomocą następujących poleceń: 
+<screen>gconftool-2 --type int --set /apps/panel/toplevels/top_panel/padding 0
+gconftool-2 --type int --set /apps/panel/toplevels/bottom_panel/padding 0
+gconftool-2 --type int --set /apps/panel/applets/systray/prefs/padding 0
+</screen>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Gnote">
+			<title>Gnote</title>
+			<para>
+				W tym wydaniu program <application>Gnote</application> jest domyślnie instalowany w środowisku GNOME, zastępując program <application>Tomboy</application>. <application>Gnote</application> jest portem programu <application>Tomboy</application> z Mono do C++, który zużywa mniej zasobów. <application>Gnote</application> jest zarówno apletem umieszczonym na panelu GNOME, jak i oddzielną aplikacją, którą można uruchomić w innych środowiskach graficznych. Live CD "Desktop" Fedory od wydania Fedory 10 nie zawiera Mono, a więc także aplikacje oparte na Mono, takie jak <application>Tomboy</application> z powodu braku miejsca. Program <application>Gnote</application> będzie także domyślnie instalowany w Live CD w tym wydaniu. Program <application>Tomboy</application> jest w dalszym ciągu dostępny jako opcjonalna alternatywa. Jeśli przeprowadzana jest aktualizacja z poprzedniego wydania pozostawiony zostanie program <application>Tomboy</application>. Jego użytkownicy mogą łatwo migrować do programu <application>Gnote</application>, ponieważ współdzieli on format plików i udostępnia wtyczkę, która automatycznie importuje notatki programu <application>Tomboy</application> podczas pierwszego uruchomienia. Wiele wtyczek programu <application>Tomboy</application> zostało przeniesionych do programu <application>Gnote</application>. Następujące wtyczki są dostępne jako część programu <application>Gnote</application>: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							Odnośniki do Bugzilli
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Importowanie z programu Tomboy
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Stała szerokość
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Umieszczanie daty
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Eksport do HTML
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Obsługa drukowania
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Importowanie z programu Sticky Notes
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Odnośniki wsteczne
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+			<para>
+				Można skopiować notatki z programu <application>Tomboy</application> do <application>Gnote</application> używając następującego polecenia w katalogu domowym: 
+<screen><command>cp -r .tomboy .gnote</command>
+</screen>
+			</para>
+			<para>
+				Aplet "Sticky Notes" nie jest już dostarczany, ponieważ program <application>Gnote</application> dostarcza lepsze narzędzie do sporządzania notatek i jest domyślnie dostępny w tym wydaniu.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Sound_preferences">
+			<title>Preferencje dźwięku</title>
+			<para>
+				Preferencje dźwięku GNOME obsługują teraz przełączanie profili.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Empathy">
+			<title>Empathy</title>
+			<para>
+				Program <application>Empathy</application> zastępuje program <application>Pidgin</application> jako domyślny komunikator w środowisku GNOME. <application>Empathy</application> jest lepiej zintegrowane ze środowiskiem GNOME i dostarcza funkcjonalność audio/wideo dla użytkowników protokołu XMPP (dawniej Jabber) z wieloma planowanymi ulepszeniami. <application>Empathy</application> obsługuje importowanie kont z programu <application>Pidgin</application> podczas pierwszego uruchomienia, więc można łatwo migrować. Jeśli przeprowadzana jest aktualizacja z poprzedniego wydania, domyślnie pozostawiony zostanie program <application>Pidgin</application>. <application>Pidgin</application> jest w dalszym ciągu dostępny w repozytorium i jest pod aktywną opieką.
+			</para>
+			<para>
+				Główne zalety i wady programu <application>Empathy</application>: 
+				<itemizedlist>
+					<title>Zalety</title>
+					<listitem>
+						<para>
+							Lepsza integracja ze środowiskiem GNOME. Hasła są przechowywane w bazie kluczy zamiast zwykłego tekstu, jak w programie <application>Pidgin</application>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Rozmowy głosowe za pomocą <application>GoogleTalk</application>. Rozmowy głosowe wymagają dodatkowych kodeków biblioteki <application>GStreamer</application> i ręcznego ponownego skonfigurowania zapory sieciowej. Program <application>Pidgin</application> używa teraz tej samej struktury.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Obsługa migracji kont z programu <application>Pidgin</application> została dodana do programu <application>Empathy</application>.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Obsługa współpracy z programem <application>AbiWord</application> i innymi
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Geolokalizacja (najnowsza funkcja)
+						</para>
+					</listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<title>Wady</title>
+					<listitem>
+						<para>
+							Brak systemu wtyczek, więc wiele dodatkowych funkcji dostępnych dla programu <application>Pidgin</application> (np. szyfrowanie) nie jest dostępnych dla programu <application>Empathy</application>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Brak obsługi pośrednika
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Totem">
+			<title>Totem</title>
+			<para>
+				<application>Totem</application> obsługuje teraz tylko zaplecze <application>GStreamer</application>. Zaplecze <application>totem-xine</application> zostało całkowicie usunięte.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Epiphany">
+			<title>Epiphany</title>
+			<para>
+				<application>Epiphany</application> w tym wydaniu używa mechanizmu WebKit zamiast mechanizmu Gecko z programu <application>Firefox</application>.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME_Shell">
+			<title>GNOME Shell &mdash; podgląd środowiska GNOME 3</title>
+			<para>
+				Bardzo wczesna wersja GNOME Shell jest teraz dostępna w repozytorium. GNOME Shell jest kluczową częścią środowiska GNOME 3 i jest aktywnie rozwijane z dużym udziałem programistów i projektantów Fedory. Prostym sposobem na wypróbowanie GNOME Shell jest zainstalowanie pakietu <package>desktop-effects</package>: 
+<screen><command>yum install desktop-effects gnome-shell</command>
+</screen>
+			</para>
+			<para>
+				Następnie należy nacisnąć <menuchoice><guimenu>System</guimenu><guimenuitem>Preferencje</guimenuitem><guimenuitem>Efekty pulpitu</guimenuitem></menuchoice>
+			</para>
+			<para>
+				Aby skonfigurować ręcznie, należy wykonać 
+<screen><command>mkdir ~/.config/autostart</command>
+<command>ln -s /usr/share/applications/gnome-shell.desktop ~/.config/autostart</command>
+</screen>
+			</para>
+			<para>
+				Można także wykonać następujące polecenie, aby przywołać bezpośrednio. 
+<screen><command>gnome-shell --replace &amp;</command>
+</screen>
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-KDE">
+		<title>KDE 4.3</title>
+		<para>
+			Środowisko <application>KDE 4.3</application>, będące częścią tego wydania jest domyślnym środowiskiem dla obrazu "KDE Dekstop" Fedory. Ten obraz jest płytą CD do pobrania, której można użyć do przetestowania nowego środowiska KDE instalując je lub nie. Można zapisać obraz na płytę CD lub dysk USB flash.
+		</para>
+		<para>
+			<application>KDE 4.3</application> jest najnowszym wydaniem środowiska KDE 4, z wieloma ulepszeniami i nowymi funkcjami. <application>Plasma</application> posiada nowy wygląd <citetitle>Air</citetitle>, ulepszone zarządzanie zadaniami i powiadomieniami oraz całkowicie konfigurowalne skróty klawiszowe. Są także nowe widgety <application>Plasmy</application>, a istniejące zostały ulepszone. <application>KWin</application> zostało zoptymalizowane pod względem wydajności i wprowadza nowe efekty pulpitu w środowisku KDE. KDE zawiera teraz nowe narzędzie zgłaszania błędów, ułatwiając zgłaszanie błędów programistom KDE.
+		</para>
+	</section>
+
+</section>
+
+

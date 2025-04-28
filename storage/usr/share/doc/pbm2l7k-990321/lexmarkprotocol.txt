@@ -1,0 +1,168 @@
+$Id: lexmarkprotocol.txt,v 1.5 1999/02/28 21:22:23 henryk Exp $
+(C) 1999 Henryk Paluch
+Lexmark 7000 - documentation of undocumented protocol
+-----------------------------------------------------
+
+This document describes communication protocol used by Lexmark 7000 printer.
+The key problem is, that Lexmark consider the protocol top secret &
+copyrighted, so all information bellow was guessed! Use on your own risk!
+
+
+
+All Escape sequences begin with
+<- *
+1B 2A
+
+<- *  m  .  @
+1B 2A 6D 00 40 ....                   56h bytes   -- Init
+
+<- *  .  s  0
+1B 2A 07 73 30
+-------- EPSON (?) or PCL (?) sequence - length - various
+
+<- *  .  c
+1B 2A 07 63
+-------- again EPSON (?) -- various length
+
+
+1B 2A 6D 00 42 ...
+-------------- various init ? -- length - various
+
+<- *  .  .  .
+1B 2A 03 04 EA     -- 5 bytes -- 4EAh means offset
+-------- paper shift
+
+<- *  .  .  .  .  .  .    .  .  .   .   .   .   .  .  
+1B 2A 04 00 00 L1 L2 6x?? N1 N2 HS1 HS2 HE1 HE2 00 00 
+
+   "  3  D  U
+   22 33 44 55 01 N1,2x<packets>
+-------- print pixels
+L1,2  - complete length of the sequence (including data) BE order
+N1,N2 - number of packes, BE order
+HS1,2 - horizontal offset start
+HE1,2 - horizontal offset end
+Should be valid: N = (HE-HS)+1
+
+packets
+
+every packet define exatly one vertical line, but it contains information
+for both left & right inkjets!
+
+3? FF - where number of zero bits in ?x2 means number of data bytes e.g.
+3F FF - no byte follows
+3B FF - 2 bytes
+37 FF - 2 bytes
+36 FF - 4 bytes
+35 FF - 4 bytes
+32 FF - 2 bytes
+31 FF - 2 bytes
+30 FF - 8 bytes
+
+1F ?? - like 3? FF
+1F FE - 2 bytes
+1F E6 - 6 bytes
+1F F6 - 4 bytes
+
+NOTE: 2? ?? packets behave very strange. I'm using only 3? ?? packets...
+
+2F FF - 2 bytes ?? why ??
+
+       <--------byte1----------> <--------byte2---------->
+2F FF | L1 R1 L2 R2 L3 R3 L4 R4 | L5 R5 L6 R6 L7 R7 L8 R8 |
+
+L? = left ink
+R? = right ink
+
+ink jets layout:
+
+         L1    
+               R1
+         L2    
+               R2
+         ........
+         L8    
+               R8
+
+Horizontal resolution is always 600dpi.
+Vertical resolution is 300dpi for one series.
+Using either left & right series we got 600dpi vertically.
+But we must take account the distance betwen two series
+(about 16 - visible when doing align test)
+
+
+
+3? ?? <bytes 2x zero bits in ?) byte format same as above (Li Ri)
+For Example:
+
+3F FC AA AA A0 00
+3    F    F   C    LRLRLRLR LRLRLRLR LRLRLRLR LRLRLRLR
+0011 1111 11111100 10101010 10101010 10100000 00000000
+     ^           ^ highest jet  1= white 0=two bytes
+     lowest jet
+
+We should get (hopefully)
+     0       -
+           0  \
+    .........   - number of 1 * 16  10 * 16 = 160 zeroes
+     0      - /
+           0
+     1      -
+           0 \
+     .......   - 10 * Left black
+     1       /
+           0\
+     .......  - 6 * white
+     0      /
+          0
+
+    96  + 96 = 192 ink jets
+
+3F sequence can drive 12 * 8 * 2 = 192 ink jets in head
+
+
+<- *  .  e
+1B 2A 07 65 ...  Note: various bytes after sequence  ?? why ??
+----------- Paper Eject 
+
+Colour printing
+----------------
+
+There is difference in 6x?? packets:
+
+ 00 02 01 01 1A 11  Black & White printing (Left cartridge)
+ 00 03 01 00 18 11  Colour printing (Right cartridge)
+
+It is possible to use same data packets for colour and Black & White
+packets. 
+Colour printing is real nightmare, because there is vertical space
+between colors (ooouuuuggggghhhh!). It looks like this for one pass:
+O        -| 
+     O    |
+O         |  64 Cyan Ink Jets
+     O   -| 
+  x
+  x          small vertical space (!)
+O        -| 
+     O    |
+O         |  64 Magenta Ink Jets
+     O   -| 
+  x
+  x          small vertical space (!)
+O        -| 
+     O    |
+O         |  64 Yellow Ink Jets
+     O   -| 
+
+The big problem is just in "small vertical space". Try to print
+"stairsc.prn" and you'll find that...
+ 
+
+
+Notes for Lexmark 5700:
+-----------------------
+It seems to have only two significant differences:
+Different prologue (107 bytes long).
+12th byte in main sequence 1B 2A 04 00 00
+is set to 01 instead of 11...
+

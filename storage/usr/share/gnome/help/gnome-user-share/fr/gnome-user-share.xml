@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.26">
+<!ENTITY app "gnome-user-share">
+]>
+<article id="index" lang="fr">
+  <articleinfo>
+	 <title>Manuel du partage de fichiers personnels</title>
+	 <copyright>
+		<year>2009</year>
+		<holder>Red Hat, Inc.</holder>
+         </copyright><copyright><year>2009</year><holder>Claude Paroz (claude@2xlibre.net)</holder></copyright><copyright><year>2009</year><holder>Bruno Brouard (annoa.b@gmail.com)</holder></copyright>
+
+	 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+	 <authorgroup>
+           <author role="maintainer">
+             <firstname>Matthias</firstname>
+             <surname>Clasen</surname>
+           </author>
+	 </authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+		<revision>
+		  <revnumber>1.0</revnumber>
+		  <date>2009</date>
+		  <revdescription>
+			 <para role="author">Matthias Clasen <email>mclasen@redhat.com</email></para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Ce manuel documente la version 2.26 de gnome-user-share.</releaseinfo>
+	 <legalnotice>
+		<title>Votre avis</title>
+		<para>Pour rapporter une anomalie ou émettre une suggestion concernant l'application gnome-user-share ou ce manuel, procédez comme indiqué sur la <ulink url="ghelp:user-guide?feedback-bugs" type="help">page de réactions sur GNOME</ulink>.</para>
+	 </legalnotice>
+    <abstract role="description">
+      <para>gnome-user-share est un service de session qui permet de partager facilement des fichiers entre plusieurs ordinateurs.</para>
+    </abstract>
+  </articleinfo>
+  <indexterm><primary>gnome-user-share</primary></indexterm>
+  <indexterm><primary>partage de fichiers</primary></indexterm>
+  <indexterm><primary>partage</primary></indexterm>
+
+  <sect1 id="gnome-user-share-intro">
+	 <title>Introduction</title>
+	 <para>gnome-user-share est un service de session qui exporte le contenu du dossier <filename>Public</filename> de votre dossier personnel, afin que l'on puisse facilement accéder aux fichiers qui s'y trouvent depuis d'autres ordinateurs du réseau local. Sur les autres ordinateurs, le nom du dossier partagé apparaît sous la forme « Fichiers partagés de <replaceable>utilisateur</replaceable> » dans la fenêtre Réseau de <application>Nautilus</application>, où <replaceable>utilisateur</replaceable> est remplacé par votre nom d'utilisateur.</para>
+	 <para>gnome-user-share utilise un serveur WebDAV pour partager le dossier <filename>Public</filename> et il publie le partage sur le réseau local en utilisant mDNS.</para>
+         <para>De plus, gnome-user-share peut aussi rendre disponible les fichiers partagés par ObexFTP sur Bluetooth et recevoir les fichiers envoyés par Bluetooth à votre ordinateur via ObexPush.</para>
+  </sect1>
+
+  <sect1 id="gnome-user-share-getting-started">
+    <title>Premiers pas</title>
+
+    <sect2 id="gnome-user-share-start">
+       <title>Lancement de gnome-user-share</title>
+
+       <para>
+         The gnome-user-share service is normally started by <application>gnome-session</application> when you log in. You can change this by opening <menuchoice><guimenu>Preferences</guimenu><guimenu>Startup Applications</guimenu></menuchoice> in the <guimenu>System</guimenu> menu, and modifying the 'User Sharing' entry in the list of startup programs.
+       </para>
+
+       <para>Pour configurer les différents aspects du partage de fichiers, ouvrez les préférences de partage de fichiers qui se trouvent dans le menu <guimenu>Système</guimenu>, sous <menuchoice><guimenu>Préférences</guimenu><guimenu>Partage de fichiers personnels</guimenu></menuchoice>.</para>
+       <figure id="file-sharing-preferences">
+         <title>Préférences du partage de fichiers</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/file-sharing-preferences.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+ 
+     </sect2>
+     <sect2 id="gnome-user-share-enabling-sharing">
+       <title>Activation du partage de fichiers sur le réseau</title>
+       <para>Ouvrez les préférences de partage de fichiers en choisissant <menuchoice><guimenu>Préférences</guimenu><guimenu>Partage de fichiers personnels</guimenu></menuchoice> dans le menu <guimenu>Système</guimenu>.</para>
+       <figure id="sharing-over-the-network">
+         <title>Partage de fichiers sur le réseau</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-the-network.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Pour activer le partage de fichiers par WebDAV, cochez la case <guilabel>Partager les fichiers publics sur le réseau</guilabel>. Lorsque le partage de fichiers est activé, vous pouvez définir une protection par mot de passe ; celui-ci sera nécessaire pour accéder aux fichiers partagés à partir d'un autre ordinateur. <note><para>Il se peut que certaines configurations de pare-feu sur la machine locale posent problème pour la publication et pour l'accès aux fichiers partagés. Consultez votre administrateur système pour plus de détails.</para></note><itemizedlist>
+           <listitem>
+              <para>Choisissez <guilabel>Jamais</guilabel> pour permettre à tout le monde de lire et écrire librement des fichiers dans le dossier partagé.</para>
+           </listitem>
+           <listitem>
+              <para>Choisissez <guilabel>Toujours</guilabel> pour exiger le mot de passe avant de pouvoir lire et écrire des fichiers dans le dossier partagé.</para>
+           </listitem>
+           <listitem>
+              <para>Choisissez <guilabel>Au moment d'écrire les fichiers</guilabel> pour permettre à tout le monde de lire des fichiers dans le dossier public, mais exiger le mot de passe s'ils souhaitent écrire (créer, modifier ou effacer) des fichiers.</para>
+           </listitem>
+         </itemizedlist><note><para>Si vous configurez un mot de passe, vous devez fournir le mot de passe à tous les utilisateurs dont vous autorisez l'accès aux fichiers partagés. Par conséquent, vous devez utiliser un mot de passe différent des autres mots de passe que vous utilisez.</para></note></para>  
+     </sect2>
+
+     <sect2 id="gnome-user-share-enabling-bluetooth">
+       <title>Activation du partage de fichiers par Bluetooth</title>
+       <para>Ouvrez les préférences de partage de fichiers en choisissant <menuchoice><guimenu>Préférences</guimenu><guimenu>Partage de fichiers personnels</guimenu></menuchoice> dans le menu <guimenu>Système</guimenu>.</para>
+       <figure id="sharing-over-bluetooth">
+         <title>Partage de fichiers par Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Pour activer le partage de fichiers par Bluetooth, cochez la case <guilabel>Partager les fichiers publics par Bluetooth</guilabel>. Pour autoriser les périphériques Bluetooth externes à supprimer des fichiers dans votre dossier partagé, cochez la case <guilabel>Autoriser les périphériques externes à supprimer des fichiers</guilabel>. Pour permettre aux périphériques Bluetooth externes d'accéder à vos fichiers partagés même s'ils ne sont pas liés à votre ordinateur, cochez la case <guilabel>Exiger que les périphériques externes se lient à cet ordinateur</guilabel>. <note><para>Lorsque vous permettez à des périphériques externes non liés d'accéder à vos fichiers partagés, toute personne se trouvant à proximité de votre ordinateur avec un téléphone portable où Bluetooth est activé peut accéder et peut-être même modifier vos fichiers partagés.</para></note></para>
+     </sect2>
+
+     <sect2 id="gnome-user-share-bluetooth-receiving">
+       <title>Réception de fichiers par Bluetooth</title>
+       <para>Ouvrez les préférences de partage de fichiers en choisissant <menuchoice><guimenu>Préférences</guimenu><guimenu>Partage de fichiers personnels</guimenu></menuchoice> dans le menu <guimenu>Système</guimenu>.</para>
+       <figure id="receiving-over-bluetooth">
+         <title>Réception de fichiers par Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/receiving-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>Pour permettre à des périphériques Bluetooth d'envoyer des fichiers à votre ordinateur, cochez la case <guilabel>Recevoir des fichiers par Bluetooth dans le dossier Téléchargements</guilabel>. Les fichiers reçus seront placés dans le dossier <filename>Téléchargements</filename> de votre dossier personnel. Lorsque la réception de fichiers est activée, la liste déroulante <guilabel>Accepter les fichiers</guilabel> permet de déterminer quels périphériques distants sont autorisés à envoyer des fichiers. <itemizedlist>
+            <listitem>
+              <para>Choisissez <guilabel>Toujours</guilabel> pour permettre à n'importe quel périphérique externe d'envoyer des fichiers.</para>
+            </listitem>
+            <listitem>
+              <para>Choisissez <guilabel>Seulement pour les périphériques liés</guilabel> pour n'accepter que les fichiers en provenance de périphériques liés. <note><para>Les périphériques liés sont ceux qui ont déjà été connectés à votre ordinateur ce qui a nécessité la saisie d'un code PIN lors de leur connexion.</para></note></para>
+            </listitem>
+            <listitem>
+              <para>Choisissez <guilabel>Seulement pour les périphériques sûrs et liés</guilabel> pour n'accepter que les fichiers des périphériques de confiance et liés. <note><para>Des périphériques peuvent être signalés comme sûrs dans la section <guilabel>Périphériques connus</guilabel> de <application>bluetooth-properties</application>.</para></note></para>
+            </listitem>
+          </itemizedlist></para>
+        <para>Cochez la case <guilabel>Avertir quand des fichiers ont été reçus</guilabel> si vous souhaitez être averti chaque fois que vous recevez un fichier par Bluetooth.</para>
+     </sect2>
+  </sect1>
+
+</article>

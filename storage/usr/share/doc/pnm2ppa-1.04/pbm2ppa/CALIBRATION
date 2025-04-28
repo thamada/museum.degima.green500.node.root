@@ -1,0 +1,52 @@
+
+                  Calibrating pbm2ppa for Your Printer
+
+  Upon being able to print successfully, you can calibrate your printer with
+the 'pbmtpg' program (PBM test-pattern generator).  Calibration basically
+consists of centering the output on the page in order to allow for a
+reasonable maximum printing area.  [Note: if attempting to print only causes
+all three lights to blink, try widening the margins to something ridiculous
+during this procedure (like 600)]
+  The 'pbmtpg' program generates a full-page (8.5"x11") test pattern in
+pbmraw (P4) format on stdout.  The output may be fed directly into pbm2ppa
+in order to print a calibration pattern on your printer with commands such as:
+Assuming you printer is on /dev/lp0
+
+    pbmtpg | pbm2ppa > /dev/lp0
+      ( as root )
+(Note: /dev/lp0 is the default device for the primary parallel port on systems
+with 2.2.x or later Linux kernels; it is /dev/lp1 on  systems with
+older Linux 2.0.x kernels)
+
+For other papersizes, the command must specify a valid size, for both
+pbmtpg and pbm2ppa:
+
+    pbmtpg -a4 | pbm2ppa -s a4 > /dev/lp0
+    pbmtpg -legal | pbm2ppa -s legal > /dev/lp0
+    pbmtpg -letter | pbm2ppa -s letter > /dev/lp0
+
+For A4, US Legal of US Letter (default).
+
+      - or -
+
+    pbmtpg | pbm2ppa | lpr -l
+      ( if your printer filter recognizes the '-l' (direct output) parameter )
+
+  The numerical values marking grid intersections are pixel coordinates.
+Unfortunately, these coordinates are probably cut off before the edge of the
+paper.  You'll have to use a ruler to estimate the pixel coordinate of the 
+left and top edges of the actual sheet of paper (should be within +/- 300, may
+be negative, there are 600 pixels per inch).
+  Add these coordinates to the X and Y offsets by either: (1) editing the
+defaults.h file and recompiling, (2) modifying the default values in
+/etc/pbm2ppa.conf, if you've set this up, or (3) using the '-x' and '-y'
+command-line parameters.
+  When properly calibrated, the center mark should be in the center of the
+paper.  Also, the margins should be able to be as small as 1/4 inch without
+causing the printer to choke with 'blinking lights syndrome'.
+
+[TODO: Add shearing adjustments to pbm2ppa and explain here]
+
+
+
+

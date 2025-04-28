@@ -1,0 +1,449 @@
+Key:
+
+SX  - http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=X
+PRX - http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=X
+RHX - https://bugzilla.redhat.com/show_bug.cgi?id=X
+DX  - http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=X
+GX  - http://bugs.gentoo.org/show_bug.cgi?id=X
+
+CVE-XXXX-YYYY: http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=XXXX-YYYY
+
+New in release 1.8.3 (2010-11-24):
+
+* Allow the building of NetX to be disabled.
+* Switch to the IcedTea server for JAXP, JAF and JAXWS tarballs.
+* Security updates
+  - RH645843, CVE-2010-3860: IcedTea System property information leak via public static
+* Backports
+  - S6853592: VM test nsk.regression.b4261880  fails with "X Error of failed request:  BadWindow"
+    inconsistently.
+* NetX
+  - Do not prompt user multiple times for the same certificate.
+  - PR592: NetX can create invalid desktop entry files
+
+New in release 1.8.2 (2010-10-13):
+
+* Security updates
+  - S6914943, CVE-2009-3555: TLS: MITM attacks via session renegotiation 
+  - S6559775, CVE-2010-3568: OpenJDK Deserialization Race condition
+  - S6891766, CVE-2010-3554: OpenJDK corba reflection vulnerabilities
+  - S6925710, CVE-2010-3562: OpenJDK IndexColorModel double-free
+  - S6938813, CVE-2010-3557: OpenJDK Swing mutable static
+  - S6957564, CVE-2010-3548: OpenJDK DNS server IP address information leak
+  - S6958060, CVE-2010-3564: OpenJDK kerberos vulnerability
+  - S6963023, CVE-2010-3565: OpenJDK JPEG writeImage remote code execution
+  - S6963489, CVE-2010-3566: OpenJDK ICC Profile remote code execution
+  - S6966692, CVE-2010-3569: OpenJDK Serialization inconsistencies
+  - S6622002, CVE-2010-3553: UIDefault.ProxyLazyValue has unsafe reflection usage
+  - S6925672, CVE-2010-3561: Privileged ServerSocket.accept allows receiving connections from any host
+  - S6952017, CVE-2010-3549: HttpURLConnection chunked encoding issue (Http request splitting)
+  - S6952603, CVE-2010-3551: NetworkInterface reveals local network address to untrusted code
+  - S6961084, CVE-2010-3541: limit setting of some request headers in HttpURLConnection
+  - S6963285, CVE-2010-3567: Crash in ICU Opentype layout engine due to mismatch in character counts
+  - S6980004, CVE-2010-3573: limit HTTP request cookie headers in HttpURLConnection
+  - S6981426, CVE-2010-3574: limit use of TRACE method in HttpURLConnection
+  - S6990437: Update with correct copyright info for source and test files from SSR10_02 fixes
+* Fixes:
+  - G244901: Skip test_gamma on hardened (PaX-enabled) kernels
+  - G266295: Provide font configuration for Gentoo.
+  - Provide font configuration for RHEL 6.
+  - RH633510: OpenJDK should use NUMA even if glibc doesn't provide it
+* Backports:
+  - S6951319: enable solaris builds using Sun Studio 12 update 1 (fixes PR398)
+  - S6539464, RH500077: Ensure java.lang.Math functions provide consistent results.
+  - S6638712: Inference with wildcard types causes selection of inapplicable method
+  - S6650759: Inference of formal type parameter (unused in formal parameters) is not performed
+  - S6623943: javax.swing.TimerQueue's thread occasionally fails to start
+* NetX:
+  - Fix browser command in BasicService.showDocument(URL)
+  - Run programs that inherit main(String[]) in their main-class
+  - Run JNLP files that use 1.6 as the spec version
+  - RH601281: Possible NullPointerException in splash screen code
+  - New man page for javaws
+* Plugin 
+  - RH560193: Fix zip error when applet jar contained another 0-byte jar
+  - PR519: 100% CPU usage when displaying applets in Webkit based browsers
+
+New in release 1.8.1 (2010-07-28):
+
+- OpenJDK:
+  - 6678385: Fixes jvm crashes when window is resized.
+  - Produces the "expected" behavior for full screen applications, when
+    running the Metacity window manager.
+- IcedTeaNPPlugin.
+  - RH524387: javax.net.ssl.SSLKeyException: RSA premaster secret error
+  - Set context classloader for all threads in an applet's threadgroup
+  - PR436: Close all applet threads on exit
+  - PR480: NPPlugin with NoScript extension.
+  - PR488: Question mark changing into underscore in URL.
+  - RH592553: Fix bug causing 100% CPU usage.
+  - Don't generate a random pointer from a pthread_t in the debug output.
+  - Add ForbiddenTargetException for legacy support.
+  - Use variadic macro for plugin debug message printing.
+  - Don't link the plugin with libxul libraries.
+  - Fix race conditions in plugin initialization code that were causing hangs.
+  - RH506730: BankID (Norwegian common online banking authentication system) applet fails to load.
+  - Fix policy evaluation to match the proprietary JDK.
+  - PR491: pass java_{code,codebase,archive} parameters to Java.
+  - Adds javawebstart.version property and give user permission to read that property.
+- NetX:
+  - Fix security flaw in NetX that allows arbitrary unsigned apps to set
+    any java property.
+  - Fix a flaw that allows unsigned code to access any file on the
+    machine (accessible to the user) and write to it.
+  - Make path sanitization consistent; use a blacklisting approach.
+  - Make the SingleInstanceServer thread a daemon thread.
+  - Handle JNLP files which use native libraries but do not indicate it
+  - Allow JNLP classloaders to share native libraries
+  - Added encoding support
+- PulseAudio:
+  - Eliminate spurious exception throwing.
+- Zero/Shark:
+  - PR shark/483: Fix miscompilation of sun.misc.Unsafe::getByte.
+  - PR PR icedtea/324, icedtea/481: Fix Shark VM crash.
+  - Fix Zero build on Hitachi SH.
+* SystemTap support:
+  - PR476: Enable building SystemTap support on GCC 4.5.
+
+New in release 1.8 (2010-04-13):
+
+- Updated to OpenJDK6 b18.
+  - Nimbus Look 'n' Feel backported from OpenJDK7.
+  - JAXP and JAXWS now external dependencies rather than being in-tree.
+  - Updated timezone data
+  - Addition of security updates applied in IcedTea6 1.6.2.
+  - Many bug fixes:
+    http://blogs.sun.com/darcy/resource/OpenJDK_6/openjdk6-b18-changes-summary.html
+- Latest security updates and hardening patches:
+  - (CVE-2010-0837): JAR "unpack200" must verify input parameters (6902299)
+  - (CVE-2010-0845): No ClassCastException for HashAttributeSet constructors if run with -Xcomp (6894807)
+  - (CVE-2010-0838): CMM readMabCurveData Buffer Overflow Vulnerability (6899653)
+  - (CVE-2010-0082): Loader-constraint table allows arrays instead of only the base-classes (6626217)
+  - (CVE-2010-0095): Subclasses of InetAddress may incorrectly interpret network addresses (6893954)
+  - (CVE-2010-0085): File TOCTOU deserialization vulnerability (6736390)
+  - (CVE-2010-0091): Unsigned applet can retrieve the dragged information before drop action occurs (6887703)
+  - (CVE-2010-0088): Inflater/Deflater clone issues (6745393)
+  - (CVE-2010-0084): Policy/PolicyFile leak dynamic ProtectionDomains. (6633872)
+  - (CVE-2010-0092): AtomicReferenceArray causes SIGSEGV -> SEGV_MAPERR error (6888149)
+  - (CVE-2010-0094): Deserialization of RMIConnectionImpl objects should enforce stricter checks (6893947)
+  - (CVE-2010-0093): System.arraycopy unable to reference elements beyond Integer.MAX_VALUE bytes (6892265)
+  - (CVE-2010-0840): Applet Trusted Methods Chaining Privilege Escalation Vulnerability (6904691)
+  - (CVE-2010-0848): AWT Library Invalid Index Vulnerability (6914823)
+  - (CVE-2010-0847): ImagingLib arbitrary code execution vulnerability (6914866)
+  - (CVE-2009-3555): TLS: MITM attacks via session renegotiation
+  - 6639665: ThreadGroup finalizer allows creation of false root ThreadGroups
+  - 6898622: ObjectIdentifer.equals is not capable of detecting incorrectly encoded CommonName OIDs
+  - 6910590: Application can modify command array in ProcessBuilder
+  - 6909597: JPEGImageReader stepX Integer Overflow Vulnerability
+  - 6932480: Crash in CompilerThread/Parser. Unloaded array klass?
+- Old plugin removed; NPPlugin is now the default and is controlled by
+  --enable/disable-plugin.  As with the old plugin, it produces a
+  IcedTeaPlugin.so library rather than IcedTeaNPPlugin.so.
+- Dependence on the binary plugs mechanism removed.  The plugin and NetX
+  code is now imported into the JDK build in the same manner as langtools,
+  CORBA, JAXP and JAXWS.
+- Fix for plugin buffer overflow: https://bugzilla.mozilla.org/show_bug.cgi?id=555342
+- Fix issue with ant -diagnostics on ant 1.8.0 due to changed exit code
+- Zero/Shark
+  - Shark is now able to build itself.
+  - For ARM, add Thumb2 JIT.
+  - Fixed Shark sharkCompiler mattr memory corruption bug when using llvm 2.7.
+
+New in release 1.7.2 (2010-03-31):
+
+- Latest security updates and hardening patches:
+  - (CVE-2010-0837): JAR "unpack200" must verify input parameters (6902299)
+  - (CVE-2010-0845): No ClassCastException for HashAttributeSet constructors if run with -Xcomp (6894807)
+  - (CVE-2010-0838): CMM readMabCurveData Buffer Overflow Vulnerability (6899653)
+  - (CVE-2010-0082): Loader-constraint table allows arrays instead of only the base-classes (6626217)
+  - (CVE-2010-0095): Subclasses of InetAddress may incorrectly interpret network addresses (6893954)
+  - (CVE-2010-0085): File TOCTOU deserialization vulnerability (6736390)
+  - (CVE-2010-0091): Unsigned applet can retrieve the dragged information before drop action occurs (6887703)
+  - (CVE-2010-0088): Inflater/Deflater clone issues (6745393)
+  - (CVE-2010-0084): Policy/PolicyFile leak dynamic ProtectionDomains. (6633872)
+  - (CVE-2010-0092): AtomicReferenceArray causes SIGSEGV -> SEGV_MAPERR error (6888149)
+  - (CVE-2010-0094): Deserialization of RMIConnectionImpl objects should enforce stricter checks (6893947)
+  - (CVE-2010-0093): System.arraycopy unable to reference elements beyond Integer.MAX_VALUE bytes (6892265)
+  - (CVE-2010-0840): Applet Trusted Methods Chaining Privilege Escalation Vulnerability (6904691)
+  - (CVE-2010-0848): AWT Library Invalid Index Vulnerability (6914823)
+  - (CVE-2010-0847): ImagingLib arbitrary code execution vulnerability (6914866)
+  - (CVE-2009-3555): TLS: MITM attacks via session renegotiation
+  - 6639665: ThreadGroup finalizer allows creation of false root ThreadGroups
+  - 6898622: ObjectIdentifer.equals is not capable of detecting incorrectly encoded CommonName OIDs
+  - 6910590: Application can modify command array in ProcessBuilder
+  - 6909597: JPEGImageReader stepX Integer Overflow Vulnerability
+  - 6932480: Crash in CompilerThread/Parser. Unloaded array klass?
+- Backport of 6822370:
+  ReentrantReadWriteLock: threads hung when there are no threads holding onto the lock
+- Increase ThreadStackSize by 512kb on 32-bit Zero platforms
+- Check cacerts database is valid
+
+New in release 1.7.1 (2010-02-26):
+
+Bug fixes
+- PR179: Rhino bootclasspath issue
+- Add missing .c file to PulseAudio build
+Zero/Shark
+- Formatting changes and other fixes to match upstream
+- PR428: Shark on ARM precompiled header incls
+- Update Shark for LLVM r95390 API change.
+- S6927165: Zero S/390 fixes (from upstream)
+- Implemented Shark host CPU feature autotuner using LLVM 2.7 APIs.
+- Add s390 support to TCK setup helper script
+- Strip stupid options that llvm-config supplies
+- Update Shark for LLVM r94686 API change.
+- S6914622, S6909153, S6913869 upstream Zero fixes.
+NPPlugin fixes
+- PR446: Use JDK_UPDATE_VERSION to set the jpi version.
+- Re-designed frame embedding code so that the applet is dynamically
+  packed into given handle. This increases stability and breaks
+  reliance on the assumption that the browser will always provide a
+  handle in a certain sequence.
+- Encode new lines, carriage returns, and other special characters
+  before sending them to Java side (de-coding code is already in
+  effect on Java side).
+- Centralised and increased timeouts to give slow-loading applets
+  enough time to load.
+- Fix security permissions related to get/set property, based on
+  specifications.
+
+New in release 1.7 (2010-01-27):
+
+- Updated to OpenJDK6 b17.
+- Alpha version of the new IcedTea NPRuntime based plugin with support for 
+  Firefox >= 3.5, Chromium, and other browsers that support NPRuntime 
+  (use --enable-npplugin to build it).  For xulrunner >= 1.9.2 (used
+  by Firefox >= 3.6), the new plugin is required and the build will
+  automatically enable it if the old plugin is requested.
+- Support added for building with HotSpot 16 using
+  --with-hotspot-build=hs16.  This is the same as was released
+  in the proprietary JDK6 update 18.
+- Zero port updated to match the version submitted to OpenJDK
+  as closely as possible.
+- libjpeg7, libjpeg8, libpng 1.4 and libXext >= 1.1.0 supported.
+- Added JNI call tracing using systemtap version 1.0+ when
+  configuring with --enable-systemtap. See tapset/hotspot_jni.stp.
+- Add support for building the Zero assembler port on Hitachi SH.
+
+New in release 1.6.2 (2009-11-09)
+- Latest security updates:
+  - (CVE-2009-3728) ICC_Profile file existence detection information leak (6631533)
+  - (CVE-2009-3885) BMP parsing DoS with UNC ICC links (6632445)
+  - (CVE-2009-3881) resurrected classloaders can still have children (6636650) 
+  - (CVE-2009-3882) Numerous static security flaws in Swing (findbugs) (6657026)
+  - (CVE-2009-3883) Mutable statics in Windows PL&F (findbugs) (6657138)
+  - (CVE-2009-3880) UI logging information leakage (6664512)
+  - (CVE-2009-3879) GraphicsConfiguration information leak (6822057)
+  - (CVE-2009-3884) zoneinfo file existence information leak (6824265)
+  - (CVE-2009-2409) deprecate MD2 in SSL cert validation (Kaminsky) (6861062)
+  - (CVE-2009-3873) JPEG Image Writer quantization problem (6862968)
+  - (CVE-2009-3875) MessageDigest.isEqual introduces timing attack vulnerabilities (6863503)
+  - (CVE-2009-3876, CVE-2009-3877) OpenJDK ASN.1/DER input stream parser denial of service (6864911)
+  - (CVE-2009-3869) JRE AWT setDifflCM stack overflow (6872357)
+  - (CVE-2009-3874) ImageI/O JPEG heap overflow (6874643
+  - (CVE-2009-3871) JRE AWT setBytePixels heap overflow (6872358)
+
+New in release 1.5.3 (2009-11-09)
+- Latest security updates:
+  - (CVE-2009-3728) ICC_Profile file existence detection information leak (6631533)
+  - (CVE-2009-3885) BMP parsing DoS with UNC ICC links (6632445)
+  - (CVE-2009-3881) resurrected classloaders can still have children (6636650) 
+  - (CVE-2009-3882) Numerous static security flaws in Swing (findbugs) (6657026)
+  - (CVE-2009-3883) Mutable statics in Windows PL&F (findbugs) (6657138)
+  - (CVE-2009-3880) UI logging information leakage (6664512)
+  - (CVE-2009-3879) GraphicsConfiguration information leak (6822057)
+  - (CVE-2009-3884) zoneinfo file existence information leak (6824265)
+  - (CVE-2009-2409) deprecate MD2 in SSL cert validation (Kaminsky) (6861062)
+  - (CVE-2009-3873) JPEG Image Writer quantization problem (6862968)
+  - (CVE-2009-3875) MessageDigest.isEqual introduces timing attack vulnerabilities (6863503)
+  - (CVE-2009-3876, CVE-2009-3877) OpenJDK ASN.1/DER input stream parser denial of service (6864911)
+  - (CVE-2009-3869) JRE AWT setDifflCM stack overflow (6872357)
+  - (CVE-2009-3874) ImageI/O JPEG heap overflow (6874643
+  - (CVE-2009-3871) JRE AWT setBytePixels heap overflow (6872358)
+
+New in release 1.6.1 (2009-09-14):
+
+- Fix tarball error in 1.6
+- Improve jar performance,
+  http://hg.openjdk.java.net/jdk6/jdk6/jdk/rev/b35f1e5075a4
+
+New in release 1.6 (2009-09-10):
+
+- Added java method tracing using systemtap version 0.9.9+.
+- FAST interpreter for ARM
+- Timezone fix: http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=377
+- Stackoverflow error fix: 
+http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=381
+- Backport regression (NPE) fix for AccessControlContext fix
+- Bump to hs14b16
+- The plugin has been updated to improve stability and cookie support.
+  Support for certificates with mismatched CNs has been added as well.
+
+New in release 1.5.2 (2009-09-04)
+- Timezone fix: http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=377
+- Stackoverflow error fix: http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=381
+- Backport regression (NPE) fix for AccessControlContext fix
+- Bump to hs14b16
+
+New in release 1.5.1 (2009-08-07)
+- Security fixes for:
+  CVE-2009-2670 - OpenJDK Untrusted applet System properties access
+  CVE-2009-2671 CVE-2009-2672 - OpenJDK Proxy mechanism information leaks
+  CVE-2009-2673 - OpenJDK proxy mechanism allows non-authorized socket connections
+  CVE-2009-2674 - Java Web Start Buffer JPEG processing integer overflow
+  CVE-2009-2675 - Java Web Start Buffer unpack200 processing integer overflow
+  CVE-2009-2625 - OpenJDK XML parsing Denial-Of-Service
+  CVE-2009-2475 - OpenJDK information leaks in mutable variables
+  CVE-2009-2476 - OpenJDK OpenType checks can be bypassed
+  CVE-2009-2689 - OpenJDK JDK13Services grants unnecessary privileges
+  CVE-2009-2690 - OpenJDK private variable information disclosure
+- Plugin/Netx security fix.
+
+New in release 1.5 (2009-05-20)
+
+- Static trace support through systemtap.
+  When given the configure option --enable-systemtap IcedTea will build
+  hotspot with the dtrace static markers enabled and install an hotspot
+  tapset that can be used to dynamically trace execution of java
+  applications at runtime. See the tapset/hotspot.stp file for
+  documentation of the various trace points and arguments available.
+- Allow building of other virtual machines besides the default VM. Additional
+  virtual machines on architectures where hotspot is available are cacao
+  and zero (or shark), and cacao, where zero (or shark) is available. It's
+  not possible to build cacao as the default VM, and zero as additional VM.
+- Update to latest HotSpot minor build (hs14b10-->hs14b15) from the new
+  HotSpot Express repository.
+- Updated to OpenJDK b16 build.
+- VisualVM updated to 1.1.1.
+- Updated to support CACAO 0.99.4.
+- Several web browser plugin and javaws support fixes:
+  - Fixed security handling to prevent access denials when there is a site
+  specific exception in the policy file
+  - Allow extentions (chrome) to run Java code with full permissions
+  - Added non-trusted SSL support to WebStart (javaws)
+  - Added proxy support
+  - Other improvements that were breaking specific sites (tag parser fix,
+    nested jar support, etc.)
+  - Added JVM Console (used by http://chrispederick.com/work/web-developer/)
+- Removed gcjwebplugin support.
+- LCMS security fixes.
+- Many build improvements.
+- Many gervill, java2d, nio2, pulse java, zero/shark, jtreg fixes.
+- Experimental out-of-the-box cross-compilation support (not yet finished)
+- Other bug fixes.
+
+New in release 1.4 (2009-01-29)
+
+- Security fixes for:
+  CVE-2008-5360 - Temporary files have guessable file names.
+  CVE-2008-5350 - Allows to list files within the user home directory.
+  CVE-2008-5348 - Denial-Of-Service in kerberos authentication.
+  CVE-2008-5359 - Buffer overflow in image processing.
+  CVE-2008-5351 - UTF-8 decoder accepts non-shortest form sequences.
+  CVE-2008-5356 - Font processing vulnerability.
+  CVE-2008-5353 - Calendar object deserialization allows privilege escalation.
+  CVE-2008-5354 - Privilege escalation in command line applications.
+  CVE-2008-5357 - Truetype Font processing vulnerability.
+  CVE-2008-5352 - Jar200 Decompression buffer overflow.
+  CVE-2008-5358 - Buffer Overflow in GIF image processing.
+- Updated to OpenJDK b14 build.
+- Upgraded to new OpenJDK7 Hotspot 14. The old OpenJDK6 Hotspot 11 can
+  still be configured --with-hotspot-build=original but future versions
+  will drop support for the old version and only support HS14. Zero
+  and Shark have been forward ported to HS14 (from HS12).
+- XRender pipeline support: Java2D are noticably faster and running over a 
+  remote X connection feels like it is all local. Build by default
+  (disable with --disable-xrender). Runtime enabled by running java
+  -Dsun.java2d.xrender=True (default is to use the old X renderer for now).
+- IcedTeaPlugin now supports HTTPS sites and adds a user prompt for
+  untrusted https certificates.
+- Use the ALSA 'default' device. Makes Java play nicer with PulseAudio.
+- VisualVM integration has been removed.
+- Gervill soft synthesizer integration updated to latest CVS version.
+- Integrated jtreg upgraded to 4_0-src-b02-15_oct_2008.
+- make check runs much faster now. jtreg -samevm support has been
+  integrated into the langtools and jdk subsystems. Please package the
+  test/jtreg-summary.log file with your distribution package so end users
+  can compare the test results.
+- Shark (--enable-shark) now builds on 64 bit platforms, but is a
+  pre-alpha technology preview and not recommended for use.
+- Better support for bootstrapping with different jar programs
+  (supporting -J options).
+- If --with-pkgversion isn't given the short mercurial rev node version
+  will be used.  Package distributors are encouraged to build packages with
+  --with-pkgversion to uniquely identify their distribution version number
+  when java -version is run to help distribution specific bug reporting.
+- Various freetype font, pisces renderer and awt X window size fixes
+  to fix visual anomalies.
+- Build fixes for gcc 4.3 and 4.4-pre-release.
+- Added support for building against a specific openjdk src dir
+  or hg revision (--with-openjdk-src-dir or --with-hg-revision).
+- Many other Plugin, Zero, Shark and PulseAudio bug fixes.
+- Build clean up.
+
+New in release 1.3.1 (2008-10-27)
+
+- Plugin including LiveConnect support built as default.
+- Various bugs fixed: renderer patch, version string updated, 
+chinese fonts filename fix for Fedora etc.
+- More progress on Shark and Cacao.
+- Several plugin bug fixes.
+- Several build fixes.
+
+New in release 1.3 (2008-10-15)
+
+- Updated to b12 build.
+- Fixed to use new sound service, Gervill.
+- Many Netx fixes and now built by default.
+- LiveConnect support (--enable-liveconnect).
+- Implemented JavaScript->Java security.
+- PulseAudio integrated (--enable-pulse-java)
+- VisualVM tool integrated (--enable-visualvm).
+- Added out-of-the-box CACAO support (--with-cacao).
+- Added the experimental Shark JIT for Zero.
+- Cleaned up crypto support, all algorithms and key sizes are fully
+  supported now without any (regional) restrictions. No more need for
+  separate crypto policy jars.
+- Integration of Mozilla Rhino javascript support for javax.script.
+  (See http://icedtea.classpath.org/bugzilla/show_bug.cgi?id=179 when
+   you want to enable non-system-installed versions of Rhino).
+- Add support for Zero builds on alpha, arm, mips, mipsel, m68k, s390.
+- Various build fixes.
+- Several bug and security fixes.
+
+New in release 1.2 (2008-05-28)
+
+- Updated to b09 build.
+- Added the the lcms library with PYCC and LINEAR_RGB ICC
+  profiles.
+- Integrated Gervill to provide midi support.
+- JTreg integrated.
+- javaws/NetX fixes:
+  -improved security, namely catching Socket permissions during    
+  runtime
+  -implemented the remaining JNLP services api (PrintService, 
+  JNLPRandomAccessFile)
+  -applet focusing bug fixed
+- sparc/sparc64 port
+- Desktop file integration.
+- Various zero fixes.
+- Sound fixes.
+- Font fixes.
+- Several other bug fixes.
+
+New in release 1.1 (2008-04-04)
+
+- Zero builds on any architecture.
+- New features added to NetX:
+   - Certificate fingerprints now show as part 
+     of certificate details.
+   - gcjwebplugin can now run applets through NetX, 
+     taking advantage of NetX's sandboxing and application security.
+   - User trusted certificates can be managed by passing the -viewer 
+     option to NetX. 
+- Updated to b08.
+- Several bug fixes.
+
+New in release 1.0 (2008-02-15)
+
+- Initial release

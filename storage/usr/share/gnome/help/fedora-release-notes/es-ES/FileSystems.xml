@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-File_Systems" lang="es-ES">
+	<title>Sistemas de Archivo</title>
+	<remark>This beat is located here: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/FileSystems">https://fedoraproject.org/wiki/Docs/Beats/FileSystems</ulink></remark>
+	<section id="sect-Release_Notes-File_Systems-fusecompress">
+		<title>fusecompress</title>
+		<indexterm>
+			<primary>fusecompress</primary>
+		</indexterm>
+		<para>
+			<package>Fusecompress</package> is a compressing filesystem mountable by unprivileged users. Fedora-11 had fusecompress-1.99.19. Fedora-12 updates to fusecompress-2.6. This fixes many very nasty bugs but changes the on-disk format. Users with fusecompress filesystems will need to migrate their data to the new format. Unless they decompress before upgrading, they will need the <package>fusecompress_offline1</package> package to do so.
+		</para>
+		<warning>
+			<title>Debe convertir su sistema de archivo</title>
+			<para>
+				Si un usuario no lee estas notas del lanzamiento y no se da cuenta de que necesita actualizar el formato, la primera indicación que tendrán sobre algo que anda mal probablemente será cuando intenten leer un archivo de texto y este sea binario: 
+<screen>$ less test.txt
+ "test.dump" puede ser un archivo binario.  ¿Desea verlo igualmente?
+</screen>
+			</para>
+		</warning>
+		<para>
+			El método básico para actualizar su sistema se documenta en el archivo <filename>/usr/share/doc/fusecompress_offline1-%{version}/README.fedora</filename> en el paquete fusecompress1. El paquete fusecompress tiene un archivo <filename>README.fedora</filename> que le indica al usuario instalar <package>fusecompress_offline1</package> y leer ese archivo. Las instrucciones de actualización se repiten abajo:
+		</para>
+		<para>
+			
+<screen>Digamos que en Fedora 11 so directorio rootDir de fusecompress (donde los archivos
+se guardan en realidad) es en ~/.fusestorage y lo monta en ~/storage. Ahora actualizó a
+Fedora 12 y necesita que sus sistemas de archivo fusecompress se actualicen al nuevo
+formato de archivo en disco.  A continuación se dan los pasos básicos:
+
+    # Asegúrese que el sistema de archivo fusecompress anterior esté desmontado
+    fusermount -u ~/storage
+    # Muévalo a la nueva ubicación
+    mv ~/.fusestorage ~/.fusestorage.old
+    # Crear un nuevo directorio para los datos en el nuevo formato
+    mkdir ~/.fusestorage
+    # Monte el nuevo directorio. Ahora tiene el formato nuevo del sistema de archivo fusecomrpess
+    fusecompress ~/.fusestorage ~/storage
+    # Descomprima todos los archivos del directorio de datos fusecompress anterior
+    fusecompress_offline1 ~/.fusestorage.old
+    # Mueva los archivos al nuevo formato de almacenamiento
+    mv .fusestorage.old/* ~/storage
+    # Si tiene archivos ocultos, recuerde moverlos también
+    mv .fusestorage.old/.?* ~/storage
+
+Note que para usar este procedimiento exacto necesita tener suficiente espacio en el disco 
+para descomprimir todos los archivos almacenados en ~/.fusestorage.old.  Si no tiene 
+suficiente espacio, necesitará ejecutar fusecompress_offline1 en porciones de 
+~/.fusestorage.old y moverlos a  ~/storage donde serán recomprimidos, liberando espacio 
+para ejecutar fusecompress_offline1 sobre más archivos.
+</screen>
+		</para>
+	</section>
+
+</section>
+
+

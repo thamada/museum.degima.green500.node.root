@@ -1,0 +1,1606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<chapter id="panels">
+  <title>Использование панелей</title>
+
+  <!-- Maintained for 2.8 compatibility -->
+  <anchor id="gospanel-1"/>
+
+  <!-- Desktop Overview / Panels -->
+  <anchor id="gosoverview-502"/>
+
+  <highlights>
+    <para>В этой главе рассказывается о том, как использовать панели вверху и внизу рабочего стола GNOME, как изменять находящиеся на панелях объекты, и как добавлять в среду новые панели.</para>
+  </highlights>
+
+  <section id="panels-intro">
+    <title>Введение</title>
+
+    <!-- Maintained for 2.8 compatibility -->
+    <anchor id="gospanel-2"/>
+
+    <indexterm>
+      <primary>панели</primary>
+      <secondary>введение</secondary>
+    </indexterm>
+
+    <para>Панель — это область рабочей среды GNOME, которая обеспечивает доступ к определённым действиям и сведениям независимо от состояния окон приложений. Например, с помощью стандартных панелей GNOME вы можете запускать приложения, видеть текущую дату и время, управлять громкостью звука и выполнять другие действия.</para> 
+    <para>Можно настраивать панели по своему усмотрению, можно изменять их поведение и внешний вид, добавлять и удалять объекты. Можно создать несколько панелей с различными свойствами, объектами и фоном. Можно также скрывать панели.</para>
+    <para>По умолчанию среда GNOME оснащена двумя панелями — по верхнему и по нижнему краям экрана. В следующих разделах будут описаны эти панели.</para>
+
+    <section id="top-panel">
+      <title>Верхняя панель</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-6"/>         
+      <indexterm>
+        <primary>панели</primary>
+        <secondary>верхняя панель</secondary>
+        <see>верхняя панель</see>
+      </indexterm>
+      <indexterm>
+        <primary>верхняя панель</primary>
+        <secondary>введение</secondary>
+      </indexterm>
+      <para>По умолчанию верхняя панель содержит следующие объекты:</para>
+      <note><para>В вашем дистрибутиве GNOME вид и содержание панелей могли быть изменены.</para></note>
+           
+      <variablelist>
+      	<varlistentry>
+      		<term>Апплет <application>Строка меню</application></term>
+      		<listitem><para>The Menu Bar contains the <guimenu>Applications</guimenu>, <guimenu>Places</guimenu>, and <guimenu>System</guimenu> menus. For more on the menu bar, see <xref linkend="menubar"/>.</para></listitem>
+      	</varlistentry>
+      	<varlistentry>
+      	  <term>A set of application launcher icons</term>
+          <listitem><para>The exact number of icons depends on your GNOME distribution, but in general you will find at least a launcher for the <application>Web Browser</application>, an <application>Email client</application> and the <application>Help Browser</application>. Click on any launcher icon to open the corresponding application.</para></listitem>
+        </varlistentry>
+      	<varlistentry>
+      	  <term>Апплет <application>Область уведомления</application></term>
+          <listitem><para>Показывает значки других приложений, которым может требоваться ваше внимание, или к которым имеет смысл обращаться без переключения из текущего окна приложения. Подробнее об этом смотрите <xref linkend="panels-notification-area"/>.</para>
+          <para>До тех пор, пока какое-нибудь приложение не добавит значок в область уведомления, о её присутствии говорит только узкая полоска.</para>
+          </listitem>
+        </varlistentry>
+
+         
+        <varlistentry>
+          <term>Апплет <application>Часы</application></term>
+          <listitem><para>The <application>Clock</application> shows the current
+      time. Click on the time to open a small calendar. You can also view a world map by clicking the <guilabel>Locations</guilabel> expansion label. For more on this, see the <ulink type="help" url="ghelp:clock">Clock Applet Manual</ulink>.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Апплет <application>Регулятор громкости</application></term>
+          <listitem><para>The <application>Volume Control</application> enables you to control the volume of the speakers on your system. For more on this, see the <ulink type="help" url="ghelp:gnome-volume-control">Volume Control Manual</ulink>.</para></listitem>
+        </varlistentry>
+        <varlistentry>
+          <term><indexterm><primary>верхняя панель</primary><secondary>значок списка окон</secondary></indexterm>Значок <application>Переключатель окон</application></term>
+          <listitem><para>The <application>Window Selector</application> lists all of your
+      open windows. To give focus to a window, click on the window selector icon
+      at the extreme right of the top edge panel, then select the window. For more on this, see <xref linkend="windows-focus"/>.</para></listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+    <section id="bottom-panel">
+      <title>Нижняя панель</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-3"/>        
+      <indexterm>
+        <primary>панели</primary>
+        <secondary>нижняя панель</secondary>
+        <see>нижняя панель</see>
+      </indexterm>
+      <indexterm>
+        <primary>нижняя панель</primary>
+        <secondary>введение</secondary>
+      </indexterm>
+      <para>По умолчанию нижняя панель содержит следующие объекты:</para>
+      <note><para>В вашем дистрибутиве GNOME вид и содержание панелей могли быть изменены.</para></note>
+      <indexterm>
+        <primary>нижняя панель</primary>
+        <secondary>содержимое по умолчанию</secondary>
+      </indexterm>            
+      <variablelist>
+      	<varlistentry>
+      		<term>Кнопка <guibutton>Расчистить рабочий стол</guibutton></term>
+      		<listitem><para>Click on this button to minimize all open windows and show the desktop. Click it again to restore all of the windows to their previous state.</para></listitem>
+      	</varlistentry>
+      	<varlistentry>
+      		<term>Апплет <application>Список окон</application></term>
+      		<listitem><para>Displays a button for each window that is open. The <application>Window List</application> enables you to minimize and restore windows. For more on this, see <xref linkend="windowlist"/>.</para></listitem>
+      	</varlistentry>
+      	<varlistentry>
+      		<term>Апплет <application>Переключатель рабочих мест</application></term>
+      		<listitem><para>Позволяет переключаться между рабочими местами. Подробнее о рабочих местах смотрите <xref linkend="overview-workspaces"/>.</para></listitem>
+      	</varlistentry>      	
+      </variablelist>
+    </section>
+  </section>
+  <section id="gospanel-5">
+    <title>Управление панелями</title>
+
+    <!-- Desktop Overview / Panels / To Create Panels -->
+    <anchor id="gosoverview-26"/>
+    <anchor id="gospanel-11"/><!-- To Interact With a Panel -->
+    <indexterm>
+      <primary>панели</primary>
+      <secondary>управление</secondary>
+    </indexterm>
+    <para>В следующих разделах описано, как управлять панелями.</para>
+    <para>To interact with a panel, you must click on a vacant space on the panel rather than on any of the objects it holds. If the hide buttons are visible on the panel, you can also middle-click or right-click on one of them to select the panel.</para>
+    <section id="gospanel-12">
+      <title>Перемещение панели</title>
+      <indexterm>
+        <primary>панели</primary>
+        <secondary>перемещение</secondary>
+      </indexterm>	  
+	  <para>To move a panel to another side of the screen, press and hold <keycap>ALT</keycap> and drag the panel to its new location. Click on any vacant space on the panel to begin the drag.</para>
+      <para>Если панель не настроена на растяжение до размеров экрана, её можно перетащить от границы экрана и разместить где угодно. Подробнее о параметре растяжения панели смотрите <xref linkend="panel-properties"/>.</para>
+    </section>  
+    <section id="panel-properties">
+      <title>Свойства панели</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-28"/>         
+      <indexterm>
+        <primary>панели</primary>
+        <secondary>изменение свойств панели</secondary>
+      </indexterm>
+      <para>Можно изменять свойства каждой панели, такие, как её расположение, параметры скрытия и внешний вид.</para>
+      <para>Чтобы изменить свойства панели, щёлкните правой кнопкой мыши на любом свободном месте на панели, затем выберите <guimenuitem>Свойства</guimenuitem>. Появится диалоговое окно <guilabel>Свойства панели</guilabel> с двумя вкладками: <guilabel>Общие</guilabel> и <guilabel>Фон</guilabel>.</para>
+      
+      <section id="panel-properties-general">
+        <title>Вкладка общих свойств</title>
+        <para>На вкладке <guilabel>Общие</guilabel> можно изменить размер панели, её расположение и параметры скрытия. В следующей таблице описаны элементы вкладки <guilabel>Общие</guilabel>:</para>
+        <informaltable frame="topbot">
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colname="colspec0" colwidth="28.57*"/>
+            <colspec colname="colspec1" colwidth="71.43*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>Элемент диалогового окна</para>
+                </entry>
+                <entry>
+                  <para>Описание</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry colname="colspec0">
+                  <para>
+                    <guilabel>Расположение</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec1">
+                  <para>Выберите положение панели на экране. Щёлкните на нужном положении.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>Размер</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Используйте числовое поле, чтобы выбрать размер панели.</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec0">
+                  <para>
+                    <guilabel>Расширять до предела</guilabel>
+                  </para>
+                </entry>
+                <entry colname="colspec1">
+                  <para>Обычно панель расширяется по всему краю экрана, вдоль которого она расположена. Если панель не расширяется, её можно переместить от краёв экрана в любую его часть.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>Автоматически скрывать</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Select this option if you want the panel to only be fully visible when the mouse pointer is over it. The panel hides off-screen along its longest edge, leaving a narrow part visible along the edge of the desktop. Move the mouse pointer over the visible part of the panel to make it move back into view.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>Показывать кнопки скрытия</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Выберите этот параметр, чтобы на концах панели показывались кнопки скрытия. Если нажать кнопку скрытия, панель скроется в соответствующем направлении за пределы экрана, и останется только кнопка скрытия на противоположном конце панели. Нажмите эту кнопку, чтобы вернуть панель на экран.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>Arrows on hide buttons</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Выберите этот параметр, чтобы на кнопках скрытия показывались стрелки (если эти кнопки включены).</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+
+      </section>
+      <section id="panel-properties-background">
+        <title>Вкладка свойств фона</title>
+        <para>Можно выбрать тип фона панели на вкладке <guilabel>Фон</guilabel>. Доступны следующие варианты:</para>
+        <informaltable frame="topbot">
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colwidth="32.32*"/>
+            <colspec colwidth="67.68*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>Элемент диалогового окна</para>
+                </entry>
+                <entry>
+                  <para>Описание</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>Нет (использовать общесистемную тему)</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Select this option to have the panel use the settings in the <link linkend="prefs-theme"><application>Appearance</application> preference tool</link>. This keeps your panel's background looking the same as the rest of the desktop and applications.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>Заливка цветом</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Выбеите этот параметр, чтобы задать один цвет для фона панели. Нажмите кнопку <guibutton>Цвет</guibutton>, чтобы вызвать диалоговое окно выбора цвета. В этом диалоговом окне выберите желаемый цвет.</para>
+                  <para>Используйте ползунок <guilabel>Стиль</guilabel>, чтобы выбрать степень прозрачности цвета. Например, чтобы сделать панель прозрачной, переместите ползунок к концу с надписью <guilabel>прозрачный</guilabel>.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <guilabel>Фоновое изображение</guilabel>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Select this option to specify an image for the panel
+background. Click on the button to browse for an image file. When you have selected the file, click <guibutton>OK</guibutton>. </para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        
+        <!-- section folded in: preserve id for backwards compatibility: 2.12 -->
+        <anchor id="gospanel-61"/>
+        <indexterm>
+          <primary>панели</primary>
+          <secondary>изменение фона</secondary>
+        </indexterm>
+        <!-- Shaun, why does this bit here change the vertical space between the previous 
+        table and the following paragraph? -->
+             
+        <para>Также можно перетащить цвет или изображение на панель, чтобы установить этот цвет или изображение в качестве фона панели. Перетаскивать цвета и изображения можно из многих программ, например:</para>
+        <itemizedlist>
+          <listitem>
+            <para>Можно перетащить цвет из любого диалогового окна выбора цвета.</para>     
+          </listitem>
+          <listitem>
+            <para>Можно перетащить файл с изображением из файлового менеджера <application>Nautilus</application>, чтобы установить этот файл в качестве фона панели.</para>     
+          </listitem>
+          <listitem>
+            <para>Можно перетащить цвет или орнамент из <link linkend="nautilus-backgrounds-and-emblems">диалогового окна <guilabel>Фон и эмблемы</guilabel></link> файлового менеджера <application>Nautilus</application> на панель, чтобы установить этот цвет или орнамент в качестве фона панели.</para>         
+          </listitem>
+        </itemizedlist>
+        <para>Нажмите кнопку <guibutton>Закрыть</guibutton>, чтобы закрыть диалоговое окно <guilabel>Свойства панели</guilabel>.</para>
+      </section>
+    </section>
+    <section id="gospanel-7">
+      <title>Скрытие панели</title>
+      <indexterm>
+        <primary>панели</primary>
+        <secondary>скрытие</secondary>
+      </indexterm>
+      <para>You can hide or show a panel if it has hide buttons. If
+the hide buttons are not visible on a panel, modify the panel properties so
+that the hide buttons are visible. </para>
+      <para>Кнопки скрытия отображаются на концах панели. На этих кнопках могут быть нарисованы стрелки. На следующем рисунке изображены кнопки скрытия.</para>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/four_hide_button.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Горизонтальная и вертикальная панели с кнопками скрытия.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para>To hide a panel, click on one of the hide buttons. The panel shrinks
+in the direction of the arrow on the hide button. The hide button at the other
+end of the panel remains visible.</para>
+      <para>Чтобы вернуть скрытую панель на экран, нажмите на той кнопке скрытия, которая осталась на экране. Панель выдвинется в направлении стрелки на этой кнопке. После этого будут видны обе кнопки скрытия.</para>
+      <para>You can set a panel to autohide. When you set autohide, the panel hides
+automatically when the mouse is not pointing to the panel. The panel reappears
+when you point to the part of the screen where the panel resides. To set your
+panel to autohide, <link linkend="panel-properties">modify the properties</link> of the panel.</para>
+    </section>    
+    <section id="gospanel-10">
+      <title>Добавление новой панели</title>
+      <indexterm>
+        <primary>панели</primary>
+        <secondary>добавление новой</secondary>
+      </indexterm>
+      <para>Чтобы добавить панель, щёлкните правой кнопкой мыши на пустом месте на любой панели, затем выберите <guimenuitem>Создать панель</guimenuitem>. В среде GNOME появится новая пустая панель. Можно настроить эту панель по своему усмотрению.</para>
+    </section>    
+    <section id="gospanel-31">
+      <title>Удаление панели</title>
+      <!-- Desktop Overview / Panels / To Delete Panels -->
+      <anchor id="gosoverview-508"/>
+      <indexterm>
+        <primary>панели</primary>
+        <secondary>удаление</secondary>
+      </indexterm>
+      <para>Чтобы удалить панель из среды GNOME, щёлкните правой кнопкой мыши на панели, которую хотите удалить, затем выберите <menuchoice><guimenuitem>Удалить эту панель</guimenuitem></menuchoice>.</para>
+      <note>
+        <para>В среде GNOME всегда должна оставаться хотя бы одна панель. Если осталась только одна панель, удалить её нельзя.</para>
+      </note>
+    </section>
+  </section>
+  
+  <!-- =============================================== managing panel objects -->
+  <section id="gospanel-8">
+    <title>Объекты панели</title>
+    <!-- Desktop Overview / Panels / To Manipulate Panel Objects -->
+    <anchor id="gosoverview-21"/>
+    <indexterm>
+      <primary>панели</primary>
+      <secondary>объекты панели</secondary>
+      <see>объекты панели</see>
+    </indexterm>
+    <para>This section describes the objects that
+you can add to and use from your panels.</para>
+    <section id="gospanel-100">
+      <title>Взаимодействие с объектами панели</title>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>взаимодействие с</secondary>
+      </indexterm>
+      <para>Используйте кнопки мыши для взаимодействия с объектами панелей следующим образом:</para>
+      <variablelist>
+        <varlistentry>
+          <term>Щелчок левой кнопкой</term>
+          <listitem>
+            <para>Запускает объект панели.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Щелчок средней кнопкой</term>
+          <listitem>
+            <para>Позволяет схватить объект и перетащить его в другое место.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry>
+          <term>Щелчок правой кнопкой</term>
+          <listitem>
+            <para>Открывает всплывающее меню объекта панели.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <section id="gospanel-39">
+        <title>Чтобы выделить апплет</title>
+        <indexterm>
+          <primary>апплеты</primary>
+          <secondary>выделение</secondary>
+        </indexterm>
+        <para>Есть некоторые ограничения, касающиеся того, по какому месту апплета нужно щёлкать, чтобы вызвать его всплывающее меню или чтобы переместить апплет. Вот эти ограничения:</para>
+        <itemizedlist>
+          <listitem>
+            <para>У некоторых апплетов есть всплывающие меню со специальными командами, зависящими от апплета. Это меню появляется при щелчке правой кнопкой мыши в определённых частях апплета. Например, апплет <application>Список окон</application> имеет вертикальную «рукоятку» с левой стороны, а справа находятся кнопки, соответствующие открытым окнам. Чтобы открыть всплывающее меню апплета <application>Список окон</application>, нужно щёлкнуть правой кнопкой мыши на «рукоятке». Если щёлкнуть правой кнопкой мыши на кнопке в правой части апплета, появится всплывающее меню этой кнопки.</para>
+          </listitem>
+          <listitem>
+            <para>У некоторых апплетов есть области, которые нельзя использовать для выбора апплета. Например, у апплета <application>Командная строка</application> есть поле для ввода команд. Щелчок по нему средней или правой кнопкой мыши не позволит вам выбрать апплет. Вместо этого следует щёлкать по другой части апплета.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+
+    </section>
+    <section id="panels-addobject">
+      <title>Добавление объекта на панель</title>
+      
+      <!-- preserve for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-15"/>   
+
+      <!-- Desktop Overview / Panels / To Add Objects to Panels -->
+      <anchor id="gosoverview-4"/>
+      <anchor id="gospanel-40"/><!-- To Add an Applet to a Panel -->
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>добавление</secondary>
+      </indexterm>
+      <para>Чтобы добавить объект на панель, выполните следующие действия:</para>
+      <orderedlist>
+        <listitem><para>Щёлкните правой кнопкой мыши на пустом месте на панели, чтобы появилось всплывающее меню панели.</para></listitem>
+        <listitem><para>Выберите <guisubmenu>Добавить на панель</guisubmenu>.</para>
+          <para>Появится диалоговое окно <guilabel>Добавить на панель</guilabel>. В нём перечислены в алфавитном порядке все доступные объекты панели, причём наверху находятся <link linkend="launchers">кнопки запуска</link>.</para>
+          <tip><para>Можно ввести часть имени или описания объекта в поле <guilabel>Найти</guilabel>. При этом список сократится до тех объектов, которые соответствуют введённым словам.</para>
+          <para>Чтобы вернуть полный список, удалите текст из поля <guilabel>Найти</guilabel>.</para>
+          </tip>
+        </listitem>
+        <listitem><para>Перетащите объект из списка на панель, либо выделите объект в списке и нажмите <guibutton>Добавить</guibutton>, чтобы поместить его в то место на панели, где вы сначала щёлкнули правой кнопкой мыши.</para></listitem>
+      </orderedlist>
+      
+      
+      <para>You can also add any item in the <guimenu>Applications</guimenu> menu to the panel: right-click the menu item and choose <guimenuitem>Add this launcher to panel</guimenuitem>.</para>
+
+      <para>Each launcher corresponds to a <filename>.desktop</filename> file. You
+can drag a <filename>.desktop</filename> file on to your panels to add the
+launcher to the panel. </para>
+<!--Each menu corresponds to a directory. You can drag the directory on to your panels to add the directory to the panel as a menu object. Is this still true?-->
+
+    </section>
+    <section id="gospanel-9">
+      <title>Изменение свойств объекта</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-41"/><!-- To Modify Preferences for an Applet -->
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>изменение свойств панели</secondary>
+      </indexterm>
+      <para>Некоторые объекты — такие, как кнопки запуска и ящики — имеют свойства. У каждого типа объектов свой набор свойств. Эти свойства задают параметры объекта, например: <itemizedlist><listitem><para>Команда приложения, запускаемая при нажатии на кнопку запуска.</para></listitem><listitem><para>Местоположение исходных файлов меню.</para></listitem><listitem><para>Значок, который представляет объект.</para></listitem></itemizedlist></para>
+      <para>To modify the properties of an object, perform the following steps: </para>
+      <orderedlist>
+        <listitem>
+          <indexterm>
+            <primary>всплывающее меню объекта панели, иллюстрация</primary>
+          </indexterm>
+          <para>Щёлкните правой кнопкой мыши на объекте панели, чтобы вызывать его всплывающее меню, как показывает <xref linkend="gospanel-FIG-54"/>.</para>
+          <figure id="gospanel-FIG-54">
+            <title>Всплывающее меню объекта панели</title>
+            <screenshot>
+              <mediaobject>
+                <imageobject>
+                  <imagedata fileref="figures/panel_object_popup_menu.png" format="PNG"/>
+                </imageobject>
+                <textobject>
+                  <phrase>Всплывающее меню объекта панели, его элементы: Свойства, Удалить с панели, Прикрепить к панели и Переместить.</phrase>
+                </textobject>
+              </mediaobject>
+            </screenshot>
+          </figure>
+        </listitem>
+        <listitem>
+          <para>Выберите <guimenuitem>Свойства</guimenuitem>. В появившемся диалоговом окне <guilabel>Свойства</guilabel> измените свойства по своему усмотрению. Содержимое диалогового окна <guilabel>Свойства</guilabel> зависит от того, какой объект вы выбрали на шаге 1.</para>
+        </listitem>
+        <listitem>
+          <para>Close the <guilabel>Properties</guilabel> dialog.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+    <section id="gospanel-32">
+      <title>Перемещение объекта панели</title>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>перемещение</secondary>
+      </indexterm>
+      <para>Можно перемещать объекты по панели или на другую панель. Можно также перемещать объекты между панелями и ящиками.</para>
+      <para>Чтобы переместить объект панели, щёлкните на нём средней кнопкой мыши и, удерживая её, переместите объект в новое место. Когда вы отпустите среднюю кнопку мыши, объект встанет на новом месте.</para>
+      <para>Также можно переместить объект панели посредством его всплывающего меню, следующим образом:</para>
+      <orderedlist>
+        <listitem>
+          <para>Щёлкните правой кнопкой мыши на объекте, затем выберите <guimenuitem>Переместить</guimenuitem>.</para>
+        </listitem>
+        <listitem>
+          <para>Укажите на новое положение объекта, затем щёлкните любой кнопкой мыши, чтобы объект встал на новом месте. Таким образом можно переместить объект на любую панель среды GNOME.</para>
+        </listitem>
+      </orderedlist>
+      <para>Перемещение объекта панели влияет на положение других объектов панели. Чтобы управлять тем, как объекты перемещаются по панели, можно выбрать режим перемещения. Для этого нужно нажать и удерживать одну из следующих клавиш во время перемещения объекта:</para>
+      <informaltable frame="topbot">
+        <tgroup cols="3" colsep="0" rowsep="0">
+          <colspec colname="colspec2" colwidth="15.00*"/>
+          <colspec colname="colspec1" colwidth="30.00*"/>
+          <colspec colname="colspec3" colwidth="54.00*"/>
+          <thead>
+            <row rowsep="1">
+              <entry colname="colspec2">
+                <para>Клавиша</para>
+              </entry>
+              <entry>
+                <para>Режим перемещения</para>
+              </entry>
+              <entry colname="colspec3">
+                <para>Описание</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry colname="colspec2" valign="top">
+                <para>Без нажатия</para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>Переключающее перемещение</para>
+              </entry>
+              <entry colname="colspec3" valign="top">
+                <para>Объект меняется местами с другим объектами на панели. Это обычный режим перемещения.</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec2" valign="top">
+                <para>клавиша <keycap>Alt</keycap></para>
+              </entry>
+              <entry valign="top">
+                <para>Свободное перемещение</para>
+              </entry>
+              <entry colname="colspec3" valign="top">
+                <para>Объект перепрыгивает над объектами панели в следующее свободное место на панели.</para>
+              </entry>
+            </row>
+            <row>
+              <entry colname="colspec2" valign="top">
+                <para>клавиша <keycap>Shift</keycap></para>
+              </entry>
+              <entry valign="top">
+                <para>Перемещение cо сдвигом</para>
+              </entry>
+              <entry colname="colspec3" valign="top">
+                <para>Объект сдвигает другие объекты вдоль панели.</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+    <section id="gospanel-566">
+      <title>Прикрепление объекта панели</title>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>прикрепление</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>прикрепление объектов панели</primary>
+      </indexterm>
+      <para>Вы можете прикреплять объекты к панели, чтобы они сохраняли своё положение. Используйте это, если хотите, чтобы объекты не меняли своего положения при перемещении других объектов.</para>
+      <para>To lock an object to its current location in the panel,
+right-click on the object to open the panel object popup menu, then select  <guimenuitem>Lock To Panel</guimenuitem>. Deselect this to unlock the object.</para>
+    </section>
+    <section id="gospanel-33">
+      <title>Удаление объекта панели</title>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>удаление</secondary>
+      </indexterm>
+      <para>To remove an object from a panel, right-click on the object
+to open the panel object popup menu and then choose <guimenuitem>Remove From
+Panel</guimenuitem>. </para>
+    </section>
+  </section>
+  
+  <!-- ============================================== big bag o' panel objects -->
+  <!-- <remark>won't work because of yelp topic clumping</remark>
+    <para>This section describes the different objects you can add to your panels.</para>
+    <para>For a list of the objects that are on the top and bottom panels by default, see <xref linkend="top-panel"/> and <xref linkend="bottom-panel"/>.</para>
+  -->
+  <section id="gospanel-17">
+    <title>Апплеты</title>
+    <indexterm>
+      <primary>апплеты</primary>
+      <secondary>введение</secondary>
+    </indexterm>
+    <indexterm>
+      <primary>объекты панели</primary>
+      <secondary>апплеты</secondary>
+      <see>апплеты</see>
+    </indexterm>
+    <para>An applet is a small application whose
+user interface resides within a panel. The following figure shows the following
+applets, from left to right: </para>
+    <itemizedlist>
+      <listitem>
+        <para><application><link linkend="windowlist">Список окон</link></application>: Показывает окна, которые в данный момент открыты в вашей системе.</para>
+      </listitem>
+      <listitem>
+        <para><application>Регулятор громкости</application>: Позволяет управлять громкостью динамиков вашей системы.</para>
+      </listitem>
+      <listitem>
+        <para><application>Clock</application>: Shows the current date and time.</para>
+      </listitem>
+    </itemizedlist>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/sample_applet.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>Примеры апплетов, описанные в тексте.</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </section>  
+
+  <section id="launchers">
+    <title>Кнопки запуска</title>
+    <!-- preserve id for backwards compatibility: 2.12 -->
+    <anchor id="gospanel-16"/>
+    <indexterm>
+      <primary>объекты панели</primary>
+      <secondary>кнопки запуска</secondary>
+      <see>кнопки запуска</see>
+    </indexterm>
+    <para><firstterm>Кнопка запуска</firstterm> — это объект, который выполняет определённое действие, когда вы нажимаете на него.</para>
+    <para>Кнопки запуска могут располагаться на панелях, в меню панели, а также на рабочем столе. Во всех случаях кнопка запуска отображается в виде значка.</para>
+    <para>Можно использовать кнопку запуска для следующих действий:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Запуска определённого приложения.</para>
+      </listitem>
+      <listitem>
+        <para>Выполнения команды.</para>
+      </listitem>
+      <listitem>
+        <para>Открытия папки.</para>
+      </listitem>
+      <listitem>
+        <para>Открытия веб-браузера на некоторой странице в вебе.</para>
+      </listitem>
+      <listitem>
+        <para>Открытия специальных <firstterm>единообразных идентификаторов ресурсов</firstterm> (англ. Uniform Resource Identifiers — URI). Среда GNOME поддерживает специальные URI, позволяющие обращаться к определённым функциям из менеджера файлов. <indexterm><primary>специальные местоположения URI</primary><secondary>и кнопки запуска</secondary></indexterm></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Вы можете изменять свойства кнопки запуска. Среди них: название кнопки; олицетворяющий её значок; и способ запуска. Подробнее смотрите <xref linkend="launchers-modify"/>.</para>
+    <note><para>В некоторых случаях кнопка запуска в меню может не иметь значка. Например, это бывает, когда для кнопки не указан значок, или когда для всего меню отключены значки.</para></note>
+
+    <section id="gospanel-34">
+      <title>Добавление кнопки запуска на панель</title>
+      <indexterm>
+        <primary>кнопки запуска</primary>
+        <secondary>добавление на панель</secondary>
+      </indexterm>
+      <para>Можно добавить кнопку запуска на панель следующими способами:</para>
+      <itemizedlist>
+        <listitem>
+          <para>Из всплывающего меню панели</para>
+          <para>Щёлкните правой кнопкой мыши в любом свободном месте на панели, затем выберите <guimenu>Добавить на панель</guimenu>. Появится <link linkend="panels-addobject">диалоговое окно <guilabel>Добавить на панель</guilabel></link>.</para>
+          <para>Чтобы создать новую кнопку запуска, выберите в списке пункт <guilabel>Пользовательская кнопка запуска</guilabel>. Появится диалоговое окно <guilabel>Создать кнопку запуска</guilabel>. Подробнее о свойствах, доступных в этом окне, смотрите <xref linkend="launchers-properties"/>.</para>
+          <para>Кроме того, можно добавить на панель уже существующую кнопку запуска. Для этого выберите в списке пункт <guilabel>Кнопка запуска</guilabel>. Затем выберите кнопку запуска, которую хотите добавить, из списка пунктов меню.</para>
+        </listitem>
+        <listitem>
+          <para>Из любого меню</para>
+          <para>To add a launcher to a panel from a menu, perform one of the following
+steps:</para>
+          <itemizedlist>
+            <listitem><para>Откройте меню, содержащее нужную кнопку запуска, и перетащите кнопку запуска на панель.</para></listitem>
+            <listitem><para>Open the menu that contains the launcher and right-click on the title of the launcher.
+Choose <guimenuitem>Add this launcher to panel</guimenuitem>. This method will only work if the launcher is on a sub-menu of the menu that you opened.</para></listitem>
+          </itemizedlist>
+        </listitem>
+        <listitem>
+          <para>Из файлового менеджера</para>
+          <para>Чтобы добавить кнопку запуска на панель из менеджера файлов, найдите в вашей файловой системе файл <filename>.desktop</filename> для кнопки запуска, затем перетащите его на панель.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="launchers-modify">
+      <title>Изменение кнопки запуска</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-36"/>        
+      <indexterm>
+        <primary>кнопки запуска</primary>
+        <secondary>изменение свойств панели</secondary>
+      </indexterm>
+      <para>Чтобы изменить свойства кнопки запуска, сделайте следующее:</para>
+      <orderedlist>
+        <listitem>
+          <para>Щёлкните правой кнопкой мыши на кнопке запуска, чтобы открыть её всплывающее меню.</para>
+        </listitem>
+        <listitem>
+          <para>Выберите <guimenuitem>Свойства</guimenuitem>. Используйте диалоговое окно <guilabel>Свойства кнопки запуска</guilabel> для внесения нужных изменений. Подробнее о диалоговом окне <guilabel>Свойства кнопки запуска</guilabel> смотрите <xref linkend="launchers-properties"/>.</para>
+        </listitem>
+        <listitem>
+          <para>Нажмите кнопку <guibutton>Закрыть</guibutton>, чтобы закрыть диалоговое окно <guilabel>Свойства кнопки запуска</guilabel>.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+
+          
+    <section id="launchers-properties"> 
+      <title>Свойства кнопки запуска</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-52"/><!-- To Create a Launcher With the Create Launcher Dialog -->
+         
+      <para>При создании или изменении кнопки запуска можно установить следующие свойства:</para>
+      <variablelist>
+        <varlistentry><term>Тип</term>
+          <listitem>
+            <para>Use the drop-down list to specify whether this launcher starts an application or opens a location: </para>
+            <variablelist>
+              <varlistentry><term>Приложение</term>
+                <listitem>
+                  <para>Кнопка запуска запускает приложение.</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>Приложение в терминале</term>
+                <listitem>
+                  <para>The launcher starts an application through a terminal window.</para>
+                </listitem>     
+              </varlistentry>
+              <varlistentry><term>Местоположение</term>
+                <listitem>
+                  <para>The launcher opens a file, web page or other location.</para>
+                </listitem>
+              </varlistentry>
+            </variablelist>
+            <para>If you are editing a location launcher, this drop-down list 
+          will not be displayed. If you are editing an application launcher, 
+          the <guilabel>Location</guilabel> option will not be available.</para>
+          </listitem>
+        </varlistentry>
+        <varlistentry><term>Имя</term>
+          <listitem>
+            <para>This is the name that is displayed if you add the launcher to a menu
+or to the desktop.</para>
+          </listitem>     
+        </varlistentry>
+        <varlistentry><term>Команда</term>
+          <listitem>
+            <para>Для кнопки запуска приложения укажите команду, которая будет выполняться при нажатии на кнопку. Для примеров команд смотрите <xref linkend="launchers-properties-commands"/>.</para>
+          </listitem>     
+        </varlistentry>
+        <varlistentry><term>Местоположение</term>
+          <listitem>
+            <para>For a location launcher, specify the location to be opened. 
+            Click <guibutton>Browse</guibutton> to select a location on your 
+            computer, or type a web address to launch a web page. For sample 
+            locations, see <xref linkend="launchers-properties-commands"/></para>
+          </listitem>     
+        </varlistentry>
+        <varlistentry><term>Комментарий</term>
+          <listitem>
+            <para>Это то, что будет показано во всплывающей подсказке при наведении указателя мыши на  кнопку запуска на панели.</para>
+          </listitem>     
+        </varlistentry>
+      </variablelist>
+      
+      <para>To choose an icon for the launcher, click on the icon button, which displays a generic icon by default. An icon selector dialog is displayed. Choose an icon from the dialog. </para>
+      <para>Чтобы изменить значок кнопки запуска, нажмите кнопку, на которой изображён текущий значок. Появится диалоговое окно выбора значка — укажите в нём желаемый значок.</para>
+  
+      <section id="launchers-properties-commands">
+        <title>Launcher Commands and Locations</title>
+        <!-- Maintained for backwards compatibility: 2.14 -->
+        <anchor id="gospanel-556"/>        
+        <para>Examples of commands and locations that you can use in the <guilabel>Launcher Properties</guilabel> dialog can be found below.</para>
+        
+        <para>If you choose <guilabel>Application</guilabel> or <guilabel>Application in Terminal</guilabel>
+from the <guilabel>Type</guilabel> drop-down box, the <guilabel>Command</guilabel> text box will be displayed. The following table shows some sample commands and the actions that the commands perform:</para>
+        <informaltable frame="topbot">
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colname="colspec0" colwidth="47.36*"/>
+            <colspec colname="colspec1" colwidth="52.64*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>Пример команды запуска приложения</para>
+                </entry>
+                <entry>
+                  <para>Действие</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry colname="colspec0" valign="top">
+                  <para>
+                    <command>gedit</command>
+                  </para>
+                </entry>
+                <entry colname="colspec1" valign="top">
+                  <para>Запускает текстовый редактор <application>gedit</application>.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <command>gedit /home/user/loremipsum.txt</command>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Opens the file <filename>/home/user/loremipsum.txt</filename> in the <application>gedit</application> text editor application.</para>
+                </entry>
+              </row>
+              <row>
+                <entry colname="colspec0" valign="top">
+                  <para>
+                    <command>nautilus /home/user/Projects</command>
+                  </para>
+                </entry>
+                <entry colname="colspec1" valign="top">
+                  <para>Opens the folder <filename>/home/user/Projects</filename> in a File Browser window.</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+        <para>If you choose <guilabel>Location</guilabel> from the <guilabel>Type</guilabel>
+drop-down box, the <guilabel>Location</guilabel> text box will be displayed. The following table
+shows some sample locations and the actions that will happen if you click on the launcher:<indexterm><primary>special URIs</primary><secondary>launchers</secondary></indexterm></para>
+        <informaltable frame="topbot">
+          <tgroup cols="2" colsep="0" rowsep="0">
+            <colspec colname="colspec0" colwidth="47.36*"/>
+            <colspec colname="colspec1" colwidth="52.64*"/>
+            <thead>
+              <row rowsep="1">
+                <entry>
+                  <para>Sample Location</para>
+                </entry>
+                <entry>
+                  <para>Действие</para>
+                </entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry colname="colspec0" valign="top">
+                  <para>
+                    <command>file:///home/user/loremipsum.txt</command>
+                  </para>
+                </entry>
+                <entry colname="colspec1" valign="top">
+                  <para>Opens the file <filename>/home/user/loremipsum.txt</filename> 
+                  in the default viewer for its file type.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <command>file:///home/user/Projects</command>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Opens the folder <filename>/home/user/Projects</filename> in a File Browser window.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <command>http://www.gnome.org</command>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Открывает веб-сайт GNOME в браузере по умолчанию.</para>
+                </entry>
+              </row>
+              <row>
+                <entry valign="top">
+                  <para>
+                    <command>ftp://ftp.gnome.org</command>
+                  </para>
+                </entry>
+                <entry valign="top">
+                  <para>Отрывает FTP-сайт GNOME в браузере по умолчанию.</para>
+                </entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </informaltable>
+      </section>
+    </section>    
+  </section>
+  <section id="gospanel-557">
+    <title>Кнопки</title>
+    <indexterm>
+      <primary>кнопки</primary>
+      <secondary>добавление на панель</secondary>
+    </indexterm>
+    <indexterm>
+      <primary>кнопки действий</primary>
+      <see>кнопки</see>
+    </indexterm>
+    <para>Можно добавлять на панели кнопки, обеспечивающие быстрый доступ к часто используемым действиям и функциям.</para>
+    <section id="gospanel-563">
+      <title>Кнопка принудительного завершения</title>
+      <indexterm>
+        <primary>кнопки</primary>
+        <secondary>Принудительное завершение</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>Кнопка принудительного завершения</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Кнопка принудительного завершения</primary>
+      </indexterm>
+      <indexterm>
+        <primary>завершение приложений</primary>
+      </indexterm>
+      <indexterm>
+        <primary>приложения</primary>
+        <secondary>завершение</secondary>
+      </indexterm>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/force_quit.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Значок принудительного завершения.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para>The <guibutton>Force Quit</guibutton> button allows you to click on 
+      a window to force an application to quit. This button is useful if you 
+      want to terminate an application that does not respond to your commands, 
+      if the application has frozen or crashed, for example.</para>
+      <para>To add a <guibutton>Force Quit</guibutton> button to a panel, right-click
+on any vacant space on the panel. Choose <guimenu>Add to Panel</guimenu>, then 
+choose <application>Force Quit</application> from the Add to Panel dialog. 
+See <xref linkend="panels-addobject"/> for more on this.</para>
+      <para>To terminate an application, click on the <guibutton>Force Quit</guibutton>
+button, then click on a window from the application that you want to terminate.
+If you do not want to terminate an application after you have clicked on the 
+<guibutton>Force Quit</guibutton> button, press <keycap>Esc</keycap>.</para>
+    </section>
+    <section id="panel-lock-screen">
+      <title>Кнопка блокировки экрана</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-21"/>         
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/lockscreen_icon.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Значок блокировки экрана.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <indexterm>
+        <primary>кнопки</primary>
+        <secondary>Блокировка</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>Кнопка блокировки</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Кнопка блокировки</primary>
+      </indexterm>
+      <indexterm>
+        <primary>блокировка экрана</primary>
+      </indexterm>
+      <para>The <guibutton>Lock Screen</guibutton> button locks your screen 
+      and activates your screensaver when you click on it. To access your session
+again, you must enter your password.</para>
+      <para>Чтобы добавить кнопку <guibutton>Заблокировать экран</guibutton> на панель, щёлкните правой кнопкой мыши в любом пустом месте на панели. Выберите <guimenu>Добавить на панель</guimenu>, затем выберите <application>Заблокировать экран</application> в диалоговом окне Добавить на панель. Подробнее смотрите <xref linkend="panels-addobject"/>.</para>
+      <para>Щёлкните правой кнопкой мыши на кнопке <guibutton>Заблокировать экран</guibutton>, чтобы открыть меню команд, связанных с хранителем экрана. О командах, доступных в этом меню, смотрите <xref linkend="gosstartsession-TBL-83"/>.</para>
+      <table frame="topbot" id="gosstartsession-TBL-83">
+        <title>Элементы меню блокировки экрана</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="43.55*"/>
+          <colspec colname="colspec1" colwidth="56.45*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>Элемент меню</para>
+              </entry>
+              <entry>
+                <para>Функция</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guimenuitem>Активировать хранитель экрана</guimenuitem>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Немедленно активирует хранитель экрана.</para>
+                <para>При этом также будет заблокирован экран, если в инструменте настройки <application>Хранитель экрана</application> вы выбрали <guilabel>Блокировать экран, когда хранитель экрана активен</guilabel>.</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guimenuitem>Заблокировать экран</guimenuitem>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Немедленно блокирует экран. Эта команда выполняет то же действие, которое происходит при нажатии на кнопку <guibutton>Заблокировать экран</guibutton>.</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guimenuitem>Свойства</guimenuitem>
+                </para>
+              </entry>
+              <entry valign="top">
+                <para>Открывает <link linkend="prefs-screensaver">инструмент настройки <application>Хранителя экрана</application>, с помощью которого вы можете настроить вид хранителя, появляющегося при блокировке экрана.</link></para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+    <section id="gospanel-20">
+      <title>Кнопка завершения сеанса</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/logout_icon.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Значок завершения сеанса.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <indexterm>
+        <primary>кнопки</primary>
+        <secondary>Завершение сеанса</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>Кнопка завершения сеанса</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Кнопка завершения сеанса</primary>
+      </indexterm>
+      <para>The <guibutton>Log Out</guibutton> button allows you to log out of
+a GNOME session or switch to a different user account.</para>
+      <para>To add a <guibutton>Log Out</guibutton> button to a panel, right-click
+on any vacant space on the panel. Choose <guimenu>Add to Panel</guimenu>, then 
+choose <application>Log Out</application> from the Add to Panel dialog. 
+See <xref linkend="panels-addobject"/> for more on this.</para>
+      <para>To log out of your session or switch users, click on the 
+      <guibutton>Log Out</guibutton> button and then click on the appropriate 
+      button in the dialog that appears. </para>
+    </section>
+    <section id="gospanel-555">
+      <title>Кнопка выполнения программ</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/run_button.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Значок выполнения программ.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <indexterm>
+        <primary>кнопки</primary>
+        <secondary>Выполнение</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>Кнопка выполнения программ</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Кнопка выполнения программ</primary>
+      </indexterm>
+      <para>The <guibutton>Run</guibutton> button opens the 
+      <guilabel>Run Application</guilabel> dialog, which allows you to start an 
+      application by choosing it from a list. </para>
+      <para>To add a <guibutton>Run</guibutton> button to a panel, right-click
+on any vacant space on the panel. Choose <guimenu>Add to Panel</guimenu>, then 
+choose <application>Run Application</application> from the Add to Panel dialog. 
+See <xref linkend="panels-addobject"/> for more on this.</para>
+      <para>To open the <application>Run Application</application> dialog, click 
+      on the <guibutton>Run</guibutton> button. </para>
+      <para>For more information on the <guilabel>Run Application</guilabel> dialog,
+see <xref linkend="gospanel-23"/>.</para>
+    </section>
+    <section id="gospanel-554">
+      <title>Кнопка поиска</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/searchtool_button.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Значок средства поиска.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <indexterm>
+        <primary>кнопки</primary>
+        <secondary>Поиск</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>Кнопка поиска</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Кнопка поиска</primary>
+      </indexterm>
+      <para>The <guibutton>Search</guibutton> button opens the 
+      <application>Search Tool</application>, which allows you to search for 
+      files on your computer. </para>
+      <para>To add a <guibutton>Search</guibutton> button to a panel, right-click
+on any vacant space on the panel. Choose <guimenu>Add to Panel</guimenu>, then choose <application>Search for Files</application> from the Add to Panel dialog. See <xref linkend="panels-addobject"/> for more on this.</para>
+      <para>To open the <application>Search Tool</application>, click on
+the <guibutton>Search</guibutton> button. </para>
+      <para>Подробнее о <application>Средстве поиска файлов</application> смотрите <ulink type="help" url="ghelp:gnome-search-tool">соответствующее руководство</ulink>.</para>
+    </section>
+    <section id="gospanel-564">
+      <title>Кнопка расчистки рабочего стола</title>
+      <indexterm>
+        <primary>кнопки</primary>
+        <secondary>Minimize Windows</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>Minimize
+Windows button</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Minimize Windows
+button</primary>
+      </indexterm>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/show_desktop_button.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Значок расчистки рабочего стола.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para>Можно использовать кнопку <guibutton>Расчистить рабочий стол</guibutton>, чтобы свернуть всех открытые окна и показать рабочий стол.</para>
+      <para>To add a <guibutton>Show Desktop</guibutton> button to a panel, right-click
+on any vacant space on the panel. Choose <guimenu>Add to Panel</guimenu>, then 
+choose <application>Show Desktop</application> from the Add to Panel dialog. 
+See <xref linkend="panels-addobject"/> for more on this.</para>
+      <para>To minimize all windows and show the desktop, click on the 
+      <guibutton>Show Desktop</guibutton> button. To restore all windows to 
+      their previous state, click it again.</para>
+    </section>
+  </section>
+  <section id="panel-menus">
+    <title>Меню</title>
+
+    <!-- Desktop Overview / Menus -->
+    <anchor id="gosoverview-42"/>
+    <anchor id="gospanel-37"/>
+    <indexterm>
+      <primary>меню</primary>
+      <secondary>добавление на панель</secondary>
+    </indexterm>
+    <indexterm>
+      <primary>объекты панели</primary>
+      <secondary>меню</secondary>
+    </indexterm>
+    <para>Вы можете добавить на панели следующие типы меню:</para>
+    <itemizedlist>
+      <listitem>
+        <para><guimenu>Menu Bar</guimenu>: You can access almost
+all of the standard applications, commands, and configuration options from
+the menus in the Menu Bar. It contains the <guimenu>Applications</guimenu>, 
+<guimenu>Places</guimenu>, and <guimenu>System</guimenu> menus.</para>
+        <para>To add a <guimenu>Menu Bar</guimenu> to a panel, right-click
+on any vacant space on the panel. Choose <guimenu>Add to Panel</guimenu>, then 
+choose <application>Menu Bar</application> from the Add to Panel dialog. 
+See <xref linkend="panels-addobject"/> for more on this.</para>
+      </listitem>
+      <listitem>
+        <para><guimenu>Main Menu</guimenu>: The Main Menu contains the same 
+        items as the Menu Bar, but organizes them into one menu instead of three. 
+        It takes up less space on the panels as a result.</para>
+        <para>To add a <guimenu>Main Menu</guimenu> to a panel, right-click
+on any vacant space on the panel. Choose <guimenu>Add to Panel</guimenu>, then 
+choose <application>Main Menu</application> from the Add to Panel dialog. 
+See <xref linkend="panels-addobject"/> for more on this.</para>
+      </listitem>
+      <listitem>
+        <para><guimenu>Submenus</guimenu>: You can add a submenu of the Menu Bar 
+        or Main Menu directly to the panel. For example, you can add the <guimenu>Games</guimenu> 
+        submenu of the <guimenu>Applications</guimenu> menu to the panel.</para>
+        <para>To add a submenu to a panel, open the submenu, right-click on a launcher, then choose 
+<menuchoice><guimenu>Entire menu</guimenu><guimenuitem>Add this as menu to panel</guimenuitem></menuchoice>. </para>
+      </listitem>
+    </itemizedlist>
+
+  </section>
+  <section id="gospanel-18">
+    <title>Ящики</title>
+    <indexterm>
+      <primary>объекты панели</primary>
+      <secondary>ящики</secondary>
+      <see>ящики</see>
+    </indexterm>
+    <para>A drawer is an extension of a panel. You
+can open and close a drawer in the same way that you can show and hide a panel.
+A drawer can contain all panel objects, including launchers, menus, applets, 
+and other drawers. When you open a drawer, you can use
+the objects in the same way that you use objects on a panel. </para>
+    <para>На следующем рисунке показан открытый ящик, содержащий два объекта.</para>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/open_drawer.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>Открытый ящик. Содержимое описано в тексте.</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+    <para>The arrow on the icon indicates that it represents a drawer
+or menu.</para>
+    <para>Можно добавлять, удалять и перемещать объекты в ящиках так же, как и объекты на панелях.</para>
+    <section id="gospanel-42">
+      <title>Чтобы открыть и закрыть ящик</title>
+      <indexterm>
+        <primary>ящики</primary>
+        <secondary>открытие</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>ящики</primary>
+        <secondary>закрытие</secondary>
+      </indexterm>
+      <para>To open a drawer, click on the drawer's icon in a panel. You can close
+a drawer in the following ways: </para>
+      <itemizedlist>
+        <listitem>
+          <para>Click on the drawer's icon.</para>
+        </listitem>
+        <listitem>
+          <para>Щёлкнуть по кнопке скрытия ящика.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+    <section id="gospanel-420">
+      <title>Чтобы добавить ящик на панель</title>
+      <indexterm>
+        <primary>ящики</primary>
+        <secondary>добавление на панель</secondary>
+      </indexterm>
+      <para>Можно добавить ящик на панель следующими способами:</para>
+      <variablelist>
+      <varlistentry>
+        <term>Из всплывающего меню панели</term>
+        <listitem>
+          <orderedlist>
+            <listitem><para>Right-click on any vacant space on the panel, then choose
+            <guimenuitem>Add to Panel</guimenuitem>.</para></listitem>
+            <listitem><para>In the <application>Add to Panel</application> dialog, select
+            <guilabel>Drawer</guilabel>.  Click <guibutton>Add</guibutton>, then click
+            <guibutton>Close</guibutton>.</para></listitem>
+          </orderedlist>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>Из любого меню</term>
+        <listitem>
+          <para>Можно добавить меню в виде ящика на панель.</para>
+          <para>Чтобы добавить меню в виде ящика на панель, откройте нужное меню. Щёлкните правой кнопкой мыши на любой кнопке запуска, затем выберите <menuchoice><guimenu>Всё меню</guimenu><guimenuitem>Добавить как ящик на панель</guimenuitem></menuchoice>.</para>
+        </listitem>
+      </varlistentry>
+      </variablelist>
+    </section>
+    <section id="gospanel-54">
+      <title>Чтобы добавить объект в ящик</title>
+      <indexterm>
+        <primary>ящики</primary>
+        <secondary>добавление объектов в</secondary>
+      </indexterm>
+      <para>Можно добавлять объекты в ящик так же, как и на панели. Подробнее смотрите <xref linkend="panels-addobject"/>.</para>
+    </section>
+    <section id="gospanel-550">
+      <title>Чтобы изменить свойства ящика</title>
+      <indexterm>
+        <primary>ящики</primary>
+        <secondary>изменение свойств панели</secondary>
+      </indexterm>
+      <para>You can modify the properties of each drawer individually. For 
+      example, you can change the visual appearance of the drawer and whether 
+      it has hide buttons.</para>
+      <para>Для изменения свойств ящика сделайте следующее:</para>
+      <orderedlist>
+        <listitem>
+          <para>Right-click on the drawer, then choose 
+          <guimenuitem>Properties</guimenuitem> to display the <guilabel>Drawer Properties</guilabel> dialog.
+The dialog displays the <guilabel>General</guilabel> tabbed section.</para>
+        </listitem>
+        <listitem>
+          <para>Выберите свойства ящика в диалоговом окне. Следующая таблица описывает элементы вкладки <guilabel>Общие</guilabel>:</para>
+          <informaltable frame="topbot">
+            <tgroup cols="2" colsep="0" rowsep="0">
+              <colspec colname="colspec0" colwidth="28.57*"/>
+              <colspec colname="colspec1" colwidth="71.43*"/>
+              <thead>
+                <row rowsep="1">
+                  <entry>
+                    <para>Элемент диалогового окна</para>
+                  </entry>
+                  <entry>
+                    <para>Описание</para>
+                  </entry>
+                </row>
+              </thead>
+              <tbody>
+                <row>
+                  <entry colname="colspec0">
+                    <para>
+                      <guilabel>Размер</guilabel>
+                    </para>
+                  </entry>
+                  <entry colname="colspec1">
+                    <para>Specify the width of the drawer when it is open.</para>
+                  </entry>
+                </row>
+                <row>
+                  <entry colname="colspec0">
+                    <para>
+                      <guilabel>Значок</guilabel>
+                    </para>
+                  </entry>
+                  <entry colname="colspec1">
+                    <para>Choose an icon to represent the drawer. Click
+on the <guibutton>Icon</guibutton> button to display an icon selector dialog.
+Choose an icon from the dialog and click <guibutton>OK</guibutton> to confirm your choice.</para>
+                  </entry>
+                </row>
+                <row>
+                  <entry valign="top">
+                    <para>
+                      <guilabel>Показывать кнопки скрытия</guilabel>
+                    </para>
+                  </entry>
+                  <entry valign="top">
+                    <para>Select this option to display hide buttons on your
+drawer. When you click one of the buttons, the drawer will close.</para>
+                  </entry>
+                </row>
+                <row>
+                  <entry valign="top">
+                    <para>
+                      <guilabel>Arrows on hide buttons</guilabel>
+                    </para>
+                  </entry>
+                  <entry valign="top">
+                    <para>Select this option to display arrows on the hide
+buttons, if the hide buttons are enabled.</para>
+                  </entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </informaltable>
+        </listitem>
+        <listitem>
+          <para>You can use the <guilabel>Background</guilabel> tabbed section
+to set the background for the drawer. For information on how to complete the <guilabel>Background</guilabel> tabbed section, see <xref linkend="panel-properties"/>. You can also drag a color or image on to a drawer
+to set the color or image as the background of the drawer. For more information,
+ see <xref linkend="panel-properties-background"/>.</para>
+        </listitem>
+        <listitem>
+          <para>Click <guibutton>Close</guibutton> to close the <guilabel>Drawer Properties</guilabel> dialog.</para>
+        </listitem>
+      </orderedlist>
+    </section>
+  </section>
+  <section id="panel-default">
+    <!-- a temporary home for things that should one day be in a greater list of panel objects -->
+    <title>Объекты на панели по умолчанию</title>
+    
+    <para>В этом разделе описаны объекты, находящиеся на панели в стандартной комплектации рабочей среды GNOME.</para>
+    
+    <section id="panel-windowselector"> 
+      <title>Апплет Переключатель окон</title>
+      <!-- preserve for backwards compatibility: 2.12 -->
+      <anchor id="gosmetacity-27"/>   
+      <indexterm>
+        <primary>верхняя панель</primary>
+        <secondary>значок переключателя окон</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>переключатель окон</primary>
+        <secondary>верхняя панель</secondary>
+      </indexterm>
+      <para>Можно просмотреть список всех открытых в данный момент окон. Также можно выбрать окно, чтобы перенести в него фокус. Чтобы увидеть список окно, щёлкните на апплете <application>Переключатель окон</application>. На следующем рисунке изображён апплет <application>Переключатель окон</application>:</para>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/openwindows_menu.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Апплет переключателя окон на верхней панели.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para>Чтобы передать фокус ввода окну, выберите его в апплете <application>Переключатель окон</application>.</para>
+      <para>The <application>Window Selector</application> lists the windows in
+all workspaces. The windows in all workspaces other than the current workspace 
+are listed under a separator line.</para>
+    </section>  
+
+    <section id="panels-notification-area">
+      <title>Апплет области уведомления</title>
+      <!-- preserve id for backwards compatibility: 2.12 -->
+      <anchor id="gospanel-567"/>         
+      <indexterm>
+        <primary>апплеты</primary>
+        <secondary>Область уведомления</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>объекты панели</primary>
+        <secondary>Апплет области уведомления</secondary>
+      </indexterm>
+      <indexterm>
+        <primary>Апплет области уведомления</primary>
+      </indexterm>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/notification_area_icon.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Значок области уведомления.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para>Апплет <application>Область уведомления</application> показывает значки от разных приложений, обозначающие активность в этих приложениях. Например, когда вы прослушиваете компакт-диск с помощью <application>Проигрывателя компакт-дисков</application>, в апплете <application>Область уведомления</application> появляется значок диска, как показано на рисунке выше.</para>
+    </section>
+     
+    <section id="goseditmainmenu-65">
+      <title>Строка меню</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/menu_bar_applet.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>Menu Bar applet. Menus: Applications, Places, System.</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para>The <application>Menu Bar</application> contains the 
+      <guimenu>Applications</guimenu>, <guimenu>Places</guimenu>, and 
+      <guimenu>System</guimenu> menus. You can access
+  almost all of the standard applications, commands, and configuration options
+  from the <application>Menu Bar</application>. For more on using the Menu Bar, see <xref linkend="menubar"/>.</para>
+    </section>
+
+<!-- This has been pasted from the Window List manual so that the Window List applet help is integrated into the GUG. -->
+<!-- This section needs gross refactoring (making task-based for starters) -->
+
+ <section id="windowlist">
+  <title>Список окон</title>
+
+	 <para>The <application>Window List</application> applet enables you to manage the windows that are open on the GNOME desktop. Window List uses a button to represent each window or group of windows that is open. The state of the buttons in the applet varies depending on the state of the window that the button represents. The following table explains the possible states of the <application>Window List</application> buttons.</para>
+	<informaltable>
+	<tgroup cols="2">
+	<colspec colname="col1"/>
+	<colspec colname="col2"/>
+	<thead>
+	<row valign="top">
+	<entry colname="col1"><para>Состояние</para></entry>
+	<entry colname="col2"><para>Означает...</para></entry>
+	</row>
+	</thead>
+	<tbody>
+	<row valign="top">
+	<entry colname="col1"><para>The button is pressed in.</para></entry>
+	<entry colname="col2"><para>Окно имеет фокус.</para></entry>
+	</row>
+	<row valign="top">
+	<entry colname="col1"><para>The button appears faded. The button text is surrounded by square brackets.</para></entry>
+	<entry colname="col2"><para>Окно свёрнуто.</para></entry>
+	</row> 
+	<row valign="top">
+	<entry colname="col1"><para>The button is not pressed in, and is not faded.</para></entry>
+	<entry colname="col2"><para>Окно показано на рабочем столе и не свёрнуто.</para></entry>
+	</row>
+	<row valign="top">
+	<entry colname="col1"><para>В конце надписи на кнопке имеется число в скобках.</para></entry>
+	<entry colname="col2"><para>Кнопка соответствует группе кнопок.</para></entry>
+	</row>
+	</tbody>
+	</tgroup>
+	</informaltable>
+
+<!-- ================ Usage ================================ -->
+  <section id="windowlist-usage"> 
+	 <title>Использование</title> 
+	 <para><application>Список окон</application> можно использовать для выполнения следующих действий:</para>
+	<itemizedlist>
+	<listitem>
+	<para>Чтобы передать фокус окну</para>
+	<para>If you click on the Window List button that represents a window that is on the desktop but does not have focus, the applet gives focus to the window. </para>
+	</listitem>
+	<listitem>
+	<para>Чтобы свернуть окно</para>
+	<para>If you click on the Window List button that represents the window that has focus, the applet minimizes the window. </para>
+	</listitem>
+	<listitem>
+	<para>Чтобы восстановить свёрнутое окно</para>
+	<para>If you click on the Window List button that represents a minimized window, the applet restores the window.</para>
+	</listitem>
+	</itemizedlist>
+	
+	<para>You can change the order of the Window List buttons by dragging a button to a different location on the Window List.</para>
+	
+  </section>
+<!-- ============= Preferences ============================= -->
+  <section id="windowlist-prefs"> 
+	 <title>Параметры</title> 
+	 <para>To configure the <application>Window List</application>, right-click 
+	 on the handle to the left of the window buttons, then choose <guimenuitem>Preferences</guimenuitem>. 
+	 The following preferences can be changed:</para>
+    
+    <!-- Maintained for compatibility -->
+    <anchor id="windowlist-prefs-behavior"/>
+    <anchor id="windowlist-prefs-size"/>
+    
+	 <variablelist>
+	 <varlistentry><term><guilabel>Содержимое списка окон</guilabel> </term>
+	 <listitem>
+	 <para>To specify which windows to display in the Window List, select one of the following options: </para>
+	 	<itemizedlist>
+	 	<listitem>
+	 	<para><guilabel>Показывать окна текущего рабочего места</guilabel></para>
+	 	<para>Выберите этот параметр, чтобы показывались только те окна, которые открыты на текущем рабочем месте.</para>
+	 	</listitem>
+	 	<listitem><para><guilabel>Показывать окна всех рабочих мест</guilabel></para>
+	 	<para>Выберите этот параметр, чтобы показывались окна со всех рабочих мест.</para>
+	 	</listitem>
+	 	</itemizedlist>
+	 </listitem>
+	 </varlistentry>
+	 
+	 <varlistentry><term><guilabel>Группировка окон</guilabel> </term>
+	 <listitem>
+	 <para>To specify when the Window List should group windows that belong to the same application, select one of the following options: </para>
+		<itemizedlist>
+	 	<listitem>
+	 	<para><guilabel>Никогда не группировать окна</guilabel></para>
+	 	<para>Select this option to never group windows of the same application under one button.</para>
+		</listitem>
+	 	<listitem>
+	 	<para><guilabel>Группировать окна, когда пространство ограничено</guilabel></para>
+	 	<para>Select this option to group windows of the same application under one button when the space on the panel is restricted.</para>
+		</listitem>
+	 	<listitem>
+	 	<para><guilabel>Всегда группировать окна</guilabel></para>
+	 	<para>Select this option to always group windows of the same application under one button.</para>
+		</listitem>
+		</itemizedlist>
+	 </listitem>
+	 </varlistentry>
+	 
+	 <varlistentry><term><guilabel>Восстановление свёрнутых окон</guilabel> </term>
+	 <listitem>
+	 <para>To define how the Window List behaves when you restore windows, select one of the following options.</para>
+	 	<itemizedlist>
+	 	<listitem>
+	 	<para><guilabel>Восстанавливать на текущее рабочее место</guilabel></para>
+	 	<para>Установите этот параметр, чтобы окна восстанавливались из апплета на текущее рабочее место, даже если раньше они располагались на других рабочих местах.</para>
+	 	</listitem>
+	 	<listitem><para><guilabel>Восстанавливать на исходное рабочее место</guilabel></para>
+	 	<para>Select this option to switch to the workspace in which a window originally resided when you restore the window from the applet. </para>
+	 	</listitem>
+	 	</itemizedlist>
+	 <para>These options are only available if <guilabel>Show windows from all workspaces</guilabel> is selected in the <guilabel>Window List Content</guilabel> section of the dialog.</para>
+	 </listitem>
+	 </varlistentry>
+	 </variablelist>
+
+  </section>
+ </section>
+
+  </section>
+</chapter>

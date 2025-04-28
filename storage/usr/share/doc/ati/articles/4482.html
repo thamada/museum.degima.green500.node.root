@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Installing the ATI Proprietary Linux Driver</title>
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+</head>
+
+<body lang="en-US" dir="ltr">
+  <table bgcolor="#FFFFFF">
+    <tr>
+      <td>
+        <p><font size="+1"><b>How can I remove the ATI Proprietary Linux Driver from my system?</b></font></p>
+
+        <p>If you installed the ATI Proprietary Linux Driver using the rpm utility as recommended in the <a href="../tips-linux.html">install guide</a>, then rpm can be used to remove it.</p>
+        
+        <p>However, if you converted the rpm driver file to some other format (using alien) and installed by some other means, then the following instructions will not apply. Please consult your system vendor for more information in this case.</p>
+        
+        <p>If you simply wish to upgrade from a previous driver, then using the rpm -U option recommended in the <a href="../tips-linux.html#rpminstall">install guide</a> should properly replace any previous fglrx driver package, as long as it is version 3.7.1 or later.</p>
+        
+        <p>Issue the following commands to determine if any previous ATI driver packages are installed:</p>
+        
+        	<blockquote>
+        	<tt>rpm -q fglrx<br>
+        	rpm -q fglrx-glc22<br>
+        	rpm -q fglrx-glc21</tt>
+        	</blockquote>
+        
+        <table class="readthis"><tr><td>
+        <p>NOTE: &quot;fglrx-glc21&quot;, and &quot;fglrx-glc22&quot; are rpm package names that have been used by ATI in the past. Version 3.7.1 and later drivers go by the package name &quot;fglrx&quot;.</p>
+        <p>If you are SURE that no ATI proprietary drivers have been installed prior to version 3.7.1, then you should NOT need to check for &quot;fglrx-glc21&quot; or &quot;fglrx-glc22&quot;.</p>
+        </td></tr></table>
+
+        <p>If any of these packages are installed on your system, then rpm will return the current version number installed. If all three commands return blank, then no ATI proprietary drivers are installed on your system.</p>
+        
+        <p>If any previous ATI Linux driver packages (&quot;&lt;package name&gt;&quot;) are present on your system, then the following command should remove the driver cleanly and restore the system to it's previous state (you need to be logged in as root for this):
+        
+        <blockquote>
+        <tt>rpm -e &lt;package-name&gt;</tt>
+        </blockquote>
+        
+        <p>For more information on managing software installation using rpm, refer to the online help as follows:</p>
+
+        <blockquote>
+        <tt>man rpm</tt>
+        </blockquote>
+        
+        <p>INFO-BASE#4482</p>
+        
+        <p>&nbsp;</p>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

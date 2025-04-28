@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>fsusage</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libgtop Reference Manual">
+<link rel="up" href="libgtop-lib.html" title="Libgtop Library Reference">
+<link rel="prev" href="libgtop-prockernel.html" title="prockernel">
+<link rel="next" href="libgtop-loadavg.html" title="loadavg">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="libgtop-white-paper.html" title="White paper">
+<link rel="chapter" href="libgtop-lib.html" title="Libgtop Library Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgtop-prockernel.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="libgtop-lib.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libgtop Reference Manual</th>
+<td><a accesskey="n" href="libgtop-loadavg.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgtop-fsusage.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgtop-fsusage.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="fsusage">
+<a name="libgtop-fsusage"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgtop-fsusage.top_of_page"></a>fsusage</span></h2>
+<p>fsusage</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgtop-fsusage.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glibtop/fsusage.h&gt;
+
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-BLOCKS--CAPS" title="GLIBTOP_FSUSAGE_BLOCKS">GLIBTOP_FSUSAGE_BLOCKS</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-BFREE--CAPS" title="GLIBTOP_FSUSAGE_BFREE">GLIBTOP_FSUSAGE_BFREE</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-BAVAIL--CAPS" title="GLIBTOP_FSUSAGE_BAVAIL">GLIBTOP_FSUSAGE_BAVAIL</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-FILES--CAPS" title="GLIBTOP_FSUSAGE_FILES">GLIBTOP_FSUSAGE_FILES</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-FFREE--CAPS" title="GLIBTOP_FSUSAGE_FFREE">GLIBTOP_FSUSAGE_FFREE</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-BLOCK-SIZE--CAPS" title="GLIBTOP_FSUSAGE_BLOCK_SIZE">GLIBTOP_FSUSAGE_BLOCK_SIZE</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-READ--CAPS" title="GLIBTOP_FSUSAGE_READ">GLIBTOP_FSUSAGE_READ</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-FSUSAGE-WRITE--CAPS" title="GLIBTOP_FSUSAGE_WRITE">GLIBTOP_FSUSAGE_WRITE</a>
+#define             <a class="link" href="libgtop-fsusage.html#GLIBTOP-MAX-FSUSAGE--CAPS" title="GLIBTOP_MAX_FSUSAGE">GLIBTOP_MAX_FSUSAGE</a>
+                    <a class="link" href="libgtop-fsusage.html#glibtop-fsusage" title="glibtop_fsusage">glibtop_fsusage</a>;
+void                <a class="link" href="libgtop-fsusage.html#glibtop-get-fsusage" title="glibtop_get_fsusage ()">glibtop_get_fsusage</a>                 (<a class="link" href="libgtop-fsusage.html#glibtop-fsusage" title="glibtop_fsusage">glibtop_fsusage</a> *buf,
+                                                         const char *mount_dir);
+#define             <a class="link" href="libgtop-fsusage.html#glibtop-get-fsusage-r" title="glibtop_get_fsusage_r">glibtop_get_fsusage_r</a>
+void                <a class="link" href="libgtop-fsusage.html#glibtop-get-fsusage-l" title="glibtop_get_fsusage_l ()">glibtop_get_fsusage_l</a>               (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-fsusage.html#glibtop-fsusage" title="glibtop_fsusage">glibtop_fsusage</a> *buf,
+                                                         const char *mount_dir);
+void                <a class="link" href="libgtop-fsusage.html#glibtop-get-fsusage-s" title="glibtop_get_fsusage_s ()">glibtop_get_fsusage_s</a>               (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-fsusage.html#glibtop-fsusage" title="glibtop_fsusage">glibtop_fsusage</a> *buf,
+                                                         const char *mount_dir);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgtop-fsusage.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgtop-fsusage.details"></a><h2>Details</h2>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_BLOCKS">
+<a name="GLIBTOP-FSUSAGE-BLOCKS--CAPS"></a><h3>GLIBTOP_FSUSAGE_BLOCKS</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_BLOCKS		0
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_BFREE">
+<a name="GLIBTOP-FSUSAGE-BFREE--CAPS"></a><h3>GLIBTOP_FSUSAGE_BFREE</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_BFREE		1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_BAVAIL">
+<a name="GLIBTOP-FSUSAGE-BAVAIL--CAPS"></a><h3>GLIBTOP_FSUSAGE_BAVAIL</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_BAVAIL		2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_FILES">
+<a name="GLIBTOP-FSUSAGE-FILES--CAPS"></a><h3>GLIBTOP_FSUSAGE_FILES</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_FILES		3
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_FFREE">
+<a name="GLIBTOP-FSUSAGE-FFREE--CAPS"></a><h3>GLIBTOP_FSUSAGE_FFREE</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_FFREE		4
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_BLOCK_SIZE">
+<a name="GLIBTOP-FSUSAGE-BLOCK-SIZE--CAPS"></a><h3>GLIBTOP_FSUSAGE_BLOCK_SIZE</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_BLOCK_SIZE	5
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_READ">
+<a name="GLIBTOP-FSUSAGE-READ--CAPS"></a><h3>GLIBTOP_FSUSAGE_READ</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_READ           6
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_FSUSAGE_WRITE">
+<a name="GLIBTOP-FSUSAGE-WRITE--CAPS"></a><h3>GLIBTOP_FSUSAGE_WRITE</h3>
+<pre class="programlisting">#define GLIBTOP_FSUSAGE_WRITE          7
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MAX_FSUSAGE">
+<a name="GLIBTOP-MAX-FSUSAGE--CAPS"></a><h3>GLIBTOP_MAX_FSUSAGE</h3>
+<pre class="programlisting">#define GLIBTOP_MAX_FSUSAGE		8
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_fsusage">
+<a name="glibtop-fsusage"></a><h3>glibtop_fsusage</h3>
+<pre class="programlisting">typedef struct {
+	guint64	flags;
+	guint64 blocks;		/* Total number of blocks. */
+	guint64 bfree;		/* Free blocks available to superuser. */
+	guint64 bavail;		/* Free blocks available to non-superuser. */
+	guint64 files;		/* Total file nodes. */
+	guint64 ffree;		/* Free file nodes. */
+	guint32	block_size;	/* Size of a block in bytes. */
+	guint64 read, write;    /* Total blocks read and written */
+} glibtop_fsusage;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_fsusage ()">
+<a name="glibtop-get-fsusage"></a><h3>glibtop_get_fsusage ()</h3>
+<pre class="programlisting">void                glibtop_get_fsusage                 (<a class="link" href="libgtop-fsusage.html#glibtop-fsusage" title="glibtop_fsusage">glibtop_fsusage</a> *buf,
+                                                         const char *mount_dir);</pre>
+<p>
+Get the file system usage for an specific <em class="parameter"><code>mount_dir</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td> A location to return the file system usage.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mount_dir</code></em> :</span></p></td>
+<td> mount dir where to get the information of usage.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_fsusage_r">
+<a name="glibtop-get-fsusage-r"></a><h3>glibtop_get_fsusage_r</h3>
+<pre class="programlisting">#define glibtop_get_fsusage_r		glibtop_get_fsusage_s
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_fsusage_l ()">
+<a name="glibtop-get-fsusage-l"></a><h3>glibtop_get_fsusage_l ()</h3>
+<pre class="programlisting">void                glibtop_get_fsusage_l               (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-fsusage.html#glibtop-fsusage" title="glibtop_fsusage">glibtop_fsusage</a> *buf,
+                                                         const char *mount_dir);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mount_dir</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_fsusage_s ()">
+<a name="glibtop-get-fsusage-s"></a><h3>glibtop_get_fsusage_s ()</h3>
+<pre class="programlisting">void                glibtop_get_fsusage_s               (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-fsusage.html#glibtop-fsusage" title="glibtop_fsusage">glibtop_fsusage</a> *buf,
+                                                         const char *mount_dir);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mount_dir</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

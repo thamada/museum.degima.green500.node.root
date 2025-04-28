@@ -1,0 +1,33 @@
+diff --git a/drivers/infiniband/hw/nes/nes_ud.c b/drivers/infiniband/hw/nes/nes_ud.c
+index a1e0a76..2cb6f0c 100644
+--- a/drivers/infiniband/hw/nes/nes_ud.c
++++ b/drivers/infiniband/hw/nes/nes_ud.c
+@@ -1625,6 +1625,7 @@ int nes_ud_post_send(struct nes_ud_file *file,
+ 	int err = 0;
+ 	int misc_flags = NES_NIC_SQ_WQE_COMPLETION;
+ 	int i = 0;
++	int vlan_tag = 0;
+ 	struct nes_ud_resources *pRsc;
+ 
+ 	/* check if qp is activated */
+@@ -1637,6 +1638,11 @@ int nes_ud_post_send(struct nes_ud_file *file,
+ 	if (!(nes_ud_wr->flags & IB_SEND_IP_CSUM))
+ 		misc_flags |= NES_NIC_SQ_WQE_DISABLE_CHKSUM;
+ 
++#define VLAN_FLAGS 0x20
++	if ((nes_ud_wr->flags & VLAN_FLAGS)) {
++		vlan_tag = (nes_ud_wr->flags >> 16) & 0xffff;
++		misc_flags |= NES_NIC_SQ_WQE_TAGVALUE_ENABLE;
++	}
+ 	/* let's assume for now that max sge count is 1 */
+ 	for (i = 0; i < nes_ud_wr->wr_cnt; i++) {
+ 		nic_sqe = &sq_vbase[file->head];
+@@ -1660,7 +1666,7 @@ int nes_ud_post_send(struct nes_ud_file *file,
+ 
+ 		wqe_fragment_length =
+ 		(u16 *)&nic_sqe->wqe_words[NES_NIC_SQ_WQE_LENGTH_0_TAG_IDX];
+-
++		wqe_fragment_length[0] = cpu_to_le16(vlan_tag);
+ 		wqe_fragment_length++; /* skip vlan tag */
+ 		remaining_length = nes_ud_wr->sg_list[i].length;
+ 		wqe_fragment_index = 0;

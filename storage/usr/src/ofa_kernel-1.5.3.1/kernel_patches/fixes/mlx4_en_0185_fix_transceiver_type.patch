@@ -1,0 +1,43 @@
+From f76acd6e53034879cb41210711c54654bf8aacd8 Mon Sep 17 00:00:00 2001
+From: Yevgeny Petrilin <yevgenyp@mellanox.co.il>
+Date: Wed, 15 Dec 2010 11:14:24 +0200
+Subject: [PATCH] mlx4: checking copper_passive when reporting transceiver type
+
+Signed-off-by: Yevgeny Petrilin <yevgenyp@mellanox.co.il>
+---
+ drivers/net/mlx4/en_port.c |    2 ++
+ drivers/net/mlx4/en_port.h |    5 +++++
+ 2 files changed, 7 insertions(+), 0 deletions(-)
+
+diff --git a/drivers/net/mlx4/en_port.c b/drivers/net/mlx4/en_port.c
+index 786e800..97f430e 100644
+--- a/drivers/net/mlx4/en_port.c
++++ b/drivers/net/mlx4/en_port.c
+@@ -170,6 +170,8 @@ int mlx4_en_QUERY_PORT(struct mlx4_en_dev *mdev, u8 port)
+ 	else
+ 		state->link_speed = 10000;
+ 	state->transciver = qport_context->transceiver;
++	if (be32_to_cpu(qport_context->transceiver_code_hi) & 0x400)
++		state->transciver = 0x80;
+ 
+ out:
+ 	mlx4_free_cmd_mailbox(mdev->dev, mailbox);
+diff --git a/drivers/net/mlx4/en_port.h b/drivers/net/mlx4/en_port.h
+index 092e814..40de37f 100644
+--- a/drivers/net/mlx4/en_port.h
++++ b/drivers/net/mlx4/en_port.h
+@@ -97,6 +97,11 @@ struct mlx4_en_query_port_context {
+ 	u16 reserved3[5];
+ 	__be64 mac;
+ 	u8 transceiver;
++	u8 reserved4[3];
++	__be32 wavelenth;
++	u32 reserved5;
++	__be32 transceiver_code_hi;
++	__be32 transceiver_code_low;
+ };
+ 
+ 
+-- 
+1.7.1.1
+

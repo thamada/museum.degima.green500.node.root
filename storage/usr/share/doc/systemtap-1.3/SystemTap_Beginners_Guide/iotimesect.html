@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.2.2. Tracking I/O Time For Each File Read or Write</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="mainsect-disk.html" title="4.2. Disk" /><link rel="prev" href="mainsect-disk.html" title="4.2. Disk" /><link rel="next" href="traceiosect.html" title="4.2.3. Track Cumulative IO" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="mainsect-disk.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="traceiosect.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="4.2.2. Tracking I/O Time For Each File Read or Write" id="iotimesect" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="iotimesect">4.2.2. Tracking I/O Time For Each File Read or Write</h3></div></div></div><a id="id797103" class="indexterm"></a><a id="id2179635" class="indexterm"></a><a id="id711000" class="indexterm"></a><a id="id677960" class="indexterm"></a><a id="id673225" class="indexterm"></a><div class="para">
+		This section describes how to monitor the amount of time it takes for each process to read from or write to any file. This is useful if you wish to determine what files are slow to load on a given system.
+	</div><div class="formalpara" id="iotime"><h5 class="formalpara">iotime.stp</h5>
+			
+<pre class="programlisting">
+global start
+global entry_io
+global fd_io
+global time_io
+
+function timestamp:long() {
+  return gettimeofday_us() - start
+}
+
+function proc:string() {
+  return sprintf("%d (%s)", pid(), execname())
+}
+
+probe begin {
+ start = gettimeofday_us()
+}
+
+global filenames
+global filehandles
+global fileread
+global filewrite
+
+probe syscall.open {
+  filenames[pid()] = user_string($filename)
+} 
+
+probe syscall.open.return {
+  if ($return != -1) {
+    filehandles[pid(), $return] = filenames[pid()]
+    fileread[pid(), $return] = 0
+    filewrite[pid(), $return] = 0
+  } else {
+    printf("%d %s access %s fail\n", timestamp(), proc(), filenames[pid()])
+  }
+  delete filenames[pid()]
+}
+
+probe syscall.read {
+  if ($count &gt; 0) {
+    fileread[pid(), $fd] += $count
+  }
+  t = gettimeofday_us(); p = pid()
+  entry_io[p] = t
+  fd_io[p] = $fd
+}
+
+probe syscall.read.return {
+  t = gettimeofday_us(); p = pid()
+  fd = fd_io[p]
+  time_io[p,fd] &lt;&lt;&lt; t - entry_io[p]
+}
+
+probe syscall.write {
+  if ($count &gt; 0) {
+    filewrite[pid(), $fd] += $count
+  }
+  t = gettimeofday_us(); p = pid()
+  entry_io[p] = t
+  fd_io[p] = $fd
+}
+
+probe syscall.write.return {
+  t = gettimeofday_us(); p = pid()
+  fd = fd_io[p]
+  time_io[p,fd] &lt;&lt;&lt; t - entry_io[p]
+}
+
+probe syscall.close {
+  if (filehandles[pid(), $fd] != "") {
+    printf("%d %s access %s read: %d write: %d\n",  timestamp(), proc(),
+           filehandles[pid(), $fd], fileread[pid(), $fd], filewrite[pid(), $fd])
+    if (@count(time_io[pid(), $fd]))
+      printf("%d %s iotime %s time: %d\n",  timestamp(), proc(),
+             filehandles[pid(), $fd], @sum(time_io[pid(), $fd]))
+   }
+  delete fileread[pid(), $fd]
+  delete filewrite[pid(), $fd]
+  delete filehandles[pid(), $fd]
+  delete fd_io[pid()]
+  delete entry_io[pid()]
+  delete time_io[pid(),$fd]
+}
+
+</pre>
+		</div><div class="para">
+		<a class="xref" href="iotimesect.html#iotime" title="iotime.stp">iotime.stp</a> tracks each time a system call opens, closes, reads from, and writes to a file. For each file any system call accesses, <a class="xref" href="iotimesect.html#iotime" title="iotime.stp">iotime.stp</a> counts the number of microseconds it takes for any reads or writes to finish and tracks the amount of data (in bytes) read from or written to the file.
+	</div><a id="id2198346" class="indexterm"></a><a id="id2188989" class="indexterm"></a><a id="id657887" class="indexterm"></a><div class="para">
+		<a class="xref" href="iotimesect.html#iotime" title="iotime.stp">iotime.stp</a> also uses the local variable <code class="command">$count</code> to track the amount of data (in bytes) that any system call <span class="emphasis"><em>attempts</em></span> to read or write. Note that <code class="command">$return</code> (as used in <a class="xref" href="mainsect-disk.html#scriptdisktop" title="disktop.stp">disktop.stp</a> from <a class="xref" href="mainsect-disk.html#disktop" title="4.2.1. Summarizing Disk Read/Write Traffic">Section 4.2.1, “Summarizing Disk Read/Write Traffic”</a>) stores the <span class="emphasis"><em>actual</em></span> amount of data read/written. <code class="command">$count</code> can only be used on probes that track data reads or writes (e.g. <code class="command">syscall.read</code> and <code class="command">syscall.write</code>).
+	</div><div class="example" title="Example 4.7. iotime.stp Sample Output" id="iotimeoutput"><h6>Example 4.7. <a class="xref" href="iotimesect.html#iotime" title="iotime.stp">iotime.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+[...]
+825946 3364 (NetworkManager) access /sys/class/net/eth0/carrier read: 8190 write: 0
+825955 3364 (NetworkManager) iotime /sys/class/net/eth0/carrier time: 9
+[...]
+117061 2460 (pcscd) access /dev/bus/usb/003/001 read: 43 write: 0
+117065 2460 (pcscd) iotime /dev/bus/usb/003/001 time: 7
+[...]
+3973737 2886 (sendmail) access /proc/loadavg read: 4096 write: 0
+3973744 2886 (sendmail) iotime /proc/loadavg time: 11
+[...]
+</pre></div></div><br class="example-break" /><div class="para">
+		<a class="xref" href="iotimesect.html#iotimeoutput" title="Example 4.7. iotime.stp Sample Output">Example 4.7, “iotime.stp Sample Output”</a> prints out the following data:
+	</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+				A timestamp, in microseconds.
+			</div></li><li class="listitem"><div class="para">
+				Process ID and process name.
+			</div></li><li class="listitem"><div class="para">
+				An <code class="computeroutput">access</code> or <code class="computeroutput">iotime</code> flag.
+			</div></li><li class="listitem"><div class="para">
+				The file accessed.
+			</div></li></ul></div><div class="para">
+		If a process was able to read or write any data, a pair of <code class="computeroutput">access</code> and <code class="computeroutput">iotime</code> lines should appear together. The <code class="computeroutput">access</code> line's timestamp refers to the time that a given process started accessing a file; at the end of the line, it will show the amount of data read/written (in bytes). The <code class="computeroutput">iotime</code> line will show the amount of time (in microseconds) that the process took in order to perform the read or write.
+	</div><div class="para">
+		If an <code class="computeroutput">access</code> line is not followed by an <code class="computeroutput">iotime</code> line, it simply means that the process did not read or write any data.
+	</div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="mainsect-disk.html"><strong>Prev</strong>4.2. Disk</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="traceiosect.html"><strong>Next</strong>4.2.3. Track Cumulative IO</a></li></ul></body></html>

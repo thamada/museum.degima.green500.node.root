@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>Installing the ATI Proprietary Linux Driver</title>
+  <style type="text/css"><!--
+  .readthis { background-color: #ECECEC; }
+  --></style>
+</head>
+<body>
+<table bgcolor="#ffffff">
+  <tbody>
+    <tr>
+      <td>
+      <p><font size="+1"><b>"drm.h: No such file or directory" error
+message while compiling fglrx kernel module<br>
+      </b></font></p>
+      <p>This information applies to the following system
+configurations:</p>
+      <ul>
+        <li>ATI Proprietary Linux Driver version 3.14.6 and earlier</li>
+      </ul>
+      <p>The following may occur during driver installation:</p>
+      <ul>
+        <li>driver module compilation fails to complete</li>
+      </ul>
+      <p>The following error message may also appear during driver
+module compilation:</p>
+      <blockquote>
+        <pre>ATI module generator V 2.0<br>==========================<br>initializing...<br>cleaning...<br>patching 'highmem.h'...<br>probing for VMA API version...<br>doing script based build for kernel 2.4.x and similar<br>compiling './agpgart_be.c'...<br>compiling './agp3.c'...<br>compiling './i7505-agp.c'...<br>compiling './nvidia-agp.c'...<br>compiling './firegl_public.c'...<br>firegl_public.c:292:17: drm.h: No such file or directory<br>firegl_public.c:308:22: drm_proc.h: No such file or directory<br>firegl_public.c: In function `firegl_init_module':<br>firegl_public.c:597: `DRM_PROC_ENTRIES' undeclared (first use in this function)<br>firegl_public.c:597: (Each undeclared identifier is reported only once<br>firegl_public.c:597: for each function it appears in.)<br>firegl_public.c:603: `FGLDRM_proc_list' undeclared (first use in this function)<br>firegl_public.c: In function `do_vm_pcie_nopage':<br>firegl_public.c:2197: `drm_device_t' undeclared (first use in this function)<br>firegl_public.c:2197: `dev' undeclared (first use in this function)<br>firegl_public.c:2197: syntax error before ')' token<br>firegl_public.c: At top level:<br>firegl_public.c:298: warning: `FGLDRM_mem_info' defined but not used<br>compiling failed - object file was not generated<br></pre>
+      </blockquote>
+      <p>This issue does not occur if the Kernel Source package is
+installed.<br>
+      </p>
+      <p>This issue has been resolved in the 8.8.25 driver.<br>
+      </p>
+      <table cellpadding="2" cellspacing="2" class="readthis"
+ style="text-align: left;">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;">Please note: The 8.8.25
+driver requires either the Kernel Header package or the Kernel Source
+package to be installed. <br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>&nbsp;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,77 @@
+
+------------------------------------------------------------------------
+- Current dependencies
+------------------------------------------------------------------------
+
+ - udev-139 with some patches
+
+ - mdadm-2.6.5 with some patches
+
+ - device-mapper with some patches
+
+ - DeviceKit 003
+
+ - D-Bus GLib 0.75 with some patches
+
+ - Linux >= 2.6.25
+
+ - PolicyKit >= 0.9
+
+ - D-Bus >= 1.1.20
+
+ - parted
+
+ - smartmontools
+
+ - sqlite3
+
+ - util-linux-ng
+
+------------------------------------------------------------------------
+- TODO List
+------------------------------------------------------------------------
+
+ - Port to libatasmart
+
+ - Port to PolicyKit 1.0
+
+ - Port to EggDBus
+
+ - Split out Linux specific bits into separate files
+
+ - General cleanup + documentation
+   - devkit-disk-device.c is way too long right now
+
+ - Finish up Linux MD Software RAID support
+   - Major thing missing right now is creating an array
+
+ - General project management tasks
+   - review licenses, NEWS, TODO, HACKING etc. file
+
+ - Should we allow operations on an unlocked encrypted device
+   unlocked by someone else? Should probably require a separate
+   authorization
+
+ - Document what udev properties we rely on
+
+------------------------------------------------------------------------
+- Future features
+------------------------------------------------------------------------
+
+ - Share drives via iSCSI
+   - initiator (connect to drive)
+   - target (offer drive)
+   - see notes in doc/TODO-ISCSI
+
+ - Filesystem check
+   - how can we do interactive fsck? Connect to a socket on the
+     client and the client includes a terminal emulator? Yuck
+
+ - Partition/Filesystem resizing
+   - Maybe just enhance PartitionModify
+
+ - Support for recognizing LVM2 PV's and LV's
+
+ - Support for recognizing partitioned disks setup via e.g. kpartx
+
+ - Support for non-Linux

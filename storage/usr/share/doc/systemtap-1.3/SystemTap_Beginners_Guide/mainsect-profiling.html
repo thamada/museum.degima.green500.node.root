@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.3. Profiling</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="useful-systemtap-scripts.html" title="Chapter 4. Useful SystemTap Scripts" /><link rel="prev" href="ioblktimesect.html" title="4.2.7. Periodically Print I/O Block Time" /><link rel="next" href="paracallgraph.html" title="4.3.2. Call Graph Tracing" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="ioblktimesect.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="paracallgraph.html"><strong>Next</strong></a></li></ul><div class="section" title="4.3. Profiling" id="mainsect-profiling"><div class="titlepage"><div><div keep-together.within-column="always"><h2 class="title" id="mainsect-profiling">4.3. Profiling</h2></div></div></div><div class="para">
+			The following sections showcase scripts that profile kernel activity by monitoring function calls.
+		</div><div xml:lang="en-US" class="section" title="4.3.1. Counting Function Calls Made" id="countcallssect" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="countcallssect">4.3.1. Counting Function Calls Made</h3></div></div></div><a id="id739586" class="indexterm"></a><a id="id721238" class="indexterm"></a><a id="id664444" class="indexterm"></a><a id="id783369" class="indexterm"></a><a id="id2211218" class="indexterm"></a><div class="para">
+		This section describes how to identify how many times the system called a specific kernel function in a 30-second sample. Depending on your use of wildcards, you can also use this script to target multiple kernel functions.
+	</div><div class="formalpara" id="countcalls"><h5 class="formalpara">functioncallcount.stp</h5>
+			
+<pre class="programlisting">
+#! /usr/bin/env stap
+# The following line command will probe all the functions
+# in kernel's memory management code:
+#
+# stap  functioncallcount.stp "*@mm/*.c"
+
+probe kernel.function(@1).call {  # probe functions listed on commandline
+  called[probefunc()] &lt;&lt;&lt; 1  # add a count efficiently
+}
+
+global called
+
+probe end {
+  foreach (fn in called-)  # Sort by call count (in decreasing order)
+  #       (fn+ in called)  # Sort by function name
+    printf("%s %d\n", fn, @count(called[fn]))
+  exit()
+}
+
+</pre>
+		</div><div class="para">
+		<a class="xref" href="mainsect-profiling.html#countcalls" title="functioncallcount.stp">functioncallcount.stp</a> takes the targeted kernel function as an argument. The argument supports wildcards, which enables you to target multiple kernel functions up to a certain extent.
+	</div><a id="id785731" class="indexterm"></a><a id="id2211495" class="indexterm"></a><a id="id2168365" class="indexterm"></a><div class="para">
+		You can increase the sample time by editing the timer in the second probe (<code class="command">timer.ms()</code>). The output of <a class="xref" href="mainsect-profiling.html#countcalls" title="functioncallcount.stp">functioncallcount.stp</a> contains the name of the function called and how many times it was called during the sample time (in alphabetical order). <a class="xref" href="mainsect-profiling.html#countcallsoutput" title="Example 4.13. functioncallcount.stp Sample Output">Example 4.13, “functioncallcount.stp Sample Output”</a> contains an excerpt from the output of <code class="command">stap countcalls.stp "*@mm/*.c"</code>:
+	</div><div class="example" title="Example 4.13. functioncallcount.stp Sample Output" id="countcallsoutput"><h6>Example 4.13. <a class="xref" href="mainsect-profiling.html#countcalls" title="functioncallcount.stp">functioncallcount.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+[...]
+__vma_link 97
+__vma_link_file 66
+__vma_link_list 97
+__vma_link_rb 97
+__xchg 103
+add_page_to_active_list 102
+add_page_to_inactive_list 19
+add_to_page_cache 19
+add_to_page_cache_lru 7
+all_vm_events 6
+alloc_pages_node 4630
+alloc_slabmgmt 67
+anon_vma_alloc 62
+anon_vma_free 62
+anon_vma_lock 66
+anon_vma_prepare 98
+anon_vma_unlink 97
+anon_vma_unlock 66
+arch_get_unmapped_area_topdown 94
+arch_get_unmapped_exec_area 3
+arch_unmap_area_topdown 97
+atomic_add 2
+atomic_add_negative 97
+atomic_dec_and_test 5153
+atomic_inc 470
+atomic_inc_and_test 1
+[...]
+</pre></div></div><br class="example-break" /></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="ioblktimesect.html"><strong>Prev</strong>4.2.7. Periodically Print I/O Block Time</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="paracallgraph.html"><strong>Next</strong>4.3.2. Call Graph Tracing</a></li></ul></body></html>

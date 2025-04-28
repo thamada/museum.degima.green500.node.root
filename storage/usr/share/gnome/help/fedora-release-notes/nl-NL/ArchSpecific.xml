@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Architecture_Specific_Notes" lang="nl-NL">
+	<title>Architectuur specifieke opmerkingen</title>
+	<remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific">https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific</ulink></remark>
+	<para>
+		Deze paragraaf bevat specifieke opmerkingen voor de ondersteunde hardware architecturen van Fedora.
+	</para>
+	<section id="sect-Release_Notes-Architecture_Specific_Notes_686">
+		<title>32-bit basis veranderde naar i686</title>
+		<para>
+			Fedora 11 heeft i568 als de basis 32-bit x86 architectuur.
+		</para>
+		<para>
+			Voor Fedora 12 gaan we naar i686 als de basis architectuur (inclusief CMOV), en we optimaliseren voor Atom processoren.
+		</para>
+		<para>
+			Dit betekent dat we ondersteuning zullen verliezen voor de volgende CPU families: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Intel i586 (alle)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						National Semiconductor Geode processoren
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						VIA C3 (Ezra en Samuel Cores)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						AMD Geode GX
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>
+			AMD Geode LX (zoals gebruikt in de OLPC XO laptop) en latere Geode NX processoren zullen nog werken. Voor hen die er interesse in hebben staat het natuurlijk vrij om een secundaire architectuur voor oudere processoren in te richten.
+		</para>
+		<para>
+			Voordelen: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Snellere programma&#39;s op de hoofd architecturen (Pentium M, Via C7, alle 64-bit architecturen, Atom)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In werkelijkheid ondersteunen we i568 niet om praktische redenen. We forceren dit nu meer logisch
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Minder kernels te bouwen
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<!-- 	<xi:include href="ArchSpecific-PPC.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+	<xi:include href="ArchSpecific-x86.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+	<xi:include href="ArchSpecific-x86_64.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+ -->
+</section>
+
+

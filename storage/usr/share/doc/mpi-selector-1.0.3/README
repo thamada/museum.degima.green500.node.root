@@ -1,0 +1,78 @@
+Copyright (c) 2007-2008 Cisco Systems, Inc.  All rights reserved.
+
+Overview
+========
+
+mpi-selector is a simplistic tool that helps manage having multiple
+MPI implementations installed on a single host (or cluster).  It
+allows system administrators to set a site-wide default MPI
+implementation, but also allows users to selectively override that
+site-wide default with their own choice of MPI implementation.
+
+Both selections are optional and independent; system administrators
+may choose not to set a site-wide default while users do choose to
+their own default (and vice versa).
+
+Much more information is contained in the mpi-selector.1 man page.
+
+Installation
+============
+
+mpi-selector is installed with the traditional "configure" / "make"
+combination common to many open source projects.
+
+A traditional "configure" script is provided to allow you where to
+install mpi-selector.  The main option that you'll want to use is
+--prefix, specifying the top directory where mpi-selector and its
+files are installed.
+
+  shell$ ./configure --prefix=/where/to/install
+
+Then run "make install" to install (you may need root permissions if
+installing into restricted directories):
+
+  shell# make install
+
+This command will install the following files:
+
+  $bindir/mpi-selector
+    --> $bindir defaults to "$prefix/bin", unless overridden on
+        the "configure" command line
+  $mandir/man1/mpi-selector.1
+    --> $mandir defaults to "$prefix/man", unless overridden on
+        the "configure" command line
+  $pkgdatadir/mpi-selector.sh
+  $pkgdatadir/mpi-selector.csh
+    --> $pkgdatadir defaults to "$prefix/share/mpi-selector", unless
+        overridden on the "configure" command line (RPMs will
+        typically change this value -- YMMV).
+
+The two files installed in $pkgdatadir are intended for site-wide
+shell startup usage.  For example, on RedHat systems, they should be
+copied to /etc/profile.d so that all shells will execute them upon
+startup.  
+
+These last two files will examine both the site-wide and per user MPI
+implementation selection, and if one is set, setup the shell's
+environment for it.
+
+Contact
+=======
+
+If you need assistance with the mpi-selector package, first read the
+mpi-selector(1) man page; it contains a lot more information than is
+listed here.
+
+If that still does not answer your question, please send mail to the
+OpenFabrics general mailing list (see http://www.openfabrics.org/).
+This is a high-volume mailing list, so be sure to put "mpi-selector"
+in the subject line somewhere to help ensure that it won't be missed.
+
+Or feel free to contact me directly.
+
+Enjoy!
+
+- Jeff Squyres
+  14 Feb 2007
+
+

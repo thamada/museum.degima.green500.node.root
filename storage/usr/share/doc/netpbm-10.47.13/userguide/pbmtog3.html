@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML><HEAD><TITLE>Pbmtog3 User Manual</TITLE></HEAD>
+<BODY>
+<H1>pbmtog3</H1>
+Updated: 03 December 2008
+<BR>
+<A HREF="#index">Table Of Contents</A>
+
+<H2>NAME</H2>
+
+pbmtog3 - convert a PBM image into a Group 3 MH fax file
+
+<H2 id="synopsis">SYNOPSIS</H2>
+
+<B>pbmtog3</B>
+[<b>-reversebits</b>]
+[<b>-nofixedwidth</b>]
+[<I>pbmfile</I>]
+
+<H2 id="description">DESCRIPTION</H2>
+
+<p>This program is part of <a href="index.html">Netpbm</a>.
+
+<p><b>pbmtog3</b> reads a PBM image as input and produces a Group 3 MH
+fax file as output.
+
+<p>You can also generate a TIFF file that uses the same encoding
+inside, with <b>pamtotiff</b>.
+
+<P>There is no program in Netpbm that generates other fax formats,
+such as MR and MMR, but <b>pamtotiff</b> can generate TIFF files that
+use those encodings.
+
+<H2 id="options">OPTIONS</H2>
+<dl>
+<dt><b>-reversebits</b>
+
+<dd>This option causes the output to have the bits in every byte
+reversed so the least signficant bit becomes the most signficant bit.
+Apparently, there is some ambiguity in transmission protocols so that
+the bits get reversed on transmission, and this compensates for that.
+If you get a whole bunch of "bad code word" messages when you try to
+read the G3 file (e.g. with <b>g3topbm</b>, try using this option.
+Note that the output is not G3 when you use this option.
+
+<dt><b>-nofixedwidth</b>
+
+<dd>Most fax machines expect the image to be 1728 columns wide, so
+<b>pbmtog3</b> cuts the output to this width by default.  If you want to
+keep the width of the original image, use this option.
+
+<p>This option was new in Netpbm 10.6 (July 2002).  Before that,
+<b>pbmtog3</b> always kept the width of the original image.
+     
+</dl>
+
+<H2 id="seealso">SEE ALSO</H2>
+
+<A HREF="g3topbm.html">g3topbm</A>,
+<A HREF="pamtotiff.html">pamtotiff</A>,
+<A HREF="pbm.html">pbm</A>
+<A HREF="faxformat.html">fax formats</A>
+
+
+<H2 id="author">AUTHOR</H2>
+
+Copyright (C) 1989 by Paul Haeberli &lt;<A
+HREF="mailto:paul@manray.sgi.com">paul@manray.sgi.com</A>&gt;.
+
+<HR>
+<H2 id="index">Table Of Contents</H2>
+<UL>
+<LI><A HREF="#synopsis">SYNOPSIS</A>
+<LI><A HREF="#description">DESCRIPTION</A>
+<LI><A HREF="#references">REFERENCES</A>
+<LI><A HREF="#seealso">SEE ALSO</A>
+<LI><A HREF="#author">AUTHOR</A>
+</UL>
+</BODY>
+</HTML>

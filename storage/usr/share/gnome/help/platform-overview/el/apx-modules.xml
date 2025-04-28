@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<appendix id="apx-modules">
+  <title>Σύντομη επισκόπηση μονάδων</title>
+
+  <para>Αυτό το παράρτημα περιέχει μια σύντομη περιγραφή των βιβλιοθηκών που συμπεριλαμβάνονται στην πλατφόρμα επιφάνειας εργασίας και προγραμματισμού του GNOME. Οι βιβλιοθήκες καταγράφονται με τη σειρά των μονάδων (modules) τους και συνοδεύονται από μια σύντομη περιγραφή και, όπου δυνατόν, από ένα σύνδεσμο προς την ενότητα του εγγράφου που περιέχει περισσότερες λεπτομέρειες.</para>
+
+<section id="apx-modules-platform">
+  <title>Μονάδες πλατφόρμας</title>
+
+  <para>Οι μονάδες της πλατφόρμας προγραμματισμού του GNOME προσφέρουν ρητές εγγυήσεις σταθερότητας των API και ABI. Οι εφαρμογές που βασίζονται σε μονάδες της πλατφόρμας θα μπορούν να λειτουργούν χωρίς τροποποιήσεις καθ' όλη τη διάρκεια ζωής του GNOME 2.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>GConf</term>
+      <listitem><para>Το GConf παρέχει υπηρεσία και βιβλιοθήκες για την αποθήκευση και ανάκτηση δεδομένων ρυθμίσεων. Το GConf εξετάζεται στην <xref linkend="gconf"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>ORBit</term>
+      <listitem><para>Η ORBit είναι ένας γρήγορος και ελαφρύς εξυπηρετητής CORBA. Η αρχιτεκτονική συστατικών του GNOME, το Bonobo, βασίζεται στο CORBA. Το CORBA εξετάζεται στην <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>atk</term>
+      <listitem><para>Η ATK παρέχει τις διεπαφές προσιτότητας που υλοποιούνται από άλλα toolkit και εφαρμογές. Χάρη στις διεπαφές της ATK, τα εργαλεία προσιτότητας διαθέτουν πλήρη πρόσβαση προκειμένου να βλέπουν και να ελέγχουν τις εκτελούμενες εφαρμογές. Η ATK εξετάζεται στην <xref linkend="a11y"/>.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gail</term>
+      <listitem><para>Η GAIL αποτελεί μια υλοποίηση των διεπαφών της ATK για τις βιβλιοθήκες GTK+ και GNOME, και επιτρέπει στα εργαλεία προσιτότητας να αλληλεπιδρούν με εφαρμογές που έχουν γραφτεί με βάση αυτές τις βιβλιοθήκες. Η προσιτότητα εξετάζεται στην <xref linkend="a11y"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gio</term>
+      <listitem><para>Η βιβλιοθήκη GIO αποτελεί τμήμα της GLib και παρέχει ένα API υψηλού επιπέδου για την πρόσβαση σε αρχεία και φακέλους. Μαζί με τη βιβλιοθήκη GVFS, παρέχει ένα αφαιρετικό μοντέλο του συστήματος αρχείων που επιτρέπει εύκολη πρόσβαση σε τοπικά και απομακρυσμένα αρχεία. Η GIO εξετάζεται στην <xref linkend="gio"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>glib</term>
+      <listitem><para>Η GLib παρέχει τα βασικά δομικά συστατικά για εφαρμογές και βιβλιοθήκες γραμμένες σε C. Παρέχει το βασικό σύστημα αντικειμένων του GNOME, την υλοποίηση του κύριου βρόγχου (main), και πλήθος βοηθητικών συναρτήσεων για το χειρισμό αλφαριθμητικών και κοινών δομών δεδομένων.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-vfs</term>
+      <listitem><para>Η GnomeVFS είναι βιβλιοθήκη για την πρόσβαση σε αρχεία και φακέλους η οποία τελεί υπό κατάργηση. Έχει αντικατασταθεί από τη GIO και τη GVFS. Αν γράφετε νέο κώδικα, χρησιμοποιήστε τη GIO στη θέση της.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtk+</term>
+      <listitem><para>Η GTK+ είναι η βασική βιβλιοθήκη για την κατασκευή διεπαφών χρήστη για εφαρμογές GNOME. Παρέχει ελέγχους διεπαφών χρήστη και σήματα επανάκλησης (callback) για τον έλεγχο αυτών των διεπαφών χρήστη. Η. GTK+ εξετάζεται στην <xref linkend="gtk"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gvfs</term>
+      <listitem><para>Η GVFS είναι υλοποίηση συστήματος υποστήριξης της GIO και επιτρέπει την πρόσβαση σε διάφορα πρωτόκολλα μέσω του API της GIO. Οι προγραμματιστές δεν διαθέτουν άμεση πρόσβαση στη GVFS. Ωστόσο, οι εφαρμογές που χρησιμοποιούν τη GIO χρησιμοποιούν αυτόματα τη GVFS στα συστήματα όπου είναι ενεργοποιημένη.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libIDL</term>
+      <listitem><para>Η libIDL είναι μια βιβλιοθήκη για την ανάλυση αρχείων IDL (Interface Definition Language), αρχείων απαραίτητων για τις διεπαφές CORBA. Η libIDL χρησιμοποιείται από την υλοποίηση της CORBA στο GNOME , την ORBit. Η CORBA εξετάζεται στην <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libart_lgpl</term>
+      <listitem><para>Η libart είναι μια βιβλιοθήκη γραφικών που μπορεί να εμφανίζει διανυσματικές διαδρομές. Χρησιμοποιείται από το γραφικό συστατικό GnomeCanvas.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libbonobo</term>
+      <listitem><para>Το Bonobo είναι ένα πλαίσιο για τη δημιουργία επαναχρησιμοποιήσιμων συστατικών για τις εφαρμογές GNOME, που έχει βασιστεί στην CORBA. Το Bonobo εξετάζεται στην <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libbonoboui</term>
+      <listitem><para>Η βιβλιοθήκη διεπαφών χρήστη του Bonobo παρέχει μια σειρά από ελέγχους διεπαφών χρήστη που χρησιμοποιούν το πλαίσιο συστατικών Bonobo. Το Bonobo εξετάζεται στην <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libglade</term>
+      <listitem><para>Η Libglade είναι μια βιβλιοθήκη για τη δυναμική δημιουργία διεπαφών χρήστη από περιγραφές XML. Η Libglade επιτρέπει στους προγραμματιστές να δημιουργούν διεπαφές χρήστη χρησιμοποιώντας μια γραφική διεπαφή δημιουργίας εφαρμογών, και στη συνέχεια να εισάγουν αυτούς ορισμούς διεπαφών. Η Libglade εξετάζεται στην <xref linkend="libglade"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnome</term>
+      <listitem><para>Η βιβλιοθήκη libgnome παρέχει μια σειρά από χρήσιμες ρουτίνες για τη δημιουργία προηγμένων εφαρμογών, όπως είναι η διαχείριση συνεδριών, η ενεργοποίηση αρχείων και URI, και η προβολή βοήθειας.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomecanvas</term>
+      <listitem><para>Το γραφικό συστατικό GnomeCanvas είναι ένα ευέλικτο συστατικό για τη δημιουργία διαδραστικών δομημένων γραφικών.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeui</term>
+      <listitem><para>Η βιβλιοθήκη libgnomeui παρέχει πρόσθετα γραφικά συστατικά για χρήση σε εφαρμογές. Πολλά από τα γραφικά συστατικά της libgnomeui έχουν ήδη μεταφερθεί στη GTK+.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxml2</term>
+      <listitem><para>Η βιβλιοθήκη libxml2 παρέχει μια σειρά από API για χρήση της XML σύμφωνα με τα πρότυπα. Η βιβλιοθήκη libxml2 εξετάζεται στην <xref linkend="libxml2"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxslt</term>
+      <listitem><para>Η βιβλιοθήκη libxslt παρέχει μια γρήγορη και ολοκληρωμένη υλοποίηση της XSLT, μιας γλώσσας που χρησιμοποιείται για τη μετατροπή της XML. Η βιβλιοθήκη libxslt εξετάζεται στην <xref linkend="libxslt"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>pango</term>
+      <listitem><para>Η Pango είναι η κύρια βιβλιοθήκη για το χειρισμό κειμένου και γραμματοσειρών στις εφαρμογές GNOME. Προσφέρει εκτεταμένη υποστήριξη των διαφόρων συστημάτων γραφής που χρησιμοποιούνται παγκοσμίως. Η Pango εξετάζεται στην <xref linkend="pango"/>.</para></listitem>
+    </varlistentry>
+  </variablelist>
+</section>
+
+<section id="apx-modules-desktop">
+  <title>Μονάδες επιφάνειας εργασίας</title>
+
+  <para>Η μονάδες της επιφάνειας εργασίας GNOME δεν είναι αναγκασμένες να προσφέρουν τις ίδιες εγγυήσεις σταθερότητας των API και ABI που προσφέρουν οι μονάδες της πλατφόρμας, αν και καταβάλλονται προσπάθειες για να παραμένουν σχετικά σταθερές. Συχνά, μία μονάδα εισάγεται πρώτα στην έκδοση της επιφάνειας εργασίας και στη συνέχεια μεταφέρεται στην πλατφόρμα, εφόσον ωριμάσει και σταθεροποιηθεί.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>eel</term>
+      <listitem><para>Η βιβλιοθήκη eel παρέχει διάφορα πρόσθετα γραφικά συστατικά, που χρησιμοποιούνται κυρίως από το <application>Ναυτίλο</application>, το διαχειριστή αρχείων του GNOME. Πολλά από τα γραφικά συστατικά της eel έχουν εν τω μεταξύ ενσωματωθεί στη GTK+.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>evolution-data-server</term>
+      <listitem><para>Ο Εξυπηρετητής Δεδομένων Evolution παρέχει μια ενιαία τοποθεσία για τις πληροφορίες του βιβλίου διευθύνσεων και του ημερολογίου, επιτρέποντας σε πολλαπλές εφαρμογές να κάνουν κοινή χρήση των ίδιων δεδομένων. Ο Εξυπηρετητής Δεδομένων Evolution εξετάζεται στην <xref linkend="address-book-calendar"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-panel</term>
+      <listitem><para>Πέρα από τον ίδιο τον πίνακα εφαρμογών, το πακέτο gnome-panel περιέχει τις βιβλιοθήκες που χρησιμοποιούνται για τη δημιουργία μικροεφαρμογών που εκτελούνται στον πίνακα εφαρμογών του χρήστη. Οι μικροεφαρμογές των πινάκων εφαρμογών εξετάζονται στην <xref linkend="panel-applets"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-keyring</term>
+      <listitem><para>Ο διαχειριστής κλειδοθηκών του GNOME είναι ένα χρήσιμο και ασφαλές εργαλείο για την αποθήκευση των συνθηματικών των χρηστών, καθώς και άλλων ευαίσθητων δεδομένων. Τα κλειδιά των κλειδοθηκών είναι κρυπτογραφημένα και απαιτείται ρητή συγκατάθεση του χρήστη για την πρόσβαση σε αυτά. Ο διαχειριστής κλειδοθηκών εξετάζεται στην <xref linkend="keyring"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gstreamer</term>
+      <listitem><para>Το GStreamer είναι η πανίσχυρη βιβλιοθήκη πολυμέσων που χρησιμοποιείται παντού στο GNOME για την αναπαραγωγή, δημιουργία και επεξεργασία ήχου και βίντεο. Το GStreamer εξετάζεται στην <xref linkend="multimedia"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtkhtml</term>
+      <listitem><para>Η βιβλιοθήκη gtkhtml είναι μία ελαφριά εφαρμογή εμφάνισης HTML με πλήρη υποστήριξη της επεξεργασίας rich text. Χρησιμοποιείται από την εφαρμογή ηλεκτρονικού ταχυδρομείου του <application>Evolution</application> και επιτρέπει στους χρήστες να γράφουν και να διαβάζουν μηνύματα HTML. </para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtksourceview</term>
+      <listitem><para>Η βιβλιοθήκη gtksourceview παρέχει μια επέκταση του γραφικού συστατικού GtkTextView για υποστήριξη της αυτόματης επισήμανσης σύνταξης και άλλων λειτουργιών χρήσιμων για την επεξεργασία πηγαίου κώδικα. Χρησιμοποιείται από τον επεξεργαστή κειμένου <application>gedit</application>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgail-gnome</term>
+      <listitem><para>Η GAIL αποτελεί μια υλοποίηση των διεπαφών της ATK για τις βιβλιοθήκες GTK+ και GNOME, και επιτρέπει στα εργαλεία προσιτότητας να αλληλεπιδρούν με εφαρμογές που έχουν γραφτεί με βάση αυτές τις βιβλιοθήκες. Η προσιτότητα εξετάζεται στην <xref linkend="a11y"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeprint</term>
+      <listitem><para>Η βιβλιοθήκη libgnomeprint παρέχει μια υλοποίηση του μοντέλου απεικόνισης PostScript και μπορεί να χρησιμοποιηθεί για την παραγωγή εκτυπώσεων υψηλής ποιότητας. Το πλαίσιο εκτύπωσης GNOME εξετάζεται στην <xref linkend="gnomeprint"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeprintui</term>
+      <listitem><para>Η βιβλιοθήκη libgnomeprintui παρέχει ένα συνήθη διάλογο εκτύπωσης, ένα διάλογο προεπισκόπησης εκτύπωσης και διάφορους άλλους ελέγχους απαραίτητους για την εκτύπωση. Το πλαίσιο εκτύπωσης GNOME εξετάζεται στην <xref linkend="gnomeprint"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgtop</term>
+      <listitem><para>Η βιβλιοθήκη libgtop παρέχει ένα φορητό API για την απόκτηση πληροφοριών σχετικά με τις εκτελούμενες διεργασίες. Χρησιμοποιείται από την εφαρμογή <application>Παρακολούθησης συστήματος</application>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>librsvg</term>
+      <listitem><para>Η βιβλιοθήκη librsvg παρέχει μια υλοποίηση των γραφικών SVG (Scalable Vector Graphics). Χρησιμοποιείται παντού στην επιφάνεια εργασίας για την εμφάνιση διανυσματικών γραφικών που δεν εξαρτώνται από την ανάλυση.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libsoup</term>
+      <listitem><para>Η βιβλιοθήκη libsoup παρέχει μια υλοποίηση του SOAP (Simple Object Access Protocol), καθώς και του HTTP. Το SOAP μπορεί να χρησιμοποιηθεί για την ενσωμάτωση υπηρεσιών ιστού σε εφαρμογές. Η βιβλιοθήκη libsoup εξετάζεται στην <xref linkend="libsoup"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libwnck</term>
+      <listitem><para>Η βιβλιοθήκη libwnck παρέχει έναν τρόπο ελέγχου διαχειριστών παραθύρων σύμμορφων με το EWMH, συμπεριλαμβανομένου και του <application>Metacity</application>, του προεπιλεγμένου διαχειριστή παραθύρων του GNOME. Η βιβλιοθήκη libwnck εξετάζεται στην <xref linkend="window-manager"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxklavier</term>
+      <listitem><para>Η βιβλιοθήκη libxklavier παρέχει ένα API υψηλού επιπέδου για την πρόσβαση και ρύθμιση διατάξεων πληκτρολογίου. Χρησιμοποιείται από τις <application>Προτιμήσεις πληκτρολογίου</application> και επιτρέπει στους χρήστες να ορίζουν τη διάταξη και τις επιλογές του πληκτρολογίου τους.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>vte</term>
+      <listitem><para>Το VTE είναι ένα γραφικό συστατικό εξομοίωσης τερματικού για χρήση σε εφαρμογές GTK+. Παρέχει ένα ενιαίο API και χρησιμοποιεί την Pango για τη σχεδίαση κειμένου, κάτι που του επιτρέπει να εμφανίζει πλήρως διεθνοποιημένο κείμενο. Το VTE χρησιμοποιείται από την εφαρμογή <application>Τερματικού</application> του GNOME.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>
+
+</appendix>

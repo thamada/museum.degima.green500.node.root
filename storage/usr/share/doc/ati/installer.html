@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>Installing the ATI Proprietary Linux Driver</title>
+</head>
+
+<body lang="en-US" dir="ltr">
+    <p><font size="+1"><b><a name="top"></a>Installation of the ATI Proprietary Linux Driver Using ATI Installer</b></font></p>
+    <hr>
+    <b>Note:</b> All environment variables defined in this document (for example, ${ATI_LOG}) can be found by sourcing /etc/ati/inst_path_default and then /etc/ati/inst_path_override after a valid installation.  For example, to find the value of ${ATI_LOG}, run <code>source /etc/ati/inst_path_default</code>, <code>source /etc/ati/inst_path_override</code>, then <code>echo ${ATI_LOG}</code>.
+    <hr>
+    <b>Requirements and precautions</b>
+    <p>
+    The following is expected to be present in order for the installation to be completed without errors:
+    <ul>
+    <li>Linux kernel 2.4 or higher.</li>
+    <li>GCC version 3.3.3 or higher.</li>
+    <li>Kernel headers or kernel sources matching version of the kernel you're running.<br>
+    Please consult to documentation for your distribution how to get and install this.</li>
+    <li>XFree86 version 4.1.X, 4.2.X, 4.3.X, or XOrg version 6.8.X or higher.<br>
+    If you have multiple version of X Window System installed on your computer the installer will try to detect the default X, and install the driver for the detected version.  However, you could experience problems trying to run other versions of X after this.  Also, if your X Window System is installed into a nonstandard location, installation of the driver could be either problematic or incomplete.</li>
+    </ul>
+    <p>
+    <b>Installation</b>
+    <p>
+    Driver installation can be done from X Window System by running the graphical installer, or from the console mode by running the text mode installer.  In both cases, installation process is similar.
+    <p>
+    To start driver installation, just run <i>ati-installer-<...>.run</i>.  You have to do this with superuser privileges.
+    <p>
+    Before displaying the installation dialog, the installer unpacks itself and tries to detect configuration of your system (the version of X Window system you're running, and whether you use 32-bit or 64-bit platform).  If you notice that detected configuration is not what you actually have, please cancel the installation and provide ATI with feedback (via www.ati.com).  Also, if the installer cannot detect the configuration of your machine, it will exit.  However, it will provide you with information how you can manually force installation.
+    <p>
+    If there are no problems during extraction and detection phases, the installer displays the installation dialog.  The dialog has two options: <i>"Install Driver &lt;driver version&gt; on X &lt;version&gt;</i> and <i>Generate Distribution Specific Driver Package</i>.  You need to choose the first option and press the <i>Continue</i> button. You'll be required to read the End User License Agreement and press the <i>I Agree</i> button to continue installation.
+    <p>
+    The next dialog will offer you to choose automatic or custom mode of installation.  The custom mode allows you to choose which particular parts of the driver will be installed.  It's mostly used for expert type of installation.  Therefore, choose the automatic mode for straightforward installation.  
+    <p>
+    After this, driver files will be copied to your system, and all necessary modifications and compilations will be done.  As soon as this process finishes, you'll see a dialog box containing the instructions telling you how to finalize the installation.  Most important things you have to do are checking the installation logfile (${ATI_LOG}/fglrx-install.log) for errors, running aticonfig (or fglrxconfig) upon exit from the installer, and rebooting the system to make sure that the freshly compiled kernel module is loaded.
+    <p>
+    <b>Uninstallation</b>
+    <p>
+    To uninstall the driver, change the directory to <i>${ATI_UNINST}</i> and run <i>fglrx-uninstall.sh</i>. You have to do this with superuser privileges. The unistallation script should remove all filles copied by the installer, and restore your system to the original state it had before installation.
+    <p>
+    <b>Notes about mixing installations done with the installer and package installations</b>
+    <p>
+    Generally, mixing installations via different methods shouldn't break the system, but uninstallation after using mixed installation methods can cause system inconsistencies, so that it's highly discouraged.
+    </body>
+</html>

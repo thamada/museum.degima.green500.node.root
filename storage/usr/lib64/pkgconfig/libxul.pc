@@ -1,0 +1,17 @@
+prefix=/usr
+sdkdir=/usr/lib64/xulrunner-sdk-1.9.1
+libdir=/usr/lib64/xulrunner-1.9.1
+includedir=/usr/include/xulrunner-sdk-1.9.1
+idldir=/usr/share/idl/xulrunner-sdk-1.9.1/stable
+includetype=stable
+
+# Note: the default pkg-config includes will only list include directories
+# that contain stable (frozen or safe for linking) header files. To include
+# nonfrozen headers, run pkg-config with --define-variable=includetype=unstable
+
+Name: libxul
+Description: The Mozilla Runtime and Embedding Engine
+Version: 1.9.1
+Requires: nspr >= 4.8.6
+Libs: -L${sdkdir}/sdk/lib -lxpcomglue_s -lxul -lxpcom
+Cflags: -I${includedir}/${includetype} -fshort-wchar

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>3.5.6. Using Arrays in Conditional Statements</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="arrayoperators.html" title="3.5. Array Operations in SystemTap" /><link rel="prev" href="arrayops-deleting.html" title="3.5.5. Clearing/Deleting Arrays and Array Elements" /><link rel="next" href="arrayops-aggregates.html" title="3.5.7. Computing for Statistical Aggregates" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="arrayops-deleting.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="arrayops-aggregates.html"><strong>Next</strong></a></li></ul><div class="section" title="3.5.6. Using Arrays in Conditional Statements" id="arrayops-conditionals"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="arrayops-conditionals">3.5.6. Using Arrays in Conditional Statements</h3></div></div></div><a id="id741457" class="indexterm"></a><a id="id2189327" class="indexterm"></a><a id="id2189339" class="indexterm"></a><a id="id2221432" class="indexterm"></a><div class="para">
+			You can also use associative arrays in <code class="command">if</code> statements. This is useful if you want to execute a subroutine once a value in the array matches a certain condition. Consider the following example:
+		</div><div class="example" title="Example 3.17. vfsreads-print-if-1kb.stp" id="simplevfsreadprintif"><h6>Example 3.17. vfsreads-print-if-1kb.stp</h6><div class="example-contents"><pre class="programlisting">
+global reads
+probe vfs.read
+{
+  reads[execname()] ++
+}
+
+probe timer.s(3)
+{
+  printf("=======\n")
+  foreach (count in reads-)
+    if (reads[count] &gt;= 1024)
+      printf("%s : %dkB \n", count, reads[count]/1024)
+    else
+      printf("%s : %dB \n", count, reads[count])
+}
+</pre></div></div><br class="example-break" /><div class="para">
+			Every three seconds, <a class="xref" href="arrayops-conditionals.html#simplevfsreadprintif" title="Example 3.17. vfsreads-print-if-1kb.stp">Example 3.17, “vfsreads-print-if-1kb.stp”</a> prints out a list of all processes, along with how many times each process performed a VFS read. If the associated value of a process name is equal or greater than 1024, the <code class="command">if</code> statement in the script converts and prints it out in <code class="command">kB</code>.
+		</div><div class="formalpara"><h5 class="formalpara" id="id795685">Testing for Membership</h5><a id="id795694" class="indexterm"></a><a id="id741523" class="indexterm"></a><a id="id741539" class="indexterm"></a><a id="id795055" class="indexterm"></a><a id="id676358" class="indexterm"></a>
+				You can also test whether a specific unique key is a member of an array. Further, membership in an array can be used in <code class="command">if</code> statements, as in:
+			</div><pre class="screen">
+if([<em class="replaceable"><code>index_expression</code></em>] in <em class="replaceable"><code>array_name</code></em>) <em class="replaceable"><code>statement</code></em></pre><div class="para">
+			To illustrate this, consider the following example:
+		</div><div class="example" title="Example 3.18. vfsreads-stop-on-stapio2.stp" id="simplesimplevfsreadprintifmember"><h6>Example 3.18. vfsreads-stop-on-stapio2.stp</h6><div class="example-contents"><pre class="programlisting">
+global reads
+
+probe vfs.read
+{
+  reads[execname()] ++
+}
+
+probe timer.s(3)
+{
+  printf("=======\n")
+  foreach (count in reads+) 
+    printf("%s : %d \n", count, reads[count])
+  if(["stapio"] in reads) {
+    printf("stapio read detected, exiting\n")
+    exit()
+  }
+}
+</pre></div></div><br class="example-break" /><div class="para">
+			The <code class="command">if(["stapio"] in reads)</code> statement instructs the script to print <code class="computeroutput">stapio read detected, exiting</code> once the unique key <code class="command">stapio</code> is added to the array <code class="command">reads</code>.
+		</div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="arrayops-deleting.html"><strong>Prev</strong>3.5.5. Clearing/Deleting Arrays and Array Elements</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="arrayops-aggregates.html"><strong>Next</strong>3.5.7. Computing for Statistical Aggregates</a></li></ul></body></html>

@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<book id="index" lang="cs">
+  <bookinfo>
+    <title>Integrace existujícího software s GNOME</title>
+    <subtitle>Příručka pro nezávislé dodavatele software</subtitle>
+    <abstract role="description"><para>Příručka pro nezávislé dodavatele software</para></abstract>
+
+    <authorgroup>
+      <author>
+	<firstname>Rosanna</firstname>
+	<surname>Yuen</surname>
+	<affiliation>
+	  <address>
+	    <email>zana@gnome.org</email>
+	  </address>
+	</affiliation>
+      </author>
+      <author role="maintainer">
+	<firstname>Federico</firstname>
+	<surname>Mena-Quintero</surname>
+	<affiliation>
+	  <address>
+	    <email>federico@gnu.org</email>
+	  </address>
+	</affiliation>
+      </author>
+      <author>
+	<firstname>Mike</firstname>
+	<surname>Hearn</surname>
+	<affiliation>
+	  <address>
+	    <email>mike@navi.cx</email>
+	  </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2005, 2006</year>
+      <holder>Rosanna Yuen, Federico Mena-Quintero, Mike Hearn</holder>
+    </copyright><copyright><year>2009.</year><holder>Lucas Lommer (llommer@svn.gnome.org)</holder></copyright>
+
+    <revhistory>
+      <revision>
+	<revnumber>0.6</revnumber>
+	<date>19. září 2006</date>
+	<revdescription>
+	  <para>Rozšířena doporučení pro ikony.</para>
+	</revdescription>
+      </revision>
+ <revision>
+	<revnumber>0.5</revnumber>
+	<date>18. září 2006</date>
+	<revdescription>
+	  <para>Zařazení prvního článku Rosanny Yuen o standardech freedesktop.org.</para>
+	</revdescription>
+      </revision>
+      <revision>
+	<revnumber>0.0</revnumber>
+	<date>Červen 2005</date>
+	<revdescription>
+	  <para>První verze tohoto dokumentu</para>
+	</revdescription>
+      </revision>
+    </revhistory>
+<!-- Added with permission of federico -->
+<legalnotice id="legalnotice">
+  <para>Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License, verze 1.1 nebo jakékoli další verze vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu jménem <ulink type="help" url="ghelp:fdl">GNU Free Documentation License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou.</para>
+  <para>Tato příručka je součástí kolekce příruček GNOME, distribuovaných pod licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, musíte přiložit kopii licence dle popisu v sekci 6 dané licence.</para>
+  <para>Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s velkým písmenem na začátku.</para>
+  <para>DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <orderedlist>
+      <listitem>
+	<para>DOKUMENT JE POSKYTOVÁN V PODOBĚ „JAK JE“ BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE</para>
+      </listitem>
+      <listitem>
+	<para>ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ.</para>
+      </listitem>
+    </orderedlist></para>
+</legalnotice>
+  </bookinfo>
+
+  <preface id="preface">
+    <title>Předmluva</title>
+
+    <para>GNOME je projekt, jehož cílem je vytvořit kompletní prostředí pracovní plochy a vývojovou platformu, obojí založené na svobodném software. Mnoho společností, vlád, škol, institucí a jednotlivců používá pracovní prostředí GNOME na svých počítačích. Pokud jste vývojářem software v pozici třetí strany ("Nezávislý dodavatel software" alias <acronym>ISV</acronym> nebo "Nezávislý vývojář software" alias <acronym>ISD</acronym>), jistě chcete mít jistotu, že váš software pracuje s GNOME správně. Tato příručka vysvětluje, jak integrovat existující software do prostředí GNOME, aniž by bylo nutno software přímo upravovat za účelem použití knihoven s vývojářských nástrojů platformy GNOME.</para>
+
+    <para>Tuto příručku využijete v těchto případech:</para>
+
+    <itemizedlist>
+      <listitem>
+	<para>Jste vývojář nebo distributor software, který není přímo určen pro běh v prostředí GNOME, ale chcete mít jistotu, že vaše aplikace budou v pořádku v GNOME fungovat.</para>
+      </listitem>
+
+      <listitem>
+	<para>Jste správce v instituci, která pro své uživatele zvolila pracovní prostředí GNOME. Zároveň používáte specifické aplikace a chcete, aby uživatelé GNOME byli schopni s těmito aplikacemi pohodlně pracovat.</para>
+      </listitem>
+
+      <listitem>
+	<para>Píšete novou aplikaci pro GNOME a potřebujete vědět, jaké základní věci je potřeba udělat, aby se váš software v pořádku integroval se zbytkem pracovního prostředí GNOME.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Obecně je tato příručka věnována integraci existujícího software do pracovního prostředí GNOME. Na druhou stranu, pokud uvažujete o napsání nového software, podporujeme vás ve volbě GNOME jako cílové platformy; Více informací naleznete v dokumentu <ulink url="http://developer.gnome.org">GNOME Developer's Site</ulink>.</para>
+
+    <para>Jedním z nejdůležitějších zájmů GNOME je zážitek uživatele, který by měl mít komfortní počítačové prostředí: to znamená mít komplexní pracovní prostředí a sadu aplikací, které vzájemně konzistentně spolupracují. S vynaložením relativně malého úsilí mohou být aplikace, které nejsou původně napsány s ohledem na GNOME, pohodlně provozovány v prostředí GNOME.</para>
+
+    <section id="structure">
+      <title>Struktura příručky</title>
+
+      <para>Tato příručka je koncipována jako seznam úkonů, které je nutné provést, aby se existující software integroval s GNOME. Jednotlivé body jsou uspořádány dle důležitosti, například přidání aplikace do hlavní nabídky GNOME je uvedeno před přidáním podpory pro přetahování. Také je připojen <link linkend="apx-integration-checklist">dodatek se seznamem úkonů</link>, který vám má pomoci se zhodnocením integrace na integraci.</para>
+    </section>
+
+    <section id="standards">
+      <title>Standardy a freedesktop.org</title>
+
+      <para>Mnoho úkonů integrace z této příručky souvisí se standardy, které se nevztahují jen ke GNOME. Jiná pracovní prostředí, například <ulink url="http://www.kde.org">K Desktop Environment</ulink>, tyto standardy také využívají: pokud integrujete svoji aplikaci s GNOME, budete později muset udělat jen málo, nebo dokonce nic, abyste zajistili bezproblémový běh i v ostatních prostředích.</para>
+
+      <para>Vytvoření dokonalé aplikace přináší úžasný pocit. Ať je malá nebo velká, chcete, aby vaši aplikaci pracovní prostředí rozpoznalo a fungovalo s ní bez problémů. V situaci, kdy existuje několik pracovních prostředí je nejlepší, aby se vaše aplikace dokázala integrovat s co možná největším počtem. I když nebyla zatím přijata žádná oficiální pravidla, zde je seznam dostupných specifikací projektu <emphasis>freedesktop.org</emphasis>.</para>
+
+      <para>I když se formálně nejedná o standard, snaží se freedesktop.org udržovat seznam neoficiálních ale obecně přijatých doporučení. Pokud se jimi budete řídit, zajistí to vaší aplikaci integraci s pracovními prostředími, která jsou na těchto zásadách založena.</para>
+    </section>
+  </preface>
+
+  <chapter id="basic-integration">
+    <title>Základní integrace</title>
+
+    <para>Tato kapitola vás poučí o základních krocích, které byste měli provést za účelem integrace s pracovním prostředím GNOME. Tyto kroky mají za cíl:</para>
+
+    <itemizedlist>
+      <listitem>
+	<para>Umožnit uživateli spouštět aplikaci tím, že zařídíte její zobrazení v hlavní nabídce nebo jiném mechanismu spouštění, které pracovní prostředí nabízí.</para>
+      </listitem>
+      <listitem>
+	<para>Umožnit pracovnímu prostředí zjistit, pro jaké typy souborů vytvořené uživatelem je potřeba spustit jakou aplikaci.</para>
+      </listitem>
+      <listitem>
+	<para>Umožnit pracovnímu prostředí zjistit, jaké ikony náležející programu zobrazit a jaké soubory váš program vytváří.</para>
+      </listitem>
+    </itemizedlist>
+
+    <section id="desktop-files">
+      <title>Soubory plochy: vložení aplikace do hlavní nabídky prostředí</title>
+
+      <para>Aplikace v GNOME uživatelé klepnou na ikonu na pracovní ploše nebo zvolí požadovanou aplikaci z hlavní nabídky. Proto je prvním krokem integrace existujícího programu s GNOME jeho <firstterm>registrace</firstterm> v sadě aplikací, které uživatelé mohou spustit.</para>
+
+      <para>Na rozdíl od Windows nebo MacOS jsou v GNOME nabídky sestavovány automaticky ze seznamu registrovaných aplikací. Každá takto publikovaná aplikace uvádí sadu kategorií, do kterých patří, a při sestavování nabídky jej systém zatřídí a umístí. Mechanismus pracuje dle standardu freedesktop.org pro položky plochy a nabídky.</para>
+
+      <note><para>Vzhledem ke zvyku ostatních prostředí se nedoporučuje vytvářet pro aplikaci vlastní podnabídku. Namísto toho vytvořte pro každou dodávanou aplikaci jednu položku. Další věci jako nápověda, soubory README nebo odkazy na WWW stránky by měly být dostupné ze samotné aplikace.</para></note>
+
+      <para>V GNOME a jiných prostředích vycházejících ze standardů freedesktop.org jsou aplikace registrovány do hlavní nabídky pomocí <firstterm>položky plochy</firstterm>, což je textový soubor s příponou <filename>.desktop</filename>. Tento soubor plochy obsahuje potřebnou konfiguraci pro integraci aplikace. Pracovní prostředí přebírá informace z tohoto souboru a používá je k:</para>
+
+      <itemizedlist>
+	<listitem>
+	  <para>vložení aplikace do <guimenu>hlavní nabídky</guimenu>.</para>
+	</listitem>
+	<listitem>
+	  <para>uvedení aplikace v seznamu okna <application>Spustit aplikaci...</application></para>
+	</listitem>
+	<listitem>
+	  <para>vytvoření příslušných spouštěčů v nabídce a na pracovní ploše</para>
+	</listitem>
+	<listitem>
+	  <para>asociování jména a popisu aplikace</para>
+	</listitem>
+	<listitem>
+	  <para>použití příslušné ikony.</para>
+	</listitem>
+	<listitem>
+	  <para>rozpoznání typů MIME, které aplikace podporuje, při otevírání souborů.</para>
+	</listitem>
+      </itemizedlist>
+
+      <para>Pokud chcete přidat záznam v nabídce pro svoji aplikaci, vytvořte soubor plochy. Ten by měl mít unikátní název a vzhledem k tomu, že délka názvu není omezena, vyvarujte se zkratek a klidně použijte název celý. V žádném případě však do názvu nevkládejte mezery nebo znaky specifické pro jiný jazyk. Název "foocorp-painter-pro.desktop" je dobrý na rozdíl od "fcpp.desktop" nebo "FooCorp Painter Pro.desktop". Soubor by měl být v kódování UTF-8 a měl by být založen na následujícím vzoru:</para>
+
+      <programlisting><![CDATA[
+	[Desktop Entry]
+	Encoding=UTF-8
+	Name=FooCorp Painter Pro
+	Exec=foocorp-painter-pro
+	Icon=foocorp-painter-pro
+	Type=Application
+	Categories=Application;
+	]]></programlisting>
+
+      <para>Soubory plochy obsahují metadata o aplikaci a hrají hlavní roli v integraci programu v GNOME a obdobných pracovních prostředích, které pracují dle stejného standardu. Zde uvedený vzor je tím úplně základním. Soubor může být lokalizován, takže uživateli se názvy aplikací zobrazují v jeho rodném jazyce.</para>
+
+      <para>Tento soubor umístěte do adresáře <literal>/usr/share/applications</literal>, kde bude dostupný pro každého uživatele, nebo do adresáře <literal>~/.local/share/applications</literal>, pokud si přejete, aby aplikace byla dostupná jen konkrétnímu uživateli. Umístění bude použito v závislosti na tom, zda je aplikace nainstalována v systému nebo v domácím adresáři uživatele. GNOME sleduje tato umístění, takže prosté nakopírování souboru plochy do jednoho z nich stačí k registraci v pracovním prostředí. <footnote>
+	  <para>Mějte na paměti, že adresář <literal>~/.local/share/applications</literal> je sledován v GNOME od verze 2.10 (v distribuci Fedora od verze 2.8). Dřívější verze GNOME pracovali na dnes již zastaralou technologii vfolder a proto musely být soubory plochy instalovány do <literal>~/.gnome2/vfolders/applications</literal>. Toto umístění není podporováno od GNOME 2.10 (v distribuci Fedora od GNOME 2.8) a proto, pro zajištění maximální kompatibility, umístěte soubor do obou adresářů.</para>
+
+	  <para>Mějte také na paměti, že pracovní prostředí KDE vyžaduje spuštění <command>kbuildsycoca</command>, aby byla nabídka aktualizována.</para>
+
+	
+	</footnote></para>
+
+      <para>Každý funkční soubor plochy musí používat tento formát. Příklad takového souboru ukazuje <xref linkend="ex-sample-desktop-file"/>. Soubor je rozdělen na části, každá začíná popisem sekce v hranatých závorkách. Ve zmiňovaném příkladu je jen jedna část, která je základem integrace aplikace do pracovního prostředí. V každé části je obsah každého řádku před znamínkem rovnosti ('=') <firstterm>klíč</firstterm> a vše za ním pak <firstterm>hodnota</firstterm> klíče. Vysvětlení jednotlivých klíčů popisuje <xref linkend="tb-desktop-file"/>.</para>
+
+      <note>
+	<para>Krom prvního řádku, který identifikuje soubor plochy, není pořadí důležité. Řádek <command>Type=Application</command>, který obsahuje <xref linkend="ex-sample-desktop-file"/>, může být na druhém, pátém nebo posledním řádku a výsledek bude stejný.</para>
+
+	<para>Každopádně názvy klíčů rozlišují malá a velký písmena a proto <command>Type=Application</command> není to samé jako <command>type=Application</command> nebo <command>TYPE=Application</command>.</para>
+      </note>
+
+      <example id="ex-sample-desktop-file">
+	<title>Nějaký soubor plochy</title>
+<screen>
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=Sample Application Name
+Comment=A sample application
+Exec=application
+Icon=aplikace.png
+Terminal=false
+</screen>
+      </example>
+
+      <table id="tb-desktop-file">
+	<title>Vysvětlení řádek po řádku</title>
+	<tgroup cols="2">
+	  <colspec colnum="1" colname="line" colwidth="1"/>
+	  <colspec colnum="2" colname="desc" colwidth="1"/>
+
+	  <thead>
+	    <row>
+	      <entry>Řádek</entry>
+	      <entry>Popis</entry>
+	    </row>
+	  </thead>
+
+	  <tbody>
+	    <row>
+	      <entry><command>[Desktop Entry]</command></entry>
+	      <entry>První řádek každého souboru plochy a hlavička každé části, sloužící k identifikaci bloku asociovaných klíčů s hodnotami a pracovního prostředí. Nezbytné pro prostředí ke správnému rozpoznání souboru.</entry>
+	    </row>
+	    <row>
+	      <entry><command>Type=Application</command></entry>
+	      <entry>Říká pracovnímu prostředí, že soubor náleží aplikaci. Další platné hodnoty tohoto klíče jsou <command>Link</command> a <command>Directory</command>.</entry>
+	    </row>
+	    <row>
+	      <entry><command>Encoding=UTF-8</command></entry>
+	      <entry>Uvádí kódování znaků v souboru plochy.</entry>
+	    </row>
+	    <row>
+	      <entry><command>Name=Sample Application Name</command></entry>
+	      <entry>Název vaší aplikace, který bude použit v nabídce a pro spouštěč.</entry>
+	    </row>
+	    <row>
+	      <entry><command>Comment=A sample application</command></entry>
+	      <entry>Popisuje aplikaci, používá se jako bublinová nápověda.</entry>
+	    </row>
+	    <row>
+	      <entry><command>Exec=application</command></entry>
+	      <entry>Příkaz, který spustí aplikaci z příkazové řádky. Může obsahovat parametry.</entry>
+	    </row>
+	    <row>
+	      <entry><command>Icon=aplikace.png</command></entry>
+	      <entry>Název ikony asociovaný s aplikací</entry>
+	    </row>
+	    <row>
+	      <entry><command>Terminal=false</command></entry>
+	      <entry>Určuje, jestli se aplikace má spustit v terminálu.</entry>
+	    </row>
+	  </tbody>
+
+	</tgroup>
+      </table>
+
+      <section id="commandline">
+	<title>Spuštění aplikace</title>
+	<para>Pokud vaše aplikace podporuje parametry z příkazového řádku, můžete je uvést v tak, jak ukazuje <xref linkend="tb-exec-params"/>.</para>
+
+	<table id="tb-exec-params">
+	  <title>Proměnné při spouštění</title>
+	  <tgroup cols="2">
+	    <colspec colnum="1" colname="line" colwidth="1"/>
+	    <colspec colnum="2" colname="desc" colwidth="1"/>
+
+	    <thead>
+	      <row>
+		<entry>Přidat...</entry>
+		<entry>Akceptuje...</entry>
+	      </row>
+	    </thead>
+
+	    <tbody>
+	      <row>
+		<entry><command>%f</command></entry>
+		<entry>jeden název souboru</entry>
+	      </row>
+	      <row>
+		<entry><command>%F</command></entry>
+		<entry>více jmen souborů</entry>
+	      </row>
+	      <row>
+		<entry><command>%u</command></entry>
+		<entry>jedna adresa URL</entry>
+	      </row>
+	      <row>
+		<entry><command>%U</command></entry>
+		<entry>více adres URL</entry>
+	      </row>
+	      <row>
+		<entry><command>%d</command></entry>
+		<entry>jeden adresář. Využívá se spolu s <command>%f</command> k určení umístění souboru.</entry>
+	      </row>
+	      <row>
+		<entry><command>%D</command></entry>
+		<entry>více adresářů. Využívá se spolu s <command>%F</command> k určení umístění souborů.</entry>
+	      </row>
+	      <row>
+		<entry><command>%n</command></entry>
+		<entry>jeden název souboru bez cesty</entry>
+	      </row>
+	      <row>
+		<entry><command>%N</command></entry>
+		<entry>více názvů souborů bez cest</entry>
+	      </row>
+	      <row>
+		<entry><command>%k</command></entry>
+		<entry>adresa URI nebo cesta k souboru, kde se nachází soubor plochy.</entry>
+	      </row>
+	      <row>
+		<entry><command>%v</command></entry>
+		<entry>název zařízení.</entry>
+	      </row>
+	    </tbody>
+	  </tgroup>
+	</table>
+
+      </section>
+
+      <section id="internationalization">
+	<title>Cizí jazyky</title>
+
+	<para>Pokud chcete lokalizovat názvy a popisy, musíte pro každý překlad uvést další řádek. Například, pokud chcete přidat český překlad popisu, přidáte následující řádek:</para>
+
+	<para>
+	  <command>Comment[cs]=Ukázková aplikace</command>
+	</para>
+
+	<para>Neexistuje limit, kolik lze maximálně uvádět překladů v jednom souboru.</para>
+
+	<tip>
+	  <para>Protože je správa dlouhého seznamu překladů v jednom souboru nešikovný, lepším způsobem je vytvořit tyto překlady pomocí balíku nástrojů <application>intltool</application>. Další informace se dozvíte z manuálových stránek popisujících <application>intltool-extract</application> a <application>intltool-merge</application>.</para>
+	</tip>
+
+      </section>
+
+      <section id="desktop-references">
+	<title>Reference</title>
+
+	<para><ulink url="http://standards.freedesktop.org/desktop-entry-spec/latest/index.html">Desktop Entry Specification</ulink> — Specifikace pro vytváření souborů plochy</para>
+      </section>
+    </section>
+
+    <section id="icons">
+      <title>Instalace ikon</title>
+
+      <para>Ukázka <xref linkend="ex-sample-desktop-file"/> má nastavenu ikonu aplikace jako <filename><replaceable>aplikace.png</replaceable></filename>. Aby to ale fungovalo, musíte také umístit soubor s ikonou do správného adresáře.</para>
+
+      <para>Pracovní prostředí hledá ikony zvoleného motivu v adresáři <filename>/usr/share/icons/</filename>. Ikony aplikací by měly být dostupné nejméně v rozlišení 48x48 pixelů a umístěny v adresáři <filename>/usr/share/icons/hicolor/48x48/apps/</filename>. Sem se prostředí podívá, pokud zvolený motiv danou ikonu aplikace neobsahuje. Pokud máte ikony pro různé motivy, vložte je do příslušných adresářů.</para>
+
+      <para>Aby byla integrace vzhledu s pracovním prostředím GNOME lepší, při udržení nativního vzhledu, když je spuštěna pod KDE, Windows XP nebo Mac OS X, řiďte se při vytváření grafiky dokumentem <ulink url="http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines">Tango Style guidelines</ulink>. Ten popisuje různé aspekty tvorby ikon včetně barev, nasvícení a rozměrů. Přiloženy jsou i popis tvorby a videa s tutoriály.</para>
+
+
+      <section id="icons-references">
+	<title>Reference</title>
+
+	<para><ulink url="http://standards.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html">Icon Theme Specification</ulink> — Popisuje instalaci a vzhled z pohledu změn motivu.</para>
+
+	<para><ulink url="http://standards.freedesktop.org/icon-naming-spec/latest/">Icon Naming Specification</ulink> — Poskytuje informace o schématu pojmenovávání souborů.</para>
+
+	<para><ulink url="http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines">Tango Style Guidelines</ulink> — Popisuje způsob, jak vytvářet čisté a 'multiplatformní' ikony.</para>
+      </section>
+    </section>
+
+    <section id="mime">
+      <title>Přidávání typů MIME</title>
+
+      <para>Pokud vaše aplikace umí otevírat nějaký specifický typ MIME, musíte o tom pracovnímu prostředí dát vědět v souboru plochy. Pokud Vaše aplikace například umí pracovat se soubory <acronym>PNG</acronym>, přidejte do jejího souboru plochy tento řádek:</para>
+
+      <para>
+	<screen>MimeType=image/png</screen>
+      </para>
+
+      <para>Další typy MIME mohou být přidány oddělené středníkem.</para>
+
+      <para>Systém sám o sobě zná mnoho typů MIME, ale pokud chcete vytvořit nějaký vlastní, musíte jej registrovat do databáze typů MIME. V adresáři <filename>/usr/share/mime/packages/</filename> vytvořte soubor typu <acronym>XML</acronym> ve formátu, jaký ukazuje <xref linkend="ex-mime-xml"/>.</para>
+
+      <example id="ex-mime-xml">
+	<title>Příklad souboru registrujícího nový typ MIME</title>
+<screen>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info"&gt;
+   &lt;mime-type type="application/x-<replaceable>example</replaceable>"&gt;
+     &lt;comment&gt;Example file type &lt;/comment&gt;
+     &lt;magic priority="50"&gt;
+       &lt;match value="<replaceable>search-string</replaceable>" type="string" offset="10:140"/&gt;
+     &lt;/magic&gt;
+     &lt;glob pattern="*.<replaceable>newextension</replaceable>"/&gt;
+   &lt;/mime-type&gt;
+&lt;/mime-info&gt;
+</screen>
+      </example>
+
+      <para>V uvedeném příkladu nahraďte typ MIME svým vlastním názvem. Příkaz <firstterm>magic</firstterm> prohledává kvůli identifikaci soubory za účelem nalezení řetězce. Řádek s <firstterm>glob</firstterm> využívá k identifikaci příponu názvu souboru.</para>
+
+      <tip>
+	<para>Protože příkaz <command>magic</command> zapříčiní otevírání souborů za účelem vyhledání řetězce, je příkaz <command>glob</command> vhodnější.</para>
+      </tip>
+
+      <para>Když je váš typ MIME řádně popsán v souboru, spusťte následující příkaz z řádky:</para>
+
+      <para>
+	<screen>update-mime-database /usr/share/mime</screen>
+      </para>
+
+      <tip>
+	<para>Více informací o výběru správné přípony typu MIME a registraci typu naleznete na WWW stránkách <ulink url="http://www.iana.org/cgi-bin/mediatypes.pl">IANA</ulink>.</para>
+      </tip>
+
+      <section id="mime-references">
+	<title>Reference</title>
+
+	<para><ulink url="http://standards.freedesktop.org/shared-mime-info-spec/latest/">Shared MIME Info Specification</ulink> — Popisuje podrobnosti o registraci typů MIME.</para>
+      </section>
+
+    </section>
+
+  </chapter>
+
+  <chapter id="deeper-integration">
+    <title>Hlubší integrace s pracovním prostředím</title>
+
+    <para>Tato kapitola obsahuje seznam věcí, které můžete dále udělat pro lepší integraci s GNOME, než je naprosté minimum. Například GNOME umožňuje sdělit uživateli, že je aplikace spouštěna: jak povolit tuto zpětnou vazbu popisuje <xref linkend="startup-notification"/>. Také, pokud vaše aplikace vytváří dokumenty nebo jiná "tisknutelná" data, můžete nainstalovat nástroj pro vytváření náhledů a umožnit tak správci souborů GNOME vytvářet náhledy přímo pro váš program.</para>
+
+    <section id="startup-notification">
+      <title>Oznámení při spuštění</title>
+
+      <para>Krom položek, které zobrazuje <xref linkend="desktop-files"/>, poskytují dostatek informací, aby bylo pracovní prostředí schopno rozpoznat vaši aplikaci, existují další, které se hodí pro různé účely. Jedním z nich je <firstterm>oznámení o spuštění</firstterm>.</para>
+
+      <para>Pokud je oznámení nastaveno, panel a kurzor informují změnou vzhledu uživatele o spouštění aplikace. Když se aplikace následně objeví na obrazovce, vzhled obou prvků se vrátí do normálu.</para>
+
+      <para>Pokud chcete ve spouštěči uvést, že vaše aplikace podporuje oznámení o spuštění, přidejte následující řádek do jejího souboru plochy:</para>
+
+      <para>
+	<command>StartupNotify=true</command>
+      </para>
+
+      <para>Tento příkaz v souboru plochy povoluje pracovnímu prostředí využití oznámení o spuštění, které je součástí aplikace nebo toolkitu. Většina moderních toolkitů pracuje s oznámením o spuštění transparentně. Pokud nepoužíváte jeden z těch moderních, dokument <ulink url="http://freedesktop.org/wiki/Standards_2fstartup_2dnotification_2dspec">Startup Notification Spec</ulink> popisuje, co budete muset sami implementovat.</para>
+
+      <tip>
+	<para>Bez ohledu na toolkit, v jednom případě budete muset zařídit zpětnou vazbu ručně. Aplikace se schopnostmi vzdáleného ovládání (když sdělíte procesu, aby otevřel nové okno namísto spuštění procesu nového) nemohou využít zabudovaný mechanismus. Hodnota prostředí DESKTOP_LAUNCH_ID musí být vaší aplikací předána a upozornit spouštěcí mechanismus na nové okno. Pokud používáte <application>GTK+</application>, naleznete o něco více informací v dokumentaci funkce <function>gdk_notify_startup_complete()</function>.</para>
+      </tip>
+
+      <section id="startup-notification-references">
+	<title>Reference</title>
+
+	<para><ulink url="http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt">Startup Notification Protocol</ulink> — Popis nízkoúrovňových podrobností o implementaci oznamování spuštění v systému X Window.</para>
+      </section>
+    </section>
+
+    <section id="thumbnailer">
+      <title>Instalace nástroje pro vytváření náhledů</title>
+
+      <para>Správce souborů GNOME, Nautilus, může zobrazovat malé náhledy každého souboru namísto obecné ikony jeho typu. Například dokument kancelářského balíku se zobrazí jako malý náhled první strany dokumentu. To je užitečné, protože uživatelé vidí malé náhledy dat ve svých souborech, které jim pomáhají se orientovat. Vaše aplikace může vytvářet náhledy, pokud provedete těchto několik jednoduchých kroků:</para>
+
+      <!-- FIXME: screenshot of Nautilus showing thumbnails -->
+
+      <para><firstterm>thumbnailer</firstterm>, nástroj pro vytváření náhledů, je program bez uživatelského rozhraní, který má jako vstup název souboru a velikost v pixelech a vytváří pro daný soubor náhled. GNOME zjišťuje, jaký thumbnailer použít, na základě typu MIME souboru, pro který chceme náhled vytvořit. Mapa mezi typy MIME a příslušnými thumbnailery je uložena jako série klíčů GConf.</para>
+
+      <para>Pro každý typ MIME, který chcete zpracovávat, musíte vytvořit pár klíčů GConf:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term><literal>/desktop/gnome/thumbnailers/<replaceable>application@x-foo</replaceable>/enable</literal></term>
+	  <listitem>
+	    <para>Typ: boolean. Určuje, zda bude thumbnailer spuštěn. Můžete tak zvlášť povolit každý z existujících. Pokud tedy nainstalujete nový thumbnailer, měli byste nastavit tento klíč na hodnotu <symbol>true</symbol>.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><literal>/desktop/gnome/thumbnailers/<replaceable>application@x-foo</replaceable>/command</literal></term>
+	  <listitem>
+	    <para>Typ: string. Příkaz, který GNOME použije, pokud je potřeba vytvořit náhled souboru s typem <replaceable>application@x-foo</replaceable>. Uvedeno může být například něco jako "<literal>application-x-foo-thumbnailer %i %o %s</literal>". Níže je popsáno vysvětlení položek uvozených znakem procento ('%').</para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+
+      <para>Každý typ MIME vyžaduje dva klíče GConf (<literal>enable</literal> a <literal>command</literal>) uvedené pod stejnou cestou. Cestu lze odvodit pomocí názvu typu MIME nahrazením "<literal>/</literal>" za "<literal>@</literal>". Například thumbnailer pro <literal>image/x-my-format</literal> bude mít dva klíče: <literal>/desktop/gnome/thumbnailers/image@x-my-format/enable</literal> a <literal>/desktop/gnome/thumbnailers/image@x-my-format/command</literal>.</para>
+
+      <para>V klíči <literal>command</literal> nahradí GNOME položky uvozené znakem procent těmito hodnotami:</para>
+
+      <informaltable frame="none">
+	<tgroup cols="2">
+	  <tbody valign="top">
+	    <row>
+	      <entry><literal>%i</literal></entry>
+	      <entry>Název vstupního souboru. To je soubor, který má thumbnailer zpracovat.</entry>
+	    </row>
+	    <row>
+	      <entry><literal>%u</literal></entry>
+	      <entry>Vstupní adresa URI. Pokud umí váš thumbnailer obsluhovat adresy URI namísto prostého názvu souboru, použijte <literal>%u</literal> namísto <literal>%i</literal>.</entry>
+	    </row>
+	    <row>
+	      <entry><literal>%o</literal></entry>
+	      <entry>Název výstupního souboru. To je místo, kam má thumbnailer uložit náhled jako obrázek ve formátu PNG.</entry>
+	    </row>
+	    <row>
+	      <entry><literal>%s</literal></entry>
+	      <entry>Velikost náhledu, uvedeno jako prostý integer. Například, pokud bude řetězec nahrazen za <literal>128</literal>, znamená to, že při vytváření náhledů by neměl být výsledek větší než 128x128 pixelů.</entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+
+      <para>Jeden z řetězců <literal>%i</literal> nebo <literal>%u</literal> musí být u příkazu uveden a <literal>%o</literal> je také povinné. Řetězec <literal>%s</literal> je volitelný, ale doporučujeme, aby jej thumbnailer neignoroval.</para>
+
+      <section>
+	<title>Dodatečné informace</title>
+
+	<para>Další parametr nastavení je booleanovský klíč <literal>/desktop/gnome/thumbnailers/disable_all</literal>, pomocí kterého můžete zakázat vytváření jakýchkoliv náhledů.</para>
+      </section>
+
+      <!-- FIXME: we mentioned the GConf keys, but not how to set them
+      globally.  Do we need to describe how to install
+      schemas/defaults? -->
+    </section>
+
+  </chapter>
+
+  <appendix id="apx-integration-checklist">
+    <title>Seznam úkonů integrace</title>
+
+    <para>Tento dodatek obsahuje seznam různých úkonů uvedených v této příručce. Použijte jej ke kontrole, zda je váš software integrován s GNOME alespoň na základní úrovni a také jako zdroj při plánování další integrace.</para>
+
+    <orderedlist>
+      <listitem>
+	<para>Zobrazuje se vaše aplikace v nabídkách panelu GNOME?</para>
+      </listitem>
+      <listitem>
+	<para>Má vaše aplikace ikonu pro nabídku a odkaz na ploše? Pokud ano, existuje několik předvytvořených rozměrů a vektorová verze ve formátu <acronym>SVG</acronym>?</para>
+      </listitem>
+      <listitem>
+	<para>Pokud vaše aplikace umožňuje nahrávat a ukládat soubory, jsou jejich typy MIME registrovány?</para>
+      </listitem>
+      <listitem>
+	<para>Poskytuje vaše aplikace ikony typů MIME pro správce souborů?</para>
+      </listitem>
+      <listitem>
+	<para>Podporuje vaše aplikace oznámení o spuštění, aby se v GNOME mohla zobrazovat zpětná vazba uživateli, když je aplikace spouštěna?</para>
+      </listitem>
+      <listitem>
+	<para>Pokud vaše aplikace vytváří "tisknutelné" dokumenty, instaluje pro ně thumbnailer, nástroj pro vytváření náhledů, který může správce souborů použít?</para>
+      </listitem>
+    </orderedlist>
+  </appendix>
+
+  <appendix id="apx-acknowledgments">
+    <title>Uznání</title>
+
+    <para>Mnoho díků patří Jakubovi Steinerovi za vytvoření krásného stylu CSS pro HTML verzi této příručky!</para>
+  </appendix>
+
+</book>

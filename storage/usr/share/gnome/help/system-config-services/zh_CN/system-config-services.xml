@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_SERVICES_DISTRO_SPECIFICS SYSTEM "system-config-services-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_SERVICES_TOOL "Services Configuration Tool">
+<!ENTITY SYSTEM_CONFIG_SERVICES_INVOCATION '
+    <indexterm significance="normal">
+        <primary><command>system-config-services</command>
+        </primary>
+        <see>&SYSTEM_CONFIG_SERVICES_TOOL;</see>
+    </indexterm>
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_SERVICES_TOOL;. To start the application on the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Services</guimenuitem></menuchoice>.
+    </para>
+'>
+<!ENTITY SYSTEM_CONFIG_SERVICES_ABSTRACT SYSTEM "system-config-services-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_SERVICES_CONTENT SYSTEM "system-config-services-content.xml">
+]>
+<article lang="zh_CN"><title>控制访问服务</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2008-01-30</date></revision><revision><revnumber>1.1</revnumber><date>2008-03-05</date></revision><revision><revnumber>1.1.1</revnumber><date>2008-03-12</date></revision></revhistory><abstract role="description"><para>保证您的系统安全是件非常重要的事情，而其中首要的就是要谨慎管理系统服务。也许您的系统需要为某些服务开放权限(比如运行Web服务器的话要用到<command>httpd</command>)。但如果您不提供服务，您应该把它们关掉，从而最大可能的防止bug被利用。</para><para>管理系统服务有多种方法。根据服务本身，您的系统设置以及您的Linux水平来选择合适的管理方法。</para><para>拒绝访问服务最容易的方法就是关闭它。由<command>xinetd</command>管理服务的和<filename>/etc/rc.d/init.d</filename>等级中的服务(也叫做SysV服务)均可使用<application>服务配置工具</application>来启动或停止。</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup></articleinfo>    <para>保证您的系统安全是件非常重要的事情，而其中首要的就是要谨慎管理系统服务。也许您的系统需要为某些服务开放权限(比如运行Web服务器的话要用到<command>httpd</command>)。但如果您不提供服务，您应该把它们关掉，从而最大可能的防止bug被利用。</para><para>管理系统服务有多种方法。根据服务本身，您的系统设置以及您的Linux水平来选择合适的管理方法。</para><para>拒绝访问服务最容易的方法就是关闭它。由<command>xinetd</command>管理服务的和<filename>/etc/rc.d/init.d</filename>等级中的服务(也叫做SysV服务)均可使用<application>服务配置工具</application>来启动或停止。</para>
+
+
+    <indexterm significance="normal"><primary><command>system-config-services</command>
+        </primary><see>服务配置工具</see></indexterm><para>您必须运行<application>X</application>窗口系统并具有root权限才可以使用服务配置工具。要从桌面打开该程序，请点击<menuchoice><guimenu>面板主菜单(带有"f"标志的那个)</guimenu><guisubmenu>系统</guisubmenu><guisubmenu>管理</guisubmenu><guimenuitem>服务</guimenuitem></menuchoice>。</para>
+
+
+	<section id="s1-services-serviceconf"><title><application>服务配置工具</application></title><indexterm significance="normal"><primary><application>服务配置工具</application></primary></indexterm><para><application>服务配置工具</application>是个图形化的程序，用来配置<filename>/etc/rc.d/init.d</filename>目录中开机启动(运行级别3，4，5)的SysV服务，以及<command>xinetd</command>所启用的服务。同时它也可以启动，停止和重启SysV服务。</para><figure float="0" id="fig-serviceconf"><title><application>服务配置工具</application></title><mediaobject><imageobject><imagedata fileref="images/system-config-services.png" format="PNG"/></imageobject><textobject><para>配置网络服务</para></textobject></mediaobject></figure><para><application>服务配置工具</application>可列出<filename>/etc/rc.d/init.d</filename>目录内的服务和<command>xinetd</command>控制的服务。在程序窗口左侧点击服务的名称将显示该服务的简述还有运行状态。如果服务为SysV服务，状态窗口会显示该服务当前是否在运行。</para><para>要立即启动，停止或重启某个服务，请在列表中选择服务然后在工具栏上点对应的按钮(或者从<guimenu>服务</guimenu>下拉菜单中选择操作)。如果是<command>xinetd</command>的服务，操作按钮会被禁用，因为这些服务无法单独启动或停止。</para><note><title>注意</title><para>当保存<command>xinetd</command>服务后，<command>xinetd</command>重新加载，更改会立即生效。而保存其它服务时，只是重新设置了运行级别，更改并不会立即生效。</para></note><para>可以在列表内选择服务然后点工具栏上的<guibutton>启用</guibutton>, <guibutton>禁用</guibutton>或(在默认运行级别外启用SysV服务)<guibutton>自定义</guibutton>按钮之一来启用服务。也可以从<guimenu>服务</guimenu>菜单中选等效操作来启用。对于SysV服务而言，虽然更改了它的运行级别，但系统当前运行级别没有变化，因此更改不会立即生效。</para><para>举例：如果您禁用了<command>httpd</command>服务，运行级别发生了变化，因此<command>httpd</command>不会开机启动。然而当前的运行级别并没有初始化，因此<command>httpd</command>仍在运行。这中情况下可做以下选择：</para><orderedlist continuation="restarts" inheritnum="ignore"><listitem><para>停止<command>httpd</command>服务 — 从列表选择该服务然后点<guibutton>停止</guibutton>停止按钮。服务状态随之将发生变化。</para></listitem><listitem><para>初始化运行级别 — 通过在shell中输入<command>telinit <replaceable>x</replaceable></command>(其中<replaceable>x</replaceable>为运行级别数字：比如3)命令来初始化运行级别。如果您启用或禁用了多个服务并且希望马上生效，那么推荐使用这个选项。</para></listitem><listitem><para>什么都不做 — 您不必停止<command>httpd</command>服务。等系统重启后服务就会停止。下次系统启动时，运行级别初始化，将不再运行<command>httpd</command>。</para></listitem></orderedlist></section>
+</article>

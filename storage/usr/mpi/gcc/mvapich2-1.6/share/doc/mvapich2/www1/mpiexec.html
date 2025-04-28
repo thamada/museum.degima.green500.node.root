@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML3.2 EN">
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" CONTENT="DOCTEXT">
+<TITLE>mpiexec</TITLE>
+</HEAD>
+<BODY BGCOLOR="FFFFFF">
+<A NAME="mpiexec"><H1>mpiexec</H1></A>
+Run an MPI program 
+<H2>Synopsis</H2>
+<PRE>
+</PRE>
+<PRE>
+    mpiexec args executable pgmargs [ : args executable pgmargs ... ]
+</PRE>
+
+where <TT>args</TT> are command line arguments for <TT>mpiexec</TT> (see below),
+<TT>executable</TT> is the name of an executable MPI program, and <TT>pgmargs
+</TT>are command line arguments for the executable.  Multiple executables
+can be specified by using the colon notation (for MPMD - Multiple Program
+Multiple Data applications).
+<P>
+<H2>Standard Parameters</H2>
+<P>
+<P>
+<DL>
+<DT><B>-n num </B><DD>number of processes
+
+<DT><B>-host hostname </B><DD>name of a host (machine, system) on which to run
+
+<DT><B>-arch architecture_name </B><DD>name of the computer architecture required
+for this executable
+
+<DT><B>-wdir working_directory </B><DD>The working directory to use when running the 
+executable (set before the executable starts)
+
+<DT><B>-path pathlist </B><DD>use this to find the executable
+
+<DT><B>-soft list </B><DD>comma separated triplets specifying valid numbers of processes
+
+<DT><B>-file name </B><DD>implementation-defined specification file
+
+<DT><B>-configfile name </B><DD>file containing specifications of host/program, 
+one per line, with # as a comment indicator, e.g., the usual
+mpiexec input, but with ":" replaced with a newline.  That is,
+the configfile contains lines with <TT>-soft</TT>, <TT>-n</TT> etc.
+</DL>
+<P>
+<P>
+<H2>Environment Variables</H2>
+The following environment variables affect the behavior of <TT>mpiexec</TT>:
+<DL>
+<DT><B>MPIEXEC_UNIVERSE_SIZE </B><DD>Sets the maximum number of processes to allow.
+
+<DT><B>MPIEXEC_TIMEOUT </B><DD>Maximum running time in seconds.  <TT>mpiexec</TT> will
+terminate MPI programs that take longer than the value specified by
+<TT>MPIEXEC_TIMEOUT</TT>.  This version of <TT>mpiexec</TT> (forker process manager)
+sets a default timelimit of 3 minutes (180 seconds) since the forker
+process manager is intended for debugging applications.
+
+<DT><B>MPIEXEC_PREFIX_DEFAULT </B><DD>If this environment variable is set, output
+to standard output is prefixed by the rank in <TT>MPI_COMM_WORLD</TT> of the 
+process and output to standard error is prefixed by the rank and the 
+text <TT>(err)</TT>; both are followed by an angle bracket (<TT>&gt;</TT>).  If
+this variable is not set, there is no prefix.
+
+<DT><B>MPIEXEC_PREFIX_STDOUT </B><DD>Set the prefix for output from standard output.
+This is a string containing text and (optionally) the expression <TT>%d</TT>;
+if <TT>%d</TT> is seen, it is replaced by the rank in <TT>MPI_COMM_WORLD</TT> of the 
+process.  If there is more than one <TT>MPI_COMM_WORLD</TT>; for example, 
+if <TT>MPI_Comm_spawn</TT> is used, the expression <TT>%w</TT> is replaced with a
+numeric <EM>world number</EM>, assigned by <TT>mpiexec</TT>.  The expression <TT>%%</TT> 
+produces a single percent character.
+
+<DT><B>MPIEXEC_PREFIX_STDERR </B><DD>Like <TT>MPIEXEC_PREFIX_STDOUT</TT>, but for output from
+standard error.
+
+<DT><B>MPIEXEC_STDIN_DEST </B><DD>Sets the destination process for input from standard in,
+by rank in the corresponding <TT>MPI_COMM_WORLD</TT>.
+
+<DT><B>MPIEXEC_STDOUTBUF </B><DD>Sets the buffering mode for standard output.  Valid
+values are <TT>NONE</TT> (no buffering), <TT>LINE</TT> (buffering by lines), and
+<TT>BLOCK</TT> (buffering by blocks of characters; the size of the block is
+implementation defined).  The default is <TT>NONE</TT>.
+
+<DT><B>MPIEXEC_STDERRBUF </B><DD>Like <TT>MPIEXEC_STDOUTBUF</TT>, but for standard error.
+</DL>
+<P>
+Note that the <TT>MPIEXEC_PREFIX_xxx</TT> and <TT>MPIEXEC_STDIN_DEST</TT> variables
+are not fully implemented.
+<P>
+<H2>Startup Environment</H2>
+All of the users environment variables are provided to each of the
+created processes.  This is not required by the MPI standard, but
+is often very convenient.
+<P>
+<H2>Return Status</H2>
+<TT>mpiexec</TT> returns the maximum of the exit status values of all of the
+processes created by <TT>mpiexec</TT>.
+<P>
+<H2>Notes</H2>
+A few additional enviroment variables are defined for the use of
+developers and in debugging.  These are
+<P>
+<DL><DT><B>MPIEXEC_DEBUG </B> <DD> If set, <TT>mpiexec</TT> will write additional information
+about the steps that it is taking.
+</DL>
+<P>
+<P>
+<P><B>Location:</B>mpiexec.txt<P>
+</BODY></HTML>

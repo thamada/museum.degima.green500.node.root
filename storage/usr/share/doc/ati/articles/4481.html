@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+  <META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+  <title>Installing the ATI Proprietary Linux Driver</title>
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+</head>
+
+<body lang="en-US" dir="ltr">
+  <table bgcolor="#FFFFFF">
+    <tr>
+      <td>
+        <p><font size="+1"><b>"unresolved symbol" error message
+        during kernel module install</b></font></p>
+
+        <p>This information applies to the ATI Proprietary Linux
+        Driver.</p>
+
+        <p>The following error message may appear while trying to
+        install the fglrx kernel module:</p>
+
+        <blockquote>
+          <p><code>: unresolved symbol</code></p>
+        </blockquote>
+
+        <p>This error (or similar) occurs when the kernel source
+        code is not installed properly or does not match the
+        currently installed kernel.</p>
+
+        <p>In some cases, the kernel source <i>is</i> the correct
+        version, but the necessary dependencies are missing. In
+        this case, it may be possible to workaround the error as
+        follows (you must become <code>root</code> first):</p>
+
+        <ol>
+          <li>
+            <p><code>cd /usr/src/linux</code></p>
+          </li>
+
+          <li>
+            <p>Copy your existing kernel options into the source
+            tree as follows:<br>
+            <code>cp /boot/config-`uname -r`
+            /usr/src/linux/.config</code></p>
+          </li>
+
+          <li>
+            <p>Generate the kernel Makefiles using these settings
+            as follows:<br>
+            <code>make oldconfig</code></p>
+          </li>
+
+          <li>
+            <p>Generate dependencies as follows:</p>
+
+            <ul>
+              <li>For kernel 2.4: <code>make dep</code></li>
+
+              <li>For kernel 2.6: <code>make</code></li>
+            </ul>
+          </li>
+
+          <li>
+            <p>restart the system</p>
+          </li>
+
+          <li>
+            <p><a href="4484.html">rebuild and
+            reinstall the kernel module</a></p>
+          </li>
+        </ol>
+
+        <p>Note any errors that occur during this process. Also
+        note the use of back quotes in step 2 for command
+        substitution - these are not single quotes.</p>
+
+<p>INFO-BASE#4481</p>
+
+        <p>&nbsp;</p>
+                
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

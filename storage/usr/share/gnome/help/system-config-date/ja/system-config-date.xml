@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="ja"><title>日時のプロパティーツール</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2007年11月22日</date><revremark>初版</revremark></revision><revision><revnumber>1.0.1</revnumber><date>2008年 1月17日</date><revremark>DocBook XML を正しく有効にする</revremark></revision><revision><revnumber>1.0.2</revnumber><date>2008年 1月18日</date><revremark>文書の要約を外にした</revremark></revision><revision><revnumber>1.0.3</revnumber><date>2008年 3月12日</date><revremark>可能な部分は選択メニュー要素を使う</revremark></revision></revhistory><abstract role="description"><para><application>日時のプロパティーツール</application> により、システムの日時の変更や、システムが使うタイムゾーンの設定、システム時計を時刻サーバーに同期させるためのネットワーク時刻プロトコル (NTP) デーモンの設定ができます。</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">レッドハット</trademark>, 社</corpauthor></authorgroup><copyright><year>2009</year><holder>日向原 龍一 (hyu_gabaru@yahoo.co.jp)</holder></copyright></articleinfo><indexterm significance="normal"><primary><command>timetool</command>
+		</primary><see>日時のプロパティーツール</see></indexterm><para><application>日時のプロパティーツール</application> により、システムの日時の変更や、システムが使うタイムゾーンの設定、システム時計を時刻サーバーに同期させるためのネットワーク時刻プロトコル (NTP) デーモンの設定ができます。</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>日時のプロパティーツール</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>日時のプロパティーツール</see></indexterm><indexterm significance="normal"><primary><command>dateconfig</command> 
+        </primary><see>日時のプロパティーツール</see></indexterm><para>日時のプロパティーツールを使うには、<application>X</application> Window システムを実行中で、root 権限を持っている必要があります。アプリケーションを起動するには3つの方法があります:</para><itemizedlist><listitem><para>デスクトップから<menuchoice><guimenu>パネルの主メニュー ("f"アイコンのあるメニュー)</guimenu><guisubmenu>システム</guisubmenu><guisubmenu>管理</guisubmenu><guimenuitem>日付 &amp; 時刻</guimenuitem></menuchoice>へ行きます。</para></listitem><listitem><para>デスクトップからは、ツールバーの時刻の上で右クリックし、<guimenuitem>日時の調整</guimenuitem>を選択します。</para></listitem><listitem><para>シェルプロンプト (例えば<application>XTerm</application>や、<application>GNOME</application>端末) からコマンド<command>system-config-date</command>や、<command>system-config-time</command>、<command>dateconfig</command>をタイプします。</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>日時のプロパティー</title><indexterm significance="normal"><primary>時刻の設定</primary></indexterm><indexterm significance="normal"><primary>日付の設定</primary></indexterm><para><xref linkend="dateconfig-time^date"/>に示されるように、最初に現れるタブのウィンドウはシステムの日時の設定のためのものです。</para><figure float="0" id="dateconfig-time-date"><title>日時のプロパティー</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>日時のプロパティー</para></textobject></mediaobject></figure><para>日付を変えるには、月を変えるには月の左右にある矢印を使い、年を変えるには年の左右にある矢印を使い、曜日を変えるには曜日をクリックします。</para><para>時刻を変えるには、<guilabel>時刻</guilabel>セクションの<guilabel>時</guilabel>と<guilabel>分</guilabel>、<guilabel>秒</guilabel>の傍の上下の矢印を使います。</para><para>もしくは、日時を変更するのにキーボードを使うこともできます。ウィジェット間を移動するには<keycap>Tab</keycap>と<keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo>を使います。カレンダーのウィジェットでは、年を変更するには<keycombo><keycap>Ctrl</keycap><keycap>Up</keycap></keycombo>と<keycombo><keycap>Ctrl</keycap><keycap>Down</keycap></keycombo>を使い、月を変更するには<keycombo><keycap>Ctrl</keycap><keycap>Left</keycap></keycombo>と<keycombo><keycap>Ctrl</keycap><keycap>Right</keycap></keycombo>を使い、日の選択と設定には矢印キーと<keycap>Space</keycap>を使います。時分秒のウィジェットでは、値を変更するのに<keycap>Up</keycap>と<keycap>Down</keycap>を使います。</para><para><guibutton>OK</guibutton>ボタンをクリックすることで、日時や NTP デーモン設定、タイムゾーン設定に対して行ったあらゆる変更が反映されます。また、プログラムが終了します。</para></section>
+	<section id="s1-dateconfig-ntp"><title>ネットワークタイムプロトコル (NTP) プロパティー</title><indexterm significance="normal"><primary>時刻の設定</primary><secondary>NTP サーバーと同期</secondary></indexterm><indexterm significance="normal"><primary>ネットワークタイムプロトコル</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>設定</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para><xref linkend="dateconfig-ntp"/>に示されるように、2番目のタブで現れるウィンドウは NTP の設定用です。</para><figure float="0" id="dateconfig-ntp"><title>NTP プロパティー</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>NTP プロパティー</para></textobject></mediaobject></figure><para>ネットワークタイムプロトコル (NTP) デーモンはシステムの時計を遠隔地の時刻サーバーや時刻源に合わせます。アプリケーションにより NTP デーモンがシステムの時計を遠隔地のサーバーに合わせるようになります。この機能を有効にするには<guibutton>ネットワークタイムプロトコルを有効にする</guibutton>を選択してください。これにより<guilabel>NTP サーバー</guilabel> 一覧や他のオプションが可能になります。所定のサーバーの一つを選んだり、<guibutton>編集</guibutton>をクリックすることで所定のサーバーを編集したり、<guibutton>追加</guibutton>をクリックすることで新しいサーバー名を追加したりできます。<guibutton>OK</guibutton>をクリックするまではシステムは NTP サーバーに時刻を合わせません。<guibutton>OK</guibutton>をクリックしたら、設定ファイルが保存され、NTP デーモンが起動(既に起動中ならば再起動)します。</para><para><guibutton>OK</guibutton>ボタンをクリックすることで、日時や NTP デーモン設定、タイムゾーン設定に対して行ったあらゆる変更が反映されます。また、プログラムが終了します。</para></section>
+	<section id="s1-dateconfig-time-zone"><title>タイムゾーンの設定</title><indexterm significance="normal"><primary>タイムゾーンの設定</primary></indexterm><para><xref linkend="dateconfig-timezone"/>に示されるように、3番目のタブで現れるウィンドウはシステムのタイムゾーンの設定用です。</para><para>システムのタイムゾーンを設定するには、<guilabel>タイムゾーン</guilabel>タブをクリックします。タイムゾーンは対話型地図を使うことでも、地図の下から希望するタイムゾーンを選択することでも変更できます。地図を使うには、あなたのタイムゾーンを特定する都市を選択してクリックします。赤い<guilabel>X</guilabel>が現れ、地図の下の一覧の中のタイムゾーンの選択が変わります。地図の左側のスライダーを使ってズームレベルを変えることができます。</para><para>または、地図の下の一覧を使うこともできます。地図上で都市を選択する前に地域を選択できるのと同様に、タイムゾーンの一覧はツリーリストになっており、特定の大陸の中に都市と国が分類されまいます。また、科学者団体の必要性を表明するために非地理的なタイムゾーンも追加しています。</para><para>変更を適用し、プログラムを終了するには<guibutton>OK</guibutton>をクリックします。</para><figure float="0" id="dateconfig-timezone"><title>タイムゾーンのプロパティー</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>タイムゾーンのプロパティー</para></textobject></mediaobject></figure><para>システム時計を UTC に設定したいのならば、<guibutton>システム時計は UTC を使う</guibutton>オプションを選択してください。UTC はグリニッジ標準時 (GMT) としても知られている <firstterm>世界標準時 (Universal Time, Coordinated</firstterm>を表しています。他のタイムゾーンは UTC 時刻から時間を加減することで決められています。</para></section>
+</article>

@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GtkClutterViewport</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.1">
+<link rel="home" href="index.html" title="Clutter-Gtk 0.10.2 Reference Manual">
+<link rel="up" href="ch03.html" title="Clutter-Gtk Actors">
+<link rel="prev" href="GtkClutterZoomable.html" title="GtkClutterZoomable">
+<link rel="next" href="ch04.html" title="Miscellaneous">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Clutter-Gtk Overview">
+<link rel="chapter" href="ch02.html" title="Clutter-Gtk Widgets">
+<link rel="chapter" href="ch03.html" title="Clutter-Gtk Actors">
+<link rel="chapter" href="ch04.html" title="Miscellaneous">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of new symbols in 0.10">
+<link rel="index" href="ix03.html" title="Index of new symbols in 0.8">
+<link rel="index" href="ix04.html" title="Index of new symbols in 0.6">
+<link rel="index" href="ix05.html" title="Index of new symbols in 0.4">
+<link rel="index" href="ix06.html" title="Index of new symbols in 0.2">
+<link rel="appendix" href="license.html" title="Appendix A. License">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GtkClutterZoomable.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Clutter-Gtk 0.10.2
+ Reference Manual</th>
+<td><a accesskey="n" href="ch04.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GtkClutterViewport.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#GtkClutterViewport.description" class="shortcut">Description</a>
+                 | 
+                <a href="#GtkClutterViewport.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#GtkClutterViewport.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                 | 
+                <a href="#GtkClutterViewport.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry" title="GtkClutterViewport">
+<a name="GtkClutterViewport"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GtkClutterViewport.top_of_page"></a>GtkClutterViewport</span></h2>
+<p>GtkClutterViewport — A scrollable actor</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="GtkClutterViewport.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="GtkClutterViewport.html#GtkClutterViewport-struct" title="GtkClutterViewport">GtkClutterViewport</a>;
+                    <a class="link" href="GtkClutterViewport.html#GtkClutterViewportClass" title="GtkClutterViewportClass">GtkClutterViewportClass</a>;
+<a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html"
+>ClutterActor</a> *      <a class="link" href="GtkClutterViewport.html#gtk-clutter-viewport-new" title="gtk_clutter_viewport_new ()">gtk_clutter_viewport_new</a>            (<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+>GtkAdjustment</a> *h_adjust,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+>GtkAdjustment</a> *v_adjust,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+>GtkAdjustment</a> *z_adjust);
+void                <a class="link" href="GtkClutterViewport.html#gtk-clutter-viewport-get-origin" title="gtk_clutter_viewport_get_origin ()">gtk_clutter_viewport_get_origin</a>     (<a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport">GtkClutterViewport</a> *viewport,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *x,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *y,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *z);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="GtkClutterViewport.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"
+>GInitiallyUnowned</a>
+         +----<a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html"
+>ClutterActor</a>
+               +----GtkClutterViewport
+</pre>
+</div>
+<div class="refsect1" title="Implemented Interfaces">
+<a name="GtkClutterViewport.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GtkClutterViewport implements
+ <a class="link" href="GtkClutterZoomable.html" title="GtkClutterZoomable">GtkClutterZoomable</a>,  <a class="link" href="GtkClutterScrollable.html" title="GtkClutterScrollable">GtkClutterScrollable</a>,  <a
+href="/usr/share/gtk-doc/html/clutter/ClutterScriptable.html"
+>ClutterScriptable</a> and  <a
+href="/usr/share/gtk-doc/html/clutter/ClutterContainer.html"
+>ClutterContainer</a>.</p>
+</div>
+<div class="refsect1" title="Properties">
+<a name="GtkClutterViewport.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GtkClutterViewport.html#GtkClutterViewport--child" title='The "child" property'>child</a>"                    <a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html"
+>ClutterActor</a>*         : Read / Write
+  "<a class="link" href="GtkClutterViewport.html#GtkClutterViewport--origin" title='The "origin" property'>origin</a>"                   <a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html#ClutterVertex"
+>ClutterVertex</a>*        : Read
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="GtkClutterViewport.description"></a><h2>Description</h2>
+<p>
+<a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport"><span class="type">GtkClutterViewport</span></a> is a scrollable actor that can contain a single
+<a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html"
+><span class="type">ClutterActor</span></a>. Using two <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+><span class="type">GtkAdjustment</span></a>s it is possible to
+control the visible area of the child actor if the size of the viewport
+is smaller than the size of the child.
+</p>
+<p>
+The <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+><span class="type">GtkAdjustment</span></a>s used to control the horizontal and
+vertical scrolling can be attached to a <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkScrollbar.html"
+><span class="type">GtkScrollbar</span></a> subclass,
+like <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkHScrollbar.html"
+><span class="type">GtkHScrollbar</span></a> or <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkVScrollbar.html"
+><span class="type">GtkVScrollbar</span></a>.
+</p>
+<p>
+The <a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport"><span class="type">GtkClutterViewport</span></a> can be used inside any <a
+href="/usr/share/gtk-doc/html/clutter/ClutterContainer.html"
+><span class="type">ClutterContainer</span></a>
+implementation.
+</p>
+<p>
+<a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport"><span class="type">GtkClutterViewport</span></a> is available since Clutter-GTK 0.10</p>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="GtkClutterViewport.details"></a><h2>Details</h2>
+<div class="refsect2" title="GtkClutterViewport">
+<a name="GtkClutterViewport-struct"></a><h3>GtkClutterViewport</h3>
+<pre class="programlisting">typedef struct _GtkClutterViewport GtkClutterViewport;</pre>
+<p>
+The <a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport"><span class="type">GtkClutterViewport</span></a> structure contains only private data and
+should be accessed using the provided functions.</p>
+<p>
+</p>
+<p class="since">Since 0.8.2</p>
+</div>
+<hr>
+<div class="refsect2" title="GtkClutterViewportClass">
+<a name="GtkClutterViewportClass"></a><h3>GtkClutterViewportClass</h3>
+<pre class="programlisting">typedef struct {
+} GtkClutterViewportClass;
+</pre>
+<p>
+The <a class="link" href="GtkClutterViewport.html#GtkClutterViewportClass" title="GtkClutterViewportClass"><span class="type">GtkClutterViewportClass</span></a> structure contains only private data and
+should be accessed using the provided functions.</p>
+<p>
+</p>
+<p class="since">Since 0.8.2</p>
+</div>
+<hr>
+<div class="refsect2" title="gtk_clutter_viewport_new ()">
+<a name="gtk-clutter-viewport-new"></a><h3>gtk_clutter_viewport_new ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html"
+>ClutterActor</a> *      gtk_clutter_viewport_new            (<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+>GtkAdjustment</a> *h_adjust,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+>GtkAdjustment</a> *v_adjust,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkAdjustment.html"
+>GtkAdjustment</a> *z_adjust);</pre>
+<p>
+Creates a new <a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport"><span class="type">GtkClutterViewport</span></a> with the given adjustments.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>h_adjust</code></em> :</span></p></td>
+<td> horizontal adjustment, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>v_adjust</code></em> :</span></p></td>
+<td> vertical adjustment, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>z_adjust</code></em> :</span></p></td>
+<td> zoom adjustment, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the newly created viewport actor
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 0.10</p>
+</div>
+<hr>
+<div class="refsect2" title="gtk_clutter_viewport_get_origin ()">
+<a name="gtk-clutter-viewport-get-origin"></a><h3>gtk_clutter_viewport_get_origin ()</h3>
+<pre class="programlisting">void                gtk_clutter_viewport_get_origin     (<a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport">GtkClutterViewport</a> *viewport,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *x,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *y,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gfloat"
+>gfloat</a> *z);</pre>
+<p>
+Retrieves the current translation factor ("origin") used when
+displaying the child of <em class="parameter"><code>viewport</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>viewport</code></em> :</span></p></td>
+<td> a <a class="link" href="GtkClutterViewport.html" title="GtkClutterViewport"><span class="type">GtkClutterViewport</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>x</code></em> :</span></p></td>
+<td> return location for the X origin in pixels, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>y</code></em> :</span></p></td>
+<td> return location for the Y origin in pixels, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>z</code></em> :</span></p></td>
+<td> return location for the Z origin in pixels, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 0.10</p>
+</div>
+</div>
+<div class="refsect1" title="Property Details">
+<a name="GtkClutterViewport.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" title='The "child" property'>
+<a name="GtkClutterViewport--child"></a><h3>The <code class="literal">"child"</code> property</h3>
+<pre class="programlisting">  "child"                    <a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html"
+>ClutterActor</a>*         : Read / Write</pre>
+<p>
+The <a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html"
+><span class="type">ClutterActor</span></a> inside the viewport.</p>
+<p>
+</p>
+<p>Since 0.10</p>
+</div>
+<hr>
+<div class="refsect2" title='The "origin" property'>
+<a name="GtkClutterViewport--origin"></a><h3>The <code class="literal">"origin"</code> property</h3>
+<pre class="programlisting">  "origin"                   <a
+href="/usr/share/gtk-doc/html/clutter/ClutterActor.html#ClutterVertex"
+>ClutterVertex</a>*        : Read</pre>
+<p>
+The current origin of the viewport. You should use the
+vertex to convert event coordinates for the child of the
+viewport.</p>
+<p>
+</p>
+<p>Since 0.10</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

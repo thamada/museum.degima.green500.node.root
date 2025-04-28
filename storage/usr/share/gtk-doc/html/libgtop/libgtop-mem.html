@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>mem</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libgtop Reference Manual">
+<link rel="up" href="libgtop-lib.html" title="Libgtop Library Reference">
+<link rel="prev" href="libgtop-loadavg.html" title="loadavg">
+<link rel="next" href="libgtop-mountlist.html" title="mountlist">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="libgtop-white-paper.html" title="White paper">
+<link rel="chapter" href="libgtop-lib.html" title="Libgtop Library Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgtop-loadavg.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="libgtop-lib.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libgtop Reference Manual</th>
+<td><a accesskey="n" href="libgtop-mountlist.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgtop-mem.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgtop-mem.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="mem">
+<a name="libgtop-mem"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgtop-mem.top_of_page"></a>mem</span></h2>
+<p>mem</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgtop-mem.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glibtop/mem.h&gt;
+
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-TOTAL--CAPS" title="GLIBTOP_MEM_TOTAL">GLIBTOP_MEM_TOTAL</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-USED--CAPS" title="GLIBTOP_MEM_USED">GLIBTOP_MEM_USED</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-FREE--CAPS" title="GLIBTOP_MEM_FREE">GLIBTOP_MEM_FREE</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-SHARED--CAPS" title="GLIBTOP_MEM_SHARED">GLIBTOP_MEM_SHARED</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-BUFFER--CAPS" title="GLIBTOP_MEM_BUFFER">GLIBTOP_MEM_BUFFER</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-CACHED--CAPS" title="GLIBTOP_MEM_CACHED">GLIBTOP_MEM_CACHED</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-USER--CAPS" title="GLIBTOP_MEM_USER">GLIBTOP_MEM_USER</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MEM-LOCKED--CAPS" title="GLIBTOP_MEM_LOCKED">GLIBTOP_MEM_LOCKED</a>
+#define             <a class="link" href="libgtop-mem.html#GLIBTOP-MAX-MEM--CAPS" title="GLIBTOP_MAX_MEM">GLIBTOP_MAX_MEM</a>
+                    <a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a>;
+void                <a class="link" href="libgtop-mem.html#glibtop-get-mem" title="glibtop_get_mem ()">glibtop_get_mem</a>                     (<a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);
+#define             <a class="link" href="libgtop-mem.html#glibtop-get-mem-r" title="glibtop_get_mem_r">glibtop_get_mem_r</a>
+void                <a class="link" href="libgtop-mem.html#glibtop-get-mem-l" title="glibtop_get_mem_l ()">glibtop_get_mem_l</a>                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);
+void                <a class="link" href="libgtop-mem.html#glibtop-get-mem-p" title="glibtop_get_mem_p ()">glibtop_get_mem_p</a>                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);
+void                <a class="link" href="libgtop-mem.html#glibtop-get-mem-s" title="glibtop_get_mem_s ()">glibtop_get_mem_s</a>                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgtop-mem.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgtop-mem.details"></a><h2>Details</h2>
+<div class="refsect2" title="GLIBTOP_MEM_TOTAL">
+<a name="GLIBTOP-MEM-TOTAL--CAPS"></a><h3>GLIBTOP_MEM_TOTAL</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_TOTAL	0
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MEM_USED">
+<a name="GLIBTOP-MEM-USED--CAPS"></a><h3>GLIBTOP_MEM_USED</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_USED	1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MEM_FREE">
+<a name="GLIBTOP-MEM-FREE--CAPS"></a><h3>GLIBTOP_MEM_FREE</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_FREE	2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MEM_SHARED">
+<a name="GLIBTOP-MEM-SHARED--CAPS"></a><h3>GLIBTOP_MEM_SHARED</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_SHARED	3
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MEM_BUFFER">
+<a name="GLIBTOP-MEM-BUFFER--CAPS"></a><h3>GLIBTOP_MEM_BUFFER</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_BUFFER	4
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MEM_CACHED">
+<a name="GLIBTOP-MEM-CACHED--CAPS"></a><h3>GLIBTOP_MEM_CACHED</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_CACHED	5
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MEM_USER">
+<a name="GLIBTOP-MEM-USER--CAPS"></a><h3>GLIBTOP_MEM_USER</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_USER	6
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MEM_LOCKED">
+<a name="GLIBTOP-MEM-LOCKED--CAPS"></a><h3>GLIBTOP_MEM_LOCKED</h3>
+<pre class="programlisting">#define GLIBTOP_MEM_LOCKED	7
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MAX_MEM">
+<a name="GLIBTOP-MAX-MEM--CAPS"></a><h3>GLIBTOP_MAX_MEM</h3>
+<pre class="programlisting">#define GLIBTOP_MAX_MEM		8
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_mem">
+<a name="glibtop-mem"></a><h3>glibtop_mem</h3>
+<pre class="programlisting">typedef struct {
+	guint64	flags;
+	guint64 total;		/* GLIBTOP_MEM_TOTAL	*/
+	guint64 used;		/* GLIBTOP_MEM_USED	*/
+	guint64 free;		/* GLIBTOP_MEM_FREE	*/
+	guint64 shared;		/* GLIBTOP_MEM_SHARED	*/
+	guint64 buffer;		/* GLIBTOP_MEM_BUFFER	*/
+	guint64 cached;		/* GLIBTOP_MEM_CACHED	*/
+	guint64 user;		/* GLIBTOP_MEM_USER	*/
+	guint64 locked;		/* GLIBTOP_MEM_LOCKED	*/
+} glibtop_mem;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_mem ()">
+<a name="glibtop-get-mem"></a><h3>glibtop_get_mem ()</h3>
+<pre class="programlisting">void                glibtop_get_mem                     (<a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);</pre>
+<p>
+Get the memory usage. Unless explicitly stated otherwise, all memory
+units are in bytes.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td> Buffer where the output will be given.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_mem_r">
+<a name="glibtop-get-mem-r"></a><h3>glibtop_get_mem_r</h3>
+<pre class="programlisting">#define             glibtop_get_mem_r</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_mem_l ()">
+<a name="glibtop-get-mem-l"></a><h3>glibtop_get_mem_l ()</h3>
+<pre class="programlisting">void                glibtop_get_mem_l                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_mem_p ()">
+<a name="glibtop-get-mem-p"></a><h3>glibtop_get_mem_p ()</h3>
+<pre class="programlisting">void                glibtop_get_mem_p                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_mem_s ()">
+<a name="glibtop-get-mem-s"></a><h3>glibtop_get_mem_s ()</h3>
+<pre class="programlisting">void                glibtop_get_mem_s                   (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-mem.html#glibtop-mem" title="glibtop_mem">glibtop_mem</a> *buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

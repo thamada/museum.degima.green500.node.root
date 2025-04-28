@@ -1,0 +1,80 @@
+#!/bin/sh
+#
+
+usage="\
+Usage: gtkdoc-mkhtml [--path=SEARCH_PATH] MODULE DRIVER_FILE [BACKEND_OPTIONS...]"
+
+#echo "args $0\n";
+
+# parse options, ignore unknown options for future extensions
+
+searchpath=
+while true; do
+    case "X$1" in
+        X--version) echo "1.11"; exit 0;;
+        X--help) echo "$usage"; exit 0;;
+        X--path=*) searchpath=`echo $1 | sed s/.*=//`; shift;;
+        X--*) shift;;
+        X*) break;;
+    esac
+done
+ 
+if test $# -lt 2; then
+      echo "${usage}" 1>&2
+      exit 1
+fi
+
+module=$1
+shift
+document=$1
+shift
+
+# FIXME: this is a hack to run uninstalled
+if test "x$0" = "x../../../gtkdoc-mkhtml" ; then
+      # uninstalled
+      gtkdocdir=`dirname $0`
+else
+      # installed
+      # the first two are needed to resolve datadir
+      prefix=/usr
+      datarootdir=${prefix}/share
+      gtkdocdir=/usr/share/gtk-doc/data
+fi
+
+if head -n 1 $document | grep "<?xml" > /dev/null; then
+  is_xml=true
+  path_option='--path'
+else
+  is_xml=false
+  path_option='--directory'
+fi
+
+if test "X$searchpath" = "X"; then
+    path_arg=
+else
+    path_arg="$path_option $searchpath"
+fi
+
+# Delete the old index.sgml file, if it exists.
+if test -f index.sgml; then
+      rm -f index.sgml
+fi
+
+if $is_xml; then
+  /usr/bin/xsltproc $path_arg --nonet --xinclude \
+      --stringparam gtkdoc.bookname $module \
+      --stringparam gtkdoc.version "1.11" \
+      "$@" $gtkdocdir/gtk-doc.xsl $document || exit $?
+else
+  /usr/bin/openjade $path_arg -t sgml-raw -w no-idref -d $gtkdocdir/gtk-doc.dsl \
+      -V "gtkdoc-bookname=$module" -V "gtkdoc-version=1.11" \
+      "$@" $gtkdocdir/gtk-doc.dcl $document || exit $?
+fi
+
+# copy navigation images and stylesheets to html directory ...
+cp -f $gtkdocdir/*.png .
+cp -f $gtkdocdir/*.css .
+
+
+echo "timestamp" > ../html.stamp
+

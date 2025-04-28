@@ -1,0 +1,1620 @@
+2004-01-24  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* configure.ac:
+	Update copyright string; look for correct (most recent) version of the
+	JSR-14 compiler.
+
+	* lib/jutil.jar:
+	Updated jutil package to version 1.1 (which works with latest JSR-14
+	compiler releases).
+
+2003-08-27  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/Java15.cup:
+	Fix a bug found by Peter Taylor aka YATArchivist:
+	 public class Test
+	 {
+	    /**
+	     * Position 1.
+	     */
+	    public Object obj =
+	        /**
+	         * Position 2.
+	         */
+	        new Object()
+	        {
+	        };
+	 }
+	generates no documentation for obj.
+
+	Problem was in the timing of the lexer.lastComment() call w.r.t the
+	parsing of the inner class.
+
+	* src/parser/Java15.cup: Nested enum classes are implicitly static.
+
+2003-08-14  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PTypeVariable.java:
+	Remove aggressive assertion that was causing premature type resolution.
+
+	* src/parser/PLazyClassType.java, src/parser/ParseControl.java:
+	Add a debugging aid to catch premature type resolution bugs.
+
+	* src/parser/Java15.cup:
+	Properly resolve mutually-recursive type parameters.  We use the following
+	strategy: any unqualified names encountered while parsing the type
+	parameter declaration are assumed to be (yet unseen) type variables.
+	After the complete type parameter declaration has been parsed, we
+	perform substitution on the bounds to replace any names we had
+	falsely assumed to be type variables with the proper "real" types
+	for those names.
+
+	Also check constructor declarations to ensure that the name matches
+	that of the enclosing class.
+
+	* src/parser/PTypeVariable.java:
+	Allow us to tweak type variable bounds after they are first assigned.
+
+	* src/parser/TypeUtil.java:
+	Make the some of the subst() methods non-private so that we can use
+	them to implement recursive type parameter definitions.
+
+2003-08-13  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PClassDoc.java:
+	Fix bug constructing PEagerClassType of a deeply-nested class.
+
+2003-08-11  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/FileUtil.java:
+	Bug-fix: java.util.regex.Matcher.replaceAll() does backslash and
+	dollar-number substitution on the replacement string.  This is
+	not what we want in FileUtil.findPackage()!  Create a new
+	replaceAllLiterally() method which does the Right Thing for
+	our purposes.
+
+	Thanks to Tim Peierls for finding this bug and patiently explaining it
+	to me.
+
+2003-08-01  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/overview.html.in: Updated SinjDoc homepage URL.
+
+	* configure.ac: Version 0.4 released.
+
+	Starting work on version 0.5 now.
+
+	* BUILDING, README:
+	Update README/BUILDING with new info for the 0.4 release.
+
+	* src/main/Main.java, src/parser/FileUtil.java, src/parser/Java15.cup, src/parser/PClassDoc.java, src/parser/PDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PPackageDoc.java, src/parser/PRootDoc.java, src/parser/PSeeTag.java, src/parser/PTag.java, src/parser/PTypeVariable.java, src/parser/ParseControl.java, src/parser/TypeContext.java, src/parser/TypeUtil.java, src/html/HTMLOptions.java, src/html/HTMLUtil.java, src/html/PackageGroup.java, src/html/TagEmitter.java, src/html/HTMLDoclet.java:
+	Convert code base to use new for-each syntax.
+
+2003-07-31  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/Doc.java, src/parser/Makefile.am, src/parser/ParseControl.java, src/parser/UniqueVector.java, Makefile.am:
+	Remove dependency on JUtil package by using our own copy of the
+	UniqueVector class.  JUtil has not been updated to work with
+	prototype 2.2 yet; we'll reinclude it when it has been.
+
+	* src/parser/Java15.cup:
+	Fix bug in joinWithParam if 'name' parameter contained dots.
+
+	* src/html/Makefile.am, src/lexer/Makefile.am, src/parser/Makefile.am, src/main/Makefile.am, src/Makefile.am, Makefile.am, configure.ac:
+	Support building with prototype 2.2 compiler.
+	We need to use the special 'java' script to run sinjdoc as well as the
+	'javac' script to build it.
+	Moved the '-source 1.5' flag to AM_JAVACFLAGS, instead of including it
+	in JAVAC.
+
+	* src/parser/UniqueVector.java: Import UniqueVector from JUtil.
+
+2003-07-30  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PClassDoc.java, src/html/TagEmitter.java:
+	Implement @see, @link, and @linkplain tags.  The "no label" output for
+	these is not yet exactly according to Sun spec.  Fix the tagContext
+	for classes, since "#method" is commonly used in the javadoc preceding
+	the class in which 'method' is found.
+
+	* src/parser/PDoc.java, src/html/TagEmitter.java:
+	Fix some whitespace issues:  trailing white space on trailing tags
+	is removed; remove an erroneous "trim()" on inline tags.
+
+	Also refactor SimpleBlockAction to make it easier to implement @see
+	properly.
+
+	* src/parser/Java15.cup:
+	Bug fix: after grammar update we were calling lookupClassType() instead
+	of lookupType() in the class_or_interface production, meaning that
+	type variables were not being resolved correctly.
+
+	Also tweak addParams() to check whether the given Type is a TypeVariable
+	and correctly report an error if it is.
+
+2003-07-29  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/Java15.cup:
+	Be more careful about looking up types so that they don't hit the lookup
+	before we're done parsing all our input files.  More aggressively use
+	PEagerClassType where appropriate.  Finally, spin off a special case
+	for PEagerClassType in addParams to avoid another early lookup.
+	We eventually need to introduce a 'PLazyOuterClassType' here to deal
+	with the last case without an early lookup.
+
+	* src/parser/Java15.cup:
+	Update to latest version of Java 1.5 grammar; fixes a few typos and supports
+	stubs.
+
+	* src/parser/FileUtil.java, src/parser/Java15.cup, src/parser/PFile.java, src/parser/PPackageDoc.java, src/parser/PRootDoc.java, src/parser/PSourcePosition.java, src/main/Main.java:
+	Fix a line numbering/character position bug when the source file has
+	embedded unicode escapes by making sure that we consistently apply
+	the EscapedUnicodeReader whenever we read in a file.
+
+	* src/lexer/Lexer.java: Minor cleanups to the lexer.
+
+	* src/parser/Java15.cup:
+	Implemented support for documenting 'enum' classes.
+
+	* src/parser/PTypeVariable.java: Disable bogus assertion.
+
+	* src/html/HTMLUtil.java: Fix emit of type arguments.
+
+	* src/parser/Java15.cup:
+	Allow stubbed out constructors in the grammar so that we can generate
+	javadoc for code stubs.
+
+	* src/parser/PTypeArgument.java, src/parser/TypeUtil.java, src/html/HTMLUtil.java, src/html/TemplateWriter.java, src/lexer/Keyword.java, src/lexer/Lexer.java, src/lexer/Separator.java, src/parser/Java15.cup, src/parser/Makefile.am, src/parser/PCompilationUnit.java, src/parser/PParameter.java, src/parser/PParameterizedType.java, src/parser/PTag.java, src/Makefile.am, src/Parameter.java, src/ParameterizedType.java, src/TypeArgument.java:
+	Update SinjDoc to handle:
+	 a) new Java 1.5 grammar/lexer (JSR-201 + JSR-14)
+	 b) wildcard types
+	 c) varargs methods
+	 d) static imports (incomplete)
+	 e) enum classes (incomplete)
+
+2003-07-21  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/TypeUtil.java:
+	null is a valid return value for ParameterizedType.getDeclaringType();
+	don't try to invoke subst on it. (Fixes a NullPointerException on
+	non-inner parameterized types.)
+
+2003-06-25  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PDoc.java:
+	Don't eat up trailing '}' which don't belong to inline tags.
+
+	* src/ProgramElementDoc.java:
+	Javadoc fix: abstract methods don't have bodies.
+
+	* src/parser/PClassType.java, src/parser/PLazyInnerClassType.java, src/parser/PParameterizedType.java, src/parser/PTag.java, src/parser/TypeUtil.java, src/html/HTMLUtil.java, src/parser/Java15.cup, src/ClassType.java, src/ParameterizedType.java:
+	New representation for ParameterizedType to match the proposed JSR-14 one.
+
+2003-05-21  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/templates/allclasses-noframe.html, src/html/templates/class-page.html, src/html/templates/overview-summary.html, src/html/templates/package-summary.html, src/html/templates/stylesheet.css:
+	An underscore is not a valid identifier character in CSS.  Who would have
+	thought?  Rename classes to used MixedCase instead.
+
+	* src/html/templates/html.css:
+	Add CSS rules for standard HTML, imported from Mozilla (GPL'ed).
+
+2003-05-20  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/TemplateWriter.java, src/html/templates/allclasses-frame.html, src/html/templates/allclasses-noframe.html, src/html/templates/class-page.html, src/html/templates/index-nopackages.html, src/html/templates/index-packages.html, src/html/templates/overview-frame.html, src/html/templates/overview-summary.html, src/html/templates/package-frame.html, src/html/templates/package-summary.html, src/html/templates/stylesheet.css:
+	Make a new @GENERATOR@ macro, and put the SinjDoc version number in the
+	"generator" meta tag.
+
+2003-05-08  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* configure.ac: Starting work on version 0.4 now.
+
+	* README: Additional note in README.
+
+	* src/lexer/Comment.java, src/lexer/DocumentationComment.java, src/lexer/DoubleLiteral.java, src/lexer/EOF.java, src/lexer/EndOfLineComment.java, src/lexer/EscapedUnicodeReader.java, src/lexer/FIFO.java, src/lexer/FloatLiteral.java, src/lexer/Identifier.java, src/lexer/InputElement.java, src/lexer/IntegerLiteral.java, src/lexer/Keyword.java, src/lexer/Lexer.java, src/lexer/Literal.java, src/lexer/LongLiteral.java, src/lexer/Makefile.am, src/lexer/NullLiteral.java, src/lexer/NumericLiteral.java, src/lexer/Operator.java, src/lexer/Separator.java, src/lexer/StringLiteral.java, src/lexer/Token.java, src/lexer/TraditionalComment.java, src/lexer/WhiteSpace.java, src/lexer/package.html, src/main/Main.java, src/parser/FileUtil.java, src/parser/Java15.cup, src/parser/PArrayType.java, src/parser/PClassDoc.java, src/parser/PClassType.java, src/parser/PClassTypeVariable.java, src/parser/PCompilationUnit.java, src/parser/PConstructorDoc.java, src/parser/PDoc.java, src/parser/PEagerClassType.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PFile.java, src/parser/PLazyClassType.java, src/parser/PLazyInnerClassType.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PMethodTypeVariable.java, src/parser/PPackageDoc.java, src/parser/PParamTag.java, src/parser/PParameter.java, src/parser/PParameterizedType.java, src/parser/PProgramElementDoc.java, src/parser/PRootDoc.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PSourcePosition.java, src/parser/PTag.java, src/parser/PThrowsTag.java, src/parser/PTypeVariable.java, src/parser/Pair.java, src/parser/ParseControl.java, src/parser/TypeContext.java, src/parser/TypeUtil.java, Makefile.am, prj.el, src/ArrayType.java, src/ClassDoc.java, src/ClassType.java, src/ClassTypeVariable.java, src/ConstructorDoc.java, src/Doc.java, src/DocErrorReporter.java, src/Doclet.java, src/ExecutableMemberDoc.java, src/FieldDoc.java, src/MemberDoc.java, src/MethodDoc.java, src/MethodTypeVariable.java, src/PackageDoc.java, src/ParamTag.java, src/Parameter.java, src/ParameterizedType.java, src/ProgramElementDoc.java, src/RootDoc.java, src/SeeTag.java, src/SerialFieldTag.java, src/SourcePosition.java, src/Tag.java, src/TagVisitor.java, src/ThrowsTag.java, src/Type.java, src/TypeVariable.java, src/TypeVisitor.java, src/html/DocComparator.java, src/html/HTMLDoclet.java, src/html/HTMLOptions.java, src/html/HTMLUtil.java, src/html/PackageGroup.java, src/html/Pair.java, src/html/ReplayReader.java, src/html/SimpleCharSequence.java, src/html/TagEmitter.java, src/html/TemplateContext.java, src/html/TemplateWriter.java, src/html/URLContext.java, src/html/Version.java.in, src/html/package.html, src/html/templates/Makefile.am, src/lexer/BooleanLiteral.java, src/lexer/CharacterLiteral.java, src/package.html:
+	Renamed all packages from net.cscott.gjdoc to net.cscott.sinjdoc.
+
+2003-05-04  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/main/Main.java:
+	Don't be quiet about -help! (-quiet and -help together combined to produce
+	no output.)
+
+2003-05-03  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/templates/allclasses-noframe.html, src/html/templates/class-page.html, src/html/templates/index-nopackages.html, src/html/templates/index-packages.html, src/html/templates/overview-frame.html, src/html/templates/overview-summary.html, src/html/templates/package-frame.html, src/html/templates/package-summary.html, src/html/templates/stylesheet.css, src/parser/PDoc.java, src/parser/PPackageDoc.java, src/parser/PRootDoc.java, src/parser/package.html, README, configure.ac, src/Doc.java, src/PackageDoc.java, src/RootDoc.java, src/SeeTag.java, src/html/HTMLDoclet.java, src/html/HTMLOptions.java, src/html/package.html, src/html/templates/allclasses-frame.html:
+	"GJDoc" is already the name of the pizza/GJ documentation tool
+	   http://www.cis.unisa.edu.au/~pizza/gj/
+	as well as a GNU version of javadoc
+	   http://www.gnu.org/software/cp-tools/gjdoc.en.html
+
+	I've no wish to further confuse the issue.  So my tool is henceforth
+	renamed 'SinjDoc', in the grand tradition of recursive acronyms for
+	software projects, for 'SinjDoc Is Not JavaDoc' -- it's better!
+
+	I've replaced GJDoc wherever it appears in the documentation, etc,
+	but the package name is still 'net.cscott.gjdoc'.  I'll fix that
+	in the next commit.
+
+	* src/parser/Makefile.am:
+	Java15.java and Sym.java should be removed during 'make clean' not only
+	'make maintainer-clean'.
+
+	* src/Makefile.am: Whoops -- overview.html is now overview.html.in.
+
+	* Makefile.am:
+	Tweak 'make clean' rules a bit -- I think classes/net should actually
+	be cleaned up as 'make mostlyclean' rather than 'make clean'.
+
+	* Makefile.am:
+	Tweak the top-level makefile so that classes/net is cleaned up even when
+	doing maintainer-clean, etc; and so that doc-clean is invoked with clean.
+
+	* BUILDING: Add some information about building the tool.
+
+	* configure.ac, src/.cvsignore, src/overview.html, src/overview.html.in:
+	Make overview.html a template so that automake can fill in the appropriate
+	package name and version number at configure time.
+
+	* Makefile.am: Make 'make doc' quiet.
+
+2003-04-26  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/Version.java.in:
+	Keep bug-report email address out of the docs (and hence off the 'net).
+
+	* src/html/Version.java.in:
+	Add a 'main' method to the 'Version' class, which simply prints out
+	the package name, version, and bug-report address.
+
+	* Makefile.am:
+	Tweak 'doc' and 'upload' rule to make them more generic (i.e. we can
+	copy-and-paste to other projects more easily).
+
+2003-04-23  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* configure.ac: Starting work on version 0.3 now.
+
+	* Makefile.am: Added 'Implementation-Version' tag to .jar manifest.
+
+	Added version number to API docs.
+
+	Added 'upload' target to Makefile to automate uploading a released version.
+
+	* src/parser/Java15.cup:
+	Update to 13-Apr-2003 release of JSR-14 grammar.  This added proper nested
+	parameterized type support and some JLS2 and other fixes.
+
+	* src/html/HTMLUtil.java:
+	Individually link each name of an inner class type.
+
+	Properly handle nested parameterized types.
+
+	* src/parser/PParameterizedType.java: Add some javadoc.
+
+	* src/parser/PExecutableMemberDoc.java:
+	Added a toString() method for easier debugging.
+
+	* src/html/templates/class-page.html:
+	The method summary table should have the method_summary class.
+
+	* src/html/TemplateWriter.java:
+	Fix an assertion in copyRemainder: the context stack may not be empty if
+	we're exiting the method due to an exception.
+
+	* src/parser/Makefile.am, src/parser/PLazyInnerClassType.java:
+	Added PLazyInnerClassType implementation of ClassType, for when we know
+	the inner class name but haven't resolved the fully-qualified name of
+	the outer class yet.
+
+2003-04-16  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PTypeVariable.java: Remove unnecessary 'import' statement.
+
+	* src/parser/PClassDoc.java, src/parser/PEagerClassType.java, src/parser/PLazyClassType.java, src/parser/TypeUtil.java, src/ClassType.java:
+	Remove ClassType.typeParameters() method.  This more properly belongs in
+	ClassDoc.  Made scattered changes necessitated.  In fixing up TypeUtil
+	to no longer use ClassType.typeParamters(), I also fixed its handling
+	of nested parameterized types.
+
+	* src/ParameterizedType.java:
+	Clarify the behavior of ParameterizedType for nested parameterized types.
+
+2003-04-15  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/templates/class-page.html, src/html/TemplateWriter.java:
+	Do The Right Thing when a class has no superclass (only the case for
+	java.lang.Object).  Added new IF_SUPERCLASS macro.
+
+	* src/parser/PArrayType.java, src/parser/PEagerClassType.java:
+	Fix missing final dollar-sign on CVS $Id$ tag.
+
+2003-04-12  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/main/Main.java:
+	Properly implement -quiet option (it's not the same as -noverbose).
+
+	* src/parser/PDoc.java:
+	Suppress an unnecessarily-pedantic "extra end brace" warning.
+
+	* src/html/templates/allclasses-frame.html, src/html/templates/allclasses-noframe.html, src/html/templates/class-page.html, src/html/templates/index-nopackages.html, src/html/templates/index-packages.html, src/html/templates/overview-frame.html, src/html/templates/overview-summary.html, src/html/templates/package-frame.html, src/html/templates/package-summary.html:
+	Make emitted XHTML viewable in Internet Explorer by getting rid of the
+	XML stylesheet directives.  If there's an XML stylesheet, IE expects it
+	to contain full styling information for all the HTML tags as well, and
+	I'm not sure that it's possible to do this (how do you specify in CSS that
+	<a href="..."> should boot you to the specified URL when you click on it?).
+
+	In any case, by getting rid of <?xml-stylesheet> and just using the HTML
+	<link> element, Internet Explorer seems almost as happy as Mozilla is
+	with the documentation output.
+
+	* src/html/TemplateWriter.java:
+	Add the always-handy IF_TRUE and IF_FALSE conditionals (also IFNOT_TRUE and
+	IFNOT_FALSE, for what it's worth).
+
+	* src/parser/PRootDoc.java: Fix double-reporting of syntax errors.
+
+2003-04-11  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/TypeContext.java:
+	Don't search enclosing class' type parameters if type context is static.
+
+	* src/parser/Java15.cup, src/parser/PClassTypeVariable.java, src/parser/PMethodTypeVariable.java, src/parser/PTypeVariable.java:
+	Move declaration of type variable to just after the type_variable production
+	is reduced; i.e. *before* get parse the type variable bounds
+	(type_bound_opt, etc) productions.  This means that we finally resolve
+	the second E in "class Enum<E extends Enum<E>>" correctly.
+
+	Needed to move "List<Type> bounds" out of the constructors of
+	TypeVariable, ClassTypeVariable, and MethodTypeVariable to make this
+	work.  Added TypeVariable.addBounds() method to add the appropriate
+	bounds to a type variable after-the-fact.  Moved the bounds checking
+	assertions around accordingly as well.
+
+	* src/html/HTMLUtil.java:
+	Oops: forgot that erasing a type variable could yield a signature of
+	java.lang.Object, as well.  This meant that many legitimate type
+	variable bounds were being suppressed.  Fixed this, plus eliminated
+	some whitespace to avoid unsightly line breaks.
+
+2003-04-10  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PTypeVariable.java, src/parser/TypeUtil.java:
+	Type variables *can* be bounds.  Erase the type variable to determine
+	whether it is a class or interface type to complete the type variable
+	erasure.  (Recursion is your friend.)
+
+	I don't recall this being specified clearly in the spec.  Thank goodness
+	for assertions to check our assumptions!
+
+	* src/html/HTMLOptions.java:
+	Bug fix: options were incompletely case-sensitive.  Fixed.
+
+	* configure.ac: Starting work on version 0.2 now.
+
+	* src/html/templates/class-page.html, src/html/HTMLUtil.java, src/html/TemplateContext.java, src/html/TemplateWriter.java:
+	Revamp type-parameter related macros, splitting into three types:
+	TYPEPARAMS_SUMMARY, which just emits the type variable names without
+	hyperlinks or bounds; TYPEPARAMS_LINK which emits the variables with
+	hyperlinks and bounds; and TYPEPARAMS_DECL which emits the variables
+	with bounds as anchors.
+
+	Most of the implementation moved to HTMLUtil.toLink().    A
+	TemplateContext.specificTypeVariables() method was added as well, to
+	return the most specific type variables in the context.
+
+	The class-page.html template was modified to use these macros appropriately.
+
+	This commit fixes the bug that we didn't actually emit type parameter
+	bounds in the HTML output.  Still left to fix:
+	  class Enum<E extends Enum<E>>
+	in this declaration the final 'E' is not correctly parsed as referring to
+	the type parameter at the head of the bound.  It is parsed as referring to
+	some unknown class E.  Similarly for:
+	   static <E extends Enum<E>> E valueOf(List<E> family, String name)
+	in this class, where the E in the bound is parsed as referring to the
+	*class variable* E, not the *method type variable*.  Also, the TypeContext
+	for static members shouldn't include the enclosing class.
+
+	Nevertheless, I'm calling this version 0.1 final.  I'll fix these bugs
+	in version 0.2.
+
+	* src/html/templates/allclasses-noframe.html, src/html/templates/class-page.html, src/html/templates/overview-summary.html, src/html/templates/package-summary.html:
+	Add LINK tags to pages for easier site navigation.  (Seems not to work
+	terribly well with frames.)
+
+	* src/html/templates/class-page.html:
+	Inner classes should link to their enclosing class.
+
+	* src/html/templates/class-page.html: Emit nested class summary.
+
+	* src/html/TemplateWriter.java:
+	Added FORALL_NESTED (also IF_NESTED, IFNOT_NESTED) to iterator over inner
+	classes.
+
+	* src/html/templates/Makefile.am, src/html/templates/allclasses-noframe.html, src/html/HTMLDoclet.java:
+	Emit allclasses-noframe.html which lists all the documented classes, as well
+	as summary information for them.
+
+	* src/html/templates/class-page.html:
+	Properly link Field/Constr/Method summary/detail in navbar for class pages.
+
+	* src/html/TemplateWriter.java:
+	Make FORALL_ macros into conditionals, too.
+
+2003-04-09  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/HTMLDoclet.java: Emit package-list file.
+
+	* src/parser/FileUtil.java:
+	Add some additional javadoc to public methods.
+
+	* src/parser/Java15.cup:
+	Fix another look-ahead bug: the constructor_declaration rule was looking
+	*past* the constructor body end brace and snarfing the javadoc comment
+	for the *following* method before doMethodDeclaration was being invoked.
+	Moving the parser action before the constructor_body nonterminal fixes
+	the problem.
+
+	* src/parser/Java15.cup:
+	Suppress unnameable classes and members -- these are classes defined
+	inside method bodies or anonymous classes, and members of such classes.
+
+	* src/html/templates/stylesheet.css, src/html/TagEmitter.java:
+	Bug-fix to TagEmitter: don't emit multiple identical tagDescriptions.
+
+	Tweak style of tags; separate multiple tags with commas.  Also trim
+	whitespace in TagEmitter so that commas are snug with tag text.
+
+	* src/parser/Java15.cup:
+	Correct the access mode of fields, methods, and inner types (classes and
+	interfaces) declared within an interface.  All members are implicitly
+	public, and inner types are implicitly static as well. (JLS 6.6.1 & 9.5)
+
+	* src/lexer/Identifier.java, src/parser/PArrayType.java:
+	The classes net.cscott.gjdoc.parser.PArrayType and
+	net.cscott.gjdoc.lexer.Identifier should not be public.  Make them
+	package-scope.
+
+	* src/lexer/EscapedUnicodeReader.java, src/lexer/Lexer.java:
+	Add some javadoc to the public Lexer and EscapedUnicodeReader classes
+	in the net.cscott.gjdoc.lexer package.
+
+	* src/parser/Java15.cup:
+	Move the call to doFieldDeclaration() *before* the SEMICOLON terminal,
+	since otherwise the lookahead has already moved on to the next member
+	declaration and the javadoc comment extracted will be wrong.
+
+	* src/html/Version.java.in: Added javadoc to the Version class.
+
+	* configure.ac:
+	Call this version 0.1 of the compiler, since it's officially "useful" now.
+
+	* configure.ac:
+	Improve the search for a JSR-14 compiler by using the value of JSR14DISTR.
+	Also check the environment variable JCC, which the user can set to
+	specifically select a desired compiler.
+
+	* src/parser/TypeContext.java:
+	Bug fix: the name resolution was counting an import of 'ArrayList' as a
+	match for a lookup of 'List' (because the strings end similarly).  Add
+	a dot to fix the problem.
+
+	Add a TypeContext.toString() method to aid debugging.
+
+	* src/parser/ParseControl.java:
+	Add an assertion to double-check that included packages really are included.
+
+	* src/parser/Java15.cup, src/parser/ParseControl.java:
+	Parse import statements and put the data in the PCompilationUnit.
+
+	Tweaked ParseControl to create all the included PPackageDoc objects
+	*first*, as the import processing might otherwise create packages
+	with the wrong 'included' status.
+
+	* src/parser/PCompilationUnit.java:
+	Improved PCompilationUnit.toString() method for easier debugging.
+
+	* src/html/templates/class-page.html:
+	Restructure the implemented/subclass information.
+
+	Also comment out (for now) all parts that don't have accurate information.
+
+	* src/html/templates/stylesheet.css:
+	Set off the class declaration a little more.
+
+	* src/html/templates/class-page.html, src/html/TemplateWriter.java:
+	Emit superinterfaces, using SUPERINTERFACES and IF_SUPERINTERFACES macros.
+
+	* src/html/templates/class-page.html, src/html/TemplateWriter.java:
+	Emit the proper superclass, using a new SUPERCLASS macro.
+
+	Also tweaked the output of TYPEPARAMS to emit links for method parameters
+	in summaries.
+
+	* src/html/templates/stylesheet.css:
+	Style the class declaration statement.
+
+	* src/html/templates/class-page.html:
+	Fix class/interface mixup in class declaration string.
+
+	* src/html/templates/stylesheet.css:
+	More stylesheet tweaks: use Andale Mono for the monospace font; add a little
+	bit extra padding above the tag list.
+
+	* src/html/templates/class-page.html, src/html/templates/stylesheet.css:
+	Tweak formatting of member summary / member detail sections.  Looks good in
+	lynx, too!
+
+	* src/html/templates/class-page.html, src/html/templates/overview-summary.html, src/html/templates/package-summary.html, src/html/templates/stylesheet.css:
+	Restyle 'summary' tables with dashed lines between baseline-aligned entries.
+	Add the summary class to the appropriate tables.
+
+	Some preliminary tag formatting: tag names are bold and tags are grouped
+	together now.
+
+	* src/html/templates/class-page.html, src/html/TemplateWriter.java:
+	Implement MODIFIERS and MODIFIER_SUMMARY macros, and use these in
+	class-page.html template.
+
+	* src/html/templates/class-page.html, src/html/TemplateWriter.java:
+	Add TYPEPARAMS and TYPEPARAMS_DECL macros (the first replacing CLASSPARAMS).
+	TYPEPARAMS_DECL emits <a name=...> tags for the type variables defined by
+	a class/method, so that links to that type variable will jump to its
+	declaration.
+
+	Updated the class-page.html template to use these macros appropriately.
+
+	* src/html/templates/class-page.html, src/html/TemplateWriter.java:
+	Added FIELD_TYPE, METHOD_RETURN_TYPE, METHOD_SIGNATURE, METHOD_PARAMS,
+	MEMBER_NAME, and MEMBER_NAME_LINK macros to TemplateWriter.
+
+	Used these in class-page.html.
+
+2003-04-08  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/HTMLUtil.java:
+	Add toLink(MemberDoc), toLink(Type), toURL(ClassTypeVariable),
+	toURL(MethodTypeVariable), and toURL(MemberDoc) methods to HTMLUtil.
+
+	* src/html/URLContext.java:
+	More-intelligently generate relative URL references to resources on the
+	same page, but at a different target location.
+
+	* src/TagVisitor.java: Fix javadoc: missing close-CODE element.
+
+	* src/parser/TypeUtil.java:
+	Bug fix: superclass can sometimes return null; don't perform substitution
+	in this case!
+
+	* src/parser/PClassDoc.java, src/parser/PParameterizedType.java, src/parser/PTypeVariable.java:
+	Implement PClassDoc.instanceOf() using TypeUtil.isInstanceOf(Type,Type).
+
+	Implement PParameterizedType.signature() and PTypeVariable.signature()
+	using TypeUtil.erasedType(Type).
+
+	Add some assertion checking to PTypeVariable to make sure that the
+	bounds given are valid.
+
+	* src/parser/Makefile.am, src/parser/TypeUtil.java:
+	Add the TypeUtil class, containing various useful Type-related functions.
+
+2003-04-07  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/TemplateWriter.java, src/parser/PClassDoc.java, src/parser/PClassType.java, src/parser/PDoc.java, src/parser/PEagerClassType.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PLazyClassType.java, src/parser/PPackageDoc.java, src/parser/PProgramElementDoc.java, src/parser/PRootDoc.java, src/parser/PSeeTag.java, src/parser/PTypeVariable.java, src/ClassType.java, src/ProgramElementDoc.java, src/RootDoc.java, src/Type.java:
+	After reading JLS 6.7, what the API has been calling a 'fully-qualified' name
+	is actually a *canonical* name, which in some cases differs.  Rename all the
+	interface methods to call this by its true name.
+
+	* src/parser/PArrayType.java, src/parser/PClassType.java, src/parser/PClassTypeVariable.java, src/parser/PMethodTypeVariable.java, src/parser/PParameterizedType.java, src/Makefile.am, src/Type.java, src/TypeVisitor.java:
+	Add a visitor for Type objects, since there can be so many different types
+	of Types!
+
+2003-04-05  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/TagEmitter.java:
+	Implement -author, -version, and -nosince command-line options.
+
+	* src/html/templates/class-page.html:
+	Flesh out class-page template a bit.  We now have the right *number* of
+	member summaries/descriptions, but the actual member information is
+	sorely lacking.
+
+	* src/html/TemplateWriter.java:
+	Add FORALL_FIELDS, FORALL_CONSTRUCTORS, and FORALL_METHODS macros.
+
+	* src/parser/PDoc.java:
+	Changed 'unmatched end brace' to a warning, as you may have braces in
+	your javadoc comment completely separate from any inline tags.
+
+	* src/html/templates/overview-summary.html, src/html/TemplateContext.java, src/html/TemplateWriter.java:
+	Add PackageGroup to TemplateContext.
+
+	Use this to implement GROUPNAME and FORALL_GROUPS macros.  FORALL_PACKAGES
+	was also changed to list only packages in a group, if expanded with a
+	group in the TemplateContext.
+
+	Added the package groups to overview-summary.html by editing the template
+	to use these new macros.
+
+	* src/html/HTMLDoclet.java, src/html/HTMLOptions.java, src/html/Makefile.am, src/html/PackageGroup.java:
+	Parse the -group command-line option, creating a list of PackageGroup
+	objects.
+
+	* src/html/templates/overview-summary.html:
+	Add package names & summaries to overview-summary.html page, but groups are
+	not yet supported.
+
+	* src/html/TagEmitter.java:
+	Use TemplateContext instead of DocErrorReporter in TagEmitter.
+
+	Implement {@docRoot} inline tag.
+
+	* src/html/templates/package-summary.html:
+	Actually list classes and summary information in package-summary.html.
+
+	* src/html/templates/class-page.html, src/html/templates/overview-summary.html, src/html/templates/package-summary.html, src/html/HTMLDoclet.java:
+	Removed the @SPLIT@ macro from the implementation of makeOverviewSummary(),
+	makePackageSummary(), and makeClassPage() (also from the templates used
+	in these methods).  We now use the TAGS and TAG_SUMMARY macros instead.
+
+	Also reformat the "See Also:" tag in the overview and package summaries
+	to match how TagEmitter emits tags.
+
+	* src/html/TemplateContext.java, src/html/TemplateWriter.java:
+	Add TemplateContext.specificItem() method to return the most specific
+	documentation item in the context.  Use in TemplateContext.toString().
+
+	Add TAGS and TAG_SUMMARY macros to TemplateWriter, using TagEmitter
+	to dump the tag information for TemplateContext.specificItem().
+
+	Rewrite the IF_TAGS macro to use TemplateContext.specificItem().
+
+	* src/html/HTMLDoclet.java:
+	Use TagEmitter instead of home-spun tag translation in HTMLDoclet.
+
+	* src/html/Makefile.am, src/html/TagEmitter.java:
+	Add TagEmitter class to encapsulate tag processing.
+
+2003-04-04  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/templates/class-page.html, src/html/TemplateWriter.java:
+	Add CLASSPARAMS macro and class parameters to the appropriate places on
+	the class pages.
+
+	* src/html/HTMLUtil.java:
+	Two bug fixes to HTMLUtil, both having to do with HTMLWriter.  First, we
+	can't share a CharsetEncoder instance between the HTMLWriter and an
+	OutputStreamWriter, or eventually the HTMLWriter will screw up the
+	state of an on-going encoding operation in the OuputStreamWriter.
+
+	Secondly, add a little bit of safely in case we're called with
+	len==0.  The 'canEncode' method *should* always return true in this
+	case, in which case we're okay -- but if it ever returned false we'd
+	potentially index an array off its end and crash.  So be safe, and
+	explicitly handle the len==0 case at the top of the method.
+
+	* src/html/templates/Makefile.am, src/html/templates/class-page.html, src/html/HTMLDoclet.java:
+	Rough out the class pages.
+
+	* src/html/TemplateWriter.java:
+	Add CLASSSHORTNAME and CLASSNAME macros, as well as CLASSTYPE and
+	IF_INTERFACE.
+
+	* src/html/templates/class-page.html:
+	Rough skeleton of class page template.
+
+	* src/html/templates/Makefile.am, src/html/templates/overview-summary.html, src/html/templates/package-summary.html, src/html/HTMLDoclet.java:
+	First-draft implementation of makePackageSummary() using
+	package-summary.html template.
+
+	* src/html/templates/package-summary.html:
+	Add a package-summary page template.
+
+	* src/html/templates/overview-summary.html, src/html/templates/stylesheet.css:
+	Update stylesheet and overview-summary template.
+
+	Reformatted navbar using more spans, navbot was actually navmid, etc.
+	Better label the package summary tables.
+
+	Don't use hover style for non-href anchor tags.  Highlight the target
+	of a named anchor tag.  Add some preliminary formatting for class_page.
+
+	* Makefile.am: Tweaked copyright message in doc footer.
+
+	* src/html/templates/overview-summary.html, src/html/TemplateWriter.java:
+	Added IF_TAGS macro to omit doc item description if it's not present.
+	Used this in overview-summary.html.
+
+	* src/html/HTMLUtil.java, src/parser/PDoc.java:
+	Sort order and link text for inner classes should include the name of
+	the containing class(es).
+
+	* src/html/templates/allclasses-frame.html, src/html/HTMLDoclet.java, src/html/TemplateWriter.java:
+	Add FORALL_CLASSES macro; reimplement makeAllClassesFrame() using it.
+
+	* src/html/templates/overview-frame.html, src/html/HTMLDoclet.java, src/html/HTMLUtil.java, src/html/TemplateWriter.java:
+	Move allDocumentedPackages() utility method to HTMLUtil (maybe not the
+	right place, but better than where it was).
+
+	Added PKGFRAMELINK and FORALL_PACKAGES macros.
+
+	Rewrote makeOverviewFrame() using new macros.
+
+	* src/html/templates/package-frame.html, src/html/HTMLDoclet.java:
+	Reimplement makePackageFrame() using the new macros.  Non-existent categories
+	are not properly suppressed and more logic is moved to the template.
+
+	* src/html/TemplateWriter.java:
+	Fix some echoing bugs in TemplateWriter.
+
+	Renamed TemplateForEach to TemplateForAll, because it seems to make more
+	sense that way.
+
+	Added CLASSLINK_P and CLASSLINK_NP macros to emit links to ClassDoc.
+
+	Added FORALL_INTERFACE, FORALL_ORDINARYCLASSES, FORALL_EXCEPTIONS, and
+	FORALL_ERRORS macros to iterate over the included classes in a package.
+
+	Added a sorted() helper method and a FilterList helper class.
+
+	* src/html/ReplayReader.java:
+	Bug fix: ReplayReader was skipping directly to the end of the file after
+	you first made a mark due to a logic thinko (logic for a previous version
+	of the code flow wasn't updated when the code flow was updated).  Fixed.
+
+	* src/html/TemplateContext.java:
+	Add TemplateContext.toString() method for easier debugging.
+
+	* src/html/TemplateWriter.java:
+	Factor out an ExtendedContext class.  I'm a little unhappy with the
+	number of places I have to pass the 'isFirst' and 'isLast' booleans, just
+	to make @IF_FIRST@ and @IF_LAST@ conditional macros, but alas.  That's how
+	it is.
+
+	* src/html/TemplateWriter.java, src/html/TemplateContext.java:
+	Remove 'echo' field from TemplateContext and use the size of the
+	TemplateContext list on the template stack to indicate whether we
+	are suppressing output.  A zero-length template context list directs
+	the TemplateWriter to suppress its output.
+
+2003-04-03  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/HTMLDoclet.java, src/html/TemplateContext.java:
+	Refactor TemplateContext constructors to eliminate the mysterious 'null'
+	arguments.
+
+	* src/html/TemplateWriter.java:
+	Extend TemplateWriter's macro interface to allow conditional output based
+	on macros, and section repeats.
+
+	* src/html/TemplateContext.java:
+	Add additional template context for turning template output on/off and
+	for iterating over class members.
+
+	* src/html/Makefile.am, src/html/ReplayReader.java:
+	Add a new ReplayReader class which allows replay from any arbitrary mark
+	made in a Reader --- you don't have a limit of one Mark like you do in
+	the standard Reader interface.
+
+	A future improvement would be to add an intelligent finalizer method to
+	the ReplayMark object to throw away portions of the replay buffer corresponding
+	to dead marks... but I don't think memory usage is too major a concern at the
+	current moment.
+
+	* src/html/Makefile.am, src/html/Pair.java:
+	Copy the pair class implementation from the net.cscott.gjdoc.parser package.
+	I should really share this, but it's such a simple one-off, and it doesn't
+	really belong in any of the GJDoc packages.  It belongs in JUtil, but that's
+	a larger project, so I'm just going to hack it for now.
+
+	* prj.el: Fix spacing bug in JDE template.
+
+	* src/html/TemplateWriter.java:
+	Allow any Java identifier as a macro name.
+
+2003-04-02  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/templates/overview-summary.html, src/html/HTMLDoclet.java:
+	Kludge in makeOverviewSummary().  Done incompletely and should rely more
+	on macros, but this gets the basic frame structure in place.
+
+	* src/html/templates/Makefile.am, src/html/templates/overview-summary.html, src/html/templates/stylesheet.css:
+	Change the div class from 'footer' to 'bottom', because that's apparently
+	what javadoc calls it.
+
+	* src/html/TemplateWriter.java:
+	Add HEADER, FOOTER, and BOTTOM macros to TemplateWriter.
+
+	* Makefile.am:
+	Add copyright notice to -bottom option in 'make doc' rule.
+
+	* src/html/HTMLOptions.java:
+	Propagate reasonable defaults for -windowtitle, -doctitle, -header, and
+	-footer options.
+
+	* Makefile.am:
+	Add -header and -windowtitle options to GJDoc documentation command.
+
+	* src/html/templates/overview-frame.html, src/html/templates/package-frame.html:
+	Add META tags with appropriate keywords.
+
+	* src/html/HTMLDoclet.java, src/html/templates/Makefile.am, src/html/templates/package-frame.html:
+	Implement makePackageFrame(), although not in an ideal manner (headings for
+	classes, exceptions, etc are omitted even if there are no classes, exceptions,
+	etc in the package).
+
+	* src/html/TemplateWriter.java:
+	Add two new macros related to packages: PKGNAME which simple emits the name
+	of the current package, and PKGSUMMARYLINK which emits a link to the
+	package summary page.
+
+	* src/html/HTMLDoclet.java: Further flesh out skeleton logic.
+
+	* src/html/HTMLDoclet.java: Create context objects for every page.
+
+	* src/html/HTMLDoclet.java, src/html/HTMLUtil.java:
+	Flesh out remainder of the skeleton of HTMLDoclet.  Refactor out an
+	'allDocumentedPackages()' method.  Refactor HTMLUtil.toURL(PackageDoc)
+	to take the name of the package page to reference as an argument.
+
+	* src/html/DocComparator.java, src/html/HTMLDoclet.java, src/html/Makefile.am:
+	Work around type system unhappiness by creating a new parameterized
+	DocComparator object.
+
+	* src/parser/PPackageDoc.java:
+	Add PPackageDoc.toString() method for debugging.
+
+	* src/html/templates/Makefile.am, src/html/templates/allclasses-frame.html, src/html/HTMLDoclet.java, src/html/HTMLUtil.java:
+	Added missing 'context' arg to HTMLUtil.toLink() methods, needed to make
+	sure URLs are correct even when containing document is not at root level.
+
+	Implement HTMLDoclet.makeAllClassesFrame() using allclasses-frame.html as
+	template.
+
+	* src/html/HTMLUtil.java:
+	Add HTMLUtil.toLink(ClassDoc) method which makes an anchor tag to a
+	class object.  A boolean lets you specify whether type parameters of
+	the class should be included in the link or not.
+
+	Also expanded some import * statements.
+
+	* src/html/templates/Makefile.am, src/html/templates/overview-frame.html, src/html/HTMLDoclet.java:
+	Clean up old debugging code in HTMLDoclet.start().
+
+	Move toURL() stuff to HTMLUtil.
+
+	Implement makeOverviewFrame(), using overview-frame.html template.
+
+	* src/html/HTMLUtil.java:
+	Move toURL() functions to HTMLUtil.  Also add a toLink() method which
+	generates an anchor tag.
+
+	Add a call to reporter.printNotice in fileWriter() to report the status
+	of output files written.
+
+	* src/html/TemplateWriter.java:
+	Factor out a map from macro names to definitions.  Hopefully this will let
+	us further separate complicated macro definitions.
+
+2003-04-01  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/HTMLDoclet.java:
+	Tweaked the index page generation to match more closely what javadoc
+	seems to do: i.e. generates a two-frame top document if either
+	no packages or specified, or exactly one package is specified and no
+	other classes are specified on the command-line.
+
+	* src/html/templates/Makefile.am, src/html/templates/index-nopackages.html, src/html/templates/index-packages.html, src/html/templates/index.html, src/html/HTMLDoclet.java:
+	Update makeTopIndex() to do the right thing even in the zero-packages-specified
+	case.  Renamed the index.html template to index-packages.html and added a
+	index-nopackages.html template.  Added some toURL() method to HTMLDoclet
+	which really belong someplace else (not sure where yet).
+
+	* src/html/TemplateWriter.java: Bug-fix to @SPLIT@ macro directive.
+
+	* src/main/Main.java: Use 'gjdoc' as the program name, not 'GJDoc'.
+
+	Add a check that the user has specified *at least* one package or class
+	name on the command-line.
+
+	* src/parser/PDoc.java, src/Doc.java:
+	Hmm.  The compiler bug which prevented us from using a parameterized
+	Comparable type on the Doc interface seems to have disappeared.  Remove
+	the workaround.
+
+	* src/html/TemplateContext.java, src/html/TemplateWriter.java, src/html/HTMLDoclet.java, src/html/Makefile.am:
+	Factor out template context from TemplateWriter into a TemplateContext
+	object.  Add convenience constructors to TemplateWriter.  Use these in
+	HTMLDoclet.
+
+	* src/parser/PDoc.java, src/parser/ParseControl.java:
+	Rewrite the compare() method of PDoc to conform with how classes are
+	sorted on the output pages: by short name first, and then by fully-qualified
+	name to break ties.  Added an instance of java.text.Collator to ParseControl
+	to support doing this in a properly locale-sensitive manner.
+
+	* src/html/TemplateWriter.java:
+	Add friendly wrappers to TemplateWrapper so that you can *either* get an
+	IOException *or* have TemplateWriter report the error using a
+	DocErrorReporter and attempt to carry on.
+
+	* src/html/HTMLOptions.java:
+	Print a warning if the selected output character set is not IANA-registered.
+
+	* src/html/HTMLOptions.java:
+	Friendlier error message on invalid charset.
+
+	* src/html/templates/Makefile.am, src/html/templates/index.html, src/html/templates/stylesheet.css, src/html/HTMLDoclet.java:
+	Reimplement stylesheet.css emit, and implement index.html emit, using
+	the new TemplateWriter.
+
+	* src/html/Makefile.am, src/html/TemplateWriter.java:
+	Create a TemplateWriter class which does simple macro substitutions on the
+	template file.
+
+	* src/html/URLContext.java:
+	Allow zero-length strings for makeRelative: these are useful for getting
+	the path to the docRoot without anything else.
+
+	* src/html/HTMLUtil.java, src/html/Makefile.am, src/html/SimpleCharSequence.java:
+	Refactor SimpleCharSequence into its own class for re-use.
+
+2003-03-31  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/html/templates/allclasses-frame.html, src/html/templates/index.html, src/html/templates/overview-frame.html, src/html/templates/overview-summary.html, src/html/templates/package-frame.html:
+	Add templates for the output files.
+
+	* src/html/templates/stylesheet.css, src/html/HTMLDoclet.java, src/html/HTMLUtil.java:
+	Emit stylesheet, with proper charset declaration at top.
+
+	Made HTMLUtil non-abstract so that we can stick a DocErrorReporter in it
+	and handle errors better.
+
+	* src/html/Makefile.am, src/html/templates/.cvsignore, src/html/templates/Makefile.am, src/html/templates/stylesheet.css, configure.ac:
+	Add src/html/templates directory, containing template files for the HTMLDoclet
+	output.  Added stylesheet.css to this new directory.
+
+	* src/html/HTMLUtil.java, src/html/Makefile.am:
+	Add a variety of file i/o utilities to the HTMLUtil class, including one
+	which adds the proper HTML escapes for characters unmappable using the
+	selected output file encoding.
+
+	* src/html/HTMLOptions.java:
+	Use UTF-8 as the default output file encoding.
+
+	* src/html/URLContext.java: Add URLContext.toString() method.
+
+	* src/html/HTMLDoclet.java, src/html/HTMLOptions.java:
+	Parse most of the doclet options.
+
+	* src/html/HTMLDoclet.java, src/html/HTMLOptions.java, src/html/Makefile.am:
+	Move option-parsing to HTMLOptions class.
+
+	* src/html/Makefile.am, src/html/URLContext.java:
+	Add URLContext class to rewrite URLs as relative to whatever the current
+	base doc is.
+
+	* prj.el: Added JDE class template.
+
+2003-03-28  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PConstructorDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java:
+	Create proper tag TypeContext for methods and constructors.
+
+	* src/parser/TypeContext.java:
+	The java.lang package should always be implicitly imported.
+
+	* src/parser/PSerialFieldTag.java, src/parser/PTag.java, src/parser/PThrowsTag.java:
+	Add code to parse parameterized type strings appearing in tags.
+
+	Array types are still not parsed, though.
+
+	* src/parser/PEagerClassType.java:
+	PEagerClassType should not be public.
+
+	* src/parser/Java15.cup, src/parser/PClassDoc.java, src/parser/PLazyClassType.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PThrowsTag.java, src/parser/TypeContext.java:
+	Tweak TypeContext interface to allow specifying whether you want a lazy
+	or an eager lookup.  This way the type machinery can be moved out of
+	Java15.cup and we avoid duplicating code.
+
+	* src/parser/TypeContext.java:
+	Fix up TypeContext to properly handle class and method type variables only
+	when that is appropriate.
+
+	* src/parser/Java15.cup: Parse methods and constructors.
+
+	* src/parser/PMethodTypeVariable.java:
+	Make PMethodTypeVariable.declaringMethod non-final, as we don't know the
+	method it will belong to until *after* the type variable is parsed.
+
+	* src/parser/PMemberDoc.java:
+	Add an assertion to the effect that no member has a null name.
+
+	* src/parser/PMethodDoc.java, src/parser/PConstructorDoc.java, src/parser/PExecutableMemberDoc.java:
+	Implement PConstructorDoc and PMethodDoc, refactoring PExecutableMemberDoc
+	to hoist parameter and thrownException specifications into the constructor.
+
+	* src/MethodDoc.java: Clarify the return type of void methods.
+
+	* src/parser/PExecutableMemberDoc.java: Implement PExecutableMemberDoc.
+
+	* src/parser/PParameterizedType.java, src/parser/PTypeVariable.java, src/parser/PArrayType.java, src/parser/PClassType.java, src/Type.java:
+	Added Type.signature() method to return a print suitable for implementing
+	the ExecutableMethodDoc.signature() method.  Added implementations to the
+	appropriate places.
+
+	* src/ClassType.java:
+	Fix up javadoc for ClassType.qualifiedTypeName() and ClassType.typeName().
+
+	* src/parser/Java15.cup, src/parser/PParameter.java:
+	Implement PParameter and add code to parser to create it.
+
+	* src/parser/PParamTag.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PTag.java, src/parser/PThrowsTag.java, src/Makefile.am, src/Tag.java, src/TagVisitor.java:
+	Add & implement a 'TagVisitor' class to efficiently dispatch based on the
+	class type of a Tag under consideration.
+
+	* src/parser/Java15.cup:
+	Parse fields into PFieldDoc objects and add them to the PClassDoc.
+
+	* src/parser/PFieldDoc.java:
+	Implement PFieldDoc.toString() for debugging purposes.
+
+	* src/parser/PConstructorDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java:
+	Implement PFieldDoc.  Pushed a lot of this implementation back to the
+	superclass, PMemberDoc, where it can be reused by methods and constructors.
+	Worked a little bit on the PExecutableMemberDoc implementation; pushed
+	various new constructor parameters up to PMethodDoc and PConstructorDoc.
+
+	* src/parser/PClassDoc.java, src/ClassDoc.java:
+	Add a ClassDoc.typeParameters() method, for symmetry with
+	MethodDoc.typeParameters().  This method was already present in the
+	implementation (PClassDoc), just had to make it public.
+
+	Also tweak the starting size of an array list in PClassDoc to use less
+	memory in the common case where a class has no type parameters.
+
+	* src/parser/Java15.cup, src/parser/PMethodTypeVariable.java, src/MethodTypeVariable.java:
+	MethodTypeVariables can belong to constructors as well as methods, therefore
+	the appropriate return type for 'declaringMethod()' is ExecutableMemberDoc.
+	Make this change in the API interface, in the implementations, and in the
+	parser routines which create PMethodTypeVariables.
+
+	* src/parser/Java15.cup:
+	Add infrastructure to lookup/resolve type variables while inside the
+	type parameter declarations (additionalTypeVariables field), and to tell
+	whether we're in the middle of parsing a class declaration or a method
+	declaration (currentMethod field).  Split lookup(String) into two new
+	functions -- lookupType() and lookupClassType() -- to make it clearer
+	when a ClassType is required and when any old type is valid.  Like the
+	split in TypeContext, this split methods aren't fully functional yet, but
+	the eager splitting helps keep the users' expectations clear.
+
+	Implement support for type parameters and type bounds.
+
+	* src/parser/PTypeVariable.java:
+	Implement PTypeVariable.toString() for pretty-printing and debugging
+	type variables (both class type variables and method type variables).
+
+	* src/parser/PRootDoc.java:
+	Rethrow RuntimeExceptions when parsing, for easier debugging (this way, we
+	get a stack trace).
+
+	* src/html/HTMLDoclet.java:
+	More debugging code.  This time: print type parameters.
+
+	* src/parser/PTypeVariable.java:
+	TypeVariables must *always* have (at least) the java.lang.Object bounds.
+	Enforce this with an assertion.
+
+2003-03-27  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PSeeTag.java:
+	Implement the package/class/member lookup routines for PSeeTag.  The
+	member lookup routine is still incomplete: it should really recurse
+	through outerclasses, superclasses, interfaces, etc.  I expect that
+	will be consolidated in some <Foo>Util class at some point, though.
+
+	* src/parser/Java15.cup, src/parser/PSerialFieldTag.java, src/parser/PClassDoc.java, src/parser/PLazyClassType.java, src/parser/TypeContext.java:
+	Split off a lookupClassTypeName() method from lookupTypeName() in TypeContext,
+	and use the former whenever we are explicitly *not* interested in
+	type variables & etc.  Add some comments in various places where
+	type variables are an issue.
+
+	* src/parser/PParamTag.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PTag.java, src/parser/PThrowsTag.java:
+	Allow extracting regexp from tail of tag list as well as from head.
+	Use this to implement string and <a href="..."> parsing for PSeeTag.
+
+	* src/parser/PSeeTag.java, src/parser/PTag.java:
+	First-draft implementation of PSeeTag.  Many bits not yet complete.
+
+	Turned on PSeeTag in PTag.  Also changed the wording of an error
+	message in PTag.extractRegexp() to apply better to the case in PSeeTag
+	where the regexp enforces well-formedness constraints on the member
+	specification.
+
+	* src/SeeTag.java:
+	The label of a SeeTag should be a list of tags, not a plain-text string.
+
+	* src/html/HTMLDoclet.java:
+	Print out information on ALL classes specified, whether by package or by
+	source file.
+
+	* src/parser/PDoc.java:
+	Fix bug where close brace of an inline tag was being included in the tag
+	name.
+
+	Tweak regexps so that trailing space after the tag name is not included
+	in the tag contents.
+
+	* src/parser/PParamTag.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PTag.java, src/parser/PThrowsTag.java:
+	More PTag refactoring.  Moved the generic 'match a regexp against the
+	tag string and return the remaining tag string' function into
+	PTag.NonText and tweak PParamTag and PThrowsTag to use it.
+	Implement PSerialFieldTag as well.
+
+	Currently we don't support specifying parameterized types in
+	PThrowsTag or PSerialFieldTag.  Should fix this eventually.
+
+	* src/parser/PThrowsTag.java:
+	Back out bad @param that I only added to test error handling in PParamTag.
+
+	* src/lexer/Comment.java, src/lexer/Lexer.java:
+	Tweaks to the lexer to ensure that whitespace-star sequences are not
+	deleted from the comment text, and to ensure that the start position
+	given corresponds to the start position of the returned comment text.
+
+	* src/parser/PParamTag.java, src/parser/PTag.java, src/parser/PThrowsTag.java:
+	Refactor PTag *again*.  This time I like how it hangs together.
+	Tag constructors throw TagParseException to indicate a problem
+	parsing, in which case an opaque tag type is returned, instead of
+	the parsed subclass type.  One potential disadvantage: you must be
+	careful to test the type of the Tag object, and not rely on the
+	tag name to tell you if a tag is (for example) a PParamTag.
+
+	Other niggling detail still unresolved: tag parsing happens lazily,
+	when the 'tags()' method is called, and is not cached.  So the
+	error message occur at unusual times, and may repeat themselves.
+	A quick fix is to cache the result of PDoc.tags().  A longer-term
+	solution would be to eagerly parse the tags, but it's hard to do this
+	in PDoc considering the constraints on superclass initialization ordering.
+
+	* src/html/HTMLDoclet.java:
+	Dump the comment associated with each ClassDoc.
+
+	* src/lexer/Lexer.java:
+	Initialize 'comment' field so that "no comment" always returns "", never
+	null.
+
+	* src/parser/PParamTag.java, src/parser/PTag.java, src/parser/PThrowsTag.java:
+	Refactor PTag (again) -- still not happy with the structure.  Implement
+	PParamTag and PThrowsTag.
+
+	* src/ThrowsTag.java: ThrowsTag comment is List<Tag>, not String.
+
+	* src/parser/Java15.cup:
+	Parse superclass and interface portions of type declaration.  Lots of
+	infrastructure to parse types, too.
+
+	* src/parser/PArrayType.java:
+	Add an assertion that the PArrayType is actually an array type
+	(dimension is greater than zero).
+
+	* src/parser/TypeContext.java:
+	Properly recurse through outer classes when resolving names.
+	Also handle the fact that PPackageDoc.allClasses() and
+	PCompilationUnit.classes contain inner classes as well as outer classes.
+
+	* src/parser/PParameterizedType.java:
+	Make PParameterizedType non-abstract (had already been implemented, just
+	had the wrong modifier tag stuck on).
+
+	Properly implement PParameterizedType.toString().  Note that there will
+	have to be a different 'toHTML' method, as the < and > characters are
+	unescaped.
+
+	* src/parser/PClassDoc.java:
+	Make sure PClassDoc.superclass() behaves correctly for java.lang.Object.
+
+	* src/html/HTMLDoclet.java:
+	More debugging code to dump superclass and interfaces of ClassDoc objects.
+
+	* src/parser/PClassDoc.java, src/parser/PEagerClassType.java, src/parser/ParseControl.java, src/parser/TypeContext.java:
+	Add convenience no-type-params constructor to PEagerClassType; change all
+	relevant sites to use it.
+
+	Add convenience fields to ParseControl for primitive type objects.
+
+	* src/parser/PClassDoc.java, src/parser/PConstructorDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PProgramElementDoc.java:
+	Add position() implementation to PProgramElementDoc; pass position parameter
+	to constructors of all its subclasses.
+
+	Also properly override PDoc.isMethod(), PDoc.isConstructor(), PDoc.isField()
+	in PMethodDoc, PConstructorDoc, PFieldDoc, respectively.
+
+	* src/parser/Java15.cup, src/parser/PClassDoc.java:
+	Fixup PClassDoc to properly override isClass(), isOrdinaryClass(),
+	isInterface(), isError(), isException() and position() methods from
+	PDoc.
+
+	* src/parser/PProgramElementDoc.java:
+	Override PDoc.isIncluded() in PProgramElementDoc to take visibility criteria
+	into account.
+
+	* src/parser/ParseControl.java:
+	Trim down validity-checking code in ParseControl, because not all files
+	mentioned on the command-line or in packages are going to be included --
+	there are access-mode visibility considerations.  It was too hard to fix
+	up the checks to be correct, and I've tested this part of the code now
+	anyway, so just junk them and trim down.
+
+	* src/html/HTMLDoclet.java:
+	Add some code to dump the classes in each package, for debugging.
+
+	* src/parser/Java15.cup:
+	Create PClassDoc objects for type declarations.  Implement doTypeDeclaration.
+
+	* src/parser/PClassDoc.java: Implement PClassDoc.
+
+	* src/parser/PConstructorDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PProgramElementDoc.java:
+	Implement PProgramElementDoc.  Propagage the new constructor parameters to
+	(and work on implementation of) all subclasses.
+
+	* src/parser/PClassType.java, src/parser/PEagerClassType.java, src/parser/PLazyClassType.java, src/parser/TypeContext.java:
+	Remove typeParameter parameter to PLazyClassType, TypeContext.  Lazy
+	types will just have the name; the type parameters will come from the
+	lookup.
+
+	* src/FieldDoc.java: Fix typo in name of isVolatile() method.
+
+2003-03-26  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PTag.java, src/parser/PThrowsTag.java:
+	Add tagContext to PThrowsTag constructor.
+
+	* src/parser/PSeeTag.java: Add tagContext to PSeeTag constructor.
+
+	* src/parser/PParamTag.java, src/parser/PTag.java:
+	Implement PParamTag.  Still unknown: how ought we handle parsing exceptions
+	when processing tags?  Right now we defer parsing, with the result that
+	bad tags aren't caught until way late.  Should probably parse eagerly,
+	which means a representation change to the Tag objects...
+
+	* src/parser/PDoc.java: Fix position reporting in firstSentenceTags.
+
+	* src/parser/PPackageDoc.java:
+	Better handle package comment text when !isIncluded.
+
+	* src/parser/PPackageDoc.java:
+	Add a comment about using reflection to enhance PPackageDoc in the case
+	where !isIncluded.
+
+	* src/main/Main.java:
+	Print out the source file line with a caret at the appropriate position
+	in the Reporter.print() method.
+
+	* src/parser/FileUtil.java: Make FileUtil.fileReader() public.
+
+	* src/parser/PFile.java:
+	Implement character-index-to-line-and-column translation.
+
+	* src/parser/PSourcePosition.java:
+	Tweaked toString() formatting of PSourcePosition.
+
+	* src/parser/FileUtil.java, src/parser/Java15.cup, src/parser/PFile.java, src/parser/PPackageDoc.java, src/parser/PRootDoc.java, src/parser/PSourcePosition.java:
+	The PFile class needs to have access to the file encoding and a
+	DocErrorReporter (if the encoding is invalid).  Refactor to make it so.
+
+	* src/parser/FileUtil.java, src/parser/Java15.cup:
+	Refactor a fileReader() method out of FileUtil; use this in Java15.cup to
+	create the proper character reader to give to the java source lexer.
+
+	* src/parser/PDoc.java, src/parser/PTag.java:
+	Pass tagContext to PTag factory methods.
+
+	* src/parser/PClassType.java, src/parser/PDoc.java, src/parser/PEagerClassType.java, src/parser/PLazyClassType.java, src/parser/PPackageDoc.java, src/parser/PRootDoc.java, src/parser/ParseControl.java, src/parser/TypeContext.java:
+	Add PDoc.getCommentContext() method, so that tag parsing of @see and @link
+	tags can access to correct type context for the type resolution.
+
+	* src/parser/TypeContext.java:
+	Clarify spec for TypeContext.lookupTypeName().
+
+	* src/parser/Makefile.am, src/parser/PArrayType.java, src/parser/PClassDoc.java, src/parser/PClassType.java, src/parser/PClassTypeVariable.java, src/parser/PEagerClassType.java, src/parser/PEagerParameterizedType.java, src/parser/PLazyClassType.java, src/parser/PLazyParameterizedType.java, src/parser/PMethodTypeVariable.java, src/parser/PPackageDoc.java, src/parser/PParameterizedType.java, src/parser/PTypeVariable.java, src/parser/TypeContext.java, src/ArrayType.java, src/ClassDoc.java, src/ClassType.java, src/Makefile.am, src/PackageDoc.java, src/ParameterizedType.java, src/Type.java, src/TypeVariable.java:
+	Restructure type interfaces: created new ArrayType and ClassType
+	interfaces and gutted the Type interface.  Clarified how ParameterizedType
+	works; also renamed getRawClass() to getBaseType().  Moved typeParameters()
+	from ClassDoc to ClassType.  Added a type() method to ClassDoc to get its
+	ClassType.  Tweaked API types to accomodate this refactoring, where necessary.
+
+	Updated the implementation in net.cscott.gjdoc.parser to reflect the interface
+	changes.  Implemented PArrayType, PTypeVariable, PClassTypeVariable, and
+	PMethodTypeVariable.  Resurrected PParameterizedType, killed
+	PLazyParameterizedType and PEagerParameterizedType.
+
+	PLazyClassType has a slight issue in that TypeContext looks up a Type --
+	what if the name stored by PLazyClassType actually ends up referring to
+	a type *variable*?  Should probably refactor a little more to fix this.
+	At the moment, there is an unsafe cast to ClassType in PLazyClassType.lookup()
+	to finesse the point.
+
+	* src/parser/Makefile.am, src/parser/PClassType.java, src/parser/PEagerClassType.java, src/parser/PEagerParameterizedType.java, src/parser/PLazyClassType.java, src/parser/PLazyParameterizedType.java, src/parser/PParameterizedType.java, src/parser/TypeContext.java:
+	Split the PClassType class into lazy and eager variants.  Factor out a
+	TypeContext object containing the name resolution code and context.
+
+	* src/TypeVariable.java: TypeVariables are Types.
+
+	* src/Type.java: Clarified the specification for Type.typeName().
+
+	* src/parser/FileUtil.java:
+	Add a documentation comment to FileUtil.findPackage().
+
+	* src/parser/PDoc.java: Fix up parsing of nested inline tags.
+
+2003-03-24  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/ParseControl.java:
+	Oops -- missed an update needed due to API change.
+
+	* src/parser/Java15.cup, src/parser/Makefile.am, src/parser/PClassType.java, src/parser/PCompilationUnit.java, src/parser/PParameterizedType.java, src/parser/PRootDoc.java:
+	Create new PCompilationUnit class to encapsulate the import statements
+	and classes of a compilation unit.  Needed for type name lookup.
+
+	Created a ClassType class for lazy/eager type lookup/naming.
+
+	* src/parser/Java15.cup:
+	Rough out class/interface declaration handling code.  Parse modifiers.
+
+	* src/lexer/.cvsignore: cvsignore generated lexer/Sym.java file.
+
+	* src/lexer/Lexer.java:
+	Add method to query comment start character position.
+
+	* src/parser/Java15.cup, src/parser/PRootDoc.java:
+	Pass in 'expectedPackage' to the parser; correctly parse the package
+	declaration and either create an unincluded package or complain if
+	the expectedPackage doesn't match what it finds.
+
+	* src/parser/FileUtil.java:
+	Restructure FileUtil.rawFileText() and FileUtil.snarf() to deal better
+	with 'null' being passed in as a file argument.  This is supposed to
+	indicate that the requested file doesn't exist, so don't complain
+	about it.  Instead it was throwing NullPointerExceptions.
+
+	Note that this factoring makes sense because it consolidates the logic
+	for creating an appropriate PSourcePosition object for the various ways
+	the rawFileText could not exist -- no file expected, file read error, etc.
+
+	* src/parser/PSourcePosition.java:
+	Make PSourcePosition.NO_INFO a PSourcePosition, which means it needs to do
+	something sensible for add()/subtract().
+
+	* Makefile.am:
+	Factor out 'make doc-link' rule to make it easier to test GJDoc using options
+	different from 'make doc'.
+
+	* src/parser/FileUtil.java, src/parser/PFile.java, src/parser/PSourcePosition.java:
+	Refactor PFile/PSourcePosition to use a shared cache mapping Files to
+	PFiles.
+
+	* src/main/Main.java:
+	Add very-limited support for printing information from the SourcePosition
+	object.
+
+	* src/parser/Java15.cup, src/parser/PRootDoc.java:
+	Arrays work better than lists as parser result values.
+
+	* lib/cup.jar:
+	Use patched version of CUP which can handle parameterized types for
+	productions.  Complains about unchecked assignments, though -- I don't
+	think there's any way to fix that.
+
+	* src/parser/Java15.cup, src/parser/PRootDoc.java:
+	Print parsing status messages; add a safe return value to Java15.cup so that
+	we can test the parser.
+
+	* src/main/Main.java:
+	Refactor the output stream flushing code so that all output goes through
+	the Reporter object and uses its (newly-added) flush method.
+
+	* src/main/Main.java: Flush notices/warnings/etc after each line.
+
+	* src/lexer/BooleanLiteral.java, src/lexer/CharacterLiteral.java, src/lexer/DoubleLiteral.java, src/lexer/EOF.java, src/lexer/FloatLiteral.java, src/lexer/Identifier.java, src/lexer/IntegerLiteral.java, src/lexer/Keyword.java, src/lexer/Lexer.java, src/lexer/LongLiteral.java, src/lexer/Makefile.am, src/lexer/NullLiteral.java, src/lexer/Operator.java, src/lexer/Separator.java, src/lexer/StringLiteral.java, src/parser/Java15.cup, src/parser/Lexer.java, src/parser/Makefile.am, src/Makefile.am:
+	Fix circular dependency between parser and lexer package by moving the
+	generated Sym.java file to the lexer package.  This requires some magic
+	to invoke CUP on java15.cup in the parser package and then magically
+	shifting it over to the lexer package, but it's not terribly evil magic.
+
+	* src/parser/Java15.cup, src/parser/PRootDoc.java, src/parser/ParseControl.java:
+	Hook up parser.  Still some type-system and circular-dependency problems.
+	Will be fixed in the next commits.
+
+2003-03-23  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PRootDoc.java, src/parser/ParseControl.java, src/RootDoc.java:
+	Work on RootDoc/classes() implementations.
+
+	* src/parser/PRootDoc.java, src/html/HTMLDoclet.java:
+	Generate PPackageDoc objects for the specified packages.
+	Implement PRootDoc.specifiedPackages() and PRootDoc.packageNamed().
+
+	Test by interrogating in HTMLDoclet.
+
+	* src/parser/FileUtil.java, src/parser/PPackageDoc.java:
+	Implement PPackageDoc; i.e. make non-abstract.  Needs external code
+	to add Type items to its classes list where appropriate.
+
+	* src/parser/Makefile.am, src/parser/PClassDoc.java, src/parser/PConstructorDoc.java, src/parser/PDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PPackageDoc.java, src/parser/PProgramElementDoc.java, src/parser/PRootDoc.java, src/parser/ParseControl.java, src/parser/ParserControl.java, src/main/Main.java:
+	Rename ParserControl class ParseControl instead.  This makes everyone use
+	the same name, which is always nice to avoid confusion.
+
+	* src/parser/FileUtil.java, src/parser/ParserControl.java, src/main/Main.java:
+	Move FileUtil instance to ParserControl class.
+
+	* src/parser/PClassDoc.java, src/parser/PConstructorDoc.java, src/parser/PDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PPackageDoc.java, src/parser/PProgramElementDoc.java:
+	Every PDoc contains a pointer to the ParserControl object.
+
+	* src/html/package.html, src/lexer/FIFO.java, src/lexer/Identifier.java, src/lexer/Lexer.java, src/lexer/package.html, src/main/Main.java, src/parser/FileUtil.java, src/parser/Java15.cup, src/parser/PClassDoc.java, src/parser/PClassTypeVariable.java, src/parser/PConstructorDoc.java, src/parser/PDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PFile.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PMethodTypeVariable.java, src/parser/PPackageDoc.java, src/parser/PParamTag.java, src/parser/PParameter.java, src/parser/PParameterizedType.java, src/parser/PProgramElementDoc.java, src/parser/PRootDoc.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PSourcePosition.java, src/parser/PTag.java, src/parser/PThrowsTag.java, src/parser/PTypeVariable.java, src/parser/Pair.java, src/parser/ParserControl.java, src/parser/package.html, src/ClassDoc.java, src/ClassTypeVariable.java, src/ConstructorDoc.java, src/Doc.java, src/DocErrorReporter.java, src/Doclet.java, src/ExecutableMemberDoc.java, src/FieldDoc.java, src/MemberDoc.java, src/MethodDoc.java, src/MethodTypeVariable.java, src/PackageDoc.java, src/ParamTag.java, src/Parameter.java, src/ParameterizedType.java, src/ProgramElementDoc.java, src/RootDoc.java, src/SeeTag.java, src/SerialFieldTag.java, src/SourcePosition.java, src/Tag.java, src/ThrowsTag.java, src/Type.java, src/TypeVariable.java, src/html/HTMLDoclet.java, src/package.html, AUTHORS:
+	Regularize email address to cscott@cscott.net.
+
+	Fix angle brackets surrounding email address in @author tags (convert to
+	 parentheses.)
+
+	Rename @parameter tag (incorrect) to @param (correct).
+
+2003-03-21  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/PTag.java: Unify PTag.toString() methods.
+
+	* src/parser/PDoc.java, src/parser/PParamTag.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PTag.java, src/parser/PThrowsTag.java, src/ParamTag.java, src/SerialFieldTag.java, src/Tag.java:
+	Refactor 'Tag' class definition, to make it more obvious that all tags
+	can contain inline tags.  Nested inline tags are not yet handled properly.
+	Perhaps my subclasses of PTag need some work to better exploit the
+	commonality of TrailingTag and InlineTag.
+
+	* src/Makefile.am, src/overview.html, Makefile.am, overview.html:
+	Move the overview.html file to the src/ subdirectory.
+
+	* src/parser/Makefile.am, src/Makefile.am, src/html/Makefile.am, src/lexer/Makefile.am, Makefile.am:
+	Add the overview.html and package.html files to EXTRA_DIST.
+
+	* src/lexer/package.html:
+	Add missing package.html file for the net.cscott.gjdoc.lexer package.
+
+	* Makefile.am, overview.html:
+	Test the '-overview' option by creating an overview.html file.
+
+	* src/parser/PDoc.java:
+	Bug fixes: firstSentenceTags() was prepending 'null' to its list,
+	and apparently java's regexp implementation requires escaping '{'
+	characters.
+
+	* src/parser/FileUtil.java, src/parser/PRootDoc.java, src/parser/PSourcePosition.java, src/parser/ParserControl.java:
+	Update the FileUtils.rawFileText() method to return a pair, so that it
+	can report the proper SourcePosition for the returned text.
+
+	Make PRootDoc non-abstract.  Some methods are still unimplemented and
+	unconditionally throw RuntimeExceptions, but we're getting there!
+
+	Doc update to PSourcePosition to clarify that the characterIndex is
+	zero-based.
+
+	Have ParserControl actually create its RootDoc object now!
+
+	* src/html/HTMLDoclet.java, src/html/Makefile.am:
+	Have the HTMLDoclet query the comment text and tags of the RootDoc it
+	is given.
+
+	* src/parser/Makefile.am, src/parser/Pair.java:
+	Add a simple strongly-typed pair class.
+
+	* src/parser/PDoc.java, src/parser/PPackageDoc.java, src/parser/PRootDoc.java:
+	Implement the tags() parser method.  The exact semantics of nested
+	tags (tags containing other inline tags) are still a bit fuzzy.
+
+	* src/parser/Makefile.am: Add new PFile class to the makefile.
+
+	* src/parser/PTag.java:
+	Two new (not yet implemented) builder methods in PTag, to create new
+	non-text tags and new inline tags.
+
+	* src/parser/PFile.java, src/parser/PSourcePosition.java:
+	Restructure PSourcePosition to represent position as a raw character index.
+	We will lazily convert to the proper line #/column using PFile.convert()
+	when needed.  This makes the implementation of 'add()' and 'subtract()'
+	much easier.
+
+	* src/parser/PDoc.java, src/parser/PRootDoc.java:
+	Add implementation for PDoc.firstSentenceTags(), using a BreakIterator
+	created using the ParserControl object's locale field.
+
+	* src/parser/PTag.java: Add convenience method PTag.newTextTag().
+
+	* src/Tag.java:
+	Add extra documentation to 'Tag' class, clarifying that "Text" tags are
+	not inline.
+
+	* src/parser/FileUtil.java, src/parser/PRootDoc.java, src/parser/ParserControl.java, src/main/Main.java:
+	Implement -encoding and -locale.
+
+	* src/parser/PExecutableMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PProgramElementDoc.java, src/ClassTypeVariable.java, src/ExecutableMemberDoc.java, src/FieldDoc.java, src/MemberDoc.java, src/MethodDoc.java, src/MethodTypeVariable.java, src/PackageDoc.java, src/ParamTag.java, src/Parameter.java, src/ParameterizedType.java, src/ProgramElementDoc.java, src/SeeTag.java, src/ThrowsTag.java, src/Type.java, src/TypeVariable.java:
+	Add lots of javadoc.
+
+	Remove the ExecutableMemberDoc.flatSignature() method, which I think
+	is unnecessary and bug-prone.
+
+2003-03-20  C. Scott Ananian  <cananian@sincerity-forever>
+
+	* src/parser/ParserControl.java, src/main/Main.java:
+	Implemented -overview option, made -breakiterator a no-op (instead of
+	complaining when we saw it).
+
+	* src/parser/PRootDoc.java: Implement PRootDoc a bit.
+
+	* src/PackageDoc.java, src/parser/PPackageDoc.java:
+	Remove a snarky question mark from the javadoc of PackageDoc -- I've figured
+	out what 'comment and tags' mean for a package: they mean what's in the
+	package.html file.
+
+	* src/parser/PDoc.java, src/parser/PTag.java, src/Doc.java, src/Tag.java:
+	Document the Doc and Tag classes; work on implementations in PDoc and PTag.
+	Removed some unnecessary and confusing methods from the Tag interface
+	that are duplicated in Doc; also add a new 'isInline()' method to Tag.
+
+	* src/parser/FileUtil.java:
+	Add code to FileUtil to snarf in input files and extract the text between
+	<body> </body> tags.
+
+	* src/RootDoc.java: Document the RootDoc interface better.
+
+	* src/parser/PSourcePosition.java:
+	Implement PSourcePosition.  Provide a convenience singleton for
+	the 'no information known' SourcePosition.
+
+	* Makefile.am:
+	Use -subpackages in the rule for 'make doc', instead of having to
+	enumerate all the subpackages ourself.
+
+	* src/parser/PRootDoc.java, src/parser/ParserControl.java, src/parser/FileUtil.java, src/parser/Makefile.am, src/main/Main.java, src/main/Makefile.am:
+	Refactor the sourcepath and file-related code out into its own class,
+	parser/FileUtil.java.  Directly set the docletOptions on the PRootDoc
+	object, instead of passing it to ParserControl.parse(), which makes
+	it look like the parser is interested in the doclet options (which
+	it's not).  Main uses FileUtil to take care of the -subpackages
+	and -exclude options now, giving the parser only the final list of
+	source files and packages to work on.  The sourcePath parameter has
+	been taken out of ParserControl and given to FileUtils.
+
+	Also some little bug-fixes: flush the {err,warn,notice}Writer streams
+	before we print the stack trace on an exception in Main so that the
+	output doesn't get jumbled up.  Multiple -exclude and -subpackages
+	options should now work as they should (add to the subpackages/exclude
+	lists, instead of replacing them).
+
+	* .cvsignore: Ignore the generated javadoc.
+
+	* src/parser/ParserControl.java, src/main/Main.java:
+	Work on non-doclet option parsing.
+
+	* src/Makefile.am:
+	Make a symlink to Main.java in src/ instead of copying it.  This will
+	hopefully prevent us from ever losing updates because we've edited the
+	wrong file.  Clean up the link on 'make clean'.
+
+	* Makefile.am:
+	'Make doc' now uses our tool to generate documentation, instead of javadoc.
+
+	* src/.cvsignore, src/Main.java, src/Makefile.am, src/main/.cvsignore, src/main/Main.java, src/main/Makefile.am, configure.ac:
+	Really build Main.java last by inventing a pseudo net.cscott.gjdoc.main
+	package.  It's a hack, but it should work fine.
+
+	* src/Main.java, src/Makefile.am: Build net.cscott.gjdoc.Main last.
+
+	* lib/jutil.jar: Update JUtil version.
+
+	* src/Doc.java, src/Makefile.am, src/html/package.html, src/lexer/.cvsignore, src/lexer/BooleanLiteral.java, src/lexer/CharacterLiteral.java, src/lexer/Comment.java, src/lexer/DocumentationComment.java, src/lexer/DoubleLiteral.java, src/lexer/EOF.java, src/lexer/EndOfLineComment.java, src/lexer/EscapedUnicodeReader.java, src/lexer/FIFO.java, src/lexer/FloatLiteral.java, src/lexer/Identifier.java, src/lexer/InputElement.java, src/lexer/IntegerLiteral.java, src/lexer/Keyword.java, src/lexer/Lexer.java, src/lexer/Literal.java, src/lexer/LongLiteral.java, src/lexer/Makefile.am, src/lexer/NullLiteral.java, src/lexer/NumericLiteral.java, src/lexer/Operator.java, src/lexer/Separator.java, src/lexer/StringLiteral.java, src/lexer/Token.java, src/lexer/TraditionalComment.java, src/lexer/WhiteSpace.java, src/package.html, src/parser/Java15.cup, src/parser/Lexer.java, src/parser/Makefile.am, src/parser/PDoc.java, src/parser/PPackageDoc.java, src/parser/package.html, configure.ac:
+	Added missing lexer classes to get parser to compile.
+
+	* classes/.cvsignore, classes/README, lib/README, lib/cup.jar, lib/jutil.jar, scripts/README, src/.cvsignore, src/ClassDoc.java, src/ClassTypeVariable.java, src/ConstructorDoc.java, src/Doc.java, src/DocErrorReporter.java, src/Doclet.java, src/ExecutableMemberDoc.java, src/FieldDoc.java, src/Main.java, src/Makefile.am, src/MemberDoc.java, src/MethodDoc.java, src/MethodTypeVariable.java, src/PackageDoc.java, src/ParamTag.java, src/Parameter.java, src/ParameterizedType.java, src/ProgramElementDoc.java, src/RootDoc.java, src/SeeTag.java, src/SerialFieldTag.java, src/SourcePosition.java, src/Tag.java, src/ThrowsTag.java, src/Type.java, src/TypeVariable.java, src/html/.cvsignore, src/html/HTMLDoclet.java, src/html/Makefile.am, src/html/Version.java.in, src/parser/.cvsignore, src/parser/Java15.cup, src/parser/Makefile.am, src/parser/PClassDoc.java, src/parser/PClassTypeVariable.java, src/parser/PConstructorDoc.java, src/parser/PDoc.java, src/parser/PExecutableMemberDoc.java, src/parser/PFieldDoc.java, src/parser/PMemberDoc.java, src/parser/PMethodDoc.java, src/parser/PMethodTypeVariable.java, src/parser/PPackageDoc.java, src/parser/PParamTag.java, src/parser/PParameter.java, src/parser/PParameterizedType.java, src/parser/PProgramElementDoc.java, src/parser/PRootDoc.java, src/parser/PSeeTag.java, src/parser/PSerialFieldTag.java, src/parser/PSourcePosition.java, src/parser/PTag.java, src/parser/PThrowsTag.java, src/parser/PTypeVariable.java, src/parser/ParserControl.java, .cvsignore, AUTHORS, Makefile.am, NEWS, README, autogen.sh, configure.ac:
+	First import, of gjdoc driver skeleton and auto* cruft.  Parser doesn't
+	quite build yet; working on that.
+

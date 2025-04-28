@@ -1,0 +1,193 @@
+Copyright
+=========
+
+libopenraw is Copyright (c) 2005-2008 Hubert Figuiere
+It is licensed under LGPLv2.1 or later. See file COPYING.
+
+Prerequistes to build:
+======================
+
+    - a C++ compiler (tested on gcc 3.3 and up)
+    - libboost 1.33.1 (Boost.Bind, Boost.Smart_pointer, 
+      Boost.String, Boost.Any)
+    - libjpeg
+    - libxml > 2.5.0 (for the test suite)
+
+If building from the git tree you also need:
+
+    - automake/autoconf
+    - pkg-config for the associated m4 macros
+
+Optional Gnome support
+
+    - gdkpixbuf
+
+Supported file format:
+======================
+
+Here are the supported file formats. For details per-camera, see
+below:
+
+    - Canon CR2
+    - Canon CRW (not those coming from hacked firmware like A610)
+    - Nikon NEF
+    - Olympus ORF: E-300, E-500
+    - Pentax PEF
+    - Epson ERF
+    - DNG
+    - Sony ARW
+    - Minolta MRW
+
+
+How to build:
+=============
+
+  Using automake/autoconf:
+
+    $ ./autogen.sh
+    $ ./configure --prefix=...
+    $ make
+    $ make install DESTDIR=...
+
+
+Support table:
+==============
+
+  T  Tested and proven to work. (I have a sample.)
+  Y  Yes, it is there. (Untested as I do not have a sample but the format
+     is known to be similar.) Yes, it is for the whole format.
+  N  Not supported.
+  B  Known to be Broken. (Needs to be fixed. I have a sample but further
+     work is required.)
+  X  Not needed.
+
+                          ThNail
+                         /  CFA compressed (as is)
+                         | /  CFA decompress
+                         | | /  Orientation Tag
+                         | | | /  Bayer Type
+                         | | | | /
+                         | | | | |
+Canon CR2                Y Y Y Y Y
+ 20D                     T T T T T
+ 30D                     T T T
+ 350D                    T T T
+ 400D                    T T T
+ 5D                      T T T
+ 1DMarkII                T T T
+
+Canon CRW                Y Y Y Y Y
+ 300D                    T T T T T
+ 10D                     T T T   T
+ D60                     T T T   T
+ G1                      T T T   T
+ G2                      T T T   T
+ G5                      T T T   T
+ Pro1                    T T T   T
+
+Canon CRW CHSDK          N N N N N
+(unofficial firmware)
+ A610                    N N N N N
+
+Nikon NEF                Y Y Y Y Y
+ Cooolpix 5700           T T N T T
+ D1                      T T X X T
+ D1X                     T T X X T
+ D100                    T T T X T
+ D2H                     T T N T T
+ D2X                     T T X T T
+ D200
+ D300
+ D40                     T T N T T
+ D40X                    T T N T T
+ D50
+ D70                     T T N T T
+ D70s                    T T N T T
+ D80
+
+Olympus ORF              Y Y N Y Y
+ E-1                     T T 
+ E-10                    B B
+ E-3                     T T
+ E-300                   T T B T T
+ E-330                   T T
+ E-400                   T B   T
+ E-410                   B T   T
+ E-500                   T T   T
+ E-510                   B T   T
+ SP-350
+ SP-510                  B B
+ SP-550                  B B
+
+Adobe DNG                Y Y N Y Y
+ Leica DMR               T T X T T
+ Leica M8                T T X T T
+ Adobe DNG converter     T T B T T
+ K10D                    T T X T T
+ Samsung GX-10           T T X T T
+ Samsung Pro815          T T X T T
+ Ricoh GR-2              T T X T T
+
+Sony ARW                 Y N N Y N
+ A-100                   T N   T
+ A-700                   T     T
+
+Pentax PEF               Y Y N Y Y
+ *-ist D                 T T X X T
+ *-ist DL                T T N
+ K10D                    T T N T T
+ K100D                   T T N
+
+Epson ERF                Y Y Y Y Y
+ Epson RD1               T T T T T
+
+Minolta MRW              Y Y B N Y
+ A1                      T T T X T
+ A2                      T T T X T
+ Dimage 5                T T X X T
+ Dimage 7i               T T X X T
+ Dimage 7Hi              T T X X T
+ Maxxum 5D               T T T N T
+ Maxxum 7D               T T T N T
+ A200                    
+
+Sony SRF                 N N N N
+
+Sony SR2                 N N N N
+ Sony R1
+
+Kodak DCR                N N N N
+
+Kodak KDC                N N N N
+
+FujiFilm RAF             N N N N
+ Finepix S3Pro
+ Finepix S6500Fd
+
+Foveon X3F               N N N N
+
+Panasonic RAW            N N N N
+ Lumix FZ30
+ Lumix FZ50
+ Lumix FZ8
+ Lumix FZ18
+
+Mamiya MEF               N N N N
+ Mamiya ZD
+
+
+Test suite
+==========
+
+There is a test suite driven by an XML file. It require you to provide
+your own RAW files and configure it.  testsuite/testsuite.xml is an
+example of valid XML configuration file that works on my local
+machine.
+
+TODO: most of these files have been downloaded off the
+internet. Enhance the testsuite to allow downloading the files off the
+internet prior to running.
+
+TODO2: provide a better description of the test file.
+
+TODO3: fix ordiag to allow outputting a test case in XML.

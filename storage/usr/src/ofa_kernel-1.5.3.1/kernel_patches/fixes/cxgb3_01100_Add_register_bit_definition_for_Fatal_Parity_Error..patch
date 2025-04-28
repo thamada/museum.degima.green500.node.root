@@ -1,0 +1,24 @@
+commit 96e4a387528cfe806fbdf7b022a6c3f103af4ae1
+Author: Casey Leedom <leedom@chelsio.com>
+Date:   Thu Sep 2 13:07:29 2010 +0000
+
+    cxgb3: Add register bit definition for Fatal Parity Error.
+    
+    Signed-off-by: Casey Leedom <leedom@chelsio.com>
+    Signed-off-by: David S. Miller <davem@davemloft.net>
+
+diff --git a/drivers/net/cxgb3/regs.h b/drivers/net/cxgb3/regs.h
+index cb42353..6990f6c 100644
+--- a/drivers/net/cxgb3/regs.h
++++ b/drivers/net/cxgb3/regs.h
+@@ -1997,6 +1997,10 @@
+ 
+ #define A_PL_RST 0x6f0
+ 
++#define S_FATALPERREN    4
++#define V_FATALPERREN(x) ((x) << S_FATALPERREN)
++#define F_FATALPERREN    V_FATALPERREN(1U)
++
+ #define S_CRSTWRM    1
+ #define V_CRSTWRM(x) ((x) << S_CRSTWRM)
+ #define F_CRSTWRM    V_CRSTWRM(1U)

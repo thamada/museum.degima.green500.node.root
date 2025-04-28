@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EList</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="up" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="prev" href="EIterator.html" title="EIterator">
+<link rel="next" href="EListIterator.html" title="EListIterator">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="EIterator.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution-Data-Server Manual: Utilities (libedataserver)</th>
+<td><a accesskey="n" href="EListIterator.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#EList.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#EList.description" class="shortcut">Description</a>
+                 | 
+                <a href="#EList.object-hierarchy" class="shortcut">Object Hierarchy</a>
+</td></tr>
+</table>
+<div class="refentry" title="EList">
+<a name="EList"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="EList.top_of_page"></a>EList</span></h2>
+<p>EList</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="EList.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="EList.html#EList-struct" title="EList">EList</a>;
+<a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (<a class="link" href="EList.html#EListCopyFunc" title="EListCopyFunc ()">*EListCopyFunc</a>)                    (<a
+href="../glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> data,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EList.html#EListFreeFunc" title="EListFreeFunc ()">*EListFreeFunc</a>)                    (<a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a class="link" href="EList.html" title="EList">EList</a> *             <a class="link" href="EList.html#e-list-new" title="e_list_new ()">e_list_new</a>                          (<a class="link" href="EList.html#EListCopyFunc" title="EListCopyFunc ()">EListCopyFunc</a> copy,
+                                                         <a class="link" href="EList.html#EListFreeFunc" title="EListFreeFunc ()">EListFreeFunc</a> free,
+                                                         void *closure);
+void                <a class="link" href="EList.html#e-list-construct" title="e_list_construct ()">e_list_construct</a>                    (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a class="link" href="EList.html#EListCopyFunc" title="EListCopyFunc ()">EListCopyFunc</a> copy,
+                                                         <a class="link" href="EList.html#EListFreeFunc" title="EListFreeFunc ()">EListFreeFunc</a> free,
+                                                         void *closure);
+<a class="link" href="EList.html" title="EList">EList</a> *             <a class="link" href="EList.html#e-list-duplicate" title="e_list_duplicate ()">e_list_duplicate</a>                    (<a class="link" href="EList.html" title="EList">EList</a> *list);
+<a class="link" href="EIterator.html" title="EIterator">EIterator</a> *         <a class="link" href="EList.html#e-list-get-iterator" title="e_list_get_iterator ()">e_list_get_iterator</a>                 (<a class="link" href="EList.html" title="EList">EList</a> *list);
+void                <a class="link" href="EList.html#e-list-append" title="e_list_append ()">e_list_append</a>                       (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         const void *data);
+void                <a class="link" href="EList.html#e-list-remove" title="e_list_remove ()">e_list_remove</a>                       (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         const void *data);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="EList.html#e-list-length" title="e_list_length ()">e_list_length</a>                       (<a class="link" href="EList.html" title="EList">EList</a> *list);
+void                <a class="link" href="EList.html#e-list-remove-link" title="e_list_remove_link ()">e_list_remove_link</a>                  (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *link);
+void                <a class="link" href="EList.html#e-list-remove-iterator" title="e_list_remove_iterator ()">e_list_remove_iterator</a>              (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a class="link" href="EIterator.html" title="EIterator">EIterator</a> *iterator);
+void                <a class="link" href="EList.html#e-list-invalidate-iterators" title="e_list_invalidate_iterators ()">e_list_invalidate_iterators</a>         (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a class="link" href="EIterator.html" title="EIterator">EIterator</a> *skip);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="EList.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="../gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----EList
+         +----<a class="link" href="EAccountList.html" title="EAccountList">EAccountList</a>
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="EList.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="EList.details"></a><h2>Details</h2>
+<div class="refsect2" title="EList">
+<a name="EList-struct"></a><h3>EList</h3>
+<pre class="programlisting">typedef struct _EList EList;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="EListCopyFunc ()">
+<a name="EListCopyFunc"></a><h3>EListCopyFunc ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (*EListCopyFunc)                    (<a
+href="../glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> data,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EListFreeFunc ()">
+<a name="EListFreeFunc"></a><h3>EListFreeFunc ()</h3>
+<pre class="programlisting">void                (*EListFreeFunc)                    (<a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_new ()">
+<a name="e-list-new"></a><h3>e_list_new ()</h3>
+<pre class="programlisting"><a class="link" href="EList.html" title="EList">EList</a> *             e_list_new                          (<a class="link" href="EList.html#EListCopyFunc" title="EListCopyFunc ()">EListCopyFunc</a> copy,
+                                                         <a class="link" href="EList.html#EListFreeFunc" title="EListFreeFunc ()">EListFreeFunc</a> free,
+                                                         void *closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>copy</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>free</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_construct ()">
+<a name="e-list-construct"></a><h3>e_list_construct ()</h3>
+<pre class="programlisting">void                e_list_construct                    (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a class="link" href="EList.html#EListCopyFunc" title="EListCopyFunc ()">EListCopyFunc</a> copy,
+                                                         <a class="link" href="EList.html#EListFreeFunc" title="EListFreeFunc ()">EListFreeFunc</a> free,
+                                                         void *closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>copy</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>free</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_duplicate ()">
+<a name="e-list-duplicate"></a><h3>e_list_duplicate ()</h3>
+<pre class="programlisting"><a class="link" href="EList.html" title="EList">EList</a> *             e_list_duplicate                    (<a class="link" href="EList.html" title="EList">EList</a> *list);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_get_iterator ()">
+<a name="e-list-get-iterator"></a><h3>e_list_get_iterator ()</h3>
+<pre class="programlisting"><a class="link" href="EIterator.html" title="EIterator">EIterator</a> *         e_list_get_iterator                 (<a class="link" href="EList.html" title="EList">EList</a> *list);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_append ()">
+<a name="e-list-append"></a><h3>e_list_append ()</h3>
+<pre class="programlisting">void                e_list_append                       (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         const void *data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_remove ()">
+<a name="e-list-remove"></a><h3>e_list_remove ()</h3>
+<pre class="programlisting">void                e_list_remove                       (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         const void *data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_length ()">
+<a name="e-list-length"></a><h3>e_list_length ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_list_length                       (<a class="link" href="EList.html" title="EList">EList</a> *list);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_remove_link ()">
+<a name="e-list-remove-link"></a><h3>e_list_remove_link ()</h3>
+<pre class="programlisting">void                e_list_remove_link                  (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *link);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>link</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_remove_iterator ()">
+<a name="e-list-remove-iterator"></a><h3>e_list_remove_iterator ()</h3>
+<pre class="programlisting">void                e_list_remove_iterator              (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a class="link" href="EIterator.html" title="EIterator">EIterator</a> *iterator);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iterator</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_list_invalidate_iterators ()">
+<a name="e-list-invalidate-iterators"></a><h3>e_list_invalidate_iterators ()</h3>
+<pre class="programlisting">void                e_list_invalidate_iterators         (<a class="link" href="EList.html" title="EList">EList</a> *list,
+                                                         <a class="link" href="EIterator.html" title="EIterator">EIterator</a> *skip);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>skip</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

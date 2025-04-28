@@ -1,0 +1,1 @@
+/usr/share/system-config-keyboard/keyboard_gui.py

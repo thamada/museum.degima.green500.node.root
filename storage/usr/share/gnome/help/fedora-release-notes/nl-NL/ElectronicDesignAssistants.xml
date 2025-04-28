@@ -1,0 +1,454 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Electronic_Design_Automation" lang="nl-NL">
+	<title>Elektronisch ontwerp automatisering</title>
+	 <remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Documentation_EDA_Beat">https://fedoraproject.org/wiki/Documentation_EDA_Beat</ulink></remark>
+	<para>
+		<indexterm>
+			<primary>Elektronisch ontwerp automatisering</primary>
+		</indexterm>
+		 <indexterm>
+			<primary>Fedora electronica lab</primary>
+		</indexterm>
+		 Deze paragraaf beschrijft veranderingen in het Fedora elektronica lab voor Fedora 12. Merk op dat een aantal van de toepassingen in FEL van toepassing zijn voor een aantal gemeenschappen. Deze specifieke toepassingen worden beschreven in de Circuit ontwerp (welke simulatie en PCB layout omvat) en Ingebedde ontwikkeling paragrafen van deze vrijgave informatie.
+	</para>
+	<section>
+		<title>Samenwerking code review</title>
+		<para>
+			<indexterm>
+				<primary>Samenwerking code review</primary>
+			</indexterm>
+			 Een van de vele aspecten van digitale hardware ontwerp is het bijhouden van de vele bestanden die nodig zijn voor meerdere EDA gereedschappen. De eventuele rapporten of netlijsten worden zorgvuldig bekeken en gelogd als onderdeel van de goedkeuring methodologie. Elk bedrijf houdt deze project afhankelijke bestanden bij in een bepaalde map structuur en met een bepaalde versie controle systeem naar keuze.
+		</para>
+		<para>
+			We hebben een efficiënte en betrouwbare code review oplossing toegevoegd aan de Fedora collectie. Deze op trac gebaseerde peer-review oplossing zal ook helpen om verwijzingen en naadloze referenties te maken tussen fouten, verander sets en bestanden. Project coördinatoren zullen een realistischer overzicht hebben van het lopende project en kunnen de vooruitgang erg gemakkelijk bijhouden met betrekking tot de verschillende mijlpalen en tijdslimieten.
+		</para>
+	</section>
+	
+	<section>
+		<title>Eclipse standaard IDE</title>
+		<para>
+			<indexterm>
+				<primary>Eclipse standaard IDE</primary>
+				<secondary>Elektronisch ontwerp automatisering</secondary>
+			</indexterm>
+			 Met de hulp en ondersteuning van het Fedora Eclipse team, wordt Eclipse de belangrijkste IDE in FEL voor de HDL IP ontwikkeling en documentatie. Deze toepassing heeft als doel het onderhouden van werkelijke interoperabiliteit tussen gereedschappen aangeboden door verschillende leveranciers van ingebedde software.
+		</para>
+		<para>
+			De plugins die standaard aangeboden worden door het Fedora elektronica lab zullen de volgende verbeteringen leveren: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						front-end ontwerp
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						automatische generatie van documentatie en onderhoud van professionele databladen
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Perl/Tcl scripting (Perl modules aanwezig sinds FEL 10)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						versie gecontroleerde projecten
+					</para>
+				</listitem>
+			</itemizedlist>
+			<table frame="all" id="tbl-FEL-Eclipse-Plugins">
+				<title>Eclipse plugins geselecteerd voor hardware ontwerp</title>
+				<indexterm>
+					<primary>eclipse-veditor</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-eclox</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-texlipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-cdt</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-dltk-tcl</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-epic</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-subclipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-egit</primary>
+				</indexterm>
+				<tgroup cols="2">
+					<thead>
+						<row>
+							<entry>
+								Pakket
+							</entry>
+							<entry>
+								Beschrijving
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								eclipse-veditor
+							</entry>
+							<entry>
+								Helpt digitale IC ontwerpers/FPGA ontwerpers met het ontwikkelen van Verilog/VHDL code in Eclipse. Biedt een realtime fout en waarschuwing berichtgeving voor typefouten, ontbrekende signalen, onnodige signalen, enz.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-eclox
+							</entry>
+							<entry>
+								Als de vhdl code doxygen-stijl commentaar bevat, kan een pdf automatisch aangemaakt worden en gebruikt tijdens interne vergaderingen of naar de cliënt gestuurd worden.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-texlipse
+							</entry>
+							<entry>
+								Omdat de pdf aangemaakt wordt met latex, zal de texlipse plugin extra pagina indeling formattering en gemakkelijk pdf aanmaken aanbieden. Het pdf aanmaken gebeurt nu met slechts Ctrl-S, in plaats van een handmatige klik zoals in kile. Nu we over kile spreken, deze zal verwijderd worden van de FEL Live dvd.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-cdt
+							</entry>
+							<entry>
+								Biedt ingebedde C en C++ ontwikkelgereedschappen.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-dltk-tcl
+							</entry>
+							<entry>
+								Tcl scripts kunnen onderhouden worden tezamen met de HDL code.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-epic
+							</entry>
+							<entry>
+								Perl scripts kunnen onderhouden worden tezamen met de HDL code.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-subclipse
+							</entry>
+							<entry>
+								Voegt Subversion integratie toe aan de Eclipse IDE.
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-egit
+							</entry>
+							<entry>
+								Voegt verspreide versie controle GIT integratie toe aan de Eclipse IDE.
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+	</section>
+	
+	<section>
+		<title>Analoog ASIC ontwerp</title>
+		<variablelist>
+			<varlistentry>
+				<term>toped</term>
+				<listitem>
+					<indexterm>
+						<primary>toped</primary>
+					</indexterm>
+					<para>
+						Vernieuwd naar de consolidatie vrijgave 0.9.4. Het Fedora Toped pakket zet de variabele $TPD_GLOBAL standaard op /usr/share/toped zodat de gebruiker toped rechtstreeks uit de verpakking kan draaien.
+					</para>
+					<para>
+						Graham Petley en Krustev Svilen leverden 2 TELL bestanden als demonstratie hoe toped interactie kan hebben met Pharosc Standard Cells via de GDSII en CIF parsers van toped.
+					</para>
+					<para>
+						Hoogtepunten 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Een nieuwe grafische omzetting welke het tekenen een factor 3.5 versnelt. Vereist openGL versie 1.4 (F11 gebruikt 1.3) en Virtual Buffer Objects. Het zal gebruikt worden als een basis voor toekomstige grafische effecten.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									De oude omzetter blijft ten behoeve van grafische drivers die oudere openGL versies gebruiken en in het bijzonder voor virtuele bureaubladen.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									De snelheid is ook significant verbeterd.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Vernieuwingen en reparaties in de externe interfaces. In het bijzonder GDSII.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Nieuw programma voor het omzetten van Virtuoso(C) technologie bestanden naar TELL.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									TDT formaat vernieuwd met nieuwe records. Versie vernieuwd naar 0.7.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									TDT formaat vernieuwd met nieuwe records. Versie vernieuwd naar 0.7.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Verdere vernieuwingen in de gebruikers interface instellingen - gereedschapsbalken.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Vernieuwingen in de interne afhandeling van de cel referenties. Als resultaat wordt laag 0 nu afgehandeld als een normale laag.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+					<warning>
+						<title>Oude Toped vrijgaves zullen niet in staat zijn TDT bestanden te lezen die met deze vrijgave gemaakt zijn. </title>
+						<para>
+							Er is een bepaalde hoeveelheid code nog niet toegevoegd aan de hoofd ontwikkel tak, waaronder de calibre fout rapport ontleding. Waarschijnlijk wordt dit na de vrijgave gedaan. Sommige nieuwe eigenschappen worden op dit moment vertraagd in plaats van de stabiliteit op te offeren.
+						</para>
+					</warning>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Magic</term>
+				<listitem>
+					<indexterm>
+						<primary>magic</primary>
+					</indexterm>
+					<indexterm>
+						<primary>magic-doc</primary>
+					</indexterm>
+					<para>
+						Fedora Magic is vernieuwd naar 8.0.54.
+					</para>
+					<para>
+						Het Fedora Magic pakket heeft zijn documentatie in een apart pakket met de naam: <package>magic-doc</package>. Deze bevat enkele voorbeelden van scmos en handleidingen. Advanced Magic VLSI gebruikers zullen er ook in geïnteresseerd zijn de documentatie opnieuw te lezen om een grip te krijgen op de kleinere details die de 8.0 serie met zich mee brengt.
+					</para>
+					<para>
+						Kenmerken: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									outline vector lettertypes (dankzij het freefont project), en een poging om een aantal problemen met labels in Magic op te lossen.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Alle weergave, manipulatie, en OpenGL zijn nu compleet.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Bevat enkele "cifoutput" operatoren voor gebruik met het nieuwe "cif paint" commando, voor het manipuleren van layout met gebruik van boolean operatoren.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									De runtime snelheid is verbeterd.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Twee extra menu&#39;s zijn toegevoegd voor grid manipulatie en tekst instellingen.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Electric</term>
+				<listitem>
+					<indexterm>
+						<primary>electric</primary>
+					</indexterm>
+					<para>
+						<package>electric</package> is vernieuwd naar 8.09.
+					</para>
+					<para>
+						Merk op dat in de bijna de gehele electric userbase plugins van derden gebruikt worden waarvan de licentie niet compatibel is met Fedora, en daarom kan FEL deze plugins niet toevoegen. Dat gezegd hebbende, begrijpt het Fedora Electronic Lab team dat het vrijgeven van een nieuwe upstream versie de werking van de plugins van de gebruiker zal verstoren. Daarom zullen nieuwe versies te zijner tijd hun weg vinden naar de updates-testing repository.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>Digitaal ontwerp</title>
+		<variablelist>
+			<varlistentry>
+				<term>Dinotrace</term>
+				<listitem>
+					<indexterm>
+						<primary>dinotrace</primary>
+					</indexterm>
+					<para>
+						Nieuw voor Fedora &PRODVER;, Dinotrace is een waveform viewer die Verilog Value Change Dumps, ASCII, en andere trace formaten begrijpt.
+					</para>
+					<para>
+						Het staat het plaatsen van cursors toe, het laten oplichten van signalen, zoeken, afdrukken, en andere mogelijkheden die veel beter zijn dan die aanwezig in commerciële wavefrom viewers.
+					</para>
+					<para>
+						Dinotrace is geoptimaliseerd voor snel foutzoeken. Met VTRACE, zal een simulatie fout automatisch cursors plaatsen op de plaats waar de fout optrad, en commentaar toevoegen die zichtbaar is in de waveform viewer. Vier muisklikken en de fouten zullen gemarkeerd worden in de log bestanden, en de waardes van signalen bij de fout zullen zichtbaar zijn in de bron.
+					</para>
+					<para>
+						Fedora bevat ook <code>dinotrace-mode</code> voor emacs als <package>emacs-dinotrace-mode</package>.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>eqntott</term>
+				<listitem>
+					<indexterm>
+						<primary>eqntott</primary>
+					</indexterm>
+					<para>
+						<package>eqntott</package> converteert Booleaanse logische expressies naar een waarheidstabel die nuttig is voor het aanmaken van input voor het espresso pakket voor logische minimalisatie, het converteren van logische expressies naar eenvoudiger vormen, en voor het maken van waarheidstabellen. <package>eqntott</package> is nieuw voor Fedora &PRODVER;.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>expresso-ab</term>
+				<listitem>
+					<indexterm>
+						<primary>expresso-ab</primary>
+					</indexterm>
+					<para>
+						Nieuw voor Fedora &PRODVER;, <package>espresso</package> krijgt als input een twee-niveau representatie van een Boolean functie met twee (of meer) waarden, en maakt een minimale equivalente representatie. Het is een boolean logisch minimalisatie gereedschap.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Verilator</term>
+				<listitem>
+					<indexterm>
+						<primary>verilator</primary>
+					</indexterm>
+					<para>
+						Verilator is de snelste vrije Verilog HDL simulator. Het compileert synthetiseerbare Verilog, en sommige PSL, SystemVerilog en Synthesis verklaringen naar C++ of SystemC code. Het is ontworpen voor grote projecten waar snelle simulatie van groot belang is, en het is speciaal geschikt voor het maken van uitvoerbare modellen van CPU&#39;s voor ingebedde software ontwerp teams.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>vrq</term>
+				<listitem>
+					<indexterm>
+						<primary>vrq</primary>
+					</indexterm>
+					<para>
+						VRQ is een modulaire verilog parser die plugin gereedschappen ondersteunt om verilog te bewerken. Meerdere gereedschappen kunnen opgestart worden op een pijplijn manier binnen een enkele uitvoering van vrq. Het is een algemeen front-end parser met ondersteuning voor plugin back-end aanpasbare gereedschappen.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Alliance</term>
+				<listitem>
+					<indexterm>
+						<primary>Alliance</primary>
+					</indexterm>
+					<para>
+						De Fedora Alliance CVS ontwikkel repository ontving zijn 100ste correctie in augustus 2009, met betrekking tot stabiliteit op 64 architectuur en we zijn blij dat upstream al onze correcties voor alliance toegepast heeft. We hebben deze nieuwe vrijgave ook gebouwd voor alle door Fedora ondersteunde test repositories en de EPEL-5 testing repository. Er komt ook een nieuwe GUI <package>xgra</package> met deze vrijgave, wat een Graph viewer is.
+					</para>
+					<para>
+						We zullen in Fedora Alliance VLSI niet vervangen door herb (dat werd ondersteund als een afsplitsing van alliance). Voor de vrijgave van Fedora 11 was de ontwikkeling van herb actief, maar het stierf uit nadat F-11 was vrijgegeven. Omdat Alliance VLSI upstream actief is en ontvankelijk voor onze wensen, is er op dit moment geen geldige reden om alliance verouderd te maken ten gunste van herb.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>Perl Scripts voor hardware ontwerp</title>
+		<variablelist>
+			<varlistentry>
+				<term>perl-SystemPerl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-SystemPerl</primary>
+					</indexterm>
+					<para>
+						Dit is een nieuw pakket voor Fedora &PRODVER;.
+					</para>
+					<para>
+						SystemPerl is een versie van de SystemC taal. Het is ontworpen om tekst uit te breiden zodat nodeloze herhaling in de taal wordt geminimaliseerd. Door het gebruik van sp_preproc, kunnen SystemPerl bestanden geëxpandeerd worden naar C++ bestanden tijdens het compileren, of ter plekke geëxpandeerd worden door ze om te zetten naar geldige op zichzelf staande SystemC bestanden.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>perl-Verilog-Perl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-Verilog-Perl</primary>
+					</indexterm>
+					<para>
+						<package>perl-Verilog-Perl</package> is vernieuwd naar versie 3.123. Nieuwe kenmerken zijn: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Verbeterde waarschuwing als "do" gebruikt wordt als identifier.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Ontsnapte preprocessor identifiers gerepareerd, bug106.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Perl 5.8.8 compilatie fout gerepareerd, rt48226.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Perl 5.8.0 compilatie fout met callbackgen gerepareerd.
+								</para>
+							</listitem>
+						</itemizedlist>
+						<warning>
+							<para>
+								perl-Verilog-Perl veroudert perl-Verilog. Fedora gebruikers worden aangeraden hun zelf gemaakte Perl scripts hierop aan te passen.
+							</para>
+						</warning>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+</section>
+
+

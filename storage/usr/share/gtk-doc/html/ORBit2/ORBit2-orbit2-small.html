@@ -1,0 +1,1113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>orbit2-small</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="ORBit2 Reference Manual">
+<link rel="up" href="general.html" title="API">
+<link rel="prev" href="ORBit2-orbit2-allocators.html" title="Allocators">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="general.html" title="API">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ORBit2-orbit2-allocators.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="general.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">ORBit2 Reference Manual</th>
+<td> </td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#ORBit2-orbit2-small.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#ORBit2-orbit2-small.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="ORBit2-orbit2-small"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="ORBit2-orbit2-small.top_of_page"></a>orbit2-small</span></h2>
+<p>orbit2-small</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="ORBit2-orbit2-small.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="ORBit2-orbit2-small.html#ORBit-IModule" title="ORBit_IModule">ORBit_IModule</a>;
+const char *        <a class="link" href="ORBit2-orbit2-small.html#ORBit-get-safe-tmp" title="ORBit_get_safe_tmp ()">ORBit_get_safe_tmp</a>                  (void);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-alloc" title="ORBit_small_alloc ()">ORBit_small_alloc</a>                   (CORBA_TypeCode tc);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-allocbuf" title="ORBit_small_allocbuf ()">ORBit_small_allocbuf</a>                (CORBA_TypeCode tc,
+                                                         CORBA_unsigned_long length);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-freekids" title="ORBit_small_freekids ()">ORBit_small_freekids</a>                (CORBA_TypeCode tc,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> p,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> d);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="ORBit2-orbit2-small.html#ORBit-sequence-alloc" title="ORBit_sequence_alloc ()">ORBit_sequence_alloc</a>                (CORBA_TypeCode sequence_tc,
+                                                         CORBA_unsigned_long length);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-sequence-append" title="ORBit_sequence_append ()">ORBit_sequence_append</a>               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> sequence,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> element);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-sequence-set-size" title="ORBit_sequence_set_size ()">ORBit_sequence_set_size</a>             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> sequence,
+                                                         CORBA_unsigned_long length);
+#define             <a class="link" href="ORBit2-orbit2-small.html#ORBit-sequence-index" title="ORBit_sequence_index()">ORBit_sequence_index</a>                (sequence,idx)
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-sequence-concat" title="ORBit_sequence_concat ()">ORBit_sequence_concat</a>               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> sequence,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> append);
+enum                <a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-servant" title="ORBit_small_get_servant ()">ORBit_small_get_servant</a>             (CORBA_Object obj);
+<a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-connection-status" title="ORBit_small_get_connection_status ()">ORBit_small_get_connection_status</a>
+                                                        (CORBA_Object obj);
+<a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-listen-for-broken" title="ORBit_small_listen_for_broken ()">ORBit_small_listen_for_broken</a>    (CORBA_Object obj,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GCallback"
+>GCallback</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-unlisten-for-broken-full" title="ORBit_small_unlisten_for_broken_full ()">ORBit_small_unlisten_for_broken_full</a>
+                                                        (CORBA_Object obj,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GCallback"
+>GCallback</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-unlisten-for-broken" title="ORBit_small_unlisten_for_broken ()">ORBit_small_unlisten_for_broken</a>  (CORBA_Object obj,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GCallback"
+>GCallback</a> fn);
+                    <a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a>;
+<a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *   <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-connection" title="ORBit_small_get_connection ()">ORBit_small_get_connection</a>          (CORBA_Object obj);
+<a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *   <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-connection-ref" title="ORBit_small_get_connection_ref ()">ORBit_small_get_connection_ref</a>      (CORBA_Object obj);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-connection-unref" title="ORBit_small_connection_unref ()">ORBit_small_connection_unref</a>        (<a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *cnx);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-connection-set-max-buffer" title="ORBit_connection_set_max_buffer ()">ORBit_connection_set_max_buffer</a>     (<a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *cnx,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gulong"
+>gulong</a> max_buffer_bytes);
+ORBit_IInterface *  <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-iinterface" title="ORBit_small_get_iinterface ()">ORBit_small_get_iinterface</a>          (CORBA_Object opt_object,
+                                                         const CORBA_char *repo_id,
+                                                         CORBA_Environment *ev);
+extern              int     <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-flags" title="ORBit_small_flags">ORBit_small_flags</a>;
+CORBA_sequence_ORBit_IInterface * <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-iinterfaces" title="ORBit_small_get_iinterfaces ()">ORBit_small_get_iinterfaces</a>
+                                                        (const char *name);
+                    <a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncQueueEntry" title="ORBitAsyncQueueEntry">ORBitAsyncQueueEntry</a>;
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-invoke-stub-n" title="ORBit_small_invoke_stub_n ()">ORBit_small_invoke_stub_n</a>           (CORBA_Object object,
+                                                         ORBit_IMethods *methods,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#glong"
+>glong</a> index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ret,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Context ctx,
+                                                         CORBA_Environment *ev);
+CORBA_char *        <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-type-id" title="ORBit_small_get_type_id ()">ORBit_small_get_type_id</a>             (CORBA_Object object,
+                                                         CORBA_Environment *ev);
+void                (<a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncInvokeFunc" title="ORBitAsyncInvokeFunc ()">*ORBitAsyncInvokeFunc</a>)             (CORBA_Object object,
+                                                         ORBit_IMethod *m_data,
+                                                         <a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncQueueEntry" title="ORBitAsyncQueueEntry">ORBitAsyncQueueEntry</a> *aqe,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data,
+                                                         CORBA_Environment *ev);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-demarshal-async" title="ORBit_small_demarshal_async ()">ORBit_small_demarshal_async</a>         (<a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncQueueEntry" title="ORBitAsyncQueueEntry">ORBitAsyncQueueEntry</a> *aqe,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ret,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Environment *ev);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-invoke-stub" title="ORBit_small_invoke_stub ()">ORBit_small_invoke_stub</a>             (CORBA_Object object,
+                                                         ORBit_IMethod *m_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ret,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Context ctx,
+                                                         CORBA_Environment *ev);
+void                <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-invoke-async" title="ORBit_small_invoke_async ()">ORBit_small_invoke_async</a>            (CORBA_Object obj,
+                                                         ORBit_IMethod *m_data,
+                                                         <a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncInvokeFunc" title="ORBitAsyncInvokeFunc ()">ORBitAsyncInvokeFunc</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Context ctx,
+                                                         CORBA_Environment *ev);
+#define             <a class="link" href="ORBit2-orbit2-small.html#ORBIT-SMALL-FAST-LOCALS--CAPS" title="ORBIT_SMALL_FAST_LOCALS">ORBIT_SMALL_FAST_LOCALS</a>
+#define             <a class="link" href="ORBit2-orbit2-small.html#ORBIT-SMALL-FORCE-GENERIC-MARSHAL--CAPS" title="ORBIT_SMALL_FORCE_GENERIC_MARSHAL">ORBIT_SMALL_FORCE_GENERIC_MARSHAL</a>
+CORBA_sequence_CORBA_TypeCode * <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-get-types" title="ORBit_small_get_types ()">ORBit_small_get_types</a>   (const char *name);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="ORBit2-orbit2-small.html#ORBit-small-load-typelib" title="ORBit_small_load_typelib ()">ORBit_small_load_typelib</a>            (const char *libname);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="ORBit2-orbit2-small.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="ORBit2-orbit2-small.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="ORBit-IModule"></a><h3>ORBit_IModule</h3>
+<pre class="programlisting">typedef struct {
+	CORBA_unsigned_long           version;
+	ORBit_IInterface            **interfaces;
+	CORBA_sequence_CORBA_TypeCode types;
+} ORBit_IModule;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-get-safe-tmp"></a><h3>ORBit_get_safe_tmp ()</h3>
+<pre class="programlisting">const char *        ORBit_get_safe_tmp                  (void);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-alloc"></a><h3>ORBit_small_alloc ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            ORBit_small_alloc                   (CORBA_TypeCode tc);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-allocbuf"></a><h3>ORBit_small_allocbuf ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            ORBit_small_allocbuf                (CORBA_TypeCode tc,
+                                                         CORBA_unsigned_long length);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-freekids"></a><h3>ORBit_small_freekids ()</h3>
+<pre class="programlisting">void                ORBit_small_freekids                (CORBA_TypeCode tc,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> p,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> d);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>d</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-sequence-alloc"></a><h3>ORBit_sequence_alloc ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            ORBit_sequence_alloc                (CORBA_TypeCode sequence_tc,
+                                                         CORBA_unsigned_long length);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sequence_tc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-sequence-append"></a><h3>ORBit_sequence_append ()</h3>
+<pre class="programlisting">void                ORBit_sequence_append               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> sequence,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> element);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sequence</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>element</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-sequence-set-size"></a><h3>ORBit_sequence_set_size ()</h3>
+<pre class="programlisting">void                ORBit_sequence_set_size             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> sequence,
+                                                         CORBA_unsigned_long length);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sequence</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-sequence-index"></a><h3>ORBit_sequence_index()</h3>
+<pre class="programlisting">#define        ORBit_sequence_index(sequence,idx) (sequence)-&gt;_buffer[(idx)]
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sequence</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>idx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-sequence-concat"></a><h3>ORBit_sequence_concat ()</h3>
+<pre class="programlisting">void                ORBit_sequence_concat               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> sequence,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> append);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sequence</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>append</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBitConnectionStatus"></a><h3>enum ORBitConnectionStatus</h3>
+<pre class="programlisting">typedef enum {
+	ORBIT_CONNECTION_CONNECTED,
+	ORBIT_CONNECTION_CONNECTING,
+	ORBIT_CONNECTION_DISCONNECTED,
+	ORBIT_CONNECTION_IN_PROC
+} ORBitConnectionStatus;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-servant"></a><h3>ORBit_small_get_servant ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            ORBit_small_get_servant             (CORBA_Object obj);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-connection-status"></a><h3>ORBit_small_get_connection_status ()</h3>
+<pre class="programlisting"><a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  ORBit_small_get_connection_status
+                                                        (CORBA_Object obj);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-listen-for-broken"></a><h3>ORBit_small_listen_for_broken ()</h3>
+<pre class="programlisting"><a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  ORBit_small_listen_for_broken    (CORBA_Object obj,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GCallback"
+>GCallback</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fn</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-unlisten-for-broken-full"></a><h3>ORBit_small_unlisten_for_broken_full ()</h3>
+<pre class="programlisting"><a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  ORBit_small_unlisten_for_broken_full
+                                                        (CORBA_Object obj,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GCallback"
+>GCallback</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fn</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-unlisten-for-broken"></a><h3>ORBit_small_unlisten_for_broken ()</h3>
+<pre class="programlisting"><a class="link" href="ORBit2-orbit2-small.html#ORBitConnectionStatus" title="enum ORBitConnectionStatus">ORBitConnectionStatus</a>  ORBit_small_unlisten_for_broken  (CORBA_Object obj,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-Closures.html#GCallback"
+>GCallback</a> fn);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fn</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBitConnection"></a><h3>ORBitConnection</h3>
+<pre class="programlisting">typedef struct _ORBitConnection ORBitConnection;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-connection"></a><h3>ORBit_small_get_connection ()</h3>
+<pre class="programlisting"><a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *   ORBit_small_get_connection          (CORBA_Object obj);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-connection-ref"></a><h3>ORBit_small_get_connection_ref ()</h3>
+<pre class="programlisting"><a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *   ORBit_small_get_connection_ref      (CORBA_Object obj);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-connection-unref"></a><h3>ORBit_small_connection_unref ()</h3>
+<pre class="programlisting">void                ORBit_small_connection_unref        (<a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *cnx);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>cnx</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-connection-set-max-buffer"></a><h3>ORBit_connection_set_max_buffer ()</h3>
+<pre class="programlisting">void                ORBit_connection_set_max_buffer     (<a class="link" href="ORBit2-orbit2-small.html#ORBitConnection" title="ORBitConnection">ORBitConnection</a> *cnx,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gulong"
+>gulong</a> max_buffer_bytes);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cnx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_buffer_bytes</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-iinterface"></a><h3>ORBit_small_get_iinterface ()</h3>
+<pre class="programlisting">ORBit_IInterface *  ORBit_small_get_iinterface          (CORBA_Object opt_object,
+                                                         const CORBA_char *repo_id,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_object</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>repo_id</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-flags"></a><h3>ORBit_small_flags</h3>
+<pre class="programlisting">extern int     ORBit_small_flags;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-iinterfaces"></a><h3>ORBit_small_get_iinterfaces ()</h3>
+<pre class="programlisting">CORBA_sequence_ORBit_IInterface * ORBit_small_get_iinterfaces
+                                                        (const char *name);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBitAsyncQueueEntry"></a><h3>ORBitAsyncQueueEntry</h3>
+<pre class="programlisting">typedef struct _ORBitAsyncQueueEntry ORBitAsyncQueueEntry;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-invoke-stub-n"></a><h3>ORBit_small_invoke_stub_n ()</h3>
+<pre class="programlisting">void                ORBit_small_invoke_stub_n           (CORBA_Object object,
+                                                         ORBit_IMethods *methods,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#glong"
+>glong</a> index,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ret,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Context ctx,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>methods</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>index</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ret</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-type-id"></a><h3>ORBit_small_get_type_id ()</h3>
+<pre class="programlisting">CORBA_char *        ORBit_small_get_type_id             (CORBA_Object object,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBitAsyncInvokeFunc"></a><h3>ORBitAsyncInvokeFunc ()</h3>
+<pre class="programlisting">void                (*ORBitAsyncInvokeFunc)             (CORBA_Object object,
+                                                         ORBit_IMethod *m_data,
+                                                         <a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncQueueEntry" title="ORBitAsyncQueueEntry">ORBitAsyncQueueEntry</a> *aqe,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>m_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>aqe</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-demarshal-async"></a><h3>ORBit_small_demarshal_async ()</h3>
+<pre class="programlisting">void                ORBit_small_demarshal_async         (<a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncQueueEntry" title="ORBitAsyncQueueEntry">ORBitAsyncQueueEntry</a> *aqe,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ret,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>aqe</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ret</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-invoke-stub"></a><h3>ORBit_small_invoke_stub ()</h3>
+<pre class="programlisting">void                ORBit_small_invoke_stub             (CORBA_Object object,
+                                                         ORBit_IMethod *m_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ret,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Context ctx,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>m_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ret</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-invoke-async"></a><h3>ORBit_small_invoke_async ()</h3>
+<pre class="programlisting">void                ORBit_small_invoke_async            (CORBA_Object obj,
+                                                         ORBit_IMethod *m_data,
+                                                         <a class="link" href="ORBit2-orbit2-small.html#ORBitAsyncInvokeFunc" title="ORBitAsyncInvokeFunc ()">ORBitAsyncInvokeFunc</a> fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> *args,
+                                                         CORBA_Context ctx,
+                                                         CORBA_Environment *ev);</pre>
+<p>
+This method is used to invoke a remote (or local) method
+asynchronously. <em class="parameter"><code>fn</code></em> is called back on return - either with an empty
+CORBA_Environment indicating success, or with the error.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td> 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>m_data</code></em> :</span></p></td>
+<td> 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fn</code></em> :</span></p></td>
+<td> 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
+<td> 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td> 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBIT-SMALL-FAST-LOCALS--CAPS"></a><h3>ORBIT_SMALL_FAST_LOCALS</h3>
+<pre class="programlisting">#define ORBIT_SMALL_FAST_LOCALS           1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBIT-SMALL-FORCE-GENERIC-MARSHAL--CAPS"></a><h3>ORBIT_SMALL_FORCE_GENERIC_MARSHAL</h3>
+<pre class="programlisting">#define ORBIT_SMALL_FORCE_GENERIC_MARSHAL 2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-get-types"></a><h3>ORBit_small_get_types ()</h3>
+<pre class="programlisting">CORBA_sequence_CORBA_TypeCode * ORBit_small_get_types   (const char *name);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="ORBit-small-load-typelib"></a><h3>ORBit_small_load_typelib ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            ORBit_small_load_typelib            (const char *libname);</pre>
+<p>
+This method has security issues if you do not use
+an absolute path in <em class="parameter"><code>libname</code></em>. The environment variables
+ORBIT_TYPELIB_PATH and GNOME2_PATH are used to scan for
+type libraries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>libname</code></em> :</span></p></td>
+<td> the name of the type library to load
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> FALSE if load failed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,2601 @@
+<summary>Policy modules for applications</summary>
+<module name="ada" filename="policy/modules/apps/ada.if">
+<summary>GNAT Ada95 compiler</summary>
+<interface name="ada_domtrans" lineno="13">
+<summary>
+Execute the ada program in the ada domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="ada_run" lineno="38">
+<summary>
+Execute ada in the ada domain, and
+allow the specified role the ada domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the ada domain.
+</summary>
+</param>
+</interface>
+</module>
+<module name="authbind" filename="policy/modules/apps/authbind.if">
+<summary>Tool for non-root processes to bind to reserved ports</summary>
+<interface name="authbind_domtrans" lineno="13">
+<summary>
+Use authbind to bind to a reserved port.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="awstats" filename="policy/modules/apps/awstats.if">
+<summary>
+AWStats is a free powerful and featureful tool that generates advanced
+web, streaming, ftp or mail server statistics, graphically.
+</summary>
+<interface name="awstats_rw_pipes" lineno="16">
+<summary>
+Read and write awstats unnamed pipes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="awstats_cgi_exec" lineno="34">
+<summary>
+Execute awstats cgi scripts in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="calamaris" filename="policy/modules/apps/calamaris.if">
+<summary>Squid log analysis</summary>
+<interface name="calamaris_read_www_files" lineno="13">
+<summary>
+Allow domain to read calamaris www files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="cdrecord" filename="policy/modules/apps/cdrecord.if">
+<summary>Policy for cdrecord</summary>
+<interface name="cdrecord_role" lineno="18">
+<summary>
+Role access for cdrecord
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<tunable name="cdrecord_read_content" dftval="false">
+<desc>
+<p>
+Allow cdrecord to read various content.
+nfs, samba, removable devices, user temp
+and untrusted content files
+</p>
+</desc>
+</tunable>
+</module>
+<module name="chrome" filename="policy/modules/apps/chrome.if">
+<summary>policy for chrome</summary>
+<interface name="chrome_domtrans_sandbox" lineno="13">
+<summary>
+Execute a domain transition to run chrome_sandbox.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="chrome_run_sandbox" lineno="42">
+<summary>
+Execute chrome_sandbox in the chrome_sandbox domain, and
+allow the specified role the chrome_sandbox domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the chrome_sandbox domain.
+</summary>
+</param>
+</interface>
+<interface name="chrome_role" lineno="66">
+<summary>
+Role access for chrome sandbox
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="cpufreqselector" filename="policy/modules/apps/cpufreqselector.if">
+<summary>Command-line CPU frequency settings.</summary>
+</module>
+<module name="ethereal" filename="policy/modules/apps/ethereal.if">
+<summary>Ethereal packet capture tool.</summary>
+<interface name="ethereal_role" lineno="18">
+<summary>
+Role access for ethereal
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="ethereal_domtrans" lineno="47">
+<summary>
+Run ethereal in ethereal domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="ethereal_domtrans_tethereal" lineno="65">
+<summary>
+Run tethereal in the tethereal domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="ethereal_run_tethereal" lineno="89">
+<summary>
+Execute tethereal in the tethereal domain, and
+allow the specified role the tethereal domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the tethereal domain.
+</summary>
+</param>
+</interface>
+</module>
+<module name="evolution" filename="policy/modules/apps/evolution.if">
+<summary>Evolution email client</summary>
+<interface name="evolution_role" lineno="18">
+<summary>
+Role access for evolution
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="evolution_home_filetrans" lineno="85">
+<summary>
+Create objects in users evolution home folders.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="file_type">
+<summary>
+Private file type.
+</summary>
+</param>
+<param name="class">
+<summary>
+The object class of the object being created.
+</summary>
+</param>
+</interface>
+<interface name="evolution_stream_connect" lineno="104">
+<summary>
+Connect to evolution unix stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="evolution_dbus_chat" lineno="124">
+<summary>
+Send and receive messages from
+evolution over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="evolution_alarm_dbus_chat" lineno="145">
+<summary>
+Send and receive messages from
+evolution_alarm over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="execmem" filename="policy/modules/apps/execmem.if">
+<summary>execmem domain</summary>
+<interface name="execmem_exec" lineno="13">
+<summary>
+Execute the execmem program in the execmem domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<template name="execmem_role_template" lineno="48">
+<summary>
+The role template for the execmem module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for execmem applications.
+</p>
+</desc>
+<param name="role_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<interface name="execmem_domtrans" lineno="106">
+<summary>
+Execute a execmem_exec file
+in the specified domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="target_domain">
+<summary>
+The type of the new process.
+</summary>
+</param>
+</interface>
+</module>
+<module name="firewallgui" filename="policy/modules/apps/firewallgui.if">
+<summary>policy for firewallgui</summary>
+<interface name="firewallgui_dbus_chat" lineno="14">
+<summary>
+Send and receive messages from
+firewallgui over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="games" filename="policy/modules/apps/games.if">
+<summary>Games</summary>
+<interface name="games_role" lineno="18">
+<summary>
+Role access for games
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="games_rw_data" lineno="45">
+<summary>
+Allow the specified domain to read/write
+games data.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="gift" filename="policy/modules/apps/gift.if">
+<summary>giFT peer to peer file sharing tool</summary>
+<interface name="gift_role" lineno="18">
+<summary>
+Role access for gift
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="gitosis" filename="policy/modules/apps/gitosis.if">
+<summary>Tools for managing and hosting git repositories.</summary>
+<interface name="gitosis_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run gitosis.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="gitosis_run" lineno="37">
+<summary>
+Execute gitosis-serve in the gitosis domain, and
+allow the specified role the gitosis domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+Role allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gitosis_read_var_lib" lineno="57">
+<summary>
+Allow the specified domain to read
+gitosis lib files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gitosis_manage_var_lib" lineno="80">
+<summary>
+Allow the specified domain to manage
+gitosis lib files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="gnome" filename="policy/modules/apps/gnome.if">
+<summary>GNU network object model environment (GNOME)</summary>
+<interface name="gnome_role" lineno="18">
+<summary>
+Role access for gnome
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="gnome_stream_connect_gconf" lineno="48">
+<summary>
+gconf connection template.
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="gnome_domtrans_gconfd" lineno="67">
+<summary>
+Run gconfd in gconfd domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gnome_dontaudit_search_config" lineno="85">
+<summary>
+Dontaudit search gnome homedir content
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="gnome_manage_config" lineno="103">
+<summary>
+manage gnome homedir content (.config)
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="gnome_signal_all" lineno="124">
+<summary>
+Send general signals to all gconf domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<template name="gnome_read_config" lineno="148">
+<summary>
+read gnome homedir content (.config)
+</summary>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<template name="gnome_read_gconf_config" lineno="174">
+<summary>
+Read gconf config files
+</summary>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<interface name="gnome_manage_gconf_config" lineno="193">
+<summary>
+Manage gconf config files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gnome_exec_gconf" lineno="213">
+<summary>
+Execute gconf programs in
+in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gnome_read_gconf_home_files" lineno="231">
+<summary>
+Read gconf home files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gnome_append_gconf_home_files" lineno="250">
+<summary>
+Append gconf home files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gnome_manage_gconf_home_files" lineno="268">
+<summary>
+manage gconf home files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<template name="gnome_list_home_config" lineno="287">
+<summary>
+Read gnome homedir content
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<interface name="gnome_stream_connect" lineno="310">
+<summary>
+Connect to gnome over an unix stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="gnome_rw_inherited_config" lineno="329">
+<summary>
+Read/Write all inherited gnome home config
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gnome_write_inherited_config" lineno="347">
+<summary>
+Write all inherited gnome home config
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="gpg" filename="policy/modules/apps/gpg.if">
+<summary>Policy for GNU Privacy Guard and related programs.</summary>
+<interface name="gpg_role" lineno="18">
+<summary>
+Role access for gpg
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="gpg_domtrans" lineno="73">
+<summary>
+Transition to a user gpg domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gpg_signal" lineno="91">
+<summary>
+Send generic signals to user gpg processes.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gpg_domtrans_web" lineno="109">
+<summary>
+Transition to a gpg web domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="gpg_entry_type" lineno="128">
+<summary>
+Make gpg an entrypoint for
+the specified domain.
+</summary>
+<param name="domain">
+<summary>
+The domain for which cifs_t is an entrypoint.
+</summary>
+</param>
+</interface>
+<tunable name="gpg_agent_env_file" dftval="false">
+<desc>
+<p>
+Allow usage of the gpg-agent --write-env-file option.
+This also allows gpg-agent to manage user files.
+</p>
+</desc>
+</tunable>
+<tunable name="gpg_web_anon_write" dftval="false">
+<desc>
+<p>
+Allow gpg web domain to modify public files
+used for public file transfer services.
+</p>
+</desc>
+</tunable>
+</module>
+<module name="irc" filename="policy/modules/apps/irc.if">
+<summary>IRC client policy</summary>
+<interface name="irc_role" lineno="18">
+<summary>
+Role access for IRC
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="java" filename="policy/modules/apps/java.if">
+<summary>Java virtual machine</summary>
+<interface name="java_role" lineno="18">
+<summary>
+Role access for java
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<template name="java_domtrans" lineno="46">
+<summary>
+Run java in javaplugin domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</template>
+<interface name="java_domtrans_unconfined" lineno="64">
+<summary>
+Execute the java program in the unconfined java domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="java_run" lineno="89">
+<summary>
+Execute java in the java domain, and
+allow the specified role the java domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the java domain.
+</summary>
+</param>
+</interface>
+<interface name="java_run_unconfined" lineno="114">
+<summary>
+Execute java in the unconfined java domain, and
+allow the specified role the unconfined java domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the java domain.
+</summary>
+</param>
+</interface>
+<interface name="java_exec" lineno="136">
+<summary>
+Execute the java program in the java domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<template name="java_role_template" lineno="171">
+<summary>
+The role template for the java module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for java applications.
+</p>
+</desc>
+<param name="role_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<tunable name="allow_java_execstack" dftval="false">
+<desc>
+<p>
+Allow java executable stack
+</p>
+</desc>
+</tunable>
+</module>
+<module name="kdumpgui" filename="policy/modules/apps/kdumpgui.if">
+<summary>system-config-kdump policy</summary>
+</module>
+<module name="livecd" filename="policy/modules/apps/livecd.if">
+<summary>policy for livecd</summary>
+<interface name="livecd_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run livecd.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="livecd_run" lineno="39">
+<summary>
+Execute livecd in the livecd domain, and
+allow the specified role the livecd domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the livecd domain.
+</summary>
+</param>
+</interface>
+<interface name="livecd_dontaudit_leaks" lineno="60">
+<summary>
+Dontaudit read/write to a livecd leaks
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="livecd_rw_tmp_files" lineno="78">
+<summary>
+Read and write livecd temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="livecd_rw_semaphores" lineno="97">
+<summary>
+Allow read and write access to livecd semaphores.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="loadkeys" filename="policy/modules/apps/loadkeys.if">
+<summary>Load keyboard mappings.</summary>
+<interface name="loadkeys_domtrans" lineno="13">
+<summary>
+Execute the loadkeys program in the loadkeys domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="loadkeys_run" lineno="38">
+<summary>
+Execute the loadkeys program in the loadkeys domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the loadkeys domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="loadkeys_exec" lineno="57">
+<summary>
+Execute the loadkeys program in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+</module>
+<module name="lockdev" filename="policy/modules/apps/lockdev.if">
+<summary>device locking policy for lockdev</summary>
+<interface name="lockdev_role" lineno="18">
+<summary>
+Role access for lockdev
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="mono" filename="policy/modules/apps/mono.if">
+<summary>Run .NET server and client applications on Linux.</summary>
+<interface name="mono_domtrans" lineno="13">
+<summary>
+Execute the mono program in the mono domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mono_rw_shm" lineno="32">
+<summary>
+Read and write to mono shared memory.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="mono_run" lineno="56">
+<summary>
+Execute mono in the mono domain, and
+allow the specified role the mono domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the mono domain.
+</summary>
+</param>
+</interface>
+<template name="mono_role_template" lineno="92">
+<summary>
+The role template for the mono module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for mono applications.
+</p>
+</desc>
+<param name="role_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<interface name="mono_exec" lineno="135">
+<summary>
+Execute the mono program in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="mozilla" filename="policy/modules/apps/mozilla.if">
+<summary>Policy for Mozilla and related web browsers</summary>
+<interface name="mozilla_role" lineno="18">
+<summary>
+Role access for mozilla
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="mozilla_read_user_home_files" lineno="72">
+<summary>
+Read mozilla home directory content
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_write_user_home_files" lineno="93">
+<summary>
+Write mozilla home directory content
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_execmod_user_home_files" lineno="112">
+<summary>
+Write mozilla home directory content
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_dontaudit_manage_user_home_files" lineno="130">
+<summary>
+Dontaudit attempts to write mozilla home directory content
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_dontaudit_rw_user_home_files" lineno="149">
+<summary>
+Dontaudit attempts to read/write mozilla home directory content
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_domtrans" lineno="167">
+<summary>
+Run mozilla in the mozilla domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_dbus_chat" lineno="186">
+<summary>
+Send and receive messages from
+mozilla over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_rw_tcp_sockets" lineno="206">
+<summary>
+read/write mozilla per user tcp_socket
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mozilla_exec_domtrans" lineno="241">
+<summary>
+Execute mozilla_exec_t
+in the specified domain.
+</summary>
+<desc>
+<p>
+Execute a mozilla_exec_t
+in the specified domain.
+</p>
+<p>
+No interprocess communication (signals, pipes,
+etc.) is provided by this interface since
+the domains are not owned by this module.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="target_domain">
+<summary>
+The type of the new process.
+</summary>
+</param>
+</interface>
+<tunable name="mozilla_read_content" dftval="false">
+<desc>
+<p>
+Control mozilla content access
+</p>
+</desc>
+</tunable>
+</module>
+<module name="mplayer" filename="policy/modules/apps/mplayer.if">
+<summary>Mplayer media player and encoder</summary>
+<interface name="mplayer_role" lineno="18">
+<summary>
+Role access for mplayer
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="mplayer_domtrans" lineno="60">
+<summary>
+Run mplayer in mplayer domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mplayer_exec" lineno="79">
+<summary>
+Execute mplayer in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="mplayer_read_user_home_files" lineno="97">
+<summary>
+Read mplayer per user homedir
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<tunable name="allow_mplayer_execstack" dftval="false">
+<desc>
+<p>
+Allow mplayer executable stack
+</p>
+</desc>
+</tunable>
+</module>
+<module name="nsplugin" filename="policy/modules/apps/nsplugin.if">
+<summary>policy for nsplugin</summary>
+<interface name="nsplugin_manage_rw_files" lineno="14">
+<summary>
+Create, read, write, and delete
+nsplugin rw files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_manage_rw" lineno="33">
+<summary>
+Manage nsplugin rw files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_role_notrans" lineno="75">
+<summary>
+The per role template for the nsplugin module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for nsplugin web browser.
+</p>
+<p>
+This template is invoked automatically for each user, and
+generally does not need to be invoked directly
+by policy writers.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_role" lineno="155">
+<summary>
+Role access for nsplugin
+</summary>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_domtrans" lineno="179">
+<summary>
+The per role template for the nsplugin module.
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_domtrans_config" lineno="199">
+<summary>
+The per role template for the nsplugin module.
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_search_rw_dir" lineno="218">
+<summary>
+Search nsplugin rw directories.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_read_rw_files" lineno="236">
+<summary>
+Read nsplugin rw files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_read_home" lineno="256">
+<summary>
+Read nsplugin home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_rw_exec" lineno="276">
+<summary>
+Exec nsplugin rw files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_manage_home_files" lineno="295">
+<summary>
+Create, read, write, and delete
+nsplugin home files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_rw_pipes" lineno="314">
+<summary>
+Allow attempts to read and write to
+nsplugin named pipes.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_rw_shm" lineno="332">
+<summary>
+Read and write to nsplugin shared memory.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="nsplugin_rw_semaphores" lineno="350">
+<summary>
+Allow read and write access to nsplugin semaphores.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<tunable name="allow_nsplugin_execmem" dftval="false">
+<desc>
+<p>
+Allow nsplugin code to execmem/execstack
+</p>
+</desc>
+</tunable>
+<tunable name="nsplugin_can_network" dftval="true">
+<desc>
+<p>
+Allow nsplugin code to connect to unreserved ports
+</p>
+</desc>
+</tunable>
+</module>
+<module name="openoffice" filename="policy/modules/apps/openoffice.if">
+<summary>Openoffice</summary>
+<interface name="openoffice_plugin_role" lineno="18">
+<summary>
+The per role template for the openoffice module.
+</summary>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+<interface name="openoffice_role_template" lineno="60">
+<summary>
+role for openoffice
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for java applications.
+</p>
+</desc>
+<param name="role_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</interface>
+</module>
+<module name="podsleuth" filename="policy/modules/apps/podsleuth.if">
+<summary>Podsleuth is a tool to get information about an Apple (TM) iPod (TM)</summary>
+<interface name="podsleuth_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run podsleuth.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="podsleuth_run" lineno="38">
+<summary>
+Execute podsleuth in the podsleuth domain, and
+allow the specified role the podsleuth domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the podsleuth domain.
+</summary>
+</param>
+</interface>
+</module>
+<module name="ptchown" filename="policy/modules/apps/ptchown.if">
+<summary>helper function for grantpt(3), changes ownship and permissions of pseudotty</summary>
+<interface name="ptchown_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run ptchown.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="ptchown_run" lineno="37">
+<summary>
+Execute ptchown in the ptchown domain, and
+allow the specified role the ptchown domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the ptchown domain.
+</summary>
+</param>
+</interface>
+</module>
+<module name="pulseaudio" filename="policy/modules/apps/pulseaudio.if">
+<summary>Pulseaudio network sound server.</summary>
+<interface name="pulseaudio_role" lineno="18">
+<summary>
+Role access for pulseaudio
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="pulseaudio_domtrans" lineno="56">
+<summary>
+Execute a domain transition to run pulseaudio.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="pulseaudio_run" lineno="80">
+<summary>
+Execute pulseaudio in the pulseaudio domain, and
+allow the specified role the pulseaudio domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the pulseaudio domain.
+</summary>
+</param>
+</interface>
+<interface name="pulseaudio_exec" lineno="99">
+<summary>
+Execute a pulseaudio in the current domain
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="pulseaudio_dbus_chat" lineno="118">
+<summary>
+Send and receive messages from
+pulseaudio over dbus.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<template name="pulseaudio_read_home" lineno="138">
+<summary>
+read pulseaudio homedir content
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<template name="pulseaudio_manage_home" lineno="158">
+<summary>
+manage pulseaudio homedir content
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<template name="pulseaudio_setattr_home_dir" lineno="178">
+<summary>
+Allow domain to setattr on pulseaudio homedir
+</summary>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<interface name="pulseaudio_stream_connect" lineno="197">
+<summary>
+Connect to pulseaudio over a unix domain
+stream socket.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="qemu" filename="policy/modules/apps/qemu.if">
+<summary>QEMU machine emulator and virtualizer</summary>
+<interface name="qemu_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run qemu.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="qemu_run" lineno="36">
+<summary>
+Execute qemu in the qemu domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to allow the qemu domain.
+</summary>
+</param>
+</interface>
+<interface name="qemu_read_state" lineno="59">
+<summary>
+Allow the domain to read state files in /proc.
+</summary>
+<param name="domain">
+<summary>
+Domain to allow access.
+</summary>
+</param>
+</interface>
+<interface name="qemu_signal" lineno="77">
+<summary>
+Send a signal to qemu.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="qemu_kill" lineno="95">
+<summary>
+Send a sigill to qemu
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="qemu_domtrans_unconfined" lineno="113">
+<summary>
+Execute a domain transition to run qemu unconfined.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<template name="qemu_domain_template" lineno="132">
+<summary>
+Creates types and rules for a basic
+qemu process domain.
+</summary>
+<param name="prefix">
+<summary>
+Prefix for the domain.
+</summary>
+</param>
+</template>
+<interface name="qemu_role_notrans" lineno="240">
+<summary>
+The per role template for the qemu module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for qemu web browser.
+</p>
+<p>
+This template is invoked automatically for each user, and
+generally does not need to be invoked directly
+by policy writers.
+</p>
+</desc>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+</interface>
+<template name="qemu_role" lineno="280">
+<summary>
+The per role template for the qemu module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for qemu web browser.
+</p>
+<p>
+This template is invoked automatically for each user, and
+generally does not need to be invoked directly
+by policy writers.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<interface name="qemu_setsched" lineno="301">
+<summary>
+Set the schedule on qemu.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="qemu_spec_domtrans" lineno="336">
+<summary>
+Execute qemu_exec_t
+in the specified domain but do not
+do it automatically. This is an explicit
+transition, requiring the caller to use setexeccon().
+</summary>
+<desc>
+<p>
+Execute qemu_exec_t
+in the specified domain.  This allows
+the specified domain to qemu programs
+on these filesystems in the specified
+domain.
+</p>
+</desc>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="target_domain">
+<summary>
+The type of the new process.
+</summary>
+</param>
+</interface>
+<interface name="qemu_unconfined_role" lineno="361">
+<summary>
+Execute qemu unconfined programs in the role.
+</summary>
+<param name="role">
+<summary>
+The role to allow the PAM domain.
+</summary>
+</param>
+</interface>
+<interface name="qemu_manage_tmp_dirs" lineno="378">
+<summary>
+Manage qemu temporary dirs.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="qemu_manage_tmp_files" lineno="396">
+<summary>
+Manage qemu temporary files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<tunable name="qemu_full_network" dftval="false">
+<desc>
+<p>
+Allow qemu to connect fully to the network
+</p>
+</desc>
+</tunable>
+<tunable name="qemu_use_usb" dftval="true">
+<desc>
+<p>
+Allow qemu to use usb devices
+</p>
+</desc>
+</tunable>
+<tunable name="qemu_use_nfs" dftval="true">
+<desc>
+<p>
+Allow qemu to use nfs file systems
+</p>
+</desc>
+</tunable>
+<tunable name="qemu_use_cifs" dftval="true">
+<desc>
+<p>
+Allow qemu to use cifs/Samba file systems
+</p>
+</desc>
+</tunable>
+<tunable name="qemu_use_comm" dftval="false">
+<desc>
+<p>
+Allow qemu to user serial/parallell communication ports
+</p>
+</desc>
+</tunable>
+</module>
+<module name="rssh" filename="policy/modules/apps/rssh.if">
+<summary>Restricted (scp/sftp) only shell</summary>
+<interface name="rssh_role" lineno="18">
+<summary>
+Role access for rssh
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="rssh_spec_domtrans" lineno="40">
+<summary>
+Transition to all user rssh domains.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="rssh_read_ro_content" lineno="58">
+<summary>
+Read all users rssh read-only content.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="sambagui" filename="policy/modules/apps/sambagui.if">
+<summary>system-config-samba policy</summary>
+</module>
+<module name="sandbox" filename="policy/modules/apps/sandbox.if">
+<summary>policy for sandbox</summary>
+<interface name="sandbox_transition" lineno="19">
+<summary>
+Execute sandbox in the sandbox domain, and
+allow the specified role the sandbox domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the sandbox domain.
+</summary>
+</param>
+</interface>
+<template name="sandbox_domain_template" lineno="72">
+<summary>
+Creates types and rules for a basic
+qemu process domain.
+</summary>
+<param name="prefix">
+<summary>
+Prefix for the domain.
+</summary>
+</param>
+</template>
+<template name="sandbox_x_domain_template" lineno="106">
+<summary>
+Creates types and rules for a basic
+qemu process domain.
+</summary>
+<param name="prefix">
+<summary>
+Prefix for the domain.
+</summary>
+</param>
+</template>
+<interface name="sandbox_rw_xserver_tmpfs_files" lineno="189">
+<summary>
+allow domain to read,
+write sandbox_xserver tmp files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+</interface>
+<interface name="sandbox_delete_files" lineno="207">
+<summary>
+Delete sandbox files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+</interface>
+<interface name="sandbox_delete_sock_files" lineno="225">
+<summary>
+Delete sandbox sock files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+</interface>
+<interface name="sandbox_setattr_dirs" lineno="244">
+<summary>
+Allow domain to  set the attributes
+of the sandbox directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+</interface>
+<interface name="sandbox_delete_dirs" lineno="262">
+<summary>
+allow domain to delete sandbox files
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+</interface>
+<interface name="sandbox_list" lineno="280">
+<summary>
+allow domain to list sandbox dirs
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+</interface>
+</module>
+<module name="screen" filename="policy/modules/apps/screen.if">
+<summary>GNU terminal multiplexer</summary>
+<template name="screen_role_template" lineno="24">
+<summary>
+The role template for the screen module.
+</summary>
+<param name="role_prefix">
+<summary>
+The prefix of the user role (e.g., user
+is the prefix for user_r).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+</module>
+<module name="sectoolm" filename="policy/modules/apps/sectoolm.if">
+<summary>policy for sectool-mechanism</summary>
+</module>
+<module name="seunshare" filename="policy/modules/apps/seunshare.if">
+<summary>policy for seunshare</summary>
+<interface name="seunshare_domtrans" lineno="13">
+<summary>
+Execute a domain transition to run seunshare.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed to transition.
+</summary>
+</param>
+</interface>
+<interface name="seunshare_run" lineno="40">
+<summary>
+Execute seunshare in the seunshare domain, and
+allow the specified role the seunshare domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the seunshare domain.
+</summary>
+</param>
+</interface>
+<interface name="seunshare_role" lineno="69">
+<summary>
+Role access for seunshare
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="slocate" filename="policy/modules/apps/slocate.if">
+<summary>Update database for mlocate</summary>
+<interface name="slocate_create_append_log" lineno="13">
+<summary>
+Create the locate log with append mode.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="locate_read_lib_files" lineno="33">
+<summary>
+Read locate lib files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="thunderbird" filename="policy/modules/apps/thunderbird.if">
+<summary>Thunderbird email client</summary>
+<interface name="thunderbird_role" lineno="18">
+<summary>
+Role access for thunderbird
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="thunderbird_domtrans" lineno="57">
+<summary>
+Run thunderbird in the user thunderbird domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="tvtime" filename="policy/modules/apps/tvtime.if">
+<summary> tvtime - a high quality television application </summary>
+<interface name="tvtime_role" lineno="18">
+<summary>
+Role access for tvtime
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="uml" filename="policy/modules/apps/uml.if">
+<summary>Policy for UML</summary>
+<interface name="uml_role" lineno="18">
+<summary>
+Role access for uml
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="uml_setattr_util_sockets" lineno="74">
+<summary>
+Set attributes on uml utility socket files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="uml_manage_util_files" lineno="92">
+<summary>
+Manage uml utility files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="userhelper" filename="policy/modules/apps/userhelper.if">
+<summary>SELinux utility to run a shell with a new role</summary>
+<template name="userhelper_role_template" lineno="24">
+<summary>
+The role template for the userhelper module.
+</summary>
+<param name="userrole_prefix">
+<summary>
+The prefix of the user role (e.g., user
+is the prefix for user_r).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The user role.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The user domain associated with the role.
+</summary>
+</param>
+</template>
+<interface name="userhelper_search_config" lineno="183">
+<summary>
+Search the userhelper configuration directory.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userhelper_dontaudit_search_config" lineno="202">
+<summary>
+Do not audit attempts to search
+the userhelper configuration directory.
+</summary>
+<param name="domain">
+<summary>
+Domain to not audit.
+</summary>
+</param>
+</interface>
+<interface name="userhelper_use_fd" lineno="220">
+<summary>
+Allow domain to use userhelper file descriptor.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userhelper_sigchld" lineno="238">
+<summary>
+Allow domain to send sigchld to userhelper.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="userhelper_exec" lineno="256">
+<summary>
+Execute the userhelper program in the caller domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+</module>
+<module name="usernetctl" filename="policy/modules/apps/usernetctl.if">
+<summary>User network interface configuration helper</summary>
+<interface name="usernetctl_domtrans" lineno="13">
+<summary>
+Execute usernetctl in the usernetctl domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="usernetctl_run" lineno="38">
+<summary>
+Execute usernetctl in the usernetctl domain, and
+allow the specified role the usernetctl domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the usernetctl domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="vmware" filename="policy/modules/apps/vmware.if">
+<summary>VMWare Workstation virtual machines</summary>
+<interface name="vmware_role" lineno="18">
+<summary>
+Role access for vmware
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="vmware_exec_host" lineno="43">
+<summary>
+Execute vmware host executables
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="vmware_read_system_config" lineno="61">
+<summary>
+Read VMWare system configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="vmware_append_system_config" lineno="79">
+<summary>
+Append to VMWare system configuration files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="vmware_append_log" lineno="97">
+<summary>
+Append to VMWare log files.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="webalizer" filename="policy/modules/apps/webalizer.if">
+<summary>Web server log analysis</summary>
+<interface name="webalizer_domtrans" lineno="13">
+<summary>
+Execute webalizer in the webalizer domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+</interface>
+<interface name="webalizer_run" lineno="38">
+<summary>
+Execute webalizer in the webalizer domain, and
+allow the specified role the webalizer domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the webalizer domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+</module>
+<module name="wine" filename="policy/modules/apps/wine.if">
+<summary>Wine Is Not an Emulator.  Run Windows programs in Linux.</summary>
+<interface name="wine_domtrans" lineno="13">
+<summary>
+Execute the wine program in the wine domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="wine_run" lineno="38">
+<summary>
+Execute wine in the wine domain, and
+allow the specified role the wine domain.
+</summary>
+<param name="domain">
+<summary>
+The type of the process performing this action.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the wine domain.
+</summary>
+</param>
+</interface>
+<template name="wine_role" lineno="74">
+<summary>
+The per role template for the wine module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for wine applications.
+</p>
+</desc>
+<param name="userdomain_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+</template>
+<template name="wine_role_template" lineno="133">
+<summary>
+The role template for the wine module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for wine applications.
+</p>
+</desc>
+<param name="role_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<tunable name="wine_mmap_zero_ignore" dftval="false">
+<desc>
+<p>
+Ignore wine mmap_zero errors
+</p>
+</desc>
+</tunable>
+</module>
+<module name="wireshark" filename="policy/modules/apps/wireshark.if">
+<summary>Wireshark packet capture tool.</summary>
+<interface name="wireshark_role" lineno="18">
+<summary>
+Role access for wireshark
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+<interface name="wireshark_domtrans" lineno="49">
+<summary>
+Run wireshark in wireshark domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="wm" filename="policy/modules/apps/wm.if">
+<summary>X Window Managers</summary>
+<template name="wm_role_template" lineno="30">
+<summary>
+The role template for the wm module.
+</summary>
+<desc>
+<p>
+This template creates a derived domains which are used
+for window manager applications.
+</p>
+</desc>
+<param name="role_prefix">
+<summary>
+The prefix of the user domain (e.g., user
+is the prefix for user_t).
+</summary>
+</param>
+<param name="user_role">
+<summary>
+The role associated with the user domain.
+</summary>
+</param>
+<param name="user_domain">
+<summary>
+The type of the user domain.
+</summary>
+</param>
+</template>
+<interface name="wm_exec" lineno="108">
+<summary>
+Execute the wm program in the wm domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>
+<module name="xscreensaver" filename="policy/modules/apps/xscreensaver.if">
+<summary>X Screensaver</summary>
+<interface name="xscreensaver_role" lineno="18">
+<summary>
+Role access for xscreensaver
+</summary>
+<param name="role">
+<summary>
+Role allowed access
+</summary>
+</param>
+<param name="domain">
+<summary>
+User domain for the role
+</summary>
+</param>
+</interface>
+</module>
+<module name="yam" filename="policy/modules/apps/yam.if">
+<summary>Yum/Apt Mirroring</summary>
+<interface name="yam_domtrans" lineno="13">
+<summary>
+Execute yam in the yam domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+<interface name="yam_run" lineno="39">
+<summary>
+Execute yam in the yam domain, and
+allow the specified role the yam domain.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+<param name="role">
+<summary>
+The role to be allowed the yam domain.
+</summary>
+</param>
+<rolecap/>
+</interface>
+<interface name="yam_read_content" lineno="58">
+<summary>
+Read yam content.
+</summary>
+<param name="domain">
+<summary>
+Domain allowed access.
+</summary>
+</param>
+</interface>
+</module>

@@ -1,0 +1,107 @@
+Fedora BitTorrent Notes
+=======================
+
+Known Bugs
+==========
+
+ 1. Translations are broken (http://bugzilla.redhat.com/237254)
+    This appears to be a python 2.5 compatibility issue
+
+ 2. BitTorrent doesn't die gracefully (http://bugzilla.redhat.com/189072)
+    Fastresume data isn't saved if the client is killed (e.g. as a result
+    of logging out without closing down the application cleanly).
+
+ 3. Newer versions are available
+
+    The 6.x BitTorrent client is closed source and cannot be included in
+    Fedora
+
+    The 5.x BitTorrent client has a GUI that is incompatible with
+    wxPython > 2.6 as used in Fedora 7 onwards
+    (http://bugzilla.redhat.com/223623)
+
+Seeding and Tracking
+====================
+
+BitTorrent seed and tracking functionality is essentially a service like a
+web server, and so initscripts are provided to launch these services at
+system startup. They run as the unprivileged user "torrent" though the
+scripts are started as root.
+
+Creating a Torrent and Tracker Setup
+====================================
+
+1. Copy the file or directory you want to create a torrent for into the
+   /var/lib/bittorrent/data/ directory.
+
+2. Make the torrent file; let's say you want to serve out the contents of
+   the /var/lib/bittorrent/data/mydata directory, and you'll be using a
+   tracker URL of http://myhostname.example.com:6969/announce :
+
+   # cd /var/lib/bittorrent/data
+   # maketorrent-console http://myhostname.example.com:6969/announce mydata
+
+   That should create /var/lib/bittorrent/data/mydata.torrent
+
+   It's not necessary for the ownership of the files in the
+   /var/lib/bittorrent/data directory to be changed from root or whatever user
+   created them, as the tracker and seeder only need to be able to read them,
+   not write to them.
+
+3. You can then start your tracker, which will track for all torrent files
+   in the /var/lib/bittorrent/data directory.
+
+   # /sbin/service bttrack start
+
+   You can point a browser at http://myhostname.example.com:6969/ to verify
+   that the tracker is working.
+
+   If you want the tracker to start up when the system boots up, do:
+
+   # /sbin/chkconfig bttrack on
+
+Starting a Seed Client
+======================
+
+If you want to start a seeder for torrents you created yourself as described
+above, all you need to do is to start the btseed service, which seeds for all
+torrents in the /var/lib/bittorrent/data directory:
+
+  # /sbin/service btseed start
+
+If you want the seeder to start up when the system boots up, do:
+
+  # /sbin/chkconfig btseed on
+
+If you want to act as a seed for a torrent file you've downloaded from
+somewhere else and you haven't downloaded the content yet, simply copy the
+downloaded torrent file into the /var/lib/bittorrent/data directory and
+start the btseed service (as above) if it is not already running. The
+btseed service will download the content into the /var/lib/bittorrent/data
+directory and then start seeding it.
+
+If you have already downloaded the content for a torrent and now want to seed
+it, copy the downloaded content into the /var/lib/bittorrent/data directory,
+then copy the torrent file into the /var/lib/bittorrent/data directory and then
+start the btseed service (as above) if it is not already running.
+
+Stopping the Services
+=====================
+
+# /sbin/service btseed stop
+# /sbin/service bttrack stop
+
+If you no longer want the services to start up at system boot time:
+
+# /sbin/chkconfig btseed off
+# /sbin/chkconfig bttrack off
+
+Log Files
+=========
+
+The seeder and tracker services create log files in the /var/log/bittorrent
+directory. Note that the seed client buffers output and so the data written
+to the log files may not actually be written to disk (and hence be read by
+anyone) for some considerable time.
+
+

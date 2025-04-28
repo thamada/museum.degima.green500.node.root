@@ -1,0 +1,454 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Electronic_Design_Automation" lang="zh-CN">
+	<title>电&#x200B;子&#x200B;设&#x200B;计&#x200B;自&#x200B;动&#x200B;化&#x200B;</title>
+	 <remark>这&#x200B;个 beat 位&#x200B;于&#x200B;：<ulink type="http" url="https://fedoraproject.org/wiki/Documentation_EDA_Beat">https://fedoraproject.org/wiki/Documentation_EDA_Beat</ulink></remark>
+	<para>
+		<indexterm>
+			<primary>电&#x200B;子&#x200B;设&#x200B;计&#x200B;自&#x200B;动&#x200B;化&#x200B;</primary>
+		</indexterm>
+		 <indexterm>
+			<primary>Fedora 电&#x200B;子&#x200B;实&#x200B;验&#x200B;室&#x200B;</primary>
+		</indexterm>
+		 本&#x200B;节&#x200B;概&#x200B;括&#x200B;了&#x200B;Fedora 12中&#x200B;Fedora Electronic Lab的&#x200B;更&#x200B;新&#x200B;。&#x200B;注&#x200B;意&#x200B;FEL中&#x200B;的&#x200B;很&#x200B;多&#x200B;程&#x200B;序&#x200B;在&#x200B;应&#x200B;用&#x200B;上&#x200B;有&#x200B;很&#x200B;多&#x200B;联&#x200B;系&#x200B;。&#x200B;这&#x200B;些&#x200B;特&#x200B;定&#x200B;的&#x200B;程&#x200B;序&#x200B;在&#x200B;电&#x200B;路&#x200B;设&#x200B;计&#x200B;（包&#x200B;括&#x200B;模&#x200B;拟&#x200B;和&#x200B;PCB布&#x200B;局&#x200B;）及&#x200B;嵌&#x200B;入&#x200B;式&#x200B;开&#x200B;发&#x200B;章&#x200B;节&#x200B;的&#x200B;相&#x200B;关&#x200B;部&#x200B;分&#x200B;做&#x200B;了&#x200B;介&#x200B;绍&#x200B;。&#x200B;
+	</para>
+	<section>
+		<title>协&#x200B;同&#x200B;代&#x200B;码&#x200B;评&#x200B;审&#x200B;</title>
+		<para>
+			<indexterm>
+				<primary>协&#x200B;同&#x200B;代&#x200B;码&#x200B;评&#x200B;审&#x200B;</primary>
+			</indexterm>
+			 One of the many faces of digital hardware design entails tracking many files to be fed to multiple EDA tools. The eventual reports or netlists are carefully analysed and logged as part of the sign-off methodology. Each company tracks these project dependent files under a certain directory structure and under a certain revision controlled system of their choice.
+		</para>
+		<para>
+			我&#x200B;们&#x200B;为&#x200B;Fedora引&#x200B;入&#x200B;了&#x200B;一&#x200B;个&#x200B;高&#x200B;效&#x200B;可&#x200B;靠&#x200B;的&#x200B;代&#x200B;码&#x200B;审&#x200B;阅&#x200B;方&#x200B;案&#x200B;。&#x200B;这&#x200B;个&#x200B;基&#x200B;于&#x200B;trac的&#x200B;同&#x200B;行&#x200B;审&#x200B;阅&#x200B;方&#x200B;案&#x200B;同&#x200B;时&#x200B;也&#x200B;可&#x200B;帮&#x200B;助&#x200B;在&#x200B;bug、&#x200B;任&#x200B;务&#x200B;、&#x200B;变&#x200B;更&#x200B;集&#x200B;和&#x200B;文&#x200B;件&#x200B;间&#x200B;建&#x200B;立&#x200B;链&#x200B;接&#x200B;和&#x200B;无&#x200B;缝&#x200B;引&#x200B;用&#x200B;。&#x200B;项&#x200B;目&#x200B;协&#x200B;调&#x200B;人&#x200B;员&#x200B;将&#x200B;对&#x200B;正&#x200B;在&#x200B;进&#x200B;行&#x200B;的&#x200B;项&#x200B;目&#x200B;有&#x200B;一&#x200B;个&#x200B;更&#x200B;真&#x200B;实&#x200B;的&#x200B;概&#x200B;览&#x200B;并&#x200B;且&#x200B;可&#x200B;以&#x200B;按&#x200B;照&#x200B;不&#x200B;同&#x200B;的&#x200B;进&#x200B;展&#x200B;和&#x200B;里&#x200B;程&#x200B;轻&#x200B;松&#x200B;地&#x200B;进&#x200B;行&#x200B;跟&#x200B;踪&#x200B;。&#x200B;
+		</para>
+	</section>
+	
+	<section>
+		<title>Eclipse缺&#x200B;省&#x200B;IDE</title>
+		<para>
+			<indexterm>
+				<primary>Eclipse缺&#x200B;省&#x200B;IDE</primary>
+				<secondary>电&#x200B;子&#x200B;设&#x200B;计&#x200B;自&#x200B;动&#x200B;化&#x200B;</secondary>
+			</indexterm>
+			 在&#x200B;Fedora Eclipse团&#x200B;队&#x200B;的&#x200B;协&#x200B;助&#x200B;和&#x200B;支&#x200B;持&#x200B;下&#x200B;，Eclipse成&#x200B;为&#x200B;了&#x200B;FEL在&#x200B;HDL IP开&#x200B;发&#x200B;和&#x200B;文&#x200B;档&#x200B;上&#x200B;主&#x200B;要&#x200B;的&#x200B;IDE。&#x200B;这&#x200B;样&#x200B;是&#x200B;为&#x200B;了&#x200B;在&#x200B;不&#x200B;同&#x200B;嵌&#x200B;入&#x200B;式&#x200B;软&#x200B;件&#x200B;商&#x200B;提&#x200B;供&#x200B;的&#x200B;工&#x200B;具&#x200B;之&#x200B;间&#x200B;保&#x200B;持&#x200B;真&#x200B;正&#x200B;的&#x200B;互&#x200B;操&#x200B;作&#x200B;性&#x200B;。&#x200B;
+		</para>
+		<para>
+			Fedora Electronic实&#x200B;验&#x200B;平&#x200B;台&#x200B;默&#x200B;认&#x200B;提&#x200B;供&#x200B;的&#x200B;如&#x200B;下&#x200B;插&#x200B;件&#x200B;将&#x200B;会&#x200B;增&#x200B;强&#x200B;： 
+			<itemizedlist>
+				<listitem>
+					<para>
+						前&#x200B;端&#x200B;设&#x200B;计&#x200B;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						专&#x200B;业&#x200B;数&#x200B;据&#x200B;表&#x200B;的&#x200B;文&#x200B;档&#x200B;自&#x200B;动&#x200B;生&#x200B;成&#x200B;及&#x200B;维&#x200B;护&#x200B;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Perl/Tcl脚&#x200B;本&#x200B;（Perl模&#x200B;块&#x200B;特&#x200B;性&#x200B;从&#x200B;FEL10开&#x200B;始&#x200B;）
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						版&#x200B;本&#x200B;控&#x200B;制&#x200B;项&#x200B;目&#x200B;
+					</para>
+				</listitem>
+			</itemizedlist>
+			<table frame="all" id="tbl-FEL-Eclipse-Plugins">
+				<title>用&#x200B;于&#x200B;硬&#x200B;件&#x200B;设&#x200B;计&#x200B;的&#x200B;Eclipse插&#x200B;件&#x200B;</title>
+				<indexterm>
+					<primary>eclipse-veditor</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-eclox</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-texlipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-cdt</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-dltk-tcl</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-epic</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-subclipse</primary>
+				</indexterm>
+				<indexterm>
+					<primary>eclipse-egit</primary>
+				</indexterm>
+				<tgroup cols="2">
+					<thead>
+						<row>
+							<entry>
+								组&#x200B;件&#x200B;
+							</entry>
+							<entry>
+								描&#x200B;述&#x200B;
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>
+								eclipse-veditor
+							</entry>
+							<entry>
+								帮&#x200B;助&#x200B;数&#x200B;字&#x200B;IC设&#x200B;计&#x200B;人&#x200B;员&#x200B;/FPGA设&#x200B;计&#x200B;人&#x200B;员&#x200B;在&#x200B;Eclipse上&#x200B;开&#x200B;发&#x200B;Verilog/ VHDL代&#x200B;码&#x200B;。&#x200B;提&#x200B;供&#x200B;了&#x200B;对&#x200B;拼&#x200B;写&#x200B;错&#x200B;误&#x200B;，缺&#x200B;失&#x200B;信&#x200B;号&#x200B;及&#x200B;不&#x200B;必&#x200B;要&#x200B;信&#x200B;号&#x200B;等&#x200B;的&#x200B;实&#x200B;时&#x200B;错&#x200B;误&#x200B;和&#x200B;警&#x200B;告&#x200B;提&#x200B;示&#x200B;。&#x200B;
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-eclox
+							</entry>
+							<entry>
+								如&#x200B;果&#x200B;vhdl代&#x200B;码&#x200B;需&#x200B;要&#x200B;doxygen式&#x200B;的&#x200B;注&#x200B;释&#x200B;，可&#x200B;自&#x200B;动&#x200B;生&#x200B;成&#x200B;pdf文&#x200B;件&#x200B;以&#x200B;便&#x200B;在&#x200B;内&#x200B;部&#x200B;会&#x200B;议&#x200B;中&#x200B;使&#x200B;用&#x200B;或&#x200B;发&#x200B;送&#x200B;给&#x200B;客&#x200B;户&#x200B;。&#x200B;
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-texlipse
+							</entry>
+							<entry>
+								由&#x200B;于&#x200B;pdf由&#x200B;latex生&#x200B;成&#x200B;，texlipse插&#x200B;件&#x200B;将&#x200B;提&#x200B;供&#x200B;一&#x200B;些&#x200B;额&#x200B;外&#x200B;的&#x200B;页&#x200B;面&#x200B;输&#x200B;出&#x200B;格&#x200B;式&#x200B;以&#x200B;方&#x200B;便&#x200B;pdf创&#x200B;建&#x200B;。&#x200B;pdf创&#x200B;建&#x200B;目&#x200B;前&#x200B;只&#x200B;有&#x200B;Ctrl-S，而&#x200B;不&#x200B;是&#x200B;像&#x200B;kile中&#x200B;手&#x200B;动&#x200B;点&#x200B;击&#x200B;。&#x200B;就&#x200B;是&#x200B;说&#x200B;FEL livedvd将&#x200B;移&#x200B;除&#x200B;kile。&#x200B;
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-cdt
+							</entry>
+							<entry>
+								提&#x200B;供&#x200B;了&#x200B;嵌&#x200B;入&#x200B;式&#x200B;C和&#x200B;C++开&#x200B;发&#x200B;工&#x200B;具&#x200B;。&#x200B;
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-dltk-tcl
+							</entry>
+							<entry>
+								Tcl脚&#x200B;本&#x200B;可&#x200B;依&#x200B;靠&#x200B;HDL代&#x200B;码&#x200B;维&#x200B;护&#x200B;。&#x200B;
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-epic
+							</entry>
+							<entry>
+								Perl脚&#x200B;本&#x200B;可&#x200B;依&#x200B;靠&#x200B;HDL代&#x200B;码&#x200B;维&#x200B;护&#x200B;。&#x200B;
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-subclipse
+							</entry>
+							<entry>
+								增&#x200B;加&#x200B;了&#x200B;对&#x200B;Eclipse IDE的&#x200B;子&#x200B;版&#x200B;本&#x200B;集&#x200B;成&#x200B;
+							</entry>
+						</row>
+						<row>
+							<entry>
+								eclipse-egit
+							</entry>
+							<entry>
+								增&#x200B;加&#x200B;了&#x200B;对&#x200B;Eclipse IDE的&#x200B;分&#x200B;布&#x200B;式&#x200B;版&#x200B;本&#x200B;控&#x200B;制&#x200B;GIT集&#x200B;成&#x200B;
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+	</section>
+	
+	<section>
+		<title>仿&#x200B;真&#x200B;式 ASIC 设&#x200B;计&#x200B;</title>
+		<variablelist>
+			<varlistentry>
+				<term>toped</term>
+				<listitem>
+					<indexterm>
+						<primary>toped</primary>
+					</indexterm>
+					<para>
+						Updated to the consolidation release 0.9.4. The Fedora Toped package sets the variable $TPD_GLOBAL to /usr/share/toped by default so that the user could run toped out of the box.
+					</para>
+					<para>
+						Graham Petley和&#x200B;Krustev Svilen为&#x200B;TELL提&#x200B;供&#x200B;了&#x200B;2个&#x200B;文&#x200B;件&#x200B;，做&#x200B;为&#x200B;示&#x200B;例&#x200B;解&#x200B;释&#x200B;toped如&#x200B;何&#x200B;通&#x200B;过&#x200B;toped的&#x200B;GDSII和&#x200B;CIF解&#x200B;析&#x200B;器&#x200B;与&#x200B;Pharosc标&#x200B;准&#x200B;Cells进&#x200B;行&#x200B;交&#x200B;互&#x200B;。&#x200B;
+					</para>
+					<para>
+						重&#x200B;点 
+						<itemizedlist>
+							<listitem>
+								<para>
+									新&#x200B;的&#x200B;图&#x200B;形&#x200B;渲&#x200B;染&#x200B;将&#x200B;绘&#x200B;图&#x200B;速&#x200B;度&#x200B;提&#x200B;升&#x200B;了&#x200B;近&#x200B;3.5倍&#x200B;。&#x200B;需&#x200B;要&#x200B;openGL 1.4（F-11用&#x200B;户&#x200B;是&#x200B;1.3，不&#x200B;过&#x200B;这&#x200B;不&#x200B;成&#x200B;问&#x200B;题&#x200B;）及&#x200B;Virtual Buffer Objects。&#x200B;它&#x200B;将&#x200B;做&#x200B;为&#x200B;未&#x200B;来&#x200B;图&#x200B;形&#x200B;效&#x200B;果&#x200B;的&#x200B;基&#x200B;础&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									保&#x200B;留&#x200B;了&#x200B;旧&#x200B;的&#x200B;渲&#x200B;染&#x200B;器&#x200B;以&#x200B;使&#x200B;得&#x200B;驱&#x200B;动&#x200B;程&#x200B;序&#x200B;执&#x200B;行&#x200B;旧&#x200B;版&#x200B;openGL以&#x200B;及&#x200B;虚&#x200B;拟&#x200B;桌&#x200B;面&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									速&#x200B;度&#x200B;也&#x200B;明&#x200B;显&#x200B;提&#x200B;高&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									对&#x200B;外&#x200B;部&#x200B;接&#x200B;口&#x200B;做&#x200B;了&#x200B;更&#x200B;新&#x200B;和&#x200B;修&#x200B;正&#x200B;。&#x200B;特&#x200B;别&#x200B;是&#x200B;GDSII。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									针&#x200B;对&#x200B;Virtuoso(C)技&#x200B;术&#x200B;文&#x200B;件&#x200B;到&#x200B;TELL会&#x200B;话&#x200B;的&#x200B;新&#x200B;工&#x200B;具&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									TDT格&#x200B;式&#x200B;更&#x200B;新&#x200B;，使&#x200B;用&#x200B;了&#x200B;新&#x200B;纪&#x200B;录&#x200B;。&#x200B;版&#x200B;本&#x200B;更&#x200B;新&#x200B;至&#x200B;0.7。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									TDT格&#x200B;式&#x200B;更&#x200B;新&#x200B;，使&#x200B;用&#x200B;了&#x200B;新&#x200B;纪&#x200B;录&#x200B;。&#x200B;版&#x200B;本&#x200B;更&#x200B;新&#x200B;至&#x200B;0.7。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									用&#x200B;户&#x200B;界&#x200B;面&#x200B;自&#x200B;定&#x200B;义&#x200B;的&#x200B;更&#x200B;多&#x200B;更&#x200B;新 - 工&#x200B;具&#x200B;栏&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									对&#x200B;cell引&#x200B;用&#x200B;的&#x200B;内&#x200B;部&#x200B;操&#x200B;作&#x200B;进&#x200B;行&#x200B;了&#x200B;更&#x200B;新&#x200B;。&#x200B;图&#x200B;层&#x200B;0将&#x200B;当&#x200B;做&#x200B;正&#x200B;常&#x200B;层&#x200B;。&#x200B;
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+					<warning>
+						<title>老&#x200B;版&#x200B;本&#x200B;的&#x200B;Toped将&#x200B;无&#x200B;法&#x200B;读&#x200B;取&#x200B;本&#x200B;版&#x200B;本&#x200B;生&#x200B;成&#x200B;的&#x200B;TDT文&#x200B;件&#x200B;。 </title>
+						<para>
+							还&#x200B;有&#x200B;一&#x200B;些&#x200B;代&#x200B;码&#x200B;没&#x200B;有&#x200B;整&#x200B;合&#x200B;到&#x200B;主&#x200B;开&#x200B;发&#x200B;中&#x200B;，包&#x200B;括&#x200B;口&#x200B;径&#x200B;错&#x200B;误&#x200B;报&#x200B;告&#x200B;分&#x200B;析&#x200B;器&#x200B;。&#x200B;建&#x200B;议&#x200B;在&#x200B;发&#x200B;行&#x200B;后&#x200B;做&#x200B;此&#x200B;工&#x200B;作&#x200B;。&#x200B;为&#x200B;了&#x200B;保&#x200B;证&#x200B;当&#x200B;前&#x200B;版&#x200B;本&#x200B;的&#x200B;稳&#x200B;定&#x200B;，搁&#x200B;浅&#x200B;了&#x200B;部&#x200B;分&#x200B;功&#x200B;能&#x200B;。&#x200B;
+						</para>
+					</warning>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Magic</term>
+				<listitem>
+					<indexterm>
+						<primary>magic</primary>
+					</indexterm>
+					<indexterm>
+						<primary>magic-doc</primary>
+					</indexterm>
+					<para>
+						Fedora Magic 已&#x200B;更&#x200B;新&#x200B;至 8.0.54 版&#x200B;本&#x200B;。&#x200B;
+					</para>
+					<para>
+						Fedora Magic的&#x200B;文&#x200B;档&#x200B;使&#x200B;用&#x200B;了&#x200B;单&#x200B;独&#x200B;的&#x200B;包&#x200B;，叫&#x200B;做&#x200B;：<package>magic-doc</package>。&#x200B;文&#x200B;档&#x200B;中&#x200B;集&#x200B;合&#x200B;了&#x200B;一&#x200B;些&#x200B;scmos的&#x200B;样&#x200B;例&#x200B;和&#x200B;教&#x200B;程&#x200B;。&#x200B;Magic VLSI高&#x200B;级&#x200B;用&#x200B;户&#x200B;应&#x200B;该&#x200B;也&#x200B;会&#x200B;有&#x200B;兴&#x200B;趣&#x200B;再&#x200B;次&#x200B;读&#x200B;此&#x200B;文&#x200B;档&#x200B;，来&#x200B;掌&#x200B;握&#x200B;8.0系&#x200B;列&#x200B;中&#x200B;不&#x200B;可&#x200B;缺&#x200B;少&#x200B;的&#x200B;详&#x200B;情&#x200B;。&#x200B;
+					</para>
+					<para>
+						特&#x200B;性&#x200B;： 
+						<itemizedlist>
+							<listitem>
+								<para>
+									轮&#x200B;廓&#x200B;矢&#x200B;量&#x200B;字&#x200B;体&#x200B;（freefont项&#x200B;目&#x200B;），目&#x200B;的&#x200B;在&#x200B;于&#x200B;清&#x200B;理&#x200B;Magic中&#x200B;相&#x200B;关&#x200B;标&#x200B;签&#x200B;的&#x200B;问&#x200B;题&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									所&#x200B;有&#x200B;显&#x200B;示&#x200B;、&#x200B;操&#x200B;作&#x200B;及&#x200B;OpenGL都&#x200B;是&#x200B;完&#x200B;整&#x200B;的&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Features some "cifoutput" operators for use with the new "cif paint" command, for manipulating layout using boolean operators.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									提&#x200B;高&#x200B;了&#x200B;执&#x200B;行&#x200B;速&#x200B;度&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									为&#x200B;网&#x200B;格&#x200B;操&#x200B;作&#x200B;和&#x200B;字&#x200B;符&#x200B;设&#x200B;置&#x200B;增&#x200B;加&#x200B;了&#x200B;两&#x200B;个&#x200B;额&#x200B;外&#x200B;菜&#x200B;单&#x200B;。&#x200B;
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Electric</term>
+				<listitem>
+					<indexterm>
+						<primary>electric</primary>
+					</indexterm>
+					<para>
+						<package>electric</package> 已&#x200B;更&#x200B;新&#x200B;至 8.09 版&#x200B;本&#x200B;
+					</para>
+					<para>
+						请&#x200B;注&#x200B;意&#x200B;大&#x200B;量&#x200B;电&#x200B;气&#x200B;用&#x200B;户&#x200B;群&#x200B;使&#x200B;用&#x200B;的&#x200B;第&#x200B;三&#x200B;方&#x200B;插&#x200B;件&#x200B;由&#x200B;于&#x200B;许&#x200B;可&#x200B;方&#x200B;面&#x200B;不&#x200B;能&#x200B;与&#x200B;Fedora兼&#x200B;容&#x200B;，因&#x200B;此&#x200B;FEL无&#x200B;法&#x200B;把&#x200B;这&#x200B;些&#x200B;插&#x200B;件&#x200B;加&#x200B;入&#x200B;其&#x200B;中&#x200B;。&#x200B;Fedora电&#x200B;气&#x200B;实&#x200B;验&#x200B;团&#x200B;队&#x200B;理&#x200B;解&#x200B;由&#x200B;于&#x200B;上&#x200B;游&#x200B;版&#x200B;本&#x200B;的&#x200B;更&#x200B;新&#x200B;造&#x200B;成&#x200B;的&#x200B;与&#x200B;用&#x200B;户&#x200B;插&#x200B;件&#x200B;互&#x200B;操&#x200B;作&#x200B;性&#x200B;的&#x200B;破&#x200B;坏&#x200B;。&#x200B;因&#x200B;此&#x200B;新&#x200B;版&#x200B;的&#x200B;电&#x200B;气&#x200B;包&#x200B;将&#x200B;放&#x200B;到&#x200B;更&#x200B;新&#x200B;测&#x200B;试&#x200B;仓&#x200B;库&#x200B;。&#x200B;
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>数&#x200B;字&#x200B;设&#x200B;计&#x200B;</title>
+		<variablelist>
+			<varlistentry>
+				<term>Dinotrace</term>
+				<listitem>
+					<indexterm>
+						<primary>dinotrace</primary>
+					</indexterm>
+					<para>
+						Dinotrace是&#x200B;Fedora &PRODVER;新&#x200B;增&#x200B;的&#x200B;，一&#x200B;个&#x200B;可&#x200B;以&#x200B;识&#x200B;别&#x200B;Verilog值&#x200B;变&#x200B;更&#x200B;转&#x200B;储&#x200B;，ASCII及&#x200B;其&#x200B;它&#x200B;跟&#x200B;踪&#x200B;格&#x200B;式&#x200B;的&#x200B;波&#x200B;形&#x200B;查&#x200B;看&#x200B;器&#x200B;。&#x200B;
+					</para>
+					<para>
+						它&#x200B;允&#x200B;许&#x200B;定&#x200B;位&#x200B;鼠&#x200B;标&#x200B;，高&#x200B;亮&#x200B;信&#x200B;号&#x200B;，搜&#x200B;索&#x200B;，打&#x200B;印&#x200B;及&#x200B;其&#x200B;它&#x200B;优&#x200B;于&#x200B;多&#x200B;数&#x200B;商&#x200B;业&#x200B;波&#x200B;形&#x200B;监&#x200B;视&#x200B;器&#x200B;的&#x200B;能&#x200B;力&#x200B;。&#x200B;
+					</para>
+					<para>
+						Dinotrace针&#x200B;对&#x200B;快&#x200B;速&#x200B;调&#x200B;试&#x200B;进&#x200B;行&#x200B;了&#x200B;优&#x200B;化&#x200B;。&#x200B;有&#x200B;了&#x200B;VTRACE，模&#x200B;拟&#x200B;失&#x200B;败&#x200B;时&#x200B;会&#x200B;自&#x200B;动&#x200B;在&#x200B;波&#x200B;形&#x200B;查&#x200B;看&#x200B;器&#x200B;中&#x200B;将&#x200B;光&#x200B;标&#x200B;定&#x200B;位&#x200B;在&#x200B;错&#x200B;误&#x200B;处&#x200B;，添&#x200B;加&#x200B;可&#x200B;见&#x200B;注&#x200B;释&#x200B;。&#x200B;点&#x200B;击&#x200B;鼠&#x200B;标&#x200B;4次&#x200B;，日&#x200B;志&#x200B;文&#x200B;件&#x200B;中&#x200B;的&#x200B;错&#x200B;误&#x200B;将&#x200B;以&#x200B;高&#x200B;亮&#x200B;显&#x200B;示&#x200B;，并&#x200B;且&#x200B;可&#x200B;在&#x200B;源&#x200B;文&#x200B;件&#x200B;中&#x200B;看&#x200B;到&#x200B;错&#x200B;误&#x200B;位&#x200B;置&#x200B;的&#x200B;信&#x200B;号&#x200B;值&#x200B;。&#x200B;
+					</para>
+					<para>
+						Fedora为&#x200B;emacs提&#x200B;供&#x200B;了&#x200B;<code>dinotrace-mode</code>做&#x200B;为&#x200B;<package>emacs-dinotrace-mode</package>。&#x200B;
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>eqntott</term>
+				<listitem>
+					<indexterm>
+						<primary>eqntott</primary>
+					</indexterm>
+					<para>
+						<package>eqntott</package> converts Boolean logic expressions into a truth table that is useful for preparing input to espresso package for logic minimization, converting logic expressions into simpler forms, and for creating truth tables. <package>eqntott</package> is new for Fedora &PRODVER;.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>expresso-ab</term>
+				<listitem>
+					<indexterm>
+						<primary>expresso-ab</primary>
+					</indexterm>
+					<para>
+						<package>espresso</package>为&#x200B;Fedora &PRODVER;新&#x200B;增&#x200B;工&#x200B;具&#x200B;，takes as input a two-level representation of a two-valued (or multiplevalued) Boolean function, and produces a minimal equivalent representation。&#x200B;它&#x200B;是&#x200B;个&#x200B;布&#x200B;尔&#x200B;逻&#x200B;辑&#x200B;最&#x200B;小&#x200B;化&#x200B;工&#x200B;具&#x200B;。&#x200B;
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Verilator</term>
+				<listitem>
+					<indexterm>
+						<primary>verilator</primary>
+					</indexterm>
+					<para>
+						Verilator是&#x200B;最&#x200B;快&#x200B;的&#x200B;免&#x200B;费&#x200B;Verilog HDL模&#x200B;拟&#x200B;器&#x200B;。&#x200B;它&#x200B;能&#x200B;够&#x200B;编&#x200B;译&#x200B;可&#x200B;合&#x200B;成&#x200B;的&#x200B;Verilog，向&#x200B;C++或&#x200B;SystemC代&#x200B;码&#x200B;中&#x200B;添&#x200B;加&#x200B;PSL，SystemVerilog及&#x200B;Synthesis判&#x200B;断&#x200B;。&#x200B;它&#x200B;的&#x200B;设&#x200B;计&#x200B;主&#x200B;要&#x200B;针&#x200B;对&#x200B;注&#x200B;重&#x200B;快&#x200B;速&#x200B;模&#x200B;拟&#x200B;性&#x200B;能&#x200B;的&#x200B;大&#x200B;项&#x200B;目&#x200B;，并&#x200B;能&#x200B;很&#x200B;好&#x200B;的&#x200B;用&#x200B;于&#x200B;为&#x200B;嵌&#x200B;入&#x200B;式&#x200B;软&#x200B;件&#x200B;设&#x200B;计&#x200B;团&#x200B;队&#x200B;创&#x200B;建&#x200B;CPU可&#x200B;执&#x200B;行&#x200B;模&#x200B;型&#x200B;。&#x200B;
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>vrq</term>
+				<listitem>
+					<indexterm>
+						<primary>vrq</primary>
+					</indexterm>
+					<para>
+						VRQ是&#x200B;模&#x200B;块&#x200B;式&#x200B;的&#x200B;verilog分&#x200B;析&#x200B;器&#x200B;，它&#x200B;支&#x200B;持&#x200B;用&#x200B;插&#x200B;件&#x200B;工&#x200B;具&#x200B;处&#x200B;理&#x200B;verilog。&#x200B;通&#x200B;过&#x200B;执&#x200B;行&#x200B;vrq可&#x200B;以&#x200B;管&#x200B;道&#x200B;形&#x200B;式&#x200B;逐&#x200B;步&#x200B;调&#x200B;用&#x200B;多&#x200B;个&#x200B;工&#x200B;具&#x200B;。&#x200B;它&#x200B;是&#x200B;一&#x200B;个&#x200B;以&#x200B;自&#x200B;定&#x200B;义&#x200B;插&#x200B;件&#x200B;做&#x200B;后&#x200B;端&#x200B;的&#x200B;通&#x200B;用&#x200B;前&#x200B;端&#x200B;分&#x200B;析&#x200B;器&#x200B;。&#x200B;
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Alliance</term>
+				<listitem>
+					<indexterm>
+						<primary>Alliance</primary>
+					</indexterm>
+					<para>
+						Fedora Alliance CVS开&#x200B;发&#x200B;仓&#x200B;库&#x200B;在&#x200B;2009年&#x200B;八&#x200B;月&#x200B;得&#x200B;到&#x200B;了&#x200B;它&#x200B;的&#x200B;第&#x200B;100个&#x200B;补&#x200B;丁&#x200B;，以&#x200B;解&#x200B;决&#x200B;在&#x200B;64位&#x200B;架&#x200B;构&#x200B;上&#x200B;的&#x200B;稳&#x200B;定&#x200B;性&#x200B;。&#x200B;我&#x200B;们&#x200B;为&#x200B;上&#x200B;游&#x200B;使&#x200B;用&#x200B;了&#x200B;全&#x200B;部&#x200B;补&#x200B;丁&#x200B;而&#x200B;感&#x200B;到&#x200B;高&#x200B;兴&#x200B;。&#x200B;同&#x200B;时&#x200B;我&#x200B;们&#x200B;为&#x200B;所&#x200B;有&#x200B;Fedora支&#x200B;持&#x200B;的&#x200B;测&#x200B;试&#x200B;仓&#x200B;库&#x200B;及&#x200B;EPEL-5测&#x200B;试&#x200B;仓&#x200B;库&#x200B;构&#x200B;建&#x200B;了&#x200B;这&#x200B;个&#x200B;新&#x200B;版&#x200B;本&#x200B;。&#x200B;本&#x200B;版&#x200B;本&#x200B;带&#x200B;来&#x200B;了&#x200B;一&#x200B;个&#x200B;全&#x200B;新&#x200B;的&#x200B;GUI<package>xgra</package>，它&#x200B;是&#x200B;个&#x200B;图&#x200B;形&#x200B;查&#x200B;看&#x200B;器&#x200B;。&#x200B;
+					</para>
+					<para>
+						Fedora不&#x200B;会&#x200B;用&#x200B;herb（被&#x200B;认&#x200B;为&#x200B;是&#x200B;Alliance的&#x200B;一&#x200B;支&#x200B;）替&#x200B;代&#x200B;Alliance。&#x200B;在&#x200B;F-11发&#x200B;布&#x200B;之&#x200B;前&#x200B;herb的&#x200B;开&#x200B;发&#x200B;一&#x200B;直&#x200B;活&#x200B;跃&#x200B;，但&#x200B;是&#x200B;在&#x200B;F-11发&#x200B;布&#x200B;后&#x200B;却&#x200B;停&#x200B;止&#x200B;了&#x200B;。&#x200B;由&#x200B;于&#x200B;Alliance VLSI上&#x200B;游&#x200B;仍&#x200B;然&#x200B;活&#x200B;跃&#x200B;并&#x200B;且&#x200B;也&#x200B;反&#x200B;应&#x200B;出&#x200B;我&#x200B;们&#x200B;的&#x200B;意&#x200B;愿&#x200B;，因&#x200B;此&#x200B;目&#x200B;前&#x200B;没&#x200B;有&#x200B;理&#x200B;由&#x200B;用&#x200B;herb代&#x200B;替&#x200B;alliance。&#x200B;
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	
+	<section>
+		<title>硬&#x200B;件&#x200B;设&#x200B;计&#x200B;用&#x200B;的&#x200B;Perl脚&#x200B;本&#x200B;</title>
+		<variablelist>
+			<varlistentry>
+				<term>perl-SystemPerl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-SystemPerl</primary>
+					</indexterm>
+					<para>
+						这&#x200B;是&#x200B;Fedora &PRODVER;的&#x200B;一&#x200B;个&#x200B;新&#x200B;软&#x200B;件&#x200B;包&#x200B;。&#x200B;
+					</para>
+					<para>
+						SystemPerl is a version of the SystemC language. It is designed to expand text so that needless repetition in the language is minimized. By using sp_preproc, SystemPerl files can be expanded into C++ files at compile time, or expanded in place to make them valid stand-alone SystemC files.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>perl-Verilog-Perl</term>
+				<listitem>
+					<indexterm>
+						<primary>perl-Verilog-Perl</primary>
+					</indexterm>
+					<para>
+						<package>perl-Verilog-Perl</package>已&#x200B;更&#x200B;新&#x200B;到&#x200B;3.123。&#x200B;新&#x200B;特&#x200B;性&#x200B;包&#x200B;括&#x200B;： 
+						<itemizedlist>
+							<listitem>
+								<para>
+									改&#x200B;进&#x200B;了&#x200B;当&#x200B;"do" 做&#x200B;为&#x200B;识&#x200B;别&#x200B;码&#x200B;时&#x200B;的&#x200B;警&#x200B;告&#x200B;。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									修&#x200B;正&#x200B;了&#x200B;漏&#x200B;掉&#x200B;的&#x200B;处&#x200B;理&#x200B;器&#x200B;标&#x200B;识&#x200B;符&#x200B;，bug106。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									修&#x200B;正&#x200B;了&#x200B;Perl 5.8.8的&#x200B;编&#x200B;译&#x200B;错&#x200B;误&#x200B;rt48226。&#x200B;
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									修&#x200B;正&#x200B;了&#x200B;Perl 5.8.8的&#x200B;callbackgen编&#x200B;译&#x200B;错&#x200B;误&#x200B;。&#x200B;
+								</para>
+							</listitem>
+						</itemizedlist>
+						<warning>
+							<para>
+								perl-Verilog-Perl替&#x200B;代&#x200B;了&#x200B;perl-Verilog。&#x200B;建&#x200B;议&#x200B;Fedora用&#x200B;户&#x200B;据&#x200B;此&#x200B;调&#x200B;整&#x200B;自&#x200B;己&#x200B;写&#x200B;的&#x200B;Perl脚&#x200B;本&#x200B;。&#x200B;
+							</para>
+						</warning>
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+
+</section>
+
+

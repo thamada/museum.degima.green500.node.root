@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EContactStore</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Evolution-Data-Server Manual: Graphical Utilities (libedataserverui)">
+<link rel="up" href="ch01.html" title="Evolution-Data-Server Manual: Graphical Utilities (libedataserverui)">
+<link rel="prev" href="libedataserverui-ECellRendererColor.html" title="ECellRendererColor">
+<link rel="next" href="libedataserverui-e-data-server-ui-marshal.html" title="e-data-server-ui-marshal">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution-Data-Server Manual: Graphical Utilities (libedataserverui)">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libedataserverui-ECellRendererColor.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution-Data-Server Manual: Graphical Utilities (libedataserverui)</th>
+<td><a accesskey="n" href="libedataserverui-e-data-server-ui-marshal.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#EContactStore.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#EContactStore.description" class="shortcut">Description</a>
+                 | 
+                <a href="#EContactStore.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#EContactStore.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+</td></tr>
+</table>
+<div class="refentry" title="EContactStore">
+<a name="EContactStore"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="EContactStore.top_of_page"></a>EContactStore</span></h2>
+<p>EContactStore</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="EContactStore.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="EContactStore.html#EContactStore-struct" title="EContactStore">EContactStore</a>;
+<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *     <a class="link" href="EContactStore.html#e-contact-store-new" title="e_contact_store_new ()">e_contact_store_new</a>                 (void);
+EBook *             <a class="link" href="EContactStore.html#e-contact-store-get-book" title="e_contact_store_get_book ()">e_contact_store_get_book</a>            (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         GtkTreeIter *iter);
+EContact *          <a class="link" href="EContactStore.html#e-contact-store-get-contact" title="e_contact_store_get_contact ()">e_contact_store_get_contact</a>         (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         GtkTreeIter *iter);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EContactStore.html#e-contact-store-find-contact" title="e_contact_store_find_contact ()">e_contact_store_find_contact</a>        (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *uid,
+                                                         GtkTreeIter *iter);
+<a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             <a class="link" href="EContactStore.html#e-contact-store-get-books" title="e_contact_store_get_books ()">e_contact_store_get_books</a>           (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store);
+void                <a class="link" href="EContactStore.html#e-contact-store-add-book" title="e_contact_store_add_book ()">e_contact_store_add_book</a>            (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBook *book);
+void                <a class="link" href="EContactStore.html#e-contact-store-remove-book" title="e_contact_store_remove_book ()">e_contact_store_remove_book</a>         (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBook *book);
+void                <a class="link" href="EContactStore.html#e-contact-store-set-query" title="e_contact_store_set_query ()">e_contact_store_set_query</a>           (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBookQuery *book_query);
+EBookQuery *        <a class="link" href="EContactStore.html#e-contact-store-peek-query" title="e_contact_store_peek_query ()">e_contact_store_peek_query</a>          (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store);
+EBookView *         <a class="link" href="EContactStore.html#find-contact-source-by-book-return-view" title="find_contact_source_by_book_return_view ()">find_contact_source_by_book_return_view</a>
+                                                        (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBook *book);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="EContactStore.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="../gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----EContactStore
+</pre>
+</div>
+<div class="refsect1" title="Implemented Interfaces">
+<a name="EContactStore.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+EContactStore implements
+ GtkTreeModel.</p>
+</div>
+<div class="refsect1" title="Description">
+<a name="EContactStore.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="EContactStore.details"></a><h2>Details</h2>
+<div class="refsect2" title="EContactStore">
+<a name="EContactStore-struct"></a><h3>EContactStore</h3>
+<pre class="programlisting">typedef struct _EContactStore EContactStore;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_new ()">
+<a name="e-contact-store-new"></a><h3>e_contact_store_new ()</h3>
+<pre class="programlisting"><a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *     e_contact_store_new                 (void);</pre>
+<p>
+Creates a new <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A new <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_get_book ()">
+<a name="e-contact-store-get-book"></a><h3>e_contact_store_get_book ()</h3>
+<pre class="programlisting">EBook *             e_contact_store_get_book            (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         GtkTreeIter *iter);</pre>
+<p>
+Gets the <span class="type">EBook</span> that provided the contact at <em class="parameter"><code>iter</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
+<td> a <span class="type">GtkTreeIter</span> from <em class="parameter"><code>contact_store</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> An <span class="type">EBook</span>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_get_contact ()">
+<a name="e-contact-store-get-contact"></a><h3>e_contact_store_get_contact ()</h3>
+<pre class="programlisting">EContact *          e_contact_store_get_contact         (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         GtkTreeIter *iter);</pre>
+<p>
+Gets the <span class="type">EContact</span> at <em class="parameter"><code>iter</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
+<td> a <span class="type">GtkTreeIter</span> from <em class="parameter"><code>contact_store</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> An <span class="type">EContact</span>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_find_contact ()">
+<a name="e-contact-store-find-contact"></a><h3>e_contact_store_find_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_contact_store_find_contact        (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *uid,
+                                                         GtkTreeIter *iter);</pre>
+<p>
+Sets <em class="parameter"><code>iter</code></em> to point to the contact row matching <em class="parameter"><code>uid</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uid</code></em> :</span></p></td>
+<td> a unique contact identifier
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
+<td> a destination <span class="type">GtkTreeIter</span> to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the contact was found, and <em class="parameter"><code>iter</code></em> was set. <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_get_books ()">
+<a name="e-contact-store-get-books"></a><h3>e_contact_store_get_books ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             e_contact_store_get_books           (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store);</pre>
+<p>
+Gets the list of books that provide contacts for <em class="parameter"><code>contact_store</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of pointers to <span class="type">EBook</span>. The caller owns the list,
+but not the books.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_add_book ()">
+<a name="e-contact-store-add-book"></a><h3>e_contact_store_add_book ()</h3>
+<pre class="programlisting">void                e_contact_store_add_book            (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBook *book);</pre>
+<p>
+Adds <em class="parameter"><code>book</code></em> to the list of books that provide contacts for <em class="parameter"><code>contact_store</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <span class="type">EBook</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_remove_book ()">
+<a name="e-contact-store-remove-book"></a><h3>e_contact_store_remove_book ()</h3>
+<pre class="programlisting">void                e_contact_store_remove_book         (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBook *book);</pre>
+<p>
+Removes <em class="parameter"><code>book</code></em> from the list of books that provide contacts for <em class="parameter"><code>contact_store</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <span class="type">EBook</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_set_query ()">
+<a name="e-contact-store-set-query"></a><h3>e_contact_store_set_query ()</h3>
+<pre class="programlisting">void                e_contact_store_set_query           (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBookQuery *book_query);</pre>
+<p>
+Sets <em class="parameter"><code>book_query</code></em> to be the query used to fetch contacts from the books
+assigned to <em class="parameter"><code>contact_store</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book_query</code></em> :</span></p></td>
+<td> an <span class="type">EBookQuery</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_contact_store_peek_query ()">
+<a name="e-contact-store-peek-query"></a><h3>e_contact_store_peek_query ()</h3>
+<pre class="programlisting">EBookQuery *        e_contact_store_peek_query          (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store);</pre>
+<p>
+Gets the query that's being used to fetch contacts from the books
+assigned to <em class="parameter"><code>contact_store</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td> an <a class="link" href="EContactStore.html" title="EContactStore"><span class="type">EContactStore</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The <span class="type">EBookQuery</span> being used.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="find_contact_source_by_book_return_view ()">
+<a name="find-contact-source-by-book-return-view"></a><h3>find_contact_source_by_book_return_view ()</h3>
+<pre class="programlisting">EBookView *         find_contact_source_by_book_return_view
+                                                        (<a class="link" href="EContactStore.html" title="EContactStore">EContactStore</a> *contact_store,
+                                                         EBook *book);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact_store</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

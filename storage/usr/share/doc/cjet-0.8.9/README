@@ -1,0 +1,160 @@
+CJET - HP Laserjet Emulation for Canon CaPSL (level III+) laser printers
+Copyright (c) 1996 Michael Huijsmans    
+
+email: mgh@sbox.tu-graz.ac.at
+
+--------------------------------------------------------------------------
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should also have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+--------------------------------------------------------------------------
+Contents of this file:
+
+0. What is Cjet?
+1. Supported machines
+2. Usage
+3. Features
+4. Notes & Bugs
+
+See file INSTALL for compilation instructions.
+
+See file TODO for missing features
+
+
+0. What is it?
+--------------
+
+CJET filters printer data from stdin to stdout, converting HP PCL
+(Printer Command Language) escape sequences and data structures,
+e.g. font headers, to their CaPSL equivalents. CaPSL is short for
+`Canon Printing Systems Language'. Whereas PCL is a de-facto
+world-wide standard as a laser and inkjet printer control language (if
+you can call a bunch of escape sequences a `language'), CaPSL is
+limited to Canon laser printers. Newer laser printers from Canon come
+with PCL emulation, so CaPSL may well be facing extinction.
+
+
+
+1. Supported machines:
+----------------------
+
+The program itself should compile on any UNIX or UNIX-like system.
+It even compiles under MS-DOS. (BC 3.1 and DJGPP). 
+
+A Canon laser printer with CaPSL level III is required. 
+
+
+2. Current usage:
+-----------------
+
+	cjet [options] <PCL-input >CaPSL-output
+
+  Current options:
+  ----------------
+
+	-f      set CaPSL paint mode to 'full'. Default is 'partial'. 
+		Full paint mode requires at least 1.5MB printer memory.
+		Not very useful right now.
+
+	-p	ignore paper size commands. Useful for printing files 
+		formatted for paper size X on printers with paper size Y.
+	
+	-q	quiet mode. Suppresses all warning messages
+
+	-x X 	shift output on paper by X dots horizontally. Positive values
+		of X shift to the right; negative values to the left.
+		Dots are 1/300 in.
+
+	-y Y	shift output on paper by Y dots vertically. Positive values 
+		of Y shift downwards; negative values shift upwards.
+
+
+3. Features:
+------------
+
+Cjet currently `emulates' a LaserJet II and supports some PCL features
+found on later LaserJet models like the LaserJet IIp, IIIp, 4l.  Not all
+PCL commands are supported or fully functional; see the Missing / TODO
+file TODO. The emulation is fairly complete; I emphasized the font
+download and raster graphics stuff in favor of the plain text stuff 
+because I needed a TeX DVI driver ASAP. Among other things, Cjet
+supports the following:
+
+- PCL Laserjet download fonts: auto-rotating and old-style landscape
+  types
+
+- PCL 5 raster compression modes 1, 2 and 3
+
+- Roman-8, ISO Latin 1, Windows, PC-8, PC-850, PC-8D/N, and various other
+  symbol sets for text - mode printing 
+
+- PJL sequences for newer LaserJet models are parsed and ignored (dvilj4l)
+
+
+Cjet was "tested" with:
+
+- PCL output from dvilj, dvilj2p, dvilj4l: TeX DVI drivers for various
+  LaserJet models:  LJII / LJIIp / LJ4l
+
+- PCL output from misc. software, e.g. the ljet3 driver in GhostScript
+  version 3.12, the LJIIIP driver in Windoze 3.1 (Note: see TODO on this)
+
+
+
+4. Notes: 
+---------
+
+PJL (Printer job language) sequences (in output from dvilj4l) are now ignored. 
+
+I mainly use `cjet' under Linux to convert PCL output from dvilj2p, a
+TeX DVI driver for various flavours of LaserJet printers. It seems to work
+(I can read what the Canon prints), at least for the 128-character fonts.
+The newer 256-character fonts shouldn't pose any problems, except for the
+fact that then only 16 download fonts are possible. This leads to
+unpredictable results when more fonts get downloaded. 
+A workaround for this of course is to split the printing job into 
+smaller chunks.
+I also prefer using GhostScript with the ljet3 driver and cjet instead
+of the lbp8 driver because the lbp8 output gets shifted down and to
+the right for some reason; with cjet I can shift it right back...
+Caution: PCL mode 3 compressed raster data usually produces HUGE
+amounts of CaPSL raster data, as CaPSL level III does not support any
+compression. 
+
+My printer is a Canon LBP-8 III+ with 1.5Mb memory. `Cjet' should(?)
+also work for other Canon printers with less memory (LBP-4, LBP-4U),
+except for full-page raster graphics, but I couldn't test this.
+Anyway, enough paper was wasted already...
+
+The printers must support CaPSL level III or higher.
+
+
+Bugs:
+-----
+Version 0.8.9:
+A quasi-bug involving missing download characters in control code positions
+has been fixed.
+Selection of nonexistent download fonts (dvilj) is now ignored.
+
+
+----
+Email bug reports, suggestions, remarks etc. to me at:
+
+ mgh@sbox.tu-graz.ac.at
+
+However, I can't promise prompt reaction, as I *really* have other
+things to do...
+
+
+
+

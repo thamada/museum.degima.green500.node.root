@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Installing the ATI Proprietary Linux Driver</TITLE>
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+	</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<table bgcolor="#FFFFFF"><tr><td>
+
+<FONT SIZE=+1>
+<P><B>"no kernel module build environment" Error message during RPM install</B></P>
+</FONT>
+
+<P>This information applies to the ATI Proprietary Linux Driver.</P>
+
+<P>The following error message may appear while trying to install:</P>
+
+<BLOCKQUOTE>
+<P><CODE>*** Trying to install a precompiled kernel module.<BR>
+*** WARNING ***<BR>
+Tailored kernel module for fglrx not present in your system.<BR>
+You must go to /lib/modules/fglrx/build_mod subdir<BR>
+and execute './make.sh' to build a fully customed kernel module.<BR>
+Afterwards go to /lib/modules/fglrx and run './make_install.sh'<BR>
+in order to install the module into your kernel's module repository.<BR>
+(see readme.txt for more details.)</CODE></P>
+
+<P><CODE>As of now you can still run your XServer in 2D, but hardware acclerated<BR>
+OpenGL will not work and 2D graphics will lack performance.</CODE></P>
+ 
+<P><CODE>failed.<BR>
+*** Error: no kernel module build environment - please consult readme.</CODE></P>
+</CODE>
+</BLOCKQUOTE>
+
+<P>A special driver file (or "kernel module") is necessary for the ATI driver to provide hardware graphics acceleration. For this kernel module to work properly, it must be tailored to your specific system configuration.</P>
+
+<P>The ATI driver package includes a few bundled versions of this kernel module to work with most systems. If your system matches one of these configurations, then a pre-packaged kernel module should be installed for you and the information below should not be necessary.</P>
+
+<P>However, if your system does not match any of these configurations, then the installer will try to build a custom module for you from scratch. This process will require the following software to be installed</P>
+<UL>
+	<LI>Kernel source code</LI>
+	<LI>Kernel header (include) files</LI>
+	<LI>GCC compiler</LI>
+	<LI>Make Utility</LI>
+</UL>
+
+<TABLE ALIGN="CENTER" CLASS="readthis"><TR><TD>
+<P>NOTE: Kernel source code and header files must match the version of the kernel you are using.</P>
+
+<P>NOTE: Your kernel may have restrictions on which compiler versions can be used. Please check your Linux documentation for more information on installing kernel source code.</P>
+</TD></TR></TABLE>
+
+<P>Once the kernel sources have been properly installed, you should be able to manually <a href="4484.html">build and install the kernel module</a>.</P>
+
+<P><B>Creating a symbolic link /usr/src/linux</B></P>
+
+<blockquote>
+<P>It is also possible that the kernel source code is installed, but the /usr/src/linux symlink has not been created.</P>
+
+<P>Proceed as follows to make sure this link exists (you may need to be logged in as root):</P>
+
+<TABLE ALIGN="CENTER" CLASS="readthis"><TR><TD>
+<p>NOTE: &quot;kernel-source-x.x.x&quot; is an example only - the name of your own kernel source tree should be used instead. Yours may be named &quot;linux-x.x.x&quot; or something else entirely. Check your kernel documentation if you're not sure.</p></LI>
+</TD></TR></TABLE>
+
+<OL>
+	<LI><p><CODE>cd /usr/src</CODE></p></LI>
+	<LI><p><CODE>ls -l</CODE></p>
+	<p>The following (or similar) should appear in the directory listing<BR>
+	(where x.x.x is your kernel version):</p>
+	<p><CODE>linux -> kernel-source-x.x.x</CODE></p>
+	<p>If so you may disregard the remaining step</p>
+	<LI><p>If &quot;linux&quot; (just &quot;linux&quot;) is not in the listing, then create a symbolic link as follows:</p>
+	<p><CODE>ln -s kernel-source-x.x.x linux</CODE></p></LI>
+</OL>
+
+</blockquote>
+
+<p>INFO-BASE#4475</p>
+
+<P>&nbsp;</P>
+</td></tr></table>
+</BODY>
+</HTML>

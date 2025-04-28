@@ -1,0 +1,41 @@
+mlx4_ib XRC RCV: Fix mlx4_ib_reg_xrc_rcv_qp() locking
+
+In mlx4_ib_reg_xrc_rcv_qp(), we need to take the xrc_reg_list_lock spinlock
+when walking the xrc_reg_list.
+
+Also, I guess spin_lock_irqsave() could be replaced by spin_lock_irq() in
+that function as we know for sure we're in process context.
+
+Signed-off-by: Sébastien Dugué <sebastien.dugue@bull.net>
+
+--
+
+ qp.c |    3 +++
+ 1 file changed, 3 insertions(+)
+
+dIndex: kernel-ib/drivers/infiniband/hw/mlx4/qp.c
+===================================================================
+--- kernel-ib.orig/drivers/infiniband/hw/mlx4/qp.c	2011-01-31 16:52:11.000000000 +0100
++++ kernel-ib/drivers/infiniband/hw/mlx4/qp.c	2011-02-11 15:24:27.000000000 +0100
+@@ -2549,13 +2549,16 @@
+ 	}
+ 
+ 	mutex_lock(&mibqp->mutex);
++	spin_lock_irqsave(&mibqp->xrc_reg_list_lock, flags);
+ 	list_for_each_entry(tmp, &mibqp->xrc_reg_list, list)
+ 		if (tmp->context == context) {
++			spin_unlock_irqrestore(&mibqp->xrc_reg_list_lock, flags);
+ 			mutex_unlock(&mibqp->mutex);
+ 			kfree(ctx_entry);
+ 			mutex_unlock(&to_mdev(xrcd->device)->xrc_reg_mutex);
+ 			return 0;
+ 		}
++	spin_unlock_irqrestore(&mibqp->xrc_reg_list_lock, flags);
+ 
+ 	ctx_entry->context = context;
+ 	spin_lock_irqsave(&mibqp->xrc_reg_list_lock, flags);
+--
+To unsubscribe from this list: send the line "unsubscribe linux-rdma" in
+the body of a message to majordomo@vger.kernel.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
+

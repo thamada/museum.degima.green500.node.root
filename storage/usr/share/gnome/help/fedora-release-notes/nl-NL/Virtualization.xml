@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Virtualization" lang="nl-NL">
+	<title>Virtualisatie</title>
+	<remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Virtualization">https://fedoraproject.org/wiki/Docs/Beats/Virtualization</ulink></remark>
+	<para>
+		<indexterm>
+			<primary>Virtualisatie</primary>
+		</indexterm>
+		<indexterm>
+			<primary>KVM</primary>
+		</indexterm>
+		<indexterm>
+			<primary>Xen</primary>
+		</indexterm>
+		<indexterm>
+			<primary>qemu</primary>
+		</indexterm>
+		<indexterm>
+			<primary>gPXE</primary>
+		</indexterm>
+		<indexterm>
+			<primary>libvirt</primary>
+		</indexterm>
+		<indexterm>
+			<primary>libguestfs</primary>
+		</indexterm>
+		<indexterm>
+			<primary>guestfish</primary>
+		</indexterm>
+		 Virtualisatie in Fedora&nbsp;12 bevat belangrijke veranderingen, en nieuwe kenmerken, die verdergaan met het ondersteunen van KVM, Xen, en vele andere virtuele machine platforms.
+	</para>
+	<para>
+		KVM en QEMU hebben in deze vrijgave een aantal nieuwe kenmerken gekregen. KVM gast geheugen gebruik en snelheid is verbeterd door de toevoeging van KSM en KVM Huge Page Backed Memory. De snelheid van het qcow2 image formaat is sterk verbeterd. Ondersteuning voor zowel SR-IOV als NIC hotplug is toegevoegd. Tenslotte wordt nu gPXE gebruikt in plaats van etherboot voor gast PXE opstarten.
+	</para>
+	<para>
+		Aan de libvirt zijde zijn API&#39;s toegevoegd voor opslag beheer en netwerk interface beheer. libvrt draait nu ook QEMU processen zonder rechten.
+	</para>
+	<para>
+		Een nieuwe bibliotheek (<application>libguestfs</application>) en een interactief gereedschap (<application>guestfish</application>) zijn nu beschikbaar voor toegang tot en het veranderen van virtuele machine schijf images.
+	</para>
+	<section>
+		<title>Kernel Same Page Merging en vermindert gast geheugen gebruik</title>
+		<para>
+			<indexterm>
+				<primary>KSM</primary>
+			</indexterm>
+			<indexterm>
+				<primary>KVM</primary>
+			</indexterm>
+			<indexterm>
+				<primary>kernel</primary>
+			</indexterm>
+			 <firstterm>Kernel SamePage Merging</firstterm> (KSM) staat nu toe dat identieke geheugen pagina&#39;s samengevoegd worden door de kernel tot een enkele pagina die gedeeld wordt door een of meer processen. Dit kenmerk staat meerdere, gelijkaardige, gast virtuele machines toe om een verminderd geheugen gebruik te hebben. Omdat geheugen wordt gedeeld, wordt het gecombineerde gebruik van de gasten verminderd.
+		</para>
+		<para>
+			Voor meer details refereer je naar <ulink url="http://fedoraproject.org/wiki/Features/KSM"></ulink> en <ulink url="http://lwn.net/Articles/306704/"></ulink>
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM huge page backed geheugen</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>Huge page backed geheugen</secondary>
+			</indexterm>
+			 Laat KVM gasten grote pagina ondersteund geheugen gebruiken om het geheugen gebruik te verminderen en de snelheid te verhogen door verminderen van CPU cache druk. Gebruikers van KVM gasten die huge page backed geheugen gebruiken moeten een verbeterde snelheid ervaren met wat besparing in host geheugen verbruik. Het snelheid voordeel is afhankelijk van de werkbelasting. Het gebruik grote pagina&#39;s voor gast geheugen heeft echter een nadeel - je kunt gast geheugen niet meer swappen of laten toenemen.
+		</para>
+		<para>
+			Voor meer details refereer je naar: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_Huge_Page_Backed_Memory"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM NIC hotplug</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>NIC hotplug</secondary>
+			</indexterm>
+			 Netwerk interfaces kunnen nu aan een draaiende KVM gast toegevoegd worden met gebruik van <package>libvirt</package>/<package>virt-manager</package> zonder dat de gast opnieuw opgestart moet worden.
+		</para>
+		<para>
+			Voor meer details refereer je naar: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_NIC_Hotplug"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM qcow2 prestaties</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>qcow2 prestaties</secondary>
+			</indexterm>
+			 Het autochtone schijf bestandsformaat van <package>qemu</package> is <command>qcow2</command>. Qcow2 biedt verbeterde kenmerken vergeleken met ruwe images, waaronder: basis images, snapshots, compressie en versleuteling.
+		</para>
+		<para>
+			Gebruikers die gast machine data willen beschermen voor host crashes zetten gewoonlijk schrijven naar cash op de host uit. Vroeger leidde dit tot een erg slechte snelheid voor gasten in qcow2 images.
+		</para>
+		<para>
+			De I/O prestaties van qcow2 schijf images zijn sterk verbeterd. Gebruikers die qcow2 niet gebruikten door de slechte prestaties kunnen overwegen om over te gaan en voordeel krijgen van de extra kenmerken die het formaat biedt vergeleken met ruwe schijf images.
+		</para>
+		<para>
+			Voor meer details refereer je naar: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_qcow2_Performance"></ulink> and <ulink type="http" url="http://www.gnome.org/~markmc/qcow-image-format.html"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM stabiele gast ABI</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>Stabiele gast ABI</secondary>
+			</indexterm>
+			 KVM gasten wordt een geëmuleerd hardware platform of toepassing binaire interface aangeboden (b.v. een CPU model, APIC, PIT, ACPI tabellen, IDE/USB/VGA controllers, NIC&#39;s, enz.). Als QEMU wordt vernieuwd naar een nieuwe versie, kunnen sommige aspecten van dit platform veranderen indien nieuwe hardware mogelijkheden toegevoegd worden. Dit is een probleem voor Windows gasten waar een gast ABI verandering kan vereisen dat de installatie opnieuw geactiveerd wordt.
+		</para>
+		<para>
+			Gast virtuele machines zullen nu dezelfde ABI gepresenteerd krijgen over QEMU vernieuwingen heen.
+		</para>
+		<para>
+			Voor meer details refereer je naar: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_Stable_Guest_ABI"></ulink> en <ulink type="http" url="http://fedoraproject.org/wiki/KVM_Stable_Guest_ABI_Design_Notes"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>libguestfs bibliotheek voor manipulatie van virtuele machines</title>
+		<para>
+			<indexterm>
+				<primary>libguestfs</primary>
+			</indexterm>
+			<indexterm>
+				<primary>guestfish</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-df</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-inspector</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-cat</primary>
+			</indexterm>
+			 Laat toegevoegd in de Fedora 11 ontwikkelings cyclus, is <package>libguestfs</package> nu een officieel kenmerk van Fedora 12. <package>libguestfs</package> is een bibliotheek voor het verkrijgen van toegang tot en het veranderen van gast schijf images. Met gebruik van de Linux kernel en <package>qemu</package> code, kan <package>libguestfs</package> toegang krijgen tot hetzelfde type gast bestandssysteem als Linux en QEMU.
+		</para>
+		<para>
+			De volgende gereedschappen worden geleverd of uitgebreid door libguestfs: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Verbanden voor OCaml, Perl, Python, Ruby, en Java programmeertalen.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>guestfish</package> - Biedt een interactieve shell voor het bewerken van virtuele machine bestandssystemen en het uitvoeren van commando&#39;s in de context van de gast.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-df</package> - Laat vrije ruimte zien op virtuele machine bestandssystemen
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-inspector</package> - Laat OS versie, kernel, drivers, aankoppelpunten, toepassingen, enz. zien in een virtuele machine.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-cat</package> - Toont elk bestand binnen een virtuele machine.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>
+			Voor meer details refereer je naar: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/libguestfs"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://libguestfs.org/"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Netwerk interface beheer</title>
+		<para>
+			<indexterm>
+				<primary>libvirt</primary>
+			</indexterm>
+			<indexterm>
+				<primary>Virtualisatie</primary>
+				<secondary>Netwerk interface beheer</secondary>
+			</indexterm>
+			 Algemeen gebruikte host netwerk configuraties, zoals bruggen, bindingen, VLAN&#39;s en zinnige combinaties hiervan kunnen nu gemaakt worden met de netwerk configuratie bibliotheek voor algemene doeleinden, netcf. Verbeteringen aan de <package>libvirt</package> API laten deze nieuwe functionaliteit zien om hosts op afstand te beheren met <package>libvirtd</package>.
+		</para>
+		<para>
+			Voor meer details refereer je naar: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/Network_Interface_Management"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedorahosted.org/netcf/"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://www.libvirt.org/remote.html"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Enkele root I/O virtualisatie</title>
+		<para>
+			<indexterm>
+				<primary>Enkele root I/O virtualisatie</primary>
+			</indexterm>
+			 Enkele root I/O virtualisatie is een PCI kenmerk dat toestaat dat virtuele functies (VF) gemaakt worden die de hulpbronnen delen van een fysieke functie (PF). De VF apparaten worden toegekend aan gast virtuele machines en verschijnen als fysieke apparaten binnen de gast. Omdat het gast OS de hardware in feite direct aanstuurt, is de I/O snelheid vergelijkbaar met de oorspronkelijke snelheid.
+		</para>
+		<para>
+			Voor meer details refereer je naar: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/SR-IOV"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://www.pcisig.com/specifications/iov/"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_PCI_Device_Assignment"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>gPXE nu standaard voor gasten</title>
+		<para>
+			<indexterm>
+				<primary>gPXE</primary>
+			</indexterm>
+			<indexterm>
+				<primary>qemu</primary>
+			</indexterm>
+			 QEMU gasten maken nu gebruik van de nieuwere en op dit moment onderhouden <package>gpxe</package> in plaats van het verouderde etherboot gereedschap voor PXE opstarten.
+		</para>
+		<para>
+			Voor meer details refereer je naar: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtgPXE"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://etherboot.org/wiki/index.php"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Virt rechten</title>
+		<para>
+			Veranderingen zijn geïntroduceerd voor QEMU/KVM virtuele machines om de host beveiliging te verbeteren in het geval van een gebrek in de QEMU bibliotheek.
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					Rechten voor /dev/kvm zijn vernieuwd om gebruikers zonder privileges toe te staan KVM hardware versnelling te gebruiken.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					QEMU processen geproduceerd door virt-manager op een locale desktop installatie draaien nu als de desktop gebruiker.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					QENU processen geproduceerd door de libvirtd daemon met rechten draaien nu als een account zonder rechten, gebruiker &#39;qemu&#39;, groep &#39;qemu&#39;.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					libvirt zal nu het eigendom van alle schijven toegekend aan een virtuele machine tijdens het opstarten, toekennen aan gebruiker &#39;qemu&#39;, groep &#39;qemu&#39;, behalve voor alleen-lezen/gedeelde schijven.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Om terug te gaan naar het vorige Fedora gedrag door alle QEMU instanciaties als &#39;root&#39; te draaien, zijn twee configuratie parameters ingevoerd in /etc/libvirt/qemu.conf. Het wordt niet aanbevolen om deze te veranderen.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			Voor meer details refereer je naar:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtPrivileges"></ulink>
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	
+	<section>
+		<title>Virtueel opslag beheer</title>
+		<para>
+			Fiber Kanaal N_Poort ID Virtualisatie of NPIV staat het aanmaken toe van meerdere virtuele N_Poorten op een enkele fysieke host bus adapter. De libvirt node apparaat API&#39;s zijn uitgebreid om virtuele adapters aan te maken en te vernietigen met gebruik van NPIV.
+		</para>
+		<para>
+			De API&#39;s die opslag ontdekking en pool aanmaken toestaan, zijn uitgebreid om opslag te ontdekken en te rescannen op een per SCSI host basis. Beheerders kunnen nu opslag voor virtuele machines ontdekken, instellen, en aanbieden zonder meerdere gereedschappen nodig te hebben.
+		</para>
+		<para>
+			Voor meer details refereer je naar: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtStorageManagement"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://libvirt.org/storage.html"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Andere verbeteringen</title>
+		<section>
+			<title>Libvirt technologie compatibiliteits kit</title>
+			<para>
+				Fedora bevat nu de libvirt technologie compatibiliteit kit (TCK). De TCK is een functionele test suite welke gedetailleerde rapporten aanbiedt over de functionaliteit die beschikbaar is voor iedere libvirt driver en kan gebruikt worden om snel fouten of terugval in de ontwikkeling van de virtualisatie kenmerken van Fedora te identificeren.
+			</para>
+			<para>
+				Voor meer details refereer je naar: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtTCK"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://libvirt.org/drivers.html"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section>
+			<title>Virtualisatie technologie vooruitzicht repo</title>
+			<para>
+				De Virtualization Preview repository is gemaakt voor hen die graag de laatste, aan virtualisatie gerelateerde, pakketten willen testen. Deze repo is voornamelijk bedoeld als een hulp bij het testen en het vroegtijdig experimenteren. Het is niet bedoeld voor &#39;productie&#39; toepassing.
+			</para>
+			<para>
+				Voor meer details refereer je naar: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Virtualization_Preview_Repository"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section>
+			<title>Xen kernel ondersteuning</title>
+			<para>
+				Het kernel pakket in Fedora 12 ondersteunt opstarten als een gast domU, maar zal niet werken als een dom0 totdat zulke ondersteuning upstream wordt geleverd. Het werk hieraan gaat voort en er is veel hoop is dat ondersteuning toegevoegd zal worden in kernel 2.6.33 en Fedora 13.
+			</para>
+			<para>
+				De meest recente Fedora vrijgave met dom0 ondersteuning is Fedora 8.
+			</para>
+			<para>
+				Een Xen domU gast opstarten in een Fedora 12 gastheer vereist de op KVM gebaseerde xenner. Xenner draait de gast kernel en een kleine Xen emulator tezamen als KVM gast.
+			</para>
+			<important>
+				<title>KVM vereist hardware virtualisatie functies in het gastheer systeem.</title>
+				<para>
+					Systemen zonder hardware virtualisatie ondersteunen Xen gasten op dit moment niet.
+				</para>
+			</important>
+			<para>
+				Voor meer details refereer je naar: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://sourceforge.net/projects/kvm"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://kraxel.fedorapeople.org/xenner/"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/XenPvops"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/XenPvopsDom0"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+
+	</section>
+
+</section>
+
+

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Using the ATI Proprietary Linux Driver</TITLE>
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><TABLE bgcolor="#FFFFFF"><TR><TD>
+
+<FONT SIZE=+1>
+<P><B>3D Linux applications exhibit tearing in fast moving objects</B></P>
+</FONT>
+
+<p>This information applies to the following:</p>
+<ul>
+    <li>ATI Proprietary Linux Driver 3.7.1 and 3.7.6</li>
+</ul>
+
+<p>Upon launching a 3D application, horizontal tearing may occur. The symptoms may appear during full screen, windowed, or 3D screen captures. The issue occurs regardless of the "sync with vertical" setting in <pre>fglrxconfig</pre>.</p>
+
+<p>Not all systems are affected.</p>
+
+One possible workaround, which has been known to minimize this behavior in some cases, is to enable the OpenGL Overlay, in place of the Video (Xv) Overlay. This may be accomplished as follows:
+
+<ol>
+<li>Open <code>/etc/X11/XF86Config-4</code> in a text editor</li> 
+<li>Look for the following lines in the ATI device section:<br>
+    <blockquote><code>
+    Option "VideoOverlay"               "on" 
+    Option "OpenGLOverlay"              "off" 
+    </code></blockquote>
+</li>
+<li>And change them as follows:<br>
+    <blockquote><code>
+    Option "VideoOverlay"               "off" 
+    Option "OpenGLOverlay"              "on"
+    </code></blockquote>
+</li>
+<li>Save /etc/X11/XF86Config-4</li> 
+<li>Restart X-Windows</li>
+</ol>
+     
+<p>ATI Engineering is aware of this issue and is investigating. Updates will appear on this page when they become available.</p>
+
+<p>INFO-BASE file # 4464</p>
+
+<P>&nbsp;</P>
+
+</TD></TR></TABLE></P>
+</BODY>
+</HTML>

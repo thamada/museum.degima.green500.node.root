@@ -1,0 +1,1 @@
+/etc/smolt/config.py

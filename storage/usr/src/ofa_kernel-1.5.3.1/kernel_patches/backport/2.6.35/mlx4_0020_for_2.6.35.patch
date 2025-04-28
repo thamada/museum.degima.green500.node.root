@@ -1,0 +1,22 @@
+Index: ofed_kernel-2.6.35/drivers/infiniband/hw/mlx4/main.c
+===================================================================
+--- ofed_kernel-2.6.35.orig/drivers/infiniband/hw/mlx4/main.c	2010-11-07 11:02:12.213418073 +0200
++++ ofed_kernel-2.6.35/drivers/infiniband/hw/mlx4/main.c	2010-11-07 11:03:00.368437782 +0200
+@@ -662,7 +662,7 @@
+ 	if (ndev) {
+ 		rdma_get_mcast_mac((struct in6_addr *)gid, mac);
+ 		rtnl_lock();
+-		dev_mc_add(mdev->iboe.netdevs[mqp->port - 1], mac, 6, 0);
++		dev_mc_add(mdev->iboe.netdevs[mqp->port - 1], mac);
+ 		ret = 1;
+ 		rtnl_unlock();
+ 		dev_put(ndev);
+@@ -739,7 +739,7 @@
+ 		rdma_get_mcast_mac((struct in6_addr *)gid, mac);
+ 		if (ndev) {
+ 			rtnl_lock();
+-			dev_mc_delete(mdev->iboe.netdevs[ge->port - 1], mac, 6, 0);
++			dev_mc_del(mdev->iboe.netdevs[ge->port - 1], mac);
+ 			rtnl_unlock();
+ 			dev_put(ndev);
+ 		}

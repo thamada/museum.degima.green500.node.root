@@ -1,0 +1,115 @@
+Changes in version 0.22.2:
+- New or updated translations:
+  - Portuguese by Rui Gouveia <rui.gouveia@globaltek.pt>
+  - Japanese by Hyu_gabaru Ryu_ichi <hyu_gabaru@yahoo.co.jp>
+  - Polish by Piotr Drąg <piotrdrag@gmail.com>
+
+Changes in version 0.22.1:
+- Fix mlocate.db format documentation.  Patch by Tomas Zellerin
+  <zellerin@gmail.com>.
+- New or updated translations:
+  - Canadian by Xavier Queralt Mateu <xqueralt@gmail.com>
+  - Danish by Kris Thomsen <lakristho@gmail.com>
+  - German by Thomas Spura <tomspur@fedoraproject.org>
+  - French by Charles-Antoine Couret <cacouret@wanadoo.fr>
+  - Japanese by Hyu_gabaru Ryu_ichi <hyu_gabaru@yahoo.co.jp>
+  - Dutch by R.E. van der Luit <nippur@fedoraproject.org>
+
+Changes in version 0.22:
+- Ignore --require-visibility in locate if the database is not owned by group
+  mlocate or it is readable by others (#7).
+- Refuse to open unprivileged databases in directories only accessible by
+  group mlocate.
+- New or updated translations:
+  - Spanish by H. Daniel Cabrera <h.daniel.cabrera@gmail.com> and Domingo Becker
+    <domingobecker@gmail.com>
+  - Hungarian by Sulyok Péter <peti@fedoraproject.org>
+  - Swedish by Magnus Glantz <mg@hacka.net>
+  - Simplified Chinese by CHAI Zhenhua <watter1985@163.com>
+
+Changes in version 0.21.1:
+- Clarified updatedb.conf(5) a bit.
+- New or updated translations:
+  - Catalan by Xavier Queralt Mateu <xqueralt@gmail.com>
+  - German by Thomas Spura <tomspur@fedoraproject.org>
+  - Italian by Francesco Tombolini <tombo@adamantio.net>
+  - Polish by Piotr Drąg <piotrdrag@gmail.com>
+  - Brazilian Portuguese by Taylon Silmer <taylonsilva@gmail.com>
+  - Serbian by Miloš Komarčević <kmilos@gmail.com>
+
+Changes in version 0.21:
+- New variable PRUNENAMES, new updatedb options --add-prunenames and
+  --prunenames.  Resolves ticket:2.
+- Fix prunepaths and bind mount pruning in certain cases.
+- Lock the database in updatedb to avoid more than one updatedb running
+  concurrently.
+- Remove the temporary database file if updatedb aborts with an assertion
+  failure.
+- Fix sorting of prunefs if an entry contains uppercase characters.  Resolves
+  ticket:3.
+- New or updated translations:
+  - Brazilian Portuguese by Igor Pires Soares <igor@projetofedora.org> and Ivo
+    Nascimento <iannsp@gmail.com>
+  - Czech
+  - Hungarian by Nagy Enikő <vakegir@gmail.com>
+  - Malay/Bahasa Melayu by Mohd Izhar Firdaus Ismail <izhar@fedoraproject.org>
+
+Changes in version 0.20:
+- Fix more typos in man pages.  Patch by Adeodato Simó <dato@net.com.org.es>.
+- Workaround (make check) failures when running as root.
+- New translations:
+  - Brazilian Portuguese by Diego Búrigo Zacarão <diegobz@projetofedora.org>,
+  - Bulgarian by Alexander Todorov <atodorov@redhat.com>,
+  - French by Robert-André Mauchin <zebob.m@pengzone.org> and Thomas Canniot
+    <mrtom@fedoraproject.org>,
+  - German by Fabian Affolter <fab@fedoraproject.org>,
+  - Italian by Silvio Pierro <perplesso82@gmail.com> and Gianluca Busiello
+    <busiello@ceinge.unina.it>,
+  - Polish by Piotr Drąg <piotrdrag@gmail.com>,
+  - Serbian by Nikola Pajtić <salgeras@gmail.com> and Miloš Komarčević
+    <kmilos@gmail.com>
+
+Changes in version 0.19:
+- New home page at https://fedorahosted.org/mlocate/ .
+- New updatedb option --debug-pruning.
+- Fix typos in man pages.  Patch by A. Costa <agcosta@gis.net>.
+- Make some aspects of the source code more portable.  Patches by Steve Edwards
+  <sgedward@korime.demon.co.uk>.
+
+Changes in version 0.18:
+- Fix uninitialized memory access when dbpath contains "-"
+- Add some examples to the man pages
+
+Changes in version 0.17:
+- Don't hang if a NFS filesystem in an excluded subtree is unavailable.
+
+Changes in version 0.16:
+- INCOMPATIBLE CHANGE: The --database-root parameter of updatedb is always
+  canonicalized.
+- Allow global exclusion of bind mounts
+- Fix string matching in some multibyte locales if no glob characters are used
+- Use gnulib, for better portability to non-Linux systems
+- Use O_NOATIME in updatedb
+- Miscellaneous small fixes, efficiency improvements and cleanups.
+
+Changes in version 0.15:
+- Use /proc/self/mounts or /proc/mounts if available
+- Add a test suite
+- Fix typos in error messages
+
+Changes in version 0.14:
+- Fix case-insensitive search with rare bracket expression constructs.
+- Speed up case-insensitive search about five times.
+
+Changes in version 0.13:
+- Fix a brown-paper-bag bug in Makefile.am, installing updatedb set-GID instead
+  of locate.
+
+Changes in version 0.12:
+- Avoid assertion failures on invalid nanosecond times returned by Captive
+  NTFS.
+
+Changes in version 0.11:
+- Nonprintable characters are replaced by `?' when stdout is a tty and --null
+  is not specified.
+- updatedb is installed to $(bindir).

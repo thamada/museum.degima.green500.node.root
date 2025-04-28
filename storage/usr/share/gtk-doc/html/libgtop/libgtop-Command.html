@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Command</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libgtop Reference Manual">
+<link rel="up" href="libgtop-lib.html" title="Libgtop Library Reference">
+<link rel="prev" href="libgtop-Close.html" title="Close">
+<link rel="next" href="libgtop-GlibTop-Server.html" title="GlibTop Server">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="libgtop-white-paper.html" title="White paper">
+<link rel="chapter" href="libgtop-lib.html" title="Libgtop Library Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgtop-Close.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="libgtop-lib.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libgtop Reference Manual</th>
+<td><a accesskey="n" href="libgtop-GlibTop-Server.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgtop-Command.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgtop-Command.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="Command">
+<a name="libgtop-Command"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgtop-Command.top_of_page"></a>Command</span></h2>
+<p>Command</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgtop-Command.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glibtop/command.h&gt;
+
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-QUIT--CAPS" title="GLIBTOP_CMND_QUIT">GLIBTOP_CMND_QUIT</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-SYSDEPS--CAPS" title="GLIBTOP_CMND_SYSDEPS">GLIBTOP_CMND_SYSDEPS</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-CPU--CAPS" title="GLIBTOP_CMND_CPU">GLIBTOP_CMND_CPU</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-MEM--CAPS" title="GLIBTOP_CMND_MEM">GLIBTOP_CMND_MEM</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-SWAP--CAPS" title="GLIBTOP_CMND_SWAP">GLIBTOP_CMND_SWAP</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-UPTIME--CAPS" title="GLIBTOP_CMND_UPTIME">GLIBTOP_CMND_UPTIME</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-LOADAVG--CAPS" title="GLIBTOP_CMND_LOADAVG">GLIBTOP_CMND_LOADAVG</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-SHM-LIMITS--CAPS" title="GLIBTOP_CMND_SHM_LIMITS">GLIBTOP_CMND_SHM_LIMITS</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-MSG-LIMITS--CAPS" title="GLIBTOP_CMND_MSG_LIMITS">GLIBTOP_CMND_MSG_LIMITS</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-SEM-LIMITS--CAPS" title="GLIBTOP_CMND_SEM_LIMITS">GLIBTOP_CMND_SEM_LIMITS</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROCLIST--CAPS" title="GLIBTOP_CMND_PROCLIST">GLIBTOP_CMND_PROCLIST</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-STATE--CAPS" title="GLIBTOP_CMND_PROC_STATE">GLIBTOP_CMND_PROC_STATE</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-UID--CAPS" title="GLIBTOP_CMND_PROC_UID">GLIBTOP_CMND_PROC_UID</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-MEM--CAPS" title="GLIBTOP_CMND_PROC_MEM">GLIBTOP_CMND_PROC_MEM</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-TIME--CAPS" title="GLIBTOP_CMND_PROC_TIME">GLIBTOP_CMND_PROC_TIME</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-SIGNAL--CAPS" title="GLIBTOP_CMND_PROC_SIGNAL">GLIBTOP_CMND_PROC_SIGNAL</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-KERNEL--CAPS" title="GLIBTOP_CMND_PROC_KERNEL">GLIBTOP_CMND_PROC_KERNEL</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-SEGMENT--CAPS" title="GLIBTOP_CMND_PROC_SEGMENT">GLIBTOP_CMND_PROC_SEGMENT</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-ARGS--CAPS" title="GLIBTOP_CMND_PROC_ARGS">GLIBTOP_CMND_PROC_ARGS</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-MAP--CAPS" title="GLIBTOP_CMND_PROC_MAP">GLIBTOP_CMND_PROC_MAP</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-MOUNTLIST--CAPS" title="GLIBTOP_CMND_MOUNTLIST">GLIBTOP_CMND_MOUNTLIST</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-FSUSAGE--CAPS" title="GLIBTOP_CMND_FSUSAGE">GLIBTOP_CMND_FSUSAGE</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-NETLOAD--CAPS" title="GLIBTOP_CMND_NETLOAD">GLIBTOP_CMND_NETLOAD</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PPP--CAPS" title="GLIBTOP_CMND_PPP">GLIBTOP_CMND_PPP</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-NETLIST--CAPS" title="GLIBTOP_CMND_NETLIST">GLIBTOP_CMND_NETLIST</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-CMND-PROC-OPEN-FILES--CAPS" title="GLIBTOP_CMND_PROC_OPEN_FILES">GLIBTOP_CMND_PROC_OPEN_FILES</a>
+#define             <a class="link" href="libgtop-Command.html#GLIBTOP-MAX-CMND--CAPS" title="GLIBTOP_MAX_CMND">GLIBTOP_MAX_CMND</a>
+                    <a class="link" href="libgtop-Command.html#glibtop-command" title="glibtop_command">glibtop_command</a>;
+                    <a class="link" href="libgtop-Command.html#glibtop-response" title="glibtop_response">glibtop_response</a>;
+union               <a class="link" href="libgtop-Command.html#glibtop-response-union" title="union glibtop_response_union">glibtop_response_union</a>;
+#define             <a class="link" href="libgtop-Command.html#glibtop-call" title="glibtop_call()">glibtop_call</a>                        (p1, p2, p3, p4)
+void *              <a class="link" href="libgtop-Command.html#glibtop-call-l" title="glibtop_call_l ()">glibtop_call_l</a>                      (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         unsigned  command,
+                                                         size_t send_size,
+                                                         const void *send_buf,
+                                                         size_t recv_size,
+                                                         void *recv_buf);
+void *              <a class="link" href="libgtop-Command.html#glibtop-call-s" title="glibtop_call_s ()">glibtop_call_s</a>                      (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         unsigned  command,
+                                                         size_t send_size,
+                                                         const void *send_buf,
+                                                         size_t recv_size,
+                                                         void *recv_buf);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgtop-Command.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgtop-Command.details"></a><h2>Details</h2>
+<div class="refsect2" title="GLIBTOP_CMND_QUIT">
+<a name="GLIBTOP-CMND-QUIT--CAPS"></a><h3>GLIBTOP_CMND_QUIT</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_QUIT		0
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_SYSDEPS">
+<a name="GLIBTOP-CMND-SYSDEPS--CAPS"></a><h3>GLIBTOP_CMND_SYSDEPS</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_SYSDEPS		1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_CPU">
+<a name="GLIBTOP-CMND-CPU--CAPS"></a><h3>GLIBTOP_CMND_CPU</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_CPU		2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_MEM">
+<a name="GLIBTOP-CMND-MEM--CAPS"></a><h3>GLIBTOP_CMND_MEM</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_MEM		3
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_SWAP">
+<a name="GLIBTOP-CMND-SWAP--CAPS"></a><h3>GLIBTOP_CMND_SWAP</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_SWAP		4
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_UPTIME">
+<a name="GLIBTOP-CMND-UPTIME--CAPS"></a><h3>GLIBTOP_CMND_UPTIME</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_UPTIME		5
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_LOADAVG">
+<a name="GLIBTOP-CMND-LOADAVG--CAPS"></a><h3>GLIBTOP_CMND_LOADAVG</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_LOADAVG		6
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_SHM_LIMITS">
+<a name="GLIBTOP-CMND-SHM-LIMITS--CAPS"></a><h3>GLIBTOP_CMND_SHM_LIMITS</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_SHM_LIMITS		7
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_MSG_LIMITS">
+<a name="GLIBTOP-CMND-MSG-LIMITS--CAPS"></a><h3>GLIBTOP_CMND_MSG_LIMITS</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_MSG_LIMITS		8
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_SEM_LIMITS">
+<a name="GLIBTOP-CMND-SEM-LIMITS--CAPS"></a><h3>GLIBTOP_CMND_SEM_LIMITS</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_SEM_LIMITS		9
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROCLIST">
+<a name="GLIBTOP-CMND-PROCLIST--CAPS"></a><h3>GLIBTOP_CMND_PROCLIST</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROCLIST		10
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_STATE">
+<a name="GLIBTOP-CMND-PROC-STATE--CAPS"></a><h3>GLIBTOP_CMND_PROC_STATE</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_STATE		11
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_UID">
+<a name="GLIBTOP-CMND-PROC-UID--CAPS"></a><h3>GLIBTOP_CMND_PROC_UID</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_UID		12
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_MEM">
+<a name="GLIBTOP-CMND-PROC-MEM--CAPS"></a><h3>GLIBTOP_CMND_PROC_MEM</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_MEM		13
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_TIME">
+<a name="GLIBTOP-CMND-PROC-TIME--CAPS"></a><h3>GLIBTOP_CMND_PROC_TIME</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_TIME		14
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_SIGNAL">
+<a name="GLIBTOP-CMND-PROC-SIGNAL--CAPS"></a><h3>GLIBTOP_CMND_PROC_SIGNAL</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_SIGNAL	15
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_KERNEL">
+<a name="GLIBTOP-CMND-PROC-KERNEL--CAPS"></a><h3>GLIBTOP_CMND_PROC_KERNEL</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_KERNEL	16
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_SEGMENT">
+<a name="GLIBTOP-CMND-PROC-SEGMENT--CAPS"></a><h3>GLIBTOP_CMND_PROC_SEGMENT</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_SEGMENT	17
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_ARGS">
+<a name="GLIBTOP-CMND-PROC-ARGS--CAPS"></a><h3>GLIBTOP_CMND_PROC_ARGS</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_ARGS		18
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_MAP">
+<a name="GLIBTOP-CMND-PROC-MAP--CAPS"></a><h3>GLIBTOP_CMND_PROC_MAP</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_MAP		19
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_MOUNTLIST">
+<a name="GLIBTOP-CMND-MOUNTLIST--CAPS"></a><h3>GLIBTOP_CMND_MOUNTLIST</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_MOUNTLIST		20
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_FSUSAGE">
+<a name="GLIBTOP-CMND-FSUSAGE--CAPS"></a><h3>GLIBTOP_CMND_FSUSAGE</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_FSUSAGE		21
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_NETLOAD">
+<a name="GLIBTOP-CMND-NETLOAD--CAPS"></a><h3>GLIBTOP_CMND_NETLOAD</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_NETLOAD		22
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PPP">
+<a name="GLIBTOP-CMND-PPP--CAPS"></a><h3>GLIBTOP_CMND_PPP</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PPP		23
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_NETLIST">
+<a name="GLIBTOP-CMND-NETLIST--CAPS"></a><h3>GLIBTOP_CMND_NETLIST</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_NETLIST		24
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_CMND_PROC_OPEN_FILES">
+<a name="GLIBTOP-CMND-PROC-OPEN-FILES--CAPS"></a><h3>GLIBTOP_CMND_PROC_OPEN_FILES</h3>
+<pre class="programlisting">#define GLIBTOP_CMND_PROC_OPEN_FILES	25
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MAX_CMND">
+<a name="GLIBTOP-MAX-CMND--CAPS"></a><h3>GLIBTOP_MAX_CMND</h3>
+<pre class="programlisting">#define GLIBTOP_MAX_CMND		28
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_command">
+<a name="glibtop-command"></a><h3>glibtop_command</h3>
+<pre class="programlisting">typedef struct {
+	guint64	command;
+	guint64	size, data_size;
+	char		parameter [_GLIBTOP_PARAM_SIZE];
+} glibtop_command;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_response">
+<a name="glibtop-response"></a><h3>glibtop_response</h3>
+<pre class="programlisting">typedef struct {
+	gint64 offset;
+	guint64 size, data_size;
+	glibtop_response_union u;
+} glibtop_response;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="union glibtop_response_union">
+<a name="glibtop-response-union"></a><h3>union glibtop_response_union</h3>
+<pre class="programlisting">union glibtop_response_union
+{
+	glibtop_union	data;
+	glibtop_sysdeps	sysdeps;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_call()">
+<a name="glibtop-call"></a><h3>glibtop_call()</h3>
+<pre class="programlisting">#define glibtop_call(p1, p2, p3, p4)	glibtop_call_r(glibtop_global_server, p1, p2, p3, p4)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p3</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>p4</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_call_l ()">
+<a name="glibtop-call-l"></a><h3>glibtop_call_l ()</h3>
+<pre class="programlisting">void *              glibtop_call_l                      (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         unsigned  command,
+                                                         size_t send_size,
+                                                         const void *send_buf,
+                                                         size_t recv_size,
+                                                         void *recv_buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>command</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>send_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>send_buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>recv_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>recv_buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_call_s ()">
+<a name="glibtop-call-s"></a><h3>glibtop_call_s ()</h3>
+<pre class="programlisting">void *              glibtop_call_s                      (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         unsigned  command,
+                                                         size_t send_size,
+                                                         const void *send_buf,
+                                                         size_t recv_size,
+                                                         void *recv_buf);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>command</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>send_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>send_buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>recv_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>recv_buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Basic Settings</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Introduction"
+HREF="intro.html"><LINK
+REL="NEXT"
+TITLE="Default Settings"
+HREF="httpd-default-settings.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="intro.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-default-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="HTTPD-BASIC-SETTINGS"
+></A
+>Chapter 2. Basic Settings</H1
+><P
+>	Use the <B
+CLASS="GUILABEL"
+>Main</B
+> tab to configure the basic server
+	settings. 
+      </P
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-MAIN"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-main.png"></P
+></DIV
+><P
+><B
+>Figure 2-1. Basic Settings</B
+></P
+></DIV
+><P
+>	Enter a fully qualified domain name that you have the right to use in
+	the <B
+CLASS="GUILABEL"
+>Server Name</B
+> text area. This option corresponds
+	to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#servername"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>ServerName</TT
+></A
+>
+	directive in <TT
+CLASS="FILENAME"
+>httpd.conf</TT
+>. The
+	<TT
+CLASS="COMMAND"
+>ServerName</TT
+> directive sets the hostname of the Web
+	server. It is used when creating redirection URLs. If you do not define
+	a server name, the Web server attempts to resolve it from the IP address of the
+	system. The server name does not have to be the domain name resolved
+	from the IP address of the server.  For example, you might want to set
+	the server name to www.example.com when your server's real DNS name
+	is actually foo.example.com.
+      </P
+><P
+>	Enter the email address of the person who maintains the Web server in
+	the <B
+CLASS="GUILABEL"
+>Webmaster email address</B
+> text area. This option
+	corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#serveradmin"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>ServerAdmin</TT
+></A
+>
+	directive in <TT
+CLASS="FILENAME"
+>httpd.conf</TT
+>. If you configure
+	the server's error pages to contain an email address, this email address
+	will be used so that users can report a problem by sending email to the
+	server's administrator. The default value is root@localhost.
+      </P
+><P
+>	Use the <B
+CLASS="GUILABEL"
+>Available Addresses</B
+> area to define the
+	ports on which the server will accept incoming requests. This option
+	corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#listen"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>Listen</TT
+></A
+>
+	directive in <TT
+CLASS="FILENAME"
+>httpd.conf</TT
+>.  By default, Red Hat
+	configures the Apache HTTP Server to listen to port 80 for non-secure Web
+	communications.
+    </P
+><P
+>      Click the <B
+CLASS="GUIBUTTON"
+>Add</B
+> button to define
+	additional ports on which to accept requests. A window as shown in <A
+HREF="httpd-basic-settings.html#HTTPD-LISTEN"
+>Figure 2-2</A
+> will appear.  Either choose the <B
+CLASS="GUILABEL"
+>Listen
+	to all addresses</B
+> option to listen to all IP addresses on the
+	defined port or specify a particular IP address over which the server
+	will accept connections in the <B
+CLASS="GUILABEL"
+>Address</B
+> field. Only
+	specify one IP address per port number. If you want to specify more than
+	one IP address with the same port number, create an entry for each IP
+	address. If at all possible, use an IP address instead of a domain name
+	to prevent a DNS lookup failure. Refer to <A
+HREF="http://httpd.apache.org/docs-2.0/dns-caveats.html"
+TARGET="_top"
+>http://httpd.apache.org/docs-2.0/dns-caveats.html</A
+>
+	for more information about <I
+CLASS="CITETITLE"
+>Issues Regarding DNS and
+	Apache</I
+>.
+    </P
+><P
+>      Entering an asterisk (*) in the <B
+CLASS="GUILABEL"
+>Address</B
+> field is the
+      same as choosing <B
+CLASS="GUILABEL"
+>Listen to all addresses</B
+>.  Clicking
+      the <B
+CLASS="GUIBUTTON"
+>Edit</B
+> button shows the same window as the
+      <B
+CLASS="GUIBUTTON"
+>Add</B
+> button except with the fields populated for
+      the selected entry. To delete an entry, select it and click the
+      <B
+CLASS="GUIBUTTON"
+>Delete</B
+> button.
+      </P
+><DIV
+CLASS="TIP"
+><P
+></P
+><TABLE
+CLASS="TIP"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="./stylesheet-images/tip.png"
+HSPACE="5"
+ALT="Tip"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="CENTER"
+><B
+>Tip</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>	  If you set the server to listen to a port under 1024, you must be root to
+	  start it. For port 1024 and above, <TT
+CLASS="COMMAND"
+>httpd</TT
+> can be
+	  started as a regular user.
+	</P
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-LISTEN"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-listen.png"></P
+></DIV
+><P
+><B
+>Figure 2-2. Available Addresses</B
+></P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="intro.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-default-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Introduction</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Default Settings</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

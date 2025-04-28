@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="sr"><title>Алатка за својства времена и датума</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2007-11-22</date><revremark>Првобитна верзија</revremark></revision><revision><revnumber>1.0.1</revnumber><date>2008-01-17</date><revremark>Успешна провера DocBook XML исправности</revremark></revision><revision><revnumber>1.0.2</revnumber><date>2008-01-18</date><revremark>Издвајање резимеа документа</revremark></revision><revision><revnumber>1.0.3</revnumber><date>2008-03-12</date><revremark>Коришћење елемената менија где је то могуће</revremark></revision></revhistory><abstract role="description"><para><application>Алатка за својства времена и датума</application> пружа могућност кориснику да мења системско време и датум, да подеси временску зону коју систем користи, као и да подеси сервис протокола мрежног времена (NTP) ради синхронизације системског часовника са сервером времена.</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup><copyright><year>2009.</year><holder>Nebojša Kamber (kamber@nebojsa.in.rs)</holder></copyright><copyright><year>2009.</year><holder>Miloš Komarčević (kmilos@gmail.com)</holder></copyright></articleinfo><indexterm significance="normal"><primary><command>timetool</command>
+		</primary><see>Алатка за својства времена и датума</see></indexterm><para><application>Алатка за својства времена и датума</application> пружа могућност кориснику да мења системско време и датум, да подеси временску зону коју систем користи, као и да подеси сервис протокола мрежног времена (NTP) ради синхронизације системског часовника са сервером времена.</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>Алатка за својства времена и датума</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>Алатка за својства времена и датума</see></indexterm><indexterm significance="normal"><primary><command>dateconfig</command> 
+        </primary><see>Алатка за својства времена и датума</see></indexterm><para>Морате имати покренут <application>Икс</application> систем прозора и поседовати root овлашћења ради употребе алатке за својства времена и датума. Постоје три начина за покретање овог програма:</para><itemizedlist><listitem><para>Са радне површине, идите на <menuchoice><guimenu>главни мени на панелу (мени са иконом „f“)</guimenu><guisubmenu>Систем</guisubmenu><guisubmenu>Администрација</guisubmenu><guimenuitem>Датум и време</guimenuitem></menuchoice></para></listitem><listitem><para>Са радне површине, кликните десним дугметом миша време на траци са алаткама и изаберите <guimenuitem>Подеси датум и време</guimenuitem>.</para></listitem><listitem><para>Укуцајте наредбу <command>system-config-date</command>, <command>system-config-time</command>, или <command>dateconfig</command> при одзиву командног окружења (нпр. у <application>XTerm</application> или <application>GNOME</application> терминалу).</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>Својства датума и времена</title><indexterm significance="normal"><primary>подешавање времена</primary></indexterm><indexterm significance="normal"><primary>подешавање датума</primary></indexterm><para>Као што приказује <xref linkend="dateconfig-time-date"/>, први прозор који се појави у низу служи подешавању системског времена и датума.</para><figure float="0" id="dateconfig-time-date"><title>Својства датума и времена</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>Својства датума и времена</para></textobject></mediaobject></figure><para>Да бисте променили датум, користите стрелице са леве и десне стране назива месеца за промену месеца, користите стрелице са леве и десне стране броја године за промену године, и кликните на дан у недељи за промену дана у недељи.</para><para>Да бисте променили време, користите дугмад са стрелицама на горе и на доле, поред одговарајућих елемената <guilabel>Час</guilabel>, <guilabel>Минут</guilabel>, и <guilabel>Секунд</guilabel> у одељку <guilabel>Време</guilabel>.</para><para>Алтернативно, можете променити датум и време коришћењем тастатуре. Притиском на <keycap>Tab</keycap> и <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> се пребацујете са једног елемента графичког окружења на други. У календарском елементу, измена текуће године се врши притиском на <keycombo><keycap>Ctrl</keycap><keycap>Горе</keycap></keycombo> и <keycombo><keycap>Ctrl</keycap><keycap>Доле</keycap></keycombo>, измена текућег месеца са <keycombo><keycap>Ctrl</keycap><keycap>Лево</keycap></keycombo> и <keycombo><keycap>Ctrl</keycap><keycap>Десно</keycap></keycombo>, а промену дана у месецу вршите стрелицама на тастатури и притиском на <keycap>Space</keycap> када означите жељени дан. Код елемената час, минут и секунд, користите <keycap>Горе</keycap> и <keycap>Доле</keycap> за мењање вредности.</para><para>Притиском на дугме <guibutton>У реду</guibutton> евентуалне измене у текућем датуму времену, подешавањима сервиса протокола мрежног времена или временској зони бивају сачуване. Истовремено се напушта програм.</para></section>
+	<section id="s1-dateconfig-ntp"><title>Својства протокола мрежног времена (NTP)</title><indexterm significance="normal"><primary>подешавање времена</primary><secondary>синхронизација са NTP сервером</secondary></indexterm><indexterm significance="normal"><primary>Протокол мрежног времена</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>подешавање</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para>Као што приказује <xref linkend="dateconfig-ntp"/>, други прозор који се појави у низу је за подешавање NTP-а.</para><figure float="0" id="dateconfig-ntp"><title>Својства NTP-а</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>Својства NTP-а</para></textobject></mediaobject></figure><para>Сервис протокола мрежног времена (NTP) синхронизује системски часовник са удаљеним сервером времена или другим извором. Програм вам омогућава да подесите NTP сервис да синхронизује системски часовник са удаљеним сервером. Како бисте активирали ову функцију, изаберите <guibutton>Укључи Протокол мрежног времена</guibutton>. Тиме се активира листа <guilabel>NTP сервери</guilabel>, као и остале опције. Можете одабрати неки од унапред дефинисаних сервера, изменити поставке унапред дефинисаног сервера притиском на <guibutton>Уреди</guibutton> или додати назив другог сервера притиском на <guibutton>Додај</guibutton>. Ваш систем не отпочиње синхронизацију са NTP сервером све док не притиснете <guibutton>У реду</guibutton>. Након кликтања на <guibutton>У реду</guibutton>, подешавања бивају сачувана и NTP сервис покренут (односно поново покренут ако је већ радио).</para><para>Притиском на дугме <guibutton>У реду</guibutton> евентуалне измене у текућем датуму времену, подешавањима сервиса протокола мрежног времена или временској зони бивају сачуване. Истовремено се напушта програм.</para></section>
+	<section id="s1-dateconfig-time-zone"><title>Подешавања временске зоне</title><indexterm significance="normal"><primary>подешавања временске зоне</primary></indexterm><para>Као што приказује <xref linkend="dateconfig-timezone"/>, трећи прозор који се појави у низу служи подешавању системске временске зоне.</para><para>Да бисте подесили системску временску зону, кликните заглавље <guilabel>Временска зона</guilabel>. Временска зона се може подесити било коришћењем интерактивне мапе, било одабиром временске зоне са листе испод мапе. Мапа се користи тако што кликнете на град који се налази у вашој временској зони. Црвени <guilabel>X</guilabel> се појављује, а временска зона бива одабрана у листи испод мапе. Користите клизач да бисте променили ниво увећања.</para><para>Алтернативно, можете користити листу за одабир испод мапе. Попут мапе, која вам нуди да одаберете регион пре одабира града, тако је и листа градова и држава и њихових временских зона груписана према континентима. Наведене су и негеографске временске зоне, пошто се користе у научним круговима.</para><para>Кликните <guibutton>У реду</guibutton> да сачувате измене и изађете из програма.</para><figure float="0" id="dateconfig-timezone"><title>Својства временске зоне</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>Својства временске зоне</para></textobject></mediaobject></figure><para>Ако је ваш системски часовник подешен да користи UTC, изаберите опцију <guibutton>Системски часовник користи UTC</guibutton>. UTC је енглеска скраћеница за <firstterm>координирано универзално време</firstterm>, познато и под називом средње време по Гриничу (GMT). Остале временске зоне се одређују додавањем или одузимањем одређеног броја часова од UTC времена.</para></section>
+</article>

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML><HEAD><TITLE>Fstopgm User Manual</TITLE></HEAD>
+<BODY>
+<H1>fstopgm</H1>
+Updated: 06 April 89
+<BR>
+<A HREF="#index">Table Of Contents</A>
+
+<H2>NAME</H2>
+fstopgm - convert a Usenix FaceSaver(tm) file into a PGM image
+
+
+<H2 id="synopsis">SYNOPSIS</H2>
+
+<B>fstopgm</B>
+[<I>fsfile</I>]
+
+<H2 id="description">DESCRIPTION</H2>
+
+<p>This program is part of <a href="index.html">Netpbm</a>.
+
+<p><b>fstopgm</b> reads a Usenix FaceSaver(tm) file as input and
+produces a PGM image as output.
+
+<P>FaceSaver(tm) files sometimes have rectangular pixels.  While
+<B>fstopgm</B> won't re-scale them into square pixels for you, it will
+give you the precise <B>pamscale</B> command that will do the job.
+Because of this, reading a FaceSaver(tm) image is a two-step process.
+First you do:
+
+<PRE>
+  fstopgm &gt; /dev/null
+</PRE>
+
+This will tell you whether you need to use <B>pamscale.</B>
+
+Then use one of the following pipelines:
+<PRE>
+  fstopgm | pgmnorm
+  fstopgm | pamscale -whatever | pgmnorm
+</PRE>
+
+To go to PBM, you want something more like one of these:
+<PRE>
+  fstopgm | pamenlarge 3 | pgmnorm | pamditherbw
+  fstopgm | pamenlarge 3 | pamscale &lt;whatever&gt; | pgmnorm | pamditherbw
+</PRE>
+
+You want to enlarge when going to a bitmap because otherwise you lose
+information; but enlarging by more than 3 does not look good.
+
+<P>FaceSaver is a registered trademark of Metron Computerware Ltd. of
+Oakland, CA.
+
+
+<H2 id="seealso">SEE ALSO</H2>
+
+<A HREF="pgmtofs.html">pgmtofs</A>,
+<A HREF="pgm.html">pgm</A>,
+<A HREF="pgmnorm.html">pgmnorm</A>,
+<A HREF="pamenlarge.html">pamenlarge</A>,
+<A HREF="pamscale.html">pamscale</A>,
+<A HREF="pamditherbw.html">pamditherbw</A>
+
+
+<H2 id="author">AUTHOR</H2>
+
+Copyright (C) 1989 by Jef Poskanzer.
+
+<HR>
+<H2 id="index">Table Of Contents</H2>
+<UL>
+<LI><A HREF="#synopsis">SYNOPSIS</A>
+<LI><A HREF="#description">DESCRIPTION</A>
+<LI><A HREF="#seealso">SEE ALSO</A>
+<LI><A HREF="#author">AUTHOR</A>
+</UL>
+</BODY>
+</HTML>

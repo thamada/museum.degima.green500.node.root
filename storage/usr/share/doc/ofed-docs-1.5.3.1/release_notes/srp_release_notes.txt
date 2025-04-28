@@ -1,0 +1,613 @@
+
+                Open Fabrics Enterprise Distribution (OFED)
+                    SRP in OFED 1.5.2 Release Notes
+
+                            December 2010
+
+
+==============================================================================
+Table of contents
+==============================================================================
+
+ 1.  Overview
+ 2.  Changes and Bug Fixes since OFED 1.5
+ 3.  Software Dependencies
+ 4.  Major Features
+ 5.  Loading SRP Initiator
+ 6.  Manually Establishing an SRP Connection
+ 7.  SRP Tools - ibsrpdm and srp_daemon
+ 8.  Automatic Discovery and Connecting to Targets
+ 9.  Multiple Connections from Initiator IB Port to the Target
+ 10. High Availability
+ 11. Shutting Down SRP
+ 12. Known Issues
+ 13. Vendor Specific Notes
+
+
+==============================================================================
+1. Overview
+==============================================================================
+
+The SRP standard describes the message format and protocol definitions required
+for transferring commands and data between a SCSI initiator port and a SCSI
+target port using RDMA communication service.
+
+
+==============================================================================
+2. Changes and Bug Fixes since OFED 1.5
+==============================================================================
+* Check for scsi_id in scmnd to prevent scan/rescan keep adding new scsi devices
+  ie. echo "- - -" > /sys/class/scsi_host/hostXX/scan
+* Bug fixing
+
+==============================================================================
+4. Software Dependencies
+==============================================================================
+
+The SRP Initiator depends on the installation of the OFED Distribution stack
+with OpenSM running.
+
+==============================================================================
+5. Major Features
+==============================================================================
+
+This SRP Initiator is based on source taken from openib.org gen2 implementing
+the SCSI RDMA Protocol-2 (SRP-2), Doc. no. T10/1524-D. See:
+www.t10.org/ftp/t10/drafts/srp2/srp2r00a.pdf
+
+The SRP Initiator supports:
+- Basic SCSI Primary Commands -3 (SPC-3)
+  (www.t10.org/ftp/t10/drafts/spc3/spc3r21b.pdf)
+- Basic SCSI Block Commands -2 (SBC-2)
+  (www.t10.org/ftp/t10/drafts/sbc2/sbc2r16.pdf)
+- Basic functionality, task management and limited error handling
+
+==============================================================================
+6. Loading SRP Initiator
+==============================================================================
+
+To load the SRP module, either execute the "modprobe ib_srp" command after the
+OFED driver is up, or change the value of SRP_LOAD in
+/etc/infiniband/openib.conf to "yes" (causing the srp module to be loaded
+at driver boot).
+
+NOTE:  When loading the ib_srp module, it is possible to set the module
+       parameter srp_sg_tablesize. This is the maximum number of
+       gather/scatter entries per I/O (default: 12).
+
+       a. modprobe ib_srp srp_sg_tablesize=32
+          or
+       b. edit /etc/modprobe.conf and add the following line:
+          options ib_srp srp_sg_tablesize=32
+
+Module paramters:
+For the list of ib_srp module parameters
+  $ modinfo ib_srp
+
+  + srp_sg_tablesze: Max number of scatter/gather entries per I/O
+  + srp_dev_loss_tmo: Number of seconds that srp driver will not return
+                      DID_NO_CONNECT status when it loss connection to target.
+                      During this period, it will try to re-establish
+                      the connection to target, and return DID_RESET,
+                      DID_ABORT statuses for outstanding scsi command to
+                      prevent DM Multipath driver to failover to next paths.
+                      Default value is 60 seconds.
+
+==============================================================================
+7. Manually Establishing an SRP Connection
+==============================================================================
+
+The following steps describe how to manually load an SRP connection between
+the Initiator and an SRP Target. Section 8 explains how to do this
+automatically.
+
+- Make sure that the ib_srp module is loaded, the SRP Initiator is reachable
+  by the SRP Target, and that an SM is running.
+
+- To establish a connection with an SRP Target and create SRP (SCSI) device(s)
+  for that target under /dev, use the following command:
+
+     echo -n id_ext=[GUID value],ioc_guid=[GUID value],dgid=[port GID value],\
+     pkey=ffff,service_id=[service[0] value] > \
+     /sys/class/infiniband_srp/srp-mthca[hca number]-[port number]/add_target
+
+   a. Execution of the above "echo" command may take some time
+   b. The SM must be running while the command executes
+   c. It is possible to include additional parameters in the echo command:
+      > max_cmd_per_lun -  Default: 63
+      > max_sect (short for max_sectors) - sets the request size of a command
+      > io_class  -  Default: 0x100 as in rev 16A of the specification
+                     Note: In rev 10 the default was 0xff00
+      > initiator_ext - Please refer to Section 9 (Multiple Connections...)
+   d. See SRP Tools below for instructions on how the parameters in the
+      echo command above may be obtained.
+
+NOTES:
+
+- Using the same *echo -n <same paramters>* more than one, the srp target
+  will terminate the previous connection and re-establish the new
+  connection. To have more than two connections to srp target, please use
+  different inititiator_ext values in echo command.
+
+- To list the new SCSI devices that have been added by the echo command, you
+  may use either of the following two methods:
+  a. Execute "fdisk -l". This command lists all devices; the new devices are 
+     included in this listing.
+  b. Execute *dmesg* or look at /var/log/messages to find messages with the
+     names of the new devices.
+
+
+==============================================================================
+8. SRP Tools - ibsrpdm and srp_daemon
+==============================================================================
+
+To assist in performing the steps in Section 6, the OFED 1.3.1 distribution
+provides two utilities which:
+- Detect targets on the fabric reachable by the Initiator (for step 1)
+- Output target attributes in a format suitable for use in the above
+  "echo" command (step 2)
+
+These utilities are:  ibsrpdm and srp_daemon.
+
+The utilities can be found under /usr/local/ofed/sbin/ (or <prefix>/sbin/),
+and are part of the srptools RPM that may be installed using the
+OFED custom installation. Detailed information regarding the various
+options for these utilities are provided by their man pages.
+
+Below, several usage scenarios for these utilities are presented.
+
+ibsrpdm usage
+-------------
+1. Detecting reachable targets
+
+   a. To detect all targets reachable by the SRP initiator via the default
+      umad device (/dev/infiniband/umad0), execute the following command:
+      $ ibsrpdm
+
+      This command will output information on each SRP target detected, in
+      human-readable form.
+
+      Sample output:
+          IO Unit Info:
+          port LID:        0103
+          port GID:        fe800000000000000002c90200402bd5
+          change ID:       0002
+       max controllers: 0x10
+
+       controller[  1]
+           GUID:      0002c90200402bd4
+           vendor ID: 0002c9
+           device ID: 005a44
+           IO class : 0100
+           ID:        LSI Storage Systems SRP Driver 200400a0b81146a1
+           service entries: 1
+               service[  0]: 200400a0b81146a1 / SRP.T10:200400A0B81146A1
+
+   b. To detect all the SRP Targets reachable by the SRP Initiator via
+      another umad device, use the following command:
+
+      $ ibsrpdm -d <umad device>
+
+2. Assistance in creating an SRP connection
+   
+   a. To generate output suitable for utilization in the "echo" command of
+      section 5, add the "-c" option to ibsrpdm:
+
+      $ ibsrpdm -c
+
+      Sample output:
+        id_ext=200400A0B81146A1,ioc_guid=0002c90200402bd4,
+        dgid=fe800000000000000002c90200402bd5,pkey=ffff,
+        service_id=200400a0b81146a1
+
+   b. To establish a connection with an SRP Target (Section 6) using the output
+      from the "libsrpdm -c" example above, execute the following command:
+
+      $ echo -n id_ext=200400A0B81146A1,ioc_guid=0002c90200402bd4,
+        dgid=fe800000000000000002c90200402bd5,pkey=ffff,
+        service_id=200400a0b81146a1
+        > /sys/class/infiniband_srp/srp-mlnx_0-1/add_target
+
+   The SRP connection should now be up; the newly created SCSI devices should
+   appear in the listing obtained from the "fdisk -l" command.
+   
+
+srp_daemon
+----------
+The srp_daemon utility is based on ibsrpdm and extends its functionality.
+In addition to the ibsrpdm functionality described above, srp_daemon can also
+- Establish an SRP connection by itself (without the need to issue the "echo"
+  command described in Section 6)
+- Continue running in background, detecting new targets and establishing SRP
+  connections with them (daemon mode)
+- Discover reachable SRP targets given an infiniband HCA name and port, rather
+  than just by /dev/umad<N> where <N> is a digit
+- Enable High Availability operation (together with Device-Mapper Multipath)
+- Have a configuration file that determines the targets to connect to
+
+a. srp_daemon commands equivalent to ibsrpdm:
+
+    "srp_daemon -a -o"    is equivalent to "ibsrpdm"
+    "srp_daemon -c -a -o" is equivalent to "ibsrpdm -c"
+
+Note: These srp_daemon commands can behave differently than the equivalent
+      ibsrpdm command when /etc/srp_daemon.conf is not empty.
+
+b. srp_daemon extensions to ibsrpdm
+
+   - To discover SRP Targets reachable from HCA device <infiniband HCA name>,
+     port <port num>, (and generate output suitable for 'echo') you may execute
+
+       srp_daemon -c -a -o -i <infiniband HCA name> -p <port number>
+
+   - To both discover the SRP Targets and establish connections with them, just
+     add the -e option to the above command.
+
+   - Executing srp_daemon over a port without the -a option will only display
+     the reachable targets via the port and to which the initiator is not
+     connected. If executing with the -e option it is better to omit -a.
+
+   - It is recommended to use the -n option. This option adds the initiator_ext
+     to the connecting string. (See Section 9 for more details).
+
+   - srp_daemon has a configuration file that can be set, where the default is 
+     /etc/srp_daemon.conf. Use the -f to supply a different configuration file
+     that configures the targets srp_daemon is allowed to connect to. The
+     configuration file can also be used to set values for additional
+     parameters (e.g., max_cmd_per_lun, max_sect).
+
+   - A continuous background (daemon) operation, providing an automatic ongoing
+     detection and connection capability. See Section 8.
+
+==============================================================================
+9. Automatic Discovery and Connecting to Targets
+==============================================================================
+
+- Make sure that the ib_srp module is loaded, the SRP Initiator can reach an
+  SRP Target, and that an SM is running.
+
+- To connect to all the existing Targets in the fabric, execute
+  srp_daemon -e -o.  This utility will scan the fabric once, connect to
+  every Target it detects, and then exit. 
+
+NOTE: srp_daemon will follow the configuration it finds in
+  /etc/srp_daemon.conf. Thus, it will ignore a target that is disallowed in
+  the configuration file.
+
+- To connect to all the existing Targets in the fabric and to connect
+  to new targets that will join the fabric, execute srp_daemon -e. This utility
+  continues to execute until it is either killed by the user or encounters
+  connection errors (such as no SM in the fabric).
+
+- To execute SRP daemon as a daemon you may execute run_srp_daemon
+  (found under /usr/local/ofed/sbin/ or <prefix>/sbin/), providing it with
+  the same options used for running srp_daemon.
+
+  Note: Make sure only one instance of run_srp_daemon runs per port.
+
+- To execute SRP daemon as a daemon on all the ports, execute srp_daemon.sh
+  (found under /usr/local/ofed/sbin/ or <prefix>/sbin/). 
+  srp_daemon.sh sends its log to /var/log/srp_daemon.log.
+
+- It is possible to configure this script to execute automatically when the 
+  InfiniBand driver starts by changing the value of SRP_DAEMON_ENABLE in 
+  /etc/infiniband/openib.conf to "yes" and SRP_LOAD to yes as well.
+ 
+  Another option to to configure this script to execute automatically when the 
+  InfiniBand driver starts is by changing the value of SRPHA_ENABLE in 
+  /etc/infiniband/openib.conf to "yes". However, this option also enables 
+  SRP High Availability that has some more features. (Please read the High
+  Availability section).
+
+==============================================================================
+10. Multiple Connections from Initiator IB Port to the Target
+==============================================================================
+
+Some system configurations may need multiple SRP connections from
+the SRP Initiator to the same SRP Target: to the same Target IB port,
+or to different IB ports on the same Target HCA.  
+
+In case of a single Target IB port, i.e., SRP connections use the same path,
+the configuration is enabled using a different initiator_ext value for each
+SRP connection. The initiator_ext value is a 16-hexadecimal-digit value
+specified in the connection command. 
+
+Also in case of two physical connections (i.e., network paths) from a single
+initiator IB port to two different IB ports on the same Target HCA, there is
+need for a different initiator_ext value on each path. The conventions is to
+use the Target port GUID as the initiator_ext value for the relevant path.
+
+If you use srp_daemon with -n flag, it automatically assigns initiator_ext
+values according to this convention. For example:
+
+   id_ext=200500A0B81146A1,ioc_guid=0002c90200402bec,
+   dgid=fe800000000000000002c90200402bed,
+   pkey=ffff,service_id=200500a0b81146a1,initiator_ext=ed2b400002c90200
+
+  Notes:
+  a. It is recommended to use the -n flag for all srp_daemon invocations.
+  b. ibsrpdm does not have a corresponding option.
+  c. srp_daemon.sh always uses the -n option (whether invoked manually by
+     the user, or automatically at startup by setting SRPHA_ENABLE or
+     SRP_DAEMON_ENABLE to yes).
+
+==============================================================================
+11. High Availability (HA)
+==============================================================================
+
+High Availability Overview
+--------------------------
+
+High Availability works using the Device-Mapper (DM) multipath and the
+SRP daemon.
+
+Each initiator is connected to the same target from several ports/HCAs. 
+The DM multipath is responsible for joining together different paths to the
+same target and for fail-over between paths when one of them goes offline.
+Multipath will be execute on newly joined SCSI devices.
+
+Each initiator should execute several instances of the SRP daemon, one for each 
+port. At startup, each SRP daemon detects the SRP targets in the fabric and
+sends requests to the ib_srp module to connect to each of them. These 
+SRP daemons also detect targets that subsequently join the fabric, and send the
+ib_srp module requests to connect to them as well.
+
+High Availability Operation
+---------------------------
+
+When a path (from port1) to a target fails, the ib_srp module starts an error
+recovery process. If this process gets to the reset_host stage and there is no
+path to the target from this port, ib_srp will remove this scsi_host. After
+the scsi_host is removed, multipath switches to another path to this target
+(from another port/HCA).
+
+When the failed path recovers, it will be detected by the SRP daemon. The SRP
+daemon will then request ib_srp to connect to this target. Once the connection
+is up, there will be a new scsi_host for this target. Multipath will be 
+executed on the devices of this host, returning to the original state (prior to
+the failed path).
+
+High Availability Prerequisites
+-------------------------------
+
+Installation for RHEL4 and RHEL5: (Execute once)
+   - Verify that the standard device-mapper-multipath rpm is installed. If not,
+     install it from the RHEL distribution.
+
+Installation for SLES10: (Execute once)
+   - Verify that multipath is installed. If not, install it from the
+     installation (You can use yast). 
+
+   - Update udev: (Execute once - for manual activation of High Availability only)
+   
+   - Add a file to /etc/udev/rules.d/  (you can call it 91-srp.rules)
+     This file should have one line:
+       ACTION=="add", KERNEL=="sd*[!0-9]", RUN+="/sbin/multipath %M:%m"
+
+   Note: When SRPHA_ENABLE is set to "yes" (see Automatic Activation of High
+   Availability below), this file is created upon each boot of the driver and
+   is deleted when the driver is unloaded.
+
+
+Manual Activation of High Availability
+--------------------------------------
+
+Initialization: (Execute after each boot of the driver)
+        1) Execute modprobe dm-multipath
+        2) Execute modprobe ib-srp
+        3) Make sure you have created file /etc/udev/rules.d/91-srp.rules
+           as described above
+        4) Execute for each port and each HCA:
+              srp_daemon -c -e -R 300 -i <InfiniBand HCA name> -p <port number>
+          (You can use another value for -R. See under the Known Issues section
+           the workaround for the rare race condition.)
+           
+           This step can be performed by executing srp_daemon.sh, which sends 
+           its log to /var/log/srp_daemon.log.
+
+        Now it is possible to access the SRP LUNs on /dev/mapper/.
+
+        NOTE: It is possible for regular (non-SRP) LUNs to also be present;
+        the SRP LUNs may be identified by their names. You can configure the
+        /etc/multipath.conf file to change multipath behavior.
+
+
+Automatic Activation of High Availability
+-----------------------------------------
+- Set the value of SRPHA_ENABLE in /etc/infiniband/openib.conf to "yes".
+  Also make sure SRP_LOAD=yes and SRP_DAEMON_ENABLE=yes. 
+
+- From the next loading of the driver it will be possible to access the SRP
+  LUNs on /dev/mapper/
+  NOTE: It is possible that regular (not SRP) LUNs may also be present;
+        the SRP LUNs may be identified by their name.
+
+- It is possible to see the output of the SRP daemon in /var/log/srp_daemon.log
+
+
+==============================================================================
+12. Shutting Down SRP
+==============================================================================
+
+SRP can be shutdown by using "modprobe -r ib_srp", or by stopping the OFED
+("/etc/init.d/openibd stop"), or as a by-product of a complete system shutdown.
+
+Prior to shutting down SRP, it is REQUIRED to remove all references to it.
+The actions you need to take depend on the way SRP was loaded. There are
+three cases.
+
+a. Without High Availability
+------------------------------------
+When working without High Availability, you should unmount all SRP
+partitions that were mounted prior to shutting down SRP.
+For example, /dev/sdd1 is srp partition and mount to /mnt/test
+$ umount /mnt/test
+$ modprobe -r ib_srp
+
+NOTES: the umount may get stuck ~90 seconds per connection to target if the
+       target is down. This is due to the srp_dev_loss_tmo=60 seconds which
+       srp driver waits for the target coming back before returning error
+       status.
+       If you have shutdown/remove srp target and the host have 4 connections
+       to the SRP target, you should wait ~4-5 minutes for the unmount to exit.
+       Do not ctrl+c to kill umount process.
+
+b. After Manual Activation of High Availability
+-----------------------------------------------
+If you manually activated SRP High Availability, perform the following steps:
+- Unmount all SRP partitions that were mounted
+- Kill all SRP daemon instances.
+- Make sure there are no multipath instances running. If there are multiple
+  instances, wait for them to end or kill them.
+- Execute multipath -F
+
+Example:
+$ umount /mnt/test1 /mnt/test2   (wait for it to exit, do not ctrl+c)
+$ ps -ax and kill all srp_daemon processes.
+$ multipath -ll                  (wait for it to exit, do not ctrl+c)
+$ multipath -F
+$ modprobe -r ib_srp
+
+c. After Automatic Activation of High Availability
+--------------------------------------------------
+If SRP High Availability was automatically activated, SRP shutdown must be
+part of the driver shutdown ("/etc/init.d/openibd stop") which performs 
+steps 2-5 of case (b) above. However, you still have to unmount all SRP
+partitions that were mounted before driver shutdown.
+
+
+HAL Issue
+---------
+The HAL (Hardware Abstraction Layer) system includes a daemon that examines
+all devices in the system. In this process, it frequently holds a reference
+to the ib_srp module. If you attempt to shutdown SRP while this daemon is
+holding a reference to ib_srp, the shutdown will fail. Therefore, you
+should make sure this will not occur. One solution may be to stop "haldaemon"
+(/etc/init.d/haldaemon stop) prior to SRP shutdown.
+
+
+==============================================================================
+13. Known Issues
+==============================================================================
+
+- There is a very rare race condition which can cause the SRP daemon to miss a
+  target that joins the fabric. The race can occur if a target joins and leaves
+  the fabric several times in a short time (e.g., if the cable is not connected
+  well). In such a case, the SM may ignore this quick change of state and may
+  not send an InformInfo to the srp_daemon. 
+
+  Workaround: Execute the srp_daemon command with the -R <sec> option. This
+  option causes the SRP daemon to perform a full rescan of the fabric every
+  <sec> seconds.
+
+- The srp_daemon does not support different pkeys other than the default
+  pkey=ffff
+
+- It is recommended to use an SM that supports the enhanced capability mask
+  matching feature (errata MGTWG8372). With SMs which support this feature, the 
+  SRP daemon generates significantly less communication traffic.
+
+- When booting OFED with SRP High Availability enabled, executing multipath for
+  all LUNs on all connections may take some time (several minutes). However, it
+  is possible to start working while this process is in progress.
+
+- Stopping the driver while SRP High Availability is enabled kills all
+  multipath processes. Consider appropriate actions in case multipath is used
+  for other purposes.
+
+- AS High Availability is based on Device Mapper multipath, it embodies
+  multipath limitations and also its configuration and tuning options.
+  See http://christophe.varoqui.free.fr/wiki/wakka.php?wiki=Home
+  for information on multipath.
+  To modify and tune multipath configuration, edit the file /etc/multipath.conf
+  according to instructions and tips listed in
+  /usr/share/doc/packages/multipath-tools/multipath.conf.*
+ 
+- In case your topology has two physical connections (i.e., network paths) from
+  a single initiator IB port to two different IB ports on the same Target HCA,
+  and you wish to have an SRP connection on the one path coexist with an SRP
+  connection on the second path, you must set a different initiator_ext value
+  on each path. See Section 9, "Multiple Connections from Initiator IB Port
+  to the Target" for details.
+
+- The srp_daemon tool reads by default the configuration file 
+  /etc/srp_daemon.conf. In case this configuration file disallows connecting
+  to a certain target, srp_daemon will ignore the target. If you find out
+  that srp_daemon ignores a target, please check the /etc/srp_daemon.conf file.
+
+- Rebooting the system with unclean mounted filesystem and dead connection
+  to SRP target, the system may get stuck.
+
+- After establish the connection with srp target and rebooting the system,
+  initiator will fail to connect to target @ first manual *echo -n* command
+  (target reject with stale connection). You need to do *echo -n* one more
+  time.
+  You do not see this problem with srp_daemon mode since srp_daemon will
+  retry to connect.
+
+- The combination of "weak" single lun srp target, I/O with big block size,
+  default max_command_per_lun=63 while using /dev/urandom to create file with
+  ext3 fs on srp lun, may cause ext3 remount with "read-only" flag
+  ie.
+  Example:
+  sdb1 is first partition of srp lun sdb, ext3 fs is created
+  $ mount /dev/sdb1 /mnt/sdb1; cd /mnt/sdb1
+  $ dd if=/dev/urandom of=10G-file bs=1G count=10
+  --> ext3 fs may remount with read-only flag
+
+  Workarounds:
+  ------------
+  a. Log into the target with small max_command_per_lun (3,4,8)
+     $ echo id_ext=0002c9030008fc0c,ioc_guid=0002c9030008fc0c,
+     dgid=fe800000000000000002c90300084417,max_cmd_per_lun=4,pkey=ffff,
+     service_id=0002c9030008fc0c > /sys/class/infiniband_srp/srp-mlx4_0-1/add_target 
+ 
+  ----------------OR-------------------
+  
+  b. Run dd with /dev/zero instead of /dev/urandom
+     $ dd if=/dev/zero of=10G-file bs=1G count=10
+  
+  ----------------OR-------------------
+  
+  c. Run dd with smaller block size
+     $ dd if=/dev/urandom of=10G-file bs=128K count=40000
+  
+  ----------------OR-------------------
+
+  d. Combine the a,b,c steps (This is the recommended workaround)
+ 
+==============================================================================
+14. Vendor Specific Notes
+==============================================================================
+
+Hosts connected to Qlogic SRP Targets must perform one of the following
+steps after upgrading to OFED 1.3.1 to continue accessing their storage
+successfully:
+
+1. When issuing the "echo" command to add a new SRP Target, the host
+   must append the string ",initiator_ext=0000000000000001" to the original
+   echo string. 
+    Example: 
+      'ibsrpdm -c' output is as follows:
+
+        id_ext=0000000000000001,ioc_guid=00066a0138000165,dgid=fe8000000000000
+        000066a0260000165,pkey=ffff,service_id=0000494353535250,io_class=ff00
+        
+        id_ext=0000000000000001,ioc_guid=00066a0238000165,dgid=fe8000000000000
+        000066a0260000165,pkey=ffff,service_id=0000494353535250,io_class=ff00
+
+       To connect to the first target, the echo command must be:
+
+        echo -n \
+        id_ext=0000000000000001,ioc_guid=00066a0138000165,\
+        dgid=fe8000000000000000066a0260000165,pkey=ffff,\
+        service_id=0000494353535250,io_class=ff00,\
+        initiator_ext=0000000000000001 > \
+        /sys/class/inifiniband_srp/srp-mthca0-1/add_target
+
+
+2. Change the SRP map on the Qlogic SRP Target to set the expected initiator
+   extension to 0. For details on how to change the SRP map on a Qlogic SRP
+   Target, please refer to product documentation.
+
+

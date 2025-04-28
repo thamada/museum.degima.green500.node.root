@@ -1,0 +1,315 @@
+sync raw qp type names with the upstream existing and submitted code
+
+Signed-off-by: Or Gerlitz <ogerlitz@mellanox.com>
+
+---
+ drivers/infiniband/core/verbs.c   |   14 +++++++-------
+ drivers/infiniband/hw/mlx4/main.c |   10 +++++-----
+ drivers/infiniband/hw/mlx4/qp.c   |   32 ++++++++++++++++----------------
+ include/rdma/ib_verbs.h           |    4 ++--
+ 4 files changed, 30 insertions(+), 30 deletions(-)
+
+Index: ofed_kernel-fixes/drivers/infiniband/core/verbs.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/core/verbs.c	2011-03-10 15:30:53.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/core/verbs.c	2011-03-10 15:31:17.000000000 +0200
+@@ -371,8 +371,8 @@ EXPORT_SYMBOL(ib_create_qp);
+ 
+ static const struct {
+ 	int			valid;
+-	enum ib_qp_attr_mask	req_param[IB_QPT_RAW_ETH + 1];
+-	enum ib_qp_attr_mask	opt_param[IB_QPT_RAW_ETH + 1];
++	enum ib_qp_attr_mask	req_param[IB_QPT_RAW_PACKET + 1];
++	enum ib_qp_attr_mask	opt_param[IB_QPT_RAW_PACKET + 1];
+ } qp_state_table[IB_QPS_ERR + 1][IB_QPS_ERR + 1] = {
+ 	[IB_QPS_RESET] = {
+ 		[IB_QPS_RESET] = { .valid = 1 },
+@@ -382,7 +382,7 @@ static const struct {
+ 				[IB_QPT_UD]  = (IB_QP_PKEY_INDEX		|
+ 						IB_QP_PORT			|
+ 						IB_QP_QKEY),
+-				[IB_QPT_RAW_ETH] = IB_QP_PORT,
++				[IB_QPT_RAW_PACKET] = IB_QP_PORT,
+ 				[IB_QPT_UC]  = (IB_QP_PKEY_INDEX		|
+ 						IB_QP_PORT			|
+ 						IB_QP_ACCESS_FLAGS),
+@@ -1006,11 +1006,11 @@ int ib_attach_mcast(struct ib_qp *qp, un
+ 	switch (rdma_node_get_transport(qp->device->node_type)) {
+ 	case RDMA_TRANSPORT_IB:
+ 		if ((gid->raw[0] != 0xff || qp->qp_type != IB_QPT_UD) &&
+-		    qp->qp_type != IB_QPT_RAW_ETH)
++		    qp->qp_type != IB_QPT_RAW_PACKET)
+ 			return -EINVAL;
+ 		break;
+ 	case RDMA_TRANSPORT_IWARP:
+-		if (qp->qp_type != IB_QPT_RAW_ETH)
++		if (qp->qp_type != IB_QPT_RAW_PACKET)
+ 			return -EINVAL;
+ 		break;
+ 	}
+@@ -1026,11 +1026,11 @@ int ib_detach_mcast(struct ib_qp *qp, un
+ 	switch (rdma_node_get_transport(qp->device->node_type)) {
+ 	case RDMA_TRANSPORT_IB:
+ 		if ((gid->raw[0] != 0xff || qp->qp_type != IB_QPT_UD) &&
+-		    qp->qp_type != IB_QPT_RAW_ETH)
++		    qp->qp_type != IB_QPT_RAW_PACKET)
+ 			return -EINVAL;
+ 		break;
+ 	case RDMA_TRANSPORT_IWARP:
+-		if (qp->qp_type != IB_QPT_RAW_ETH)
++		if (qp->qp_type != IB_QPT_RAW_PACKET)
+ 			return -EINVAL;
+ 		break;
+ 	}
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/main.c	2011-03-10 15:30:53.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c	2011-03-10 15:31:17.000000000 +0200
+@@ -678,7 +678,7 @@ static int mlx4_ib_mcg_attach(struct ib_
+ 	u32 *eth_gid_flags = (u32 *)(gid->raw);
+ 	u8 high_prio = 0;
+ 
+-	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH) {
++	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_PACKET) {
+ 		gid->raw[5] = mqp->port;
+ 
+ 		if (!gid->raw[5]) {
+@@ -694,7 +694,7 @@ static int mlx4_ib_mcg_attach(struct ib_
+ 
+ 	err = mlx4_multicast_attach(mdev->dev, &mqp->mqp, gid->raw, !!(mqp->flags &
+ 				MLX4_IB_QP_BLOCK_MULTICAST_LOOPBACK),
+-				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
++				(ibqp->qp_type == IB_QPT_RAW_PACKET) ?
+ 				    MLX4_PROT_EN : MLX4_PROT_IB_IPV6,
+ 				    high_prio);
+ 	if (high_prio)
+@@ -712,7 +712,7 @@ err_add:
+ 	if (high_prio)
+ 		*eth_gid_flags &= ~IB_RAW_ETH_GID_HIGH_PRIO;
+ 	mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
+-			      (ibqp->qp_type == IB_QPT_RAW_ETH) ?
++			      (ibqp->qp_type == IB_QPT_RAW_PACKET) ?
+ 			      MLX4_PROT_EN : MLX4_PROT_IB_IPV6,
+ 			      high_prio);
+ 	if (high_prio)
+@@ -747,7 +747,7 @@ static int mlx4_ib_mcg_detach(struct ib_
+ 	u32 *eth_gid_flags = (u32 *)(gid->raw);
+ 	u8 high_prio = 0;
+ 
+-	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH) {
++	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_PACKET) {
+ 		gid->raw[5] = mqp->port;
+ 		if (!gid->raw[5]) {
+ 			printk(KERN_WARNING "0 port num for raw_eth detach\n");
+@@ -759,7 +759,7 @@ static int mlx4_ib_mcg_detach(struct ib_
+ 		*eth_gid_flags &= ~IB_RAW_ETH_GID_HIGH_PRIO;
+ 	}
+ 	err = mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
+-				    (ibqp->qp_type == IB_QPT_RAW_ETH) ?
++				    (ibqp->qp_type == IB_QPT_RAW_PACKET) ?
+ 				    MLX4_PROT_EN : MLX4_PROT_IB_IPV6,
+ 				    high_prio);
+ 	if (high_prio)
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/qp.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/qp.c	2011-03-10 15:30:53.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/qp.c	2011-03-10 15:31:17.000000000 +0200
+@@ -325,7 +325,7 @@ static int send_wqe_overhead(enum ib_qp_
+ 			ALIGN(4 +
+ 			      sizeof (struct mlx4_wqe_inline_seg),
+ 			      sizeof (struct mlx4_wqe_data_seg));
+-	case IB_QPT_RAW_ETY:
++	case IB_QPT_RAW_ETHERTYPE:
+ 		return sizeof(struct mlx4_wqe_ctrl_seg) +
+ 			ALIGN(MLX4_IB_MAX_RAW_ETY_HDR_SIZE +
+ 			      sizeof(struct mlx4_wqe_inline_seg),
+@@ -411,7 +411,7 @@ static int set_kernel_sq_size(struct mlx
+ 		return -EINVAL;
+ 	}
+ 
+-	if (type == IB_QPT_RAW_ETY &&
++	if (type == IB_QPT_RAW_ETHERTYPE &&
+ 	    cap->max_send_sge + 1 > dev->dev->caps.max_sq_sg) {
+ 		mlx4_ib_dbg("No space for RAW ETY hdr");
+ 		return -EINVAL;
+@@ -457,7 +457,7 @@ static int set_kernel_sq_size(struct mlx
+ 	 */
+ 	if (dev->dev->caps.fw_ver >= MLX4_FW_VER_WQE_CTRL_NEC &&
+ 	    qp->sq_signal_bits && BITS_PER_LONG == 64 &&
+-	    type != IB_QPT_SMI && type != IB_QPT_GSI && type != IB_QPT_RAW_ETY)
++	    type != IB_QPT_SMI && type != IB_QPT_GSI && type != IB_QPT_RAW_ETHERTYPE)
+ 		qp->sq.wqe_shift = ilog2(64);
+ 	else
+ 		qp->sq.wqe_shift = ilog2(roundup_pow_of_two(s));
+@@ -656,7 +656,7 @@ static int create_qp_common(struct mlx4_
+ 		qpn = sqpn;
+ 	} else {
+ 		err = mlx4_qp_reserve_range(dev->dev, 1, 1, &qpn,
+-					    init_attr->qp_type == IB_QPT_RAW_ETH ?
++					    init_attr->qp_type == IB_QPT_RAW_PACKET ?
+ 					    0xC0 : 0);
+ 		if (err)
+ 			goto err_wrid;
+@@ -844,7 +844,7 @@ struct ib_qp *mlx4_ib_create_qp(struct i
+ 	case IB_QPT_RC:
+ 	case IB_QPT_UC:
+ 	case IB_QPT_UD:
+-	case IB_QPT_RAW_ETH:
++	case IB_QPT_RAW_PACKET:
+ 	{
+ 		qp = kzalloc(sizeof *qp, GFP_KERNEL);
+ 		if (!qp)
+@@ -865,7 +865,7 @@ struct ib_qp *mlx4_ib_create_qp(struct i
+ 
+ 		break;
+ 	}
+-	case IB_QPT_RAW_ETY:
++	case IB_QPT_RAW_ETHERTYPE:
+ 		if (!(dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_RAW_ETY))
+ 			return ERR_PTR(-ENOSYS);
+ 	case IB_QPT_SMI:
+@@ -885,7 +885,7 @@ struct ib_qp *mlx4_ib_create_qp(struct i
+ 
+ 		err = create_qp_common(dev, pd, init_attr, udata,
+ 				       dev->dev->caps.sqp_start +
+-				       (init_attr->qp_type == IB_QPT_RAW_ETY ? 4 :
++				       (init_attr->qp_type == IB_QPT_RAW_ETHERTYPE ? 4 :
+ 				       (init_attr->qp_type == IB_QPT_SMI ? 0 : 2)) +
+ 				       init_attr->port_num - 1,
+ 				       qp);
+@@ -933,10 +933,10 @@ static int to_mlx4_st(enum ib_qp_type ty
+ 	case IB_QPT_UC:		return MLX4_QP_ST_UC;
+ 	case IB_QPT_UD:		return MLX4_QP_ST_UD;
+ 	case IB_QPT_XRC:	return MLX4_QP_ST_XRC;
+-	case IB_QPT_RAW_ETY:
++	case IB_QPT_RAW_ETHERTYPE:
+ 	case IB_QPT_SMI:
+ 	case IB_QPT_GSI:
+-	case IB_QPT_RAW_ETH:	return MLX4_QP_ST_MLX;
++	case IB_QPT_RAW_PACKET:	return MLX4_QP_ST_MLX;
+ 	default:		return -1;
+ 	}
+ }
+@@ -1101,10 +1101,10 @@ static int __mlx4_ib_modify_qp(struct ib
+ 			break;
+ 		}
+ 	}
+-	if (ibqp->qp_type == IB_QPT_RAW_ETH)
++	if (ibqp->qp_type == IB_QPT_RAW_PACKET)
+ 		context->mtu_msgmax = 0xff;
+ 	else if (ibqp->qp_type == IB_QPT_GSI || ibqp->qp_type == IB_QPT_SMI ||
+-	    ibqp->qp_type == IB_QPT_RAW_ETY)
++	    ibqp->qp_type == IB_QPT_RAW_ETHERTYPE)
+ 		context->mtu_msgmax = (IB_MTU_4096 << 5) | 11;
+ 	else if (ibqp->qp_type == IB_QPT_UD) {
+ 		if (qp->flags & MLX4_IB_QP_LSO)
+@@ -1275,8 +1275,8 @@ static int __mlx4_ib_modify_qp(struct ib
+ 	if (cur_state == IB_QPS_INIT &&
+ 	    new_state == IB_QPS_RTR  &&
+ 	    (ibqp->qp_type == IB_QPT_GSI || ibqp->qp_type == IB_QPT_SMI ||
+-	     ibqp->qp_type == IB_QPT_UD || ibqp->qp_type == IB_QPT_RAW_ETY ||
+-		ibqp->qp_type == IB_QPT_RAW_ETH)) {
++	     ibqp->qp_type == IB_QPT_UD || ibqp->qp_type == IB_QPT_RAW_ETHERTYPE ||
++		ibqp->qp_type == IB_QPT_RAW_PACKET)) {
+ 		context->pri_path.sched_queue = (qp->port - 1) << 6;
+ 		if (is_qp0(dev, qp))
+ 			context->pri_path.sched_queue |= MLX4_IB_DEFAULT_QP0_SCHED_QUEUE;
+@@ -1395,7 +1395,7 @@ int mlx4_ib_modify_qp(struct ib_qp *ibqp
+ 		goto out;
+ 	}
+ 
+-	if ((attr_mask & IB_QP_PORT) && (ibqp->qp_type != IB_QPT_RAW_ETH) &&
++	if ((attr_mask & IB_QP_PORT) && (ibqp->qp_type != IB_QPT_RAW_PACKET) &&
+ 	    (attr->port_num == 0 || attr->port_num > dev->num_ports)) {
+ 		mlx4_ib_dbg("qpn 0x%x: invalid port number (%d) specified "
+ 			    "for transition %d to %d. qp_type %d",
+@@ -1404,7 +1404,7 @@ int mlx4_ib_modify_qp(struct ib_qp *ibqp
+ 		goto out;
+ 	}
+ 
+-	if ((attr_mask & IB_QP_PORT) && (ibqp->qp_type == IB_QPT_RAW_ETH) &&
++	if ((attr_mask & IB_QP_PORT) && (ibqp->qp_type == IB_QPT_RAW_PACKET) &&
+ 		(rdma_port_get_link_layer(&dev->ib_dev, attr->port_num)
+ 				!= IB_LINK_LAYER_ETHERNET)) {
+ 		mlx4_ib_dbg("qpn 0x%x: invalid port (%d) specified (not RDMAoE)"
+@@ -2083,7 +2083,7 @@ int mlx4_ib_post_send(struct ib_qp *ibqp
+ 			size += seglen / 16;
+ 			break;
+ 
+-		case IB_QPT_RAW_ETY:
++		case IB_QPT_RAW_ETHERTYPE:
+ 			err = build_raw_ety_header(to_msqp(qp), wr, ctrl,
+ 						   &seglen);
+ 			if (unlikely(err)) {
+Index: ofed_kernel-fixes/include/rdma/ib_verbs.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/rdma/ib_verbs.h	2011-03-10 15:30:53.000000000 +0200
++++ ofed_kernel-fixes/include/rdma/ib_verbs.h	2011-03-10 15:31:17.000000000 +0200
+@@ -572,8 +572,8 @@ enum ib_qp_type {
+ 	IB_QPT_UD,
+ 	IB_QPT_XRC,
+ 	IB_QPT_RAW_IPV6,
+-	IB_QPT_RAW_ETY,
+-	IB_QPT_RAW_ETH
++	IB_QPT_RAW_ETHERTYPE,
++	IB_QPT_RAW_PACKET
+ };
+ 
+ enum ib_raw_eth_flags {
+Index: ofed_kernel-fixes/drivers/infiniband/hw/nes/nes_verbs.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/nes/nes_verbs.c	2011-03-10 15:34:50.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/nes/nes_verbs.c	2011-03-10 15:35:00.000000000 +0200
+@@ -1412,7 +1412,7 @@ static struct ib_qp *nes_create_qp(struc
+ 			atomic_inc(&qps_created);
+ 			break;
+ 
+-	case IB_QPT_RAW_ETH:
++	case IB_QPT_RAW_PACKET:
+ 	if (!ibpd->uobject)
+ 		return ERR_PTR(-EINVAL);
+ 
+@@ -1588,7 +1588,7 @@ static int nes_destroy_qp(struct ib_qp *
+ 	atomic_inc(&sw_qps_destroyed);
+ 	nesqp->destroyed = 1;
+ 
+-	if (nesqp->ibqp.qp_type == IB_QPT_RAW_ETH) {
++	if (nesqp->ibqp.qp_type == IB_QPT_RAW_PACKET) {
+ 		/* check the QP refernece count */
+ 		if (atomic_read(&nesqp->refcount) == 0)
+ 			BUG();
+@@ -3133,7 +3133,7 @@ int nes_modify_qp(struct ib_qp *ibqp, st
+ 			nesqp->hwqp.qp_id, attr->qp_state, nesqp->ibqp_state,
+ 			nesqp->iwarp_state, atomic_read(&nesqp->refcount));
+ 
+-	if (ibqp->qp_type == IB_QPT_RAW_ETH) {
++	if (ibqp->qp_type == IB_QPT_RAW_PACKET) {
+ 		ret = nes_ud_modify_qp(ibqp, attr, attr_mask, &udata);
+ 		return ret;
+ 	}
+Index: ofed_kernel-fixes/drivers/infiniband/hw/ehca/ehca_qp.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/ehca/ehca_qp.c	2011-03-10 15:46:27.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/ehca/ehca_qp.c	2011-03-10 15:46:56.000000000 +0200
+@@ -249,7 +249,7 @@ static inline int ibqptype2servicetype(e
+ 		return ST_UD;
+ 	case IB_QPT_RAW_IPV6:
+ 		return -EINVAL;
+-	case IB_QPT_RAW_ETY:
++	case IB_QPT_RAW_ETHERTYPE:
+ 		return -EINVAL;
+ 	default:
+ 		ehca_gen_err("Invalid ibqptype=%x", ibqptype);
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mthca/mthca_cmd.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mthca/mthca_cmd.c	2011-03-10 15:46:27.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mthca/mthca_cmd.c	2011-03-10 15:46:56.000000000 +0200
+@@ -1816,7 +1816,7 @@ int mthca_CONF_SPECIAL_QP(struct mthca_d
+ 	case IB_QPT_RAW_IPV6:
+ 		op_mod = 2;
+ 		break;
+-	case IB_QPT_RAW_ETY:
++	case IB_QPT_RAW_ETHERTYPE:
+ 		op_mod = 3;
+ 		break;
+ 	default:

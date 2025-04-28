@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>config</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libuser Reference Manual">
+<link rel="up" href="ch01.html" title="libuser">
+<link rel="prev" href="ch01.html" title="libuser">
+<link rel="next" href="libuser-value.html" title="value">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="libuser">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libuser Reference Manual</th>
+<td><a accesskey="n" href="libuser-value.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libuser-config.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libuser-config.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="config">
+<a name="libuser-config"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libuser-config.top_of_page"></a>config</span></h2>
+<p>config — Routines for reading configuration information for the libuser library.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libuser-config.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             <a class="link" href="libuser-config.html#lu-cfg-read" title="lu_cfg_read ()">lu_cfg_read</a>                         (struct lu_context *context,
+                                                         const char *key,
+                                                         const char *default_value);
+const char *        <a class="link" href="libuser-config.html#lu-cfg-read-single" title="lu_cfg_read_single ()">lu_cfg_read_single</a>                  (struct lu_context *context,
+                                                         const char *key,
+                                                         const char *default_value);
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             <a class="link" href="libuser-config.html#lu-cfg-read-keys" title="lu_cfg_read_keys ()">lu_cfg_read_keys</a>                    (struct lu_context *context,
+                                                         const char *parent_key);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libuser-config.description"></a><h2>Description</h2>
+<p>
+These routines allow an application or module to read configuration data
+from the libuser configuration.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libuser-config.details"></a><h2>Details</h2>
+<div class="refsect2" title="lu_cfg_read ()">
+<a name="lu-cfg-read"></a><h3>lu_cfg_read ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             lu_cfg_read                         (struct lu_context *context,
+                                                         const char *key,
+                                                         const char *default_value);</pre>
+<p>
+Reads the list of values for a given key from the configuration space.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
+<td>A valid libuser library context.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>The value to be read from the configuration.  The key should be of the
+form "section/key" for most purposes.  For example, the <span class="type">files</span> module uses
+keys of the form "file/foo" for all of its configuration data.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>default_value</code></em> :</span></p></td>
+<td>A default value to be returned in case none are found.  Can
+be NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>A <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of values, formatted as strings.  The list must be freed
+by calling <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"
+><code class="function">g_list_free()</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_cfg_read_single ()">
+<a name="lu-cfg-read-single"></a><h3>lu_cfg_read_single ()</h3>
+<pre class="programlisting">const char *        lu_cfg_read_single                  (struct lu_context *context,
+                                                         const char *key,
+                                                         const char *default_value);</pre>
+<p>
+Read a single value set for a given key in the configuration space.  This is
+a convenience function.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
+<td>A valid libuser library context.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>The value to be read from the configuration.  The key should be of the
+form "section/key" for most purposes.  For example, the <span class="type">files</span> module uses
+keys of the form "file/foo" for all of its configuration data.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>default_value</code></em> :</span></p></td>
+<td>A default value to be returned in case none are found.  Can
+be NULL.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>A string representation of one of the values set for the key.  This
+string must not be freed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_cfg_read_keys ()">
+<a name="lu-cfg-read-keys"></a><h3>lu_cfg_read_keys ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             lu_cfg_read_keys                    (struct lu_context *context,
+                                                         const char *parent_key);</pre>
+<p>
+Read the names of all of the keys "below" a given key in the configuration
+space.  This function is typically used for walking the configuration space.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
+<td>A valid libuser library context.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent_key</code></em> :</span></p></td>
+<td>The parent key under which the caller wishes to know which subkeys
+are present.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>A <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of string representations of key names.  The list must be
+freed using <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"
+><code class="function">g_list_free()</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

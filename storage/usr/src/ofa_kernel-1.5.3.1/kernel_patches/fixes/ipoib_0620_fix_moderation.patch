@@ -1,0 +1,39 @@
+From 4237a1fbc1bae6bb86665f81cd93cfac37b216d2 Mon Sep 17 00:00:00 2001
+From: Eli Cohen <eli@mellanox.co.il>
+Date: Wed, 3 Nov 2010 10:56:38 +0200
+Subject: [PATCH] IPoIB: Fix IPoIB to conform to ethtool definitions
+
+Ethtool documentation states that when once of the parameters,
+rx_coalesce_usecs or rx_max_coalesced_frames are set to zero while the other
+has a none zero value, the none zero parameter should still be operative. For
+example, if rx_max_coalesced_frames is set to zero while rx_coalesce_usecs is >
+0, the rate of events is limited to not exceed (1 / rx_coalesce_usecs). In the
+opposite case, an event is generated only after rx_max_coalesced_frames have
+arrived. The documentation also states that setting both to zero is invalid.
+
+Signed-off-by: Eli Cohen <eli@mellanox.co.il>
+---
+ drivers/infiniband/ulp/ipoib/ipoib_ethtool.c |    7 +++++++
+ 1 files changed, 7 insertions(+), 0 deletions(-)
+
+diff --git a/drivers/infiniband/ulp/ipoib/ipoib_ethtool.c b/drivers/infiniband/ulp/ipoib/ipoib_ethtool.c
+index e9795f6..e602b7f 100644
+--- a/drivers/infiniband/ulp/ipoib/ipoib_ethtool.c
++++ b/drivers/infiniband/ulp/ipoib/ipoib_ethtool.c
+@@ -78,6 +78,13 @@ static int ipoib_set_coalesce(struct net_device *dev,
+ 	    coal->rx_max_coalesced_frames > 0xffff)
+ 		return -EINVAL;
+ 
++	if (coal->rx_max_coalesced_frames | coal->rx_coalesce_usecs) {
++		if (!coal->rx_max_coalesced_frames)
++			coal->rx_max_coalesced_frames = 0xffff;
++		else if (!coal->rx_coalesce_usecs)
++			coal->rx_coalesce_usecs = 0xffff;
++	}
++
+ 	ret = ib_modify_cq(priv->recv_cq, coal->rx_max_coalesced_frames,
+ 			   coal->rx_coalesce_usecs);
+ 	if (ret && ret != -ENOSYS) {
+-- 
+1.7.3.2
+

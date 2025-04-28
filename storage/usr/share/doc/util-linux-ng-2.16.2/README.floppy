@@ -1,0 +1,89 @@
+                         The floppy formatting utility
+
+   This utility program low-level formats floppy disks. This utility is
+   capable of formatting floppies in LS-120 "Superdisk" ATAPI IDE drives, in
+   addition to the standard floppy controller drives. ATAPI IDE floppy format
+   required Linux kernel 2.4.10, or higher. For earlier kernel versions:
+
+   The patch file linux-2.4.0.patch.txt is for kernel 2.4.0.
+
+   The patch file linux-2.4.0-0.96.patch.txt is for the 0.96 version of
+   ide-floppy.c
+
+   The patch file linux-2.4.7.patch.txt is for kernel 2.4.7.
+
+   The patch file linux-2.4.7-ac3.patch.txt is for kernel 2.4.7-ac3.
+
+   The patch file linux-2.2.16.patch.txt is for kernel 2.2.16 (and 2.2.17,
+   probably).
+
+   Please don't ask me how to apply kernel patches. If you know how to build
+   and compile the Linux kernel, you know how to apply kernel patches.
+
+   The floppy utility can still be used without applying these patches.
+   You'll just get a jazzed-up version of fdformat.
+
+   WARNING: Do not attempt to format 120 mb super-floppies. There's nothing
+   in the floppy utility that blocks any attempt to issue a request to format
+   a disk, if the floppy drive claims it can do so. Some LS-120 drives claim
+   to be able to format 120 mb super-floppies, even though these disk are
+   factory-formatted, AND CANNOT be user-formatted. An attempt to do so will
+   permanently destroy the superfloppy disk.
+
+Compiling
+
+   To compile this floppy utility you need to install the libpopt library. It
+   is a small library used to parse command line arguments. It is included in
+   most Linux distributions by default. If you don't have it, grab it from
+   [1]ftp://ftp.redhat.com/pub/redhat/code/popt and install it.
+
+   You will also need to have the [2]GTK toolkit installed in order to
+   compile the GTK front end to the floppy utility. Without the GTK toolkit
+   only the command-line utility will be compiled and installed.
+
+   Compiling the floppy utility is straightforward:
+
+ ./configure
+ make
+ make install (if you care, you can simply run it from the current directory
+ too).
+
+   That's it. By default, floppy will install in /usr/local/bin, and use
+   /usr/local/etc/floppy as its configuration file. The configure script
+   accepts the usual options:
+
+     * --prefix=/usr -- installs /usr/bin/floppy, and uses /usr/etc/floppy
+     * --sysconfdir=/etc -- use /etc/floppy as the configuration file
+
+   Therefore:
+
+   --prefix=/usr --sysconfdir=/etc
+
+   This configuration installs /usr/bin/floppy, and uses /etc/floppy as its
+   configuration file.
+
+   The floppy utility can also be built by RPM:
+
+   rpmbuild -ta floppy-version.tar.(gz|bz2)
+
+   Please see the [3]installed manual page for instructions on using the
+   floppy utility.
+
+Red Hat 9
+
+   Red Hat 9 includes the console floppy binary in "util-linux", but does not
+   include floppygtk, the GTK wrapper. Including floppygtk makes util-linux
+   depend on X, which will not work very well.
+
+   The easiest way to get floppygtk working with Red Hat 9 is to use this
+   mouthfull:
+
+ rpmbuild -ta --define '_prefix /usr/local' \
+              --define '_mandir /usr/local/share/man' \
+         floppy-0.14.tar.bz2
+
+   floppy and floppygtk will now install into /usr/local, and the Gnome link
+   will start the /usr/local version. The only problem is that running
+   'floppy' from gnome-terminal will run the gtk-wrapperless /usr/bin
+   version. So you can't start the GTK wrapper from a gnome-terminal window,
+   but the Gnome menu link will work.

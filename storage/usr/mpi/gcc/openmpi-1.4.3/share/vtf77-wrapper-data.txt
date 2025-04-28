@@ -1,0 +1,25 @@
+version=5.4.13
+language=Fortran 77
+compiler_env=VT_F77
+compiler_flags_env=VT_FFLAGS
+compiler=gfortran
+compiler_flags=
+linker_flags=
+libs= -lotf  -lz     
+includedir=${includedir}
+libdir=${libdir}
+opari_bin=/usr/mpi/gcc/openmpi-1.4.3/bin/opari
+opari_tab_compiler=gcc
+opari_tab_compiler_flags=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic
+pmpilib=
+fmpilib=-lvt.fmpi
+dynattlib=
+compiler_iflags_gnu=-g -finstrument-functions
+compiler_iflags_intel=-g -finstrument-functions
+compiler_iflags_pathscale=-g -finstrument-functions
+compiler_iflags_pgi=-Mprof=func
+compiler_iflags_sun=-O -Qoption f90comp -phat
+compiler_iflags_xl=-qdebug=function_trace
+compiler_iflags_ftrace=-ftrace
+inst_avail=manual pomp gnu
+inst_default=gnu

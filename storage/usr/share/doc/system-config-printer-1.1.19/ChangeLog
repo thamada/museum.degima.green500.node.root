@@ -1,0 +1,2731 @@
+2010-05-18  Tim Waugh  <twaugh@redhat.com>
+
+	Bumped version for 1.1.19 release.
+
+	update-po
+
+2010-05-18  warrink  <warrink@fedoraproject.org>
+
+	l10n: Updates to Dutch (Flemish) (nl) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-05-18  ttrinks  <ttrinks@fedoraproject.org>
+
+	l10n: Updates to German (de) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-05-17  elsupergomez  <elsupergomez@fedoraproject.org>
+
+	l10n: Updates to Spanish (Castilian) (es) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-05-17  mareklaane  <mareklaane@fedoraproject.org>
+
+	l10n: Updates to Estonian (et) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-05-15  Tim Waugh  <twaugh@redhat.com>
+
+	Don't buffer debugging output.
+
+2010-05-14  raven  <raven@fedoraproject.org>
+
+	l10n: Updates to Polish (pl) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-05-14  Tim Waugh  <twaugh@redhat.com>
+
+	Updated British translation.
+
+	update-po
+
+	Attempt to translate backend device-info strings (Ubuntu #557199).
+
+	Avoid traceback changing PPD for queue with bad PPD.
+
+2010-05-14  Simon Olofsson  <simon@olofsson.de>
+
+	Escape messages in the error dialog, they may contain markup (Ubuntu #567324).
+
+2010-05-14  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed typo.
+
+2010-05-13  Tim Waugh  <twaugh@redhat.com>
+
+	cups-pk-helper support: FileGet requires a file it can write to (bug #587744).
+
+2010-05-10  Tim Waugh  <twaugh@redhat.com>
+
+	Another fix for bug #590193.
+
+	Only local filenames can be selected for troubleshoot.txt (bug #590529).
+
+	Initialise auto_make to the empty string (bug #590193).
+
+	AdvancedServerSettings: fixed HTTPError status code handling.
+
+2010-05-07  Tim Waugh  <twaugh@redhat.com>
+
+	Always use close_fds=True in subprocess.Popen calls (bug #587830).
+
+	authconn: treat any HTTPError as failure (bug #587744).
+	* authconn.py (Connection._authloop): Don't restrict failure cases to
+	HTTP_UNAUTHORIZED and HTTP_FORBIDDEN.  HTTP_AUTHORIZATION_CANCELED is
+	another case, but really any error code here should be treated as
+	failure.
+
+	Initialise GUI.printers in constructor (bug #589793).
+
+	asyncconn: always give the right Connection object in the callbacks.
+	* asyncconn.py (Connection): Rather than overloading the
+	__eq__ and __ne__ operators to compare with the captured
+	object, always give this Connection object in reply/error
+	handlers.
+
+	asyncipp: handle connection failures better.
+	* asyncipp.py (_IPPConnectionThread.run): Don't exit thread if
+	connection fails.
+
+	asyncipp: show reconnect/cancel dialog, and handle response correctly.
+	* asyncipp.py (_IPPAuthOperation._reconnect_error): Actually show
+	the dialog.
+	(_IPPAuthOperation._on_retry_server_error_response): Use the correct
+	object when invoking the reconnect method.
+
+2010-05-06  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: run SNMP query for lpd: URIs too.
+
+2010-05-05  Tim Waugh  <twaugh@redhat.com>
+
+	Show (stdout) unmatched IEEE 1284 Device IDs in less confusing format.
+
+2010-05-04  Tim Waugh  <twaugh@redhat.com>
+
+	Some strings in the SMB auth dialog were not marked for l10n (Ubuntu #557199).
+
+	Better fix for Ubuntu #575048 (Verify button width).
+
+	Fixed a troubleshooter string that wasn't being translated (Ubuntu #557199).
+
+2010-05-04  Jiri Popelka  <jpopelka@redhat.com>
+
+	Make Varify button auto-resizable (Ubuntu #575048).
+
+	Fixed TreeIter handling in update_job_creation_times() (bug #588409).
+
+	Make Kyocera detected if it reports only the model name (Ubuntu #564633).
+
+2010-04-30  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed localized state reasons (bug #587718).
+
+	troubleshoot: turn off debugging before fetching error log.
+
+	No need to introspect CupsPkHelper every time, just once.
+
+	Fixed indentation in PK1Connection.getDevices.
+
+2010-04-28  Tim Waugh  <twaugh@redhat.com>
+
+	jobviewer: PrinterURIIndex fix when no names to initialise with.
+
+2010-04-28  enshahar  <enshahar@fedoraproject.org>
+
+	l10n: Updates to Korean (ko) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-04-26  Tim Waugh  <twaugh@redhat.com>
+
+	Resolve DNS-SD hostnames for physical device comparison (trac #179).
+
+2010-04-23  shanky  <shanky@fedoraproject.org>
+
+	l10n: Updates to Kannada (kn) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-04-22  Jiri Popelka  <jpopelka@redhat.com>
+
+	Also close NewPrinterWindow when queue has been deleted (better fix of #581668).
+
+2010-04-22  Tim Waugh  <twaugh@redhat.com>
+
+	Specify requested_attributes in getJobs if possible (bug #584806).
+
+2010-04-22  Jiri Popelka  <jpopelka@redhat.com>
+
+	Make sure the printer we change ppd for still exists (bug #581668).
+
+2010-04-14  Tim Waugh  <twaugh@redhat.com>
+
+	Avoid tracebacks when adjusting server settings.
+
+	monitor: don't crash if job-state attribute is missing (Ubuntu #562441).
+
+2010-04-13  mvdz  <mvdz@fedoraproject.org>
+
+	l10n: Updates to Ukrainian (uk) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-04-12  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: exclude 'hpfax' devices.
+
+2010-04-09  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: don't reuse 'c'.
+
+	check-device-ids: exclude the hal backend.
+
+	check-device-ids: handle non-UTF-8 environments.
+
+2010-04-08  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: temporarily disabling firewall will get SNMP responses.
+
+	check-device-ids: neater output for skipping devices.
+
+	check-device-ids: use SNMP to try to fetch device-id if missing.
+
+	troubleshoot: handle IPPError in PrintTestPage module (bug #579957).
+
+2010-04-07  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: switch scheme and make_and_model around in output
+
+2010-04-06  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed typo (Ubuntu #552398).
+
+2010-04-02  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: fix user-specified IDs
+
+	check-device-ids: exclude dnssd, explain why URIs are skipped.
+
+	check-device-ids: allow hp backend IDs as well
+
+2010-04-01  htaira  <htaira@fedoraproject.org>
+
+	l10n: Updates to Japanese (ja) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-03-29  swkothar  <swkothar@fedoraproject.org>
+
+	l10n: Updates to Gujarati (gu) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-03-26  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: use make-and-model field for best-matching.
+
+	Finally fixed race condition in asyncipp.
+	The IPP connection thread was using the idle loop for callbacks, but
+	the error/reply callback functions were stored in class instance
+	variables.  By the time the idle loop ran the callbacks they may be
+	for a different caller!
+
+	The fix is to pass the error/reply callback function itself to the
+	idle timeout, as well as the actually error/reply data.
+
+	Fixed window transience for 'Change Device URI'.
+
+	More async traceback fixes (Ubuntu #547075).
+
+2010-03-25  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed set arithmetic.
+
+	check-device-ids: search harder for missing Device IDs.
+
+	Fixed traceback in asyncipp (Ubuntu #520466).
+	In the time between the callback invocation being added to the idle
+	loop and it actually getting called, the connection thread was
+	destroyed.  Move the check for whether there is a callback function to
+	call to the moment before it is used.
+
+2010-03-24  Tim Waugh  <twaugh@redhat.com>
+
+	Actually, use JobCancel method instead for 1.1.x.
+	For 1.1.x we will use the compatibility JobCancel method.  This way we
+	will only fallback to IPP when attempting to purge a job.
+
+	Use new JobCancelPurge cups-pk-helper method.
+	This is how the interface has been adapted upstream (bug #548756).
+
+2010-03-24  mareklaane  <mareklaane@fedoraproject.org>
+
+	l10n: Updates to Estonian (et) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-03-23  Tim Waugh  <twaugh@redhat.com>
+
+	check-device-ids: show drivers in preference order.
+
+2010-03-22  Tim Waugh  <twaugh@redhat.com>
+
+	Initialize downloadable_drivers when OpenPrinting query fails (bug #400872).
+
+	More error-checking in udev-configure-printer.
+	Fixes compilation warnings from gcc.
+
+	Fixed 'NotShowIn' desktop entry in print-applet.desktop.in.
+	Warning message from desktop-file-install:
+	print-applet.desktop: key "NotShowIn" is a list and does not have a
+	semicolon as trailing character, fixing
+
+	Fixed reconnection error handling in IPPAuthOperation class (bug #575198).
+
+2010-03-19  Tim Waugh  <twaugh@redhat.com>
+
+	The canonical name for Kyocera is Kyocera Mita.
+
+	Fixed typo.
+
+	Removed some debugging bits in check-device-ids.
+
+	check-device-ids.py: show CMD field as well.
+
+2010-03-18  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed traceback in check-driver-ids.py when no drivers are found.
+
+2010-03-16  Tim Waugh  <twaugh@redhat.com>
+
+	Added missing-imports Makefile rule, with distcheck hook.
+
+	Import modules we catch exceptions from (bug #574117).
+
+2010-03-15  htaira  <htaira@fedoraproject.org>
+
+	l10n: Updates to Japanese (ja) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+	l10n: Updates to Japanese (ja) translation
+	Transmitted-via: Transifex (translate.fedoraproject.org)
+
+2010-03-15  Tim Waugh  <twaugh@redhat.com>
+
+	Added StartupNotify=true to the 'manage print jobs' desktop file.
+
+2010-03-10  Tim Waugh  <twaugh@redhat.com>
+
+	update-po
+
+	Bumped version for 1.1.18 release.
+
+2010-03-09  Tim Waugh  <twaugh@redhat.com>
+
+	Treat hpcups-requiring-plugin as 3rd party proprietary (bug #547837).
+
+	Rua bootstrap against autoconf-2.65.
+
+2010-03-09  Jiri Popelka  <jpopelka@redhat.com>
+
+	Fixed jobviewer traceback when closing notification (bug #571603).
+	* jobviewer.py (Jobviewer.cleanup, Jobviewer.now_connected):
+	Ignore glib.GError when closing not yet shown notification.
+
+2010-03-05  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed typo in data button setting function.
+
+2010-02-28  Tim Waugh  <twaugh@redhat.com>
+
+	Import gobject in gtkspinner.
+
+2010-02-26  Tim Waugh  <twaugh@redhat.com>
+
+	Added simple program to check IEEE 1284 Device IDs against PPDs.
+
+	Allow IPP_INTERNAL_ERROR when fetching PPD for empty class (bug #567920).
+
+2010-02-22  Tim Waugh  <twaugh@redhat.com>
+
+	Removed HP and Kyocera IEEE 1284 Device ID hacks.
+
+2010-02-22  Jiri Popelka  <jpopelka@redhat.com>
+
+	Catch RuntimeError in statereason.py when cupsGetPPD2 fails (#566938).
+
+2010-02-21  Tim Waugh  <twaugh@redhat.com>
+
+	Display a warning when the wrong IEEE 1284 Device ID is detected.
+
+2010-02-18  Tim Waugh  <twaugh@redhat.com>
+
+	Added compatibility code for unofficial DevicesGet D-Bus interface.
+	* cupspk.py (Connection.getDevices): Use empty list for schemes
+	defaults.  Catch TypeError on D-Bus call and use old API in that case.
+	* asyncpk1.py (PK1Connection.__init__): Use introspection to discover
+	which interface to use for DevicesGet.
+	(PK1Connection.getDevices): Use old or new interface as appropriate.
+
+2010-02-17  Vincent Untz  <vuntz@gnome.org>
+
+	Update the PolicyKit code to use the correct signature for DevicesGet
+	The DevicesGet dbus method was originally developed as a patch, and when
+	it got integrated in cups-pk-helper, the signature changed a bit.
+
+2010-02-11  Tim Waugh  <twaugh@redhat.com>
+
+	Avoid clearing selecting device settings when adding printer.
+	* system-config-printer.py (NewPrinterUGI.add_devices): Don't set the
+	cursor in the URIs treeview if a device was already selected by the
+	user.
+
+2010-02-10  Tim Waugh  <twaugh@redhat.com>
+
+	Use gtk.STOCK_* instead of 'gtk-*' throughout.
+
+	Use stock 'add' icon for new-printer button (Ubuntu #394071).
+	* system-config-printer.py (GUI.__init__): Use 'add' instead of
+	'new' for new-printer button.  Part of trac #64.
+
+2010-02-09  Tim Waugh  <twaugh@redhat.com>
+
+	Bumped version for 1.1.17 release.
+
+	update-po
+
+2010-02-07  Tim Waugh  <twaugh@redhat.com>
+
+	Avoid crash filling makes list when no make detected (bug #562520).
+
+2010-02-03  Tim Waugh  <twaugh@redhat.com>
+
+	Better error handling when renaming a printer (bug #561182).
+	* system-config-printer.py (GUI.rename_printer): Handle
+	IPPError when fetching attributes for printer.  Also
+	use the original name to undo changes on failure.
+
+2010-01-28  bouska  <bouska@fedoraproject.org>
+
+	Sending translation for French
+
+2010-01-26  Tim Waugh  <twaugh@redhat.com>
+
+	When retrying authentication as another user, forbid PolicyKit.
+	With normal IPP authentication we retry as the root user if the
+	operation fails the first time.  However, if we are using PolicyKit we
+	only want to attempt it via PolicyKit the first time; all subsequent
+	times should be via IPP.
+
+2010-01-25  Tim Waugh  <twaugh@redhat.com>
+
+	Only add current device to list when all devices found (bug #558524).
+
+2010-01-24  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed statereason localization for raw queues (bug #558156).
+
+	Fixed async pycups fallback again.
+
+2010-01-22  Tim Waugh  <twaugh@redhat.com>
+
+	Mirror asyncpk1 fallback fix in asyncpk0 (bug #557695).
+
+2010-01-22  ypoyarko  <ypoyarko@fedoraproject.org>
+
+	Sending translation for Russian
+
+2010-01-20  Jiri Popelka  <jpopelka@redhat.com>
+
+	Update 'Time submitted' column when clicking Refresh in job viewer.
+
+2010-01-18  Tim Waugh  <twaugh@redhat.com>
+
+	Clean up temporary files when localizing statereason (bug #552768).
+
+	Handle errors more gracefully in userdefault.py (bug #556345).
+
+	Make sure serial device widgets are always initialized (bug #556488).
+
+	Updated aclocal.m4 by running bootstrap.
+
+	Don't rely on cups-pk-helper being around (bug #556170).
+	* asyncpk1.py (PK1Connection._call_with_pk): Fall back to pycups if
+	the D-Bus call fails.
+
+2010-01-15  Tim Waugh  <twaugh@redhat.com>
+
+	Avoid traceback when checking on connecting backends (bug #555552).
+	Although I can't see any route into check_still_connecting where the
+	event's source ID is not in the connecting_printers dict, somehow it
+	is happening.  Just ignore this if it happens.
+
+2010-01-14  Tim Waugh  <twaugh@redhat.com>
+
+	udev-add-printer: avoid traceback when no CMD field present.
+
+	Fixed window modality and transience.
+
+2010-01-13  Tim Waugh  <twaugh@redhat.com>
+
+	Set D-Bus timeout when calling asynchronously.
+
+2010-01-11  Tim Waugh  <twaugh@redhat.com>
+
+	Removed unnecessary debugging.
+
+	Fixed traceback introduced in d9f4fe5 (bug #554372).
+
+	Fix crash copying printer with certain job options (bug #554268).
+	When a job option such as page-border (which has known supported
+	values) is present on a queue, and that queue is duplicated, we decide
+	whether to set that job option based on whether it is the system
+	default.  However, the system default is not set for that type of
+	option.
+
+	* options.py: Add 'get_default' method to optionwidget interface.
+	* system-config-printer.py (GUI.save_printer): Use it.
+
+2010-01-07  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed typo introduced in 8db7f55 (bug #551436).
+
+	Fixed crash when using keyring for auth without password (bug #553141).
+
+2010-01-06  Tim Waugh  <twaugh@redhat.com>
+
+	Make sure there are enough ink level values (bug #541882).
+
+2010-01-04  Tim Waugh  <twaugh@redhat.com>
+
+	asyncpk1: Handle cancelJob's optional purge_job parameter.
+
+	Make sure the printer we added still exists before selecting it (bug #551436).
+
+	Update copyright message.
+
+	Set notification timeouts appropriately (bug #550829).
+	* applet.py (NewPrinterNotification.NewPrinter): If there is any doubt
+	about the queue, don't let the notification time out.
+
+	Fixed traceback in NewPrinterGUI.init (bug #550442).
+	* system-config-printer.py (NewPrinterGUI.init): Fixed incorrect test.
+
+	Updated copyright message.
+
+	Avoid on_jobviewer_exit traceback (bug #550437).
+	* system-config-printer.py (GUI.on_quit_activate): Make sure to hide
+	the jobviewer windows when asking them to quit, to make sure their
+	exit handlers are not called twice.
+
+2009-12-23  Tim Waugh  <twaugh@redhat.com>
+
+	Parse foomatic's special DRV Device ID field (bug #550108).
+	This allows us to prefer foomatic-recommended drivers, which helps in
+	the case of e.g. the Brother HL-2040 (see bug #531370).
+
+	Driver selection fixes (bug #550075).
+	New auto_driver instance variable to track which driver should be
+	pre-selected.  For adding a queue, use the ppdname suggested by
+	cupshelpers.ppds.PPDs.  For changing an existing queue, use the
+	NickName or ModelName of the PPD to search for the corresponding
+	ppdname.
+
+	Fixed typo.
+
+2009-12-22  Tim Waugh  <twaugh@redhat.com>
+
+	Bumped version for release.
+
+	update-po
+
+	Fixed translatable text for fetching devices.
+
+	Ignore com.apple.print.recoverable state reason.
+
+	Prevent traceback in found_network_printer_callback (bug #547765).
+
+	Initialise gobject threads in the applet.
+
+	Ship async classes.
+
+	Translate strings in asyncipp.py.
+
+	Initialise gobject threads in main application.
+
+	Fix up gettext functions in async classes.
+
+	Use asyncconn for fetching device lists.
+	This avoids a thread-safety issue: as getDevices is an operation
+	that (by default) requires authentication, when PolicyKit is
+	available we will use it.  However, doing so from within a
+	TimedOperation will cause it to be done from a separate thread.
+
+	As PolicyKit is implemented over the D-Bus system bus, and we
+	are already using the system bus in Monitor, this is not safe.
+
+	By using the new asynchronous calling class, direct IPP
+	connections are done from a separate thread (as there is no
+	asynchronous interface in libcups) whereas PolicyKit calls
+	are performed asynchronously in the same thread.  This means
+	that D-Bus is only ever used from one thread, and so is safe.
+
+	Allow asyncconn.Connection instances to be compared correctly.
+	The comparison should really be made against the wrapped
+	connection class.
+
+	Prepare cupshelpers for asyncconn.
+	This change allows cupshelpers.getDevices() to handle asynchronous
+	connections.  Synchronous connections are unchanged.
+
+	Fixed PK1Connection.getDevices.
+	Was converting the schemes parameters into strings too early.
+
+	List unimplemented methods in asyncpk1.
+
+2009-12-21  Tim Waugh  <twaugh@redhat.com>
+
+	Parent XID support in asyncpk0.
+
+	Use asyncpk0 when appropriate.
+
+	New asyncpk0 module to handle PolicyKit pre polkit-1.
+
+	asyncconn: use asyncpk1 when appropriate.
+
+	asyncpk1: pass unhandled method calls through to asyncipp object.
+
+	asyncpk1: more careful __del__ debug output.
+
+	asyncipp: Fix up ref counts, more careful __del__ debugging output.
+
+	asyncconn: remove synchronous calling, fix up ref counts.
+
+	Async reference counting fixes and temporary file handling.
+
+2009-12-18  Tim Waugh  <twaugh@redhat.com>
+
+	Removed extra debugging.
+
+	More asyncpk1 methods: setJobHoldUntil, restartJob, getFile.
+
+	Fixed asyncipp HTTP-level authentication.
+
+	More asyncpk1 work.  Error handling and cancelJob.
+
+2009-12-18  Jiri Popelka  <jpopelka@redhat.com>
+
+	Prevent traceback when no downloadable driver selected (#548449).
+	* system-config-printer.py: set selection mode of tvNPDownloadableDrivers
+	to SELECTION_BROWSE instead of SELECTION_SINGLE.
+
+2009-12-18  Tim Waugh  <twaugh@redhat.com>
+
+	Implemented framework for PK1Connection class.
+
+	Adapted to new pycups API for cupsSetPasswordCB2.
+
+2009-12-16  Tim Waugh  <twaugh@redhat.com>
+
+	Save initial work on asynchronous PK1 connection class.
+
+	Implemented async Connection wrapper class for IPP/polkit.
+
+	More asyncconn improvements: semantic operations and comments.
+
+	More fixes and improvements to asyncconn.
+	Use cups.Connection.setPasswordCB() if available.
+	Supply given password after reconnecting as new user.
+
+	Added authentication to asyncconn.
+
+2009-12-15  Tim Waugh  <twaugh@redhat.com>
+
+	Simple asynchronous calling class for cups.Connection.
+
+2009-12-14  Jiri Popelka  <jpopelka@redhat.com>
+
+	Prevent traceback when cancel button in troubleshooter pressed (#546821).
+	* troubleshoot/ErrorLogCheckpoint.py (ErrorLogCheckpoint.enable_clicked):
+	catch OperationCanceled exception
+
+2009-12-14  Tim Waugh  <twaugh@redhat.com>
+
+	Prefer Foomatic/hpijs to hpcups for the time being.
+	The hpcups driver is a better architecture but still has quite a few
+	bugs (page margins, duplexing, etc).
+
+	The Foomatic/hpijs is more reliable than hpcups at this stage.
+
+2009-12-11  kami911  <kami911@fedoraproject.org>
+
+	Sending translation for Hungarian
+
+2009-12-10  Tim Waugh  <twaugh@redhat.com>
+
+	Clear device screen each time a new dialog is presented.
+	* system-config-printer.py (NewPrinterGUI.fillDeviceTab): Select
+	'Other' initially.
+
+2009-12-09  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed jobviewer traceback with very short-lived state reasons (bug #545733).
+	* system-config-printer.py (GUI.state_reason_removed): Ignore
+	glib.GError when closing notification.
+
+2009-12-09  amitakhya  <amitakhya@fedoraproject.org>
+
+	Sending translation for Assamese
+
+2009-12-09  anipeter  <anipeter@fedoraproject.org>
+
+	Sending translation for Malayalam
+
+2009-12-08  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed traceback with short lpd device URIs (bug #545397).
+	* system-config-printer.py (GUI.on_tvNPDevices_cursor_changed): Don't
+	assume an lpd: URI has a queue part.
+
+2009-12-08  khasida  <khasida@fedoraproject.org>
+
+	Sending translation for Japanese
+
+2009-12-08  tchuang  <tchuang@fedoraproject.org>
+
+	Sending translation for Chinese (Traditional)
+
+2009-12-08  eukim  <eukim@fedoraproject.org>
+
+	Sending translation for Korean
+
+2009-12-07  ypoyarko  <ypoyarko@fedoraproject.org>
+
+	Sending translation for Russian
+
+2009-12-07  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed traceback when troubleshooter options is cancelled (bug #544356).
+	If the troubleshooter window is "busy", the cancel button is for
+	cancelling the current operation.  Otherwise it is for aborting the
+	entire troubleshoot session.
+
+2009-12-07  runab  <runab@fedoraproject.org>
+
+	Sending translation for Bengali (India)
+
+2009-12-04  Tim Waugh  <twaugh@redhat.com>
+
+	Constraints handling fix.
+	Detect constraints of the form:
+	*UIConstraints: *Duplex *OptionDuplex False
+
+2009-12-03  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed cupsd.conf parsing when lines begin with blanks (bug #544003).
+
+	Don't overwrite BrowsePoll settings with basic settings dialog (bug #543986).
+	The cupsAdminGetServerSettings function cannot return more than one
+	BrowsePoll value, so any BrowsePoll values must be filtered out before
+	calling cupsAdminSetServerSettings.  To prevent any other such
+	problems, best to only include the settings we want to set.
+
+	Handle RuntimeError when localizing state reason (bug #543937).
+	* statereason.py (StateReason.get_description): Handle RuntimeError
+	from cups.getPPD.
+
+	Don't fail if smbc module is not available (trac #199).
+
+2009-12-01  Tim Waugh  <twaugh@redhat.com>
+
+	Give finishings reference for translators.
+
+2009-11-30  Tim Waugh  <twaugh@redhat.com>
+
+	update-po
+
+	Bumped version for release
+
+	Don't update properties if apply failed (bug #542503).
+	* system-config-printer.py (GUI.printer_properties_response): Don't
+	update the printer properties after apply is clicked if the operation
+	failed.
+
+	Prevent traceback when marker-levels are not reported.
+	* system-config-printer.py (GUI.updateMarkerLevels): Avoid traceback
+	introduced in last change.
+
+2009-11-27  Tim Waugh  <twaugh@redhat.com>
+
+	Bumped version for release
+
+	update-po
+
+	Prevent traceback with bad marker-levels attribute (bug #541882).
+	* system-config-printer.py (GUI.updateMarkerLevels): Attempt to coerce
+	attribute values to required types.
+
+	Retry when reconnection (due to authentication) fails (bug #541741).
+	* authconn.py (Connection._authloop): Moved _perform_authentication call
+	inside the try..except clause.  Set _has_failed if the operation will
+	be retried.
+	(Connection._perform_authentication): If _connect fails treat it as
+	server-error-service-unavailable so the retry handler kicks in.
+
+2009-11-27  ruigo  <ruigo@fedoraproject.org>
+
+	Sending translation for Portuguese
+
+2009-11-26  Tim Waugh  <twaugh@redhat.com>
+
+	Prevent number of markers causing window to exceed screen height.
+	* glade/PrinterPropertiesDialog.glade: Put gtkinklevel widgets inside
+	a scrolled window.
+
+	Prevent marker-names causing window to exceed screen width (bug #540826).
+	* system-config-printer.py (GUI.updateMarkerLevels): Set desired label
+	width for ink levels to 10 characters.
+
+	Start main window in the middle of the screen (bug #539876).
+
+	Fixed editability of PPD options for explicit IPP queues (bug #541588).
+	* system-config-printer.py (GUI.fillPrinterTab): The PPD options are
+	editable if the queue is not a discovered queue.
+
+2009-11-23  Tim Waugh  <twaugh@redhat.com>
+
+	Prevent traceback when PackageKit is not installed (bug #540230).
+
+2009-11-18  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed initialisation of PrinterFinder class.
+
+	Install the foomatic package if foomatic-rip is missing.
+
+2009-11-18  chenh  <chenh@fedoraproject.org>
+
+	Sending translation for Chinese (Simplified)
+
+2009-11-15  jensm  <jensm@fedoraproject.org>
+
+	Sending translation for German
+
+2009-11-13  sandeeps  <sandeeps@fedoraproject.org>
+
+	Sending translation for Marathi
+
+2009-11-13  ifelix  <ifelix@fedoraproject.org>
+
+	Sending translation for Tamil
+
+2009-11-13  shanky  <shanky@fedoraproject.org>
+
+	Sending translation for Kannada
+
+2009-11-12  mgiri  <mgiri@fedoraproject.org>
+
+	Sending translation for Oriya
+
+2009-11-12  kkrothap  <kkrothap@fedoraproject.org>
+
+	Sending translation for Telugu
+
+2009-11-12  rajesh  <rajesh@fedoraproject.org>
+
+	Sending translation for Hindi
+
+2009-11-12  jassy  <jassy@fedoraproject.org>
+
+	Sending translation for Punjabi
+
+2009-11-12  swkothar  <swkothar@fedoraproject.org>
+
+	Sending translation for Gujarati
+
+2009-11-11  Tim Waugh  <twaugh@redhat.com>
+
+	Suggest installing foomatic-db-ppds when appropriate.
+	* cupshelpers/cupshelpers.py (parseDeviceID): Don't set the CMD
+	list to a list of the empty string when not present; set it to
+	the empty list.
+	* system-config-printer.py (NewPrinterGUI.nextNPTab): After the
+	device is selected decide whether it might support PostScript.
+	If it might, and foomatic-db-ppds is not installed, suggest
+	installing it.
+
+	NOTE: The application will have to be restarted for the new
+	PPDs to be discovered.
+
+	This is not particularly elegant.  It will be fixed properly in
+	1.2 by installing packages by MFG/MDL tags.
+
+2009-11-09  ruigo  <ruigo@fedoraproject.org>
+
+	Sending translation for Portuguese
+
+2009-11-08  pkst  <pkst@fedoraproject.org>
+
+	Sending translation for Greek
+
+2009-11-07  perplex  <perplex@fedoraproject.org>
+
+	Sending translation for Italian
+
+2009-11-07  warrink  <warrink@fedoraproject.org>
+
+	Sending translation for Dutch
+
+2009-11-07  kmilos  <kmilos@fedoraproject.org>
+
+	Sending translation for Serbian (Latin)
+
+	Sending translation for Serbian
+
+2009-11-07  beckerde  <beckerde@fedoraproject.org>
+
+	Sending translation for Spanish
+
+2009-11-07  raven  <raven@fedoraproject.org>
+
+	Sending translation for Polish
+
+2009-11-06  vpv  <vpv@fedoraproject.org>
+
+	Sending translation for Finnish
+
+2009-11-06  igor  <igor@fedoraproject.org>
+
+	Sending translation for Brazilian Portuguese
+
+2009-11-06  Tim Waugh  <twaugh@redhat.com>
+
+	Updated British translation.
+
+	update-po
+
+	Added translatable string for new retry-current-job error policy.
+	Was showing untranslated (as "retry-current-job").
+
+2009-11-05  Tim Waugh  <twaugh@redhat.com>
+
+	Fail nicely if new printer is deleted during test page prompt (bug #533109).
+	* system-config-printer.py (GUI.on_btnNPApply_clicked): Catch
+	RuntimeError from display_properties_dialog_for and don't try printing
+	a test page in that case.  It means our printer has disappeared in the
+	mean time.
+
+2009-11-04  pkst  <pkst@fedoraproject.org>
+
+	Sending translation for Greek
+
+2009-11-02  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed typo in German translation (bug #532371).
+
+2009-10-30  Tim Waugh  <twaugh@redhat.com>
+
+	Catch IPP errors when updating from notified events (bug #530641).
+	* system-config-printer.py (GUI.printer_event, GUI.state_reason_added,
+	GUI.state_reason_removed): Catch and ignore IPP errors here.  It may
+	be that the printer for which the event was generated no longer
+	exists, in which case we should take no action.
+
+2009-10-28  Jiri Popelka  <jpopelka@redhat.com>
+
+	Added support for custom state reasons (trac #16).
+
+2009-10-28  Tim Waugh  <twaugh@redhat.com>
+
+	Strip 'zjs' from make-and-model as well.
+
+	Avoid Connection.setServer in troubleshooter when choosing network queue.
+
+	Strip 'zxs' and 'pcl3' from make-and-model (bug #531048).
+
+	Fixed visibility tracking for jobs window.
+	* jobviewer.py (JobViewer.on_delete_event): Track visibility on delete
+	event.
+
+2009-10-26  mareklaane  <mareklaane@fedoraproject.org>
+
+	Sending translation for Estonian
+
+2009-10-22  Tim Waugh  <twaugh@redhat.com>
+
+	Ship udev rules in the correct location.
+
+	Use gobject.timeout_add_seconds where appropriate.
+	This allows for more efficient system power usage.
+
+	* applet.py (NewPrinterNotification.GetReady,
+	NewPrinterNotification.run_config_tool): Use gobject.timeout_add_seconds.
+	* jobviewer.py (JobViewer.update_job_creation_times,
+	JobViewer.on_icon_configure_printers_activate): Likewise.
+	* monitor.py (Monitor.check_state_reasons,
+	Monitor.get_notifications, Monitor.refresh): Likewise.
+	* system-config-printer.py (GUI.on_btnIPPVerify_clicked): Likewise.
+	* timedops.py (TimedSubprocess.run): Likewise.
+	* troubleshoot/PrintTestPage.py (PrintTestPage.connect_signals,
+	PrintTestPage.update_jobs_list): Likewise.
+
+2009-10-17  kami911  <kami911@fedoraproject.org>
+
+	Sending translation for Hungarian
+
+2009-10-16  Tim Waugh  <twaugh@redhat.com>
+
+	Don't import pprint needlessly in applet and jobviewer.
+
+2009-10-07  chenh  <chenh@fedoraproject.org>
+
+	Sending translation for Chinese (Simplified)
+
+2009-10-06  runab  <runab@fedoraproject.org>
+
+	Sending translation for Bengali (India)
+
+2009-10-06  Tim Waugh  <twaugh@redhat.com>
+
+	Don't display properties dialog for first test page (Ubuntu #444280).
+	When offering to print a test page for a newly added printer,
+	initialise the properties dialog so that we know the correct page size
+	but don't present it on the screen.  This avoids leaving it around
+	with only "Cancel" clickable.
+
+2009-10-05  kmaraas  <kmaraas@fedoraproject.org>
+
+	Sending translation for Norwegian Bokmål
+
+2009-09-30  Tim Waugh  <twaugh@redhat.com>
+
+	Attempt to determine make and model of network printers (bug #524321).
+	* system-config-printer.py (NewPrinterGUI.nextNPTab): If a network
+	device is selected and we do not yet know its Device ID, attempt to
+	determine it when Next is clicked.
+
+	Auto-select raw queue correctly when changing PPD.
+	* system-config-printer.py (NewPrinterGUI.init): The raw queue is
+	filed under Generic, so use that for auto-selecting the current make
+	and model from the list.
+
+2009-09-29  Tim Waugh  <twaugh@redhat.com>
+
+	Style fixes.
+
+2009-09-29  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	If a printer is created and there is already a queue with the suggested name, add a dash and a number to the new name, not only a number. This makes it more readable if the original name ends with a digit.
+
+	If there is no device ID for a discovered printer, use the make-and-model string to determine make and model for auto-selecting the PPD/driver.
+
+	Fixed bug in previous upload for carrying the device ID through the wizard steps (LP: #436218).
+
+	Make sure that the discovered device ID is saved into the data structure representing the printer, so that it is used for pre-filling the search field for PPD download (it got often pre-filled with "Generic text-only printer" before) and also for generating the default print queue name.
+
+2009-09-24  Tim Waugh  <twaugh@redhat.com>
+
+	troubleshoot: don't rely on stdout being available (Ubuntu #435505).
+	* troubleshoot/__init__.py (Troubleshooter._report_traceback): Don't
+	assume "print" will work -- catch exceptions.
+
+2009-09-23  mgiri  <mgiri@fedoraproject.org>
+
+	Sending translation for Oriya
+
+2009-09-23  ypoyarko  <ypoyarko@fedoraproject.org>
+
+	Sending translation for Russian
+
+	Sending translation for Russian
+
+2009-09-22  rajesh  <rajesh@fedoraproject.org>
+
+	Sending translation for Maithili
+
+2009-09-22  Tim Waugh  <twaugh@redhat.com>
+
+	Better order for network printer probes.
+	* probe_printer.py (PrinterFinder._do_find): Try the quick probes first.
+
+	Use the correct URI for probed CUPS queues.
+	* probe_printer.py (PrinterFinder._probe_ipp): Use printer-uri-supported
+	attribute here, not device-uri (which is only meaningful to the remote
+	server).
+
+	Give debug output for each network printer found.
+	* probe_printer.py (PrinterFinder._new_device): Show URI in debug
+	output.
+
+	Avoid traceback in PhysicalDevice.py.
+	* PhysicalDevice.py (PhysicalDevice._get_host_from_uri): Return None
+	if it is an HPLIP URI for a local device.
+
+2009-09-22  Jiri Popelka  <jpopelka@redhat.com>
+
+	Added IPP and JetDirect support to 'Find Network Printer' (rest of trac #152).
+	* probe_printer.py
+	(PrinterFinder._probe_jetdirect): New method.
+	(PrinterFinder._probe_ipp): New method.
+	(PrinterFinder._new_device): New method.
+
+2009-09-22  amitakhya  <amitakhya@fedoraproject.org>
+
+	Sending translation for Assamese
+
+2009-09-22  Tim Waugh  <twaugh@redhat.com>
+
+	Cancel PrinterFinder when new-printer dialog closes.
+	* system-config-printer.py (NewPrinterGUI.init): Initialise widgets
+	for PrinterFinder.
+	(NewPrinterGUI.on_NPCancel): Cancel PrinterFinder.
+	(NewPrinterGUI.found_network_printer_callback): Delete PrinterFinder.
+	(NewPrinterGUI.on_btnNPApply_clicked): Cancel PrinterFinder.
+
+	Allow PrinterFinder cancellation.
+	* probe_printer.py (PrinterFinder.cancel): Cancel background operation
+	and set quit flag.
+	(PrinterFinder._do_find): Check quit flag.
+	(PrinterFinder._probe_snmp): Likewise.
+	(PrinterFinder._probe_lpd): Likewise.
+	(PrinterFinder._probe_hplip): Likewise.
+	(PrinterFinder._probe_smb): Likewise.
+
+2009-09-22  mvdz  <mvdz@fedoraproject.org>
+
+	Sending translation for Russian
+
+	Sending translation for Ukrainian
+
+	Sending translation for Russian
+
+2009-09-22  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed label display when clicking Find twice in Find Network Printer.
+	* system-config-printer.py (NewPrinterGUI.on_btnNetworkFind_clicked):
+	Make sure to hide the "not found" label.
+
+	Let Return key activate the 'Find' button for Find Network Printer.
+
+2009-09-22  jassy  <jassy@fedoraproject.org>
+
+	Sending translation for Punjabi
+
+2009-09-22  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed missing import.
+	* probe_printer.py: Import errno.
+
+2009-09-22  ifelix  <ifelix@fedoraproject.org>
+
+	Sending translation for Tamil
+
+2009-09-22  rajesh  <rajesh@fedoraproject.org>
+
+	Sending translation for Hindi
+
+2009-09-22  shanky  <shanky@fedoraproject.org>
+
+	Sending translation for Kannada
+
+2009-09-22  tchuang  <tchuang@fedoraproject.org>
+
+	Sending translation for Chinese (Traditional)
+
+2009-09-22  fvalen  <fvalen@fedoraproject.org>
+
+	Sending translation for Italian
+
+2009-09-21  mrtom  <mrtom@fedoraproject.org>
+
+	Sending translation for French
+
+2009-09-21  kmilos  <kmilos@fedoraproject.org>
+
+	Sending translation for Serbian (Latin)
+
+	Sending translation for Serbian
+
+2009-09-21  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed device fetch when not using polkit-1.
+	* system-config-printer.py (NewPrinterGUI.init): Don't start querying
+	PPDs yet.
+	(NewPrinterGUI.fetchDevices): Removed incorrect code for the path not
+	using polkit-1.  Re-use authconn connection in that case.
+	(NewPrinterGUI.got_devices): After network device query has finished,
+	start a PPDs query.
+
+	Added SMB support to 'Find Network Printer' (part of trac #152).
+	* probe_printer.py (BackgroundSmbAuthContext): New class based on
+	pysmb.AuthContext.  Always perform UI operations from a gobject
+	timeout rather than in-line.  Must be used from a non-UI thread.
+	(PrinterFinder._probe_smb): New method.
+	(PrinterFinder._do_find): use it.
+
+2009-09-21  anipeter  <anipeter@fedoraproject.org>
+
+	Sending translation for Malayalam
+
+2009-09-21  kkrothap  <kkrothap@fedoraproject.org>
+
+	Sending translation for Telugu
+
+2009-09-21  sandeeps  <sandeeps@fedoraproject.org>
+
+	Sending translation for Marathi
+
+	Sending translation for Marathi
+
+2009-09-21  kristho  <kristho@fedoraproject.org>
+
+	Sending translation for Danish
+
+2009-09-21  jensm  <jensm@fedoraproject.org>
+
+	Sending translation for German
+
+	Sending translation for German
+
+2009-09-21  swkothar  <swkothar@fedoraproject.org>
+
+	Sending translation for Gujarati
+
+2009-09-21  feonsu  <feonsu@fedoraproject.org>
+
+	Sending translation for Slovak
+
+2009-09-21  jassy  <jassy@fedoraproject.org>
+
+	Sending translation for Punjabi
+
+2009-09-21  eukim  <eukim@fedoraproject.org>
+
+	Sending translation for Korean
+
+2009-09-21  ypoyarko  <ypoyarko@fedoraproject.org>
+
+	Sending translation for Russian
+
+2009-09-20  fgonz  <fgonz@fedoraproject.org>
+
+	Sending translation for Spanish
+
+2009-09-20  vpv  <vpv@fedoraproject.org>
+
+	Sending translation for Finnish
+
+2009-09-20  ccielogs  <ccielogs@fedoraproject.org>
+
+	Sending translation for Italian
+
+2009-09-20  dominiksandjaja  <dominiksandjaja@fedoraproject.org>
+
+	Sending translation for German
+
+2009-09-19  xconde  <xconde@fedoraproject.org>
+
+	Sending translation for Catalan
+
+2009-09-19  raven  <raven@fedoraproject.org>
+
+	Sending translation for Polish
+
+2009-09-19  ruigo  <ruigo@fedoraproject.org>
+
+	Sending translation for Portuguese
+
+2009-09-19  khasida  <khasida@fedoraproject.org>
+
+	Sending translation for Japanese
+
+2009-09-18  goeran  <goeran@fedoraproject.org>
+
+	Sending translation for Swedish
+
+2009-09-18  igor  <igor@fedoraproject.org>
+
+	Sending translation for Brazilian Portuguese
+
+2009-09-18  warrink  <warrink@fedoraproject.org>
+
+	Sending translation for Dutch
+
+2009-09-18  Tim Waugh  <twaugh@redhat.com>
+
+	Updated British translation.
+
+	update-po
+
+	Handle hpcups driver for 5400 series in test suite.
+
+2009-09-18  hunter688  <hunter688@fedoraproject.org>
+
+	Sending translation for Czech
+
+2009-09-18  Tim Waugh  <twaugh@redhat.com>
+
+	Iconify jobs window into status icon.
+	* jobviewer.py (JobViewer.toggle_window_display): When hiding the
+	window, set the icon geometry to that of the status icon, turn off
+	the taskbar entry and iconify the window.  On showing the window,
+	use present() and turn the taskbar entry back on.  Track window
+	visibility in user data rather than with the "visible" property.
+
+2009-09-17  Tim Waugh  <twaugh@redhat.com>
+
+	Attempt to discover whether the firewall needs adjusting.
+	* firewall.py: New file.
+	* Makefile.am: Ship and install it.
+	* system-config-printer.py: Check whether TCP port 631 is open before
+	telling user to adjust firewall.
+
+2009-09-16  Tim Waugh  <twaugh@redhat.com>
+
+	Translate job-hold-until values.
+	* ppdippstr.py: New job_options dict.  Provide translations for
+	job-hold-until.
+	* options.py (OptionAlwaysShown.reinit): Look for translations and
+	construct a combobox_map/dict if present.
+
+	Avoid unnecessary "publish printers" dialog.
+	* system-config-printer.py (GUI.__init__): Set server_is_publishing
+	variable to None to indicate that we don't yet know.
+	(GUI.on_shared_activate): If server publishing status is not yet known,
+	examine printer's attributes to see if server-is-sharing-printers is
+	there.
+
+2009-09-16  ypoyarko  <ypoyarko@fedoraproject.org>
+
+	Sending translation for Russian
+
+2009-09-15  Tim Waugh  <twaugh@redhat.com>
+
+	Prevent traceback when cancelling change-driver dialog.
+
+2009-09-15  kristho  <kristho@fedoraproject.org>
+
+	Sending translation for Danish
+
+2009-09-15  Tim Waugh  <twaugh@redhat.com>
+
+	More data button state fixing.  Surely correct now!
+	* system-config-printer.py (GUI.setDataButtonState): Don't allow
+	device or PPD of discovered queue to be changed.
+
+2009-09-14  goeran  <goeran@fedoraproject.org>
+
+	Sending translation for Swedish
+
+2009-09-14  Tim Waugh  <twaugh@redhat.com>
+
+	update-po
+
+	Bumped version for release.
+
+2009-09-10  mvdz  <mvdz@fedoraproject.org>
+
+	Sending translation for Ukrainian
+
+2009-09-10  amitakhya  <amitakhya@fedoraproject.org>
+
+	Sending translation for Assamese
+
+2009-09-09  fvalen  <fvalen@fedoraproject.org>
+
+	Sending translation for Italian
+
+2009-09-09  willwill  <willwill@fedoraproject.org>
+
+	Sending translation for Thai
+
+2009-09-08  taljurf  <taljurf@fedoraproject.org>
+
+	Sending translation for Arabic
+
+2009-09-08  hunter688  <hunter688@fedoraproject.org>
+
+	Sending translation for Czech
+
+2009-09-07  kkrothap  <kkrothap@fedoraproject.org>
+
+	Sending translation for Telugu
+
+2009-09-06  peterve  <peterve@fedoraproject.org>
+
+	Sending translation for Dutch
+
+2009-09-05  palos  <palos@fedoraproject.org>
+
+	Sending translation for Slovak
+
+2009-09-04  Tim Waugh  <twaugh@redhat.com>
+
+	Make sure to cancel the fetchDevices callback when not needed.
+
+	Fetch network devices as soon as local devices are received.
+	* system-config-printer.py (NewPrinterGUI.init): Don't connect to
+	row-expanded signal.
+	(NewPrinterGUI.device_row_expanded): Removed.
+	(NewPrinterGUI.fillDeviceTab): Retain thread handle to allow for
+	cancellation.
+	(NewPrinterGUI.got_devices): Start fetching network devices once local
+	devices request has completed.
+	(NewPrinterGUI.on_NPCancel): Cancel any pending fetchDevices callback.
+
+	Fixed cancellation in TimedOperation class.
+	* timedops.py (TimedOperation): Remember whether a callback was
+	initially specified and always operate in callback mode in that case.
+
+2009-09-03  ruigo  <ruigo@fedoraproject.org>
+
+	Sending translation for Portuguese
+
+2009-09-03  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed spinner UI bug.
+	* gtkspinner.py (Spinner._next_frame): Fixed spinner UI bug.
+
+	Use callbacks when fetching devices.
+	* system-config-printer.py (NewPrinterGUI.__init__): Connect to
+	row-expanded signal for devices treeview.
+	(NewPrinterGUI.fetchDevices): New optional parameter network.  This
+	method is now called in its own thread so don't interact with GTK+ or
+	create another thread.
+	(NewPrinterGUI.fillDeviceTab): Set 'Other' and 'Network Printer' rows
+	only, and start a fetchDevices thread for local devices.
+	(NewPrinterGUI.got_devices): Callback function for discovered devices.
+	Add them to the treeview if they are new.
+	(NewPrinterGUI.device_row_expanded): Fetch network devices if we have
+	not already done so.
+
+	Allow for more than one spinner task.
+	* system-config-printer.py (NewPrinterGUI.__init__): Initialise
+	spinner task count.
+	(NewPrinterGUI.inc_spinner_task): New method.
+	(NewPrinterGUI.on_btnNetworkFind_clicked): Use it.
+	(NewPrinterGUI.dec_spinner_task): New method.
+	(NewPrinterGUI.found_network_printer_callback): Use it.
+
+	Allow parameters to cupshelpers.getDevices.
+	* cupshelpers/cupshelpers.py (getDevices): Pass keywords through.
+
+	Fixed cupspk support for DevicesGet.
+	* cupspk.py (Connection.getDevices): Follow Connection interface more
+	closely: first parameter is limit, fourth is timeout, scheme lists are
+	lists not strings.
+
+	Extended TimedOperation class to allow callbacks.
+	* timedops.py (TimedOperation.__init__): New optional callback and
+	context parameters.  Start checking the thread immediately if giving
+	a callback.
+	(TimedOperation.run): This is not allowed if a callback will be given.
+	(TimedOperation._check_thread): Give a callback if requested.
+	(TimedOperation.cancel): Prevent callback.
+
+2009-09-03  shanky  <shanky@fedoraproject.org>
+
+	Sending translation for Kannada
+
+2009-09-02  Tim Waugh  <twaugh@redhat.com>
+
+	Allow PPD/device changes for raw queues.
+	* system-config-printer.py (GUI.setDataButtonState): Fixed sensitivity
+	of Browse... buttons for PPD and Device.
+
+2009-09-02  mgiri  <mgiri@fedoraproject.org>
+
+	Sending translation for Oriya
+
+2009-09-02  sandeeps  <sandeeps@fedoraproject.org>
+
+	Sending translation for Marathi
+
+2009-09-02  kami911  <kami911@fedoraproject.org>
+
+	Sending translation for Hungarian
+
+2009-09-01  kmilos  <kmilos@fedoraproject.org>
+
+	Sending translation for Serbian (Latin)
+
+	Sending translation for Serbian
+
+2009-09-01  runab  <runab@fedoraproject.org>
+
+	Sending translation for Bengali (India)
+
+2009-09-01  anipeter  <anipeter@fedoraproject.org>
+
+	Sending translation for Malayalam
+
+2009-09-01  jassy  <jassy@fedoraproject.org>
+
+	Sending translation for Punjabi
+
+2009-09-01  rajesh  <rajesh@fedoraproject.org>
+
+	Sending translation for Hindi
+
+2009-09-01  leahliu  <leahliu@fedoraproject.org>
+
+	Sending translation for Chinese (Simplified)
+
+2009-08-31  swkothar  <swkothar@fedoraproject.org>
+
+	Sending translation for Gujarati
+
+2009-08-31  kmaraas  <kmaraas@fedoraproject.org>
+
+	Sending translation for Norwegian Bokmål
+
+2009-08-30  kami911  <kami911@fedoraproject.org>
+
+	Sending translation for Hungarian
+
+2009-08-30  jensm  <jensm@fedoraproject.org>
+
+	Sending translation for German
+
+2009-08-30  kami911  <kami911@fedoraproject.org>
+
+	Sending translation for Hungarian
+
+2009-08-29  ifelix  <ifelix@fedoraproject.org>
+
+	Sending translation for Tamil
+
+2009-08-28  vpv  <vpv@fedoraproject.org>
+
+	Sending translation for Finnish
+
+2009-08-28  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed PPD/IPP string translation.
+
+	Make proxy authentication work for all usernames.
+	* jobviewer.py (JobViewer.update_job): Don't use "user" attribute for
+	keyring look-up.
+	(JobViewer.auth_info_dialog_response): More debugging output.
+
+	Fixed proxy authentication.
+	* jobviewer.py (JobViewer.on_auth_notification_closed): Removed.
+	(JobViewer.on_auth_notification_authenticate): Removed.
+	(JobViewer.update_job): Set the keyring attributes for searching.
+
+2009-08-28  xconde  <xconde@fedoraproject.org>
+
+	Sending translation for Catalan
+
+2009-08-28  ypoyarko  <ypoyarko@fedoraproject.org>
+
+	Sending translation for Russian
+
+2009-08-28  tchuang  <tchuang@fedoraproject.org>
+
+	Sending translation for Chinese (Traditional)
+
+2009-08-27  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed traceback with older versions of GTK+.
+	The icon-press signal only exists when we have primary/secondary icon
+	support in GtkEntry.
+
+	Make new polkit-1 support conditional on "configure --with-polkit-1".
+	* configure.in: New --with-polkit-1 configure option, default=no.
+	* Makefile.am: Replace @WITH_POLKIT_1@.
+	* config.py.in: Set WITH_POLKIT_1.
+	* authconn.py: Restore locking exception when using PolicyKit before
+	polkit-1.
+	* cupspk.py: Restored old PolicyKit code, used unless WITH_POLKIT_1 is
+	set.
+	* system-config-printer.py (NewPrinterGUI.fetchDevices): Only fetch
+	devices in a separate thread if WITH_POLKIT_1 is set.
+
+	Fetch devices in a separate thread to avoid blocking (bug #516787).
+	* system-config-printer.py (NewPrinterGUI.fetchDevices): Fetch devices in
+	a separate thread if using PolicyKit.  Don't do this if we are not using
+	PolicyKit as we would lose any cached credentials for IPP authentication.
+
+	It is now safe to use cups-pk-helper from a non-GUI thread.
+	* authconn.py (Connection.__init__): Removed cupspk exception when we
+	are in a separate thread.
+
+	Ported to polkit-1.
+	* cupspk.py (Connection._obtain_auth): Removed.
+	(Connection._handle_exception_with_auth): Removed.
+	(Connection._call_with_pk_and_fallback): Handle cancellation in-line.
+
+	Avoid error dialog after cancelling operation via PolicyKit dialog.
+	* authconn.py (Connection._authloop): Don't show a dialog here.
+
+2009-08-27  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Fix cleaning of TurboPrint PPD listings of CUPS 1.4.x to get assigned to the correct printer model.
+
+	Model lists from CUPS 1.4.x seem to be a mixture of Unicode and conventional strings, let the sorting procedure handle this.
+
+2009-08-27  eukim  <eukim@fedoraproject.org>
+
+	Sending translation for Korean
+
+2009-08-26  Tim Waugh  <twaugh@redhat.com>
+
+	Handle icon load failure gracefully.
+
+	Use correct statereason level icon names.
+
+2009-08-26  kristho  <kristho@fedoraproject.org>
+
+	Sending translation for Danish
+
+	Sending translation for Danish
+
+2009-08-26  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed traceback in on_tvNPDeviceURIs_cursor_changed (bug #519367).
+	* system-config-printer.py
+	(NewPrinterGUI.on_tvNPDeviceURIs_cursor_changed): Use get_cursor
+	instead of get_selected and avoid traceback (bug #519367).
+
+2009-08-26  hyuuga  <hyuuga@fedoraproject.org>
+
+	Sending translation for Japanese
+
+2009-08-25  warrink  <warrink@fedoraproject.org>
+
+	Sending translation for Dutch
+
+2009-08-25  Tim Waugh  <twaugh@redhat.com>
+
+	update-po
+
+	Bumped version for release.
+
+	Don't allow Back/Forward to lose troubleshooting diagnostic information.
+	* troubleshoot/ErrorLogCheckpoint.py
+	(ErrorLogCheckpoint.collect_answer): Don't allow Back/Forward to
+	lose any debugging output from error_log.
+	(cherry picked from commit cf65ee6f6592a3ba01606a02b94907e43653802f)
+
+	Don't install RPM provides script.
+
+	Neater bash-wrapping.
+
+	Fixed bash-wrapping for postscriptdriver.prov.
+
+	Bash-wrapped postscriptdriver.prov.
+
+	postscriptdriver.prov: Handle one level of symlinks.
+
+2009-08-24  Tim Waugh  <twaugh@redhat.com>
+
+	Don't allow Back/Forward to lose troubleshooting diagnostic information.
+	* troubleshoot/ErrorLogCheckpoint.py
+	(ErrorLogCheckpoint.collect_answer): Don't allow Back/Forward to
+	lose any debugging output from error_log.
+
+	Source code tidying in applet.py.
+	* applet.py: Avoid line continuation slashes.
+
+	Fixed applet traceback when printing test page.
+	* applet.py (NewPrinterNotification.NewPrinter): Set devid before
+	using it.
+
+2009-08-22  igor  <igor@fedoraproject.org>
+
+	Sending translation for Brazilian Portuguese
+
+2009-08-21  Jiri Popelka  <jpopelka@redhat.com>
+
+	Removed notification when job has completed (trac #181).
+
+	Fixed mixed indentation (Tab -> spaces)
+
+2009-08-21  Tim Waugh  <twaugh@redhat.com>
+
+	Added experimental package tagging for PPD files.
+	* postscriptdriver.prov: New file.
+	* Makefile.am: Ship and install it.
+
+2009-08-20  Tim Waugh  <twaugh@redhat.com>
+
+	Better consistency with printer icons (bug #518020).
+	* system-config-printer.py (GUI.populateList): Only use paused icon for
+	disabled printers.  Rejecting printers show as insensitive.  Overlay
+	state reason icon if appropriate.
+
+	Use paused icon when printer state reason is 'paused'.
+	* system-config-printer.py (GUI.updateStateReasons): Store icon name, not
+	reason level.  Use gtk.STOCK_MEDIA_PAUSE for 'paused'.
+	(GUI.set_printer_state_reason_icon): Updated.
+
+	Small fix for cupshelpers.
+	* cupshelpers/cupshelpers.py (Printer.__init__): Store all supplied
+	attributes in other_attributes instance variable initially.
+
+2009-08-20  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Fixed driver selection.
+	This change is needed for models which support PostScript but where
+	the OpenPrinting database recommends a PCL driver. I have recommended
+	PCL drivers on PostScript printers for two reasons:
+
+	1. The printer ships with not enough memory for PostScript. This made
+	many users complain and report bugs. Examples are HP LaserJet
+	12xx/13xx.
+
+	2. The printer does not ship with the PostScript interpreter by
+	default, but the manufacturer has uploaded a PostScript PPD to
+	OpenPrinting.
+
+	To make these printers work out of the box I have made
+	system-config-printer preferring the "recommended" driver of the
+	OpenPrinting database over the native PostScript PPD. I have never let
+	it prefer a generic PostScript PPD over a manufacturer-supplied one.
+
+	I have found a real bug now:
+
+	The HP LaserJet 12xx/13xx got explicitly forced to use the HPIJS
+	driver and not the newer hpcups driver the recommended pxlmono (PCL
+	6/XL, 1200 dpi instead of 600 dpi). I have removed the exception and
+	now pxlmono gets used.
+
+2009-08-20  Tim Waugh  <twaugh@redhat.com>
+
+	Job status icon and state reason in jobs treeview (bug #518070).
+	* jobviewer.py (JobViewer.__init__): Use cell data functions for the main
+	treeview.  Just store jobid and job creation time in the treestore.
+	(update_job): Invalidate cached status description and redraw the status
+	icon.
+	(add_state_reason_emblem): Optionally calculate the worst state reason
+	for a given printer.
+	(state_reason_added, state_reason_removed): Redraw the treeview so that
+	the icon is recomputed.
+
+	Only update job creation times once per minute at rest.
+	* jobviewer.py (JobViewer.add_job): Just update job creation times once
+	here.
+
+	Kill job creation times timer on the jobviewer is destroyed.
+	* jobviewer.py (cleanup): Kill job creation times timer.
+
+	Use symbolic icon name instead of string literal.
+	* system-config-printer.py (GUI.populateList): Use gtk.STOCK_MEDIA_PAUSE
+	here.
+
+2009-08-20  beckerde  <beckerde@fedoraproject.org>
+
+	Sending translation for Spanish
+
+2009-08-20  Tim Waugh  <twaugh@redhat.com>
+
+	Use preferred object path for AuthenticationAgent (bug #518427).
+	* cupspk.py: Use preferred object path for AuthenticationAgent.
+
+2009-08-19  Tim Waugh  <twaugh@redhat.com>
+
+	Updated British translation.
+
+2009-08-19  raven  <raven@fedoraproject.org>
+
+	Sending translation for Polish
+
+2009-08-19  Tim Waugh  <twaugh@redhat.com>
+
+	update-po
+
+	Show a 'paused' emblem for rejecting/disable printers (bug #518020).
+	* system-config-printer.py (GUI.printer_event): Update the icon view.
+	(GUI.populateList): Set a 'paused' emblem on the icon if the queue is
+	rejecting or disabled (bug #518020).
+
+	Fixed cupspk handling of disabling a printer.
+	* cupspk.py (Connection.disablePrinter): Use the correct fallback
+	function.
+
+	Set an appropriate status icon tooltip when configuring printer (bug #518007).
+	* jobviewer.py (JobViewer.set_special_statusicon): Allow a tooltip
+	to accompany a special status icon.
+	* applet.py (NewPrinterNotification.GetReady): Set an appropriate
+	tooltip (part of bug #518007).
+
+2009-08-18  Tim Waugh  <twaugh@redhat.com>
+
+	Use separate thread for verifying IPP queue (bug #518065).
+	* system-config-printer.py (NewPrinterGUI.on_btnIPPVerify_clicked):
+	Use TimedOperation here.
+
+	timedops: allow cancel method to be used as a timeout callback.
+
+	Fixed WaitWindow transience when changing PPD.
+
+	Busy/ready cursor handling fixes.
+
+	Prefer native CUPS drivers to foomatic drivers.
+
+	Another small fixed for gutenprint driver identification.
+
+	Fixed identification of CUPS native gutenprint drivers.
+
+	Removed pango import.
+	We no longer need pango as we don't ellipsize any strings now.
+
+	Better looping.
+
+	Fixed typo.
+	* system-config-printer.py (GUI.rename_printer): Fixed typo in error
+	handling case.
+
+2009-08-18  jensm  <jensm@fedoraproject.org>
+
+	Sending translation for German
+
+2009-08-18  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed missing treeview update in properties dialog.
+	* system-config-printer.py (GUI.updatePrinterProperties): Actually
+	call the function to update the treeview, rather than naming it.
+
+	Removed unnecessary comma at end of line.
+
+	Don't iuse deprecated string.find() in cupspk.
+
+	Removed unnecessary semi-colons.
+
+	Use set_default_size instead of setting width and height properties.
+
+	Fixed typo handling exceptions from AdvancedServerSettingsDialog.
+	* system-config-printer.py (GUI.on_adv_server_settings_apply):
+	Fixed typo.
+
+	More tooltips fixes.
+
+2009-08-18  Paolo Borelli  <pborelli@gnome.org>
+
+	Use modern gtk tooltip support.
+
+2009-08-18  kami911  <kami911@fedoraproject.org>
+
+	Sending translation for Hungarian
+
+2009-08-14  Tim Waugh  <twaugh@redhat.com>
+
+	udev-configure-printer: Compare MFG and MDL case-insensitively.
+	HPLIP reports incorrect Device IDs (launchpad #405804).
+
+	* udev/udev-configure-printer.c (find_matching_device_uris): Use
+	strcasecmp instead of strcmp for MFG and MDL fields.
+
+	Support for cups-pk-helper's DevicesGet method.
+	* cupspk.py (Connection.getDevices): New method.  Based on a patch by
+	Marek Kašík.
+
+	Don't attempt to use PolicyKit if we are root.
+	* authconn.py (Connection._connect): Don't use PolicyKit if we are
+	root.
+
+2009-08-13  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed parenting of WaitWindow when adding printer.
+	The WaitWindow widget is only used by the NewPrinterGUI object so load
+	it there.  Use the NewPrinterWindow widget as the parent when
+	displaying the WaitWindow, except when fetching devices which occurs
+	before that window is presented.
+
+2009-08-13  Jiri Popelka  <jpopelka@redhat.com>
+
+	Added support for localized marker names (trac #183).
+
+2009-08-11  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	HP's Bluetooth printers return a model name with added "_BT" in their device ID. This breaks PPD file matching. This change removes this suffix before comparing model names.
+
+2009-08-11  Tim Waugh  <twaugh@redhat.com>
+
+	Don't get tripped up by "-" when checking for missing executables.
+	* cupshelpers/cupshelpers.py (missingPackagesAndExecutables):
+	Accept a filter of "-" (Ubuntu #411376).
+
+2009-08-07  Tim Waugh  <twaugh@redhat.com>
+
+	update-po
+
+	Build XZ tarball. (cherry picked from commit 6de5c892171318abc08a489041c77b0980bb6355)
+
+	Bumped version for release.
+
+	Adjusted PPDs test suite for HP PSC 2210.
+	HPLIP now provides a native driver for the HP PSC 2200 series, so that
+	is now the preferred PPD.
+
+	Validate BrowsePoll entries (bug #493839).
+	* AdvancedServerSettings.py
+	(AdvancedServerSettingsDialog.on_browse_poll_edited): Use
+	socket.getaddrinfo() to validate edited value as numeric IP address.  If
+	that fails, verify the value is a valid hostname.
+
+	Make properties dialog OK button insensitive when no changes (bug #493891).
+	* system-config-printer.py (GUI.setDataButtonState): Make OK button
+	sensitivity depdendent on there being changes made.
+
+	udev-configure-printer: fixed removal when cupsd not running.
+	If the queue for a device has been removed, then cupsd is stopped, and
+	then the device is disconnected, reconnecting the device once cupsd
+	has been re-started fails to add a queue.
+
+	The fix is always to remove the usb-uris line for the device on
+	disconnection even if we cannot connect to cupsd.
+
+	* udev/udev-configure-printer.c (cups_connection): Removed.
+	(find_matching_device_uris): Exit if unable to connect to cupsd.
+	(for_each_matching_queue): Return early if unable to connect.
+	(enable_queue, disable_queue): Likewise.
+	(main): Set the CUPS password callback here.
+
+2009-08-05  Tim Waugh  <twaugh@redhat.com>
+
+	Revert "Split out D-Bus system service for adding the printer."
+	This reverts commit 98564e671c84c831a9a6b0706659fb99783bc57c as it
+	introduced a race condition between:
+
+	a) the udev callout fetching the Device ID from the device, and
+	b) CUPS backends responding to CUPS-Get-Devices, called from the D-Bus
+	service, fetching the Device IDs from USB devices.
+
+2009-08-02  beckerde  <beckerde@fedoraproject.org>
+
+	Sending translation for Spanish
+
+2009-08-02  Tim Waugh  <twaugh@redhat.com>
+
+	troubleshoot: treat http and https schemes as potential CUPS servers.
+	* troubleshoot/CheckNetworkServerSanity.py: Recognize http and https
+	schemes and try to connect to a CUPS server.  Use encryption for
+	https.
+	* troubleshoot/CheckPrinterSanity.py: Include https in the list of
+	network schemes.
+
+2009-08-01  igor  <igor@fedoraproject.org>
+
+	Sending translation for Brazilian Portuguese
+
+2009-07-31  raven  <raven@fedoraproject.org>
+
+	Sending translation for Polish
+
+2009-07-31  Tim Waugh  <twaugh@redhat.com>
+
+	Updated British translation.
+
+	update-po
+
+	API improvement in cupshelpers: limit job fetches.
+	* cupshelpers/cupshelpers.py (Printer.jobsQueued): New optional limit
+	parameter.
+	(Printer.jobsPreserved): Likewise.
+	(Printer.testsQueued): Likewise.
+	* system-config-printer.py (GUI.rename_confirmed_by_user): Use it.
+	(GUI.is_rename_possible): Likewise.
+
+	Small improvements for printer rename confirmation.
+	* cupshelpers/cupshelpers.py (Printer.jobsPreserved): Removed
+	pprint import.  Just fetch 'completed' jobs, not 'all'.  Handle job
+	attribute 'job-state' absence.
+	* glade/RenamePrinter.glade: Removed.
+	* system-config-printer.py (GUI.rename_confirmed_by_user): Build
+	dialog programmatically instead.
+
+2009-07-31  Jiri Popelka  <jpopelka@redhat.com>
+
+	A warning is given that renaming destroys print job history.
+
+2009-07-31  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed cupspk's implementation of adminGetServerSettings().
+	* cupspk.py (Connection.adminGetServerSettings): Fixed handling of
+	dbus.String types.  Patch from Marek Kašík.
+
+	jobviewer: notice jobs that have stopped due to backend errors.
+	* jobviewer.py (JobViewer.job_event): If a backend fails, CUPS
+	doesn't stop the job at all but stops the printer, the job-state being
+	set back to IPP_JOB_PENDING.  Watch for this scenario and warn the
+	user about the problem.
+
+	Create better ChangeLogs by omitting merge commit logs.
+	* Makefile.am: Added "-- --no-merges" to the gitlog-to-changelog
+	invocation.
+
+2009-07-30  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Let the checks for adding a device to a physicaldevice object parse HPLIP URIs correctly to extract the host name/IP from them
+
+	Updated the "hp-info" call to check fax capability of an HP printer to work with HPLIP 3.9.6.
+
+	Updated installation of the HPLIP plug-in to the needs of HPLIP 3.9.6.
+
+2009-07-29  ccielogs  <ccielogs@fedoraproject.org>
+
+	Sending translation for Italian
+
+2009-07-27  Tim Waugh  <twaugh@redhat.com>
+
+	Printer icon should not show 'printing' when job stopped.
+	* jobviewer.py (JobViewer.job_event): Update job status after
+	handling updated job data.
+
+	Better method of determining current device URI.
+	* system-config-printer.py (NewPrinterGUI.getDeviceURI): Use the
+	notebook page number to decide whether we already have the device
+	URI rather than having two lists of optionless backends.  Don't give
+	valid URIs for empty socket, lpd or smb URI types.
+
+2009-07-27  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Made the field for freely typing in an URI actually work.
+
+	Made extracting make and model from the NickName of TurboPrint PPDs working again.
+
+2009-07-26  charnik  <charnik@fedoraproject.org>
+
+	Sending translation for Greek
+
+2009-07-26  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Use case-insensitive matching when cleaning up the PPD nick names to get the model names for the make/model/driver list.
+
+2009-07-26  Tim Waugh  <twaugh@redhat.com>
+
+	Split out D-Bus system service for adding the printer.
+	The udev rule now just invokes a program that simply gives the correct
+	devpath to com.redhat.PrinterConfig.UsbPrinterAdd/Remove.  The work of
+	deciding whether to enable, disable or add the printer is done in the
+	D-Bus system service by printer-config-daemon.
+
+	Revert "Fixed file descriptor leak in udev-configure-printer."
+	This reverts commit 7682b865c6a59be7ddf6cba32fe0380ab58c0d24.
+
+2009-07-25  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed file descriptor leak in udev-configure-printer.
+	* udev/udev-configure-printer.c (read_usb_uri_map): Close the file
+	descriptor.
+
+2009-07-24  Tim Waugh  <twaugh@redhat.com>
+
+	udev-configure-printer: fixed duplicate devpath check.
+	* udev/udev-configure-printer.c (device_id_from_devpath): Fixed
+	devpath check.  Patch from Till Kamppeter.
+	(device_id_from_devpath): Fixed memory leak.
+
+	udev-add-printer: create fax queues using prefix of printer queue.
+	* udev/udev-add-printer: Use the name of the printer queue as a prefix
+	for the name of the fax queue.  Fax PPDs have model names like "Fax"
+	which is not specific to a particular model.
+
+	Add a dash before the numeric suffix when making names unique.
+	* system-config-printer.py (GUI.makeNameUnique): Add a dash before
+	the numeric suffix.
+
+	Notify the correct printer name in udev-add-printer.
+	* udev/udev-add-printer (create_queue): Return unique name.
+	(add_queue): Notify unique name.
+
+	Fixed name uniqueness checking in udev-add-printer.
+	* udev/udev-add-printer (create_queue): Printer names are not
+	case-sensitive.  Don't consider discovered queues as conflicting.
+	(add_queue): Give printers list to create_queue, not just their
+	names.
+
+	udev-add-printer: don't require pycups 1.9.46 just yet.
+	* udev/udev-add-printer (add_queue): Don't use include_schemes
+	parameter if pycups doesn't yet support it.
+
+	White-space change only.
+	* udev/udev-configure-printer.c (do_add): Don't exceed 80 characters per
+	line.
+
+	Exit early in udev-configure-printer if device already mapped to URIs.
+	* udev/udev-configure-printer.c (device-id_from_devpath): Scan map entries
+	to see if this devpath has already been mapped to device URIs and exit if
+	so.
+	(find_matching_device_uris): No need to scan map entries here now.
+	(do_add): Pass map pointer to device_id_from_devpath.
+
+	Serialize CUPS-Get-Devices requests in udev-configure-printer.
+	* udev/udev-configure-printer.c (do_add): Call fork() first, then lock the
+	map file before discovering which device URIs correspond with this device.
+	(find_matching_device_ids): New parameter 'map'.
+	Patch from Till Kamppeter.
+
+	Don't set USB configuration in udev-configure-printer.
+	* udev/udev-configure-printer.c (device_id_from_devpath): Don't call
+	usb_set_configuration.  Patch from Till Kamppeter, explanation below:
+	We cannot set (and also need not set) the configuration of the USB
+	device. This conflicts with usb-storage if the printer contains a USB
+	mass storage device like memory card readers. This made all photo
+	inkjets not getting re-enabled as they have memory card readers for
+	pc-less photo printing.
+
+	Fixed missing loop variable initializations.
+	* udev/udev-configure-printer.c (device_id_from_devpath): Set conf and
+	iface to 0 each time round their respective loops.  Patch from Till
+	Kamppeter.
+
+2009-07-23  Tim Waugh  <twaugh@redhat.com>
+
+	udev-configure-printer: make sure we don't configure the same printer twice.
+	* udev/udev-configure-printer.c (find_matching_device_uris): If a
+	devpath mapping was already made for this device, abort.
+
+	udev-configure-printer: use '/' as delimiter when examining device URI.
+	* udev/udev-configure-printer.c (find_matching_device_uris): Also
+	use '/' as a delimiter when looking for the USB serial number in
+	the device URI.
+
+	udev-configure-printer: use USB serial numbers if present even if short.
+	* udev/udev-configure-printer.c (find_matching_device_uris): Some
+	USB serial numbers (e.g. HP Color LaserJet CM3530) are only 10
+	characters long.  Use USB serial numbers if present, regardless of
+	length.
+
+	Enable/disable queues with paired device URIs in udev-configure-printer.
+	* udev/udev-configure-printer.c (find_matching_device_uris): Use the
+	exclude-schemes attribute instead of include-schemes so that we can
+	look for paired device URIs, i.e. device URIs that are identical except
+	for the scheme part.
+	* udev/udev-add-printer (add_queue): We are given paired device URIs now
+	so look for those ending in "fax" and just fetch Device IDs from them.
+
+	udev-configure-printer: don't fork if DEBUG environment variable set.
+	* udev/udev-configure-printer.c (do_add): Check DEBUG environment variable
+	and don't fork if it is set.
+
+	Fixed typo.
+	* udev/udev-add-printer (create_queue): Fixed typo.
+
+	udev-add-printer: don't add fax queue if already present.
+	* udev/udev-add-printer (add_queue): Check whether this URI is present
+	in the list of device URIs already assigned to queues.
+
+	Better variable naming in udev-configure-printer.
+	* udev/udev-configure-printer.c: Use 'usbserial' as the variable name
+	for storing a USB serial number, not 'serial' which may be confused
+	with the Device ID 'SERN' field.
+
+2009-07-22  Tim Waugh  <twaugh@redhat.com>
+
+	Filter out device URIs not asked for in udev-configure-printer.
+	* udev/udev-configure-printer.c (find_matching_device_uris): Filter
+	returned device URIs in case the include-schemes attribute was ignored
+	(as in CUPS prior to 1.4).
+
+	Fixed incorrect free() in udev-configure-printer.
+	* udev/udev-configure-printer.c (find_matching_device_uris): Avoid
+	freeing memory we need to reference.
+
+	Install udev rules in the right place.
+	* Makefile.am: Don't use nobase_ prefix for udev rules rule.
+
+	Bumped version for release.
+	* configure.in: Version 1.1.10.
+
+	Always ship udev/udev-add-printer.
+	* Makefile.am: Explicitly ship udev/udev-add-printer as
+	udevhelper_SCRIPTS will not be set unless configured with
+	--with-udev-rules.
+
+	update-po
+
+	Bumped version for release.
+	* configure.in: Version 1.1.9.
+
+	Fixed Device ID matching for HPLIP PPDs.
+	* cupshelpers/ppds.py (PPDs.getPPDNameFromDeviceID): Try using HP as
+	an alias for Hewlett-Packard when looking up by ID.
+	(_self_test): Fixed test case.
+
+	Fixed tracebacks in cupshelpers.ppds test suite.
+	* cupshelpers/ppds.py (_self_test): Fixed typo when using --help, and
+	traceback when using --deviceid.
+
+	Make udev rules dependent on --with-udev-rules configure option.
+	* configure.in: New option --with-udev-rules, default=no.  Make
+	AM_PROG_CC_C_O conditional on it.
+	* Makefile.am: Make udev-related rules conditional on it.
+
+	udev-configure-printer: comments about usb-uris fields.
+
+	udev-configure-printer: prefer the hp backend over the usb backend.
+	* udev/udev-configure-printer.c (device_uri_types): Prefer the hp
+	backend over the usb backend.  The hpijs driver currently uses the
+	hp backend to tell it whether to report low ink etc.
+	Don't include the hpfax scheme as this will never match a USB
+	device.
+
+	udev-configure-printer: concatenate non-serial URIs onto serial URIs.
+	* udev/udev-configure-printer.c (find_matching_device_uris):
+	Concatenate device URIs that did not match by serial number onto the
+	end of the list of device URIs that did.
+
+	Fixed locking in udev-configure-printer.
+	* udev/udev-configure-printer.c (struct usb_uri_map): Store the file
+	descriptor for the file here.
+	(add_usb_uri_mapping): Updated.
+	(read_usb_uri_map): Open the file read-write, creating it if
+	necessary.  Set a write lock and keep the file open until write/free.
+	Avoid stdio.
+	(write_usb_uri_map): Rewind file and truncate it.
+	(free_usb_uri_map): Updated.  Close file descriptor if open.
+	(find_matching_device_uris): Updated.
+	(do_remove): Updated.
+
+	Fixed udev-add-printer for multiple URI matches and fax queues.
+	* udev/udev-add-printer (add_queue): Don't append "-fax" to fax queue
+	name as the name is already derived from the fax-specific model name.
+	Fixed parameters for add_queue call creating fax queue.  Fixed D-Bus
+	error logging.
+	(top-level): Allow more than two arguments.
+
+2009-07-21  Tim Waugh  <twaugh@redhat.com>
+
+	Fax support in udev-add-printer.  HPLIP changes required.
+	* udev/udev-configure-printer.c (do_add): Give the Device ID to
+	udev-add-printer as its first argument and pass all device URIs as the
+	following arguments.
+	* udev/udev-add-printer (add_queue): Find device URI matching any we
+	were given but with a URI scheme ending in "fax"; add fax queue if
+	found.
+
+	For this to work we need HPLIP to give a correct device-id during
+	device discovery.
+
+	Truncate the usb-uris when writing it in udev-configure-printer.
+	* udev/udev-configure-printer.c (write_usb_uri_map): Use O_TRUNC.
+
+	Small efficiency fix for udev-configure-printer.
+	* udev/udev-configure-printer.c (find_matching_device_uris): Don't
+	bother validating the USB serial number if we already matched the SERN
+	fields.
+
+	Fixed bad merge.
+
+	Fixed hang on start-up when trying to resize the window.
+	* system-config-printer.glade: Larger default height for main window,
+	and start it hidden.
+	* system-config-printer.py (GUI): Decide on a default size for the
+	main window before showing it.
+
+	udev-configure-printer: handle devices with no SERN Device ID field.
+	* udev/udev-configure-printer.c (add_device_uri): New function.
+	(read_usb_uri_map): Use it.
+	(find_matching_device_uris): Likewise.
+	(device_id_from_devpath): Fetch USB serial number.
+	(do_add): Pass USB serial number to find_matching_device_uris.
+	(find_matching_device_uris): Try to match SERN field values when
+	present.  Failing that, try to match USB serial number against
+	device-id's SERN field.  Failing that, look for USB serial number in
+	device URI.  If no device URIs match that way, use whatever device
+	URIs matched the MFG and MDL fields.
+
+2009-07-21  pingman  <pingman@fedoraproject.org>
+
+	Sending translation for Chinese (Simplified)
+
+2009-07-21  Tim Waugh  <twaugh@redhat.com>
+
+	Lock the usb-uris file in udev-configure-printer.
+	* udev/udev-configure-printer.c (read_usb_uri_map): Set a read lock
+	on the file.
+	(write_usb_uri_map): Set a write lock on the file.
+
+	Fixed usb-uris parsing from doubling up newlines.
+	* udev/udev-configure-printer.c (read_usb_uri_map): Use newline as a
+	delimiter as well.
+	(for_each_matching_queue): Compare the entire URI.
+
+	Fixed usb-uris memory allocation error in udev-configure-printer.
+	* udev/udev-configure-printer.c (read_usb_uri_map): Store a copy of
+	each extra URI, not the pointer into the temporary buffer.
+
+	Fixed incorrect usb-uris map lookup in udev-configure-printer.
+	* udev/udev-configure-printer.c (do_remove): Use the correct list of
+	device URIs (patch from Till Kamppeter).
+
+2009-07-20  Tim Waugh  <twaugh@redhat.com>
+
+	udev-configure-printer: make it actually work.
+	Now we have two ACTION=="add" triggers: one for the usb_device and one
+	for the USB class driver (usblp) device.  We need both of them
+	because:
+
+	* at least one, and soon two, of the CUPS backends will most likely
+	  unload the usblp module if it is loaded, in order to use libusb.
+	  This means that the usb_device is the only reliable object we can
+	  track to see when printers have been disconnected.
+
+	* if the usblp module is already loaded, libusb won't work because
+	  usblp holds open the raw device.
+
+	* the usblp module may be blacklisted altogether, as most printer
+	  device users use libusb now.
+
+	We have a single ACTION=="remove" trigger for the usb_device.
+
+	On "add" we obtain the Device ID by fair means or foul, depending on
+	whether the usblp module is loaded.  We match this against devices
+	reported by CUPS using the device-id attribute, and keep a note of
+	this mapping of USB devpath to device URIs.  Note that if we fail to
+	contact CUPS we just exit -- the idea is that the CUPS initscript will
+	replay the udev events after cupsd is started.
+
+	Next, we examine the existing CUPS queues to see if any of them use
+	any of the device URIs associated with our device.  If so, and they
+	are disabled, and we'd disabled them, we enable them.
+
+	If no queues match, we invoke udev-add-printer to create a queue.
+
+	On "remove" we look up the list of device URIs associated with our USB
+	devpath, then examine the existing CUPS queues to see if any of them
+	use it.  If so they are disabled.
+
+	A walk in the park.
+
+	(I know which I'd prefer.)
+
+2009-07-19  Tim Waugh  <twaugh@redhat.com>
+
+	More error-checking and logging in udev-configure-printer.
+		* udev/udev-configure-printer.c (device_id_from_devpath): Check
+		for missing sysattrs.
+		(do_add): Show invalid IEEE 1284 Device ID if available.
+
+	udev-configure-printer: quote device URIs in REMOTE_CMD.
+	* udev/udev-configure-printer.c (do_add): Put the device URIs in
+	single-quotes when exporting REMOTE_CMD (patch from Till
+	Kamppeter).
+
+	udev-configure-printer: use libusb to look up IEEE 1284 Device ID.
+	* udev/udev-configure-printer.c (device_id_from_devpath): Use libusb
+	to look up IEEE 1284 Device ID.
+
+2009-07-18  Tim Waugh  <twaugh@redhat.com>
+
+	udev-add-printer: fixed indentation.
+
+	udev-configure-printer: choose which URI to use.
+
+	udev-configure-printer: there may be more than one matching device URI.
+	* udev/udev-configure-printer.c (free_device_uris): New function.
+	(find_matching_device_uris): Renamed.  Take a device_uris list.  Allow
+	hp and hpfax URI schemes.  Compare using device-id attribute.
+	(for_each_matching_queue): Take a device_uris list.
+	(do_add): Updated.
+	(do_remove): Updated.
+	(main): Updated.
+
+	Fixed compiler warnings.
+	* Makefile.am: Compile with -Wall.
+	* udev/udev-configure-printer.c: Fixed several bugs found by compiler
+	warnings.
+
+	udev-configure-printer: only re-enable printers we disabled.
+	* udev/udev-configure-printer.c (for_each_matching_queue): Fetch
+	printer-state-message attribute and compare with our 'unplugged'
+	reason text if we're matching against disabled printers.
+
+	Don't fork too soon in udev-configure-printer.
+	* udev/udev-configure-printer.c (main): Moved fork code...
+	(do_add): ...here, so that our REMOVE_CMD line gets to udev.
+
+2009-07-17  Tim Waugh  <twaugh@redhat.com>
+
+	New udev-add-printer script for the udev callout.
+	* udev/udev-add-printer: New file.
+	* Makefile.am: Ship it and install it.
+
+	udev-configure-printer: Call udev-add-printer to add a queue.
+
+	udev-configure-printer: enable/disable matching queues.
+
+	udev-configure-printer: identify existing queue.
+
+	IEEE 1284 Device ID matching for udev-configure-printer.
+
+	Ship and install a udev rules file.
+	* udev/70-printer.rules: New file.
+	* Makefile.am: Ship and install it.
+
+	Start using libudev in udev-configure-printer.
+
+	Fixed udev-configure-printer's REMOVE_CMD string.
+
+	udev-configure-printer: CUPS connection, with retries.
+
+	.gitignore: ignore files due to compilation.
+
+	udev-configure-printer: syslogging and a bit more structure.
+
+2009-07-16  Tim Waugh  <twaugh@redhat.com>
+
+	File structure for new udev-based queue configuration system.
+	* udev/udev-configure-printer.c: New file.
+	* Makefile.am: Build and install it.
+	* configure.in: Added AM_PROG_CC_C_O.
+	* aclocal.m4: Updated.
+
+2009-07-15  Tim Waugh  <twaugh@redhat.com>
+
+	75% speed improvement in ppdMakeModelSplit().
+	There is no need to use expensive regular expressions here.  In
+	profiling I measured a single cupshelpers.PPDs() operation as spending
+	3.933s in ppdMakeModelSplit().  After removing the vast majority of
+	regular expression uses this was reduced to 0.984s.
+
+	I hope that the new code handles all real world cases identically.
+	Please submit test cases for any that have broken.
+
+2009-07-15  igor  <igor@fedoraproject.org>
+
+	Sending translation for Brazilian Portuguese
+
+2009-07-15  Tim Waugh  <twaugh@redhat.com>
+
+	Don't reload all PPDs if the query has already finished.
+
+	Small speed-up (0.09s) for the case where jockey is not present.
+
+	Avoid reloading all PPDs when calls to jockey fail.
+
+	Drop libsexy support in favour of GTK+ 2.17's equivalent (bug #509299).
+
+	Fixed incorrect "printer not shared on server" message (bug #511407).
+	* troubleshoot/NetworkCUPSPrinterShared.py
+	(NetworkCUPSPrinterShared.display): Avoid cups.setServer/setPort.
+
+	* troubleshoot/CheckNetworkServerSanity.py
+	(CheckNetworkServerSanity.display): Avoid cups.setServer/setPort.
+	Fetch the attributes for the correct remote queue (bug #511407).
+
+2009-07-15  beckerde  <beckerde@fedoraproject.org>
+
+	Sending translation for Spanish
+
+2009-07-14  Tim Waugh  <twaugh@redhat.com>
+
+	Efficiency and readability improvements in PPDs Device ID matcher.
+	* cupshelpers/ppds.py (PPDs.getPPDNameFromDeviceID): Efficiency
+	improvements and more comments.
+
+	Fixed --debug option for PPDs self-test function.
+	* cupshelpers/ppds.py (_self_test): Fixed --debug option.
+
+	Efficiency fixes for PPDs Device ID matching.
+	* cupshelpers/ppds.py (PPDs.getPPDNameFromDeviceID): Don't recompute
+	case-insensitive strings unnecessarily.
+
+	Added PIXMA comment to test suite.
+	* cupshelpers/ppds.py (_self_test): Note which driver provides support
+	for the Canon PIXMA iP3000.
+
+2009-07-14  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Improved matching of printer model names: Check case-independently when removing manufacturer names from model names, remove expressions in parantheses ("(...)") from the model name, do not add "HP" as manufacturer name when "edgeline" is somewhere in the middle of the model name, only if it is in the beginning.
+
+2009-07-14  anipeter  <anipeter@fedoraproject.org>
+
+	Sending translation for Malayalam
+
+2009-07-12  raven  <raven@fedoraproject.org>
+
+	Sending translation for Polish
+
+2009-07-11  Tim Waugh  <twaugh@redhat.com>
+
+	Removed IPP browser (trac #178).
+	There is no point in having the IPP browser.  It only works for CUPS,
+	and CUPS has its own browsing mechanism.
+
+	Check exit codes for child processes.
+	* system-config-printer.py (NewPrinterGUI.install_hplip_plugin):
+	Check returncode of child process.
+	(NewPrinterGUI.get_hplip_uri_for_network_printer): Likewise.
+	(NewPrinterGUI.getNetworkPrinterMakeModel): Likewise.
+	* probe_printer.py (PrinterFinder._probe_snmp): Likewise.
+	(PrinterFinder._probe_hplip): Likewise.
+
+	Updated British translation.
+
+	New aclocal.m4 from autoconf 1.11.
+
+	update-po
+
+	Don't mention the job number in completed jobs notification (trac #170).
+	* jobviewer.py (JobViewer.notify_completed_job): No need to
+	mention the job number in "document printed" notification (trac
+
+2009-07-10  Tim Waugh  <twaugh@redhat.com>
+
+	Don't run Properties dialog on new printer (trac #170).
+	* applet.py (NewPrinterNotification.NewPrinter): Don't run the
+	Properties dialog when notifications actions are not supported
+	(trac #170).
+
+	Make sure to URL-encode usernames and passwords correctly (bug #509588).
+		* smburi.py (_urlquote): New function for URL-encoding strings.
+		URL-encode "/", "@" and ":" characters as well.
+		(SMBURI._construct): Use it (bug #509588).
+
+	Fixed initial radio button selection for SMB authentication.
+	* system-config-printer.py (NewPrinterGUI.init): When changing a
+	device URI for the smb backend, start with 'prompt user if
+	authentication is required' selected.
+
+	Avoid possible traceback when receiving printer-added-events.
+	* system-config-printer.py (GUI.printer_event): Avoid possible
+	traceback when receiving printer-added events.
+
+2009-07-07  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed UI oddities when changing PPD/device (trac #143).
+	* system-config-printer.py (GUI.setDataButtonState): Don't allow
+	the 'Change...' buttons for PPD or device to be clicked if doing
+	so would lose changes (trac #143).
+	(NewPrinterGUI.on_btnNPApply_clicked): Select 'Settings' in the
+	printer properties treeview after PPD or device is changed (trac
+
+	Always update the jobviewer status icon on job events (trac #174).
+	* jobviewer.py (JobViewer.job_event): Always update the icon
+	status, not when the active jobs list changes between empty and
+	non-empty (trac #174).
+
+2009-07-07  swkothar  <swkothar@fedoraproject.org>
+
+	Sending translation for Gujarati
+
+2009-07-06  Tim Waugh  <twaugh@redhat.com>
+
+	Don't use hard-coded "python" program name in Makefile.
+	* Makefile.am: Use "$(PYTHON)" instead of "python" throughout.
+
+2009-07-06  ruigo  <ruigo@fedoraproject.org>
+
+	Sending translation for Portuguese
+
+2009-07-04  igor  <igor@fedoraproject.org>
+
+	Sending translation for Brazilian Portuguese
+
+2009-07-03  Tim Waugh  <twaugh@redhat.com>
+
+	Use gpk-install-package-name to install packages, not the PK D-Bus API.
+	* installpackage.py: Don't use the D-Bus API as it changes too
+	often and is now too low-level.  Instead, try to execute
+	gpk-install-package-name.
+
+	Map gutenprint filenames to the package name.
+	* cupshelpers/cupshelpers.py
+	(missingPackagesAndExecutables.pathcheck): Map gutenprint
+	filenames to the package name.
+
+	Spot stopped jobs with CUPS 1.4 as well (trac #177).
+	* jobviewer.py (JobViewer.job_event): CUPS 1.4 no longer emits a
+	job-stopped event, so look for job-state-changed where the
+	job-state is IPP_JOB_STOPPED (trac #177).
+
+2009-07-01  Tim Waugh  <twaugh@redhat.com>
+
+	Another fix for selecting an added printer (trac #145).
+	* system-config-printer.py (NewPrinterGUI.on_btnNPApply_clicked):
+	After adding a printer, make sure only that printer is selected.
+	Don't just add it to the pre-existing selection.
+
+2009-06-30  Tim Waugh  <twaugh@redhat.com>
+
+	Small fix for class members arrows: always de-sensitise buttons after use.
+	* system-config-printer.py
+	(NewPrinterGUI.on_btnNCAddMember_clicked,
+	NewPrinterGUI.on_btnNCDelMember_clicked): Always set the button
+	insensitive after use.
+
+2009-06-30  Jiri Popelka  <jpopelka@redhat.com>
+
+	Arrows for adding and removing class members are sensitive only if something is selected.
+
+2009-06-25  Tim Waugh  <twaugh@redhat.com>
+
+	Fixed incorrect authentication in the troubleshooter (bug #508102).
+	* authconn.py (Connection._show_not_authorized_dialog): Actually
+	put the dialog on the screen (bug #508102).
+
+2009-06-24  Tim Waugh  <twaugh@redhat.com>
+
+	Prevent traceback on IPP notification after properties dialog cancelled.
+	* system-config-printer.py (GUI.printer_properties_response):
+	Don't delete self.printer here as we check it later.  Instead, set
+	it to None.  Fixes a traceback when an IPP notification is
+	received after a printer properties dialog has been cancelled.
+
+	Make sure we find https URIs from https backend (bug #507628).
+	* system-config-printer.py
+	(NewPrinterGUI.browse_ipp_queues_thread): Always encrypt when
+	browsing for https IPP queues.
+	(NewPrinterGUI.on_btnIPPBrowseOk_clicked): Override
+	printer-uri-supported for browsed queues that use the https
+	scheme (bug #507628).
+
+2009-06-23  Tim Waugh  <twaugh@redhat.com>
+
+	Avoid non-fatal traceback when adding IPP printer (bug #507629).
+	* system-config-printer.py (NewPrinterGUI.nextNPTab): Don't log
+	non-fatal traceback messages if we cannot connect to the IPP
+	printer (bug #507629).
+
+	Parse nmblookup failures correctly in troubleshooter (from bug #507442).
+	* troubleshoot/CheckPrinterSanity.py (CheckPrinterSanity.display):
+	Parse nmblookup failures correctly (from bug #507442).
+
+2009-06-22  Tim Waugh  <twaugh@redhat.com>
+
+	Avoid traceback when adding new printer.
+	* system-config-printer.py (NewPrinterGUI.on_btnNPApply_clicked):
+	We need to load the printer's information here, as we use it
+	later on.
+
+2009-06-19  Tim Waugh  <twaugh@redhat.com>
+
+	Use git commit logs to generate the ChangeLog file.
+	* ChangeLog: Renamed ChangeLog-OLD.
+	* gitlog-to-changelog: New build tool from gnulib for generating
+	ChangeLog from git commit logs.
+	* Makefile.am: Generate ChangeLog in dist-hook.  Ship ChangeLog-OLD.
+	* bootstrap: Create dummy ChangeLog to keep automake happy.
+	* .gitignore: Ignore dummy ChangeLog.
+
+	Fixed 'location' field for printers added remotely.
+		* system-config-printer.py
+		(NewPrinterGUI.on_tvNPDeviceURIs_cursor_changed): Set the location
+		to the hostname of the server we are connected to, not necessarily
+		our own hostname.
+
+2009-06-19  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Support for HPLIP 3.9.6.
+
+2009-06-18  raven  <raven@fedoraproject.org>
+
+	Sending translation for Polish
+
+2009-06-18  Tim Waugh  <twaugh@redhat.com>
+
+	Bumped version for release.
+
+	Updated aclocal.m4.
+
+	update-po
+
+	Make troubleshooter work again by disabling cupspk for it.
+	* authconn.py (Connection._connect): The cupspk module needs to be
+	fixed so that it works correctly from a non-UI thread.  Until
+	then, avoid using cupspk.Connection in that situation.
+
+2009-06-18  Tim Waugh  <twaugh@worm.elk>
+
+	Make 'make distcheck' succeed again.
+	* cupshelpers/ppds.py (_self_test): Show the ppd-make-and-model on
+	failure.
+	(_self_test): Updated some HPLIP test cases as newer versions of
+	HPLIP give different results.
+
+2009-06-18  beckerde  <beckerde@fedoraproject.org>
+
+	Sending translation for Spanish
+
+2009-06-17  Tim Waugh  <twaugh@worm.elk>
+
+	Updated British translation.
+
+	update-po
+
+	Mark 'Advanced...' as translatable in Server Settings dialog (bug #505785).
+
+	Select a newly-added printer (trac #145).
+		* system-config-printer.py (NewPrinterGUI.on_btnNPApply_clicked):
+		Select a newly-added printer (trac #145).
+
+	Make sure the job context menu cannot get out of date (trac #175).
+	* jobviewer.py (JobViewer.__init__): Handle 'row-changed' signal
+	from the TreeStore.
+	(JobViewer.on_treemodel_row_changed): Make sure the context menu
+	gets updated (trac #175).
+
+	Removed some stale code in cupshelpers.
+	* cupshelpers/cupshelpers.py (Printer.getAttributes): Removed
+	some stale code.
+
+	Track printer state changes for the printer context menu (trac #172).
+	* system-config-printer.py (GUI.printer_event): Update printer
+	context menu when a printer event is seen (trac #172).
+
+	Fixed conversion from broken-down UTC time to simple UNIX time for held jobs.
+	* jobviewer.py (JobViewer.update_job): Fixed conversion from
+	broken-down UTC time to simple UNIX time for held jobs.
+
+	Use grey ink-drop when there is no marker-colors value (bug #505399).
+	* gtkinklevel.py (GtkInkLevel.__init__): Use grey ink-drop when
+	there is no marker-colors value (bug #505399).
+
+2009-06-10  Tim Waugh  <twaugh@worm.elk>
+
+	Scroll to new job if it was added just above the visible range.
+	* jobviewer.py (JobViewer.add_job): Scroll to new job if it was
+	added just above the visible range.
+
+2009-05-25  mrtom  <mrtom@fedoraproject.org>
+
+	Sending translation for French
+
+2009-05-20  mrtom  <mrtom@fedoraproject.org>
+
+	Sending translation for French
+
+2009-05-15  kristho  <kristho@fedoraproject.org>
+
+	Sending translation for Danish
+
+2009-05-13  Till Kamppeter  <till.kamppeter@gmail.com>
+
+	Reconnect to CUPS if the connection gets lost during the installation of a driver from OpenPrinting.
+
+2009-05-12  charnik  <charnik@fedoraproject.org>
+
+	Sending translation for Greek
+
+2009-05-12  Tim Waugh  <twaugh@worm.elk>
+
+	Clean up temporary PPD files when we're finished with them (bug #498743).
+	* system-config-printer.py (GUI.printer_properties_response):
+	Delete printer object when we're finished with it.
+	(GUI.on_quit_activate): Delete printer lists before exiting.  This
+	allows the appropriate __del__ functions to clean up temporary
+	files (bug #498743).
+
+2009-05-12  andrmart  <andrmart@fedoraproject.org>
+
+	Sending translation for Norwegian Nynorsk
+
+	Sending translation for Russian
+
+	Sending translation for Norwegian Nynorsk
+
+2009-05-12  willwill  <willwill@fedoraproject.org>
+
+	Sending translation for Thai
+
+2009-05-07  beckerde  <beckerde@fedoraproject.org>
+
+	Sending translation for Spanish
+
+2009-05-05  anipeter  <anipeter@fedoraproject.org>
+
+	Sending translation for Malayalam
+
+2009-05-05  Tim Waugh  <twaugh@worm.elk>
+
+	Fixed XmlHelper crash on invalid XML file (Ubuntu #370469).
+	* XmlHelper.py (XmlHelper.__init__): Initialise the in-memory XML
+	representation to an empty document, not None (Ubuntu #370469).

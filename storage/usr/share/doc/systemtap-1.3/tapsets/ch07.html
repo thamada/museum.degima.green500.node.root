@@ -1,0 +1,40 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Chapter&#160;7.&#160;IO Scheduler and block IO Tapset</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="up" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="prev" href="re114.html" title="function::task_time_string_tid"><link rel="next" href="re115.html" title="probe::ioscheduler.elv_next_request"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&#160;7.&#160;IO Scheduler and block IO Tapset</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re114.html">Prev</a>&#160;</td><th width="60%" align="center">&#160;</th><td width="20%" align="right">&#160;<a accesskey="n" href="re115.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&#160;7.&#160;IO Scheduler and block IO Tapset"><div class="titlepage"><div><div><h2 class="title"><a name="iosched.stp"></a>Chapter&#160;7.&#160;IO Scheduler and block IO Tapset</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="refentrytitle"><a href="re115.html"><span>probe::ioscheduler.elv_next_request</span></a></span><span class="refpurpose"> &#8212; 
+  Fires when a request is retrieved from the request queue
+ </span></dt><dt><span class="refentrytitle"><a href="re116.html"><span>probe::ioscheduler.elv_next_request.return</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request retrieval issues a return signal
+ </span></dt><dt><span class="refentrytitle"><a href="re117.html"><span>probe::ioscheduler.elv_completed_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is completed
+ </span></dt><dt><span class="refentrytitle"><a href="re118.html"><span>probe::ioscheduler.elv_add_request.kp</span></a></span><span class="refpurpose"> &#8212; 
+     kprobe based probe to indicate that a request was added to the request queue
+ </span></dt><dt><span class="refentrytitle"><a href="re119.html"><span>probe::ioscheduler.elv_add_request.tp</span></a></span><span class="refpurpose"> &#8212; 
+     tracepoint based probe to indicate a request is added to the request queue.
+ </span></dt><dt><span class="refentrytitle"><a href="re120.html"><span>probe::ioscheduler.elv_add_request</span></a></span><span class="refpurpose"> &#8212; 
+     probe to indicate request is added to the request queue.
+ </span></dt><dt><span class="refentrytitle"><a href="re121.html"><span>probe::ioscheduler_trace.elv_completed_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is
+ </span></dt><dt><span class="refentrytitle"><a href="re122.html"><span>probe::ioscheduler_trace.elv_issue_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is
+ </span></dt><dt><span class="refentrytitle"><a href="re123.html"><span>probe::ioscheduler_trace.elv_requeue_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is
+ </span></dt><dt><span class="refentrytitle"><a href="re124.html"><span>probe::ioscheduler_trace.elv_abort_request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request is aborted.
+ </span></dt><dt><span class="refentrytitle"><a href="re125.html"><span>probe::ioscheduler_trace.plug</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request queue is plugged;
+ </span></dt><dt><span class="refentrytitle"><a href="re126.html"><span>probe::ioscheduler_trace.unplug_io</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a request queue is unplugged;
+ </span></dt><dt><span class="refentrytitle"><a href="re127.html"><span>probe::ioscheduler_trace.unplug_timer</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when unplug timer associated
+ </span></dt><dt><span class="refentrytitle"><a href="re128.html"><span>probe::ioblock.request</span></a></span><span class="refpurpose"> &#8212; 
+  Fires whenever making a generic block I/O request.
+ </span></dt><dt><span class="refentrytitle"><a href="re129.html"><span>probe::ioblock.end</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever a block I/O transfer is complete.
+ </span></dt><dt><span class="refentrytitle"><a href="re130.html"><span>probe::ioblock_trace.bounce</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever a buffer bounce is needed for at least one page of a block IO request.
+ </span></dt><dt><span class="refentrytitle"><a href="re131.html"><span>probe::ioblock_trace.request</span></a></span><span class="refpurpose"> &#8212; 
+     Fires just as a generic block I/O request is created for a bio.
+ </span></dt><dt><span class="refentrytitle"><a href="re132.html"><span>probe::ioblock_trace.end</span></a></span><span class="refpurpose"> &#8212; 
+     Fires whenever a block I/O transfer is complete.
+ </span></dt></dl></div><p>
+      This family of probe points is used to probe block IO layer and IO scheduler activities.
+      It contains the following probe points:
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re114.html">Prev</a>&#160;</td><td width="20%" align="center">&#160;</td><td width="40%" align="right">&#160;<a accesskey="n" href="re115.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"><span>function::task_time_string_tid</span>&#160;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&#160;<span>probe::ioscheduler.elv_next_request</span></td></tr></table></div></body></html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>2.3. Running SystemTap Scripts</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="using-systemtap.html" title="Chapter 2. Using SystemTap" /><link rel="prev" href="cross-compiling.html" title="2.2. Generating Instrumentation for Other Computers" /><link rel="next" href="understanding-how-systemtap-works.html" title="Chapter 3. Understanding How SystemTap Works" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="cross-compiling.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="understanding-how-systemtap-works.html"><strong>Next</strong></a></li></ul><div class="section" title="2.3. Running SystemTap Scripts" id="using-usage"><div class="titlepage"><div><div keep-together.within-column="always"><h2 class="title" id="using-usage">2.3. Running SystemTap Scripts</h2></div></div></div><a id="id2177139" class="indexterm"></a><a id="id677826" class="indexterm"></a><a id="id677838" class="indexterm"></a><a id="id783114" class="indexterm"></a><a id="id783129" class="indexterm"></a><a id="id785867" class="indexterm"></a><div class="para">
+			SystemTap scripts are run through the command <code class="command">stap</code>. <code class="command">stap</code> can run SystemTap scripts from standard input or from file.
+		</div><a id="id2177170" class="indexterm"></a><div class="para">
+			Running <code class="command">stap</code> and <code class="command">staprun</code> requires elevated privileges to the system. However, not all users can be granted root access just to run SystemTap. In some cases, for instance, you may want to allow a non-privileged user to run SystemTap instrumentation on his machine.
+		</div><div class="para">
+			To allow ordinary users to run SystemTap without root access, add them to one of these user groups:
+		</div><div class="variablelist"><dl><dt class="varlistentry"><span class="term">stapdev</span></dt><dd><a id="id727855" class="indexterm"></a><a id="id727867" class="indexterm"></a><div class="para">
+						Members of this group can use <code class="command">stap</code> to run SystemTap scripts, or <code class="command">staprun</code> to run SystemTap instrumentation modules.
+					</div><div class="para">
+						Running <code class="command">stap</code> involves compiling SystemTap scripts into kernel modules and loading them into the kernel. This requires elevated privileges to the system, which are granted to <code class="command">stapdev</code> members. Unfortunately, such privileges also grant effective root access to <code class="command">stapdev</code> members. As such, you should only grant <code class="command">stapdev</code> group membership to users whom you can trust root access.
+					</div></dd><dt class="varlistentry"><span class="term">stapusr</span></dt><dd><a id="id721339" class="indexterm"></a><a id="id721351" class="indexterm"></a><div class="para">
+						Members of this group can only run <code class="command">staprun</code> to run SystemTap instrumentation modules. In addition, they can only run those modules from <code class="filename">/lib/modules/<em class="replaceable"><code>kernel_version</code></em>/systemtap/</code>. Note that this directory must be owned only by the root user, and must only be writable by the root user.
+					</div></dd></dl></div><div class="para">
+			Below is a list of commonly used <code class="command">stap</code> options:
+		</div><a id="id678064" class="indexterm"></a><a id="id721441" class="indexterm"></a><div class="variablelist"><a id="id721456" class="indexterm"></a><dl><dt class="varlistentry"><span class="term">-v</span></dt><dd><div class="para">
+						Makes the output of the SystemTap session more verbose. You can repeat this option (for example, <code class="command">stap -vvv script.stp</code>) to provide more details on the script's execution. This option is particularly useful if you encounter any errors in running the script.
+					</div><div class="para">
+						For more information about common SystemTap script errors, refer to <a class="xref" href="errors.html" title="Chapter 5. Understanding SystemTap Errors">Chapter 5, <i>Understanding SystemTap Errors</i></a>.
+					</div></dd><dt class="varlistentry"><span class="term">-o <em class="replaceable"><code>filename</code></em></span></dt><dd><div class="para">
+						Sends the standard output to file (<em class="replaceable"><code>filename</code></em>).
+					</div></dd><dt class="varlistentry"><span class="term">-S <em class="replaceable"><code>size</code></em>,<em class="replaceable"><code>count</code></em></span></dt><dd><div class="para">
+						Limit files to <em class="replaceable"><code>size</code></em> megabytes and limit the the number of files kept around to <em class="replaceable"><code>count</code></em>. The file names will have a sequence number suffix. This option implements logrotate operations for SystemTap.
+					</div></dd><dt class="varlistentry"><span class="term">-x <em class="replaceable"><code>process ID</code></em></span></dt><dd><div class="para">
+						Sets the SystemTap handler function <code class="command">target()</code> to the specified process ID. For more information about <code class="command">target()</code>, refer to <a class="xref" href="systemtapscript-handler.html#systemtapscript-functions" title="SystemTap Functions">SystemTap Functions</a>.
+					</div></dd><dt class="varlistentry"><span class="term">-c <em class="replaceable"><code>command</code></em></span></dt><dd><div class="para">
+						Sets the SystemTap handler function <code class="command">target()</code> to the specified command. Note that you must use the full path to the specified command; for example, instead of specifying <code class="command">cp</code>, use <code class="command">/bin/cp</code> (as in <code class="command">stap <em class="replaceable"><code>script</code></em> -c /bin/cp</code>). For more information about <code class="command">target()</code>, refer to <a class="xref" href="systemtapscript-handler.html#systemtapscript-functions" title="SystemTap Functions">SystemTap Functions</a>.
+					</div></dd><dt class="varlistentry"><span class="term">-e '<em class="replaceable"><code>script</code></em>'</span></dt><dd><div class="para">
+						Use <code class="command"><em class="replaceable"><code>script</code></em></code> string rather than a file as input for systemtap translator.
+					</div></dd><dt class="varlistentry"><span class="term">-F</span></dt><dd><div class="para">
+						Use SystemTap's Flight recorder mode and make the script a background process. For more information about flight recorder mode, refer to <a class="xref" href="using-usage.html#flight-recorder" title="2.3.1. SystemTap Flight Recorder Mode">Section 2.3.1, “SystemTap Flight Recorder Mode”</a>.
+					</div></dd></dl></div><div class="para">
+			You can also instruct <code class="command">stap</code> to run scripts from standard input using the switch <code class="command">-</code>. To illustrate:
+		</div><a id="id2158314" class="indexterm"></a><a id="id2158326" class="indexterm"></a><a id="id2158338" class="indexterm"></a><div class="example" title="Example 2.1. Running Scripts From Standard Input" id="stdinstap"><h6>Example 2.1. Running Scripts From Standard Input</h6><div class="example-contents"><pre class="programlisting">
+echo "probe timer.s(1) {exit()}" | stap -
+</pre></div></div><br class="example-break" /><div class="para">
+			<a class="xref" href="using-usage.html#stdinstap" title="Example 2.1. Running Scripts From Standard Input">Example 2.1, “Running Scripts From Standard Input”</a> instructs <code class="command">stap</code> to run the script passed by <code class="command">echo</code> to standard input. Any <code class="command">stap</code> options you wish to use should be inserted before the <code class="command">-</code> switch; for instance, to make the example in <a class="xref" href="using-usage.html#stdinstap" title="Example 2.1. Running Scripts From Standard Input">Example 2.1, “Running Scripts From Standard Input”</a> more verbose, the command would be:
+		</div><div class="para">
+			<code class="command">echo "probe timer.s(1) {exit()}" | stap -v -</code>
+		</div><div class="para">
+			For more information about <code class="command">stap</code>, refer to <code class="command">man stap</code>.
+		</div><div class="para">
+			To run SystemTap instrumentation (i.e. the kernel module built from SystemTap scripts during a cross-instrumentation), use <code class="command">staprun</code> instead. For more information about <code class="command">staprun</code> and cross-instrumentation, refer to <a class="xref" href="cross-compiling.html" title="2.2. Generating Instrumentation for Other Computers">Section 2.2, “Generating Instrumentation for Other Computers”</a>.
+		</div><div class="note" title="Note"><div class="admonition_header"><h2>Note</h2></div><div class="admonition"><div class="para">
+				The <code class="command">stap</code> options <code class="command">-v</code> and <code class="command">-o</code> also work for <code class="command">staprun</code>. For more information about <code class="command">staprun</code>, refer to <code class="command">man staprun</code>.
+			</div></div></div><div class="section" title="2.3.1. SystemTap Flight Recorder Mode" id="flight-recorder"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="flight-recorder">2.3.1. SystemTap Flight Recorder Mode</h3></div></div></div><a id="id783067" class="indexterm"></a><div class="para">
+				SystemTap's flight recorder mode allows you to run a SystemTap script run for long periods and just focus on recent output. The flight recorder mode (the <code class="command">-F</code> option) limits the amount of output generated. There are two variations of the flight recorder mode: in-memory and file mode. In both cases the SystemTap script runs as a background process.
+			</div><div class="section" title="2.3.1.1. In-memory Flight Recorder" id="memory-flight-recorder"><div class="titlepage"><div><div keep-together.within-column="always"><h4 class="title" id="memory-flight-recorder">2.3.1.1. In-memory Flight Recorder</h4></div></div></div><a id="id783096" class="indexterm"></a><div class="para">
+					When flight recorder mode (the <code class="command">-F</code> option) is used without a file name SystemTap uses a buffer in kernel memory to store the output of the script. The SystemTap instrumentation module will load and the probes start running, the instrumentation will then detach and be put in the background. When the interesting event occurs, you can reattach to the instrumentation and see the recent output in the memory buffer and any continuing output. The following command starts a script using the flight recorder in-memory mode:
+				</div><pre class="screen">
+stap -F iotime.stp
+</pre><div class="para">
+					Once the script starts, you will see a message like the following that provides the command to reconnect to the running script:
+				</div><pre class="screen">
+Disconnecting from systemtap module.
+To reconnect, type "staprun -A stap_5dd0073edcb1f13f7565d8c343063e68_19556"
+</pre><div class="para">
+					When the interesting event occurs, you reattach to the currently running script and output the recent data in the memory buffer and get continuing output with the following command:
+				</div><pre class="screen">
+staprun -A stap_5dd0073edcb1f13f7565d8c343063e68_19556
+</pre><div class="para">
+					By default the kernel buffer is 1MB in size and it can be increased with the <code class="command">-s</code> option specifying the size in megabytes (rounded up to the next power over 2) for the buffer. For example <code class="command">-s2</code> on the SystemTap command line would specify 2MB for the buffer.
+				</div></div><div class="section" title="2.3.1.2. File Flight Recorder" id="file-flight-recorder"><div class="titlepage"><div><div keep-together.within-column="always"><h4 class="title" id="file-flight-recorder">2.3.1.2. File Flight Recorder</h4></div></div></div><a id="id2158368" class="indexterm"></a><div class="para">
+					The flight recorder mode can also store data to files. The number and size of the files kept is controlled by the <code class="command">-S</code> option followed by two numerical arguments separated by a comma. The first argument is the maximum size in megabytes for the each output file. The second argument is the number of recent files to keep. The file name is specified by the <code class="command">-o</code> option followed by the name. SystemTap will add a number suffix to the file name to indicate the order of the files. The following will start SystemTap in file flight recorder mode with the output going to files named <code class="command">/tmp/iotime.log.</code><em class="replaceable"><code>[0-9]+</code></em> and each file 1MB or smaller and keeping latest two files:
+				</div><pre class="screen">
+stap -F -o /tmp/pfaults.log -S 1,2  pfaults.stp
+</pre><div class="para">
+					The number printed by the command is the process ID. Sending a SIGTERM to the process will shutdown the SystemTap script and stop the data collection. For example if the previous command listed the 7590 as the process ID, the following command whould shutdown the systemtap script:
+				</div><pre class="screen">
+kill -s SIGTERM 7590
+</pre><div class="para">
+					Only the most recent two file generated by the script are kept and the older files are been removed. Thus, <code class="command">ls -sh /tmp/pfaults.log.*</code> shows the only two files:
+				</div><pre class="screen">
+1020K /tmp/pfaults.log.5    44K /tmp/pfaults.log.6
+</pre><div class="para">
+					One can look at the highest number file for the latest data, in this case /tmp/pfaults.log.6.
+				</div></div></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="cross-compiling.html"><strong>Prev</strong>2.2. Generating Instrumentation for Other Compute...</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="understanding-how-systemtap-works.html"><strong>Next</strong>Chapter 3. Understanding How SystemTap Works</a></li></ul></body></html>

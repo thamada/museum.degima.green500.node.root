@@ -1,0 +1,67 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Chapter&#160;5.&#160;Memory Tapset</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="up" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="prev" href="re74.html" title="function::ctime"><link rel="next" href="re75.html" title="function::vm_fault_contains"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&#160;5.&#160;Memory Tapset</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re74.html">Prev</a>&#160;</td><th width="60%" align="center">&#160;</th><td width="20%" align="right">&#160;<a accesskey="n" href="re75.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&#160;5.&#160;Memory Tapset"><div class="titlepage"><div><div><h2 class="title"><a name="memory_stp"></a>Chapter&#160;5.&#160;Memory Tapset</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="refentrytitle"><a href="re75.html"><span>function::vm_fault_contains</span></a></span><span class="refpurpose"> &#8212; 
+  Test return value for page fault reason
+ </span></dt><dt><span class="refentrytitle"><a href="re76.html"><span>probe::vm.pagefault</span></a></span><span class="refpurpose"> &#8212; 
+     Records that a page fault occurred.
+ </span></dt><dt><span class="refentrytitle"><a href="re77.html"><span>probe::vm.pagefault.return</span></a></span><span class="refpurpose"> &#8212; 
+     Indicates what type of fault occurred.
+ </span></dt><dt><span class="refentrytitle"><a href="re78.html"><span>function::addr_to_node</span></a></span><span class="refpurpose"> &#8212; 
+     Returns which node a given address belongs to within a NUMA system.
+ </span></dt><dt><span class="refentrytitle"><a href="re79.html"><span>probe::vm.write_shared</span></a></span><span class="refpurpose"> &#8212; 
+     Attempts at writing to a shared page.
+ </span></dt><dt><span class="refentrytitle"><a href="re80.html"><span>probe::vm.write_shared_copy</span></a></span><span class="refpurpose"> &#8212; 
+     Page copy for shared page write.
+ </span></dt><dt><span class="refentrytitle"><a href="re81.html"><span>probe::vm.mmap</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when an mmap is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re82.html"><span>probe::vm.munmap</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when an munmap is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re83.html"><span>probe::vm.brk</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a brk is requested (i.e. the heap will be resized).
+ </span></dt><dt><span class="refentrytitle"><a href="re84.html"><span>probe::vm.oom_kill</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when a thread is selected for termination by the OOM killer.
+ </span></dt><dt><span class="refentrytitle"><a href="re85.html"><span>probe::vm.kmalloc</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when kmalloc is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re86.html"><span>probe::vm.kmem_cache_alloc</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when \
+ </span></dt><dt><span class="refentrytitle"><a href="re87.html"><span>probe::vm.kmalloc_node</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when kmalloc_node is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re88.html"><span>probe::vm.kmem_cache_alloc_node</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when \
+ </span></dt><dt><span class="refentrytitle"><a href="re89.html"><span>probe::vm.kfree</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when kfree is requested.
+ </span></dt><dt><span class="refentrytitle"><a href="re90.html"><span>probe::vm.kmem_cache_free</span></a></span><span class="refpurpose"> &#8212; 
+     Fires when \
+ </span></dt><dt><span class="refentrytitle"><a href="re91.html"><span>function::proc_mem_size</span></a></span><span class="refpurpose"> &#8212; 
+  Total program virtual memory size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re92.html"><span>function::proc_mem_size_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Total program virtual memory size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re93.html"><span>function::proc_mem_rss</span></a></span><span class="refpurpose"> &#8212; 
+     Program resident set size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re94.html"><span>function::proc_mem_rss_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program resident set size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re95.html"><span>function::proc_mem_shr</span></a></span><span class="refpurpose"> &#8212; 
+     Program shared pages (from shared mappings)
+ </span></dt><dt><span class="refentrytitle"><a href="re96.html"><span>function::proc_mem_shr_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program shared pages (from shared mappings)
+ </span></dt><dt><span class="refentrytitle"><a href="re97.html"><span>function::proc_mem_txt</span></a></span><span class="refpurpose"> &#8212; 
+     Program text (code) size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re98.html"><span>function::proc_mem_txt_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program text (code) size in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re99.html"><span>function::proc_mem_data</span></a></span><span class="refpurpose"> &#8212; 
+     Program data size (data + stack) in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re100.html"><span>function::proc_mem_data_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Program data size (data + stack) in pages
+ </span></dt><dt><span class="refentrytitle"><a href="re101.html"><span>function::mem_page_size</span></a></span><span class="refpurpose"> &#8212; 
+     Number of bytes in a page for this architecture
+ </span></dt><dt><span class="refentrytitle"><a href="re102.html"><span>function::bytes_to_string</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string for given bytes
+ </span></dt><dt><span class="refentrytitle"><a href="re103.html"><span>function::pages_to_string</span></a></span><span class="refpurpose"> &#8212; 
+     Turns pages into a human readable string
+ </span></dt><dt><span class="refentrytitle"><a href="re104.html"><span>function::proc_mem_string</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string of current proc memory usage
+ </span></dt><dt><span class="refentrytitle"><a href="re105.html"><span>function::proc_mem_string_pid</span></a></span><span class="refpurpose"> &#8212; 
+     Human readable string of process memory usage
+ </span></dt></dl></div><p>
+      This family of probe points is used to probe memory-related events
+      or query the memory usage of the current process.
+      It contains the following probe points:
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re74.html">Prev</a>&#160;</td><td width="20%" align="center">&#160;</td><td width="40%" align="right">&#160;<a accesskey="n" href="re75.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"><span>function::ctime</span>&#160;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&#160;<span>function::vm_fault_contains</span></td></tr></table></div></body></html>

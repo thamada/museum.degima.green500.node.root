@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Server Settings</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Virtual Hosts Settings"
+HREF="httpd-virtualhosts-settings.html"><LINK
+REL="NEXT"
+TITLE="Performance Tuning"
+HREF="httpd-tuning-settings.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="httpd-virtualhosts-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-tuning-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="HTTPD-SERVER-SETTINGS"
+></A
+>Chapter 5. Server Settings</H1
+><P
+>	The <B
+CLASS="GUILABEL"
+>Server</B
+> tab allows you to configure basic server
+	settings. The default settings for these options are appropriate for
+	most situations.
+      </P
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-SERVER"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-server.png"></P
+></DIV
+><P
+><B
+>Figure 5-1. Server Configuration</B
+></P
+></DIV
+><P
+>	The <B
+CLASS="GUILABEL"
+>Lock File</B
+> value corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#lockfile"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>LockFile</TT
+></A
+>
+	  directive. This directive sets the path to the lockfile used
+	  when the server is compiled with either USE_FCNTL_SERIALIZED_ACCEPT or
+	  USE_FLOCK_SERIALIZED_ACCEPT. It must be stored on the local disk.  It
+	  should be left to the default value unless the
+	  <TT
+CLASS="FILENAME"
+>logs</TT
+> directory is located on an NFS share. If
+	  this is the case, the default value should be changed to a location on
+	  the local disk and to a directory that is readable only by root.
+      </P
+><P
+>	The <B
+CLASS="GUILABEL"
+>PID File</B
+> value corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#pidfile"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>PidFile</TT
+></A
+>
+	  directive. This directive sets the file in which the server records
+	  its process ID (pid). This file should only be readable by root. In
+	  most cases, it should be left to the default value.
+      </P
+><P
+>	The <B
+CLASS="GUILABEL"
+>Core Dump Directory</B
+> value corresponds to the
+	<A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#coredumpdirectory"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>CoreDumpDirectory</TT
+></A
+>
+	directive. The Apache HTTP Server tries to switch to this directory before dumping
+	core. The default value is the <TT
+CLASS="COMMAND"
+>ServerRoot</TT
+>. However,
+	if the user that the server runs as can not write to this directory, the
+	core dump can not be written. Change this value to a directory writable
+	by the user the server runs as, if you want to write the core dumps to
+	disk for debugging purposes.
+      </P
+><P
+>	The <B
+CLASS="GUILABEL"
+>User</B
+> value corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#user"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>User</TT
+></A
+>
+	directive. It sets the userid used by the server to answer
+	requests. This user's settings determine the server's access.  Any files
+	inaccessible to this user will also be inaccessible to your website's
+	visitors.  The default for <TT
+CLASS="COMMAND"
+>User</TT
+> is apache.
+      </P
+><P
+>	The user should only have privileges so that it can access files which
+	are supposed to be visible to the outside world.  The user is also the
+	owner of any CGI processes spawned by the server.  The user should not
+	be allowed to execute any code which is not intended to be in response
+	to HTTP requests.
+      </P
+><DIV
+CLASS="WARNING"
+><P
+></P
+><TABLE
+CLASS="WARNING"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="./stylesheet-images/warning.png"
+HSPACE="5"
+ALT="Warning"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="CENTER"
+><B
+>Warning</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>	  Unless you know exactly what you are doing, do not set the
+	  <TT
+CLASS="COMMAND"
+>User</TT
+> directive to root. Using root as the
+	  <TT
+CLASS="COMMAND"
+>User</TT
+> will create large security holes for your Web
+	  server.
+	</P
+></TD
+></TR
+></TABLE
+></DIV
+><P
+>	The parent <TT
+CLASS="COMMAND"
+>httpd</TT
+> process first runs as root during
+	normal operations, but is then immediately handed off to the apache
+	user.  The server must start as root because it needs to bind to a port
+	below 1024.  Ports below 1024 are reserved for system use, so they can not
+	be used by anyone but root.  Once the server has attached itself to its
+	port, however, it hands the process off to the apache user before it
+	accepts any connection requests.
+      </P
+><P
+>	The <B
+CLASS="GUILABEL"
+>Group</B
+> value corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mpm_common.html#group"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>Group</TT
+></A
+>
+	directive. The <TT
+CLASS="COMMAND"
+>Group</TT
+> directive is similar to the
+	<TT
+CLASS="COMMAND"
+>User</TT
+> directive.  <TT
+CLASS="COMMAND"
+>Group</TT
+> sets
+	  the group under which the server will answer requests. The default
+	  group is also apache.
+      </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="httpd-virtualhosts-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-tuning-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Virtual Hosts Settings</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Performance Tuning</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

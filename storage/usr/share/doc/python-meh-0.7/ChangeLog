@@ -1,0 +1,534 @@
+commit 34ed074ca77ff573defed81cbe4a8bcb63a20f14
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Nov 3 12:56:31 2009 -0500
+
+    New version.
+
+commit f79665d0849d0b3fea57fd3d52f70b63143c7fc7
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Nov 3 11:44:12 2009 -0500
+
+    Add a test case framework.
+    
+    This also adds a test case that checks the attrSkipList functionality to
+    make sure we don't run into those problems again.
+
+commit 7ad97941b96801cd7fc3345237204d580550a4e5
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Nov 3 11:43:13 2009 -0500
+
+    Move src -> meh for ease of test case writing.
+
+commit 148adc5fe0098033fdd594a5489c2cca142716f7
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Nov 3 10:12:18 2009 -0500
+
+    Another attempt at making the attrSkipList work (#532612, #532737).
+    
+    In the most local frame, the name of whatever object we're dumping isn't
+    what the attrSkipList is, it's "obj".  Therefore the attrSkipList needs
+    to not start with the object's name, and dump needs to put "obj" on the
+    front of each attribute.
+
+commit 23b15e9b56a65b4ee90e0df28608453f99a21149
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Oct 8 14:44:49 2009 -0400
+
+    New version.
+
+commit 070022eb90c43e9a0b28c494f0d41fd0699f8dd3
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Oct 8 14:36:21 2009 -0400
+
+    Make idSkipList work again.
+    
+    The problem was that basically nothing in the passed in attrSkipList could
+    ever get evaluated properly unless they're globals, because the environment
+    local to the eval() statement didn't contain much at all.  The solution is
+    to add the local environment from the frame where the traceback happened to
+    the environment the eval() runs in.
+
+commit 937b4a97a1007e4c13673dd1244ed5f96de38afd
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Oct 8 13:54:02 2009 -0400
+
+    Support dumping objects derived from Python's object.
+    
+    See the giant comment in _dumpClass for more information.
+
+commit 3597a3e327e57836f5f0fb0fc9efc8e37f5d6aba
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Oct 2 09:57:43 2009 -0400
+
+    Use the right method to set text on a snack.Entry (#526884).
+
+commit 8c94ff46b8604eced5373b426ca79f50c5073901
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Sep 29 14:23:38 2009 -0400
+
+    New version.
+
+commit 2ff4cb0d81abb628201a31e4edf2f4bab90221f4
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Sep 29 13:52:17 2009 -0400
+
+    Always compare version numbers as strings (#526188).
+    
+    Sometimes bugzilla gives us version numbers as strings, sometimes as integers
+    (for Fedora), and sometimes as floats (for RHEL).  Always comparing as strings
+    saves a lot of annoyance.
+
+commit ed4372014c485070962ee24cb2fd18eabd121f52
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Sep 25 15:31:20 2009 -0400
+
+    New version.
+
+commit 09786775a153367bf6b0babd41f836efa92051b7
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Sep 25 13:53:00 2009 -0400
+
+    Add a default description to bug reports.
+    
+    This means that on the save-to-bugzilla screen, there will typically be
+    a default description, and the user doesn't have to come up with their
+    own.  Most user don't do a fantastic job of this anyway.
+
+commit 7ecebdf04e413f7ecfa8ae7969009280dc97d1bf
+Author: raada <raada@fedoraproject.org>
+Date:   Wed Sep 23 17:51:40 2009 +0000
+
+    Sending translation for po/sv.po
+
+commit 80e2b4f1015b35c198cfc511b30cb4694df8d5ff
+Author: raven <raven@fedoraproject.org>
+Date:   Tue Sep 22 19:32:56 2009 +0000
+
+    Sending translation for Polish
+
+commit 55d8bc999f9a45d221baa7a607497033e5720eae
+Author: amitakhya <amitakhya@fedoraproject.org>
+Date:   Tue Sep 22 12:14:50 2009 +0000
+
+    Sending translation for Assamese
+
+commit 25eee9f90e8f7097a35c7375d11270762ed7cf6e
+Author: samfreemanz <samfreemanz@fedoraproject.org>
+Date:   Tue Sep 22 06:26:55 2009 +0000
+
+    Sending translation for French
+
+commit 0cab076c543878307640e6727ff6fffb4bbb3d23
+Author: kristho <kristho@fedoraproject.org>
+Date:   Mon Sep 21 22:26:41 2009 +0000
+
+    Sending translation for po/da.po
+
+commit d707eaa4fe04ff0bd8bf3ce82da6b6b1f0b3d05f
+Author: xconde <xconde@fedoraproject.org>
+Date:   Sun Sep 20 16:39:15 2009 +0000
+
+    Sending translation for po/ca.po
+
+commit 495030d873e2e96b82c8d1309d6be72bcccdc25f
+Author: ruigo <ruigo@fedoraproject.org>
+Date:   Sun Sep 20 13:34:58 2009 +0000
+
+    Sending translation for Portuguese
+
+commit 784a1536bf8c6c83df727e36b56f7c354bdc4bb3
+Author: ruigo <ruigo@fedoraproject.org>
+Date:   Sun Sep 20 12:49:11 2009 +0000
+
+    Sending translation for po/pt.po
+
+commit 617bd77d073a3664c166c476bb6c9e59dc0cf6aa
+Author: perplex <perplex@fedoraproject.org>
+Date:   Fri Sep 18 13:25:35 2009 +0000
+
+    Sending translation for po/it.po
+
+commit f2f30071093bd2e034b3e6a74ff3062262e1652b
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Sep 15 15:58:20 2009 -0400
+
+    Handle the user pressing Escape by continuing to show the dialog.
+
+commit f758d0e156aef9a02299cd2ce7b94ba9418095d5
+Author: nagyesta <nagyesta@fedoraproject.org>
+Date:   Tue Sep 15 15:43:10 2009 +0000
+
+    Sending translation for Hungarian
+
+commit 38e4eb2252b4517a1417b0d748ac5d78fee8ea1c
+Author: samfreemanz <samfreemanz@fedoraproject.org>
+Date:   Fri Sep 11 07:09:02 2009 +0000
+
+    Sending translation for po/fr.po
+
+commit 264079f4839b6b208e7e84a2f671c04f5c36ea46
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Sep 10 10:37:25 2009 -0400
+
+    New version.
+
+commit 8a5201e51d555bc71b859cc1d79ed576d316ad3c
+Author: amitakhya <amitakhya@fedoraproject.org>
+Date:   Thu Sep 10 10:16:51 2009 +0000
+
+    Sending translation for po/as.po
+
+commit 21cacccfe6e029477d4a6017701a182d3bc5fad9
+Author: hedda <hedda@fedoraproject.org>
+Date:   Thu Sep 10 06:24:24 2009 +0000
+
+    Sending translation for German
+
+commit b95ed5cb806325123c847d607d140cf7f424090c
+Author: jassy <jassy@fedoraproject.org>
+Date:   Thu Sep 10 06:08:33 2009 +0000
+
+    Sending translation for Punjabi
+
+commit 445888aa286c43e401b7bd10353e0aad1e0cbf32
+Author: kmilos <kmilos@fedoraproject.org>
+Date:   Wed Sep 9 22:15:36 2009 +0000
+
+    Sending translation for Serbian (Latin)
+
+commit 670c9a61f3b741c03b978c9614628e220444ac44
+Author: kmilos <kmilos@fedoraproject.org>
+Date:   Wed Sep 9 22:14:09 2009 +0000
+
+    Sending translation for Serbian
+
+commit 53a8e9a41a4eb1005e8ce62be7f8c3143bbef97d
+Author: shanky <shanky@fedoraproject.org>
+Date:   Wed Sep 9 18:42:58 2009 +0000
+
+    Sending translation for po/kn.po
+
+commit bb6f15b01d53eac8e8483d04b447759cacc7b3c8
+Author: rajesh <rajesh@fedoraproject.org>
+Date:   Wed Sep 9 09:09:42 2009 +0000
+
+    Sending translation for po/hi.po
+
+commit 0a47dc3826fa6d5b0c1730c9711a0f208292c84b
+Author: swkothar <swkothar@fedoraproject.org>
+Date:   Wed Sep 9 06:10:38 2009 +0000
+
+    Sending translation for Gujarati
+
+commit f437f4ba6378e5923cbd27254b97e7680f1a3ff9
+Author: jassy <jassy@fedoraproject.org>
+Date:   Tue Sep 8 15:51:59 2009 +0000
+
+    Sending translation for Punjabi
+
+commit 8addcb53cf91fc3809a7436f699145f9158d3423
+Author: jassy <jassy@fedoraproject.org>
+Date:   Tue Sep 8 11:31:23 2009 +0000
+
+    Sending translation for po/pa.po
+
+commit 46536cd0169a2d2b6a14a1a66a963d4a084d843a
+Author: swkothar <swkothar@fedoraproject.org>
+Date:   Tue Sep 8 10:49:08 2009 +0000
+
+    Sending translation for po/gu.po
+
+commit a0af1d5550cbde17275193374818a0c877f7c857
+Author: kkrothap <kkrothap@fedoraproject.org>
+Date:   Tue Sep 8 08:45:57 2009 +0000
+
+    Sending translation for po/te.po
+
+commit 5bcebfd7dcd62baaf7f6cf721851039ddaa7a894
+Author: runab <runab@fedoraproject.org>
+Date:   Mon Sep 7 18:07:10 2009 +0000
+
+    Sending translation for Bengali (India)
+
+commit 556ffe52571f8e6ba18984e966dbc31488765f5c
+Author: sandeeps <sandeeps@fedoraproject.org>
+Date:   Mon Sep 7 17:18:47 2009 +0000
+
+    Sending translation for po/mr.po
+
+commit 6ef2cecf9f533f42b8d2a5687b7753516a69e755
+Author: runab <runab@fedoraproject.org>
+Date:   Mon Sep 7 13:08:45 2009 +0000
+
+    Sending translation for po/bn_IN.po
+
+commit 7c4db933941c0736b65820eb253de04ef9ec56b1
+Author: anipeter <anipeter@fedoraproject.org>
+Date:   Mon Sep 7 10:45:09 2009 +0000
+
+    Sending translation for po/ml.po
+
+commit bd4b9c72009d2bb2e6d745ab43afc7f9ffd62fc4
+Author: mgiri <mgiri@fedoraproject.org>
+Date:   Mon Sep 7 07:50:51 2009 +0000
+
+    Sending translation for po/or.po
+
+commit 9919452894b183b615e42e4302ddb2376d0eab68
+Author: jensm <jensm@fedoraproject.org>
+Date:   Sat Sep 5 16:53:08 2009 +0000
+
+    Sending translation for po/de.po
+
+commit 9e27ced9e1a80f438be171614c8e42fe9e8e7969
+Author: eukim <eukim@fedoraproject.org>
+Date:   Wed Sep 2 03:25:02 2009 +0000
+
+    Sending translation for Korean
+
+commit b5cfca5d8a9f481809f2062689773c945096083b
+Author: ypoyarko <ypoyarko@fedoraproject.org>
+Date:   Wed Sep 2 00:41:59 2009 +0000
+
+    Sending translation for po/ru.po
+
+commit 5dcb6d43997c6109d40f9e73580ff6cf8512e8ea
+Author: kmilos <kmilos@fedoraproject.org>
+Date:   Tue Sep 1 20:02:18 2009 +0000
+
+    Sending translation for po/sr@latin.po
+
+commit b6cd959435b813b82b3da44cca014c4bf438d71e
+Author: kmilos <kmilos@fedoraproject.org>
+Date:   Tue Sep 1 20:01:38 2009 +0000
+
+    Sending translation for po/sr.po
+
+commit 98aa5a9c942dfe6533f6df20be30ca56dd97f88f
+Author: leahliu <leahliu@fedoraproject.org>
+Date:   Tue Sep 1 02:29:46 2009 +0000
+
+    Sending translation for Chinese (Simplified)
+
+commit b37a83be318e11696f41e05b26a81ea45dd1809c
+Author: zoltanh721 <zoltanh721@fedoraproject.org>
+Date:   Mon Aug 31 12:17:29 2009 +0000
+
+    Sending translation for po/hu.po
+
+commit 2335bbb382a0aca5789dc0c98a783f9b565f7ac7
+Author: vpv <vpv@fedoraproject.org>
+Date:   Sat Aug 29 21:02:51 2009 +0000
+
+    Sending translation for po/fi.po
+
+commit 187015c3f3b407c185fe99b393cf175d343af47b
+Author: pingman <pingman@fedoraproject.org>
+Date:   Sat Aug 29 12:48:38 2009 +0000
+
+    Sending translation for Chinese (Simplified)
+
+commit 3f00df0840ec8747beb9262ae9f2eddfbe92169b
+Author: hyuuga <hyuuga@fedoraproject.org>
+Date:   Sat Aug 29 11:02:33 2009 +0000
+
+    Sending translation for Japanese
+
+commit ea995a32a0b64ed1c19b618cda4a4175f5a02dc2
+Author: khasida <khasida@fedoraproject.org>
+Date:   Sat Aug 29 05:14:06 2009 +0000
+
+    Sending translation for po/ja.po
+
+commit 62a35758c5247c7ac64b11d63fbc0fafb663ec14
+Author: ifelix <ifelix@fedoraproject.org>
+Date:   Fri Aug 28 05:49:10 2009 +0000
+
+    Sending translation for po/ta.po
+
+commit 3b587cc18bf1b41e282d03d33dd69d2d5075f246
+Author: warrink <warrink@fedoraproject.org>
+Date:   Thu Aug 27 19:47:28 2009 +0000
+
+    Sending translation for Dutch
+
+commit ba360606de2c82b18450dd482f8e073b77c2aa79
+Author: warrink <warrink@fedoraproject.org>
+Date:   Thu Aug 27 15:12:28 2009 +0000
+
+    Sending translation for po/nl.po
+
+commit 24af4fdf8ddaf757cf0b1ace1c9f908f240de63b
+Author: eukim <eukim@fedoraproject.org>
+Date:   Thu Aug 27 04:35:44 2009 +0000
+
+    Sending translation for po/ko.po
+
+commit cae02318f1acd0f4b7f7b531bccdacf7cc42412a
+Author: igor <igor@fedoraproject.org>
+Date:   Wed Aug 26 22:54:27 2009 +0000
+
+    Sending translation for po/pt_BR.po
+
+commit 34bdd201ed1fcc4bd0a74471d2ba9324db1b2305
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Wed Aug 19 13:05:19 2009 -0400
+
+    New version.
+
+commit f87123ba843498fde72401ee7913bd5604fa5d34
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Wed Aug 19 11:48:20 2009 -0400
+
+    Add a title to the main exception dialog so it looks right in anaconda.
+
+commit 9c15826b03c3d2c0a6b599f30ed4857f48132f8c
+Author: beckerde <beckerde@fedoraproject.org>
+Date:   Tue Aug 18 22:53:31 2009 +0000
+
+    Sending translation for Spanish
+
+commit 2d1e7c6ae2ae7c4615ad49e3256ed0c11e693de7
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Aug 14 10:42:01 2009 -0400
+
+    Don't include an extra '/' in the displayed bug URL (#517515).
+
+commit 685950609de2e634ee9e7eac718c561faaf764ff
+Author: leahliu <leahliu@fedoraproject.org>
+Date:   Thu Aug 13 00:19:10 2009 +0000
+
+    Sending translation for po/zh_CN.po
+
+commit d39c482e19f6edfcd4cd804782c96b9c7d42f6df
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Wed Aug 12 15:48:20 2009 -0400
+
+    Now that there's .po files, package them.
+
+commit 7ecb2ff2cb81eb027750113b8a774c7856768372
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Wed Aug 12 15:41:26 2009 -0400
+
+    Use the new exception icon (#517164).
+
+commit c073748e692aa132a1a1e20917a9312ca4b9e172
+Author: logan <logan@fedoraproject.org>
+Date:   Wed Aug 12 14:04:58 2009 +0000
+
+    Sending translation for po/es.po
+
+commit ebb190ddbbf6f51a386888c167d3163643b20617
+Author: raven <raven@fedoraproject.org>
+Date:   Wed Jul 29 14:18:15 2009 +0000
+
+    Sending translation for po/pl.po
+
+commit 5c7bcca139b00ae6607f47c294797fee04719adc
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Tue Jul 28 22:52:49 2009 -0400
+
+    New version.
+
+commit 3693a90293903c671481227923879c1f003e461a
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 23 17:06:23 2009 -0400
+
+    More packaging fixes (#513486).
+
+commit 387d8ed3b22905c9a4a63ef35afe83c26a476a34
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 23 16:25:34 2009 -0400
+
+    Add some packaging cleanups.
+
+commit 932509c41d11361676a2a0f75e5173587f03a7f1
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 23 16:00:55 2009 -0400
+
+    Not all bugzilla versions are numbers - some are strings.
+
+commit ceac200ebc21c4941339e639d9731c97f2e346be
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 23 16:00:20 2009 -0400
+
+    We're not always writing to disk, so change the message.
+
+commit fcb46fb9bc48eae32b909406151ea205db0d696c
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 23 11:55:12 2009 -0400
+
+    Fix a bunch of errors pychecker found.
+
+commit 359dafa738560098fa93f4fee67afc63f8b9ef7d
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 23 11:39:22 2009 -0400
+
+    Add a convenience method for programs written by Red Hat.
+    
+    It doesn't make sense to use the same rather complicated block of code
+    over and over in every program.  So add a method to do this stuff for
+    us.
+
+commit a0fd74b1fcc544112d2cd2fc2378169d5eb0bb08
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Mon Jul 20 15:27:52 2009 -0400
+
+    Add a text interface to python-meh, which is needed for anaconda.
+
+commit a693ac8520b4fe2890b98f0076ef9db74d75d923
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Jul 17 15:17:39 2009 -0400
+
+    Compare the version number as an integer.
+
+commit ef8b34257cbb47511f13e42ee4dae30e22001c4c
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Jul 17 15:07:13 2009 -0400
+
+    Pull in a missing import.
+
+commit b754e2453940f08aac7b032e3d6bcbe2a0a4ad5c
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Jul 17 15:04:07 2009 -0400
+
+    The programName is in the Config object, not the ExceptionDump.
+
+commit 15be2067dd830583ba23dd5edc69fbdf21c245b7
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Jul 17 13:58:29 2009 -0400
+
+    Get rid of defaultProduct and defaultVersion.
+    
+    Instead, the caller should either supply their own values or use filer.getVersion
+    and filer.getProduct to query the system.
+
+commit f74492875725da302641e2e8d1df57ad3a973cb5
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Jul 17 10:49:41 2009 -0400
+
+    Add exception.png.
+
+commit 62ed14cabc3b1cbac8405d8bf30b32e6714be5f0
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Fri Jul 17 10:47:37 2009 -0400
+
+    Add the install locations to GLADEPATH and PIXMAPPATH.
+
+commit a732aaf509fe39ab81bf0f68b144c4904a1b378d
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 16 15:02:25 2009 -0400
+
+    Add i18n support.
+
+commit 1336079ccd485db7e1a42a48482bd85b1b540daa
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 16 14:33:39 2009 -0400
+
+    Add a bunch of packaging-related files.
+
+commit c50f4c1b7a81b5b742a61b9d5bbed1533860628b
+Author: Chris Lumens <clumens@redhat.com>
+Date:   Thu Jul 16 14:04:13 2009 -0400
+
+    Initial commit of python-meh module.

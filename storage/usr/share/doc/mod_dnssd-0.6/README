@@ -1,0 +1,253 @@
+                                 mod_dnssd 0.6
+
+   Copyright 2006-2009 Lennart Poettering <mzzbqqaffq (at) 0pointer (dot)
+   net>
+     * [1]License
+     * [2]News
+     * [3]Overview
+     * [4]Current Status
+     * [5]Documentation
+     * [6]Requirements
+     * [7]Installation
+     * [8]Acknowledgements
+     * [9]Download
+
+License
+
+   Copyright 2006-2009 Lennart Poettering
+
+   Licensed under the Apache License, Version 2.0 (the "License"); you may
+   not use this file except in compliance with the License. You may obtain
+   a copy of the License at
+
+       [10]http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+   implied. See the License for the specific language governing
+   permissions and limitations under the License.
+
+News
+
+   Wed Jan 18 2009:
+
+   [11]Version 0.6 released, changes include: add a new directive
+   DNSSDServiceTxtRecord
+
+   Tue Apr 17 2007:
+
+   [12]Version 0.5 released, changes include: updated for Apache 2.2; for
+   compatibility with older Apache versions please use mod_dnssd 0.4.
+
+   Sat Apr 1 2006:
+
+   [13]Version 0.4 released, changes include: deal properly with vhosts
+   listening on ports != 80; add new DNSSDUserDir directive.
+
+   Sun Jan 22 2006:
+
+   [14]Version 0.3 released, changes include: fix compilation on FreeBSD
+   and Mandriva; compatibility with Apache 2.2; fix a memory corruption
+   bug
+
+   Sat Jan 21 2006:
+
+   [15]Version 0.2 released, changes include: handle graceful restarts
+   properly, other smaller cleanups
+
+   Thu Jan 19 2006:
+
+   [16]Version 0.1 released, initial realease
+
+Overview
+
+   mod_dnssd is an [17]Apache HTTPD module which adds [18]Zeroconf support
+   via [19]DNS-SD using [20]Avahi.
+
+Status
+
+   Version 0.6 is more or less stable and fulfills its purpose.
+
+Documentation
+
+   For activating mod_dnssd just load it into the server and use the
+   global directive DNSSDEnable to enable it:
+DNSSDEnable on
+
+   That's it, nothing more is required! The module publishes all
+   configured virtual hosts and the mod_userdir directories of all local
+   users. For mod_userdir to work you need to load that module and
+   configure it for the path ~/public_html/.
+
+   Please note that all ServerNames used in the Apache configuration files
+   for services that shall be published with Avahi/DNS-SD need to be valid
+   and in [21]FQDN format, i.e. resolvable via mDNS or traditional DNS,
+   and consist of at least two labels. (foobar does not qualify as such,
+   but foobar.local does.)
+
+  Advanced Features
+
+   Five other directives are available: the global directive
+   DNSSDAutoRegisterUserDir can be used to disable automatic registration
+   of mod_userdir directories. The global directive
+   DNSSDAutoRegisterVHosts can be used to disable automatic registration
+   of all local virtual hosts.
+
+   The two directives DNSSDServiceName and DNSSDServiceTypes which can be
+   placed inside a <VirtualHost> or <Location> section can be used to
+   define additional services for publishing or to finetune the service
+   name or types of virtual hosts. If placed inside a <VirtualHost> you
+   can change the service types and name of the attached service (if used
+   with DNSSDAutoRegisterVHosts set to on) or to register a service for
+   the virtual host (if used with DNSSDAutoRegisterVHosts disabled).
+   DNSSDServiceTypes takes a list of at least one DNS-SD service type
+   (defaults to _http._tcp). A good example when to pass more than one
+   service type is a WebDAV server:
+DNSSDServiceTypes _http._tcp _webdav._tcp
+
+   This will register the server both as HTTP and as WebDAV service.
+   Please note that both services do have different types but share the
+   same name! Other areas where this might become handy is when
+   registering RSS formatted blogs or XMLRPC services.
+
+   DNSSDServiceName and DNSSDServiceTypes are especially useful inside a
+   <Location> block. Using this notation you can register additional
+   services in subdirectories of the server. A quick and incomplete
+   example:
+...
+DNSSDEnable On
+DNSSDAutoRegisterVHosts On
+DNSSDAutoRegisterUserDir On
+
+<VirtualHost *>
+    DocumentRoot /var/www
+    DNSSDServiceName "Our Little Home Web Server"
+
+    <Location /doc>
+        DNSSDServiceName "Documentation"
+        ...
+    </Location>
+
+    <Location /squirrelmail>
+        DNSSDServiceName "Webmail"
+        ...
+    </Location>
+
+    <Location /webdav>
+        DAV On
+        DNSSDServiceName "Our WebDAV folder"
+        DNSSDServiceTypes _webdav._tcp _http._tcp
+        ...
+    </Location>
+
+    <Location /blog.rss>
+        DNSSDServiceName "The Blog"
+        DNSSDServiceTypes _rss._tcp
+        ...
+    </Location>
+
+    ...
+</VirtualHost>
+
+...
+
+   This will register six services: Our Little Home Web Server,
+   Documentation, Webmail and Our WebDAV folder as type _http._tcp, Our
+   WebDAV folder a second time under the type _webdav._tcp and finally The
+   Blog as type _rss._tcp.
+
+   The directive DNSSDServicePort can be used to tell mod_dnssd the right
+   port number in complicated setups, where it fails to detect the correct
+   one to use. It is seldomly used and you probably shouldn't bother.
+
+   The global directive DNSSDUserDir may be used to change the directory
+   inside the user's home directory that is published by
+   DNSSDAutoRegisterUserDir. This defaults to public_html. If you used the
+   UserDir directive in your Apache configuration file you probably want
+   to use this directive, too. Please note, however, that DNSSDUserDir
+   doesn't accept the full syntax that UserDir accepts. In fact only the
+   simplest form - a simple string without any * and without the / prefix
+   - is accepted.
+
+   You might find this [22]blog article I wrote enlightening which
+   contains more examples how to make use of mod_dnssd.
+
+Requirements
+
+   mod_dnssd requires a current release of Apache 2.2 with apxs and a
+   development installation of [23]Avahi 0.6 or newer. mod_dnssd has been
+   tested exclusively with mpm_prefork, your mileage with other MPMs may
+   vary. (Please report successes or failures!)
+
+   mod_dnssd has been developed and tested on Debian GNU/Linux "testing"
+   from January 2006, it should work on most other Linux distributions and
+   probably POSIX implementations since it uses GNU autoconf and Apache
+   apxs for source code configuration.
+
+Installation
+
+   As this package is made with the GNU autotools you should run
+   ./configure inside the distribution directory for configuring the
+   source tree. After that you should run make for compilation and make
+   install (as root) for installation of mod_dnssd.
+
+Acknowledgements
+
+   This work was inspired by Sander Temme's and Sebastien Estienne's
+   [24]mod_zeroconf module.
+
+   Sebastien Estienne for packaging mod_dnssd for Debian.
+
+   Bastien Nocera for adding the DNSSDServiceTxtRecord directive.
+
+Download
+
+   The newest release is always available from
+   [25]http://0pointer.de/lennart/projects/mod_dnssd/
+
+   The current release is [26]0.6
+
+   Get mod_dnssd's development sources from the [27]GIT [28]repository
+   ([29]gitweb):
+git clone git://git.0pointer.de/mod_dnssd
+
+   You may find an up to date Debian package of mod_dnssd in the
+   [30]Debian package repository.
+     __________________________________________________________________
+
+
+    Lennart Poettering <mzzbqqaffq (at) 0pointer (dot) net>, January 2009
+
+References
+
+   1. README#license
+   2. README#news
+   3. README#overview
+   4. README#status
+   5. README#documentation
+   6. README#requirements
+   7. README#installation
+   8. README#acks
+   9. README#download
+  10. http://www.apache.org/licenses/LICENSE-2.0
+  11. http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.6.tar.gz
+  12. http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.5.tar.gz
+  13. http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.4.tar.gz
+  14. http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.3.tar.gz
+  15. http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.2.tar.gz
+  16. http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.1.tar.gz
+  17. http://httpd.apache.org/
+  18. http://www.zeroconf.org/
+  19. http://www.dns-sd.org/
+  20. http://avahi.org/
+  21. http://en.wikipedia.org/wiki/FQDN
+  22. http://0pointer.de/blog/projects/mod_dnssd.html
+  23. http://avahi.org/
+  24. http://www.temme.net/sander/mod_zeroconf/
+  25. http://0pointer.de/lennart/projects/mod_dnssd/
+  26. http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.6.tar.gz
+  27. http://git.or.cz/
+  28. git://git.0pointer.de/mod_dnssd
+  29. http://git.0pointer.de/?p=mod_dnssd.git
+  30. http://packages.debian.org/libapache2-mod-dnssd

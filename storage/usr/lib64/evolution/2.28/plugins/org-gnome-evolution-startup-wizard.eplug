@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e-plugin-list>
+	  <e-plugin type="shlib" location="/usr/lib64/evolution/2.28/plugins/liborg-gnome-evolution-startup-wizard.so" id="org.gnome.evolution.plugin.startup-wizard" name="Setup Assistant">
+	     <author name="JP Rosevear" email="jpr@novell.com"/>
+	     <description>Guides you through your initial account setup.</description>
+		<hook class="org.gnome.evolution.shell.events:1.0">
+			<event target="upgrade" id="upgrade.done" handle="startup_wizard"/>
+		</hook>    
+
+	    <hook class="org.gnome.evolution.mail.config:1.0">
+		      <group target="account" id="org.gnome.evolution.mail.config.accountWizard" commit="startup_wizard_commit" abort="startup_wizard_abort">
+			<item type="page" path="60.importers" factory="startup_wizard_importer_page"/>
+		      </group>
+	    </hook>
+
+	  </e-plugin>
+</e-plugin-list>

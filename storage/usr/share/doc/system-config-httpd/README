@@ -1,0 +1,50 @@
+
+system-config-httpd - An easy to use Apache web server configuration utility
+
+Authors:
+  Philipp Knirsch <pknirsch@redhat.com>
+  Jonathan Blandford <jrb@redhat.com>
+
+
+Overview
+========
+
+In order for newcomers to configure an Apache web server without too much
+hazle we have put together this nice little tool.
+
+It is based on a newly developed base component called alchemist. The
+alchemist is the backend which to put it in simple terms manages all
+configurations in a tool independant manner and is capable of handling and
+merging multiple XML based configurations. Apacheconf simply uses it as a
+storage and data handling backend.
+
+Apacheconf itself is a Python 1.5 program using the pygtk, pygnome and
+pygnome-libglade to do the whole UI work.
+
+With system-config-httpd you can edit your HTTPD server configuration.
+
+
+
+Design
+======
+
+In order to separate the different modules we have differentiated everything
+in the following order:
+
+  UI                                Glade 
+
+  UI Interface                    ApacheConf
+
+  UI <-> Gizmo Interface        ApacheControl  
+
+  Gizmo <-> Base Interface       ApacheGizmo 
+
+  Base <-> Alchemist Interface   ApacheBase
+
+  Data storage                    Alchemist
+
+
+The idea was to have the middleware part (ApacheControl, ApacheGizmo and
+ApacheBase) separated in two parts: One part for the frontend (GUI), the other
+for the backend (Alchemist).
+

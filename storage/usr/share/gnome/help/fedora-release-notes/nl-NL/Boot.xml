@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Fedora_12_Boot_Time" lang="nl-NL">
+	<title>Fedora 12 opstart tijd</title>
+	<remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Boot">https://fedoraproject.org/wiki/Docs/Beats/Boot</ulink></remark>
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-ext4">
+		<title>GRUB met ext4 ondersteuning</title>
+		<para>
+			Fedora&nbsp;9 bevatte oorspronkelijk experimentele ondersteuning voor ext4 en Fedora&nbsp;11 bevatte standaard ext4 ondersteuning. <application>GRUB</application> ondersteunde echter in die versie ext4 niet en vereiste daarom een aparte boot partitie geformatteerd als ext3 of ext2. Fedora&nbsp;12 bevat nu een vernieuwde versie van <application>GRUB</application> met ext4 ondersteuning. <application>Anaconda</application> (het Fedora installatie programma) zal dit ook toestaan.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-Dracut">
+		<title>Dracut &mdash; nieuw opstart systeem</title>
+		<para>
+			Tot en met Fedora&nbsp;10 was het opstart systeem (<firstterm>initial ram disk</firstterm> of <firstterm>initrd</firstterm>), dat gebruikt werd om Fedora op te starten, monolithisch, erg distributie specifiek en bood niet veel flexibiliteit. Dit zal vervangen worden door <application>Dracut</application>, een initiële ram schijf met een event-based raamwerk wat ontworpen is om distributie onafhankelijk te zijn. Het wordt ook gebruikt door het van Fedora afgeleide XO operating systeem van het OLPC project. OLPC modules voor <application>Dracut</application> zijn beschikbaar in de Fedora repository. Vroegtijdige terugkoppeling en testen zijn welkom.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_12_Boot_Time-KMS">
+		<title>Sneller en gelijkmatiger grafisch opstarten</title>
+		<para>
+			<firstterm>Kernel Mode Setting</firstterm> (KMS) wordt nu standaard ook bij NVIDIA systemen aangezet met behulp van de <application>Nouveau</application> driver. Fedora&nbsp;10 bevatte oorspronkelijk ondersteuning voor KMS, echter alleen voor enkele ATI grafische kaarten. In Fedora&nbsp;11 werd dit ook uitgebreid naar Intel kaarten. Deze vrijgave heeft het verder uitgebreid om ook NVIDIA kaarten te ondersteunen.
+		</para>
+		<para>
+			Als resultaat van deze verbetering zul je een sneller en gelijkmatiger grafisch opstarten krijgen op bijna alle systemen met het <application>plymouth</application> grafisch opstart systeem ontwikkeld binnen Fedora.
+		</para>
+	</section>
+
+</section>
+
+

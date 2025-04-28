@@ -1,0 +1,12 @@
+diff --git a/drivers/infiniband/hw/qib/qib_user_sdma.c b/drivers/infiniband/hw/qib/qib_user_sdma.c
+index 78e34ca..f83031f 100644
+--- a/drivers/infiniband/hw/qib/qib_user_sdma.c
++++ b/drivers/infiniband/hw/qib/qib_user_sdma.c
+@@ -382,6 +382,7 @@ static void qib_user_sdma_free_pkt_list(struct device *dev,
+ 
+ 		kmem_cache_free(pq->pkt_slab, pkt);
+ 	}
++	INIT_LIST_HEAD(list);
+ }
+ 
+ /*

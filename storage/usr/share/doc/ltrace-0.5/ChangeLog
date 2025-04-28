@@ -1,0 +1,222 @@
+2006-06-19  Ian Wienand  <ianw@ieee.org>
+
+	* sysdeps/linux-gnu/mksyscallent: update, fix for ia64
+	* sysdeps/linux-gnu/i386/syscallent.h: regenerate to 2.6.17
+	* sysdeps/linux-gnu/i386/signalent.h: likewise
+	* sysdeps/linux-gnu/arm/syscallent.h: likewise
+	* sysdeps/linux-gnu/arm/signalent.h: likewise
+	* sysdeps/linux-gnu/m68k/syscallent.h: likewise
+	* sysdeps/linux-gnu/m68k/signalent.h: likewise
+	* sysdeps/linux-gnu/ia64/syscallent.h: likewise
+	* sysdeps/linux-gnu/ia64/signalent.h: likewise
+
+2006-06-19  Heiko Carstens <heiko.carstens@de.ibm.com>
+
+	* sysdeps/linux-gnu/s390/syscalls31.h: update to 2.6.17
+	* sysdeps/linux-gnu/s390/syscalls64.h: ditto
+
+2006-06-16  Justin Pryzby <justinpryzby@users.sourceforge.net>
+
+	* ltrace.1: spelling fix
+	* TODO: spelling fix
+
+2006-06-14  Ian Wienand  <ianw@gelato.unsw.edu.au>
+
+	* configure.ac: Bump version to 0.5 for Paull Gillam's PPC64
+	non-exec PLT patch (as merged below).
+	* breakpoints.c: merge
+	* elf.c: merge
+	* elf.h: merge
+	* ltrace.h: merge
+	* output.c: merge
+	* process_event.c: merge
+	* sysdeps/linux-gnu/alpha/plt.c: merge
+	* sysdeps/linux-gnu/arm/plt.c: merge
+	* sysdeps/linux-gnu/breakpoint.c: merge
+	* sysdeps/linux-gnu/i386/plt.c: merge
+	* sysdeps/linux-gnu/ia64/plt.c: merge
+	* sysdeps/linux-gnu/m68k/plt.c: merge
+	* sysdeps/linux-gnu/ppc/arch.h: merge
+	* sysdeps/linux-gnu/ppc/arch.h.rej: merge
+	* sysdeps/linux-gnu/ppc/plt.c: merge
+	* sysdeps/linux-gnu/s390/plt.c: merge
+	* sysdeps/linux-gnu/sparc/plt.c: merge
+	* sysdeps/linux-gnu/x86_64/plt.c: merge
+
+
+2006-05-11  Heiko Carstens <heiko.carstens@de.ibm.com>
+
+	* sysdeps/linux-gnu/mksyscallent_s390: add
+	* sysdeps/linux-gnu/s390/syscalls31.h: update to 2.6.16
+	* sysdeps/linux-gnu/s390/syscalls64.h: ditto
+
+2006-04-24  Paul Gilliam <pgilliam@us.ibm.com>
+
+	* elf.c: Use PLT_REINITALISATION_BP for those architectures that need
+	to re-initialize breakpoints after the dynamic linker has run.  Also,
+	use value of "e_entry" for address of PLT_REINITALISATION_BP if the
+	 target program has been stripped.
+	* ltrace.1: Note that fact that "-X" is only available on architectures
+	that need it.
+	* options.c: Use PLT_REINITALISATION_BP for those architectures that
+	need to re-initialize breakpoints after the dynamic linker has run.
+	* process_event.c: ditto.
+	* sysdeps/linux-gnu/ppc/arch.h: This is the only such architecture.
+	* sysdeps/linux-gnu/arm/arch.h: Delete use of PLT_REINITALISATION_BP.
+	* sysdeps/linux-gnu/m68k/arch.h: ditto.
+	* sysdeps/linux-gnu/alpha/arch.h: ditto.
+	* sysdeps/linux-gnu/i386/arch.h: ditto.
+	* sysdeps/linux-gnu/x86_64/arch.h: ditto.
+	* sysdeps/linux-gnu/s390/arch.h: ditto.
+	* sysdeps/linux-gnu/ia64/arch.h: ditto.
+	* sysdeps/linux-gnu/sparc/arch.h: ditto.
+
+2006-04-24  Paul Gilliam <pgilliam@us.ibm.com>
+
+	* elf.c: Adds some casts to keep a more picky version of GCC happy.
+	* sysdeps/linux-gnu/trace.c: ditto.
+	* sysdeps/linux-gnu/breakpoint.c: ditto.
+	* ltrace.h: ditto.
+
+2006-04-24  Paul Gilliam <pgilliam@us.ibm.com>
+
+	* summery.c: Correct a typo prevented the inclusion of "demangle.h".
+
+2006-03-16  Ian Wienand  <ianw@gelato.unsw.edu.au>
+
+	* testsuite/ltrace.minor/trace-clone.c: use __clone2() for IA64
+	clone test
+
+2006-03=13  Paul Gilliam <pgilliam@us.ibm.com>
+
+	* Makefile.in: Add targets to support testsuite, including 'check'.
+	* confiure.ac: Add testsuite Makefile's to AC_OUTPUT.
+	* testsuite: Add dejagnu base testsuite.
+	* testsuite/config/: Add
+	* testsuite/config/unix.exp: Add
+	* testsuite/lib/: Add
+	* testsuite/lib/compiler.c: Add
+	* testsuite/lib/compiler.cc: Add
+	* testsuite/lib/ltrace.exp: Add
+	* testsuite/ltrace.main/: Add
+	* testsuite/ltrace.main/main.c: Add
+	* testsuite/ltrace.main/main.exp: Add
+	* testsuite/ltrace.main/main-internal-1.c: Add
+	* testsuite/ltrace.main/main-internal.c: Add
+	* testsuite/ltrace.main/main-internal.exp: Add
+	* testsuite/ltrace.main/main-lib.c: Add
+	* testsuite/ltrace.main/Makefile.in: Add
+	* testsuite/ltrace.main/signals.c: Add
+	* testsuite/ltrace.main/signals.exp: Add
+	* testsuite/ltrace.main/system_calls.c: Add
+	* testsuite/ltrace.main/system_calls.exp: Add
+	* testsuite/ltrace.minor/: Add
+	* testsuite/ltrace.minor/attach-process.c: Add
+	* testsuite/ltrace.minor/attach-process.exp: Add
+	* testsuite/ltrace.minor/count-record.c: Add
+	* testsuite/ltrace.minor/count-record.exp: Add
+	* testsuite/ltrace.minor/demangle.cpp: Add
+	* testsuite/ltrace.minor/demangle.exp: Add
+	* testsuite/ltrace.minor/demangle.h: Add
+	* testsuite/ltrace.minor/demangle-lib.cpp: Add
+	* testsuite/ltrace.minor/Makefile.in: Add
+	* testsuite/ltrace.minor/print-instruction-pointer.c: Add
+	* testsuite/ltrace.minor/print-instruction-pointer.exp: Add
+	* testsuite/ltrace.minor/time-record.c: Add
+	* testsuite/ltrace.minor/time-record-T.exp: Add
+	* testsuite/ltrace.minor/time-record-tt.exp: Add
+	* testsuite/ltrace.minor/time-record-ttt.exp: Add
+	* testsuite/ltrace.minor/trace-clone.c: Add
+	* testsuite/ltrace.minor/trace-clone.exp: Add
+	* testsuite/ltrace.minor/trace-fork.c: Add
+	* testsuite/ltrace.minor/trace-fork.exp: Add
+	* testsuite/ltrace.torture/: Add
+	* testsuite/ltrace.torture/Makefile.in: Add
+	* testsuite/ltrace.torture/signals.c: Add
+	* testsuite/ltrace.torture/signals.exp: Add
+	* testsuite/Makefile.in: Add
+	* testsuite/README: Add
+	* testsuite/run-my-tests.sh: Add
+	* testsuite/so_test1/: Add
+	* testsuite/so_test2/: Add
+
+2006-03-13  Paul Gilliam <pgilliam@us.ibm.com>
+
+	* options.h: New structure for opt_x list elements, now with 'found'.
+	* options.c: Use new opt_x_t structure, initializing 'found' to 0.
+	* elf.c: Use new 'found' field for better error checking.
+
+2006-03-06  Ian Wienand  <ianw@ieee.org>
+
+	* Makefile.in: remove unneeded dirs from make dist; use rm
+	directly.
+
+2006-02-22  Ian Wienand  <ianw@ieee.org>
+
+	* COPYING: update from FSF to update address
+	* Makefile.in: check for SVN checkout with make dist.
+
+2006-02-21  Ian Wienand  <ianw@ieee.org>
+
+	* README: update to point to Alioth list
+
+2006-02-21  Ian Wienand  <ianw@ieee.org>
+
+	* lots!: Rebase from RedHat 0.3.36-4.2 package.  Forward port most
+	of the below changes that weren't already there.  Bump version to
+	0.4 as there are two added architectures and internal API changes.
+	All changes from this point on should be reflected in this file.
+
+2006-02-17  Ian Wienand  <ianw@ieee.org>
+
+	* sysdeps/linux-gnu/ia64/arch.h: add ia64 support
+	* sysdeps/linux-gnu/ia64/breakpoint.c: add
+	* sysdeps/linux-gnu/ia64/Makefile: add
+	* sysdeps/linux-gnu/ia64/plt.c: add
+	* sysdeps/linux-gnu/ia64/ptrace.h: add
+	* sysdeps/linux-gnu/ia64/regs.c: add
+	* sysdeps/linux-gnu/ia64/signalent.h: add
+	* sysdeps/linux-gnu/ia64/syscallent.h: add
+	* sysdeps/linux-gnu/ia64/trace.c: add
+	* elf.h: add extra field for PLT size
+	* elf.c: put in PLT size
+	* sysdeps/linux-gnu/breakpoint.c: add arch breakpoint override
+	* sysdeps/linux-gnu/trace.c: don't single step after breakpoint for
+	ia64
+
+	* configure.ac: add version to AC_INIT, bump version to 0.3.38
+	* options.c: use PACKAGE_VERSION
+
+2006-02-16  Ian Wienand  <ianw@ieee.org>
+
+	* Makefile.in: install documentation into share/doc, make dist
+	target from SVN export.
+
+2006-02-16  Rajeev V. Pillai <rajeevvp@yahoo.com>
+
+	* Makefile.in: pass through CPP and LD FLAGS
+
+2006-02-16  Ian Wienand  <ianw@ieee.org>
+
+	* read_config_file.c: initialise pt stack argument to stop warning
+	* summary.c: make show_summary() obey -C for demangaling function names
+
+2006-02-16 Bernd Zeimetz <bernd@zeimetz.de>
+
+	* ltrace.1: reference reportbug
+
+2006-02-16 Colin S. Miller <csmiller@iname.com>
+
+	* ltrace.1: fix debug typo
+
+2006-02-16  Andrew Stribblehill <ads@debian.org>
+
+	* etc/ltrace.conf: fix putenv typo
+
+2006-02-16  Ian Wienand <ianw@ieee.org>
+
+	* README: update
+	* Makefile.in: remove obsolete -I- for -iquote, add TAGS target
+	* debug.c, debug.h: __PRETTY_FUNCTION__ is const; change specifier
+	to stop warnings.
+	* ltrace.1: add a note about not tracing dlopen()ed libraries

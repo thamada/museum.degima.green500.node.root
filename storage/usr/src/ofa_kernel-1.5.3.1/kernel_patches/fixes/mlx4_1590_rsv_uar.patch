@@ -1,0 +1,44 @@
+From 3699a010a6a90e06914c30426f8459f669736c17 Mon Sep 17 00:00:00 2001
+From: Eli Cohen <eli@mellanox.co.il>
+Date: Mon, 8 Nov 2010 11:06:53 +0200
+Subject: [PATCH 2/2] mlx4_core: reserve UARs for userspace consumers
+
+Do not allow a kernel consumer to allocate a UAR to serve for blue flame if the
+number of available UARs gets below MLX4_NUM_RESERVED_UARS (currently 8). This
+will allow userspace apps to open a device file and run things like
+ibv_devinfo.
+
+Signed-off-by: Eli Cohen <eli@mellanox.co.il>
+---
+ drivers/net/mlx4/pd.c |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+diff --git a/drivers/net/mlx4/pd.c b/drivers/net/mlx4/pd.c
+index b47e091..cfb78a0 100644
+--- a/drivers/net/mlx4/pd.c
++++ b/drivers/net/mlx4/pd.c
+@@ -44,6 +44,10 @@
+ #define ioremap_wc ioremap_nocache
+ #endif
+ 
++enum {
++	MLX4_NUM_RESERVED_UARS = 8
++};
++
+ int mlx4_pd_alloc(struct mlx4_dev *dev, u32 *pdn)
+ {
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+@@ -109,6 +113,10 @@ int mlx4_bf_alloc(struct mlx4_dev *dev, struct mlx4_bf *bf)
+ 	if (!list_empty(&priv->bf_list))
+ 		uar = list_entry(priv->bf_list.next, struct mlx4_uar, bf_list);
+ 	else {
++		if (mlx4_bitmap_avail(&priv->uar_table.bitmap) < MLX4_NUM_RESERVED_UARS) {
++			err = -ENOMEM;
++			goto out;
++		}
+ 		uar = kmalloc(sizeof *uar, GFP_KERNEL);
+ 		if (!uar) {
+ 			err = -ENOMEM;
+-- 
+1.7.3.2
+

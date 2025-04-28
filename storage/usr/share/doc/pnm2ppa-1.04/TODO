@@ -1,0 +1,76 @@
+TODO
+
+Code issues (comments by duncan):
+* implement data compression for color as well as
+  black and white printing.
+* bidirectional printing is not fully consistent (It is not clear
+  ahead of time whether the next sweep will be color or black, and thus
+  when the sweep changes from black to color or vice-versa, the sweep
+  direction may not reverse.)
+* check out the new information about the buffer on the printer.
+  (mentioned on ppa.devel by andrew in early 2000)
+* cleaning head codes needed. (or put them into PUP);
+  document the codes in  the ppa docs here.
+* should multiple color sweeps in a swath (gMaxpass=4)
+  alternate between right-to-left and left-to-right ?
+* Printing of e.g. tiger.ps (an example included with ghostscript)
+  shows lines between swaths.  The Windows driver does not.  This is because
+  the four passes of the color head (gMaxPass=4) are all at the same
+  vertical position.   This is not the way to e.g. paint a wall using a
+  paint roller - instead the successive passes should  be vertically
+  staggered  so  their swath boundaries are not all at the same vertical
+  position.   The Windows driver does this: the vertical position of pass 2
+  is 1/4 of a swath height  below pass 1, etc.  Unfortunately, the design
+  decisions in cutswath.c make this not a simple change.   Initial changes 
+  would be to somehow decouple the four sweeps, so they could have independent
+  left and right values, directions, vertical positions, etc.
+
+* The Windows driver  also has a "normal" mode with gMaxPass=2, and well
+  as "econofast" (gMaxPass=1) and high quality (gMaxPass=4).  It
+  alternates color passes in one direction with black passes in the
+  other direction, at the same vertical position.
+  If this structure is adopted, maybe the way the 600dpi resolution of black
+  if reduced to 300dpi resolution in dither.c should be rethought.
+  (Why not keep 600dpi black resolution ?).
+
+* A FS_black_dither routine is needed in black-only printing, for high-quality
+  black-only images.
+
+* Internationalization ("i18n") should be done with GNU gettext and .po files,
+ not the current hack.
+
+* add autodetection of device via IEEE 1284 and other methods
+* redo debugging support	(done ajv)
+* add extra .conf parameters to avoid recompiles (done: ajv & giorgio)
+* getopt() rather than current handling	(done:	ajv 19991003)
+
+Distribution and Installation issues
+
+* *BSD compatibility (partially there: ajv 19991021)
+* update README and all doco
+* update installation instructions for major distributions (caldera, RH, etc)
+* Translate man page into other languages
+* add autoconf support ? (NetBSD and alpha issues)
+* update CREDITS
+* Make install target	(done: ajv)
+* make syslog configurable; stdout or syslog (done: ajv 19991021)
+
+CALIBRATION
+* CALIBRATE doco, and supporting .ps file to generate page
+
+Long Term wants
+
+* write instructions on how to speed up parallel port (Linux 2.2.x and later)
+* write hppaconf (KDE)?
+* gs native filter rather than take pnm/pbm/ppm files
+* scpd to monitor printer status, and provide support for console alerts
+  (These are dumb printers, so ...)
+
+
+
+
+
+
+
+
+

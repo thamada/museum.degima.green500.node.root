@@ -1,0 +1,250 @@
+telepathy-python 0.15.17 (2010-03-12)
+=====================================
+
+Enhancements:
+
+ * New function ChannelManager.implement_channel_classes to deprecate
+   _implement_channel_class. This allows implementing multiple channel
+   classes per channel type. Fixes fd.o#26979.
+
+ * Add new NoneHandle class to represent a handle type of NONE, and
+   use this class so that telepathy.server.Handle's methods return
+   NoneHandle objects for HT=NONE, instead of None.
+
+Fixes:
+
+ * Allow TargetHandleType=NONE when requesting a new channel.
+
+telepathy-python 0.15.16 (2010-03-09)
+=====================================
+
+The "Capybara is a vegan rodent" release.
+
+Enhancements:
+  * implement setting the Enabled property in the Debug interface
+  * Allow specifying the object path of channels
+
+Fixes:
+  * Return actual channel properties in EnsureChannel/CreateChannel
+  * Fix connection.check_parameters to accept dbus.Boolean
+
+telepathy-python 0.15.15 (2010-01-20)
+=====================================
+
+The "square" release.
+
+Fixes:
+  * Register new channels correctly in the channel manager
+
+telepathy-python 0.15.14 (2010-01-19)
+=====================================
+
+The "Madness? This is Our House!" release.
+
+Fixes:
+  * CreateChannel now really create a new channel.
+
+telepathy-python 0.15.13 (2009-12-14)
+=====================================
+
+The "part of my Getting Nothing Done life methodology" release.
+
+Enhancements:
+
+ * Specification 0.19.0.
+ * Support for Telepathy Clients interface
+ * New Observer example
+
+Fixes:
+
+  * #25116: Always return TargetId in channel props
+  * #25620: Fix parallel build (Diego Pettenò)
+
+telepathy-python 0.15.12 (2009-09-29)
+=====================================
+
+The "You Look Nice Today" release.
+
+Enhancements:
+
+ * Specification 0.18.0.
+ * Build system now uses the autotools.
+
+Fixes:
+
+ * Debug helper: default to debug messages being off by default.
+
+telepathy-python 0.15.11 (2009-08-18)
+=====================================
+
+The "That's not funny" release
+
+Enhancements:
+
+ * Add the ChannelTypeFileTransfer interface
+ * Implement the Debug interface (handle logging and stderr output)
+ * Specification 0.17.27.
+
+Fixes:
+
+ * #23081: Fixing TargetID handle search (Thiago Borges Abdnur)
+ * Fix GetCapabilities method that was broken and didn't return anything
+
+telepathy-python 0.15.10 (2009-07-30)
+=====================================
+
+The "Come back automake, all is forgiven" release.
+
+Fixes:
+
+* Actually include server/channelmanager.py in the tarball.
+
+telepathy-python 0.15.9 (2009-07-28)
+====================================
+
+The "If my luggage was running Empathy, its location would be Singapore" release.
+
+Enhancements:
+
+* Add service side helper code to implement Connection.Interface.Requests.
+  This breaks the old request channel API so be sure to upgrade
+  telepathy-butterfly at the same time as telepathy-python.
+  Client side code is not affected by this change.
+
+Fixes:
+
+ * Call get_handle_type() in ListChannels avoiding an error if the handle is null.
+
+telepathy-python 0.15.8 (2009-06-15)
+====================================
+
+Enhancements:
+
+ * Specification 0.17.26.
+ * Upgrade tube examples to use the new API.
+
+Fixes:
+
+ * examples/file-transfer.py: UNIX socket address is supposed to be an 'ay'
+   according to the spec.
+
+
+telepathy-python 0.15.7 (2009-02-17)
+====================================
+
+The "I can hear every word and it's extremely boring" release.
+
+Enhancements:
+
+ * Specification 0.17.19.
+ * file-transfer.py example script now uses the stable FT interface.
+ * Support DBusProperty and Secret flags in generate-manager-file.
+
+Fixes:
+
+ * call.py: make ^C clean up connection in incoming mode.
+
+telepathy-python 0.15.6 (2009-01-07)
+====================================
+
+The "we're moving to autotools" release.
+
+Fixes:
+
+ * Include src/utils.py in MANIFEST.in to make sure it is present in the dist
+   tarball.
+
+telepathy-python 0.15.5 (2009-01-06)
+====================================
+
+The "Point de wjt" release.
+
+Enhancements:
+
+ * Add telepathy.utils module with debug_divert_messages.
+
+Fixes:
+
+ * Make DBusProperties initialisable without removing all previous interface
+   property implementations.
+
+telepathy-python 0.15.4 (2009-01-05)
+====================================
+
+The "it's like teaching quantum physics to a goat" release.
+
+Enhancements:
+
+ * Specification 0.17.16.
+ * Add file-transfer.py example script.
+ * Add DBusProperties interface.
+ * Implement some D-Bus properties to Channel, Connection and
+   ChannelInterfaceGroup classes.
+
+Fixes:
+
+ * Don't use bool() for boolean parameter strings as it always returns True.
+ * Don't allow queuing for the CM bus name.
+ * Don't generate code for draft interfaces.
+
+telepathy-python 0.15.3 (2008-10-21)
+====================================
+
+Enhancements:
+
+* Client side objects can now use the D-Bus Properties interface.
+* Add client.conn.call_when_ready() method.
+
+Fixes:
+
+* Fix a race in client/conn.py making the ready handler called twice.
+
+
+telepathy-python 0.15.2 (2008-10-17)
+====================================
+
+Enhancements:
+
+* Specification 0.17.13
+
+Fixes:
+
+* Fix client code bugs when using a bus different of the default one.
+
+
+telepathy-python 0.15.1 (2008-08-26)
+====================================
+
+The "Welcome to the git house" release.
+
+Enhancements:
+
+* Specification 0.17.9
+* Add example for discovering existing connections (examples/connections.py)
+
+API changes:
+
+* Add ConnectionInterfaceSimplePresence and ConnectionInterfaceContacts to
+  telepathy.server.conn
+* Remove ConnectionInterfaceForwarding, ConnectionInterfaceContactInfo,
+  ConnectionInterfacePrivacy from telepathy.server.conn and ChannelTypeContactSearch
+  from telepathy.server.channel. These interfaces have been removed from the
+  specification.
+
+Fixes:
+
+* Fix a crash in the MUC D-Bus tube example
+
+
+telepathy-python 0.15.0 (2008-02-21)
+====================================
+
+Enhancements:
+
+* Specification 0.17.1
+* Some improvements to Tubes examples
+
+Fixes:
+
+* Don't crash on % in .manager files (e.g. in haze.manager's Zephyr entry)
+* Avoid a DeprecationWarning from dbus-python >= 0.82.1

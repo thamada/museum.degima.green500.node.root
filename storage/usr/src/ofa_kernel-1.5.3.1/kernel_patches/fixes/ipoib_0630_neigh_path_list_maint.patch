@@ -1,0 +1,47 @@
+diff --git a/drivers/infiniband/ulp/ipoib/ipoib_main.c b/drivers/infiniband/ulp/ipoib/ipoib_main.c
+index 9ff7bc7..ddd52f6 100644
+--- a/drivers/infiniband/ulp/ipoib/ipoib_main.c
++++ b/drivers/infiniband/ulp/ipoib/ipoib_main.c
+@@ -283,6 +283,7 @@ static void path_free(struct net_device *dev, struct ipoib_path *path)
+ 		if (neigh->ah)
+ 			ipoib_put_ah(neigh->ah);
+ 
++		list_del(&neigh->list);
+ 		ipoib_neigh_free(dev, neigh);
+ 	}
+ 
+@@ -390,6 +391,7 @@ void ipoib_flush_paths(struct net_device *dev)
+ 		spin_unlock_irqrestore(&priv->lock, flags);
+ 		netif_tx_unlock_bh(dev);
+ 		wait_for_completion(&path->done);
++		list_del(&path->list);
+ 		path_free(dev, path);
+ 		netif_tx_lock_bh(dev);
+ 		spin_lock_irqsave(&priv->lock, flags);
+@@ -882,12 +884,14 @@ struct ipoib_neigh *ipoib_neigh_alloc(struct neighbour *neighbour,
+ 	if (!neigh)
+ 		return NULL;
+ 
++	neigh->ah = NULL;
+ 	neigh->neighbour = neighbour;
+ 	neigh->dev = dev;
+ 	memset(&neigh->dgid.raw, 0, sizeof (union ib_gid));
+ 	*to_ipoib_neigh(neighbour) = neigh;
+ 	skb_queue_head_init(&neigh->queue);
+ 	ipoib_cm_set(neigh, NULL);
++	INIT_LIST_HEAD(&neigh->list);
+ 
+ 	return neigh;
+ }
+diff --git a/drivers/infiniband/ulp/ipoib/ipoib_multicast.c b/drivers/infiniband/ulp/ipoib/ipoib_multicast.c
+index 3871ac6..05f4c9a 100644
+--- a/drivers/infiniband/ulp/ipoib/ipoib_multicast.c
++++ b/drivers/infiniband/ulp/ipoib/ipoib_multicast.c
+@@ -86,6 +86,7 @@ static void ipoib_mcast_free(struct ipoib_mcast *mcast)
+ 		 */
+ 		if (neigh->ah)
+ 			ipoib_put_ah(neigh->ah);
++		list_del(&neigh->list);
+ 		ipoib_neigh_free(dev, neigh);
+ 	}
+ 

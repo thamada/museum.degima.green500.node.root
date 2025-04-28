@@ -1,0 +1,318 @@
+            Open Fabrics Enterprise Distribution (OFED)
+      NetEffect Ethernet Cluster Server Adapter Release Notes
+                           February 2011
+
+
+
+The iw_nes module and libnes user library provide RDMA and L2IF
+support for the NetEffect Ethernet Cluster Server Adapters.
+
+==========
+What's New
+==========
+OFED 1.5.3 contains several enhancements and bug fixes to iw_nes driver.
+
+* Correct AEQE operation.
+* Add backports for 2.6.35 and 2.6.36 kernels.
+* Fix for problem of lack of HW limit checking for MG attach for IMA.
+* Fix for a problem with non-aligned buffers crash during post_recv for IMA.
+* Fix for possible crash when RAW QP resources are destroyed.
+* Fix for problem of RAW QP transition state to	ERR.
+* Fix a problem with sending packets with VLAN flag for IMA.
+* Enable bonds on iw_nes.
+* Fix hazard of sending ibevent for unregistered device.
+* Fix for sending IB_EVENT_PORT_ERR/PORT_ACTIVE	event on link state interrupt.
+* Fix SFP link down detection issue with switch port disable.
+* Fix incorrect SFP link status detection on driver init.
+
+============================================
+Required Setting - RDMA Unify TCP port space
+============================================
+RDMA connections use the same TCP port space as the host stack.  To avoid
+conflicts, set rdma_cm module option unify_tcp_port_space to 1 by adding
+the following to /etc/modprobe.conf:
+
+    options rdma_cm unify_tcp_port_space=1
+
+
+========================================
+Required Setting - Power Management Mode
+========================================
+If possible, disable Active State Power Management in the BIOS, e.g.:
+
+  PCIe ASPM L0s - Advanced State Power Management: DISABLED
+
+
+=======================
+Loadable Module Options
+=======================
+The following options can be used when loading the iw_nes module by modifying
+modprobe.conf file.
+
+wide_ppm_offset=0
+    Set to 1 will increase CX4 interface clock ppm offset to 300ppm.
+    Default setting 0 is 100ppm.
+
+mpa_version=1
+    MPA version to be used int MPA Req/Resp (0 or 1).
+
+disable_mpa_crc=0
+    Disable checking of MPA CRC.
+    Set to 1 to enable MPA CRC.
+
+send_first=0
+    Send RDMA Message First on Active Connection.
+
+nes_drv_opt=0x00000100
+    Following options are supported:
+
+    0x00000010 - Enable MSI
+    0x00000080 - No Inline Data
+    0x00000100 - Disable Interrupt Moderation
+    0x00000200 - Disable Virtual Work Queue
+    0x00001000 - Disable extra doorbell read after write
+
+nes_debug_level=0
+    Specify debug output level.
+
+wqm_quanta=65536
+    Set size of data to be transmitted at a time.
+
+limit_maxrdreqsz=0
+    Limit PCI read request size to 256 bytes.
+
+
+===============
+Runtime Options
+===============
+The following options can be used to alter the behavior of the iw_nes module:
+NOTE: Assuming NetEffect Ethernet Cluster Server Adapter is assigned eth2.
+
+    ifconfig eth2 mtu 9000  - largest mtu supported
+
+    ethtool -K eth2 tso on  - enables TSO
+    ethtool -K eth2 tso off - disables TSO
+
+    ethtool -C eth2 rx-usecs-irq 128 - set static interrupt moderation
+
+    ethtool -C eth2 adaptive-rx on  - enable dynamic interrupt moderation
+    ethtool -C eth2 adaptive-rx off - disable dynamic interrupt moderation
+    ethtool -C eth2 rx-frames-low 16 - low watermark of rx queue for dynamic
+                                       interrupt moderation
+    ethtool -C eth2 rx-frames-high 256 - high watermark of rx queue for
+                                         dynamic interrupt moderation
+    ethtool -C eth2 rx-usecs-low 40 - smallest interrupt moderation timer
+                                      for dynamic interrupt moderation
+    ethtool -C eth2 rx-usecs-high 1000 - largest interrupt moderation timer
+                                         for dynamic interrupt moderation
+
+===================
+uDAPL Configuration
+===================
+Rest of the document assumes the following uDAPL settings in dat.conf:
+
+    OpenIB-iwarp u1.2 nonthreadsafe default libdaplcma.so.1 dapl.1.2 "eth2 0" ""
+    ofa-v2-iwarp u2.0 nonthreadsafe default libdaplofa.so.2 dapl.2.0 "eth2 0" ""
+
+
+==============
+mpd.hosts file
+==============
+mpd.hosts is a text file with a list of nodes, one per line, in the MPI ring.  
+Use either fully qualified hostname or IP address.
+
+===========================
+100% CPU Utilization remark
+===========================
+Most of the RDMA applications use CQ Polling mode to decrease latency.
+This operational mode can cause 100% CPU utilization.
+
+To switch to Event Driven mode and lower CPU utilization please refer to README or 
+Release Notes for specific application.
+
+============================================================
+Recommended Settings for Platform MPI 7.1 (formerly HP-MPI)
+============================================================
+Add the following to mpirun command:
+
+    -1sided
+
+Example mpirun command with uDAPL-2.0:
+
+    mpirun -np 2 -hostfile /opt/mpd.hosts 
+           -UDAPL -prot -intra=shm
+           -e MPI_HASIC_UDAPL=ofa-v2-iwarp
+           -1sided
+           /opt/platform_mpi/help/hello_world
+
+Example mpirun command with uDAPL-1.2:
+
+    mpirun -np 2 -hostfile /opt/mpd.hosts 
+           -UDAPL -prot -intra=shm
+           -e MPI_HASIC_UDAPL=OpenIB-iwarp
+           -1sided
+           /opt/platform_mpi/help/hello_world
+           
+
+==============================================
+Recommended Settings for Intel MPI 4.0.x
+==============================================
+Add the following to mpiexec command:
+
+    -genv I_MPI_FALLBACK_DEVICE 0
+    -genv I_MPI_FABRICS shm:dapl 
+    -genv I_MPI_DAPL_PROVIDER ofa-v2-iwarp
+    -genv I_MPI_USE_RENDEZVOUS_RDMA_WRITE 1
+
+Example mpiexec command line for uDAPL-2.0:
+
+    mpiexec -genv I_MPI_FALLBACK_DEVICE 0
+            -genv I_MPI_DEVICE shm:dapl
+            -genv I_MPI_DAPL_PROVIDER OpenIB-iwarp
+            -genv I_MPI_DAPL_PROVIDER ofa-v2-iwarp
+            -genv I_MPI_USE_RENDEZVOUS_RDMA_WRITE 1
+            -ppn 1 -n 2
+            /opt/intel/impi/4.0.0.025/bin64/IMB-MPI1
+
+Intel MPI use CQ Polling mode as a default.
+To switch to wait mode add the following to mpiexec command:
+     -genv I_MPI_WAIT_MODE 1
+
+NOTE: Wait mode supports the sock device only.
+
+Example mpiexec command line for uDAPL-1.2:
+    mpiexec -genv I_MPI_FALLBACK_DEVICE 0
+            -genv I_MPI_DEVICE rdma:OpenIB-iwarp
+            -genv I_MPI_USE_RENDEZVOUS_RDMA_WRITE 1
+            -ppn 1 -n 2
+            /opt/intel/impi/3.2.2/bin64/IMB-MPI1
+
+
+========================================
+Recommended Setting for MVAPICH2 and OFA
+========================================
+Example mpirun_rsh command line:
+
+    mpirun_rsh -ssh -np 2 -hostfile /root/mpd.hosts
+            /usr/mpi/gcc/mvapich2-1.6/tests/osu_benchmarks-3.1.1/osu_latency
+
+MVAPICH2 use CQ Polling mode as a default.
+To switch to Blocking mode add the following to mpirun_rsh command:
+     MV2_USE_BLOCKING=1
+
+==========================================
+Recommended Setting for MVAPICH2 and uDAPL
+==========================================
+Add the following to the mpirun_rsh command for 64 or more processes:
+
+    -env MV2_ON_DEMAND_THRESHOLD <number of processes>
+
+Example mpirun_rsh command with uDAPL-2.0:
+
+    mpirun_rsh -ssh -np 64 -hostfile /root/mpd.hosts
+            MV2_DAPL_PROVIDER=ofa-v2-iwarp
+            MV2_ON_DEMAND_THRESHOLD=64
+            /usr/mpi/gcc/mvapich2-1.6/tests/IMB-3.2/IMB-MPI1
+
+Example mpirun_rsh command with uDAPL-1.2:
+
+    mpirun_rsh -ssh -np 64 -hostfile /root/mpd.hosts
+            MV2_DAPL_PROVIDER=OpenIB-iwarp
+            MV2_ON_DEMAND_THRESHOLD=64
+            /usr/mpi/gcc/mvapich2-1.6/tests/IMB-3.2/IMB-MPI1
+
+MVAPICH2 use CQ Polling mode as a default.
+To switch to Blocking mode add the following to mpirun_rsh command:
+     MV2_USE_BLOCKING=1
+
+
+
+===========================
+Modify Settings in Open MPI
+===========================
+There is more than one way to specify MCA parameters in
+Open MPI.  Please visit this link and use the best method
+for your environment:
+
+http://www.open-mpi.org/faq/?category=tuning#setting-mca-params
+
+
+=======================================
+Recommended Settings for Open MPI 1.4.3
+=======================================
+Allow the sender to use RDMA Writes:
+
+    -mca btl_openib_flags 2
+
+Example mpirun command line:
+
+    mpirun -np 2 -hostfile /opt/mpd.hosts
+           -mca btl openib,self,sm
+           -mca btl_mpi_leave_pinned 0
+           -mca btl_openib_flags 2
+           /usr/mpi/gcc/openmpi-1.4.3/tests/IMB-3.2/IMB-MPI1
+
+OpenMPI use CQ Polling mode as a default.
+No command parameter available to swith to Event Driven mode.
+
+
+===================================
+iWARP Multicast Acceleration (IMA)
+===================================
+
+iWARP multicast acceleration enables raw L2 multicast traffic kernel
+bypass using user-space verbs API using the new defined QP type
+IBV_QPT_RAW_ETH.
+
+The L2 RAW_ETH acceleration assumes that user application transmits and
+receives a whole L2 frame including MAC/IP/UDP/TCP headers.
+
+ETH RAW QP usage:
+First the application creates IBV_QPT_RAW_ETH QP with associated CQ, PD,
+completion channels as it is performed for RDMA connection.
+
+Next step is enabling L2 MAC address RX filters for directing received
+multicasts to the RAW_ETH QPs using ibv_attach_multicast() verb.
+
+From this point the application is ready to receive and transmit multicast
+traffic.
+
+In multicast acceleration the user application passes to ibv_post_send()
+whole IGMP frame including MAC header, IP header, UDP header and UDP payload.
+It is a user responsibility to make IP fragmentation when required payload
+is larger than MTU. Every fragment is a separate L2 frame to transmit.
+The ibv_poll_cq() provides an information about the status of transmit buffer.
+
+On receive path, ibv_poll_cq() returns information about received L2
+packet, the Rx buffer (previously posted by ibv_post_recv() ) contains
+whole L2 frame including MAC header, IP header and UDP header.
+It is a user application responsibility to check if received packet is
+a valid UDP frame so the fragments must be checked and checksums must be
+computed.
+
+IMA API description (NE020 specific):
+User application must create separate CQs for RX and TX path.
+Only single SGE on tranmit is supported.
+User application must post at least 65 rx buffers to keep RX path working.
+
+IMA device:
+IMA requires creation of the /dev/infiniband/nes_ud_sksq device to get
+access to optimized IMA transmit path. The best method for creation of this
+device is manual addition following line to /etc/udev/rules.d/90-ib.rules
+file after OFED distribution installation and rebooting machine.
+
+KERNEL=="nes_ud_sksq", NAME="infiniband/%k", MODE="0644"
+
+As a result the 90-ib.rules should look like:
+
+KERNEL=="umad*", NAME="infiniband/%k"
+KERNEL=="issm*", NAME="infiniband/%k"
+KERNEL=="ucm*", NAME="infiniband/%k", MODE="0666"
+KERNEL=="uverbs*", NAME="infiniband/%k", MODE="0666"
+KERNEL=="ucma", NAME="infiniband/%k", MODE="0666"
+KERNEL=="rdma_cm", NAME="infiniband/%k", MODE="0666"
+KERNEL=="nes_ud_sksq", NAME="infiniband/%k", MODE="0644"
+
+
+
+NetEffect is a trademark of Intel Corporation in the U.S. and other countries.

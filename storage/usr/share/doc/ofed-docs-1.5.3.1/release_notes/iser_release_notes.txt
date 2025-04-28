@@ -1,0 +1,90 @@
+
+	     Open Fabrics Enterprise Distribution (OFED)
+              iSER initiator in OFED 1.5.x Release Notes
+
+			   March 2010
+
+
+* Background
+
+	iSER allows iSCSI to be layered over RDMA transports (including
+	InfiniBand and iWARP (RNIC)).
+
+	The OpenFabrics iSER initiator implementation is inter-operable with
+	open-iscsi (http://www.open-iscsi.org/). It provides an alternative
+	transport to iscsi_tcp in the open-iscsi framework. The iSER transport
+	exposes a transport API to scsi_transport_iscsi, and a SCSI LLD API to
+	the Linux SCSI mid-layer (scsi_mod). Currently, the OpenFabrics iSER
+	initiator can be layered over InfiniBand (no iWARP support yet).
+
+* Supported platforms
+
+	- kernel.org: 2.6.30 and higher
+	- RHEL 5.4
+
+	Except for these platforms, OFED-1.5.x will not install iSER on top of
+	the kernel and the original iSER module coming with Linux Distribution
+	will stop working because of mismatch in symbols version.
+
+* Fixed Bugs and Enhancements since OFED 1.3
+	iSER:
+	- Add logical unit reset support
+	- Update URLs of iSER docs
+	- Add change_queue_depth method
+	- Fix list iteration bug
+	- Handle iser_device allocation error gracefully
+	- Don't change ITT endianess
+	- Move high-volume debug output to higher debug level
+	- Count FMR alignment violations per session
+	Open-iSCSI:
+	- Update open-iscsi rpm versions from
+	  2.0-754 to 2.0-754.1 and from 2.0-865.15 to 2.0-869.2
+	- Change open-iscsi defaults
+	- iscsi_discovery: fixed printing debug information
+	- iscsi_discovery: check if iscsid is running
+	- Set open-iscsi for auto-startup when installing OFED
+	- iscsiadm: bail out if daemon isn't running
+
+* Known Issues
+	Open-iSCSI:
+	- modifying node transport_name while session is active
+	  will create stale session. It will be deleted only after reboot.
+
+* Installation/upgrade of open-iscsi
+	If iSER is selected to be installed with OFED, open-iscsi will be also
+	installed (or upgraded if another version of open-iscsi is already
+	installed).  Installing/upgrading open-iscsi is required for iSER to
+	work properly. Before installing OFED, please make sure that no version
+	of open-iscsi is installed or add the following key to your ofed.conf
+	file: upgrade_open_iscsi=yes. Using this key will remove any old version
+	of open-iscsi.
+
+	If an older version of open-iscsi was installed, it is recommended to
+	delete its records before running open-iscsi. This can easily be done by
+	running the following command (while open-iscsi is stopped):
+
+	rm -rf /etc/iscsi/nodes/* /etc/iscsi/send_targets/*
+
+	Then, open-iscsi may be started, and targets may be discovered by running
+	'iscsi_discovery <target_ip>'.
+
+* iSER links
+
+	Wiki pages
+
+	Information on building/configuring/running the open iscsi initiator over
+	iSER: https://wiki.openfabrics.org/tiki-index.php?page=iSER
+
+	IETF pages
+
+	iSCSI and iSER specifications come out of the IETF IP storage (IPS) work
+	group.
+
+	iSCSI specification:    http://www.ietf.org/rfc/rfc3720.txt
+	iSER specification:     http://www.ietf.org/rfc/rfc5046.txt
+
+	"About" page
+
+	general and detailed information on iSCSI and iSER
+	http://www.voltaire.com/Products/Server_Products/iSER_iSCSI_RDMA
+

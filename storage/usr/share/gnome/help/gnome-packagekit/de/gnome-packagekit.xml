@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY GFDL SYSTEM "fdl-appendix.xml">
+<!ENTITY app "gnome-packagekit">
+<!ENTITY application "<application>&app;</application>">
+<!ENTITY appversion "2.17.1">
+<!ENTITY manrevision "2.17.1">
+]>
+<!--
+      (Do not remove this comment block.)
+  Template Maintained by the GNOME Documentation Project:
+          http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 12, 2002
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="de">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+
+  <articleinfo>
+    <title><application>gnome-packagekit</application>-Handbuch</title>
+    <abstract role="description">
+      <para><application>gnome-packagekit</application> ist eine Sammlung von Werkzeugen zur Integration in den GNOME-Desktop.</para>
+    </abstract>
+    <copyright>
+      <year>2008</year>
+      <holder>Richard Hughes (richard@hughsie.com)</holder>
+    </copyright><copyright><year>2009</year><holder>Mario Blättermann (mariobl@gnome.org)</holder></copyright>
+
+  <!-- translators: uncomment this:
+
+  <copyright>
+   <year>2007</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+  -->
+
+<!-- An address can be added to the publisher information.  If a role is
+     not specified, the publisher/author is the same for all versions of the
+     document.  -->
+    <publisher role="maintainer">
+      <publishername>Richard Hughes</publishername>
+    </publisher>
+
+     <legalnotice id="legalnotice">
+	<para>Das vorliegende Dokument kann gemäß den Bedingungen der GNU Free Documentation License (GFDL), Version 1.1 oder jeder späteren, von der Free Software Foundation veröffentlichten Version ohne unveränderbare Abschnitte sowie ohne Texte auf dem vorderen und hinteren Buchdeckel kopiert, verteilt und/oder modifiziert werden. Eine Kopie der GFDL finden Sie unter diesem <ulink type="help" url="ghelp:fdl">Link</ulink> oder in der mit diesem Handbuch gelieferten Datei COPYING-DOCS.</para>
+         <para>Dieses Handbuch ist Teil einer Sammlung von GNOME-Handbüchern, die unter der GFDL veröffentlicht werden. Wenn Sie dieses Handbuch getrennt von der Sammlung weiterverbreiten möchten, können Sie das tun, indem Sie eine Kopie der Lizenz zum Handbuch hinzufügen, wie es in Abschnitt 6 der Lizenz beschrieben ist.</para>
+
+	<para>Viele der Namen, die von Unternehmen verwendet werden, um ihre Produkte und Dienstleistungen von anderen zu unterscheiden, sind eingetragene Warenzeichen. An den Stellen, an denen diese Namen in einer GNOME-Dokumentation erscheinen, werden die Namen in Großbuchstaben oder mit einem großen Anfangsbuchstaben geschrieben, wenn das GNOME-Dokumentationsprojekt auf diese Warenzeichen hingewiesen wird.</para>
+
+	<para>DAS DOKUMENT UND VERÄNDERTE FASSUNGEN DES DOKUMENTS WERDEN UNTER DEN BEDINGUNGEN DER GNU FREE DOCUMENTATION LICENSE ZUR VERFÜGUNG GESTELLT MIT DEM WEITERGEHENDEN VERSTÄNDNIS, DASS: <orderedlist>
+		<listitem>
+		  <para>DIESES DOKUMENT WIRD »WIE VORLIEGEND« GELIEFERT, OHNE GARANTIEN IRGENDEINER ART, SOWOHL AUSDRÜCKLICH GENANNTE ALS AUCH ANGEDEUTETE. DIES BEZIEHT SICH AUCH OHNE EINSCHRÄNKUNG AUF GARANTIEN, DASS DIESES DOKUMENT ODER VERÄNDERTE FASSUNGEN DIESES DOKUMENTS FREI VON HANDELSDEFEKTEN, FÜR EINEN BESTIMMTEN ZWECK GEEIGNET IST ODER DASS ES KEINE RECHTE DRITTER VERLETZT. DAS VOLLE RISIKO WAS QUALITÄT, GENAUIGKEIT UND LEISTUNG DES DOKUMENTS ODER VERÄNDERTE FASSUNGEN DES DOKUMENTS LIEGT BEI IHNEN. SOLLTE EIN DOKUMENT ODER EINE VERÄNDERTE FASSUNG DAVON FEHLER IRGENDEINER ART BEINHALTEN, TRAGEN SIE (NICHT DER URSPRUNGSAUTOR, DER AUTOR ODER EIN MITWIRKENDER) DIE KOSTEN FÜR NOTWENDIGE DIENSTLEISTUNGEN, REPARATUREN ODER FEHLERKORREKTUREN. DIESER HAFTUNGSAUSSCHLUSS IST EIN ESSENZIELLER TEIL DIESER LIZENZ. DIE VERWENDUNG EINES DOKUMENTS ODER EINER VERÄNDERTEN VERSION DES DOKUMENTS IST NICHT GESTATTET AUßER UNTER BEACHTUNG DIESES HAFTUNGSAUSSCHLUSSES UND</para>
+		</listitem>
+		<listitem>
+		  <para>UNTER KEINEN UMSTÄNDEN UND AUF BASIS KEINER RECHTSGRUNDLAGE, EGAL OB DURCH UNERLAUBTEN HANDLUNGEN (EINSCHLIEßLICH FAHRLÄSSIGKEIT), VERTRAG ODER ANDERWEITIG KANN DER AUTOR, URSPRUNGSAUTOR, EIN MITWIRKENDER ODER EIN VERTRIEBSPARTNER DIESES DOKUMENTS ODER EINER VERÄNDERTEN FASSUNG DES DOKUMENTS ODER EIN ZULIEFERER EINER DIESER PARTEIEN, HAFTBAR GEMACHT WERDEN FÜR DIREKTE, INDIREKTE, SPEZIELLE, VERSEHENTLICHE ODER FOLGESCHÄDEN JEGLICHER ART, EINSCHLIEßLICH UND OHNE EINSCHRÄNKUNGEN SCHÄDEN DURCH VERLUST VON KULANZ, ARBEITSAUSFALL, COMPUTERVERSAGEN ODER COMPUTERFEHLFUNKTIONEN ODER ALLE ANDEREN SCHÄDEN ODER VERLUSTE, DIE SICH AUS ODER IN VERBINDUNG MIT DER VERWENDUNG DES DOKUMENTS UND VERÄNDERTER FASSUNGEN DES DOKUMENTS ERGEBEN, AUCH WENN DIE OBEN GENANNTEN PARTEIEN ÜBER DIE MÖGLICHKEIT SOLCHER SCHÄDEN INFORMIERT WAREN.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+   <!-- This file  contains link to license for the documentation (GNU FDL), and
+        other legal stuff such as "NO WARRANTY" statement. Please do not change
+        any of this. -->
+
+    <authorgroup>
+      <author role="maintainer">
+        <firstname>Richard</firstname>
+        <surname>Hughes</surname>
+        <email>richard@hughsie.com</email>
+      </author>
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+        <firstname>Latin</firstname>
+        <surname>Translator 1</surname>
+        <affiliation>
+          <orgname>Latin Translation Team</orgname>
+          <address> <email>translator@gnome.org</email> </address>
+        </affiliation>
+        <contrib>Latin translation</contrib>
+      </othercredit>
+-->
+    </authorgroup>
+
+    <revhistory>
+      <revision>
+       <revnumber>3.0</revnumber>
+        <date>31. März 2008</date>
+        <revdescription>
+          <para role="author">Rahul Sundaram <email>sundaram@fedoraproject.org</email></para>
+          <para role="publisher">Rahul Sundaram</para>
+        </revdescription>
+      </revision>
+      <revision>
+        <revnumber>2.0</revnumber>
+        <date>30. August 2007</date>
+        <revdescription>
+          <para role="author">Richard Hughes <email>richard@hughsie.com</email></para>
+          <para role="publisher">Richard Hughes</para>
+        </revdescription>
+      </revision>
+    </revhistory>
+
+    <legalnotice>
+      <title>Rückmeldungen</title>
+      <para>Um einen Fehler zu melden oder einen Vorschalg zu gnome-packagekit oder zu diesem Handbuch zu machen, folgen Sie bitte den Anweisungen auf der <ulink url="http://www.packagekit.org/" type="http">Kontakt-Webseite von <application>gnome-packagekit</application> </ulink>.</para>
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice>
+  </articleinfo>
+
+  <indexterm zone="index">
+    <primary><application>gnome-packagekit</application></primary>
+  </indexterm>
+  <indexterm zone="index">
+    <primary>gpk-application</primary>
+  </indexterm>
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+<section id="intro">
+  <title>Einführung</title>
+  <!-- manrevision 2.0 compatibility -->
+  <anchor id="aboutex"/>
+  <anchor id="notice"/>
+  <indexterm>
+    <primary><application>gnome-packagekit</application></primary>
+    <secondary>Handbuch</secondary>
+    <tertiary>gpk-application</tertiary>
+  </indexterm>
+
+  <para>gnome-packagekit ist eine Sammlung von Werkzeugen für den <systemitem>GNOME desktop</systemitem></para>
+  <para>PackageKit wurde daraufhin entworfen, alle Software-Werkzeuge der verschiedenen Distributionen zu vereinheitlichen. Es bedient sich diverser Paketverwaltungstechnologien wie yum, apt, smart usw. und stellt eine einheitliche grafische Schnittstelle sowie Befehlszeilenwerkzeuge bereit. Außerdem ist ein Framework enthalten, das durch andere Software nutzbare Programmierschnittstellen bereitstellt. Es ist jedoch kein Ersatz für existierende Paketverwaltungen wie yum.</para>
+  <para>Eine der grundlegenden Verbesserungen von PackageKit gegenüber anderen Paketverwaltungen ist, dass der PackageKit-Dienst als Systemprozess läuft und nicht einer bestimmten Benutzersitzung zugeordnet ist. Eine langwierige Aktualisierung oder Installation kann auf diese Weise nicht durch einen sich abmeldenden Benutzer abgebrochen werden. Aufgaben werden in einer Warteschlange vorgehalten. Das bedeutet, dass ein Benutzer mehrere Aufgaben anstoßen kann, die nacheinander abgearbeitet werden. Außerdem können mehrere Benutzer gleichzeitig PackageKit parallel nutzen, ohne jeweils voneinander zu wissen, wer welche Aufgaben startet. Der Zugriff auf alle privilegierten Vorgänge wird über  <ulink url="http://en.wikipedia.org/wiki/PolicyKit">PolicyKit</ulink> gesteuert.</para>
+  <figure>
+    <title>Grafische Oberfläche der PolicyKit-Zugriffsrechte</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-repo-auth.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+</section>
+
+<section id="application">
+  <title>Anwendungen</title>
+  <para><application>packagekitd</application> wird automatisch gestartet, wenn nötig. <command>pkcon</command> bietet eine vielseitige Befehlszeilenschnittstelle zu PackageKit.</para>
+  <para>Nachfolgend finden Sie eine Liste der Werkzeuge in gnome-packagekit, einschließlich der Namen und einer kurzen Beschreibung:</para>
+  <variablelist>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-application</command>: Hinzufügen/Entfernen von Software</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-update-viewer</command>: Aktualisierung ihres Systems, Anzeige einer Chronik früherer Aktualisierungen.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-prefs</command>: Einstellungen zur Softwareaktualisierung</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-repo</command>: Aktivieren oder Deaktivieren von Softwarebeständen</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-log</command>: Chronik der Aktualisierungen, beinhaltet Installieren, Entfernen oder Aktualisieren jeglicher Software</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-install-file</command>: Installiert lokal verfügbare Softwarepakete. Dies wird auch dann ausgeführt, wenn Sie auf ein Paket auf Ihrem Desktop oder in Ihrem Dateimanager doppelklicken.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-update-icon</command>: Wenn PackageKit installiert ist, startet es das Sitzungssymbol beim Anmelden automatisch. Diese Anwendung zeigt ein Symbol im Benachrichtigungsfeld Ihres Panels an, wenn Softwareaktualisierungen zur Verfügung stehen. Außerdem ist es für Benachrichtigungen über Operationen und Ereignisse in PackageKit zuständig.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>Befehlszeile</term>
+      <listitem>
+        <para><command>gpk-backend-status</command>: Zeigt den technischen Status der Unterstützung des zugrundeliegenden Paketverwaltungs-Backends. Dies dürfte nur für Entwickler von Bedeutung sein.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>
+
+<section id="add-remove">
+  <title>Hinzufügen oder Entfernen von Software</title>
+  <para>Die über das Menü <menuchoice><guimenu>System</guimenu><guisubmenu>Systemverwaltung</guisubmenu><guimenuitem>Software hinzufügen/entfernen</guimenuitem></menuchoice> erreichbare Anwendung zum Hinzufügen oder Entfernen von Software ermöglicht Ihnen das leichte Durchsuchen der Softwarebestände oder das Durchsuchen der verschiedenen Paketgruppen wie Unterhaltungsmedien oder Büroanwendungen sowie das Auswählen von Paketen zum Hinzufügen zum oder Entfernen vom System. Weitere Informationen über ein Paket, wie die Paketbeschreibung oder die Abhängigkeiten erhalten Sie, indem Sie darauf klicken. Vor dem Installieren eines Pakets können sie auch die Webseite des Softwareprojekts besuchen, um eventuell zusätzliche Details zu erhalten.</para>
+  <figure>
+    <title>Suchen nach einer Gruppe mit Filtern</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-application-groups.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Typischerweise finden Sie einige Tausend Softwarepakete, die in verschiedenen Gruppen verfügbar gemacht werden. Die Anzahl ist wohl beeindruckend, aber unübersichtlich. Daher können Sie Filter für verschiedene Kriterien auswählen: Ist das Paket bereits installiert? Handelt es sich um eine grafische Anwendung oder eine Entwicklungssoftware? Unter welcher Lizenz wird es veröffentlicht? Weitere Informationen über Filter finden Sie in <xref linkend="filters"/>.</para>
+  <para>Eine Konfigurationsmöglichkeit für die Softwarequellen ist im Systemmenü verfügbar. Diese ermöglicht Ihnen die Aktivierung oder Deaktivierung vorhandener Softwarebestände. Sie können hier auch die Liste der Anwendungen auffrischen, um die neuesten Informationen über die in einem Softwarebestand vorhandenen Pakete anzuzeigen.</para>
+
+  <section id="filters">
+    <title>Filter</title>
+    <para>Sie können die Anzahl der in jedem Softwarekriterium angezeigten Pakete begrenzen.</para>
+    <para>Um nur installierte oder nicht installierte Pakete anzuzeigen, wählen Sie den entsprechenden Eintrag im Menü <menuchoice><guimenu>Filter</guimenu><guisubmenu>Installed</guisubmenu></menuchoice>.</para>
+    <para>Um nur Pakete anzuzeigen, die entweder über eine grafische Oberfläche oder eine Befehlszeilen-Schnittstelle verfügen, wählen Sie einen Filter im Menü <menuchoice><guimenu>Filter</guimenu><guisubmenu>Grafisch</guisubmenu></menuchoice>.</para>
+    <note><para>Beachten Sie, dass PackageKit eine heuristische Analyse benutzt, um zu bestimmen, ob es sich bei einem Paket um eine grafische Anwendung handelt. Dies kann falsch sein, wenn ein Paket beispielsweise von gtk2+ abhängig ist.</para></note>
+    <para>Um nur Pakete anzuzeigen, die als freie Software gekennzeichnet sind, wählen Sie den entsprechenden Eintrag im Menü <menuchoice><guimenu>Filter</guimenu><guisubmenu>Frei</guisubmenu></menuchoice>. Gegenwärtig berücksichtigt PackageKit dabei Pakete, dessen Lizenz in der <ulink url="http://fedoraproject.org/wiki/Licensing">Licensing-Webseite von Fedora</ulink> aufgelistet sind.</para>
+  </section>
+
+  <section id="searching">
+    <title>Suchen nach Software</title>
+    <para>Mit dem Suchfeld und dem <guibutton>Find</guibutton>-Knopf können Sie nach Softwarepaketen suchen. Das Symbol innerhalb des Suchfeldes gibt an, welche Art einer Suche ausgeführt wird. Wenn Sie darauf klicken, können Sie wählen, ob nach einer im Paketnamen, der Paketbeschreibung oder im Namen einer in einem Paket enthaltenen Datei nach einer Zeichenkette gesucht werden soll.</para>
+  </section>
+
+</section>
+
+<section id="software-sources">
+  <title>Softwarequellen</title>
+  <para>Der Betrachter für Softwarequellen ermöglicht Ihnen die Aktivierung oder Deaktivierung von Softwarequellen. Diese Softwarequellen sind Sammlungen von Softwarepaketen, die bekanntermaẞen mit Ihrem System zusammenarbeiten und zu diesem kompatibel sind. Auẞerhalb der Softwarequellen selbst gibt es Quellen von Drittanbietern, die zusätzliche Software für zahlreiche Linux-Distributionen anbieten. Weitere Informationen hierzu finden Sie in der Dokumentation Ihrer Distribution.</para>
+  <figure>
+    <title>Grafische Oberfläche der Software-Quellen</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-repo.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Derzeit bietet PackageKit keine Möglichkeit, neue Softwarebestände zu ihrem System hinzuzufügen. Es erlaubt lediglich die Aktivierung oder Deaktivierung vorhandener Bestände. Allerdings ist es oft möglich, PackageKit mit einer neuen Quelle bekannt zu machen, indem Sie ein Paket mit den benötigten Informationen installieren. Diese Pakete heißen üblicherweise »(foo)-release«, wobei »foo« für den Namen des Softwarebestandes steht.</para>
+</section>
+
+<section id="mime-types">
+  <title>Hilfswerkzeug für Dateien</title>
+  <para>Manchmal möchten Sie vielleicht verhindern, dass eine Software auf Ihrem System eine bestimmte Datei öffnet. Falls der Dateityp nicht erkannt wurde, werden Anwendungen angezeigt, die mit diesem Dateityp umgehen können.</para>
+  <para>Derzeit wird nur eine begrenzte Anzahl von Paketen angezeigt, da für die Anzeige der für PackageKit benötigten zusätzlichen Informationen ein erneutes Bauen des Pakets seitens des Distributors notwendig ist. Das wird automatisch geschehen, und bald werden alle entsprechenden Anwendungen angezeigt werden.</para>
+</section>
+
+<section id="update-viewer">
+  <title>Aktualisierungsbetrachter</title>
+  <para>Sie können Ihr System über <menuchoice><guimenu>System</guimenu><guisubmenu>Systemverwaltung</guisubmenu><guimenuitem>System aktualisieren</guimenuitem></menuchoice> oder durch Wählen von <menuchoice><guimenuitem>Aktualisierungen anzeigen</guimenuitem></menuchoice> im Kontextmenü des Aktualisierungssymbols im Benachrichtigungsfeld aktualisieren. Wenn Sie dies tun, wird der Aktualisierungsbetrachter gestartet und unmittelbar mit der Überprüfung auf verfügbare Aktualisierungen begonnen. Sobald diese Überprüfung abgeschlossen ist, wird ein Überblick über die verfügbaren Aktualisierungen angezeigt, gruppiert nach Bedeutsamkeit. Die Bedeutung reicht von Sicherheitsaktualisierungen über wichtige Aktualisierungen bis hin zu Fehlerkorrekturen und kleinen Verbesserungen.</para>
+  <note><para>Beachten Sie, dass die Informationen zur Bedeutsamkeit von den Softwarebeständen bereitgestellt werden müssen, in denen sich das Paket befindet. Diese Information könnte für die Entwicklungszweige von Distributionen eventuell nicht verfügbar sein.</para></note>
+  <figure>
+    <title>Aktualisierungs-Überblick</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-updates-overview.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Unterhalb der Zusammenfassung der verfügbaren Aktualisierungen informiert Sie der Aktualisierungsbetrachter darüber, wann die vorhandenen Aktualisierungen zuletzt überprüft (oder »aufgefrischt«) und wann zuletzt Aktualisierungen installiert wurden.</para>
+  <para>Sie können vorhandene Aktualisierungen manuell auffrischen und überprüfen, indem Sie auf den <guibutton>Auffrischen</guibutton>-Knopf klicken.</para>
+  <tip><para>In den <link linkend="prefs">Softwareaktualisierungs-Einstellungen</link> können Sie bestimmen, wie oft PackageKit selbst aktualisiert.</para></tip>
+  <para>Es gibt eine Chronik der Aktualisierungen, die frühere Installationen, Löschungen oder Aktualisierungen von Software enthält.</para>
+  <para>Mit dem Knopf <guibutton>System aktualisieren</guibutton> installieren Sie alle verfügbaren Aktualisierungen, mit dem Knopf <guibutton>Überprüfen</guibutton> können Sie die verfügbaren Aktualisierungen betrachten und auswählen. Falls Sie die Aktualisierungen zu einem späteren Zeitpunkt installieren wollen, schlieẞen Sie einfach das Fenster.</para>
+
+  <section id="update-viewer-details">
+    <title>Detaillierte Informationen über Aktualisierungen</title>
+    <para>Mit dem Knopf <guibutton>Überprüfen</guibutton> öffnen Sie eine ausführliche Auflistung aller verfügbaren Aktualisierungen. Im Bereich unterhalb der Liste finden Sie detaillierte Informationen über die ausgewählte Aktualisierung. In diesen Informationen sind eventuell Informationen zu diesbezüglichen Fehlerberichten oder Sicherheitsproblemen enthalten, sofern diese Aktualisierung diese Fehler beseitigt.</para>
+    <note><para>Beachten Sie, dass ausführliche Aktualisierungsinformationen durch die Softwarebestände bereitgestellt werden müssen, in denen sich das Paket befindet. Diese Information könnte für die Entwicklungszweige von Distributionen eventuell nicht verfügbar sein.</para></note>
+    <para>Die Ankreuzfelder neben jedem Paket in der Liste ermöglichen Ihnen, einzelne Pakete für die Installation auszuwählen. Verwenden Sie den Knopf <guibutton>Aktualisierungen installieren</guibutton>, um nur die ausgewählten Aktualisierungen zu installieren.</para>
+    <figure>
+      <title>Werkzeug zum Betrachten von Aktualisierungen</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gpk-updates.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <note><para>Sie können auf einfache Art und Weise alle Aktualisierungen abwählen, indem Sie mit der rechten Maustaste in die Liste klicken und anschließend <guibutton>Alle abwählen</guibutton> anklicken.</para></note>
+  </section>
+</section>
+
+<section id="prefs">
+  <title>Einstellungen für Softwareaktualiserungen</title>
+  <figure>
+    <title>Einstellungswerkzeug</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-prefs.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Die Einstellungen können in <menuchoice><guimenu>System</guimenu><guisubmenu>Einstellungen</guisubmenu><guisubmenu>System</guisubmenu><guimenuitem>Software-Aktualiserungen</guimenuitem></menuchoice> geändert werden. Sie können festlegen, ob täglich, stündlich, wöchentlich oder niemals nach Aktualiserungen gesucht werden soll. Beachten Sie, dass diese Zeitabstände lediglich ungefähre Werte sind, denn die Suche nach Aktualisierungen kann durch andere Ereignisse überlagert werden, wie das Entsperren des Bildschirms, das Zustandekommen einer Netzwerkverbindung oder die Suche eines anderen Benutzers nach Aktualisierungen. Die Vorgabe hierbei sit die tägliche Überprüfung. Sie können auch bestimmen, dass alle Aktualisierungen automatisch installiert werden oder nur jene, die Sicherheitslücken schließen. Diese Einstellungen sind für den jeweiligen Benutzer gültig und wirken sich nur auf den am System angemeldeten Benutzer aus.</para>
+</section>
+
+<section id="software-log">
+  <title>Software-Protokollbtrachter</title>
+  <figure>
+    <title>Protokollbetrachter</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-log.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Um dieses Werkzeug zu öffnen, wählen Sie <menuchoice><guimenu>Anwendungen</guimenu><guisubmenu>Systemwerkzeuge</guisubmenu><guimenuitem>Software-Protokollbetrachter</guimenuitem></menuchoice>.</para>
+  <para>Der Protokollbetrachter dient dazu, die heruntergeladenen und installierten Aktualisierungen zu betrachten. Eine Filterung nach Paketnamen, Versionen oder Architektur ist möglich.</para>
+  <para>Sie können auch zu einer bestimmten Stelle der Paketinstallation zurückrollen, sofern das Paketverwaltungs-Backend <literal>RollBack</literal> unterstützt.</para>
+</section>
+
+<section id="service-pack">
+  <title>Servicepaket-Erstellung</title>
+  <figure>
+    <title>Servicepaket-Erstellung</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-service-pack.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Um dieses Werkzeug zu öffnen, wählen Sie <menuchoice><guimenu>Anwendungen</guimenu><guisubmenu>Systemwerkzeuge</guisubmenu><guimenuitem>Servicepaket-Erstellung</guimenuitem></menuchoice>.</para>
+  <para>Ein Servicepaket ist ein tar-Archiv, welches eine Reihe von Paketen und deren Abhängigkeiten enthält. Um zu verdeutlichen, was ein Servicepaket ist, zeigen wir hier einige Anwendungsfälle.</para>
+  <note><para>Sie können mehrere Pakete zu einem Servicepaket hinzufügen, indem Sie die Paketnamen mit Kommata trennen, beispielsweise <literal>hal,gnome-power-manager</literal>.</para></note>
+  <orderedlist numeration="arabic">
+    <listitem>
+      <para>Sie haben sieben Desktop-Rechner, auf denen Sie Fedora 9 installiert haben. Jeder dieser Rechner benötigt die Installation von 204 MB an Aktualisierungen.</para>
+    </listitem>
+    <listitem>
+      <para>Sie haben einen Laptop, der Netzwerktreiber benötigt, bevor überhaupt Aktualisierungen heruntergeladen werden können. Weiterhin haben Sie einen ähnlichen, mit den neuesten Aktualisierungen ausgestatteten Laptop in der Nähe. Die Netzwerktreiber erfordern einige Abhängigkeiten, und weitere Pakete müssen aktualisiert werden, bevor diese installiert werden können.</para>
+    </listitem>
+    <listitem>
+      <para>Sie installieren häufig Linux auf den Rechnern anderer Leute. Sie haben eine Live-CD und einen USB-Speicherstick dabei, der eine 204 MB große Datei namens <filename>Fedora-updates-SP1.servicepack</filename> mit sämtlichen Aktualisierungen seit letzter Woche enthält.</para>
+    </listitem>
+    <listitem>
+      <para>Eine Zeitschrift aus der Branche der freien Software möchte patentgeschützte Multimedia-Plugins und Programme zusammen mit der DVD der letzten Fedora-Veröffentlichung vertreiben. Es wird ein Weg benötigt, auf welchem auch der faulste Benutzer diese Dinge ohne viel Aufhebens installieren kann.</para>
+    </listitem>
+  </orderedlist>
+  <para>Intern betrachtet ist die Paketdatei ein nicht gepacktes Tar-Archiv mit den Paketen und einer Datei namens metadata.conf. Die Metadaten-Datei enthält die Bezeichnung der Distribution und den Zeitpunkt der Erstellung. Dies stellt sicher, dass Sie nicht versehentlich ein <filename>fedora-9-i386</filename>-Servicepaket auf einem <filename>ubuntu-intrepid-ppc</filename>-Rechner installieren.</para>
+  <para>Wir benötigen eine Ziel-Dateiliste, da wir nicht wissen, welche Pakete auf dem Zielrechner installiert sind. Beispiel:</para>
+  <figure>
+    <title>Zwei Beispielrechner</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-service-pack-example.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Auf Rechner A sind die folgenden Pakete installiert, und es ist ein Internetanschluss verfügbar.</para>
+  <itemizedlist>
+    <listitem><para><literal>glib</literal></para></listitem>
+    <listitem><para><literal>dbus</literal></para></listitem>
+    <listitem><para><literal>dbus-glib</literal></para></listitem>
+    <listitem><para><literal>libgnome</literal></para></listitem>
+  </itemizedlist>
+  <para>Auf Rechner B sind die folgenden Pakete installiert, aber es ist kein Internetanschluss verfügbar.</para>
+  <itemizedlist>
+    <listitem><para><literal>glib</literal></para></listitem>
+    <listitem><para><literal>dbus</literal></para></listitem>
+    <listitem><para><literal>kdebase</literal></para></listitem>
+    <listitem><para><literal>kdeapps</literal></para></listitem>
+  </itemizedlist>
+  <para>Rechner B benötigt ein Servicepaket, das eine neue Version von <literal>k3b</literal> enthält, mit deren Hilfe DVD-RWs gebrannt werden können.</para>
+  <para>Das Programm <literal>k3b</literal> hängt von <literal>dbus</literal>, <literal>dbus-glib</literal> und <literal>kdebase</literal> ab. Wenn wir nun Rechner A <literal>k3b</literal> herunterladen lassen, werden <literal>k3b</literal><emphasis>und</emphasis><literal>kdebase</literal> heruntergeladen, aber <emphasis>nicht</emphasis><literal>dbus-glib</literal>. Wir müssen für Rechner A Informationen bereitstellen, welche Pakete Rechner B enthält, bevor ein Servicepaket erstellt werden kann.</para>
+  <para>Durch Erstellung einer Paketliste auf Rechner B und die Übertragung mittels USB-Speicherstick oder CDRW können die korrekten Pakete heruntergeladen werden. In diesem Fall werden <literal>k3b</literal> und <literal>dbus-glib</literal> heruntergeladen und im neuen Servicepaket abgelegt.</para>
+  <para>Das Servicepaket kann nun vom Rechner A zum Rechner B mit Hilfe des USB-Speichersticks übertragen werden.</para>
+  <para>Das Befehlszeilenwerkzeug <command>pkgenpack</command> kann auch dazu benutzt werden, um Servicepaket-Dateien zu erstellen.</para>
+</section>
+
+<section id="auto-updates">
+  <title>Automatische Aktualisierungen</title>
+  <para>Automatische Aktualisierungen können im Hintergrund systemweit ablaufen, wobei das Paket PackageKit-cron zum Einsatz kommt. Dieses Paket enthält einen Cronjob und eine Konfigurationsdatei. Die Einstellungen werden über die Konfigurationsdatei <filename>/etc/sysconfig/packagekit-background</filename> gesteuert. Sie können so nach Aktualisierungen suchen lassen oder die Aktualisierungen installieren und eine Nachricht an eine beliebige E-Mail-Adresse senden lassen.</para>
+</section>
+
+<section id="update-icon">
+  <title>Aktualisierungssymbol</title>
+  <para>Das Symbol stellt Menüeinträge für die Installation der verfügbaren Aktualisierungen oder für das Starten des Aktualisierungsbetrachters bereit. Dieser erlaubt Ihnen das Abrufen ausführlicher Informationen über die verfügbaren Aktualisierungen, bevor Sie diese installieren. Weitere Informationen finden Sie in <xref linkend="update-viewer"/>.</para>
+  <figure>
+    <title>Einstellungswerkzeug</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-updates-warning.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+</section>
+
+<section id="eula">
+  <title>Akzeptieren von Lizenzvereinbarungen (EULAs)</title>
+  <para>Eine Lizenzvereinbarung ist ein Vertrag zwischen dem Hersteller und dem Benutzer einer Software, der dem Benutzer eine Softwarelizenz gewährt. Eine Software-Lizenzvereinbarung definiert die rechtlichen Grundlagen des Gebrauchs der Software durch den Benutzer. Dies wird Endbenutzer-Lizenzvertrag oder kurz EULA genannt.</para>
+  <para>Viele EULAs machen umfangreiche Haftungsbeschränkungen für die Software geltend. Typischerweise schützt eine EULA den Hersteller einer Software in dem Fall, dass die Software Schäden auf dem Rechner oder in dessen Daten verursacht. In einigen Fällen sind auch Beschränkungen einbegriffen für den Fall von auftretenden Schäden, die durch unzweckmäßige Benutzung der Software entstehen.</para>
+  <figure>
+    <title>Beispiel-EULA</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-eula.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Lesen Sie die EULA sorgfältig und akzeptieren Sie sie, bevor Sie die Installation oder Aktualisierung fortsetzen.</para>
+</section>
+
+<section id="gpg-signature">
+  <title>Akzeptieren einer Sicherheitssignatur</title>
+  <para>Die Pakete einer Softwarequelle sind typischerweise von dem Projekt signiert, das diesen Softwarebestand oder die Pakete verwaltet. Dadurch wird für Benutzer sichergestellt, dass ein mit einem Sicherheitsschlüssel signiertes Paket auch aus der Softwarequelle stammt, aus der es zu stammen scheint.</para>
+  <para>Um eine Paketverwaltungs-Infrastruktur effektiv zu betreiben, müssen vertrauenswürdige Softwarebestände vorhanden sein, um Aktualisierungen automatisch herunterzuladen und zu installieren. Ein weiterer Vorteil ist, dass signierte Pakete ohne einzugebendes Systemverwalterpasswort installiert werden können, sofern Ihr Systemverwalter diese Möglichkeit aktiviert hat.</para>
+  <figure>
+    <title>Beispiel für eine Signaturabfrage</title>
+    <screenshot>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gpk-signature.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+  <para>Um einem Softwarebestand zu vertrauen, sollten Sie die Einzelheiten des signierenden Schlüssels überprüfen. Der einfachste Weg führt auf die Webseite dieser Softwarequelle. Dort sollten Sie Einzelheiten über den für Paketsignaturen verwendeten Schlüssel finden. Dieser wird üblicherweise <literal>GPG key</literal> genannt.</para>
+  <para>Sie sollten diesen Dialog nur dann fortsetzen, wenn Sie tatsächlich den Paketen aus dieser Softwarequelle Ihr Vertrauen schenken wollen.</para>
+</section>
+
+<section id="dialogs">
+  <title>Erklärung häufig verwendeter Dialoge</title>
+  <para>Diese Anwendung versucht Dialoge so oft wie möglich wiederzuverwenden, was eine nachvollziehbare und konsistente Benutzerschnittstelle zur Verwaltung von Paketen ermöglicht. In den folgenden Unterabschnitten werden einige dieser Dialoge ausführlicher erklärt, oft auch mit Beispielen oder Internetlinks.</para>
+
+  <section id="dialog-installing-private-files">
+    <title>Kopieren von Dateien an einen anderen Ort</title>
+    <figure>
+      <title>Beispieldialog</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gpk-client-copy-local.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Falls Sie eine Datei in Ihren persönlichen Ordner heruntergeladen haben, wird der Name des Zielordners üblicherweise  z.B. <literal>/home/hughsie/Downloads</literal> lauten. Der PackageKit-Dienst wird nicht unter dem Benutzerkennzeichen eines gewöhnlichen Desktop-Benutzers ausgeführt, daher wird der Dienst wahrscheinlich nicht in der Lage sein, auf diese Datei zuzugreifen. Falls der Download-Ordner vom Systemverwalter lesbar ist, wird dieser in einen temporären Ordner kopiert, so dass der Zugriff möglich ist.</para>
+  </section>
+
+  <section id="dialog-install-files">
+    <title>Installieren lokaler Dateien</title>
+    <para>Eine Anwendung fragte nach der Installation lokaler Dateien auf Ihrem System. Falls Sie diese Aktion selbst eingeleitet haben, klicken Sie auf den <guibutton>Installieren</guibutton>-Knopf.</para>
+  </section>
+
+  <section id="dialog-install-catalogs">
+    <title>Installieren von Katalogen</title>
+    <para>Ein Paketkatalog ist nichts weiter als eine Datei, die Anweisungen über die Installation anderer Pakete enthält. Es gibt keine wahlweise zu installierenden Pakete, weil eine solche Katalogdatei simpel und ohne weiteren Benutzereingriff funktionieren soll. Durch die Nutzung einer Katalogdatei ist die schnelle und einfache Installation verschiedener Pakete möglich.</para>
+    <note><para>Weitere Informationen über Kataloge finden Sie in den <ulink url="http://www.packagekit.org/pk-faq.html#catalogs" type="http">Häufig gestellten Fragen</ulink>.</para></note>
+  </section>
+
+  <section id="dialog-catalog-none-required">
+    <title>Keine Pakete notwendig</title>
+    <para>Der Katalog, den Sie installieren wollten, ändert nichts an Ihrem System, da die benötigten Pakete bereits installiert sind. Es sind keine weiteren Aktionen erforderlich.</para>
+    <note><para>Weitere Informationen über Kataloge finden Sie in den <ulink url="http://www.packagekit.org/pk-faq.html#catalogs" type="http">Häufig gestellten Fragen</ulink>.</para></note>
+  </section>
+
+  <section id="dialog-application-confirm">
+    <title>Bestätigung erforderlich</title>
+    <figure>
+      <title>Beispiel-Plugindialog</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gpk-client-codecs.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Eine Anwendung erfordert die entsprechenden Zugriffsrechte, um Pakete auf Ihrem System zu ändern. Der Programmname und das Symbol stammen aus der Anwendung, die nach den Zugriffsrechten fragt.</para>
+  </section>
+
+  <section id="dialog-finding-requires">
+    <title>Suchen nach weiteren benötigten Paketen</title>
+    <para>Andere Pakete können von diesem Paket abhängen, um die korrekte Funktion zu gewährleisten. Diese Anwendung sucht nach anderen Paketen, welche das von Ihnen zur Entfernung ausgewählte Paket benötigen. Keine Änderungen werden angewendet, und Sie werden falls nötig später um Bestätigung gebeten.</para>
+  </section>
+
+  <section id="dialog-finding-depends">
+    <title>Suchen nach weiteren abhängigen Paketen</title>
+    <para>Dieses Paket könnte in anderen Paketen enthaltene Ressourcen erfordern, um korrekt zu funktionieren. Diese Anwendung </para>
+  </section>
+
+  <section id="dialog-remove-other-packages">
+    <title>Entfernen anderer Pakete</title>
+    <figure>
+      <title>Beispieldialog beim Entfernen von rarian</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gpk-remove-confirm.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Weitere Pakete müssen entfernt werden, wenn dieses Paket entfernt wird. Wenn Sie diese Pakete entfernen, könnte die Funktionalität anderer Anwendungen darunter leiden.</para>
+    <caution><para>Falls Sie nicht sicher sind, sollten Sie das Paket nicht entfernen.</para></caution>
+  </section>
+
+  <section id="dialog-install-other-packages">
+    <title>Installieren weiterer Pakete</title>
+    <figure>
+      <title>Beispieldialog beim Installieren von xfce-utils</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gpk-added-deps.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Für die Installation dieses Pakets müssen weitere Pakete installiert werden. Falls Sie diese Pakete entfernen, verlieren Sie möglicherweise Funktionalität in anderen Anwendungen. Das Herunterladen und Installieren weiterer Pakete erhöht die für die Installation dieses Pakets benötigte Zeit.</para>
+  </section>
+
+  <section id="dialog-finding-packages">
+    <title>Suchen von Paketen</title>
+    <para>Die Paketdatenbank wird anhand Ihrer Abfrage durchsucht. Dies kann einige Zeit dauern, falls neue Paketlisten aus dem Internet geladen werden müssen.</para>
+  </section>
+
+  <section id="dialog-package-not-found">
+    <title>Paket nicht gefunden</title>
+    <para>In keiner entfernten Softwarequelle konnten Pakete gefunden werden. Das bedeutet normalerweise, dass Sie die Softwarebestände von Drittanbietern nicht aktiviert oder installiert haben. Diese Softwarebestände finden Sie oft in Foren oder mittels Suchmaschinen.</para>
+    <caution><para>Nur Pakete aus vertrauenswürdigen Softwarequellen installieren.</para></caution>
+  </section>
+
+  <section id="dialog-progress">
+    <title>Fortschrittsfenster</title>
+    <para>Wenn eine Aktion automatisch gestartet wird, dann geschieht dies normalerweise nicht interaktiv. Wenn diese Aktion den Zugriff auf das Netzwerk erfordert oder voraussichtlich eine lange Zeit benötigt, erscheint ein Dialog. In diesem Dialog erhalten Sie die Möglichkeit, die Aktion abzubrechen, falls deren Ausführung nicht gewünscht ist.</para>
+  </section>
+
+  <section id="dialog-permissions">
+    <title>Keine Privilegien</title>
+    <figure>
+      <title>Grafische Oberfläche der PolicyKit-Zugriffsrechte</title>
+      <screenshot>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="figures/gpk-repo-auth.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+    </figure>
+    <para>Sie verfügen nicht über die erforderlichen Rechte, um diese Aktion auszuführen. Dies könnte dann der Fall sein, wenn Sie sich nicht korrekt legitimiert haben, beispielsweise durch Eingabe eines korrekten Passworts zweimal in einer Zeile hintereinander. ACHTUNG: Auf einigen Distributionen muss das Passwort des Systemverwalters eingegeben werden, nicht Ihr Benutzerpasswort.</para>
+    <note><para>Falls Sie sich nicht legitimieren können, sollten Sie Ihren Systemverwalter kontaktieren.</para></note>
+  </section>
+
+  <section id="dialog-no-service">
+    <title>PackageKit-Dienst läuft nicht</title>
+    <para>Der PackageKit zugrunde liegende Dienst konnte nicht gestartet werden. Dies geschieht nur bei ernstzunehmenden Systemfehlern. Weitere Informationen hierzu erhalten Sie, wenn Sie folgenden Befehl mit Systemverwalterrechten ausführen:  <literal>/usr/sbin/packagekitd --verbose</literal></para>
+  </section>
+
+  <section id="dialog-update-system">
+    <title>System aktualisieren</title>
+    <para>Alle auf Ihrem System aktualisierbaren Pakete wurden nun aktualisiert. Sie können die Aktualisierung abbrechen, sofern der <guibutton>Abbrechen</guibutton>-Knopf nicht ausgegraut ist.</para>
+  </section>
+
+  <section id="dialog-update-packages">
+    <title>Pakete aktualisieren</title>
+    <para>Einige Pakete auf Ihrem System wurden nun aktualisiert. Sie können die Aktualisierung abbrechen, sofern der <guibutton>Abbrechen</guibutton>-Knopf nicht ausgegraut ist.</para>
+  </section>
+
+  <section id="dialog-refresh">
+    <title>Paketlisten auffrischen</title>
+    <para>Einmal wöchentlich (kann in den Einstellungen geändert werden) werden automatisch die neuesten Paketlisten heruntergeladen. Das bedeutet, dass Sie bei der Suche nach einem nicht installierten Paket neue Software erhalten, die zu einer Softwarequelle hinzugefügt wurde.</para>
+    <para>Sobald die Paketlisten heruntergeladen wurden, werden die installierten und verfügbaren Pakete zwischengespeichert, so dass Client-Werkzeuge diese automatisch vervollständigen können. Sobald dies abgeschlossen ist, werden neue Anwendungen eingelesen und zur Client-Datenbank hinzugefügt.</para>
+  </section>
+</section>
+
+<section id="about">
+  <title>Info</title>
+  <para><application>gnome-packagekit</application> wird von Richard Hughes <email>richard@hughsie.com</email> verwaltet und gemeinsamen mit einigen  anderen Mitstreitern entwickelt. Weitere Informationen über <application>gnome-packagekit</application> finden Sie auf dessen <ulink url="http://www.packagekit.org/" type="http">Webseite</ulink>.</para>
+  <para>Wenn Sie Fehler finden oder Vorschläge zu dieser Anwendung oder zu diesem Handbuch haben, folgen Sie den Anweisungen auf der <ulink url="http://www.packagekit.org/" type="http">Bug-Webseite von<application>gnome-packagekit</application></ulink>.</para>
+  <para>Dieses Programm ist freie Software. Sie können es unter den Bedingungen der <citetitle>GNU General Public License</citetitle>, wie von der Free Software Foundation veröffentlicht, weitergeben und/oder verändern, entweder gemäß Version 2 der Lizenz oder (nach Ihrer Option) jeder späteren Version. Eine <ulink url="ghelp:gpl" type="help">Kopie dieser Lizenz</ulink> ist in dieser Dokumentation enthalten, eine weitere in der Datei COPYING, die im Quellcode dieses Programms enthalten ist.</para>
+</section>
+
+</article>

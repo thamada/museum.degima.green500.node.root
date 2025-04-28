@@ -1,0 +1,515 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelService</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="Services.html" title="Services">
+<link rel="prev" href="camel-camel-provider.html" title="camel-provider">
+<link rel="next" href="camel-CamelStore.html" title="CamelStore">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-camel-provider.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="Services.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelStore.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelService.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelService.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelService">
+<a name="camel-CamelService"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelService.top_of_page"></a>CamelService</span></h2>
+<p>CamelService</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelService.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+struct              <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a>;
+#define             <a class="link" href="camel-CamelService.html#CAMEL-SERVICE-USERNAME--CAPS" title="CAMEL_SERVICE_USERNAME">CAMEL_SERVICE_USERNAME</a>
+#define             <a class="link" href="camel-CamelService.html#CAMEL-SERVICE-AUTH--CAPS" title="CAMEL_SERVICE_AUTH">CAMEL_SERVICE_AUTH</a>
+#define             <a class="link" href="camel-CamelService.html#CAMEL-SERVICE-HOSTNAME--CAPS" title="CAMEL_SERVICE_HOSTNAME">CAMEL_SERVICE_HOSTNAME</a>
+#define             <a class="link" href="camel-CamelService.html#CAMEL-SERVICE-PORT--CAPS" title="CAMEL_SERVICE_PORT">CAMEL_SERVICE_PORT</a>
+#define             <a class="link" href="camel-CamelService.html#CAMEL-SERVICE-PATH--CAPS" title="CAMEL_SERVICE_PATH">CAMEL_SERVICE_PATH</a>
+enum                <a class="link" href="camel-CamelService.html#CamelServiceConnectionStatus" title="enum CamelServiceConnectionStatus">CamelServiceConnectionStatus</a>;
+                    <a class="link" href="camel-CamelService.html#CamelServiceAuthType" title="CamelServiceAuthType">CamelServiceAuthType</a>;
+void                <a class="link" href="camel-CamelService.html#camel-service-construct" title="camel_service_construct ()">camel_service_construct</a>             (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-camel-provider.html#CamelProvider" title="CamelProvider">CamelProvider</a> *provider,
+                                                         <a class="link" href="camel-camel-url.html#CamelURL" title="CamelURL">CamelURL</a> *url,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelService.html#camel-service-connect" title="camel_service_connect ()">camel_service_connect</a>               (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelService.html#camel-service-disconnect" title="camel_service_disconnect ()">camel_service_disconnect</a>            (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> clean,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-CamelService.html#camel-service-cancel-connect" title="camel_service_cancel_connect ()">camel_service_cancel_connect</a>        (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelService.html#camel-service-get-url" title="camel_service_get_url ()">camel_service_get_url</a>               (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelService.html#camel-service-get-name" title="camel_service_get_name ()">camel_service_get_name</a>              (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> brief);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelService.html#camel-service-get-path" title="camel_service_get_path ()">camel_service_get_path</a>              (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);
+<a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *      <a class="link" href="camel-CamelService.html#camel-service-get-session" title="camel_service_get_session ()">camel_service_get_session</a>           (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);
+<a class="link" href="camel-camel-provider.html#CamelProvider" title="CamelProvider">CamelProvider</a> *     <a class="link" href="camel-CamelService.html#camel-service-get-provider" title="camel_service_get_provider ()">camel_service_get_provider</a>          (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             <a class="link" href="camel-CamelService.html#camel-service-query-auth-types" title="camel_service_query_auth_types ()">camel_service_query_auth_types</a>      (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelService.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelService.details"></a><h2>Details</h2>
+<div class="refsect2" title="struct CamelService">
+<a name="CamelService"></a><h3>struct CamelService</h3>
+<pre class="programlisting">struct CamelService {
+	CamelObject parent_object;
+	struct _CamelServicePrivate *priv;
+
+	CamelSession *session;
+	CamelProvider *provider;
+	CamelServiceConnectionStatus status;
+	CamelOperation *connect_op;
+	CamelURL *url;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_SERVICE_USERNAME">
+<a name="CAMEL-SERVICE-USERNAME--CAPS"></a><h3>CAMEL_SERVICE_USERNAME</h3>
+<pre class="programlisting">#define CAMEL_SERVICE_USERNAME     (CAMEL_SERVICE_ARG_USERNAME | CAMEL_ARG_STR)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_SERVICE_AUTH">
+<a name="CAMEL-SERVICE-AUTH--CAPS"></a><h3>CAMEL_SERVICE_AUTH</h3>
+<pre class="programlisting">#define CAMEL_SERVICE_AUTH         (CAMEL_SERVICE_ARG_AUTH | CAMEL_ARG_STR)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_SERVICE_HOSTNAME">
+<a name="CAMEL-SERVICE-HOSTNAME--CAPS"></a><h3>CAMEL_SERVICE_HOSTNAME</h3>
+<pre class="programlisting">#define CAMEL_SERVICE_HOSTNAME     (CAMEL_SERVICE_ARG_HOSTNAME | CAMEL_ARG_STR)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_SERVICE_PORT">
+<a name="CAMEL-SERVICE-PORT--CAPS"></a><h3>CAMEL_SERVICE_PORT</h3>
+<pre class="programlisting">#define CAMEL_SERVICE_PORT         (CAMEL_SERVICE_ARG_PORT | CAMEL_ARG_INT)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_SERVICE_PATH">
+<a name="CAMEL-SERVICE-PATH--CAPS"></a><h3>CAMEL_SERVICE_PATH</h3>
+<pre class="programlisting">#define CAMEL_SERVICE_PATH         (CAMEL_SERVICE_ARG_PATH | CAMEL_ARG_STR)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum CamelServiceConnectionStatus">
+<a name="CamelServiceConnectionStatus"></a><h3>enum CamelServiceConnectionStatus</h3>
+<pre class="programlisting">typedef enum {
+	CAMEL_SERVICE_DISCONNECTED,
+	CAMEL_SERVICE_CONNECTING,
+	CAMEL_SERVICE_CONNECTED,
+	CAMEL_SERVICE_DISCONNECTING
+} CamelServiceConnectionStatus;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelServiceAuthType">
+<a name="CamelServiceAuthType"></a><h3>CamelServiceAuthType</h3>
+<pre class="programlisting">typedef struct {
+	const gchar *name;               /* user-friendly name */
+	const gchar *description;
+	const gchar *authproto;
+
+	gboolean need_password;   /* needs a password to authenticate */
+} CamelServiceAuthType;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_construct ()">
+<a name="camel-service-construct"></a><h3>camel_service_construct ()</h3>
+<pre class="programlisting">void                camel_service_construct             (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *session,
+                                                         <a class="link" href="camel-camel-provider.html#CamelProvider" title="CamelProvider">CamelProvider</a> *provider,
+                                                         <a class="link" href="camel-camel-url.html#CamelURL" title="CamelURL">CamelURL</a> *url,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Constructs a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> initialized with the given parameters.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> the <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> for <em class="parameter"><code>service</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>provider</code></em> :</span></p></td>
+<td> the <a class="link" href="camel-camel-provider.html#CamelProvider" title="CamelProvider"><span class="type">CamelProvider</span></a> associated with <em class="parameter"><code>service</code></em>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>url</code></em> :</span></p></td>
+<td> the default URL for the service (may be <code class="literal">NULL</code>)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_connect ()">
+<a name="camel-service-connect"></a><h3>camel_service_connect ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_service_connect               (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Connect to the service using the parameters it was initialized
+with.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the connection is made or <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_disconnect ()">
+<a name="camel-service-disconnect"></a><h3>camel_service_disconnect ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_service_disconnect            (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> clean,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+Disconnect from the service. If <em class="parameter"><code>clean</code></em> is <code class="literal">FALSE</code>, it should not
+try to do any synchronizing or other cleanup of the connection.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>clean</code></em> :</span></p></td>
+<td> whether or not to try to disconnect cleanly
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the disconnect was successful or <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_cancel_connect ()">
+<a name="camel-service-cancel-connect"></a><h3>camel_service_cancel_connect ()</h3>
+<pre class="programlisting">void                camel_service_cancel_connect        (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);</pre>
+<p>
+If <em class="parameter"><code>service</code></em> is currently attempting to connect to or disconnect
+from a server, this causes it to stop and fail. Otherwise it is a
+no-op.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_get_url ()">
+<a name="camel-service-get-url"></a><h3>camel_service_get_url ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_service_get_url               (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);</pre>
+<p>
+Gets the URL representing <em class="parameter"><code>service</code></em>. The returned URL must be
+freed when it is no longer needed. For security reasons, this
+routine does not return the password.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the URL representing <em class="parameter"><code>service</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_get_name ()">
+<a name="camel-service-get-name"></a><h3>camel_service_get_name ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_service_get_name              (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> brief);</pre>
+<p>
+This gets the name of the service in a "friendly" (suitable for
+humans) form. If <em class="parameter"><code>brief</code></em> is <code class="literal">TRUE</code>, this should be a brief description
+such as for use in the folder tree. If <em class="parameter"><code>brief</code></em> is <code class="literal">FALSE</code>, it should
+be a more complete and mostly unambiguous description.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>brief</code></em> :</span></p></td>
+<td> whether or not to use a briefer form
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a description of the service which the caller must free
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_get_path ()">
+<a name="camel-service-get-path"></a><h3>camel_service_get_path ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_service_get_path              (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);</pre>
+<p>
+This gets a valid UNIX relative path describing <em class="parameter"><code>service</code></em>, which
+is guaranteed to be different from the path returned for any
+different service. This path MUST start with the name of the
+provider, followed by a "/", but after that, it is up to the
+provider.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the path, which the caller must free
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_get_session ()">
+<a name="camel-service-get-session"></a><h3>camel_service_get_session ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession">CamelSession</a> *      camel_service_get_session           (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);</pre>
+<p>
+Gets the <a class="link" href="camel-CamelSession.html#CamelSession" title="struct CamelSession"><span class="type">CamelSession</span></a> associated with the service.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the session
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_get_provider ()">
+<a name="camel-service-get-provider"></a><h3>camel_service_get_provider ()</h3>
+<pre class="programlisting"><a class="link" href="camel-camel-provider.html#CamelProvider" title="CamelProvider">CamelProvider</a> *     camel_service_get_provider          (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service);</pre>
+<p>
+Gets the <a class="link" href="camel-camel-provider.html#CamelProvider" title="CamelProvider"><span class="type">CamelProvider</span></a> associated with the service.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the provider
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_service_query_auth_types ()">
+<a name="camel-service-query-auth-types"></a><h3>camel_service_query_auth_types ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *             camel_service_query_auth_types      (<a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService">CamelService</a> *service,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<p>
+This is used by the mail source wizard to get the list of
+authentication types supported by the protocol, and information
+about them.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-CamelService.html#CamelService" title="struct CamelService"><span class="type">CamelService</span></a> object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td> a <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException"><span class="type">CamelException</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a list of <a class="link" href="camel-CamelService.html#CamelServiceAuthType" title="CamelServiceAuthType"><span class="type">CamelServiceAuthType</span></a> records. The caller
+must free the list with <a
+href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#g-list-free"
+><span class="type">g_list_free</span></a> when it is done with it.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

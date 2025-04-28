@@ -1,0 +1,43 @@
+preupgrade - tool to help you update a fedora system from one distro to the
+             next. Pre-resolves dependencies and sets up the system to be
+             upgraded via anaconda
+License: GPLv2 or above
+URL: https://fedorahosted.org/preupgrade/
+
+= NOTES =
+
+== Cleanup ==
+preupgrade modifies data in ~3 places:
+  /var/cache/yum/preupgrade*
+  /boot/upgrade
+  /etc/grub.conf
+
+If you want to clean up manually, you can do:
+  preupgrade --clean
+Or, if you really want to be sure, do it by hand:
+  grubby --remove-kernel=/boot/upgrade/vmlinuz
+  rm -rf /var/cache/yum/preupgrade* /boot/upgrade
+
+== Remote Headless Upgrades ==
+Use preupgrade-cli --vnc=VNCPASSWORD.
+See preupgrade-cli --help for more info.
+The upgrade will start a VNC server on port 5901, requiring the given password.
+The upgrade will proceed whether you connect the VNC client or not.
+
+--> IMPORTANT NOTE ABOUT VNC INSTALLS <--
+If something goes wrong or the installer needs more info, it will hang forever,
+waiting for you to tell it what to do. So you should probably connect a VNC
+client and monitor its progress.
+
+== Adding Custom Distributions ==
+preupgrade searches the following locations for release data, in order:
+  ./releases.txt
+  ./data/releases.txt
+  http://mirrors.fedoraproject.org/releases.txt
+If you want to add your own distribution to preupgrade: download releases.txt,
+edit it to your liking, then run preupgrade from that dir - or save it to
+~/releases.txt to make it work when preupgrade is run normally.
+
+
+Please note that /usr/share/preupgrade/releases.list is ignored and is only
+being shipped for compatibility reasons. Use ~/releases.txt for customization.

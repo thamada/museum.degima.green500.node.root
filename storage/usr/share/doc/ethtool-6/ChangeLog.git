@@ -1,0 +1,789 @@
+commit 669ba5cadfb15842e90d8aa7ba5a575f7a457b3e
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Mon Mar 23 04:58:11 2009 -0400
+
+    Command line help does not require DEVNAME on command line.
+    
+    Reflect this in usage text.  Patch via Robert Scheck
+    <robert@fedoraproject.org>, possibly other sources as well?
+    
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 7336e8a6a587802ca72dcf5f509696d96b9d6f23
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Fri Mar 6 07:28:58 2009 -0500
+
+    Change version from "6" to "6git", indicating it is not truly v6.
+    
+    Should have done this immediately after v6 release.
+    
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 501821c429d3915ee8f4702b72553828cb093c6b
+Author: Ben Hutchings <ben@decadent.org.uk>
+Date:   Fri Mar 6 07:28:07 2009 -0500
+
+    man page: Add GRO and LRO to the full description of the -K option
+    
+    Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 580cc500e397299c01caa615d4159ddbad47fffb
+Author: Ben Hutchings <bhutchings@solarflare.com>
+Date:   Fri Jan 9 13:16:14 2009 +0000
+
+    ethtool: Support arbitrary speeds
+    
+    The speed and speed_hi fields of struct ethtool_cmd together represent
+    a value in units of Mbit/s.  The valid speed settings are hardware-
+    dependent and should be checked by the driver.  Remove our validation
+    and allow arbitrary positive values.  Continue to report 0 and -1 as
+    "Unknown!" since some drivers will report these invalid values when
+    the link is down.
+    
+    Signed-off-by: Ben Hutchings <bhutchings@solarflare.com>
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit a97a2ece26d1e88171d7b2f0824686fcd4a15a0c
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Fri Mar 6 06:12:13 2009 -0500
+
+    Merge several minor changes from Debian.
+    
+    Namely, wrap ioctl send so that Debian can more easily support kernels
+    older than 2.4.x.  We don't support that, but they wish to.
+    
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit b161802dd86ecb417f5464c588620d1910a64f93
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Fri Mar 6 06:11:17 2009 -0500
+
+    igb, ixgbe: Trim trailing whitespace.
+    
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 310929a57a1619db998dc5ad782973c004c25f04
+Author: Ben Hutchings <ben@decadent.org.uk>
+Date:   Fri Mar 6 06:04:21 2009 -0500
+
+    ethtool: Manual page corrections
+    
+    Fix the following nits, too small to deserve separate patches:
+    
+    There is a separator missing between -K and --offload.
+    
+    The first mention of -p says the long option is --blink, but it's
+    really --identify.
+    
+    The [N] following -p has the brackets in italics, not the N.
+    
+    Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
+
+commit 4ec0a795e52ca8effd622d8b3c49c6b927aceef5
+Author: Ben Hutchings <ben@decadent.org.uk>
+Date:   Thu Nov 27 04:11:12 2008 +0000
+
+    ethtool: Show short message for syntax error
+    
+    In case of a syntax error it's likely to be more helpful to just say
+    that rather than showing the entire usage information, which is now
+    very long.
+    
+    Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 5c368cd47d390555f17d9dfb0b04ef48d0a42a21
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Fri Mar 6 05:58:15 2009 -0500
+
+    Get/set GRO settings.
+    
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 5ba682804969e8e7e3f34a83286c1667ef733d3f
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Fri Mar 6 05:46:05 2009 -0500
+
+    Explicitly ship GPLv2 license.
+    
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 2c4bd1c0c4d8112c16f9143da69c03d02ac3b1ae
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Thu Jan 15 17:27:10 2009 -0500
+
+    Directly reference GPL v2 via new LICENSE file.
+    
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 4eaac2cc32a43dcbecd329bff9824a7535a8808c
+Author: Andrew Paprocki <andrew@ishiboo.com>
+Date:   Wed Mar 26 20:36:43 2008 -0400
+
+    ethtool: Add register dump support for all r8169 driver cards
+    
+    This adds all MAC versions currently found in the r8169 to the RealTek
+    table and modifies the dump logic to handle card versions >= RTL8169
+    instead of specifically looking at the few previously supported cards.
+    
+    Signed-off-by: Andrew Paprocki <andrew@ishiboo.com>
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit c36a51cd7ee9a31981f904a7406b798f1f75ee8e
+Author: Ben Hutchings <bhutchings@solarflare.com>
+Date:   Thu Apr 17 13:11:21 2008 +0100
+
+    ethtool: command line support for lro
+    
+    Add lro support to command in similar manner to TSO, GSO, etc.
+    
+    Based on patch by Stephen Hemminger
+    <http://article.gmane.org/gmane.linux.network/88124>.
+    
+    My changes:
+    - Changed error return codes for setting LRO to be unique.
+    - Report failure to get device flags, consistent with other offload settings.
+    - Fixed code spacing.
+    
+    Tested with the sfc driver.
+    
+    Signed-off-by: Ben Hutchings <bhutchings@solarflare.com>
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 1bd87128467b50f1e36ea07beb8181a37c41e7cc
+Author: Santwona Behera <santwona.behera@sun.com>
+Date:   Fri Jun 27 17:06:20 2008 -0700
+
+    Add support for rx flow hash configuration in a network device
+    
+    Added new interfaces to ethtool to configure receive network flow
+    distribution across multiple rx rings using hashing.
+    
+    Signed-off-by: Santwona Behera <santwona.behera@sun.com>
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit e3ac850412df91b64aa5f7ccb5e043948a8caef4
+Author: Brandon Philips <brandon@ifup.org>
+Date:   Fri Sep 12 02:31:40 2008 -0700
+
+    ethtool: Use ethtool_cmd->speed_hi
+    
+    struct ethtool_cmd now has a speed_hi field to support more than 65535
+    Mb devices, use it.
+    
+    Also, pull in the ethtool-copy.h file without the __KERNEL__ sections.
+    
+    Signed-off-by: Brandon Philips <bphilips@suse.de>
+    Signed-off-by: Jeff Garzik <jgarzik@redhat.com>
+
+commit 9f77b6be72c7a77b619564e7d9327da230d1c9e4
+Author: Auke Kok <auke-jan.h.kok@intel.com>
+Date:   Mon Jan 7 09:36:16 2008 -0800
+
+    ethtool: correct man page for advertise mask value of 10gig
+    
+    10 gigabit is defined as 0x1000 in the advertise mask. The man
+    page mistakenly lists 0x800.
+    
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 658f4c03163b6ca4c08861b234ed9cf38e5c1801
+Author: Auke Kok <auke-jan.h.kok@intel.com>
+Date:   Wed Dec 12 16:37:14 2007 -0800
+
+    ethtool: update license field in specfile to be correctly defined
+    
+    RPM uses "License" as field and not "Copyright".
+    
+    Signed-off-by: Jesse Brandeburg <jesse.brandeburg@intel.com>
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit a93c55989b0718396d91d62c0e1bcd7d613711dd
+Author: Jesse Brandeburg <jesse.brandeburg@intel.com>
+Date:   Mon Nov 26 10:39:06 2007 -0800
+
+    ethtool: fix typo on setting speed 10000
+    
+    fix the typo in speed 10000 setting.
+    
+    Signed-off-by: Jesse Brandeburg <jesse.brandeburg@intel.com>
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 2b91ca4dd31e676afbc390067ca448f99fbf3a52
+Author: Auke Kok <auke-jan.h.kok@intel.com>
+Date:   Mon Nov 12 10:28:42 2007 -0800
+
+    ethtool: Fix coalesce settings copy+paste typo
+    
+    Coalesce setting errors use the same error messages as the
+    descriptor ring errors.
+    
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 1288ec8133806e23ad94455420bbf5c9efb578db
+Author: Jesse Brandeburg <jesse.brandeburg@intel.com>
+Date:   Wed Nov 7 08:24:20 2007 -0800
+
+    ethtool: add support for supporting 10000baseT
+    
+    there is missing support in ethtool for reporting 10000baseT
+    as SUPPORTED_10000baseT_Full.  The code seems to be half
+    implemented because the "advertising" field has the implementation.
+    
+    this patch just adds it for supported reporting.
+    
+    Signed-off-by: Jesse Brandeburg <jesse.brandeburg@intel.com>
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit e52c3a02a4d7c64a4e0a7a2ee28784d2ba6031b2
+Author: Auke Kok <auke-jan.h.kok@intel.com>
+Date:   Thu Oct 4 11:37:31 2007 -0700
+
+    ethtool: Add e1000e reg dump support (using e1000 decode function)
+    
+    The e1000 register dump code can print out e1000e register dump
+    information as well, so enable it for e1000e devices.
+    
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit bdaae5bb41c2b0e1451776e8b3316ee83be7b67a
+Author: Stephen Hemminger <shemminger@linux-foundation.org>
+Date:   Mon Sep 17 14:08:09 2007 -0700
+
+    ethtool: marvell register update
+    
+    Update the decode of sky2 registers.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@linux-foundation.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 4b448eccd48106bf03dc48a841522b9a4ac37cfb
+Author: Nicholas Nunley <nicholas.d.nunley@intel.com>
+Date:   Wed Aug 15 10:44:11 2007 -0700
+
+    ethtool: add register dump support for intel 82598 chipsets (ixgbe driver)
+    
+    Signed-off-by: Nicholas Nunley <nicholas.d.nunley@intel.com>
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit ae5505efd0c8df6e705f852dbb697f8d69f7e815
+Author: Nicholas Nunley <nicholas.d.nunley@intel.com>
+Date:   Wed Aug 15 10:44:01 2007 -0700
+
+    ethtool: add register dump support for intel 82575 chipsets (igb driver)
+    
+    Signed-off-by: Nicholas Nunley <nicholas.d.nunley@intel.com>
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit ee6a4ec9b23ae887d280f0f4eedb9a931f71d311
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Thu Jul 26 13:41:45 2007 -0400
+
+    Release version 6.
+    
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit f45bb4faddffed6de1932105b17e28d48f9c3127
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Thu Jul 26 13:32:17 2007 -0400
+
+    Update embedded copy of ethtool.h from kernel 2.6.23-rc1.
+    
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit ba2f54ba29ab2a9fee5529f161ce86215c3b1b0d
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Thu Jul 26 13:24:59 2007 -0400
+
+    Trim trailing whitespace.
+    
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit a5f8ce23307719f03727f72f1d68007213de7d5c
+Author: Steve Glendinning <steve.glendinning@smsc.com>
+Date:   Mon Jul 16 20:04:40 2007 +0100
+
+    ethtool: add register dump support for SMSC LAN911x/LAN921x
+    
+    This patch adds support for SMSC's LAN911x and LAN921x families of
+    embedded ethernet controllers to ethtool's dump registers (-d) command.
+    
+    This patch is for use with the smsc911x driver.
+    
+    Signed-off-by: Steve Glendinning <steve.glendinning@smsc.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 3764dec8110409fd07def332732909ba84fec752
+Author: Francois Romieu <romieu@fr.zoreil.com>
+Date:   Wed May 30 13:44:03 2007 +0200
+
+    ethtool: new ID to decode the registers of the 8101E (realtek)
+    
+    Signed-off-by: Francois Romieu <romieu@fr.zoreil.com>
+    Cc: Rolf Eike Beer <eike-kernel@sf-tec.de>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit fed21029f02c970c6affaafa4a9294fce2775f40
+Author: Francois Romieu <romieu@fr.zoreil.com>
+Date:   Thu May 24 22:02:42 2007 +0200
+
+    ethtool: new ID to decode the registers of the 8168 (realtek)
+    
+    Tested with an Asrock 945G-DVI (LOM).
+    
+    Signed-off-by: Francois Romieu <romieu@fr.zoreil.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 029cce110c4e5297bbe3f946868e32820e842856
+Author: Michael Chan <mchan@broadcom.com>
+Date:   Thu May 3 00:27:10 2007 -0700
+
+    ethtool: Add 2.5G support
+    
+    Add 2.5G Serdes support to ethtool user program and ethtool.8 man
+    page.  The missing pause bits are also added to keep ethtool-copy.h
+    in sync with the kernel's version.
+    
+    Signed-off-by: Michael Chan <mchan@broadcom.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 06759c2e613e608038836d0ab7f21eb07570d355
+Author: Stephen Hemminger <shemminger@linux-foundation.org>
+Date:   Wed Apr 4 13:41:16 2007 -0700
+
+    ethtool: add 88e807X chip to decode
+    
+    Add decode for Yukon Extreme chip
+    
+    Signed-off-by: Stephen Hemminger <shemminger@linux-foundation.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 9896cd5012e6c76cb5978da424888a06fa666ff4
+Author: Stephen Hemminger <shemminger@linux-foundation.org>
+Date:   Wed Apr 4 13:40:15 2007 -0700
+
+    ethtool: marvell chip version decode fix
+    
+    The chip revision wasn't being decoded properly.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@linux-foundation.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit ec45cbae2eefffa770f5cf5729a0b5410963b7b8
+Author: Rick Jones <rick.jones2@hp.com>
+Date:   Wed Apr 4 17:33:08 2007 -0700
+
+    ethtool: additional 10Gig niceness
+    
+    teach ethtool to print "10000Mb/s" for a 10G NIC and prepare
+    for 10G NICs where it is possible to run something other than 10G
+    update the ethtool.8 manpage with info re same and some grammar fixes
+    
+    Signed-off-by: Rick Jones <rick.jones2@hp.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 0be59452b155b2b79980d809fbcb435de4b6e799
+Author: Stephen Hemminger <shemminger@linux-foundation.org>
+Date:   Wed Jan 31 16:23:46 2007 -0800
+
+    marvell chip decode formatting
+    
+    Fix some typo's and formatting on Marvell ethtool output.
+    If sync transmit queue is not used, don't print settings.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@linux-foundation.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 96144b87a89d72eafb227a69103a74d49975fb44
+Author: Auke Kok <auke-jan.h.kok@intel.com>
+Date:   Fri Jan 19 14:49:57 2007 -0800
+
+    e1000: update device ID table for register dumps
+    
+    e1000: update device ID table for register dumps with new devices
+    
+    From: Auke Kok <auke-jan.h.kok@intel.com>
+    
+    The register dump routine of e1000 was missing several newer chipsets. I
+    reimported the mac detection code from the linux e1000 driver. This fixes
+    newer NIC's reporting that their bus type is PCI instead of PCI-e.
+    
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 7764430a139e4a089127f5616b0d56f497be1036
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Thu Jan 11 15:36:10 2007 -0800
+
+    ethtool: fix long statistics name
+    
+    Fix handling of statistics where the label is exactly 32 (ETH_GSTRING_LEN)
+    characters long (observed with chelsio 10G driver).
+    Before it would print garbage because of going by end
+    of string. Don't need to copy string, just use formats properly.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 5ab06db9d8777aef9307357b49d94cc267ba8105
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Mon Oct 23 10:58:37 2006 -0700
+
+    ethtool: allow force hex in register dump
+    
+    Sometimes the device decode logic just gets in the way
+    so add a "force hex" option to register dump.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit fd3dc7be2449dc1b7950fcf22dbc2cf5a6504fa2
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Mon Oct 23 10:57:03 2006 -0700
+
+    ethtool: flie option to register dump
+    
+    Add ability to take old raw dumps from a file and decode them.
+    It is kind of limited because you still need to have same device
+    as the raw file, but useful for maintainers to decode raw dumps.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit b9caefa09afc12072e8beee0596be19384e7a21f
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Mon Oct 23 10:51:42 2006 -0700
+
+    [PATCH] ethtool: marvell register dump
+    
+    This is a consolidation of earlier marvell register decode patches to ethtool.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 12b0c64313c96d87dfc08254fd4e9544e45f5b18
+Author: Sriram Chidambaram <schidambaram@fabric7.com>
+Date:   Tue Oct 24 15:07:27 2006 -0700
+
+    [PATCH] Fabric7 VIOC: Ethtool
+    
+    Removed debug print statement
+    
+    Signed-off-by: Fabric7 Driver-Support <driver-support@fabric7.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 8babd795f6bcbf9b21e31c43ce53bd0654974488
+Author: Sriram Chidambaram <schidambaram@fabric7.com>
+Date:   Tue Oct 24 14:30:41 2006 -0700
+
+    [PATCH] Fabric7 VIOC: Ethtool
+    
+    Ethtool patch for Fabric7 VIOC Device Driver.
+    
+    Signed-off-by: Fabric7 Driver-Support <driver-support@fabric7.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit ee35083398b3497d627a14b51e97c23c243d4f6b
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Fri Oct 6 15:45:41 2006 -0700
+
+    [PATCH] ethtool: sky2 more decode
+    
+    Add some more decoding of Rx FIFO bits
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit aa60a2982e3f9cdf1307c105cb9f298e0e10a99b
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Tue Sep 26 13:10:52 2006 -0700
+
+    [PATCH] ethtool: spelling fix
+    
+    Fix my bogus spelling.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit ad702599947629f096b698b6d0f9ba7f24b27cce
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Tue Sep 26 13:09:14 2006 -0700
+
+    [PATCH] ethtool: sky2 support
+    
+    Add full support for sky2 chip
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 2d50690d76353f1a954f7f632e0894d124cc9241
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Tue Sep 26 13:08:25 2006 -0700
+
+    [PATCH] ethtool: move skge.c to marvell.c
+    
+    The code will be common for skge and sky2
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 6763e2b61d134ecb2b9c9732c25963e52afab54b
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Tue Sep 19 15:05:55 2006 -0400
+
+    ixgb: Trim trailing whitespace.
+
+commit fb522ac8e761a669c88e03a9e23b4204a36217c7
+Author: Nicholas Nunley <nicholas.d.nunley@intel.com>
+Date:   Tue Sep 19 11:27:35 2006 -0700
+
+    [PATCH] ethtool: add ixgb register dump support
+    
+    This adds support for dumping ixgb registers in readable format.
+    
+    Signed-off-by: Nicholas Nunley <nicholas.d.nunley@intel.com>
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 5860312ac4ae67da856df19b31bd26ada6927955
+Merge: 9fecbca... bfcb014...
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Tue Sep 19 15:04:17 2006 -0400
+
+    Merge branch 'e1000' of git://lost.foo-projects.org/~jtkirshe/ethtool into tmp
+
+commit 9fecbca7a032cd644d76a8b35ae4fe743e7b2b16
+Author: Auke Kok <auke-jan.h.kok@intel.com>
+Date:   Fri Sep 8 16:13:30 2006 -0700
+
+    [PATCH] ethtool: e1000: fix a typo
+    
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit bfcb014b3b18dce0e3f744b0ad919eef47b9d25d
+Author: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+Date:   Wed Sep 6 09:38:39 2006 -0700
+
+    ethtool v5: add autoneg advertise feature
+    
+    adds the ability to change the advertised speed and duplex for a network interface.  Previously, a network interface was only able to advertise all supported speed's and duplex's, or one individual speed and duplex.  The feature allows the user to choose which supported speed's and duplex's to advertise by using the hex value.
+    
+    Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+    Signed-off-by: Auke Kok <auke-jan.h.kok@intel.com>
+
+commit 0c3deb37fe907bd2ed38c63229b20a8af8d101cc
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Fri Sep 1 18:20:50 2006 -0400
+
+    Release version 5.
+
+commit 5312dbe9bd44f354f35b3b77649e4fc580100f0c
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Thu Aug 24 02:53:26 2006 -0400
+
+    Trim trailing whitespace.
+
+commit 8f3b48b99aa5df84bb1457b1a97261fc3e01a305
+Author: Stephen Hemminger <shemminger@osdl.org>
+Date:   Wed Aug 23 14:16:09 2006 -0700
+
+    [PATCH] ethtool: skge register dump
+    
+    Pretty printing of skge registers. This is a redo of earlier
+    patch that must have got lost. It earlier patch was before the
+    git conversion.
+    
+    Signed-off-by: Stephen Hemminger <shemminger@osdl.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 20fd164c618403634ec12f90ad51be8c6e28813e
+Author: $B5HF#1QL@(B <$B5HF#1QL@(B>
+Date:   Tue Aug 22 11:40:04 2006 +0900
+
+    [PATCH] GSO Support for ethtool
+    
+    Upcoming 2.6.18 provides Generic Segmentation Offload (GSO).
+    This provides its control with -K option.
+    
+    Signed-off-by: YOSHIFUJI Hideaki <yoshfuji@linux-ipv6.org>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit e1944540b8f3008857bc95f3d08a0eb64f19a580
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Thu Aug 24 02:35:51 2006 -0400
+
+    Check for too-long interface names.
+
+commit 7f75aabe66f0c3befef7bf027fc820e244121ca9
+Author: Jeff Garzik <jeff@garzik.org>
+Date:   Tue Jul 18 22:24:58 2006 -0400
+
+    Release version 4.
+
+commit 1d077f0b42d91daad0473258f0f8c58efacda71b
+Author: Ananda Raju <Ananda.Raju@neterion.com>
+Date:   Tue Mar 14 15:15:18 2006 -0500
+
+    [PATCH] UFO patch
+    
+    Hi,
+    
+    Kernel version 2.6.15 onwards provides UDP Fragmentation Offload (UFO)
+    This patch to ethtool provides UFO (UDP Fragmentation Offload) on/off support
+    using -K option similar to feature TSO.
+    
+    To find out whether UFO is enabled or not use
+    #ethtool -k eth3
+    Offload parameters for eth3:
+    rx-checksumming: on
+    tx-checksumming: on
+    scatter-gather: on
+    tcp segmentation offload: on
+    udp fragmentation offload: on
+    #
+    
+    To turn off UFO use following command.
+    #ethtool -K eth3 ufo off
+    
+    To turn off UFO use following command.
+    #ethtool -K eth3 ufo on
+    
+    Please review the patch.
+    
+    Signed-off-by: Ananda Raju <ananda.raju@neterion.com>
+    Signed-off-by: Jeff Garzik <jeff@garzik.org>
+
+commit 7064b0d88a566b4c373593a55c39ea2d1a53c35f
+Author: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+Date:   Wed Jan 11 23:16:42 2006 -0800
+
+    [PATCH] e1000: Remove duplex info from CTRL register dump
+    
+    The duplex control register is used for setting the driver and is not
+    necessary for debug purposes.  The value of the duplex control register is
+    what the register's current value is and may not reflect the correct status
+    of te current connection.  That is what the duplex status register is used
+    for.  To keep from confusing the user, we are removing the duplex register
+    from the ethtool dump of the registers.
+    
+    Signed-off-by: Jeff Kirsher <jeffrey.t.kirsher@intel.com>
+    Signed-off-by: Jesse Brandeburg <jesse.brandeburg@intel.com>
+    Signed-off-by: John Ronciak <john.ronciak@intel.com>
+    Signed-off-by: Jeff Garzik <jgarzik@pobox.com>
+
+commit 42c353ae201f7efce6bf5b94d2a4d26735143880
+Author: Don Fry <brazilnut@us.ibm.com>
+Date:   Fri Nov 4 12:53:08 2005 -0800
+
+    [PATCH] ethtool.8 typo
+    
+    Ethtool man page nit.
+    
+    Signed-off-by: Don Fry <brazilnut@us.ibm.com>
+    Signed-off-by: Jeff Garzik <jgarzik@pobox.com>
+
+commit 14004d1a4d4b5b155e1c94da222388167456c3cd
+Author: Michael Chan <mchan@broadcom.com>
+Date:   Tue Nov 8 12:24:23 2005 -0800
+
+    [PATCH] ethtool: Format register dump for tg3
+    
+    Format output of "ethtool -d" for tg3 devices to make it more
+    readable. Each register is displayed as a 32-bit value and the
+    undefined regions in the register space are skipped.
+    
+    Signed-off-by: Michael Chan <mchan@broadcom.com>
+    Signed-off-by: Jeff Garzik <jgarzik@pobox.com>
+
+commit af2dbf701797d5c2bb5b8ea24bc1832ac79a7d7a
+Author: Michael Chan <mchan@broadcom.com>
+Date:   Fri Oct 7 13:45:10 2005 -0700
+
+    [PATCH] ethtool: Fix default advertsing
+    
+    Change 'ethtool -s eth0 autoneg on' to pass in only the supported
+    speeds to advertise if speed and duplex are not specified by the user.
+    This makes more sense than the current behavior of advertising 10/100/
+    1000, some of which may not be supported by the device.
+    
+    Signed-off-by: Michael Chan <mchan@broadcom.com>
+    Signed-off-by: Jeff Garzik <jgarzik@pobox.com>
+
+commit a69768a4266ef72fb6936334013a4183269732f2
+Author: Eugene Surovegin <ebs@ebshome.net>
+Date:   Tue Oct 25 02:29:27 2005 -0400
+
+    Add PPC4xx EMAC support.
+
+commit 6960d52a9dff61f0c6d5c788d0cd4b691d28c7e7
+Author: Manfred Spraul <manfred@colorfullife.com>
+Date:   Tue Oct 25 02:23:28 2005 -0400
+
+    Use hexdump instead of single values for default register dump.
+    
+    forcedeth now supports ethtool -d, but ethtool dumps that as 1024 lines
+    with one value in each line.
+    
+    A hexdump would be far better readable than the current output.
+
+commit b2fe65baadfbcc1ec8f1375256aef24a9ff178d4
+Author: Don Fry <brazilnut@us.ibm.com>
+Date:   Tue Jun 28 09:38:39 2005 -0700
+
+    [PATCH] display pcnet32 chip revision with ethtool
+    
+    This patch will display the version of the pcnet32 chip used by the
+    device.  It also correctly displays the MII register numbers for devices
+    with multiple PHYs.  Tested ia32 and ppc64.
+    
+    Signed-off-by: Don Fry <brazilnut@us.ibm.com>
+    Signed-off-by: Jeff Garzik <jgarzik@pobox.com>
+
+commit 527a5620f391f93e6072a923a18c75d8378ab335
+Author: Andi Kleen <ak@muc.de>
+Date:   Mon Jun 13 21:06:47 2005 +0200
+
+    [PATCH] Add long options to ethtool
+
+commit 26e7b97b2292e0ec27c326498ca3924008f0216b
+Author: Jesse Brandeburg <jesse.brandeburg@intel.com>
+Date:   Tue May 10 08:40:32 2005 -0700
+
+    [PATCH] ethtool: add support for latest Intel adapters
+    
+    This patch adds register dump and device ID support for the new Intel
+    PRO/1000 Adapters with a PCI Express bus.  It also took care of a little
+    housekeeping of some missing device IDs.
+    
+    Signed-off-by: Jesse Brandeburg <jesse.brandeburg@intel.com>
+    
+    ===== e1000.c 1.5 vs edited =====
+    Signed-off-by: Jeff Garzik <jgarzik@pobox.com>
+
+commit 940a469885deb7b63201e0c0db19b9d577933a41
+Author: Jeff Garzik <jgarzik@pobox.com>
+Date:   Tue Oct 25 02:07:02 2005 -0400
+
+    Add *.tar.gz to .gitignore (output of 'make distcheck').
+
+commit a4f48f0196c5d6a76bc26dfd6cc7a2823a0daabc
+Author: Jeff Garzik <jgarzik@pobox.com>
+Date:   Tue Oct 25 02:06:01 2005 -0400
+
+    Fix minor FC4/x86 warnings.  Add .gitignore file.
+
+commit 32c8037055f5fdaba9c9f401fd532c02571b66d7
+Author: Jeff Garzik <jgarzik@pobox.com>
+Date:   Tue Oct 25 01:56:48 2005 -0400
+
+    Initial import of ethtool version 3 + a few patches.

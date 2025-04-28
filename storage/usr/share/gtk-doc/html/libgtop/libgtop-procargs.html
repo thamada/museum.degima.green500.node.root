@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>procargs</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libgtop Reference Manual">
+<link rel="up" href="libgtop-lib.html" title="Libgtop Library Reference">
+<link rel="prev" href="libgtop-parameter.html" title="parameter">
+<link rel="next" href="libgtop-procmem.html" title="procmem">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="libgtop-white-paper.html" title="White paper">
+<link rel="chapter" href="libgtop-lib.html" title="Libgtop Library Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgtop-parameter.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="libgtop-lib.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libgtop Reference Manual</th>
+<td><a accesskey="n" href="libgtop-procmem.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgtop-procargs.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgtop-procargs.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="procargs">
+<a name="libgtop-procargs"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgtop-procargs.top_of_page"></a>procargs</span></h2>
+<p>procargs</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgtop-procargs.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glibtop/procargs.h&gt;
+
+#define             <a class="link" href="libgtop-procargs.html#GLIBTOP-PROC-ARGS-SIZE--CAPS" title="GLIBTOP_PROC_ARGS_SIZE">GLIBTOP_PROC_ARGS_SIZE</a>
+#define             <a class="link" href="libgtop-procargs.html#GLIBTOP-MAX-PROC-ARGS--CAPS" title="GLIBTOP_MAX_PROC_ARGS">GLIBTOP_MAX_PROC_ARGS</a>
+                    <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a>;
+char *              <a class="link" href="libgtop-procargs.html#glibtop-get-proc-args-l" title="glibtop_get_proc_args_l ()">glibtop_get_proc_args_l</a>             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);
+char *              <a class="link" href="libgtop-procargs.html#glibtop-get-proc-args" title="glibtop_get_proc_args ()">glibtop_get_proc_args</a>               (<a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);
+#define             <a class="link" href="libgtop-procargs.html#glibtop-get-proc-args-r" title="glibtop_get_proc_args_r">glibtop_get_proc_args_r</a>
+char *              <a class="link" href="libgtop-procargs.html#glibtop-get-proc-args-p" title="glibtop_get_proc_args_p ()">glibtop_get_proc_args_p</a>             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);
+char *              <a class="link" href="libgtop-procargs.html#glibtop-get-proc-args-s" title="glibtop_get_proc_args_s ()">glibtop_get_proc_args_s</a>             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);
+char **             <a class="link" href="libgtop-procargs.html#glibtop-get-proc-argv-l" title="glibtop_get_proc_argv_l ()">glibtop_get_proc_argv_l</a>             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);
+char **             <a class="link" href="libgtop-procargs.html#glibtop-get-proc-argv" title="glibtop_get_proc_argv ()">glibtop_get_proc_argv</a>               (<a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgtop-procargs.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgtop-procargs.details"></a><h2>Details</h2>
+<div class="refsect2" title="GLIBTOP_PROC_ARGS_SIZE">
+<a name="GLIBTOP-PROC-ARGS-SIZE--CAPS"></a><h3>GLIBTOP_PROC_ARGS_SIZE</h3>
+<pre class="programlisting">#define GLIBTOP_PROC_ARGS_SIZE		0
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MAX_PROC_ARGS">
+<a name="GLIBTOP-MAX-PROC-ARGS--CAPS"></a><h3>GLIBTOP_MAX_PROC_ARGS</h3>
+<pre class="programlisting">#define GLIBTOP_MAX_PROC_ARGS		1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_proc_args">
+<a name="glibtop-proc-args"></a><h3>glibtop_proc_args</h3>
+<pre class="programlisting">typedef struct {
+	guint64	flags;
+	guint64 size;			/* GLIBTOP_PROC_ARGS_SIZE	*/
+} glibtop_proc_args;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_args_l ()">
+<a name="glibtop-get-proc-args-l"></a><h3>glibtop_get_proc_args_l ()</h3>
+<pre class="programlisting">char *              glibtop_get_proc_args_l             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_args ()">
+<a name="glibtop-get-proc-args"></a><h3>glibtop_get_proc_args ()</h3>
+<pre class="programlisting">char *              glibtop_get_proc_args               (<a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_args_r">
+<a name="glibtop-get-proc-args-r"></a><h3>glibtop_get_proc_args_r</h3>
+<pre class="programlisting">#define             glibtop_get_proc_args_r</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_args_p ()">
+<a name="glibtop-get-proc-args-p"></a><h3>glibtop_get_proc_args_p ()</h3>
+<pre class="programlisting">char *              glibtop_get_proc_args_p             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_args_s ()">
+<a name="glibtop-get-proc-args-s"></a><h3>glibtop_get_proc_args_s ()</h3>
+<pre class="programlisting">char *              glibtop_get_proc_args_s             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_argv_l ()">
+<a name="glibtop-get-proc-argv-l"></a><h3>glibtop_get_proc_argv_l ()</h3>
+<pre class="programlisting">char **             glibtop_get_proc_argv_l             (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proc_argv ()">
+<a name="glibtop-get-proc-argv"></a><h3>glibtop_get_proc_argv ()</h3>
+<pre class="programlisting">char **             glibtop_get_proc_argv               (<a class="link" href="libgtop-procargs.html#glibtop-proc-args" title="glibtop_proc_args">glibtop_proc_args</a> *buf,
+                                                         pid_t pid,
+                                                         unsigned  max_len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e-plugin-list>
+    <e-plugin type="shlib" location="/usr/lib64/evolution/2.28/plugins/liborg-gnome-templates.so" id="org.gnome.evolution.plugin.templates" name="Templates">
+        <description>Drafts based template plugin</description>
+        <author name="Bharath Acharya" email="abharath@novell.com"/>
+	<author name="Diego Escalante Urrelo" email="diegoe@gnome.org"/>
+
+        
+        <hook class="org.gnome.evolution.mail.popup:1.0">
+            <menu target="select" id="org.gnome.evolution.mail.folderview.popup" factory="org_gnome_templates_popup">
+            </menu>
+        </hook>
+
+	<hook class="org.gnome.evolution.ui:1.0">
+		<ui-manager id="org.gnome.evolution.composer">
+			<menubar name='main-menu'>
+				<placeholder name='pre-edit-menu'>
+      					<menu action='file-menu'>
+						<placeholder name="template-holder">
+							<menuitem action="Template"/>
+						</placeholder>
+					</menu>
+				</placeholder>
+			</menubar>
+		</ui-manager>
+	</hook>
+    </e-plugin>
+</e-plugin-list>

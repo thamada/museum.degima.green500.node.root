@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Fedora_Desktop" lang="sv-SE">
+	<title>Fedoras skrivbord</title>
+	<remark>Denna nyhet finns här: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Desktop">https://fedoraproject.org/wiki/Docs/Beats/Desktop</ulink></remark>
+	<section id="sect-Release_Notes-Fedora_Desktop-Spanning_Desktop">
+		<title>Skrivbord spänner över monitorer</title>
+		<para>
+			I den senaste versionen av &#39;&#39;&#39;Xorg&#39;&#39;&#39; som ingår i denna utgåva spänner, om du har en uppsättning med dubbla monitorer, ditt skrivbord över dem istället för att använda en klonad display som standard. Detta stämmer överens med beteendet i andra operativsystem.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-Webcam">
+		<title>Bättre stöd för webbkameror</title>
+		<para>
+			Det förbättrade stödet i Fedora&nbsp;10 gjorde mycket för att förbättra stödet för webbkameror i Linux. Vi har nu ett bibliotek (<application>libv4l</application>) för att dekomprimera olika privata videoformat i användarrymden, och nästan alla program som använder webbkameror har modifierats för att använda detta bibliotek.
+		</para>
+		<para>
+			Fedora&nbsp;12 innehåller en andra omgång med bättre stöd för webbkameror, bestående av tre delar: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Mängder av testande, felrättningar och förbättringar av existerande drivrutiner i kärnan.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Tillägg av videobearbetning till <application>libv4l</application> för bättre videokvalitet för kameror som saknar någon av följande i hårdvara: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Vitbalansering
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Gammakorrigering
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Automatisk justering av exponering (gain)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Igenkänning av bärbara datorer med kameror som är kända för att installeras upp och ner och roterar bilden 180 grader i programvara
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Uppstädning av existerande drivrutiner utanför trädet, flytt av dekomprimeringen till <application>libv4l</application> vid behov och sammanslagning av dem i huvudlinjen, särskilt de följande: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									qc-usb: stv0600 (och liknande)-baserade kameror, huvudsakligen Logitech QuickCam Express (gjort i och med kärna 2.6.29)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									ov51x-jpeg: drivrutiner för ov511(+) och ov518(+) (gjort i och med kärna 2.6.31rc1, libv4l-0.6.0)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									qc-usb-messenger: st6422-baserade kameror huvudsakligen Logitech QuickCam Messenger-modeller (gjort i och med kärna 2.6.31rc1)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									sn9c20x: sn9c20x-baserade kameror, många nyare billiga kameror (gjort i och med kärna 2.6.31rc2)
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-ABRT">
+		<title>ABRT</title>
+		<para>
+			Det automatiska felrapporteringsverktyget <application>ABRT</application> ersätter <application>bug-buddy</application> och <application>kerneloops</application> i skrivbordet på Fedora&nbsp;12. <application>ABRT</application> har en utökningsbar arkitektur och kan inte bara fånga och rapportera segmenteringsfel och kärn-oops:ar, utan även pythonstackspår. I motsats till <application>bug-buddy</application> kan det fånga segmenteringsfel i vilken binär som helst, inte bara GTK+-program.
+		</para>
+		<para>
+			Om du manuellt har ändrat <application>GConf</application>-inställningarna för GTK+-modulen <application>bug-buddy</application> tidigare kan du få se varningsmeddelanden som detta från GTK+-program:
+		</para>
+		
+<screen><computeroutput>Gtk-Message: Failed to load module "gnomebreakpad":</computeroutput>
+<computeroutput>libgnomebreakpad.so: cannot open shared object file: No such file or directory</computeroutput>
+</screen>
+		<para>
+			Kör följande kommando i en terminal för att få stopp på dessa meddelanden:
+		</para>
+		
+<screen><command>gconftool-2 --type bool --set /apps/gnome_settings_daemon/gtk-modules/gnomebreakpad false</command>
+</screen>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-GNOME">
+		<title>GNOME 2.28</title>
+		<para>
+			The <application>GNOME 2.28.1</application> desktop is part of this release, and is the default environment used in the Fedora Desktop Live image. The Desktop Live image is a downloadable CD you can use to test the new GNOME environment with or without installing it. The image can be written to CD, or to a USB flash disk; for instructions, refer to <ulink url="https://fedoraproject.org/wiki/FedoraLiveCD/USBHowTo"></ulink>.
+		</para>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Icons">
+			<title>Ikoner i menyer och knappar</title>
+			<para>
+				Ikoner i menyer och knappar visas inte som standard i <application>GNOME 2.28</application>. För att få det gamla, ikonrika utseendet tillbaka, välj <menuchoice><guimenu>System</guimenu><guimenuitem>Inställningar</guimenuitem><guimenuitem>Utseende</guimenuitem></menuchoice>, klicka på fliken <guilabel>Gränssnitt</guilabel> och aktivera <guilabel>Visa ikoner i menyer</guilabel>. Det finns dock inget menygränssnitt för att aktivera ikoner i knapparna. För att sätta motsvarande GConf-nycklar istället för att aktivera att både menyerna och knapparna har ikoner: 
+<screen><command>gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true</command>
+<command>gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true</command>
+</screen>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Changes">
+			<title>Ytterligare förbättringar i GNOME 2.28</title>
+			<para>
+				Jämfört med tidigare Fedorautgåvor finns ett antal andra förändringar i standardkonfigurationen av GNOME-skrivbordet: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							Inställningsdialogen "Fönster" installeras inte längre som standard. Den finns fortfarande tillgänglig i paketet control-center-extra
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Inställningsdialogen "Huvudmeny" installeras inte längre som standard. Den finns fortfarande tillgänglig i paketet alacarte
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Användarbytaren har flyttats längst ut till höger i toppanelen
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Knappen "Visa skrivbord" har tagits bort som standard. Om du vill kan du lägga tillbaka detta panelprogram genom att högerklicka, "Lägg till i panelen..." och välja "Visa skrivbord".
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Antalet arbetsytor i "Arbetsytebytaren" har reducerats till 2
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Panelen lägger nu till extra utfyllnad mellan panelprogram och mellan ikoner i notifieringsområdet. Utfyllnaden kan tas bort med följande kommandon: 
+<screen>gconftool-2 --type int --set /apps/panel/toplevels/top_panel/padding 0
+gconftool-2 --type int --set /apps/panel/toplevels/bottom_panel/padding 0
+gconftool-2 --type int --set /apps/panel/applets/systray/prefs/padding 0
+</screen>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Gnote">
+			<title>Gnote</title>
+			<para>
+				<application>Gnote</application> är installerat som standard i GNOME i denna utgåva och ersätter <application>Tomboy</application>. <application>Gnote</application> är en portering av <application>Tomboy</application> från Mono till C++ och använder färre resurser. <application>Gnote</application> är såväl ett panelprogram som kan sitta i din GNOME-panel som ett eget program du kan köra i andra skrivbordsmiljöer. Fedora Desktop Live CD sedan utgåvan Fedora 10 har uteslutit Mono och därmed Mono-baserade program som <application>Tomboy</application> på grund av platsbrist. <application>Gnote</application> kommer installeras som standrad i Live CD:n också i denna utgåva. <application>Tomboy</application> är fortfarande tillgänglig som ett valfritt alternativ. Om du uppgraderar från en tidigare utgåva kommer du inte migreras till <application>Gnote</application> och kommer fortsätta ha <application>Tomboy</application>. <application>Tomboy</application>-användare kan migrera enkelt till <application>Gnote</application> eftersom den delar filformat och en insticksmodul är tillgänglig i <application>Gnote</application> som automatiskt importerar <application>Tomboy</application>-noteringar vid första körningen. Många <application>Tomboy</application>-insticksmoduler har porterats till <application>Gnote</application>. Följande insticksmoduler är tillgängliga som en del av <application>Gnote</application>: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							Bugzillalänkar
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Tomboy-importerare
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Fast bredd
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Infoga tidsstämpel
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Export till HTML
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Utskriftsstöd
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Importerare av klisterlappar
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Bakåtlänkar
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+			<para>
+				Du kan kopiera anteckningarna från <application>Tomboy</application> till <application>Gnote</application> med följande kommando i din hemkatalog: 
+<screen><command>cp -r .tomboy .gnote</command>
+</screen>
+			</para>
+			<para>
+				Panelprogrammet klisterlappar är inte tillgängligt längre eftersom <application>Gnote</application> utgör ett bättre verktyg för att skriva anteckningar och är tillgängligt som standard i denna utgåva.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Sound_preferences">
+			<title>Ljudinställningar</title>
+			<para>
+				GNOME:s ljudinställningar stödjer nu byte mellan profiler.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Empathy">
+			<title>Empathy</title>
+			<para>
+				<application>Empathy</application> ersätter <application>Pidgin</application> som standardprogram för snabbmeddelanden i GNOME. <application>Empathy</application> är bättre integrerat med GNOME och ger audio- och videofunktionalitet för användare av protokollet Extensible Messaging and Presence Protocol (XMPP, tidigare Jabber) med fler förbättringar planerade. <application>Empathy</application> stödjer import av konton från <application>Pidgin</application> när det först körs så att du kan migrera enklare. Om du uppgraderar från en tidigare utgåva kommer du fortsätta ha <application>Pidgin</application> som standard. <application>Pidgin</application> kommer fortsatt vara tillgänligt i förrådet och är aktivt underhållet.
+			</para>
+			<para>
+				De största fördelarna och nackdelarna med <application>Empathy</application> är: 
+				<itemizedlist>
+					<title>Fördelar</title>
+					<listitem>
+						<para>
+							Bättre integration med GNOME. Lösenord lagras i nyckelringen istället för i klartext som i <application>Pidgin</application>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Röst-chattande med <application>GoogleTalk</application>. Röst-chattande kräver extra <application>gstreamer</application>-omkodare och manuell omkonfiguration av brandväggen och <application>Pidgin</application> använder nu också samma ramverk.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Stöd för kontomigrering från <application>Pidgin</application> har lagts till i <application>Empathy</application>.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Stöd för samarbete med <application>Abiword</application> och andra program
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Geo Location (väldigt ny funktion)
+						</para>
+					</listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<title>Nackdelar</title>
+					<listitem>
+						<para>
+							System för insticksmoduler saknas, så många av tilläggsfunktionerna tillgängliga i <application>Pidgin</application> (som kryptering) är inte tillgängliga i <application>Empathy</application>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Inget stöd för proxy
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Totem">
+			<title>Totem</title>
+			<para>
+				<application>Totem</application> stödjer endast en <application>gstreamer</application>-bakände nu. Bakänden <application>totem-xine</application> har helt tagits bort.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Epiphany">
+			<title>Epiphany</title>
+			<para>
+				<application>Epiphany</application> i denna utgåva använder nu WebKit-motorn istället för Gecko-motorn från <application>Firefox</application>.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME_Shell">
+			<title>GNOME-skal &mdash; förhandsutgåva av GNOME 3</title>
+			<para>
+				En mycket tidig version av GNOME-skalet är nu tillgänglig i förrådet. GNOME-skalet är en nyckeldel i GNOME 3 och är under aktiv utveckling med stark medverkan av Fedorautvecklare och interaktionsdesignrar. Ett enkelt sätt att pröva GNOME-skalet är att installera paketet <package>desktop-effects</package>: 
+<screen><command>yum install desktop-effects gnome-shell</command>
+</screen>
+			</para>
+			<para>
+				Klicka sedan på <menuchoice><guimenu>System</guimenu><guimenuitem>Inställningar</guimenuitem><guimenuitem>Skrivbordseffekter</guimenuitem></menuchoice>
+			</para>
+			<para>
+				Om du skulle vilja konfigurera det manuellt, kör 
+<screen><command>mkdir ~/.config/autostart</command>
+<command>ln -s /usr/share/applications/gnome-shell.desktop ~/.config/autostart</command>
+</screen>
+			</para>
+			<para>
+				Du kan också köra följande för att sätta igång det direkt. 
+<screen><command>gnome-shell --replace &amp;</command>
+</screen>
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-KDE">
+		<title>KDE 4.3</title>
+		<para>
+			<application>KDE 4.3</application> är en del av denna utgåva och är standardmiljön i Fedora KDE Desktop Live-avbild. KDE Desktop Live-avbilden är en nedladdningsbar CD som du kan använda för att prova den nya KDE-miljön med eller utan att installera den. Du kan skriva avbilden på en CD eller till en USB-flash-disk.
+		</para>
+		<para>
+			<application>KDE 4.3</application> is the latest release of KDE 4, with many enhancements and new features. <application>Plasma</application> has a new <citetitle>Air</citetitle> look, improved job and notification management and fully-configurable keyboard shortcuts. There are also new <application>Plasma</application> widgets and existing ones are improved. <application>KWin</application> is optimized for performance and brings new desktop effects to KDE. KDE now contains a new bug reporting tool, making it easier to report bugs to the KDE developers.
+		</para>
+	</section>
+
+</section>
+
+

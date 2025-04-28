@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_SERVICES_DISTRO_SPECIFICS SYSTEM "system-config-services-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_SERVICES_TOOL "Services Configuration Tool">
+<!ENTITY SYSTEM_CONFIG_SERVICES_INVOCATION '
+    <indexterm significance="normal">
+        <primary><command>system-config-services</command>
+        </primary>
+        <see>&SYSTEM_CONFIG_SERVICES_TOOL;</see>
+    </indexterm>
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_SERVICES_TOOL;. To start the application on the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Services</guimenuitem></menuchoice>.
+    </para>
+'>
+<!ENTITY SYSTEM_CONFIG_SERVICES_ABSTRACT SYSTEM "system-config-services-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_SERVICES_CONTENT SYSTEM "system-config-services-content.xml">
+]>
+<article><title>Controlling Access to Services</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2008-01-30</date></revision><revision><revnumber>1.1</revnumber><date>2008-03-05</date></revision><revision><revnumber>1.1.1</revnumber><date>2008-03-12</date></revision></revhistory><abstract role="description"><para>
+    Maintaining security on your system is extremely important, and one approach for this task is to manage access to system services carefully. Your system may need to provide open access to particular services (for example, <command>httpd</command> if you are running a Web server). However, if you do not need to provide a service, you should turn it off to minimize your exposure to possible bug exploits.
+</para><para>
+    There are several different methods for managing access to system services. Choose which method of management to use based on the service, your system's configuration, and your level of Linux expertise.
+</para><para>
+    The easiest way to deny access to a service is to turn it off. Both the services managed by <command>xinetd</command> and the services in the <filename>/etc/rc.d/init.d</filename> hierarchy (also known as SysV services) can be configured to start or stop with the <application>Services Configuration Tool</application>.
+</para>
+</abstract><authorgroup><corpauthor role="maintainer">
+                <trademark class="registered">Red Hat</trademark>, Inc.
+            </corpauthor></authorgroup></articleinfo>    <para>
+    Maintaining security on your system is extremely important, and one approach for this task is to manage access to system services carefully. Your system may need to provide open access to particular services (for example, <command>httpd</command> if you are running a Web server). However, if you do not need to provide a service, you should turn it off to minimize your exposure to possible bug exploits.
+</para><para>
+    There are several different methods for managing access to system services. Choose which method of management to use based on the service, your system's configuration, and your level of Linux expertise.
+</para><para>
+    The easiest way to deny access to a service is to turn it off. Both the services managed by <command>xinetd</command> and the services in the <filename>/etc/rc.d/init.d</filename> hierarchy (also known as SysV services) can be configured to start or stop with the <application>Services Configuration Tool</application>.
+</para>
+
+
+    <indexterm significance="normal"><primary><command>system-config-services</command>
+        </primary><see>Services Configuration Tool</see></indexterm><para>
+        You must be running the <application>X</application> Window System and have root privileges to use the Services Configuration Tool. To start the application on the desktop, go to <menuchoice><guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu><guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Services</guimenuitem></menuchoice>.
+    </para>
+
+
+	<section id="s1-services-serviceconf"><title><application>Services Configuration Tool</application></title><indexterm significance="normal"><primary><application>Services Configuration Tool</application></primary></indexterm><para>
+			The <application>Services Configuration Tool</application> is a graphical application to configure which SysV services in the <filename>/etc/rc.d/init.d</filename> directory are started at boot time (for runlevels 3, 4, and 5) and which <command>xinetd</command> services are enabled. It also allows you to start, stop, and restart SysV services.
+		</para><figure float="0" id="fig-serviceconf"><title><application>Services Configuration Tool</application></title><mediaobject><imageobject><imagedata fileref="images/system-config-services.png" format="PNG"/></imageobject><textobject><para>
+						Configuring network services
+					</para></textobject></mediaobject></figure><para>
+			The <application>Services Configuration Tool</application> lists the services from the <filename>/etc/rc.d/init.d</filename> directory as well as the services controlled by <command>xinetd</command>. Click on the name of the service from the list on the left-hand side of the application to display a brief description of that service as well as the status of the service. If the service is a SysV service, the status window shows whether the service is currently running.
+		</para><para>
+			To start, stop, or restart a service immediately, select the service from the list and click the appropriate button on the toolbar (or choose the action from the <guimenu>Service</guimenu> pulldown menu). If the service is an <command>xinetd</command> service, the action buttons are disabled because they cannot be started or stopped individually.
+		</para><note><title>Note</title><para>
+				When you save changes to <command>xinetd</command> services, <command>xinetd</command> is reloaded, and the changes take place immediately. When you save changes to other services, the runlevel is reconfigured, but the changes do not take effect immediately.
+			</para></note><para>
+            To enable a service, select the service in the list and click on one of the <guibutton>Enable</guibutton>, <guibutton>Disable</guibutton> or (to enable a SysV service in other than the default runlevels) <guibutton>Customize</guibutton> buttons in the toolbar or choose the equivalent action from the <guimenu>Service</guimenu> menu. In the case of a SysV service, the runlevel configuration is changed, but the runlevel is not restarted; thus, the changes do not take place immediately.
+		</para><para>
+			As an example: If you disable the <command>httpd</command> service, the runlevel configuration changes so that <command>httpd</command> is not started at boot time. However, the current runlevel is not reinitialized, so <command>httpd</command> is still running. Select one of following options at this point:
+		</para><orderedlist continuation="restarts" inheritnum="ignore"><listitem><para>
+					Stop the <command>httpd</command> service &#x2014; Stop the service by selecting it from the list and clicking the <guibutton>Stop</guibutton> button. The status of the service will be updated accordingly.
+				</para></listitem><listitem><para>
+					Reinitialize the runlevel &#x2014; Reinitialize the runlevel by going to a shell prompt and typing the command <command>telinit <replaceable>x</replaceable></command> (where <replaceable>x</replaceable> is the runlevel number; for example, 3.). This option is recommended if you enable or disable multiple services and want to activate the changes immediately.
+				</para></listitem><listitem><para>
+					Do nothing else &#x2014; You do not have to stop the <command>httpd</command> service. You can wait until the system is rebooted for the service to stop. The next time the system is booted, the runlevel is initialized without the <command>httpd</command> service running.
+				</para></listitem></orderedlist></section>
+</article>

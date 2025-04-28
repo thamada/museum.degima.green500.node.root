@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-File_Systems" lang="zh-CN">
+	<title>文&#x200B;件&#x200B;系&#x200B;统&#x200B;</title>
+	<remark>这&#x200B;个 beat 位&#x200B;于&#x200B;：<ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/FileSystems">https://fedoraproject.org/wiki/Docs/Beats/FileSystems</ulink></remark>
+	<section id="sect-Release_Notes-File_Systems-fusecompress">
+		<title>fusecompress</title>
+		<indexterm>
+			<primary>fusecompress</primary>
+		</indexterm>
+		<para>
+			<package>Fusecompress</package> is a compressing filesystem mountable by unprivileged users. Fedora-11 had fusecompress-1.99.19. Fedora-12 updates to fusecompress-2.6. This fixes many very nasty bugs but changes the on-disk format. Users with fusecompress filesystems will need to migrate their data to the new format. Unless they decompress before upgrading, they will need the <package>fusecompress_offline1</package> package to do so.
+		</para>
+		<warning>
+			<title>您&#x200B;必&#x200B;须&#x200B;转&#x200B;换&#x200B;您&#x200B;的&#x200B;文&#x200B;件&#x200B;系&#x200B;统&#x200B;</title>
+			<para>
+				如&#x200B;果&#x200B;用&#x200B;户&#x200B;没&#x200B;有&#x200B;阅&#x200B;读&#x200B;这&#x200B;些&#x200B;发&#x200B;行&#x200B;注&#x200B;记&#x200B;并&#x200B;且&#x200B;他&#x200B;们&#x200B;意&#x200B;识&#x200B;到&#x200B;需&#x200B;要&#x200B;更&#x200B;新&#x200B;格&#x200B;式&#x200B;，他&#x200B;们&#x200B;出&#x200B;错&#x200B;后&#x200B;的&#x200B;第&#x200B;一&#x200B;表&#x200B;现&#x200B;很&#x200B;可&#x200B;能&#x200B;是&#x200B;当&#x200B;它&#x200B;们&#x200B;打&#x200B;算&#x200B;阅&#x200B;读&#x200B;文&#x200B;本&#x200B;文&#x200B;件&#x200B;时&#x200B;文&#x200B;件&#x200B;成&#x200B;了&#x200B;二&#x200B;进&#x200B;制&#x200B;： 
+<screen>$ less test.txt
+ "test.dump" may be a binary file.  See it anyway?
+</screen>
+			</para>
+		</warning>
+		<para>
+			更&#x200B;新&#x200B;文&#x200B;件&#x200B;系&#x200B;统&#x200B;的&#x200B;基&#x200B;本&#x200B;方&#x200B;法&#x200B;位&#x200B;于&#x200B;fusecompress1软&#x200B;件&#x200B;包&#x200B;的&#x200B;<filename>/usr/share/doc/fusecompress_offline1-%{version}/README.fedora</filename>文&#x200B;件&#x200B;内&#x200B;。&#x200B;fusecompress包&#x200B;中&#x200B;的&#x200B;<filename>README.fedora</filename>文&#x200B;件&#x200B;告&#x200B;诉&#x200B;用&#x200B;户&#x200B;安&#x200B;装&#x200B;<package>fusecompress_offline1</package>并&#x200B;阅&#x200B;读&#x200B;那&#x200B;个&#x200B;文&#x200B;件&#x200B;。&#x200B;更&#x200B;新&#x200B;说&#x200B;明&#x200B;重&#x200B;复&#x200B;如&#x200B;下&#x200B;：
+		</para>
+		<para>
+			
+<screen>假设Fedora 11中您的旧fusecompress根目录（文件实际
+存储位置）位于~/.fusestorage，您将其挂载到~/storage。现在您已
+升级到Fedora 12并需要将您的fusecompress文件系统更新至
+新格式。以下是基本步骤：
+
+   #  确认没有挂载旧的fuseompress文件系统
+    fusermount -u ~/storage
+    # 将其移动至新的位置
+    mv ~/.fusestorage ~/.fusestorage.old
+    # 为新格式的数据创建新目录
+    mkdir ~/.fusestorage
+    # 挂载新目录。它现在就是新格式的fusecompress文件系统
+    fusecompress ~/.fusestorage ~/storage
+    # 在旧fusecompress数据目录中解压所有文件
+    fusecompress_offline1 ~/.fusestorage.old
+    # 将这些文件转移到新格式的目录
+    mv .fusestorage.old/* ~/storage
+    # 如果您有隐藏文件，也记得移动它们
+    mv .fusestorage.old/.?* ~/storage
+
+注意使用本步骤时您需要足够的磁盘空间
+来存放位于~/.fusestorage.old中的解压文件。如果您的
+空间不足，您必须对~/.fusestorage.old中部分文件运行fusecompress_offline1
+然后将它们移动到~/storage重新压缩，
+以释放空间来让您对更多文件运行fusecompress_offline1。
+</screen>
+		</para>
+	</section>
+
+</section>
+
+

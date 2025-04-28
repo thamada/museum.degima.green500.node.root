@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="iso-8859-15"?> <!-- -*-html-helper-*- -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>mod_dnssd 0.6</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+<h1><a name="top">mod_dnssd 0.6</a></h1>
+
+<p><i>Copyright 2006-2009 Lennart Poettering &lt;mzzbqqaffq (at) 0pointer (dot) net&gt;</i></p>
+
+<ul class="toc">
+    <li><a href="#license">License</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#status">Current Status</a></li>
+    <li><a href="#documentation">Documentation</a></li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#installation">Installation</a></li>
+    <li><a href="#acks">Acknowledgements</a></li>
+    <li><a href="#download">Download</a></li>
+</ul>
+
+<h2><a name="license">License</a></h2>
+
+<p>Copyright 2006-2009 Lennart Poettering</p>
+
+<p>Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except in compliance with the License.  You may
+obtain a copy of the License at</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
+
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied.  See the License for the specific language governing
+permissions and limitations under the License.</p>
+
+<h2><a name="news">News</a></h2>
+
+<div class="news-date">Wed Jan 18
+2009: </div> <p class="news-text"><a href="http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.6.tar.gz">Version
+0.6</a> released, changes include: add a new
+directive <tt>DNSSDServiceTxtRecord</tt></p>
+
+<div class="news-date">Tue Apr 17 2007: </div> <p class="news-text"><a
+href="http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.5.tar.gz">Version 0.5</a> released, changes include: updated for Apache 2.2; for compatibility with older Apache versions please use <tt>mod_dnssd</tt> 0.4.</p>
+
+<div class="news-date">Sat Apr 1 2006: </div> <p class="news-text"><a
+href="http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.4.tar.gz">Version 0.4</a> released, changes include: deal properly with vhosts listening on ports != 80; add new <tt>DNSSDUserDir</tt> directive.</p>
+
+<div class="news-date">Sun Jan 22 2006: </div> <p class="news-text"><a
+href="http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.3.tar.gz">Version 0.3</a> released, changes include: fix compilation on FreeBSD and Mandriva; compatibility with Apache 2.2; fix a memory corruption bug</p>
+
+<div class="news-date">Sat Jan 21 2006: </div> <p class="news-text"><a
+href="http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.2.tar.gz">Version 0.2</a> released, changes include: handle graceful restarts properly, other smaller cleanups</p>
+
+<div class="news-date">Thu Jan 19 2006: </div> <p class="news-text"><a
+href="http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.1.tar.gz">Version 0.1</a> released,
+initial realease</p>
+
+<h2><a name="overview">Overview</a></h2>
+
+<p><tt>mod_dnssd</tt> is an <a href="http://httpd.apache.org/">Apache
+HTTPD</a> module which adds <a
+href="http://www.zeroconf.org/">Zeroconf</a> support via <a
+href="http://www.dns-sd.org/">DNS-SD</a> using <a
+href="http://avahi.org/">Avahi</a>.</p>
+
+<h2><a name="status">Status</a></h2>
+
+<p>Version 0.6 is more or less stable and fulfills its purpose.</p>
+
+<h2><a name="documentation">Documentation</a></h2>
+
+<p>For activating <tt>mod_dnssd</tt> just load it into the server and use the global directive <tt>DNSSDEnable</tt> to enable it: </p>
+
+<pre>
+DNSSDEnable on
+</pre>
+
+<p>That's it, nothing more is required! The module publishes all
+configured virtual hosts and the <tt>mod_userdir</tt> directories of
+all local users. For <tt>mod_userdir</tt> to work you need to load
+that module and configure it for the path <tt>~/public_html/</tt>.</p>
+
+<p><b>Please note</b> that all <tt>ServerName</tt>s used in the Apache
+configuration files for services that shall be published with Avahi/DNS-SD need
+to be valid and in <a href="http://en.wikipedia.org/wiki/FQDN">FQDN format</a>, i.e. resolvable via mDNS or traditional DNS,
+and consist of at least two labels. (<tt>foobar</tt> does not qualify as such,
+but <tt>foobar.local</tt> does.)</p>
+
+<h3>Advanced Features</h3>
+
+<p>Five other directives are available: the global directive
+<tt>DNSSDAutoRegisterUserDir</tt> can be used to disable automatic
+registration of <tt>mod_userdir</tt> directories. The global directive
+<tt>DNSSDAutoRegisterVHosts</tt> can be used to disable automatic
+registration of all local virtual hosts.</p>
+
+<p>The two directives <tt>DNSSDServiceName</tt> and
+<tt>DNSSDServiceTypes</tt> which can be placed inside a
+<tt>&lt;VirtualHost&gt;</tt> or <tt>&lt;Location&gt;</tt> section
+can be used to define additional services for publishing or to
+finetune the service name or types of virtual hosts. If placed inside
+a <tt>&lt;VirtualHost&gt;</tt> you can change the service types and
+name of the attached service (if used with
+<tt>DNSSDAutoRegisterVHosts</tt> set to <tt>on</tt>) or to register a
+service for the virtual host (if used with
+<tt>DNSSDAutoRegisterVHosts</tt> disabled). <tt>DNSSDServiceTypes</tt>
+takes a list of at least one DNS-SD service type (defaults to
+<tt>_http._tcp</tt>). A good example when to pass more than one
+service type is a WebDAV server:</p>
+
+<pre>
+DNSSDServiceTypes _http._tcp _webdav._tcp
+</pre>
+
+<p>This will register the server both as HTTP and as WebDAV
+service. Please note that both services do have different types but
+share the same name! Other areas where this might become handy is when registering RSS formatted blogs or XMLRPC services.</p>
+
+<p><tt>DNSSDServiceName</tt> and <tt>DNSSDServiceTypes</tt> are
+especially useful inside a <tt>&lt;Location&gt;</tt> block. Using this
+notation you can register additional services in subdirectories of the
+server. A quick and incomplete example:</p>
+
+<pre>
+...
+DNSSDEnable On
+DNSSDAutoRegisterVHosts On
+DNSSDAutoRegisterUserDir On
+
+&lt;VirtualHost *&gt;
+    DocumentRoot /var/www
+    DNSSDServiceName "Our Little Home Web Server"
+
+    &lt;Location /doc&gt;
+        DNSSDServiceName "Documentation"
+        ...
+    &lt;/Location&gt;
+
+    &lt;Location /squirrelmail&gt;
+        DNSSDServiceName "Webmail"
+        ...
+    &lt;/Location&gt;
+
+    &lt;Location /webdav&gt;
+        DAV On
+        DNSSDServiceName "Our WebDAV folder"
+        DNSSDServiceTypes _webdav._tcp _http._tcp
+        ...
+    &lt;/Location&gt;
+
+    &lt;Location /blog.rss&gt;
+        DNSSDServiceName "The Blog"
+        DNSSDServiceTypes _rss._tcp
+        ...
+    &lt;/Location&gt;
+
+    ...
+&lt;/VirtualHost&gt;
+
+...
+</pre>
+
+<p>This will register six services: <i>Our Little Home Web Server</i>,
+<i>Documentation</i>, <i>Webmail</i> and <i>Our WebDAV folder</i> as
+type <tt>_http._tcp</tt>, <i>Our WebDAV folder</i> a second time under
+the type <tt>_webdav._tcp</tt> and finally <i>The Blog</i> as type
+<tt>_rss._tcp</tt>.</p>
+
+<p>The directive <tt>DNSSDServicePort</tt> can be used to tell
+<tt>mod_dnssd</tt> the right port number in complicated setups, where
+it fails to detect the correct one to use. It is seldomly used and you
+probably shouldn't bother.</p>
+
+<p>The global directive <tt>DNSSDUserDir</tt> may be used to change
+the directory inside the user's home directory that is published by
+<tt>DNSSDAutoRegisterUserDir</tt>. This defaults to
+<tt>public_html</tt>. If you used the <tt>UserDir</tt> directive in
+your Apache configuration file you probably want to use this
+directive, too. Please note, however, that <tt>DNSSDUserDir</tt>
+doesn't accept the full syntax that <tt>UserDir</tt> accepts. In fact
+only the simplest form - a simple string without any <tt>*</tt> and
+without the <tt>/</tt> prefix - is accepted.</p>
+
+<p>You might find this <a
+href="http://0pointer.de/blog/projects/mod_dnssd.html">blog
+article</a> I wrote enlightening which contains more examples how
+to make use of <tt>mod_dnssd</tt>.</p>
+
+<h2><a name="requirements">Requirements</a></h2>
+
+<p><tt>mod_dnssd</tt> requires a current release of Apache 2.2 with
+<tt>apxs</tt> and a development installation of <a
+href="http://avahi.org/">Avahi</a> 0.6 or newer. <tt>mod_dnssd</tt> has been tested exclusively with <tt>mpm_prefork</tt>, your mileage with other MPMs may vary. (Please report successes or failures!)</p>
+
+<p><tt>mod_dnssd</tt> has been developed and tested on Debian GNU/Linux
+"testing" from January 2006, it should work on most other Linux
+distributions and probably POSIX implementations since it uses GNU
+autoconf and Apache <tt>apxs</tt> for source code configuration.</p>
+
+<h2><a name="installation">Installation</a></h2>
+
+<p>As this package is made with the GNU autotools you should run
+<tt>./configure</tt> inside the distribution directory for configuring
+the source tree. After that you should run <tt>make</tt> for
+compilation and <tt>make install</tt> (as root) for installation of
+<tt>mod_dnssd</tt>.</p>
+
+<h2><a name="acks">Acknowledgements</a></h2>
+
+<p>This work was inspired by Sander Temme's and Sebastien Estienne's <a href="http://www.temme.net/sander/mod_zeroconf/">mod_zeroconf</a> module.</p>
+
+<p>Sebastien Estienne for packaging <tt>mod_dnssd</tt> for Debian.</p>
+
+<p>Bastien Nocera for adding the <tt>DNSSDServiceTxtRecord</tt> directive.</p>
+
+<h2><a name="download">Download</a></h2>
+
+<p>The newest release is always available from <a href="http://0pointer.de/lennart/projects/mod_dnssd/">http://0pointer.de/lennart/projects/mod_dnssd/</a></p>
+
+<p>The current release is <a href="http://0pointer.de/lennart/projects/mod_dnssd/mod_dnssd-0.6.tar.gz">0.6</a></p>
+
+<p>Get <tt>mod_dnssd</tt>'s development sources from the <a href="http://git.or.cz/">GIT</a> <a href="git://git.0pointer.de/mod_dnssd">repository</a> (<a href="http://git.0pointer.de/?p=mod_dnssd.git">gitweb</a>): </p>
+
+
+<pre>git clone git://git.0pointer.de/mod_dnssd</pre>
+
+<p>You may find an up to date Debian package of <tt>mod_dnssd</tt> in the <a href="http://packages.debian.org/libapache2-mod-dnssd">Debian package repository</a>.</p>
+
+<hr/>
+<address class="grey">Lennart Poettering &lt;mzzbqqaffq (at) 0pointer (dot) net&gt;, January 2009</address>
+
+</body>
+</html>

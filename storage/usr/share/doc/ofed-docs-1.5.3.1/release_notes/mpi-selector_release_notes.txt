@@ -1,0 +1,43 @@
+			MPI Selector 1.0 release notes
+				December 2009
+			==============================
+
+OFED contains a simple mechanism for system administrators and end
+users to select which MPI implementation they want to use.  The MPI
+selector functionality is not specific to any MPI implementation; it
+can be used with any implementation that provides shell startup files
+that correctly set the environment for that MPI.  The OFED installer
+will automatically add MPI selector support for each MPI that it
+installs.  Additional MPI's not known by the OFED installer can be
+listed in the MPI selector; see the mpi-selector(1) man page for
+details.
+
+Note that MPI selector only affects the default MPI environment for
+*future* shells.  Specifically, if you use MPI selector to select MPI
+implementation ABC, this default selection will not take effect until
+you start a new shell (e.g., logout and login again).  Other packages
+(such as environment modules) provide functionality that allows
+changing your environment to point to a new MPI implementation in the
+current shell.  The MPI selector was not meant to duplicate or replace
+that functionality.
+
+The MPI selector functionality can be invoked in one of two ways:
+
+1. The mpi-selector-menu command.
+
+    This command is a simple, menu-based program that allows the
+    selection of the system-wide MPI (usually only settable by root)
+    and a per-user MPI selection.  It also shows what the current
+    selections are.
+
+    This command is recommended for all users.
+
+2. The mpi-selector command.
+
+    This command is a CLI-equivalent of the mpi-selector-menu,
+    allowing for the same functionality as mpi-selector-menu but
+    without the interactive menus and prompts.  It is suitable for
+    scripting.
+
+See the mpi-selector(1) man page for more information.
+

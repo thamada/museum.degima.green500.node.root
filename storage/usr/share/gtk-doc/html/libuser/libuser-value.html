@@ -1,0 +1,304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>value</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libuser Reference Manual">
+<link rel="up" href="ch01.html" title="libuser">
+<link rel="prev" href="libuser-config.html" title="config">
+<link rel="next" href="libuser-entity.html" title="entity">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="libuser">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libuser-config.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libuser Reference Manual</th>
+<td><a accesskey="n" href="libuser-entity.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libuser-value.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libuser-value.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="value">
+<a name="libuser-value"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libuser-value.top_of_page"></a>value</span></h2>
+<p>value — Simplified interface to GValue types used in libuser entities.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libuser-value.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#define             <a class="link" href="libuser-value.html#LU-VALUE-INVALID-ID--CAPS" title="LU_VALUE_INVALID_ID">LU_VALUE_INVALID_ID</a>
+char *              <a class="link" href="libuser-value.html#lu-value-strdup" title="lu_value_strdup ()">lu_value_strdup</a>                     (const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value);
+<a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libuser-value.html#lu-value-init-set-attr-from-string" title="lu_value_init_set_attr_from_string ()">lu_value_init_set_attr_from_string</a>  (<a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         const char *attr,
+                                                         const char *string,
+                                                         lu_error_t **error);
+void                <a class="link" href="libuser-value.html#lu-value-init-set-id" title="lu_value_init_set_id ()">lu_value_init_set_id</a>                (<a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         id_t id);
+id_t                <a class="link" href="libuser-value.html#lu-value-get-id" title="lu_value_get_id ()">lu_value_get_id</a>                     (const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value);
+int                 <a class="link" href="libuser-value.html#lu-values-equal" title="lu_values_equal ()">lu_values_equal</a>                     (const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *a,
+                                                         const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *b);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libuser-value.description"></a><h2>Description</h2>
+<p>
+Libuser entities store attribute values as <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a>, which allows representing
+any possible data type.  Only a few types are needed in practice; the only
+types applications should hard-code are <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#G-TYPE-LONG--CAPS"
+><code class="literal">G_TYPE_LONG</code></a> and <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#G-TYPE-STRING--CAPS"
+><code class="literal">G_TYPE_STRING</code></a>
+(<a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#G-TYPE-STRING--CAPS"
+><code class="literal">G_TYPE_STRING</code></a> can usually be used as a fallback for other number types).
+</p>
+<p>
+The only currently used data types that are not conveniently supported using
+the above types are <span class="type">uid_t</span> and <span class="type">gid_t</span> (which can be together represented in
+<span class="type">id_t</span>), because they can support values outside of the range of <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#glong"
+><span class="type">glong</span></a>.  Helper
+functions are provided to convert values between <span class="type">id_t</span> and <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a>, even if the
+value is stored using <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#G-TYPE-STRING--CAPS"
+><code class="literal">G_TYPE_STRING</code></a>.  The <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+><span class="type">GValue</span></a> types used for storing <span class="type">id_t</span>
+values are an internal implementation detail of libuser and applications should
+not rely on them.
+</p>
+<p>
+Values of each attribute are expected to have a specific type, documented in
+the documentation of the specific attribute name.  Using other types (e.g.
+using <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#G-TYPE-STRING--CAPS"
+><code class="literal">G_TYPE_STRING</code></a> for <a class="link" href="libuser-entity.html#LU-UIDNUMBER--CAPS" title="LU_UIDNUMBER"><code class="literal">LU_UIDNUMBER</code></a>) is not allowed and results in undefined
+behavior.. You can use <a class="link" href="libuser-value.html#lu-value-strdup" title="lu_value_strdup ()"><code class="function">lu_value_strdup()</code></a> and
+<a class="link" href="libuser-value.html#lu-value-init-set-attr-from-string" title="lu_value_init_set_attr_from_string ()"><code class="function">lu_value_init_set_attr_from_string()</code></a> for conversion between strings and values
+appropriate for a specific attribute.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libuser-value.details"></a><h2>Details</h2>
+<div class="refsect2" title="LU_VALUE_INVALID_ID">
+<a name="LU-VALUE-INVALID-ID--CAPS"></a><h3>LU_VALUE_INVALID_ID</h3>
+<pre class="programlisting">#define LU_VALUE_INVALID_ID ((id_t)-1)
+</pre>
+<p>
+An <span class="type">id_t</span> value that matches no valid user or group ID.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="lu_value_strdup ()">
+<a name="lu-value-strdup"></a><h3>lu_value_strdup ()</h3>
+<pre class="programlisting">char *              lu_value_strdup                     (const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value);</pre>
+<p>
+Converts <em class="parameter"><code>value</code></em>, of any type used by libuser, to a string.  Preferable
+to hard-coding checks for expected value types.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>value
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>string, should be freed by <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"
+><code class="function">g_free()</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_value_init_set_attr_from_string ()">
+<a name="lu-value-init-set-attr-from-string"></a><h3>lu_value_init_set_attr_from_string ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"
+>gboolean</a>            lu_value_init_set_attr_from_string  (<a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         const char *attr,
+                                                         const char *string,
+                                                         lu_error_t **error);</pre>
+<p>
+Initializes a zero-filled (uninitialized) <em class="parameter"><code>value</code></em> for storing a value of
+attribute <em class="parameter"><code>attr</code></em> and sets it to the contents of <em class="parameter"><code>string</code></em>.  To see whether a
+specific type is used for an attribute, see the documentation of that
+attribute.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>#GValue
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>attr</code></em> :</span></p></td>
+<td>attribute name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
+<td>the string to convert
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>filled with a <span class="type">lu_error</span> if an error occurs, or <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> if <em class="parameter"><code>attr</code></em> is
+unknown
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>%TRUE on success, <a
+href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> on error or if <em class="parameter"><code>attr</code></em> is unknown
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_value_init_set_id ()">
+<a name="lu-value-init-set-id"></a><h3>lu_value_init_set_id ()</h3>
+<pre class="programlisting">void                lu_value_init_set_id                (<a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value,
+                                                         id_t id);</pre>
+<p>
+Initializes a zero-filled (uninitialized) <em class="parameter"><code>value</code></em> with an unspecified type and
+sets it to <em class="parameter"><code>id</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>#GValue
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td>user or group ID.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_value_get_id ()">
+<a name="lu-value-get-id"></a><h3>lu_value_get_id ()</h3>
+<pre class="programlisting">id_t                lu_value_get_id                     (const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *value);</pre>
+<p>
+Get the contents of <em class="parameter"><code>value</code></em>. <em class="parameter"><code>value</code></em> should be initialized by
+<a class="link" href="libuser-value.html#lu-value-init-set-id" title="lu_value_init_set_id ()"><code class="function">lu_value_init_set_id()</code></a> or use <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#G-TYPE-LONG--CAPS"
+><code class="literal">G_TYPE_LONG</code></a> or <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#G-TYPE-STRING--CAPS"
+><code class="literal">G_TYPE_STRING</code></a>.
+</p>
+<p>
+If <em class="parameter"><code>value</code></em> does not contain a valid <span class="type">id_t</span> value, <a class="link" href="libuser-value.html#LU-VALUE-INVALID-ID--CAPS" title="LU_VALUE_INVALID_ID"><code class="literal">LU_VALUE_INVALID_ID</code></a>
+is returned.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>#GValue
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>ID value or <a class="link" href="libuser-value.html#LU-VALUE-INVALID-ID--CAPS" title="LU_VALUE_INVALID_ID"><code class="literal">LU_VALUE_INVALID_ID</code></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="lu_values_equal ()">
+<a name="lu-values-equal"></a><h3>lu_values_equal ()</h3>
+<pre class="programlisting">int                 lu_values_equal                     (const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *a,
+                                                         const <a
+href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"
+>GValue</a> *b);</pre>
+<p>
+Check whether <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em> have the same type and value.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
+<td>#GValue
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>b</code></em> :</span></p></td>
+<td>#GValue
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>#TRUE if <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em> have the same type and value
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

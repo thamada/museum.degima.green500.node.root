@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_USERS_DISTRO_SPECIFICS SYSTEM "system-config-users-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_USERS_TOOL "User and Group Configuration Tool">
+<!ENTITY SYSTEM_CONFIG_USERS_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-users</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_USERS_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_USERS_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Users and Groups</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the fast user switch applet in the toolbar and select <guimenu>Edit Users and Groups</guimenu>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-users</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_USERS_ABSTRACT SYSTEM "system-config-users-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_USERS_CONTENT SYSTEM "system-config-users-content.xml">
+]>
+<article lang="ka"><title>User and Group Configuration Tool</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2008-01-31</date></revision><revision><revnumber>1.0.1</revnumber><date>2008-03-11</date></revision><revision><revnumber>1.0.2</revnumber><date>2008-03-12</date></revision></revhistory><abstract role="description"><para>
+    The <application>User and Group Configuration Tool</application> allows you to view, modify, add, and delete local users and groups.
+</para>
+</abstract><authorgroup><corpauthor role="maintainer">
+                <trademark class="registered">Red Hat</trademark>, Inc.
+            </corpauthor></authorgroup></articleinfo><para>
+    The <application>User and Group Configuration Tool</application> allows you to view, modify, add, and delete local users and groups.
+</para>
+<indexterm significance="normal"><primary><command>system-config-users</command> 
+        </primary><see>User and Group Configuration Tool</see></indexterm><para>
+        You must be running the <application>X</application> Window System and have root privileges to use the User and Group Configuration Tool. There are three ways to start the application:
+    </para><itemizedlist><listitem><para>
+                From the desktop, go to <menuchoice><guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu><guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Users and Groups</guimenuitem></menuchoice>
+            </para></listitem><listitem><para>
+                From the desktop, right-click on the fast user switch applet in the toolbar and select <guimenu>Edit Users and Groups</guimenu>.
+            </para></listitem><listitem><para>
+                Type the command <command>system-config-users</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para></listitem></itemizedlist>
+<section id="s1-system-config-users"><title>User and Group Configuration</title><indexterm significance="normal"><primary>users</primary><see>user configuration</see></indexterm><indexterm significance="normal"><primary>groups</primary><see>group configuration</see></indexterm><indexterm significance="normal"><primary><command>system-config-users</command></primary><see>user and group configuration</see></indexterm><indexterm significance="normal"><primary>user configuration</primary><secondary>viewing list of users</secondary></indexterm><indexterm significance="normal"><primary>group configuration</primary><secondary>viewing list of groups</secondary></indexterm><indexterm significance="normal"><primary><application>User and Group Configuration Tool</application></primary><see>user configuration</see></indexterm><figure float="0" id="figs-users"><title>User and Group Configuration Tool</title><mediaobject><imageobject><imagedata fileref="images/system-config-users.png" format="PNG"/></imageobject><textobject><para>
+					User and Group Configuration Tool
+				</para></textobject></mediaobject></figure><indexterm significance="normal"><primary>user configuration</primary><secondary>filtering list of users</secondary></indexterm><indexterm significance="normal"><primary>group configuration</primary><secondary>filtering list of groups</secondary></indexterm><para>
+		To view a list of local users on the system, click the <guilabel>Users</guilabel> tab. To view a list of local groups on the system, click the <guilabel>Groups</guilabel> tab.
+	</para><para>
+		To find a specific user or group, type the first few letters of the name in the <guilabel>Search filter</guilabel> field. Press <keycap>Enter</keycap> or click the <guibutton>Apply filter</guibutton> button. The filtered list is displayed.
+	</para><para>
+		To sort the users or groups, click on the column name. The users or groups are sorted according to the value of that column.
+	</para><para>
+        User IDs below 500 are reserved for system users. By default, <application>User and Group Configuration Tool</application> does not display system users. To view all users, including the system users, go to <menuchoice><guimenu>Edit</guimenu><guisubmenu>Preferences</guisubmenu></menuchoice> and uncheck <guimenuitem>Hide system users and groups</guimenuitem> from the dialog box.
+	</para><section id="s2-system-config-users-user-new"><title>Adding a New User</title><indexterm significance="normal"><primary>user configuration</primary><secondary>adding users</secondary></indexterm><para>
+			To add a new user, click the <guibutton>Add User</guibutton> button. A window as shown in <xref linkend="user-new-fig"/> appears. Type the username and full name for the new user in the appropriate fields. Type the user's password in the <guilabel>Password</guilabel> and <guilabel>Confirm Password</guilabel> fields. The password must be at least six characters.
+		</para><tip><title>Tip</title><para>
+				It is advisable to use a much longer password, as this makes it more difficult for an intruder to guess it and access the account without permission. It is also recommended that the password not be based on a dictionary term; use a combination of letters, numbers and special characters.
+			</para></tip><para>
+			Select a login shell. If you are not sure which shell to select, accept the default value of <computeroutput>/bin/bash</computeroutput>. The default home directory is <filename>/home/<replaceable>&lt;username&gt;</replaceable>/</filename>. You can change the home directory that is created for the user, or you can choose not to create the home directory by unselecting <guilabel>Create home directory</guilabel>.
+		</para><para>
+			If you select to create the home directory, default configuration files are copied from the <filename>/etc/skel/</filename> directory into the new home directory.
+		</para><para>
+			By default, a <firstterm>user private group</firstterm> (UPG) scheme is used. The UPG scheme does not add or change anything in the standard UNIX way of handling groups; it offers a new convention. Whenever you create a new user, by default, a unique group with the same name as the user is created. If you do not want to create this group, unselect <guilabel>Create a private group for the user</guilabel>.
+		</para><para>
+			To specify a user ID for the user, select <guibutton>Specify user ID manually</guibutton>. If the option is not selected, the next available user ID above 500 is assigned to the new user. Because user IDs below 500 are reserved for system users, it is not advisable to manually assign user IDs 1-499.
+		</para><para>
+			Click <guibutton>OK</guibutton> to create the user.
+		</para><figure float="0" id="user-new-fig"><title>New User</title><mediaobject><imageobject><imagedata fileref="images/system-config-users-user-new.png" format="PNG"/></imageobject><textobject><para>
+						Creating a new user
+					</para></textobject></mediaobject></figure><para>
+			To configure more advanced user properties, such as password expiration, modify the user's properties after adding the user. Refer to <xref linkend="s2-system-config-users-user-properties"/> for more information.
+		</para></section><section id="s2-system-config-users-user-properties"><title>Modifying User Properties</title><indexterm significance="normal"><primary>user configuration</primary><secondary>modifying users</secondary></indexterm><indexterm significance="normal"><primary>user configuration</primary><secondary>modify groups for a user</secondary></indexterm><para>
+            To view the properties of an existing user, click on the <guilabel>Users</guilabel> tab, select the user from the user list, and click <guibutton>Properties</guibutton> from the menu (or choose <menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice> from the pulldown menu). A window similar to <xref linkend="user-properties-fig"/> appears.
+		</para><figure float="0" id="user-properties-fig"><title>User Properties</title><mediaobject><imageobject><imagedata fileref="images/system-config-users-user-properties-user-data.png" format="PNG"/></imageobject><textobject><para>
+						Modifying user properties
+					</para></textobject></mediaobject></figure><para>
+			The <guilabel>User Properties</guilabel> window is divided into multiple tabbed pages:
+		</para><indexterm significance="normal"><primary>user configuration</primary><secondary>changing password</secondary></indexterm><indexterm significance="normal"><primary>user configuration</primary><secondary>changing login shell</secondary></indexterm><indexterm significance="normal"><primary>user configuration</primary><secondary>changing full name</secondary></indexterm><indexterm significance="normal"><primary>user configuration</primary><secondary>changing home directory</secondary></indexterm><itemizedlist><listitem><para>
+					<guilabel>User Data</guilabel> — Shows the basic user information configured when you added the user. Use this tab to change the user's full name, password, home directory, or login shell.
+				</para></listitem><listitem><para>
+					<guilabel>Account Info</guilabel> — <indexterm significance="normal"><primary>user configuration</primary><secondary>setting user account expiration</secondary></indexterm>
+					 Select <guibutton>Enable account expiration</guibutton> if you want the account to expire on a certain date. Enter the date in the provided fields. <indexterm significance="normal"><primary>user configuration</primary><secondary>locking user accounts</secondary></indexterm>
+					 Select <guilabel>Local password is locked</guilabel> to lock the user account and prevent the user from logging into the system.
+				</para></listitem><listitem><indexterm significance="normal"><primary>user configuration</primary><secondary>password expiration</secondary></indexterm><para>
+					<guilabel>Password Info</guilabel> — Displays the date that the user's password last changed. To force the user to change passwords after a certain number of days, select <guilabel>Enable password expiration</guilabel> and enter a desired value in the <guilabel>Days before change required:</guilabel> field. The number of days before the user's password expires, the number of days before the user is warned to change passwords, and days before the account becomes inactive can also be changed.
+				</para></listitem><listitem><para>
+					<indexterm significance="normal"><primary>user configuration</primary><secondary>adding users to groups</secondary></indexterm>
+					<guilabel>Groups</guilabel> — Allows you to view and configure the Primary Group of the user, as well as other groups that you want the user to be a member of.
+				</para></listitem></itemizedlist></section><section id="s2-system-config-users-group-new"><title>Adding a New Group</title><indexterm significance="normal"><primary>group configuration</primary><secondary>adding groups</secondary></indexterm><para>
+			To add a new user group, click the <guibutton>Add Group</guibutton> button. A window similar to <xref linkend="group-new-fig"/> appears. Type the name of the new group to create. To specify a group ID for the new group, select <guibutton>Specify group ID manually</guibutton> and select the GID. Note that group IDs lower than 500 are reserved for system groups.
+		</para><figure float="0" id="group-new-fig"><title>New Group</title><mediaobject><imageobject><imagedata fileref="images/system-config-users-group-new.png" format="PNG"/></imageobject><textobject><para>
+						Creating a new group
+					</para></textobject></mediaobject></figure><para>
+			Click <guibutton>OK</guibutton> to create the group. The new group appears in the group list.
+		</para></section><section id="s2-system-config-users-group-properties"><title>Modifying Group Properties</title><indexterm significance="normal"><primary>group configuration</primary><secondary>modifying group properties</secondary></indexterm><para>
+            To view the properties of an existing group, select the group from the group list and click <guibutton>Properties</guibutton> from the menu (or choose <menuchoice><guimenu>File</guimenu><guimenuitem>Properties</guimenuitem></menuchoice> from the pulldown menu). A window similar to <xref linkend="group-properties-fig"/> appears.
+		</para><figure float="0" id="group-properties-fig"><title>Group Properties</title><mediaobject><imageobject><imagedata fileref="images/system-config-users-group-properties-group-data.png" format="PNG"/></imageobject><textobject><para>
+						Modifying group properties
+					</para></textobject></mediaobject></figure><indexterm significance="normal"><primary>group configuration</primary><secondary>modify users in groups</secondary></indexterm><para>
+			The <guilabel>Group Users</guilabel> tab displays which users are members of the group. Use this tab to add or remove users from the group. Click <guibutton>OK</guibutton> to save your changes.
+		</para></section></section>
+</article>

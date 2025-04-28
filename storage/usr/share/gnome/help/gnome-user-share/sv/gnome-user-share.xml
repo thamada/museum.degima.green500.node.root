@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY appversion "2.26">
+<!ENTITY app "gnome-user-share">
+]>
+<article id="index" lang="sv">
+  <articleinfo>
+	 <title>Handbok för personlig filutdelning</title>
+	 <copyright>
+		<year>2009</year>
+		<holder>Red Hat, Inc.</holder>
+         </copyright><copyright><year>2009</year><holder>Daniel Nylander (po@danielnylander.se)</holder></copyright>
+
+	 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="legal.xml"/>
+	 <authorgroup>
+           <author role="maintainer">
+             <firstname>Matthias</firstname>
+             <surname>Clasen</surname>
+           </author>
+	 </authorgroup>
+
+<!-- According to GNU FDL, revision history is mandatory if you are -->
+<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+	 <revhistory>
+		<revision>
+		  <revnumber>1.0</revnumber>
+		  <date>2009</date>
+		  <revdescription>
+			 <para role="author">Matthias Clasen <email>mclasen@redhat.com</email></para>
+		  </revdescription>
+		</revision>
+	 </revhistory>
+	 <releaseinfo>Denna handbok beskriver version 2.26 av gnome-user-share.</releaseinfo>
+	 <legalnotice>
+		<title>Återkoppling</title>
+		<para>För att rapportera ett fel eller föreslå någonting angående programmet gnome-user-share eller denna handbok, följ anvisningarna på <ulink url="ghelp:user-guide?feedback-bugs" type="help">GNOME:s återkopplingssida</ulink>.</para>
+	 </legalnotice>
+    <abstract role="description">
+      <para>gnome-user-share är en sessionstjänst som tillåter enkel utdelning av filer mellan flera datorer.</para>
+    </abstract>
+  </articleinfo>
+  <indexterm><primary>gnome-user-share</primary></indexterm>
+  <indexterm><primary>filutdelning</primary></indexterm>
+  <indexterm><primary>delning</primary></indexterm>
+
+  <sect1 id="gnome-user-share-intro">
+	 <title>Introduktion</title>
+	 <para>gnome-user-share är en sessionstjänst som exporterar innehållet i mappen <filename>Publikt</filename> i din hemkatalog, så att den enkelt kan kommas åt från andra datorer på samma lokala nätverk. På andra datorer så kommer den utdelade mappen att visas med ett namn såsom "<replaceable>användaren</replaceable>'s shared files" i <application>nautilus</application> nätverksfönster, där <replaceable>användaren</replaceable> kommer att ersättas med ditt användarnamn.</para>
+	 <para>gnome-user-share använder en WebDAV-server för att dela ut mappen <filename>Publikt</filename> och annonserar utdelningen på det lokala nätverket med hjälp av mDNS.</para>
+         <para>I tillägg kan gnome-user-share göra de utdelade filerna tillgängliga via ObexFTP över Bluetooth och ta emot filer som skickas till din dator via Bluetooth via ObexPush.</para>
+  </sect1>
+
+  <sect1 id="gnome-user-share-getting-started">
+    <title>Komma igång</title>
+
+    <sect2 id="gnome-user-share-start">
+       <title>Starta gnome-user-share</title>
+
+       <para>
+         The gnome-user-share service is normally started by <application>gnome-session</application> when you log in. You can change this by opening <menuchoice><guimenu>Preferences</guimenu><guimenu>Startup Applications</guimenu></menuchoice> in the <guimenu>System</guimenu> menu, and modifying the 'User Sharing' entry in the list of startup programs.
+       </para>
+
+       <para>För att konfigurera olika aspekter för filutdelning, använd Inställningar för filutdelning, vilken kan hittas i menyn <guimenu>System</guimenu> under <menuchoice><guimenu>Inställningar</guimenu><guimenu>Utdelning av personliga filer</guimenu></menuchoice>.</para>
+       <figure id="file-sharing-preferences">
+         <title>Inställningar för filutdelning</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/file-sharing-preferences.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+ 
+     </sect2>
+     <sect2 id="gnome-user-share-enabling-sharing">
+       <title>Aktivera utdelning av filer över nätverket</title>
+       <para>Öppna Inställningar för filutdelning med <menuchoice><guimenu>Inställningar</guimenu><guimenu>Utdelning av personliga filer</guimenu></menuchoice> i menyn <guimenu>System</guimenu>.</para>
+       <figure id="sharing-over-the-network">
+         <title>Dela ut filer över nätverket</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-the-network.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>För att aktivera filutdelning via WebDAV, använd kryssrutan <guilabel>Dela ut publika filer på nätverket</guilabel>. När filutdelning är aktiverat så tillåter kontrollerna för lösenordsskydd att ett lösenord kan ställas in för att användare på andra datorer måste anges innan de får åtkomst till de utdelade filerna. <note><para>Vissa brandväggskonfigurationer på den lokala datorn kan orsaka problem med annonseringen, såväl som åtkomsten till de utdelade filerna. Kontakta din systemadministratör för mer information.</para></note><itemizedlist>
+           <listitem>
+              <para>Välj <guilabel>Aldrig</guilabel> för att tillåta alla att helt fritt läsa eller skriva filer i den delade mappen.</para>
+           </listitem>
+           <listitem>
+              <para>Välj <guilabel>Alltid</guilabel> för att kräva ett lösenord för att läsa eller skriva filer i den delade mappen.</para>
+           </listitem>
+           <listitem>
+              <para>Välj <guilabel>När filer skrivs</guilabel> för att tillåta alla att helt fritt läsa filer i den delade mappen, men kräver ett lösenord när filer skrivs.</para>
+           </listitem>
+         </itemizedlist><note><para>När du anger ett lösenord så måste du ge lösenordet till alla användare som du vill ska ha åtkomst till de utdelade filerna. Därför bör du använda ett lösenord som inte används på andra platser.</para></note></para>  
+     </sect2>
+
+     <sect2 id="gnome-user-share-enabling-bluetooth">
+       <title>Aktivera utdelning av filer över Bluetooth</title>
+       <para>Öppna Inställningar för filutdelning med <menuchoice><guimenu>Inställningar</guimenu><guimenu>Utdelning av personliga filer</guimenu></menuchoice> i menyn <guimenu>System</guimenu>.</para>
+       <figure id="sharing-over-bluetooth">
+         <title>Dela ut filer över Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/sharing-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>För att aktivera filutdelning via Bluetooth, använd kryssrutan <guilabel>Dela ut publika filer över Bluetooth</guilabel>. För att tillåta fjärrenheter via Bluetooth att ta bort filer i din utdelade mapp, använd kryssrutan <guilabel>Tillåt fjärrenheter att ta bort filer</guilabel>. För att tillåta fjärrenheter via Bluetooth att komma åt dina utdelade filer även om de inte är ihopparade med din dator, använd kryssrutan <guilabel>Kräv att fjärrenheter paras ihop med denna dator</guilabel>. <note><para>När du tillåter fjärrenheter som inte är ihopparade att komma åt dina utdelade filer så kan alla med en Bluetooth-aktiverad mobiltelefon inom räckhåll för din dator komma åt och kanske även ändra dina utdelade filer.</para></note></para>
+     </sect2>
+
+     <sect2 id="gnome-user-share-bluetooth-receiving">
+       <title>Ta emot filer över Bluetooth</title>
+       <para>Öppna Inställningar för filutdelning med <menuchoice><guimenu>Inställningar</guimenu><guimenu>Utdelning av personliga filer</guimenu></menuchoice> i menyn <guimenu>System</guimenu>.</para>
+       <figure id="receiving-over-bluetooth">
+         <title>Ta emot filer över Bluetooth</title>
+         <screenshot>
+           <mediaobject>
+             <imageobject>
+               <imagedata fileref="figures/receiving-over-bluetooth.png" format="PNG"/>
+             </imageobject>
+           </mediaobject>
+         </screenshot>
+       </figure>
+       <para>För att låta fjärrenheter via Bluetooth skicka filer till din dator, använd kryssrutan <guilabel>Ta emot filer i mappen Hämtat över Bluetooth</guilabel>. Mottagna filer kommer att lagras i mappen <filename>Hämtat</filename> i din hemkatalog. När mottagning av filer är aktiverat kommer valet av <guilabel>Acceptera filer</guilabel> att låta dig bestämma om fjärrenheter som tillåts att skicka filer. <itemizedlist>
+            <listitem>
+              <para>Välj <guilabel>Alltid</guilabel> för att tillåta alla fjärrenheter att skicka filer.</para>
+            </listitem>
+            <listitem>
+              <para>Välj <guilabel>Endast för ihopparade enheter</guilabel> för att endast acceptera filer från ihopparade enheter. <note><para>Ihopparade enheter är de som blev anslutna till din dator och en PIN-kod angavs för att ansluta till eller från dem.</para></note></para>
+            </listitem>
+            <listitem>
+              <para>Välj <guilabel>Endast för ihopparade och pålitliga enheter</guilabel> för att endast acceptera filer från ihopparade och pålitliga enheter. <note><para>Enheter kan markeras som pålitliga i sektionen <guilabel>Kända enheter</guilabel> i <application>bluetooth-properties</application>.</para></note></para>
+            </listitem>
+          </itemizedlist></para>
+        <para>Använd kryssrutan <guilabel>Notifiera om mottagna filer</guilabel> för att välja huruvida du vill bli notifierad när en fil tas emot via Bluetooth.</para>
+     </sect2>
+  </sect1>
+
+</article>

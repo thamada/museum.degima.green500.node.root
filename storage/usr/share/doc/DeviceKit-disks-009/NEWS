@@ -1,0 +1,276 @@
+-------------------
+DeviceKit-disks 009
+-------------------
+
+DeviceKit-disks is a daemon that provide interfaces to obtain
+information and perform operations on storage devices.
+
+NOTE NOTE NOTE: This is an unstable release of DeviceKit-disks, all
+                API is subject to change.
+
+David Zeuthen (15):
+      Post-release version bump to 009
+      Various device-mapper and cryptsetup fixes
+      Pass -T to cryptsetup to handle incorrect passphrases
+      When updating holders/slaves, defer the updates to an idle handler
+      Work around blkid incorrectly detecting FAT on extended partitions
+      Use 'udevadm settle' instead of 15-second timeout
+      Allow creating a partition table with same scheme as existing one
+      Pass -F to mkfs.ext[234] to allow creating a filesystem on the whole disk
+      Use unregister facility in dbus-glib 0.82 and misc life-cycle fixes
+      Add new LinuxMdComponentPosition property
+      Also ignore a device if DM_UDEV_DISABLE_OTHER_RULES_FLAG is set
+      Use BLKPG_DEL_PARTITION when deleting partitions instead of libparted
+      Use BLKPG_ADD_PARTITION when adding a partition
+      Don't use hyphens in param names
+      Update NEWS for release
+
+Martin Pitt (6):
+      Bug 24673 — Support creating swap fs with labels
+      Bug 24778 — throw_error() segfaults for daemon-internally called methods
+      Bug 24757 — Bashism in luks helper breaks password changing
+      Bug 24757 – Simplify helper-change-luks-password
+      Bug 24679 — Support creating minix file systems
+      Bug 24718 — Proper handling of missing mkfs.*/fsck.*
+
+David Zeuthen,
+November 2, 2009
+
+-------------------
+DeviceKit-disks 008
+-------------------
+
+DeviceKit-disks is a daemon that provide interfaces to obtain
+information and perform operations on storage devices.
+
+NOTE NOTE NOTE: This is an unstable release of DeviceKit-disks, all
+                API is subject to change.
+
+David Zeuthen (6):
+      Post-release version bump to 008
+      Actually inhibit the daemon when Inhibit() is called
+      Bug 24054 – Devickit-disks doesn't support changing ntfs label
+      Bug 24343 – Unintended side-effect when calling DriveDetach()
+      Bug 24264 – Crash on removing NULL value from hash in device_remove()
+      Update NEWS for release
+
+Martin Pitt (5):
+      Bug 24052 – CDROM eject button is locked while CDROM is mounted
+      Bug 24129 – Please mount vfat disks with shortname=mixed
+      Bug 24351 – Firewire hard drive is considered system-internal
+      Bug 24468 – part-id crashes if drive device node does not exist
+      Bug 24499 – media players have USB drive icon
+
+Maxim Levitsky (1):
+      Bug 24053 – MMC cards aren't automounted.
+
+David Zeuthen,
+October 16, 2009
+
+-------------------
+DeviceKit-disks 007
+-------------------
+
+DeviceKit-disks is a daemon that provide interfaces to obtain
+information and perform operations on storage devices.
+
+NOTE NOTE NOTE: This is an unstable release of DeviceKit-disks, all
+                API is subject to change.
+
+David Zeuthen (17):
+      Post-release version bump to 007
+      Bug 22914 – Require password to eject a CD or DVD mounted by the same user
+      Rework ATA SMART handling
+      Also be paranoid about the UUID containing '/' characters
+      Use WindowsStyleCaps for property names
+      Bug 23829 – Undefined value in partutil.c
+      Bug 23828 – Undefined value in umount-devkit.c
+      Bug 23827 – Undefined value
+      Bug 23826 – NULL dereference
+      Bug 23825 – Leak in update_info_mount_state
+      Bug 23824 – Unused variable
+      Bug 23823 – NULL dereference
+      Bug 23764 – Small leak in update_drive_properties_from_sysfs
+      Bug 23762 – Fix typo
+      Bug 23579 – Must allow DBus Properties interface for g-d-u to work
+      Bug 23926 – Error creating partition
+      Update NEWS for release
+
+Evan Dandrea (1):
+      Bug 23541 – PartitionTableCreate method times out
+
+Matthias Clasen (1):
+      Bug 23761 – Some leaks
+
+David Zeuthen,
+September 18, 2009
+
+-------------------
+DeviceKit-disks 006
+-------------------
+
+DeviceKit-disks is a daemon that provide interfaces to obtain
+information and perform operations on storage devices.
+
+NOTE NOTE NOTE: This is an unstable release of DeviceKit-disks, all
+                API is subject to change.
+
+David Zeuthen (22):
+      Post-release version bump to 006
+      Add a way to spin down drives
+      Fix segfault when starting a Linux MD array
+      Fix polling process title and turn off noisy debugging spew
+      Pass size of buffer to avoid Z_BUF_ERROR when compressing ATA SMART blob
+      Add --poll-for-media option to devkit-disks(1)
+      Work around media detection problems
+      Move implementation of DrivePollMedia into a separate process
+      Move data files into a separate directory
+      Misc fixes for optical disc detection
+      Fix up ATA SMART detection
+      Add Device:drive-is-rotational property
+      Add LinuxMdCreate method
+      Rely on the disk to spin itself down
+      Require latest libatasmart
+      Fix up object path mapping
+      Bug 23309 – Udev rules probe floppy drives when they shouldn't
+      Add a new :device-presentation-nopolicy property
+      Ignore loop and ram devices for now
+      Make FilesystemMount() accept an 'auth_no_user_interaction' option
+      Bug 23235 – Cannot mount disc with / (slash) in label
+      Update NEWS for release
+
+Martin Pitt (1):
+      Hide recovery, boot, and hidden partitions from desktops
+
+David Zeuthen,
+August 17, 2009
+
+-------------------
+DeviceKit-disks 005
+-------------------
+
+DeviceKit-disks is a daemon that provide interfaces to obtain
+information and perform operations on storage devices.
+
+NOTE NOTE NOTE: This is an unstable release of DeviceKit-disks, all
+                API is subject to change.
+
+David Zeuthen (28):
+      Move to using a capital letter for commit messages
+      Port to polkit-1
+      Post-release version bump
+      Remove unneeded code for PolicyKit
+      Update to latest PolicyKit API
+      Update to latest polkit API where PolkitAuthorizationResult is an object
+      Catch up with latest polkit API changes
+      Only check for ATA SMART if the device reports non-removable media
+      Use PolkitDetails, not GHashTable to pass details to PolicyKit
+      Add a pkg-config file
+      The PolicyKit extensions dir has moved
+      Add a DriveDetach() method to properly power down USB hard disk enclosures
+      Don't insert NULL pointers in details
+      Suspend USB device on DriveDetach() if it only has one interface
+      Remove :drive-requires-eject and read udev props for detached/ejectable
+      Use gudev-1.0 instead of devkit-gobject
+      Fix bug when retrieving historical ATA SMART data
+      Bug 22149 – Do not poll floppy drives
+      Better handling of Floppy and Zip drives
+      GIO modules, for the polkit action lookup module, need to be prefixed with
+      Update udev rules
+      Use ID_CDROM_MEDIA to detect optical drives
+      Add API to check/repair Linux MD RAID arrays
+      Sort out dbus-glib registration mess
+      Remove unused SMART test files
+      Clean up build a bit
+      Use AM_SILENT_RULES if available
+      Update NEWS for release
+
+David Zeuthen,
+June 19, 2009
+
+-------------------
+DeviceKit-disks 004
+-------------------
+
+DeviceKit-disks is a daemon that provide interfaces to obtain
+information and perform operations on storage devices.
+
+NOTE NOTE NOTE: This is an unstable release of DeviceKit-disks, all
+                API is subject to change.
+
+David Zeuthen (54):
+      use dev_t to identify mounts, not device files
+      allow users with appropriate authorizations to unmount all fstab mounts
+      add a --dump option to devkit-disks(1)
+      only export holders/slaves if the devices are in our db
+      only use a single PolicyKit action for Linux MD operations
+      add newline for debug message
+      export all linux-md raid devices (except ones marked as 'clear')
+      avoid taking action if a component is removed from an array
+      rework default mount options
+      don't poll SATA AN drives
+      fix up how device-is-system-internal is computed
+      port to libatasmart
+      forgot to add ATA SMART prober in last commit
+      if BLKRRPART fails with EBUSY, just try a few more times
+      allow job-num-tasks to be 0 (meaning "unknown")
+      ensure a MS-DOS extended partition is busy if logical partitions are busy
+      rework partition table handling
+      print the scheme of the main partition table, never the nested one
+      use /proc/self/mountinfo and handle a device being mounted in multiple pla
+      export device-major and device-minor properties
+      remove device-is-busy property
+      remove a lot of unnecessary errors
+      remove erase= option and the notion of tasks within jobs
+      rework some of the ATA SMART stuff, go back to using sqlite
+      fix udev rules to keep udev from complaining
+      prefix all D-Bus objects paths with /org/freedesktop/DeviceKit/Disks
+      add FindDeviceByMajorMinor() to look up a device by dev_t
+      also move umount.devkit over to use the correct object paths
+      change devkit-disks(1) to use device node paths instead of object paths
+      install udev rules into /lib/udev/rules.d not /etc/udev/rules.d
+      fix grammar/spelling for ATA SMART output in devkit-disks(1)
+      remove debug spew from mount monitor
+      remove hack for working around broken USB card reader
+      use /var/run/DeviceKit-disks, not /tmp as a temporary directory
+      bump version
+      fix a race where /etc/fstab mount points where sometimes removed
+      change default mount options for vfat to utf8=1 and shortname=lower
+      fix some bugs in the man page
+      add command line options to devkit-disks for refreshing ATA SMART data
+      use correct dmode for iso9660 mounts
+      also check if partitions on a device is busy
+      remove debug spew
+      add temporary workaround for btrfs
+      rework how we detect whether a device is busy
+      be more careful when probing for ATA SMART
+      add device-presentation-hide property
+      document influential udev properties in the DeviceKit-disks man page
+      add property device-detection-time
+      fix up some warnings
+      allow the 'flush' mount option for vfat
+      properly detect devices with vfat on the whole disk
+      add support for ext2
+      add :device-media-detection-time property
+      only consider Prefail attibutes when checking for bad attributes
+
+Matthias Clasen (3):
+      fix up inhibit parameter handling
+      fix typo in error name
+      make umount work on mount points
+
+David Zeuthen,
+May 1st, 2009
+
+-------------------
+DeviceKit-disks 003
+-------------------
+
+DeviceKit-disks is a daemon that provide interfaces to obtain
+information and perform operations on storage devices.
+
+NOTE NOTE NOTE: This is an unstable release of DeviceKit-disks, all
+                API is subject to change.
+
+David Zeuthen,
+March 2, 2009

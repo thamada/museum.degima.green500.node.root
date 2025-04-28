@@ -1,0 +1,687 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelKeyTable</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="Storage.html" title="Metadata Storage">
+<link rel="prev" href="camel-CamelIndex.html" title="CamelIndex">
+<link rel="next" href="camel-CamelTextIndexName.html" title="CamelTextIndex">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-CamelIndex.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="Storage.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-CamelTextIndexName.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelKeyTable.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelKeyTable.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelKeyTable">
+<a name="camel-CamelKeyTable"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelKeyTable.top_of_page"></a>CamelKeyTable</span></h2>
+<p>CamelKeyTable</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelKeyTable.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+typedef             <a class="link" href="camel-CamelKeyTable.html#camel-hash-t" title="camel_hash_t">camel_hash_t</a>;
+                    <a class="link" href="camel-CamelKeyTable.html#CamelPartitionKey" title="CamelPartitionKey">CamelPartitionKey</a>;
+                    <a class="link" href="camel-CamelKeyTable.html#CamelPartitionKeyBlock" title="CamelPartitionKeyBlock">CamelPartitionKeyBlock</a>;
+                    <a class="link" href="camel-CamelKeyTable.html#CamelPartitionMap" title="CamelPartitionMap">CamelPartitionMap</a>;
+                    <a class="link" href="camel-CamelKeyTable.html#CamelPartitionMapBlock" title="CamelPartitionMapBlock">CamelPartitionMapBlock</a>;
+                    <a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a>;
+<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> * <a class="link" href="camel-CamelKeyTable.html#camel-partition-table-new" title="camel_partition_table_new ()">camel_partition_table_new</a>         (struct _CamelBlockFile *bs,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> root);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelKeyTable.html#camel-partition-table-sync" title="camel_partition_table_sync ()">camel_partition_table_sync</a>          (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelKeyTable.html#camel-partition-table-add" title="camel_partition_table_add ()">camel_partition_table_add</a>           (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid);
+<a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a>         <a class="link" href="camel-CamelKeyTable.html#camel-partition-table-lookup" title="camel_partition_table_lookup ()">camel_partition_table_lookup</a>        (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);
+void                <a class="link" href="camel-CamelKeyTable.html#camel-partition-table-remove" title="camel_partition_table_remove ()">camel_partition_table_remove</a>        (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);
+                    <a class="link" href="camel-CamelKeyTable.html#CamelKeyBlock" title="CamelKeyBlock">CamelKeyBlock</a>;
+                    <a class="link" href="camel-CamelKeyTable.html#CamelKeyRootBlock" title="CamelKeyRootBlock">CamelKeyRootBlock</a>;
+struct              <a class="link" href="camel-CamelKeyTable.html#CamelKeyKey" title="struct CamelKeyKey">CamelKeyKey</a>;
+#define             <a class="link" href="camel-CamelKeyTable.html#CAMEL-KEY-TABLE-MAX-KEY--CAPS" title="CAMEL_KEY_TABLE_MAX_KEY">CAMEL_KEY_TABLE_MAX_KEY</a>
+                    <a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a>;
+<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *     <a class="link" href="camel-CamelKeyTable.html#camel-key-table-new" title="camel_key_table_new ()">camel_key_table_new</a>                 (<a class="link" href="camel-CamelKeyFile.html#CamelBlockFile" title="CamelBlockFile">CamelBlockFile</a> *bs,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> root);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelKeyTable.html#camel-key-table-sync" title="camel_key_table_sync ()">camel_key_table_sync</a>                (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki);
+<a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a>         <a class="link" href="camel-CamelKeyTable.html#camel-key-table-add" title="camel_key_table_add ()">camel_key_table_add</a>                 (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);
+void                <a class="link" href="camel-CamelKeyTable.html#camel-key-table-set-data" title="camel_key_table_set_data ()">camel_key_table_set_data</a>            (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> data);
+void                <a class="link" href="camel-CamelKeyTable.html#camel-key-table-set-flags" title="camel_key_table_set_flags ()">camel_key_table_set_flags</a>           (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> set);
+<a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a>       <a class="link" href="camel-CamelKeyTable.html#camel-key-table-lookup" title="camel_key_table_lookup ()">camel_key_table_lookup</a>              (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **key,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *flags);
+<a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a>         <a class="link" href="camel-CamelKeyTable.html#camel-key-table-next" title="camel_key_table_next ()">camel_key_table_next</a>                (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> next,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **keyp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *flagsp,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> *datap);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelKeyTable.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelKeyTable.details"></a><h2>Details</h2>
+<div class="refsect2" title="camel_hash_t">
+<a name="camel-hash-t"></a><h3>camel_hash_t</h3>
+<pre class="programlisting">typedef guint32 camel_hash_t;	/* a hashed key */
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelPartitionKey">
+<a name="CamelPartitionKey"></a><h3>CamelPartitionKey</h3>
+<pre class="programlisting">typedef struct {
+	camel_hash_t hashid;
+	camel_key_t keyid;
+} CamelPartitionKey;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelPartitionKeyBlock">
+<a name="CamelPartitionKeyBlock"></a><h3>CamelPartitionKeyBlock</h3>
+<pre class="programlisting">typedef struct {
+	guint32 used;
+	struct _CamelPartitionKey keys[(CAMEL_BLOCK_SIZE-4)/sizeof(struct _CamelPartitionKey)];
+} CamelPartitionKeyBlock;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelPartitionMap">
+<a name="CamelPartitionMap"></a><h3>CamelPartitionMap</h3>
+<pre class="programlisting">typedef struct {
+	camel_hash_t hashid;
+	camel_block_t blockid;
+} CamelPartitionMap;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelPartitionMapBlock">
+<a name="CamelPartitionMapBlock"></a><h3>CamelPartitionMapBlock</h3>
+<pre class="programlisting">typedef struct {
+	camel_block_t next;
+	guint32 used;
+	struct _CamelPartitionMap partition[(CAMEL_BLOCK_SIZE-8)/sizeof(struct _CamelPartitionMap)];
+} CamelPartitionMapBlock;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelPartitionTable">
+<a name="CamelPartitionTable"></a><h3>CamelPartitionTable</h3>
+<pre class="programlisting">typedef struct {
+	CamelObject parent;
+
+	struct _CamelPartitionTablePrivate *priv;
+
+	CamelBlockFile *blocks;
+	camel_block_t rootid;
+
+	gint (*is_key)(CamelPartitionTable *cpi, const gchar *key, camel_key_t keyid, gpointer data);
+	gpointer is_key_data;
+
+	/* we keep a list of partition blocks active at all times */
+	CamelDList partition;
+} CamelPartitionTable;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_partition_table_new ()">
+<a name="camel-partition-table-new"></a><h3>camel_partition_table_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> * camel_partition_table_new         (struct _CamelBlockFile *bs,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> root);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bs</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>root</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_partition_table_sync ()">
+<a name="camel-partition-table-sync"></a><h3>camel_partition_table_sync ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_partition_table_sync          (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cpi</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_partition_table_add ()">
+<a name="camel-partition-table-add"></a><h3>camel_partition_table_add ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_partition_table_add           (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cpi</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_partition_table_lookup ()">
+<a name="camel-partition-table-lookup"></a><h3>camel_partition_table_lookup ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a>         camel_partition_table_lookup        (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cpi</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_partition_table_remove ()">
+<a name="camel-partition-table-remove"></a><h3>camel_partition_table_remove ()</h3>
+<pre class="programlisting">void                camel_partition_table_remove        (<a class="link" href="camel-CamelKeyTable.html#CamelPartitionTable" title="CamelPartitionTable">CamelPartitionTable</a> *cpi,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cpi</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelKeyBlock">
+<a name="CamelKeyBlock"></a><h3>CamelKeyBlock</h3>
+<pre class="programlisting">typedef struct {
+	camel_block_t next;
+	guint32 used;
+	union {
+		struct _CamelKeyKey keys[(CAMEL_BLOCK_SIZE-8)/sizeof(struct _CamelKeyKey)];
+		gchar keydata[CAMEL_BLOCK_SIZE-8];
+	} u;
+} CamelKeyBlock;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelKeyRootBlock">
+<a name="CamelKeyRootBlock"></a><h3>CamelKeyRootBlock</h3>
+<pre class="programlisting">typedef struct {
+	camel_block_t first;
+	camel_block_t last;
+	camel_key_t free;	/* free list */
+} CamelKeyRootBlock;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="struct CamelKeyKey">
+<a name="CamelKeyKey"></a><h3>struct CamelKeyKey</h3>
+<pre class="programlisting">struct CamelKeyKey {
+	camel_block_t data;
+	guint offset:10;
+	guint flags:22;
+};
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_KEY_TABLE_MAX_KEY">
+<a name="CAMEL-KEY-TABLE-MAX-KEY--CAPS"></a><h3>CAMEL_KEY_TABLE_MAX_KEY</h3>
+<pre class="programlisting">#define CAMEL_KEY_TABLE_MAX_KEY (128) /* max size of any key */
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelKeyTable">
+<a name="CamelKeyTable"></a><h3>CamelKeyTable</h3>
+<pre class="programlisting">typedef struct {
+	CamelObject parent;
+
+	struct _CamelKeyTablePrivate *priv;
+
+	CamelBlockFile *blocks;
+
+	camel_block_t rootid;
+
+	CamelKeyRootBlock *root;
+	CamelBlock *root_block;
+} CamelKeyTable;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_key_table_new ()">
+<a name="camel-key-table-new"></a><h3>camel_key_table_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *     camel_key_table_new                 (<a class="link" href="camel-CamelKeyFile.html#CamelBlockFile" title="CamelBlockFile">CamelBlockFile</a> *bs,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> root);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bs</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>root</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_key_table_sync ()">
+<a name="camel-key-table-sync"></a><h3>camel_key_table_sync ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_key_table_sync                (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ki</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_key_table_add ()">
+<a name="camel-key-table-add"></a><h3>camel_key_table_add ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a>         camel_key_table_add                 (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *key,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ki</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_key_table_set_data ()">
+<a name="camel-key-table-set-data"></a><h3>camel_key_table_set_data ()</h3>
+<pre class="programlisting">void                camel_key_table_set_data            (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ki</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_key_table_set_flags ()">
+<a name="camel-key-table-set-flags"></a><h3>camel_key_table_set_flags ()</h3>
+<pre class="programlisting">void                camel_key_table_set_flags           (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> flags,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> set);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ki</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>set</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_key_table_lookup ()">
+<a name="camel-key-table-lookup"></a><h3>camel_key_table_lookup ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a>       camel_key_table_lookup              (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> keyid,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **key,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *flags);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ki</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyid</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_key_table_next ()">
+<a name="camel-key-table-next"></a><h3>camel_key_table_next ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a>         camel_key_table_next                (<a class="link" href="camel-CamelKeyTable.html#CamelKeyTable" title="CamelKeyTable">CamelKeyTable</a> *ki,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-key-t" title="camel_key_t">camel_key_t</a> next,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> **keyp,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> *flagsp,
+                                                         <a class="link" href="camel-CamelKeyFile.html#camel-block-t" title="camel_block_t">camel_block_t</a> *datap);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ki</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>next</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>flagsp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>datap</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

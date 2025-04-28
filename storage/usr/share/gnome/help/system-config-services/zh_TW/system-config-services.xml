@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_SERVICES_DISTRO_SPECIFICS SYSTEM "system-config-services-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_SERVICES_TOOL "Services Configuration Tool">
+<!ENTITY SYSTEM_CONFIG_SERVICES_INVOCATION '
+    <indexterm significance="normal">
+        <primary><command>system-config-services</command>
+        </primary>
+        <see>&SYSTEM_CONFIG_SERVICES_TOOL;</see>
+    </indexterm>
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_SERVICES_TOOL;. To start the application on the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Services</guimenuitem></menuchoice>.
+    </para>
+'>
+<!ENTITY SYSTEM_CONFIG_SERVICES_ABSTRACT SYSTEM "system-config-services-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_SERVICES_CONTENT SYSTEM "system-config-services-content.xml">
+]>
+<article lang="zh_TW"><title>服務的控制存取</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2008-01-30</date></revision><revision><revnumber>1.1</revnumber><date>2008-03-05</date></revision><revision><revnumber>1.1.1</revnumber><date>2008-03-12</date></revision></revhistory><abstract role="description"><para>維護您系統上的安全性是非常重要的，其中一種方法就是小心地管理系統服務的存取權限。您的系統可能需要針對特定服務提供開放式的存取權限，比方說（當您在執行網站伺服器時）<command>httpd</command>。然而，若您不需要提供服務的話，您應將它關閉以降低您遭到外部攻擊的機會。</para><para>有幾種方式可用來管理系統服務的存取權限。請根據服務、您系統的設定，以及您對於 Linux 的理解程度來選擇要使用哪種管理方式。</para><para>要拒絕對於一項服務的存取請求的最簡單方式就是將它關閉。由 <command>xinetd</command> 所管理的服務以及 <filename>/etc/rc.d/init.d</filename> 層級中的服務（亦稱為 SysV 服務）皆可被透過使用<application>服務設定工具</application>來將其停用或啟用。</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup></articleinfo>    <para>維護您系統上的安全性是非常重要的，其中一種方法就是小心地管理系統服務的存取權限。您的系統可能需要針對特定服務提供開放式的存取權限，比方說（當您在執行網站伺服器時）<command>httpd</command>。然而，若您不需要提供服務的話，您應將它關閉以降低您遭到外部攻擊的機會。</para><para>有幾種方式可用來管理系統服務的存取權限。請根據服務、您系統的設定，以及您對於 Linux 的理解程度來選擇要使用哪種管理方式。</para><para>要拒絕對於一項服務的存取請求的最簡單方式就是將它關閉。由 <command>xinetd</command> 所管理的服務以及 <filename>/etc/rc.d/init.d</filename> 層級中的服務（亦稱為 SysV 服務）皆可被透過使用<application>服務設定工具</application>來將其停用或啟用。</para>
+
+
+    <indexterm significance="normal"><primary><command>system-config-services</command>
+        </primary><see>服務設定工具</see></indexterm><para>您必須執行 <application>X</application> Window System 並且擁有 root 權限才可使用服務設定工具。若要啟用該應用程式，請在桌面上點選<menuchoice><guimenu>面板上的主選單（有個「f」圖示的選單）</guimenu><guisubmenu>系統</guisubmenu><guisubmenu>管理</guisubmenu><guimenuitem>服務</guimenuitem></menuchoice>。</para>
+
+
+	<section id="s1-services-serviceconf"><title><application>服務設定工具</application></title><indexterm significance="normal"><primary><application>服務設定工具</application></primary></indexterm><para><application>服務設定工具</application>是個用來設定開機時（runlevels 3、4 與 5）在 <filename>/etc/rc.d/init.d</filename> 目錄中的哪項 Sys V 服務會被啟用以及哪項 <command>xinetd</command> 服務會被啟用的圖形化應用程式。它同時能讓您啟用、停用與重新啟用 SysV 服務。</para><figure float="0" id="fig-serviceconf"><title><application>服務設定工具</application></title><mediaobject><imageobject><imagedata fileref="images/system-config-services.png" format="PNG"/></imageobject><textobject><para>設定網路服務</para></textobject></mediaobject></figure><para><application>服務設定工具</application>會將 <filename>/etc/rc.d/init.d</filename> 目錄中的服務以及由 <command>xinetd</command> 所控制的服務列出。請點選應用程式左方清單中的服務名稱以顯示該服務的詳細描述以及服務狀態。若該項服務為 SysV 服務的話，狀態視窗便會顯示這項服務是否正在執行。</para><para>若要即刻啟用、停用或重新啟用一項服務，請由清單中選取服務並點選工具列上的適當按鈕（或由<guimenu>服務</guimenu>下拉式選單中選取欲進行的動作）。若該項服務為一項 <command>xinetd</command> 服務的話，動作按鈕就無法使用，因為它們無法個別地被啟用或停用。</para><note><title>請注意</title><para>當您將 <command>xinetd</command> 服務的變更儲存時，<command>xinetd</command> 會被重新載入，並且所作的變更將會即刻生效。當您儲存其它服務的變更時，runlevel 將會被重新設定，不過變更卻不會即刻生效。</para></note><para>若要啟用一項服務，請由清單中選擇服務並按下工具列中的<guibutton>啟用</guibutton>、<guibutton>停用</guibutton>或（用來在預設 runlevel 之外的 runlevel 中啟用 SysV 服務）<guibutton>自訂</guibutton>按鈕，或由<guimenu>服務</guimenu>選單中選相等的動作。在使用 SysV 服務的情況下，runlevel 的變更不會即刻生效。</para><para>範例：比方說若您停用 <command>httpd</command> 服務，runlevel 設定便會改變，如此一來 <command>httpd</command> 便不會在開機時啟用。然而，目前的 runlevel 不會被重新初始化，因此 <command>httpd</command> 會持續執行。在此情況下請選擇下列其中一個選項：</para><orderedlist continuation="restarts" inheritnum="ignore"><listitem><para>停止 <command>httpd</command> 服務 — 藉由清單中選取這項服務並按下<guibutton>停止</guibutton>按鈕來將它停用。服務的狀態將會相應地更新。</para></listitem><listitem><para>重新初始化 runlevel — 藉由在 shell 提示上輸入 <command>telinit <replaceable>x</replaceable></command> 指令（<replaceable>x</replaceable> 代表 runlevel 號碼；比方說 3。）來重新初始化 runlevel。若您啟用或停用多項服務並希望變更即刻生效的話，建議您使用此選項。</para></listitem><listitem><para>甚麼都不作 — 您無須停用 <command>httpd</command> 服務。您可等到服務在系統重新啟動後停用。下次系統啟動時，runlevel 將會被初始化而 <command>httpd</command> 服務將不會執行。</para></listitem></orderedlist></section>
+</article>

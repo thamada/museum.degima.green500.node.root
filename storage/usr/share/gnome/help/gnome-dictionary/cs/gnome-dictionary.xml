@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY app "Dictionary">
+<!ENTITY applet "Dictionary Applet">
+<!ENTITY appversion "2.14.0">
+<!ENTITY date "January 2005">
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY manrevision "1.0.0">
+]>
+<!-- This file describes the Dictionary applet and application. -->
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified 11 April, 2002
+  
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="cs">
+<!-- please do not change the id; for translations, change language to -->
+<!-- appropriate code -->
+  <articleinfo> 
+    <title>Příručka ke Slovníku</title>
+
+    <abstract role="description">
+      <para>Slovník vám umožňuje vyhledávat definice a správnou výslovnost slov.</para>
+    </abstract>
+    
+    <copyright>
+      <year>2005</year>
+      <holder>Emmanuele Bassi</holder>
+    </copyright><copyright><year>2009</year><holder>Marek Černocký (marek@manet.cz)</holder></copyright>
+    
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2006</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+   -->
+   
+    <publisher> 
+      <publishername>Dokumentační projekt GNOME</publishername> 
+    </publisher> 
+
+     <legalnotice id="legalnotice">
+	<para>Je povoleno kopírovat, šířit a/nebo upravovat tento dokument za podmínek GNU Free Documentation License, verze 1.1 nebo jakékoli další verze vydané nadací Free Software Foundation; bez neměnných oddílů, bez textů předních desek a bez textů zadních desek. Kopie této licence je zahrnuta v oddílu jménem <ulink type="help" url="ghelp:fdl">GNU Free Documentation License</ulink> nebo v souboru COPYING-DOCS dodávaném s touto příručkou.</para>
+         <para>Tato příručka je součástí kolekce příruček GNOME, distribuovaných pod licencí GNU FDL. Pokud chcete tento dokument šířit odděleně od kolekce, musíte přiložit kopii licence dle popisu v sekci 6 dané licence.</para>
+
+	<para>Mnoho užívaných jmen určených k zviditelnění produktů nebo služeb jsou ochranné známky. Na místech, kde jsou tato jména v dokumentaci užita a členové Dokumentačního projektu GNOME jsou si vědomi skutečnosti, že se jedná o ochrannou známku, je takové jméno psáno velkými písmeny celé nebo s velkým písmenem na začátku.</para>
+
+	<para>DOKUMENT A JEHO UPRAVENÉ VERZE JSOU ŠÍŘENY V SOULADU SE ZNĚNÍM LICENCE GNU FREE DOCUMENTATION LICENSE S NÁSLEDUJÍCÍM USTANOVENÍM: <orderedlist>
+		<listitem>
+		  <para>DOKUMENT JE POSKYTOVÁN V PODOBĚ „JAK JE“ BEZ ZÁRUKY V JAKÉKOLIV PODOBĚ, NEPOSKYTUJÍ SE ANI ODVOZENÉ ZÁRUKY, ZÁRUKY, ŽE DOKUMENT, NEBO JEHO UPRAVENÁ VERZE, JE BEZCHYBNÝ NEBO ZÁRUKY PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL NEBO NEPORUŠENOSTI. RIZIKO NEKVALITY, NEPŘESNOSTI A ŠPATNÉHO PROVEDENÍ DOKUMENTU, NEBO JEHO UPRAVENÉ VERZE, LEŽÍ NA VÁS. POKUD KVŮLI TOMUTO DOKUMENTU, NEBO JEHO UPRAVENÉ VERZI, NASTANE PROBLÉM, VY (NIKOLIV PŮVODNÍ AUTOR NEBO JAKÝKOLIV PŘISPĚVATEL) PŘEBÍRÁTE JAKÉKOLIV NÁKLADY ZA NUTNÉ ÚPRAVY, OPRAVY ČI SLUŽBY. TOTO PROHLÁŠENÍ O ZÁRUCE PŘEDSTAVUJE ZÁKLADNÍ SOUČÁST TÉTO LICENCE. BEZ TOHOTO PROHLÁŠENÍ NENÍ, PODLE TÉTO DOHODY, POVOLENO UŽÍVÁNÍ ANI ÚPRAVY TOHOTO DOKUMENTU; DÁLE</para>
+		</listitem>
+		<listitem>
+		  <para>ZA ŽÁDNÝCH OKOLNOSTÍ A ŽÁDNÝCH PRÁVNÍCH PŘEDPOKLADŮ, AŤ SE JEDNÁ O PŘEČIN (VČETNĚ NEDBALOSTNÍCH), SMLOUVU NEBO JINÉ, NENÍ AUTOR, PŮVODNÍ PISATEL, KTERÝKOLIV PŘISPĚVATEL NEBO KTERÝKOLIV DISTRIBUTOR TOHOTO DOKUMENTU NEBO UPRAVENÉ VERZE DOKUMENTU NEBO KTERÝKOLIV DODAVATEL NĚKTERÉ Z TĚCHTO STRAN ODPOVĚDNÝ NĚJAKÉ OSOBĚ ZA PŘÍMÉ, NEPŘÍMÉ, SPECIÁLNÍ, NAHODILÉ NEBO NÁSLEDNÉ ŠKODY JAKÉHOKOLIV CHARAKTERU, VČETNĚ, ALE NEJEN, ZA POŠKOZENÍ ZE ZTRÁTY DOBRÉHO JMÉNA, PŘERUŠENÍ PRÁCE, PORUCHY NEBO NESPRÁVNÉ FUNKCE POČÍTAČE NEBO JINÉHO A VŠECH DALŠÍCH ŠKOD NEBO ZTRÁT VYVSTÁVAJÍCÍCH Z NEBO VZTAHUJÍCÍCH SE K POUŽÍVÁNÍ TOHOTO DOKUMENTU NEBO UPRAVENÝCH VERZÍ DOKUMENTU, I KDYŽ BY TAKOVÁTO STRANA BYLA INFORMOVANÁ O MOŽNOSTI TAKOVÉHOTO POŠKOZENÍ.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+
+    <authorgroup> 
+      <author role="maintainer"> 
+	<firstname>Emmanuele</firstname> 
+	<surname>Bassi</surname> 
+	<affiliation> 
+	  <address><email>ebassi@gmail.com</email></address> 
+	</affiliation> 
+      </author> 
+
+<!-- This is appropriate place for other contributors: translators,
+      maintainers,  etc. Commented out by default.
+       <othercredit role="translator">
+	<firstname>Latin</firstname> 
+	<surname>Translator 1</surname> 
+	<affiliation> 
+	  <orgname>Latin Translation Team</orgname> 
+	  <address> <email>translator@gnome.org</email> </address> 
+	</affiliation>
+	<contrib>Latin translation</contrib>
+      </othercredit>
+-->
+
+    </authorgroup>
+
+    <revhistory>
+      <revision> 
+	<revnumber>Příručka V1.0.0 ke Slovníku</revnumber> 
+	<date>Leden 2005</date> 
+	<revdescription> 
+	  <para role="author">Emmanuele Bassi</para>
+	  <para role="publisher">Dokumentační projekt GNOME</para>
+	</revdescription> 
+      </revision>
+    </revhistory> 
+
+    <releaseinfo>Tato příručka popisuje aplikaci Slovník ve verzi 2.14.0</releaseinfo> 
+    <legalnotice> 
+      <title>Ohlasy</title> 
+      <para>Pokud chcete oznámit chybu nebo navrhnout vylepšení vztahující se k aplikaci Slovník nebo této příručce, postupujte dle instrukcí na stránce <ulink url="ghelp:gnome-feedback" type="help">Stránka s ohlasy na GNOME</ulink>.</para>
+      
+<!-- Translators may also add here feedback address for translations -->
+    </legalnotice> 
+  </articleinfo> 
+
+  <indexterm> 
+    <primary>Slovník</primary> 
+  </indexterm> 
+
+<!-- ============= Document Body ============================= -->
+<!-- ============= Introduction ============================== -->
+  <sect1 id="gnome-dictionary-introduction"> 
+    <title>Úvod</title>
+
+    <para>Aplikace <application>Slovník</application> vám umožňuje vyhledávat slova a výrazy ve slovníkových zdrojích.</para>
+    
+  </sect1>
+
+<!-- ============= Getting Started =========================== -->  
+  <sect1 id="gnome-dictionary-getting-started">
+    <title>Začínáme</title>
+    
+<!-- ============= To Start Dictionary ======================= -->
+    <sect2 id="gnome-dictionary-start-application">
+      <title>Spuštění Slovníku</title>
+      
+      <para>Aplikaci <application>Slovník</application> můžete spustit následujícími způsoby:</para>
+      
+      <variablelist>
+        	<varlistentry>
+        	  <term>Nabídka <guimenu>Aplikace</guimenu></term>
+        	  <listitem>
+        	    <para>Zvolte <menuchoice><guisubmenu>Příslušenství</guisubmenu><guimenuitem>Slovník</guimenuitem></menuchoice>.</para>
+        	  </listitem>
+        	</varlistentry>
+    	<varlistentry>
+    	  <term>Příkazový řádek</term>
+    	  <listitem>
+    	    <para>Spusťte následující příkaz: <command>gnome-dictionary</command></para>
+    	  </listitem>
+    	</varlistentry>
+      </variablelist>
+      
+      <para>Jakmile se spustí, zobrazí se okno <application>Slovník</application>:</para>
+      
+      <figure id="gnome-dictionary-fig">
+        <title>Okno</title>
+        <screenshot> 
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gnome-dictionary-application.png" format="PNG"/>
+            </imageobject>
+            <textobject><phrase>Ukazuje hlavní okno aplikace Slovník.</phrase></textobject> 
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+    </sect2>
+
+  </sect1>
+  
+<!-- ============= Usage ===================================== -->
+  <sect1 id="gnome-dictionary-usage">
+    <title>Použití</title>
+    
+    <sect2 id="gnome-dictionary-lookup">
+      <title>Vyhledávání slov</title>
+      
+      <para>Slovo vyhledáte tak, že jej zadáte do vstupního pole <guilabel>Hledat</guilabel> a stisknete <keycap>Enter</keycap>.</para>
+    
+      <para>Pokud se nalezne nějaká definice zadaného slova, objeví se uvnitř oblasti hlavního okna</para>
+
+      <figure id="gnome-dictionary-lookup-fig">
+        <title>Okno</title>
+        <screenshot> 
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gnome-dictionary-lookup.png" format="PNG"/>
+            </imageobject>
+            <textobject><phrase>Ukazuje definici slova uvnitř hlavního okna Slovníku.</phrase></textobject> 
+          </mediaobject>
+        </screenshot>
+      </figure>
+      
+      <para>V opačném případě se objeví chybový dialog se zprávou vysvětlující příčiny chyby.</para>
+    
+    </sect2>
+    
+    <sect2 id="gnome-dictionary-save">
+      <title>Ukládání výsledků hledání</title>
+      
+      <para>Pokud chcete výsledky vyhledávání uložit, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Uložit kopii</guimenuitem></menuchoice>. V dialogové okně <guilabel>Uložit kopii</guilabel> zadejte název pro soubor a klikněte na <guibutton>Uložit</guibutton>.</para>
+    
+    </sect2>
+    
+    <sect2 id="gnome-dictionary-print">
+      <title>Tisk výsledků hledání</title>
+      
+      <para>Pokud chcete výsledky vyhledávání vytisknout, zvolte <menuchoice><guimenu>Soubor</guimenu><guimenuitem>Tisk</guimenuitem></menuchoice>.</para>
+
+      <para>V dialogovém okně <guilabel>Tisk</guilabel> můžete zvolit, kterou tiskárnu chcete použít, formát papíru a počet kopií.</para>
+
+      <para>Na náhled, jak bude tisk vypadat, se podíváte kliknutím na <guibutton>Náhled tisku</guibutton>.</para>
+
+      <para>Kliknutím na tlačítko <guibutton>Tisk</guibutton> se tisk provede.</para>
+    
+    </sect2>
+    
+    <sect2 id="gnome-dictionary-find">
+      <title>Hledání textu</title>
+
+      <figure id="gnome-dictionary-find-fig">
+        <title>Okno</title>
+        <screenshot> 
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gnome-dictionary-find.png" format="PNG"/>
+            </imageobject>
+            <textobject><phrase>Ukazuje panel hledání ve slovníku uvnitř hlavního okna.</phrase></textobject> 
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      
+      <para>Pokud chcete najít text ve výsledcích vyhledávání, postupujte následovně:</para>
+      
+      <orderedlist>
+        <listitem><para>Zvolte <menuchoice><guimenu>Úpravy</guimenu><guimenuitem>Hledat</guimenuitem></menuchoice>, aby se zobrazil panel <guilabel>Hledání</guilabel>.</para></listitem>
+        <listitem><para>Text, který chcete najít, zadejte do pole <guilabel>Hledat</guilabel>.</para></listitem>
+        <listitem><para>Pokud chcete najít další výskyt zadaného textu, klikněte na <guibutton>Následující</guibutton>. Pokud chcete najít předcházející výskyt zadaného textu, klikněte na <guibutton>Předchozí</guibutton>.</para></listitem>
+      </orderedlist>
+    
+    </sect2>
+      
+  </sect1>
+
+<!-- ============= Preferences =============================== -->
+  <sect1 id="gnome-dictionary-preferences">
+    <title>Předvolby</title>
+    
+    <para>Pokud chcete změnit nastavení aplikace <application>Slovník</application>, použijte <menuchoice><guimenu>Úpravy</guimenu><guimenuitem>Předvolby</guimenuitem></menuchoice>.</para>
+
+<!-- ============= Source Tab ================================ -->
+    <sect2 id="gnome-dictionary-source-tab">
+      <title>Zdroje slovníků</title>
+
+      <figure id="gnome-dictionary-sources-fig">
+        <title>Okno</title>
+        <screenshot> 
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gnome-dictionary-preferences-source.png" format="PNG"/>
+            </imageobject>
+            <textobject><phrase>Ukazuje kartu Zdroj v dialogovém okně Předvolby slovníku.</phrase></textobject> 
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>Pokud chcete změnit zdroj slovníku používaného k vyhledávání slov, zvolte požadovaný zdroj v seznamu.</para>
+    </sect2>
+    
+<!-- ============= Add Source ================================ -->
+    <sect2 id="gnome-dictionary-add-source">
+      <title>Přidání nového zdroje</title>
+
+      <figure id="gnome-dictionary-add-source-fig">
+        <title>Okno</title>
+        <screenshot> 
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gnome-dictionary-add-source.png" format="PNG"/>
+            </imageobject>
+            <textobject><phrase>Ukazuje dialogové okno Přidat zdroj slovníku</phrase></textobject> 
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>Pokud chcete přidat nový zdroj slovníku, postupujte následovně:</para>
+
+      <orderedlist>
+        <listitem><para>Klikněte na tlačítko <guibutton>Přidat</guibutton></para></listitem>
+	<listitem><para>V poli <guilabel>Popis</guilabel> upravte název nového zdroje</para></listitem>
+	<listitem><para>Ve výběrovém seznamu <guilabel>Transport</guilabel> zvolte typ transportu nového zdroje</para></listitem>
+	<listitem><para>Upravte atributy nového zdroje</para></listitem>
+	<listitem><para>Klikněte na <guibutton>Přidat</guibutton></para></listitem>
+      </orderedlist>
+
+      <para>Různé typy transportů ze zdrojů používají odlišné atributy. Zde je seznam dostupných atributů podle typu transportu:</para>
+
+      <informaltable frame="all">
+        <tgroup cols="2" colsep="1" rowsep="1">
+	  <thead>
+	    <row valign="top">
+	      <entry><para>Transport</para></entry>
+	      <entry><para>Parametry</para></entry>
+	    </row>
+	  </thead>
+	  <tbody>
+	    <row valign="top">
+	      <entry><para>Server se slovníkem</para></entry>
+	      <entry>
+	        <para>Název počítače: název počítače hostujícího server se slovníkem</para>
+		<para>Port: port serveru se slovníkem</para>
+              </entry>
+	    </row>
+	  </tbody>
+	</tgroup>
+      </informaltable>
+    
+    </sect2>
+
+<!-- ============= Remove Source ============================= -->
+    <sect2 id="gnome-dictionary-remove-source">
+      <title>Odebrání zdroje</title>
+      
+      <para>Zdroj slovníku odstraníte ze seznamu pomocí následujícího postupu:</para>
+
+      <orderedlist>
+        <listitem><para>Vyberte zdroj, který si přejete ze seznamu odstranit</para></listitem>
+	<listitem><para>Klikněte na tlačítko <guibutton>Odstranit</guibutton></para></listitem>
+      </orderedlist>
+
+      <warning><para>Pokud zdroj slovníku odstraníte, bude trvale vymazán ze seznamu dostupných zdrojů. Navíc, jelikož jsou některé zdroje definované pro celý systém, nebudete je moci odstranit, pokud nebudete mít oprávnění skutečného vlastníka.</para></warning>
+      
+    </sect2>
+    
+<!-- ============= Print Tab ================================= -->
+    <sect2 id="gnome-dictionary-print-tab">
+      <title>Volby tisku</title>
+
+      <figure id="gnome-dictionary-print-fig">
+        <title>Okno</title>
+        <screenshot> 
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gnome-dictionary-preferences-print.png" format="PNG"/>
+            </imageobject>
+            <textobject><phrase>Ukazuje kartu Vytisknout v dialogovém okně Předvolby slovníku.</phrase></textobject> 
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>Jestliže chcete změnit písmo a jeho velikost použité pro tisk, proveďte následující:</para>
+
+      <orderedlist>
+        <listitem><para>Klikněte na tlačítko <guilabel>Písmo pro tisk</guilabel></para></listitem>
+	<listitem><para>Vyberte si dle svého přání písmo a jeho velikost</para></listitem>
+	<listitem><para>Klikněte na <guibutton>Ok</guibutton></para></listitem>
+      </orderedlist>
+	
+    </sect2>
+    
+  </sect1>
+
+<!-- ============= Dictionary Applet ======================== -->
+  <sect1 id="gnome-dictionary-applet">
+  <title>Applet Hledat ve slovníku</title>
+  
+  <para>Aplikace <application>Slovník</application> se dodává spolu s appletem na panel <application>Hledání ve slovníku</application>. Můžete si applet <application>Hledání ve slovníku</application> přidat na panel a vyhledávat slova ve slovnících.</para>
+
+  <figure id="gnome-dictionary-applet-fig">
+    <title>Okno appletu Hledat ve slovníku</title>
+    <screenshot> 
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="figures/gnome-dictionary-applet.png" format="PNG"/>
+        </imageobject>
+        <textobject><phrase>Ukazuje applet Hledat ve slovníku.</phrase></textobject> 
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+
+<!-- ============= Dictionary Applet Start ================== -->
+    <sect2 id="gnome-dictionary-applet-start">
+      <title>Spuštění appletu Slovník</title>
+    
+      <para>Applet <application>Hledat ve slovníku</application> přidáte na panel tím, že na něj kliknete pravým tlačítkem a zvolíte <guimenuitem>Přidat na panel</guimenuitem>. V dialogovém okně <application>Přidat na panel</application> vyberete Hledat ve slovníku a kliknete na <guibutton>OK</guibutton>.</para>
+      
+    </sect2>
+
+<!-- ============= Dictionary Applet Start ================== -->
+    <sect2 id="gnome-dictionary-applet-usage">
+      <title>Používání appletu Hledat ve slovníku</title>
+      
+      <para>Když chcete vyhledat slovo, napíšete jej do <guilabel>vstupního pole</guilabel> a stisknete <keycap>Enter</keycap> nebo kliknete na ikonu slovníku a zvolíte <guimenuitem>Hledat vybraný text</guimenuitem>.</para>
+      
+      <para>Pokud se podaří pro slovo najít nějakou definici, objeví se okno s textem definice:</para>
+
+      <figure id="gnome-dictionary-applet-window-fig">
+        <title>Okno appletu Hledat ve slovníku</title>
+        <screenshot> 
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="figures/gnome-dictionary-applet-window.png" format="PNG"/>
+            </imageobject>
+            <textobject><phrase>Ukazuje hlavní okno appletu Slovník.</phrase></textobject> 
+          </mediaobject>
+        </screenshot>
+      </figure>
+      
+      <para>Klikněte na <guibutton>Uložit</guibutton> pro uložení definice do textového souboru. Na <guibutton>Tisk</guibutton> klikněte pro vytisknutí definici. A na <guibutton>Vymazat</guibutton> klikněte pro vymazání definice z okna.</para>
+      
+      <para>Okno můžete skrýt kliknutím na ikonu slovníku nebo stiskem <keycap>Esc</keycap>.</para>
+
+    </sect2>
+    
+    <sect2 id="gnome-dictionary-applet-preferences">
+      <title>Předvolby</title>
+      
+      <para>Pokud chcete změnit nastavení <application>appletu Hledat ve slovníku</application>, klikněte pravým tlačítkem na ikoně slovníku a vyberte <guimenuitem>Předvolby</guimenuitem>.</para>
+      
+      <para>Objeví se dialogové okno <guilabel>Předvolby slovníku</guilabel>, které je stejné jako u aplikace <application>Slovník</application> a platí pro něj to stejné, co uvádí <xref linkend="gnome-dictionary-preferences"/></para>
+      
+    </sect2>
+    
+  </sect1>
+
+</article>

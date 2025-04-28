@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>2.2. Generating Instrumentation for Other Computers</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="using-systemtap.html" title="Chapter 2. Using SystemTap" /><link rel="prev" href="using-systemtap.html" title="Chapter 2. Using SystemTap" /><link rel="next" href="using-usage.html" title="2.3. Running SystemTap Scripts" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="using-systemtap.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="using-usage.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="2.2. Generating Instrumentation for Other Computers" id="cross-compiling" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h2 class="title" id="cross-compiling">2.2. Generating Instrumentation for Other Computers</h2></div></div></div><a id="id2225038" class="indexterm"></a><a id="id674871" class="indexterm"></a><a id="id2210021" class="indexterm"></a><a id="id655198" class="indexterm"></a><a id="id732787" class="indexterm"></a><a id="id661347" class="indexterm"></a><a id="id708424" class="indexterm"></a><a id="id2142319" class="indexterm"></a><div class="para">
+		When users run a SystemTap script, SystemTap builds a kernel module out of that script. SystemTap then loads the module into the kernel, allowing it to extract the specified data directly from the kernel (refer to <a class="xref" href="understanding-how-systemtap-works.html#systemtapsession" title="Procedure 3.1. SystemTap Session">Procedure 3.1, “SystemTap Session”</a> in <a class="xref" href="understanding-how-systemtap-works.html#understanding-architecture-tools" title="3.1. Architecture">Section 3.1, “Architecture”</a> for more information).
+	</div><div class="para">
+		Normally, however, SystemTap scripts can only be run on systems where SystemTap is deployed (as in <a class="xref" href="using-systemtap.html#using-setup" title="2.1. Installation and Setup">Section 2.1, “Installation and Setup”</a>). This could mean that if you want to run SystemTap on ten systems, you would need to deploy SystemTap on <span class="emphasis"><em>all</em></span> those systems. In some cases, this may be neither feasible nor desired. For instance, corporate policy may prohibit an administrator from installing RPMs that provide compilers or debug information on specific machines, which will prevent the deployment of SystemTap.
+	</div><div class="para">
+		To work around this, you can resort to <em class="firstterm">cross-instrumentation</em>. Cross-instrumentation is the process of generating SystemTap instrumentation module from a SystemTap script on one computer to be used on another computer. This process offers the following benefits:
+	</div><a id="id783136" class="indexterm"></a><a id="id2210669" class="indexterm"></a><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+				The kernel information packages for various machines can be installed on a single <span class="emphasis"><em>host machine</em></span>.
+			</div></li><li class="listitem"><div class="para">
+				Each <span class="emphasis"><em>target machine</em></span> only needs one RPM to be installed to use the generated SystemTap instrumentation module: <code class="filename">systemtap-runtime</code>.
+			</div></li></ul></div><div class="note" title="Note"><div class="admonition_header"><h2>Note</h2></div><div class="admonition"><div class="para">
+			For the sake of simplicity, we will be using the following terms throughout this section:
+		</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+					<a id="id672735" class="indexterm"></a>
+					 <a id="id739531" class="indexterm"></a>
+					 <span class="emphasis"><em>instrumentation module</em></span> — the kernel module built from a SystemTap script; i.e. the <span class="emphasis"><em>SystemTap module</em></span> is built on the <span class="emphasis"><em>host system</em></span>, and will be loaded on the <span class="emphasis"><em>target kernel</em></span> of <span class="emphasis"><em>target system</em></span>.
+				</div></li><li class="listitem"><div class="para">
+					<a id="id2221892" class="indexterm"></a>
+					 <a id="id727832" class="indexterm"></a>
+					 <span class="emphasis"><em>host system</em></span> — the system on which you compile the instrumentation modules (from SystemTap scripts), to be loaded on <span class="emphasis"><em>target systems</em></span>.
+				</div></li><li class="listitem"><div class="para">
+					<a id="id2180106" class="indexterm"></a>
+					 <a id="id736356" class="indexterm"></a>
+					 <span class="emphasis"><em>target system</em></span> — the system for which you are building the <span class="emphasis"><em>instrumentation module</em></span> (from SystemTap scripts).
+				</div></li><li class="listitem"><div class="para">
+					<a id="id783099" class="indexterm"></a>
+					 <a id="id720913" class="indexterm"></a>
+					 <span class="emphasis"><em>target kernel</em></span> — the kernel of the <span class="emphasis"><em>target system</em></span>. This is the kernel on which you wish to load/run the <span class="emphasis"><em>instrumentation module</em></span>.
+				</div></li></ul></div></div></div><div class="procedure" title="Procedure 2.1. Configuring a Host System and Target Systems" id="preppingxcompile"><h6>Procedure 2.1. Configuring a Host System and Target Systems</h6><a id="id727361" class="indexterm"></a><a id="id663095" class="indexterm"></a><a id="id741355" class="indexterm"></a><ol class="1"><li class="step" title="Step 1"><div class="para">
+				Install the <code class="filename">systemtap-runtime</code> RPM on each <span class="emphasis"><em>target system</em></span>.
+			</div></li><li class="step" title="Step 2"><div class="para">
+				Determine the kernel running on each <span class="emphasis"><em>target system</em></span> by running <code class="command">uname -r</code> on each <span class="emphasis"><em>target system</em></span>.
+			</div></li><li class="step" title="Step 3"><div class="para">
+				Install SystemTap on the <span class="emphasis"><em>host system</em></span>. You will be building the <span class="emphasis"><em>instrumentation module</em></span> for the <span class="emphasis"><em>target systems</em></span> on the <span class="emphasis"><em>host system</em></span>. For instructions on how to install SystemTap, refer to <a class="xref" href="using-systemtap.html#installproper" title="2.1.1. Installing SystemTap">Section 2.1.1, “Installing SystemTap”</a>.
+			</div></li><li class="step" title="Step 4"><div class="para">
+				Using the <span class="emphasis"><em>target kernel</em></span> version determined earlier, install the <span class="emphasis"><em>target kernel</em></span> and related RPMs on the <span class="emphasis"><em>host system</em></span> by the method described in <a class="xref" href="using-systemtap.html#install-kinfo" title="2.1.2. Installing Required Kernel Information RPMs">Section 2.1.2, “Installing Required Kernel Information RPMs”</a>. If multiple <span class="emphasis"><em>target systems</em></span> use different <span class="emphasis"><em>target kernels</em></span>, you will need to repeat this step for each different kernel used on the <span class="emphasis"><em>target systems</em></span>.
+			</div></li></ol></div><div class="para">
+		After performing <a class="xref" href="cross-compiling.html#preppingxcompile" title="Procedure 2.1. Configuring a Host System and Target Systems">Procedure 2.1, “Configuring a Host System and Target Systems”</a>, you can now build the <span class="emphasis"><em>instrumentation module</em></span> (for any <span class="emphasis"><em>target system</em></span>) on the <span class="emphasis"><em>host system</em></span>.
+	</div><div class="para">
+		To build the <span class="emphasis"><em>instrumentation module</em></span>, run the following command on the <span class="emphasis"><em>host system</em></span> (be sure to specify the appropriate values):
+	</div><pre class="screen">
+stap -r <em class="replaceable"><code>kernel_version</code></em> <em class="replaceable"><code>script</code></em> -m <em class="replaceable"><code>module_name</code></em></pre><div class="para">
+		Here, <code class="command"><em class="replaceable"><code>kernel_version</code></em></code> refers to the version of the <span class="emphasis"><em>target kernel</em></span> (the output of <code class="command">uname -r</code> on the target machine), <code class="command"><em class="replaceable"><code>script</code></em></code> refers to the script to be converted into an <span class="emphasis"><em>instrumentation module</em></span>, and <code class="command"><em class="replaceable"><code>module_name</code></em></code> is the desired name of the <span class="emphasis"><em>instrumentation module</em></span>.
+	</div><div class="note" title="Note"><div class="admonition_header"><h2>Note</h2></div><div class="admonition"><a id="id674359" class="indexterm"></a><a id="id674367" class="indexterm"></a><a id="id674375" class="indexterm"></a><div class="para">
+			To determine the architecture notation of a running kernel, run <code class="command">uname -m</code>.
+		</div></div></div><div class="para">
+		Once the the <span class="emphasis"><em>instrumentation module</em></span> is compiled, copy it to the <span class="emphasis"><em>target system</em></span> and then load it using:
+	</div><pre class="screen">
+staprun <em class="replaceable"><code>module_name</code></em>.ko
+</pre><div class="para">
+		For example, to create the <span class="emphasis"><em>instrumentation module</em></span> <code class="filename">simple.ko</code> from a SystemTap script named <code class="filename">simple.stp</code> for the <span class="emphasis"><em>target kernel</em></span> 2.6.18-92.1.10.el5 (on x86_64 architecture), use the following command:
+	</div><div class="para">
+		<code class="command">stap -r 2.6.18-92.1.10.el5 -e 'probe vfs.read {exit()}' -m simple</code>
+	</div><div class="para">
+		This will create a module named <code class="filename">simple.ko</code>. To use the <span class="emphasis"><em>instrumentation module</em></span> <code class="filename">simple.ko</code>, copy it to the <span class="emphasis"><em>target system</em></span> and run the following command (on the <span class="emphasis"><em>target system</em></span>):
+	</div><div class="para">
+		<code class="command">staprun simple.ko</code>
+	</div><div class="important" title="Important"><div class="admonition_header"><h2>Important</h2></div><div class="admonition"><div class="para">
+			The <span class="emphasis"><em>host system</em></span> must be the same architecture and running the same distribution of Linux as the <span class="emphasis"><em>target system</em></span> in order for the built <span class="emphasis"><em>instrumentation module</em></span> to work.
+		</div></div></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="using-systemtap.html"><strong>Prev</strong>Chapter 2. Using SystemTap</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="using-usage.html"><strong>Next</strong>2.3. Running SystemTap Scripts</a></li></ul></body></html>

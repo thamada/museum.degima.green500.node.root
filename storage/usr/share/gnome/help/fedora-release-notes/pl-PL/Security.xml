@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Security" lang="pl-PL">
+	<title>Bezpieczeństwo</title>
+	<remark>Ta treść znajduje się tutaj: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Security">https://fedoraproject.org/wiki/Docs/Beats/Security</ulink></remark>
+	<para>
+		Ta sekcja omawia różne aspekty związane z bezpieczeństwem Fedory.
+	</para>
+	<section id="sect-Release_Notes-Security-Lower_process_capabilities">
+		<title>Niższe możliwości procesów</title>
+		<para>
+			Demony uruchomione jako root zostały przejrzane i załatane, aby były uruchamiane z niższymi możliwościami procesów. Zmniejsza to szansę użycia tych demonów do rozszerzenia uprawnień. Dodatkowo uprawnienia pliku shadow zostały zmienione na <literal>000</literal>, a kilka katalogów w <filename>$PATH</filename> zostało ustawionych na <literal>555</literal>, aby powstrzymać demony bez <literal>DAC_OVERRIDE</literal> od możliwości dostępu do pliku shadow lub zapisania do katalogów <filename>$PATH</filename>.
+		</para>
+		<para>
+			Po zaatakowaniu systemu zwykle nie można wyrządzić większych szkód, chyba że dojdzie do rozszerzenia uprawnień. Ta funkcja zmniejsza liczbę celów ataków, których można użyć do rozszerzenia uprawnień. Jeśli procesy roota nie posiadają wszystkich możliwości, trudniejsze będzie użycie ich do uszkodzenia systemu.
+		</para>
+		<para>
+			Procesy z UID roota mogą ciągle uszkodzić system, ponieważ mogą one zapisywać do prawie każdego pliku i oczywiście odczytywać<filename>plik /etc/shadow</filename>. Jednakże jeśli system jest ulepszony, aby root wymagał możliwości <literal>DAC_OVERRIDE</literal>, tylko ograniczona liczba procesów może uszkodzić system. Nie ma to wpływu na możliwości administratora, ponieważ administratorzy zawsze otrzymują pełne uprawnienia, które zawierają <literal>DAC_OVERRIDE</literal>. Z tego powodu nawet jeśli ktoś pomyślnie zaatakuje proces roota, trudniejsze jest wykorzystanie tego ataku.
+		</para>
+		<para>
+			Ulepszony system powinien posiadać uprawnienia typu: <literal>555</literal> <filename>/bin</filename>, <literal>555</literal> <filename>/lib</filename>, <literal>000</literal> <filename>/etc/shadow</filename> i tak dalej. Obecnie pokrywane są katalogi w zmiennej <filename>$PATH</filename>, katalogi bibliotek, partycje <filename>/boot</filename> i <filename>/root</filename>. Ten schemat nie wpływa w żaden sposób na SELinuksa, ale uzupełnia go, ponieważ możliwości są kontrolą DAC, i muszą najpierw uzyskać uprawnienie dostępu.
+		</para>
+	</section>
+
+</section>
+
+

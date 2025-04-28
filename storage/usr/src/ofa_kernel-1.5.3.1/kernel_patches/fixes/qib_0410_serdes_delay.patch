@@ -1,0 +1,13 @@
+diff --git a/drivers/infiniband/hw/qib/qib_iba7322.c b/drivers/infiniband/hw/qib/qib_iba7322.c
+index 690b6fc..0b73bf8 100644
+--- a/drivers/infiniband/hw/qib/qib_iba7322.c
++++ b/drivers/infiniband/hw/qib/qib_iba7322.c
+@@ -8190,6 +8190,8 @@ static int serdes_7322_init_new(struct qib_pportdata *ppd)
+ 	/* VGA output common mode */
+ 	ibsd_wr_allchans(ppd, 12, (3 << 2), BMASK(3, 2));
+ 
++	/* Add a delay to allow the SERDES to init */
++	msleep(3000);
+ 	return 0;
+ }
+ 

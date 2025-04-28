@@ -1,0 +1,46 @@
+Add a multicast leave maximum retry setting in sys/module/ib_sa/parameters/mcast_leave_retries.
+Add a debug print when the maximum retry count is reached.
+
+Signed-off-by: Nir Muchtar <nirm@voltaire.com>
+Reviewed-by:   Moni Shoua  <monis@voltaire.com>
+--
+
+Index: ofa_kernel-1.5.2/drivers/infiniband/core/multicast.c
+===================================================================
+--- ofa_kernel-1.5.2.orig/drivers/infiniband/core/multicast.c	2010-08-17 12:56:06.000000000 +0300
++++ ofa_kernel-1.5.2/drivers/infiniband/core/multicast.c	2010-08-17 13:15:38.000000000 +0300
+@@ -40,6 +40,12 @@
+ #include <rdma/ib_cache.h>
+ #include "sa.h"
+ 
++static int mcast_leave_retries = 3;
++
++module_param_call(mcast_leave_retries, param_set_int, param_get_int,
++		  &mcast_leave_retries, 0644);
++MODULE_PARM_DESC(mcast_leave_retries, "Number of retries for multicast leave requests before giving up");
++
+ static void mcast_add_one(struct ib_device *device);
+ static void mcast_remove_one(struct ib_device *device);
+ 
+@@ -520,8 +526,11 @@
+ 	if (status && (group->retries > 0) &&
+ 	    !send_leave(group, group->leave_state))
+ 		group->retries--;
+-	else
++	else {
++		if (status && group->retries <= 0) 
++			printk("reached max retry count. status=%d  .Giving up\n", status);
+ 		mcast_work_handler(&group->work);
++	}
+ }
+ 
+ static struct mcast_group *acquire_group(struct mcast_port *port,
+@@ -544,7 +553,7 @@
+ 	if (!group)
+ 		return NULL;
+ 
+-	group->retries = 3;
++	group->retries = mcast_leave_retries;
+ 	group->port = port;
+ 	group->rec.mgid = *mgid;
+ 	group->pkey_index = MCAST_INVALID_PKEY_INDEX;

@@ -1,0 +1,35 @@
+commit 18edc84cf15cbe114dcdf7e8612ee52586d0aad7
+Author: Divy Le Ray <divy@chelsio.com>
+Date:   Mon Oct 25 07:35:02 2010 +0000
+
+    cxgb3: fix device opening error path
+    
+    Only negative return from bind_qsets() should be considered an error and
+    propagated.
+    It fixes an issue reported by IBM on P Series platform.
+    
+    Signed-off-by: Divy Le Ray <divy@chelsio.com>
+    Tested-by: Nishanth Aravamudan <nacc@us.ibm.com>
+    Signed-off-by: David S. Miller <davem@davemloft.net>
+
+diff --git a/drivers/net/cxgb3/cxgb3_main.c b/drivers/net/cxgb3/cxgb3_main.c
+index a04ce6a..4e3c123 100644
+--- a/drivers/net/cxgb3/cxgb3_main.c
++++ b/drivers/net/cxgb3/cxgb3_main.c
+@@ -1266,11 +1266,13 @@ static int cxgb_up(struct adapter *adap)
+ 	}
+ 
+ 	if (!(adap->flags & QUEUES_BOUND)) {
+-		err = bind_qsets(adap);
+-		if (err) {
+-			CH_ERR(adap, "failed to bind qsets, err %d\n", err);
++		int ret = bind_qsets(adap);
++
++		if (ret < 0) {
++			CH_ERR(adap, "failed to bind qsets, err %d\n", ret);
+ 			t3_intr_disable(adap);
+ 			free_irq_resources(adap);
++			err = ret;
+ 			goto out;
+ 		}
+ 		adap->flags |= QUEUES_BOUND;

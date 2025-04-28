@@ -1,0 +1,298 @@
+#!/usr/bin/env perl
+#
+# Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
+#
+# Simple perl script to effect system-wide and per-user default
+# selections of which MPI implementation to use.
+#
+
+use strict;
+use Getopt::Long;
+use Text::Wrap;
+use File::Copy;
+
+#===========================================================================
+
+=head1 NAME
+
+mpi-selector-menu - A menu-based wrapper around the mpi-selector command
+
+=head1 SYNOPSIS
+
+mpi-selector-menu [--version] [--help]
+
+=head1 DESCRIPTION
+
+Simple wrapper around the mpi-selector command-line 
+
+=head1 AUTHOR
+
+Written by Jeff Squyres.
+
+=head1 REPORTING BUGS
+
+Send bug reports to the OpenFabrics general mailing list (see
+L<http://www.openfabrics.org/>).  This is a high-volume mailing list,
+so be sure to put "mpi-selector" in the subject to ensure that it is
+not missed.
+
+=head1 COPYRIGHT
+
+Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
+
+This is free software; see the source for copying conditions.  There
+is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+
+=head1 SEE ALSO
+
+mpi-selector(1)
+
+=cut
+
+#===========================================================================
+
+sub show_help {
+    our $silent;
+    my $ret = shift;
+
+    print "$0 options:
+
+--help                This help message
+--version             Display the version of $0.
+";
+    exit($ret);
+}
+
+#===========================================================================
+
+sub make_safe_filename {
+    my $name = shift;
+    $name =~ s/[ :\/\\\*\&\$\#\@\!\t\n\[\]\{\}\(\)]/_/g;
+    return $name;
+}
+
+#===========================================================================
+
+sub error {
+    our $silent;
+    print STDERR wrap("ERROR: ", "       ", @_) . "\n"
+      if (!$silent);
+    exit(1);
+}
+
+
+sub warning {
+    our $silent;
+    print STDERR wrap("WARNING: ", "         ", @_) . "\n"
+      if (!$silent);
+}
+
+
+sub verbose {
+    our $silent;
+    our $verbose_flag;
+    print wrap("", "", @_) . "\n"
+      if ($verbose_flag && !$silent);
+}
+
+#===========================================================================
+
+sub get_yn {
+    my $prompt = shift;
+    my $default = shift;
+
+    if (defined($default)) {
+        if ($default) {
+            $default = 1;
+            $prompt .= " (Y/n) ";
+        } else {
+            $default = 0;
+            $prompt .= " (y/N) ";
+        }
+    } else {
+        $prompt .= " (y/n/) ";
+    }
+
+    while (1) {
+        print $prompt;
+        my $ans = <STDIN>;
+        chomp($ans);
+        if ($ans =~ /y/i) {
+            return 1;
+        } elsif ($ans =~ /n/i) {
+            return 0;
+        } elsif ("" eq $ans) {
+            return $default 
+              if (defined($default));
+        }
+        print "\nPlease choose Y or N\n";
+    }
+}
+
+#===========================================================================
+
+# Set autoflush
+select STDOUT;
+$| = 1;
+
+# Module options
+$Text::Wrap::columns = 76;
+&Getopt::Long::Configure("bundling");
+
+my $help = 0;
+my $version = 0;
+
+my $ok = Getopt::Long::GetOptions("help|h" => \$help,
+                                  "version" => \$version,
+                                  );
+
+show_help(1) if (!$ok);
+show_help(0) if ($help);
+
+#---------------------------------------------------------------------------
+
+# Version informtion
+
+if ($version) {
+    print "$0 version 1.0.0
+
+Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Written by Jeff Squyres.\n";
+    exit(0);
+}
+
+#---------------------------------------------------------------------------
+
+# Ensure that we can find the mpi-selector executable
+
+#---------------------------------------------------------------------------
+
+sub query {
+    my $arg = shift;
+    my $ret = `mpi-selector --query $arg | head -n 1 | cut -d: -f2`;
+    chomp($ret);
+    $ret = "<none>" if ($ret eq "");
+    return $ret;
+}
+
+sub list {
+    my $list;
+    open(CMD, "mpi-selector --list|");
+    while (<CMD>) {
+        chomp;
+        push(@$list, $_);
+    }
+    sort @$list;
+    return $list;
+}
+
+sub get_user_or_system {
+    my $ret;
+    while (1) {
+        print "Operator on the per-user or system-wide default (u/s)? ";
+        $ret = <STDIN>;
+        if (!defined($ret)) {
+            print "\n";
+            exit(0);
+        }
+
+        if ($ret =~ /^\s*u\s*$/i) {
+            return "u";
+        } elsif ($ret =~ /^\s*s\s*$/i) {
+            return "s";
+        }
+    }
+}
+
+# Main menu
+
+my $registered = list();
+my $first = 1;
+my $made_changes = 0;
+my $warning = "\nWARNING: Changes made to mpi-selector defaults will not be visible until
+you start a new shell!\n\n";
+
+while (1) {
+    my $system_default = query("--system");
+    my $user_default = query("--user");
+
+    if ($first) {
+        $first = 0;
+    } else {
+        print "\n";
+    }
+
+    print "Current system default: $system_default
+Current user default:   $user_default
+
+    \"u\" and \"s\" modifiers can be added to numeric and \"U\"
+    commands to specify \"user\" or \"system-wide\".\n\n";
+
+    my $i = 1;
+    while ($i - 1 <= $#$registered) {
+        print "$i. $$registered[$i - 1]\n";
+        ++$i;
+    }
+    --$i;
+    print "U. Unset default
+Q. Quit
+
+Selection (1-${i}[us], U[us], Q): ";
+    my $val = <STDIN>;
+
+    # Check for bozo: no stdin
+    if (!defined($val)) {
+        print "\n";
+        print $warning
+            if ($made_changes);
+        exit(0);
+    }
+
+    # Check letter options
+    if ($val =~ /^q$/i) {
+        print $warning
+            if ($made_changes);
+        exit(0);
+    } elsif ($val =~ /^\s*u\s*s\s*$/i) {
+        system("mpi-selector --unset --system");
+        $made_changes = 1;
+    } elsif ($val =~ /^\s*u\s*u\s*$/i) {
+        system("mpi-selector --unset --user");
+        $made_changes = 1;
+    } elsif ($val =~ /^\s*u\s*$/i) {
+        $val = get_user_or_system();
+        my $str = "mpi-selector --unset " .
+            ("s" eq $val ? "--system" : "--user");
+        system($str);
+        $made_changes = 1;
+    } 
+
+    # Numeric options
+    elsif ($val =~ m/^\s*([0-9]+)\s*([us])*\s*$/) {
+        # In range?
+        if ($1 < 0 || $1 > $i) {
+            printf("$1 is not a valid choice\n");
+            next;
+        }
+
+        # Figure out if system or user
+        if ("" eq $2) {
+            $val = get_user_or_system();
+        } else {
+            $val = $2;
+        }
+
+        my $i = $1 - 1;
+        my $str = "mpi-selector --set $$registered[$i] " .
+            ("s" eq $val ? "--system" : "--user");
+        system($str);
+        $made_changes = 1;
+    }
+}
+
+# Shouldn't get here
+exit(0);

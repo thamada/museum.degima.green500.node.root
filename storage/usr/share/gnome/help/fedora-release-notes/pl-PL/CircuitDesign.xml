@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Circuit_Design" lang="pl-PL">
+	<title>Projektowanie układów</title>
+	<indexterm>
+		<primary>Projektowanie układów</primary>
+		<secondary>Section</secondary>
+	</indexterm>
+	<para>
+		Fedora &PRODVER; zawiera pełny zestaw aplikacji do przechwytywania schematów, symulacji układów i układów PCB. Poniżej można zobaczyć znaczne zmiany w tych aplikacjach. Pełną listę zmian można znaleźć na końcu tego dokumentu.
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>geda</term>
+			<listitem>
+				<indexterm>
+					<primary>geda</primary>
+				</indexterm>
+				<para>
+					W Fedorze 12 zestaw <package>geda</package>, poprzednio znajdujący się w wielu indywidualnych pakietach aplikacji, jest teraz dostarczany jako pojedynczy, pełny pakiet.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>gspiceui</term>
+			<listitem>
+				<indexterm>
+					<primary>gspiceui</primary>
+				</indexterm>
+				<para>
+					Pakiet <package>gspiceui</package> Fedory jest teraz skompilowany pod <package>wxgtk</package> 2.8 zamiast starego <package>wxgtk</package> 2.6. Ulepsza to graficzny interfejs użytkownika GSpiceUI. GSpiceUI dołącza brakujący plik opamp-3.sym do /usr/share/gEDA/sym/misc/ (katalogu symboli geda). 
+					<note>
+						<title>PPC64</title>
+						<para>
+							GSpiceUI nie jest dostępne na architekturze PPC64 obsługiwanej przez Fedorę w wyniku braku gwave dla tej architektury.
+						</para>
+					</note>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>kicad</term>
+			<listitem>
+				<indexterm>
+					<primary>kicad</primary>
+				</indexterm>
+				<para>
+					Fedora 12 zawiera najnowszą wersję pakietu <package>kicad</package>, który zawiera olbrzymią ilość pomniejszych poprawek błędów i ulepszeń użyteczności. Aby uzyskać pełny opis tych zmian, proszę zobaczyć dziennik zmian projektu na <ulink type="http" url="http://www.lis.inpg.fr/realise_au_lis/kicad/"></ulink>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>ngspice</term>
+			<listitem>
+				<indexterm>
+					<primary>ngspice</primary>
+				</indexterm>
+				<para>
+					Pakiet <package>ngspice</package> został zaktualizowany do wersji 19. 
+					<itemizedlist>
+						<listitem>
+							<para>
+								Zarządzanie pamięcią: naprawiono wycieki pamięci (błąd 514484 - długi komunikat ostrzeżenia)
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Zawarcie poprawek błędów i ulepszeń espice
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Poprawki błędów w interfejsach wykresów i wiersza poleceń.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Ponowne opracowanie modeli BSim, dołączenie modelu EPFL-EKV V2.63, modeli mextram, hicum0, hicum2 ADMS.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Program ngspice Fedory został załatany, aby akceptował wywołania z interfejsu TCL Xcircuit.
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>tclspice</term>
+			<listitem>
+				<indexterm>
+					<primary>tclspice</primary>
+				</indexterm>
+				<para>
+					Pakiet <package>tclspice</package> jest nowy w Fedorze &PRODVER;.
+				</para>
+				<para>
+					Przed ngspice-rework-19 Fedora uważała, że pakiet <package>tclspice</package> jest za mało stabilny. Przykłady <package>tclspice</package> można znaleźć przez <command>rpm -qd tclspice</command>.
+				</para>
+				<para>
+					Tclspice dostarcza użytkownikom Fedory rozszerzone możliwości projektowania mieszanych sygnałów przez swoje zaplecze TCL. Ponieważ Fedora dostarcza także narzędzia do manipulowania zmiennymi logicznymi (wyjaśnione w następnej sekcji), użytkownicy muszą dopasować materiały do swoich własnych wtyczek mieszanych sygnałów EDA.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>xcircuit</term>
+			<listitem>
+				<indexterm>
+					<primary>xcircuit</primary>
+				</indexterm>
+				<para>
+					Pakiet <package>xcircuit</package> został zaktualizowany do wersji 3.6.161. Główne zmiany: 
+					<itemizedlist>
+						<listitem>
+							<para>
+								Obsługa wielu schematycznych okien układów.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Zupełnie zmienione procedury dowiązywania funkcji kluczy, w tym mechanizmu rozdzielania funkcji.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Kilka dodatków i poprawek wymaganych do poprawnego działania implementacji wielu okien.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Ulepszony został sposób, w jaki są obsługiwane biblioteki przez rozróżnienie między stronami bibliotek i plików używając "przestrzeni nazw technologii". Każdy obiekt posiada nazwę składającą się z "przedrostka technologii", podwójnego dwukropka ("::") i nazwy obiektu. Każdy plik biblioteki określa nazwę technologii, która jest używana jako przedrostek dla wszystkich obiektów w tym pliku. Przedrostki są używane przez XCircuit do śledzenia, które obiekty są z danego pliku, niezależnie od strony biblioteki, do której zostały wczytane. Dodano obsługę przewodów podłączonych do wtyków symboli pozostających połączone, kiedy symbol jest przenoszony. Rozszerza także funkcję "Podłącz-do", umożliwiając (pół)automatyczne podłączanie przewodów do etykiet wtyków lub wtyków symboli. Makro klawiszowe dla "podłącz-do" (klawisz "A") może zostać także użyte jako funkcja "przewodu" (klawisz "w"), aby rozpocząć przewód z punktem początkowym podłączonym do wtyków symboli lub etykiet wtyków.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Sposób obsługi etykiet informacji dla PCB został zmieniony w porównaniu do wersji 3.6.66.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Runtime speed has been improved.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Program ngspice Fedory został załatany, aby akceptował wywołania z interfejsu TCL Xcircuit.
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>
+
+

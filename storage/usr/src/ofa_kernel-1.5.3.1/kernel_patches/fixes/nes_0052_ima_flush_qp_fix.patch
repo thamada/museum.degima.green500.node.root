@@ -1,0 +1,87 @@
+diff --git a/drivers/infiniband/hw/nes/nes_ud.c b/drivers/infiniband/hw/nes/nes_ud.c
+index 2cb6f0c..c784fad 100644
+--- a/drivers/infiniband/hw/nes/nes_ud.c
++++ b/drivers/infiniband/hw/nes/nes_ud.c
+@@ -892,6 +892,31 @@ static void nes_ud_destroy_nic(struct nes_ud_file *file)
+ 	return;
+ }
+ 
++int nes_ud_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
++		int attr_mask, struct ib_udata *udata)
++{
++	struct nes_qp *nesqp = to_nesqp(ibqp);
++	int ret = 0;
++
++	if (attr_mask & IB_QP_STATE) {
++		switch (attr->qp_state) {
++		case IB_QPS_ERR:
++			if (nesqp->rx_ud_wq)
++				nes_ud_destroy_nic(nesqp->rx_ud_wq);
++
++			if (nesqp->tx_ud_wq && (ret == 0))
++				nes_ud_destroy_nic(nesqp->tx_ud_wq);
++
++			nesqp->ibqp_state = IB_QPS_ERR;
++			break;
++
++		default:
++			break;
++		}
++	}
++	return ret;
++}
++
+ static void nes_ud_free_resources(struct nes_ud_file *file)
+ {
+ 	struct nes_device *nesdev = file->nesvnic->nesdev;
+@@ -952,9 +977,9 @@ static void nes_ud_free_resources(struct nes_ud_file *file)
+ 	  }
+ 	}
+ 
+-
+-
+-	nes_ud_destroy_nic(file);
++	if (file->qp_ptr)
++		if (file->qp_ptr->ibqp_state != IB_QPS_ERR)
++			nes_ud_destroy_nic(file);
+ 
+ 	if (file->queue_type == NES_UD_RECV_QUEUE) {
+ 		wqm_config0 = nes_read_indexed(nesdev, 0x5000);
+diff --git a/drivers/infiniband/hw/nes/nes_ud.h b/drivers/infiniband/hw/nes/nes_ud.h
+index 729b883..b28f6e2 100644
+--- a/drivers/infiniband/hw/nes/nes_ud.h
++++ b/drivers/infiniband/hw/nes/nes_ud.h
+@@ -80,5 +80,7 @@ int nes_ud_dereg_mr(u32 stag);
+ int nes_ud_subscribe_mcast(struct nes_ud_file *file, union ib_gid *gid);
+ int nes_ud_unsubscribe_mcast(struct nes_ud_file *file, union ib_gid *gid);
+ int nes_ud_cq_replace(struct nes_vnic *nesvnic, struct nes_cq *cq);
++int nes_ud_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
++		int attr_mask, struct ib_udata *udata);
+ 
+ #endif
+diff --git a/drivers/infiniband/hw/nes/nes_verbs.c b/drivers/infiniband/hw/nes/nes_verbs.c
+index edaa824..f009100 100644
+--- a/drivers/infiniband/hw/nes/nes_verbs.c
++++ b/drivers/infiniband/hw/nes/nes_verbs.c
+@@ -1470,6 +1470,7 @@ static struct ib_qp *nes_create_qp(struct ib_pd *ibpd,
+ 		return ERR_PTR(-EFAULT);
+ 	}
+ 
++	nesqp->ibqp_state = IB_QPS_RTS;
+ 	/* create association between qp and tx/rx files
+ 	 it is used when CQ is replaced from user space */
+ 	nesqp->rx_ud_wq->qp_ptr = nesqp;
+@@ -3132,9 +3133,10 @@ int nes_modify_qp(struct ib_qp *ibqp, struct ib_qp_attr *attr,
+ 			nesqp->hwqp.qp_id, attr->qp_state, nesqp->ibqp_state,
+ 			nesqp->iwarp_state, atomic_read(&nesqp->refcount));
+ 
+-	if (ibqp->qp_type == IB_QPT_RAW_ETH)
+-		return 0;
+-
++	if (ibqp->qp_type == IB_QPT_RAW_ETH) {
++		ret = nes_ud_modify_qp(ibqp, attr, attr_mask, &udata);
++		return ret;
++	}
+ 	spin_lock_irqsave(&nesqp->lock, qplockflags);
+ 
+ 	nes_debug(NES_DBG_MOD_QP, "QP%u: hw_iwarp_state=0x%X, hw_tcp_state=0x%X,"

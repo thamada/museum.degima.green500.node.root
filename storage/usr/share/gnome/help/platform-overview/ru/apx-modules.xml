@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<appendix id="apx-modules">
+  <title>Краткий обзор модулей</title>
+
+  <para>Это приложение кратко описывает библиотеки, включённые в рабочий стол GNOME и платформу разработки. Библиотеки сгруппированы по модулям с кратким описанием и по возможности ссылками на подробную информацию в этом документе.</para>
+
+<section id="apx-modules-platform">
+  <title>Модули платформы</title>
+
+  <para>Модули платформы разработки GNOME жестко гарантируют стабильность API и ABI. Гарантируется, что приложения, разработанные с использованием модулей платформы будут работать без изменений в течение всего жизненного цикла GNOME 2.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>GConf</term>
+      <listitem><para>GConf предоставляет службу и библиотеку для хранения и получения конфигурационной информации. Описывается в <xref linkend="gconf"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>ORBit</term>
+      <listitem><para>ORBit — это быстрый и легковесный сервер CORBA. Компонент архитектуры GNOME — Bonobo, основан на CORBA. CORBA рассматривается в <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>atk</term>
+      <listitem><para>ATK обеспечивает набор интерфейсов специальных возможностей, которые реализованы другими инструментами и приложениями. С помощью интерфейсов ATK инструменты специальных возможностей могут получить полный доступ к просмотру и управлению запущенных приложений. ATK рассматривается в <xref linkend="a11y"/>.</para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gail</term>
+      <listitem><para>GAIL предоставляет реализацию инетерфейсов ATK для GTK+ и библиотек GNOME, позволяя инструментам специальных возможностей взаимодействовать с приложениями, написанными с использованием этих библиотек. Специальные возможности рассматриваются в <xref linkend="a11y"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gio</term>
+      <listitem><para>GIO — часть GLib, обеспечивающая высокоуровневый API для доступа к каталогам и файлам. Совместно с библиотекой GVFS, она обеспечивает уровень абстракции файловой системы, дающий прозрачный доступ к локальным и удалённым файлам. GIO рассматривается в <xref linkend="gio"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>glib</term>
+      <listitem><para>GLib является базовой библиотекой для написания программ и библиотек на языке C. Она обеспечивает основные объекты, используемые системой в GNOME, реализацию главного цикла приложения и большой набор функций для манипуляций со строками и общими структурами данных.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-vfs</term>
+      <listitem><para>GnomeVFS — устаревшая библиотека для доступа к файлам и папкам. Она заменена GIO и GVFS. Вновь написанный код должен использовать вместо нее GIO.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtk+</term>
+      <listitem><para>GTK+ — основная библиотека, используемая для построения интерфейсов в приложениях GNOME. Она предоставляет элементы управления пользовательского интерфейса и обработчики сигналов для управления пользовательским интерфейсом. GTK+ рассмотрена в <xref linkend="gtk"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gvfs</term>
+      <listitem><para>GVFS является подсистемой GIO, обеспечивая доступ ко множеству протоколов с помощью API GIO. Разработчикам не нужно напрямую обращаться к GVFS, так как приложения, использующие GIO будут автоматически использовать GVFS, если она доступна в системе.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libIDL</term>
+      <listitem><para>libIDL — библиотека для разбора файлов языка определения интерфейсов(IDL), которые необходимы интерфейсам CORBA. libIDL используется реализацией GNOME CORBA — ORBit. CORBA рассмотрена в <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libart_lgpl</term>
+      <listitem><para>libart — графическая библиотека, отрисовывающая векторные пути, используется виджетом GnomeCanvas.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libbonobo</term>
+      <listitem><para>Bonobo — платформа для создания компонентов многократного использования в приложениях GNOME, построенная на основе CORBA. Bonobo рассматривается в <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libbonoboui</term>
+      <listitem><para>Библиотека Bonobo UI предоставляет множество элементов управления пользовательского интерфейса, с помощью компонентов платформы Bonobo. Bonobo рассматривается в <xref linkend="bonobo-corba"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libglade</term>
+      <listitem><para>Libglade — библиотека для динамического построения интерфейсов на основе XML-описаний. Libglade позволяет разработчикам создавать пользовательские интерфейсы с помощью специальных описаний, а затем импортировать эти определения интерфейсов в приложения. Libglade рассматривается в <xref linkend="libglade"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnome</term>
+      <listitem><para>Библиотека libgnome предоставляет полезные функции для построения современных приложений, включая управление сеансами, активацию файлов и URI и отображение справки.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomecanvas</term>
+      <listitem><para>The GnomeCanvas widget provides a flexible widget for
+      creating interactive structured graphics.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeui</term>
+      <listitem><para>Библиотека libgnomeui предоставляет дополнительные виджеты для приложений. Многие из них уже перенесены в GTK+.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxml2</term>
+      <listitem><para>Библиотека libxml2 предоставляет программный интерфейс для работы с XML в соответствии со стандартами. Библиотека libxml2 рассматривается в <xref linkend="libxml2"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxslt</term>
+      <listitem><para>Библиотека libxslt предоставляет быструю и полную реализацию XSLT— языка для преобразования XML. Библиотека libxslt рассматривается в <xref linkend="libxslt"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>pango</term>
+      <listitem><para>Pango is the core text and font handling library used
+      in GNOME applications.  It has extensive support for the different
+      writing systems used throughout the world.  Pango is discussed in
+      <xref linkend="pango"/>.</para></listitem>
+    </varlistentry>
+  </variablelist>
+</section>
+
+<section id="apx-modules-desktop">
+  <title>Модули рабочего стола</title>
+
+  <para>Модули рабочего стола GNOME не требуют таких же гарантий стабильности API и ABI как модули платформы, хотя предпринимаются попытки сделать их относительно стабильными. Обычно, модули вводятся в выпуск рабочего стола для его зрелости и перемещаются в платформу после их стабилизации.</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>eel</term>
+      <listitem><para>Библиотека eel обеспечивает набор дополнительных виджетов главным образом для использования в <application>Nautilus</application>, менеджере файлов GNOME. Многие виджеты eel со временем были перенесены в GTK+.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>evolution-data-server</term>
+      <listitem><para>Сервер данных Evolution обеспечивает единое хранилище адресной книги и информации календаря, позволяя разным приложениям использовать единые данные. Сервер данных Evolution рассмотрен в <xref linkend="address-book-calendar"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-panel</term>
+      <listitem><para>В дополнение к текущей панели, пакет gnome-panel предоставляет библиотеки, используемые для построения апплетов панели, выполняющихся на панели пользователя. Апплеты панели рассмотрены в <xref linkend="panel-applets"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gnome-keyring</term>
+      <listitem><para>Менеджер брелоков GNOME обеспечивает современные и безопасные средства для хранения паролей пользователя и другой частной информации. Ключи зашифрованы и доступ к ним может быть совершен только с явного разрешения пользователя. Менеджер брелоков рассматривается в <xref linkend="keyring"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gstreamer</term>
+      <listitem><para>GStreamer — мощное мультимедийное средство GNOME для воспроизведения, создания и и манипулирования звуком и видео. GStreamer рассматривается <xref linkend="multimedia"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtkhtml</term>
+      <listitem><para>Библиотека gtkhtml предоставляет лековесное средство просмотра HTML с полной поддержкой расширенного редактирования текста. Она используется в почтовом модуле приложения <application>Evolution</application> для просмотра и составления писем в формате HTML.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>gtksourceview</term>
+      <listitem><para>Библиотека gtksourceview предоставляет расширение виджета GtkTextView с поддержкой автоматической подсветки синтаксиса и других функций, которые будут полезны для редакторов исходных текстов. Эта библиотека используется в текстовом редакторе <application>gedit</application>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgail-gnome</term>
+      <listitem><para>GAIL предоставляет реализацию инетерфейсов ATK для GTK+ и библиотек GNOME, позволяя инструментам специальных возможностей взаимодействовать с приложениями, написанными с использованием этих библиотек. Специальные возможности рассматриваются в <xref linkend="a11y"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeprint</term>
+      <listitem><para>Библиотека libgnomeprint реализует графическую модель PostScript и может быть использована для создания высококачественных препринтов. Подсистема печати GNOME рассмотрена в <xref linkend="gnomeprint"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgnomeprintui</term>
+      <listitem><para>The libgnomeprintui library provides a standard print
+      dialog, a print preview dialog, and various other controls required for
+      printing.  The GNOME print framework is discussed in <xref linkend="gnomeprint"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libgtop</term>
+      <listitem><para>The libgtop library provides a portable API for obtaining
+      information about running processes.  It is used in the <application>System
+      Monitor</application> application.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>librsvg</term>
+      <listitem><para>Библиотека librsvg предоставляет реализацию Scalable Vector Graphics (SVG). Она используется повсюду в рабочем столе для отрисовки векторной графики, не зависящий от разрешения экрана.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libsoup</term>
+      <listitem><para>Библиотека libsoup предоставляет реализацию Simple Object Access Protocol (SOAP). Библиотека libsoup рассматривается в <xref linkend="libsoup"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libwnck</term>
+      <listitem><para>Библиотека libwnck предоставляет средств контроля любого EWMH-compliant менеджера окон, включая <application>Metacity</application>, менеджера окон GNOME по умолчанию. Библиотека libwnck рассматривается в <xref linkend="window-manager"/>.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>libxklavier</term>
+      <listitem><para>Библиотека libxklavier предоставляет высокоуровневый программный интерфейс для доступа и установки раскладок клавиатуры. Эта библиотека используется в <application>Keyboard Preferences</application> и позволяет пользователям устанавливать раскладку и параметры клавиатуры.</para></listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>vte</term>
+      <listitem><para>VTE — это виджет эмулятора терминала для использования в приложения, написанных с использованием GTK+. Он предоставляет стабильный программный интерфейс и использует Pango для отображения текста, что позволяет отображать любой интернациональный текст. VTE используется в приложении GNOME <application>Терминал</application>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</section>
+
+</appendix>

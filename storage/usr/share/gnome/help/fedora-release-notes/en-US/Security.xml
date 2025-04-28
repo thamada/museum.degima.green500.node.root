@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+]>
+
+<section id="sect-Release_Notes-Security">
+	<title>Security</title>
+	<remark>This beat is located here: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Security">https://fedoraproject.org/wiki/Docs/Beats/Security</ulink></remark>
+	<para>
+		This section highlights various security items from Fedora.
+	</para>
+	
+	
+	<section id="sect-Release_Notes-Security-Lower_process_capabilities">
+		<title>Lower process capabilities</title>
+		<para>
+			Daemons running as root have been reviewed and patched to run with lower process capabilities. This reduces the desirability of using these daemons for privilege escalation. Additionally, the shadow file permissions have been changed to <literal>000</literal> and several directories in <filename>$PATH</filename> have been set to <literal>555</literal> in order to prevent daemons without <literal>DAC_OVERRIDE</literal> from being able to access the shadow file or write to the <filename>$PATH</filename> directories.
+		</para>
+
+		<para>
+			When someone attacks a system, they normally can not do much unless they can escalate privileges. This feature reduces the number of attack targets that can be used to escalate privileges. If root processes do not have all capabilities, they will be harder to use to subvert the system.
+		</para>
+
+		<para>
+			Processes with the root uid can still damage a system, because they can write to nearly any file and of course read the <filename>/etc/shadow file</filename>. However, if the system is hardened so that root requires the <literal>DAC_OVERRIDE</literal> capability, then only a limited number of processes can damage the system. This will not affect any admin abilities because they always get full privileges which includes <literal>DAC_OVERRIDE</literal>. Therefore, even if someone does successfully attack a root process, it is now harder for them to take advantage of this attack. 
+		</para>
+
+		<para>
+			A hardened system would have permissions like: <literal>555</literal> <filename>/bin</filename>, <literal>555</literal> <filename>/lib</filename>, <literal>000</literal> <filename>/etc/shadow</filename> and so on. The current scope is to cover the directories in <filename>$PATH</filename> variable, library dirs, <filename>/boot</filename>, and <filename>/root</filename>. This scheme does not affect SELinux in any way and complements it since capabilities are DAC controls and they have first vote on allowing an access.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Security-SELinux_Sandbox">
+	  <title>SELinux Sandbox</title>
+	  <para>
+	    The SELinux sandbox allows a command to be run in a highly
+	    constrained fashion.  Unfortunately, the nature of GUI
+	    applications is such that it is very difficult to use this
+	    capability on those applications that need it most.
+	  </para>
+	  <para>
+	    A new <command>sandbox -X</command> command allows many
+	    GUI applications to be tightly constrained.  By applying
+	    this within some web applications, a user may specify, for
+	    example, that Open Office should run normally when invoked
+	    by the user, but should be constrained when invoked from
+	    the web.
+	  </para>
+	  <para>
+	    When run from the SELinux sandbox, a GUI application may
+	    only access a limited directory structure which is
+	    destroyed on exit, is denied access to the network, and
+	    runs in an isolated X-server, which prevents it from
+	    accessing other X applications.
+	  </para>
+	</section>
+
+</section>
+
+

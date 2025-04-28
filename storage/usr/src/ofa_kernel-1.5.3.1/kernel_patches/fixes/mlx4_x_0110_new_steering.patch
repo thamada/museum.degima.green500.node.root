@@ -1,0 +1,2545 @@
+From ef5ec352758cf90d51d0537a620b82ca3e4d7fae Mon Sep 17 00:00:00 2001
+From: Vladimir Sokolovsky <vlad@mellanox.co.il>
+Date: Sat, 20 Nov 2010 19:58:40 +0200
+Subject: [PATCH 1/2] mlx4_en: new steering model
+
+Signed-off-by: Vladimir Sokolovsky <vlad@mellanox.co.il>
+---
+ drivers/infiniband/hw/mlx4/main.c |    6 +-
+ drivers/net/mlx4/en_netdev.c      |  161 ++++++++--
+ drivers/net/mlx4/en_port.c        |  118 +-------
+ drivers/net/mlx4/en_port.h        |   40 +---
+ drivers/net/mlx4/en_rx.c          |   11 +-
+ drivers/net/mlx4/fw.c             |   23 ++-
+ drivers/net/mlx4/fw.h             |    2 +
+ drivers/net/mlx4/main.c           |  133 ++++++--
+ drivers/net/mlx4/mcg.c            |  627 ++++++++++++++++++++++++++++++++++---
+ drivers/net/mlx4/mlx4.h           |   89 ++++++-
+ drivers/net/mlx4/mlx4_en.h        |    3 +-
+ drivers/net/mlx4/port.c           |  304 ++++++++++++++++--
+ include/linux/mlx4/cmd.h          |   19 +-
+ include/linux/mlx4/device.h       |  176 +++++++----
+ include/linux/mlx4/driver.h       |    5 -
+ 15 files changed, 1340 insertions(+), 377 deletions(-)
+
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/main.c	2011-02-24 10:52:18.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c	2011-02-27 16:53:47.000000000 +0200
+@@ -679,7 +679,7 @@ static int mlx4_ib_mcg_attach(struct ib_
+ 	err = mlx4_multicast_attach(mdev->dev, &mqp->mqp, gid->raw, !!(mqp->flags &
+ 				MLX4_IB_QP_BLOCK_MULTICAST_LOOPBACK),
+ 				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+-				MLX4_MCAST_PROT_EN : MLX4_MCAST_PROT_IB);
++				MLX4_PROT_EN : MLX4_PROT_IB_IPV6);
+ 	if (err)
+ 		return err;
+ 
+@@ -692,7 +692,7 @@ static int mlx4_ib_mcg_attach(struct ib_
+ err_add:
+ 	mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
+ 				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+-				MLX4_MCAST_PROT_EN : MLX4_MCAST_PROT_IB);
++				MLX4_PROT_EN : MLX4_PROT_IB_IPV6);
+ 	return err;
+ }
+ 
+@@ -723,7 +723,7 @@ static int mlx4_ib_mcg_detach(struct ib_
+ 
+ 	err = mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
+ 				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+-				MLX4_MCAST_PROT_EN : MLX4_MCAST_PROT_IB);
++				MLX4_PROT_EN : MLX4_PROT_IB_IPV6);
+ 	if (err)
+ 		return err;
+ 
+Index: ofed_kernel-fixes/drivers/net/mlx4/en_netdev.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/en_netdev.c	2011-02-24 10:52:17.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/en_netdev.c	2011-02-24 10:52:20.000000000 +0200
+@@ -149,9 +149,8 @@ static void mlx4_en_do_set_mac(struct wo
+ 	mutex_lock(&mdev->state_lock);
+ 	if (priv->port_up) {
+ 		/* Remove old MAC and insert the new one */
+-		mlx4_unregister_mac(mdev->dev, priv->port, priv->mac_index);
+-		err = mlx4_register_mac(mdev->dev, priv->port,
+-					priv->mac, &priv->mac_index);
++		err = mlx4_replace_mac(mdev->dev, priv->port,
++				       priv->base_qpn, priv->mac, 0);
+ 		if (err)
+ 			en_err(priv, "Failed changing HW MAC address\n");
+ 	} else
+@@ -182,6 +181,7 @@ static void mlx4_en_cache_mclist(struct 
+ 	struct dev_mc_list *tmp;
+ 	struct dev_mc_list *plist = NULL;
+ 
++	mlx4_en_clear_list(dev);
+ 	for (mclist = dev->mc_list; mclist; mclist = mclist->next) {
+ 		tmp = kmalloc(sizeof(struct dev_mc_list), GFP_ATOMIC);
+ 		if (!tmp) {
+@@ -218,6 +218,7 @@ static void mlx4_en_do_set_multicast(str
+ 	struct net_device *dev = priv->dev;
+ 	struct dev_mc_list *mclist;
+ 	u64 mcast_addr = 0;
++	u8 mc_list[16] = {0};
+ 	int err;
+ 
+ 	mutex_lock(&mdev->state_lock);
+@@ -232,6 +233,16 @@ static void mlx4_en_do_set_multicast(str
+ 		goto out;
+ 	}
+ 
++	if (!netif_carrier_ok(dev)) {
++		if (!mlx4_en_QUERY_PORT(mdev, priv->port)) {
++			if (priv->port_state.link_state) {
++				priv->last_link_state = MLX4_DEV_EVENT_PORT_UP;
++				netif_carrier_on(dev);
++				en_dbg(LINK, priv, "Link Up\n");
++			}
++		}
++	}
++
+ 	/*
+ 	 * Promsicuous mode: disable all filters
+ 	 */
+@@ -243,8 +254,12 @@ static void mlx4_en_do_set_multicast(str
+ 			priv->flags |= MLX4_EN_FLAG_PROMISC;
+ 
+ 			/* Enable promiscouos mode */
+-			err = mlx4_SET_PORT_qpn_calc(mdev->dev, priv->port,
+-						     priv->base_qpn, 1);
++			if (!mdev->dev->caps.vep_uc_steering)
++				err = mlx4_SET_PORT_qpn_calc(mdev->dev, priv->port,
++							     priv->base_qpn, 1);
++			else
++				err = mlx4_unicast_promisc_add(mdev->dev, priv->base_qpn,
++							       priv->port);
+ 			if (err)
+ 				en_err(priv, "Failed enabling "
+ 					     "promiscous mode\n");
+@@ -256,10 +271,21 @@ static void mlx4_en_do_set_multicast(str
+ 				en_err(priv, "Failed disabling "
+ 					     "multicast filter\n");
+ 
+-			/* Disable port VLAN filter */
+-			err = mlx4_SET_VLAN_FLTR(mdev->dev, priv->port, NULL);
+-			if (err)
+-				en_err(priv, "Failed disabling VLAN filter\n");
++			/* Add the default qp number as multicast promisc */
++			if (!(priv->flags & MLX4_EN_FLAG_MC_PROMISC)) {
++				err = mlx4_multicast_promisc_add(mdev->dev, priv->base_qpn,
++								 priv->port);
++				if (err)
++					en_err(priv, "Failed entering multicast promisc mode\n");
++				priv->flags |= MLX4_EN_FLAG_MC_PROMISC;
++			}
++
++			if (priv->vlgrp) {
++				/* Disable port VLAN filter */
++				err = mlx4_SET_VLAN_FLTR(mdev->dev, priv->port, NULL);
++				if (err)
++					en_err(priv, "Failed disabling VLAN filter\n");
++			}
+ 		}
+ 		goto out;
+ 	}
+@@ -274,15 +300,30 @@ static void mlx4_en_do_set_multicast(str
+ 		priv->flags &= ~MLX4_EN_FLAG_PROMISC;
+ 
+ 		/* Disable promiscouos mode */
+-		err = mlx4_SET_PORT_qpn_calc(mdev->dev, priv->port,
+-					     priv->base_qpn, 0);
++		if (!mdev->dev->caps.vep_uc_steering)
++			err = mlx4_SET_PORT_qpn_calc(mdev->dev, priv->port,
++						     priv->base_qpn, 0);
++		else
++			err = mlx4_unicast_promisc_remove(mdev->dev, priv->base_qpn,
++							  priv->port);
+ 		if (err)
+ 			en_err(priv, "Failed disabling promiscous mode\n");
+ 
++		/* Disable Multicast promisc */
++		if (priv->flags & MLX4_EN_FLAG_MC_PROMISC) {
++			err = mlx4_multicast_promisc_remove(mdev->dev, priv->base_qpn,
++							    priv->port);
++			if (err)
++				en_err(priv, "Failed disabling multicast promiscous mode\n");
++			priv->flags &= ~MLX4_EN_FLAG_MC_PROMISC;
++		}
++
+ 		/* Enable port VLAN filter */
+-		err = mlx4_SET_VLAN_FLTR(mdev->dev, priv->port, priv->vlgrp);
+-		if (err)
+-			en_err(priv, "Failed enabling VLAN filter\n");
++		if (priv->vlgrp) {
++			err = mlx4_SET_VLAN_FLTR(mdev->dev, priv->port, priv->vlgrp);
++			if (err)
++				en_err(priv, "Failed enabling VLAN filter\n");
++		}
+ 	}
+ 
+ 	/* Enable/disable the multicast filter according to IFF_ALLMULTI */
+@@ -291,12 +332,38 @@ static void mlx4_en_do_set_multicast(str
+ 					  0, MLX4_MCAST_DISABLE);
+ 		if (err)
+ 			en_err(priv, "Failed disabling multicast filter\n");
++
++		/* Add the default qp number as multicast promisc */
++		if (!(priv->flags & MLX4_EN_FLAG_MC_PROMISC)) {
++			err = mlx4_multicast_promisc_add(mdev->dev, priv->base_qpn,
++							 priv->port);
++			if (err)
++				en_err(priv, "Failed entering multicast promisc mode\n");
++			priv->flags |= MLX4_EN_FLAG_MC_PROMISC;
++		}
+ 	} else {
++
++		/* Disable Multicast promisc */
++		if (priv->flags & MLX4_EN_FLAG_MC_PROMISC) {
++			err = mlx4_multicast_promisc_remove(mdev->dev, priv->base_qpn,
++							    priv->port);
++			if (err)
++				en_err(priv, "Failed disabling multicast promiscous mode\n");
++			priv->flags &= ~MLX4_EN_FLAG_MC_PROMISC;
++		}
++
+ 		err = mlx4_SET_MCAST_FLTR(mdev->dev, priv->port, 0,
+ 					  0, MLX4_MCAST_DISABLE);
+ 		if (err)
+ 			en_err(priv, "Failed disabling multicast filter\n");
+ 
++		/* Detach our qp from all the multicast addresses */
++		for (mclist = priv->mc_list; mclist; mclist = mclist->next) {
++			memcpy(&mc_list[10], mclist->dmi_addr, ETH_ALEN);
++			mc_list[5] = priv->port;
++			mlx4_multicast_detach(mdev->dev, &priv->rss_map.indir_qp,
++					      mc_list, MLX4_PROT_ETH);
++		}
+ 		/* Flush mcast filter and init it with broadcast address */
+ 		mlx4_SET_MCAST_FLTR(mdev->dev, priv->port, ETH_BCAST,
+ 				    1, MLX4_MCAST_CONFIG);
+@@ -307,6 +374,10 @@ static void mlx4_en_do_set_multicast(str
+ 		mlx4_en_cache_mclist(dev);
+ 		netif_tx_unlock_bh(dev);
+ 		for (mclist = priv->mc_list; mclist; mclist = mclist->next) {
++			memcpy(&mc_list[10], mclist->dmi_addr, ETH_ALEN);
++			mc_list[5] = priv->port;
++			mlx4_multicast_attach(mdev->dev, &priv->rss_map.indir_qp,
++					      mc_list, 0, MLX4_PROT_ETH);
+ 			mcast_addr = mlx4_en_mac_to_u64(mclist->dmi_addr);
+ 			mlx4_SET_MCAST_FLTR(mdev->dev, priv->port,
+ 					    mcast_addr, 0, MLX4_MCAST_CONFIG);
+@@ -315,8 +386,6 @@ static void mlx4_en_do_set_multicast(str
+ 					  0, MLX4_MCAST_ENABLE);
+ 		if (err)
+ 			en_err(priv, "Failed enabling multicast filter\n");
+-
+-		mlx4_en_clear_list(dev);
+ 	}
+ out:
+ 	mutex_unlock(&mdev->state_lock);
+@@ -610,6 +679,7 @@ int mlx4_en_start_port(struct net_device
+ 	int err = 0;
+ 	int i;
+ 	int j;
++	u8 mc_list[16] = {0};
+ 
+ 	if (priv->port_up) {
+ 		en_dbg(DRV, priv, "start port called while port already up\n");
+@@ -649,10 +719,20 @@ int mlx4_en_start_port(struct net_device
+ 		++rx_index;
+ 	}
+ 
++	/* Set port mac number */
++	en_dbg(DRV, priv, "Setting mac for port %d\n", priv->port);
++	err = mlx4_register_mac(mdev->dev, priv->port,
++				priv->mac, &priv->base_qpn, 0);
++	if (err) {
++		en_err(priv, "Failed setting port mac\n");
++		goto cq_err;
++	}
++	mdev->mac_removed[priv->port] = 0;
++
+ 	err = mlx4_en_config_rss_steer(priv);
+ 	if (err) {
+ 		en_err(priv, "Failed configuring rss steering\n");
+-		goto cq_err;
++		goto mac_err;
+ 	}
+ 
+ 	/* Configure tx cq's and rings */
+@@ -705,24 +785,22 @@ int mlx4_en_start_port(struct net_device
+ 		en_err(priv, "Failed setting default qp numbers\n");
+ 		goto tx_err;
+ 	}
+-	/* Set port mac number */
+-	en_dbg(DRV, priv, "Setting mac for port %d\n", priv->port);
+-	err = mlx4_register_mac(mdev->dev, priv->port,
+-				priv->mac, &priv->mac_index);
+-	if (err) {
+-		en_err(priv, "Failed setting port mac\n");
+-		goto tx_err;
+-	}
+-	mdev->mac_removed[priv->port] = 0;
+ 
+ 	/* Init port */
+ 	en_dbg(HW, priv, "Initializing port\n");
+ 	err = mlx4_INIT_PORT(mdev->dev, priv->port);
+ 	if (err) {
+ 		en_err(priv, "Failed Initializing port\n");
+-		goto mac_err;
++		goto tx_err;
+ 	}
+ 
++	/* Attach rx QP to bradcast address */
++	memset(&mc_list[10], 0xff, ETH_ALEN);
++	mc_list[5] = priv->port;
++	if (mlx4_multicast_attach(mdev->dev, &priv->rss_map.indir_qp, mc_list,
++				  0, MLX4_PROT_ETH))
++		mlx4_warn(mdev, "Failed Attaching Broadcast\n");
++
+ 	/* Schedule multicast task to populate multicast list */
+ 	queue_work(mdev->workqueue, &priv->mcast_task);
+ 
+@@ -730,8 +808,6 @@ int mlx4_en_start_port(struct net_device
+ 	netif_tx_start_all_queues(dev);
+ 	return 0;
+ 
+-mac_err:
+-	mlx4_unregister_mac(mdev->dev, priv->port, priv->mac_index);
+ tx_err:
+ 	while (tx_index--) {
+ 		mlx4_en_deactivate_tx_ring(priv, &priv->tx_ring[tx_index]);
+@@ -739,6 +815,8 @@ tx_err:
+ 	}
+ 
+ 	mlx4_en_release_rss_steer(priv);
++mac_err:
++	mlx4_unregister_mac(mdev->dev, priv->port, priv->base_qpn);
+ cq_err:
+ 	while (rx_index--)
+ 		mlx4_en_deactivate_cq(priv, &priv->rx_cq[rx_index]);
+@@ -753,7 +831,9 @@ void mlx4_en_stop_port(struct net_device
+ {
+ 	struct mlx4_en_priv *priv = netdev_priv(dev);
+ 	struct mlx4_en_dev *mdev = priv->mdev;
++	struct dev_mc_list *mclist;
+ 	int i;
++	u8 mc_list[16] = {0};
+ 
+ 	if (!priv->port_up) {
+ 		en_dbg(DRV, priv, "stop port called while port already down\n");
+@@ -768,8 +848,23 @@ void mlx4_en_stop_port(struct net_device
+ 	/* Set port as not active */
+ 	priv->port_up = false;
+ 
++	/* Detach All multicasts */
++	memset(&mc_list[10], 0xff, ETH_ALEN);
++	mc_list[5] = priv->port;
++	mlx4_multicast_detach(mdev->dev, &priv->rss_map.indir_qp, mc_list,
++			      MLX4_PROT_ETH);
++	for (mclist = priv->mc_list; mclist; mclist = mclist->next) {
++		memcpy(&mc_list[10], mclist->dmi_addr, ETH_ALEN);
++		mc_list[5] = priv->port;
++		mlx4_multicast_detach(mdev->dev, &priv->rss_map.indir_qp,
++				      mc_list, MLX4_PROT_ETH);
++	}
++	mlx4_en_clear_list(dev);
++	/* Flush multicast filter */
++	mlx4_SET_MCAST_FLTR(mdev->dev, priv->port, 0, 1, MLX4_MCAST_CONFIG);
++
+ 	/* Unregister Mac address for the port */
+-	mlx4_unregister_mac(mdev->dev, priv->port, priv->mac_index);
++	mlx4_unregister_mac(mdev->dev, priv->port, priv->base_qpn);
+ 	mdev->mac_removed[priv->port] = 1;
+ 
+ 	/* Free TX Rings */
+Index: ofed_kernel-fixes/drivers/net/mlx4/en_port.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/en_port.c	2011-02-24 10:52:17.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/en_port.c	2011-02-24 10:52:20.000000000 +0200
+@@ -41,108 +41,6 @@
+ #include "mlx4_en.h"
+ 
+ 
+-int mlx4_SET_MCAST_FLTR(struct mlx4_dev *dev, u8 port,
+-			u64 mac, u64 clear, u8 mode)
+-{
+-	return mlx4_cmd(dev, (mac | (clear << 63)), port, mode,
+-			MLX4_CMD_SET_MCAST_FLTR, MLX4_CMD_TIME_CLASS_B);
+-}
+-
+-int mlx4_SET_VLAN_FLTR(struct mlx4_dev *dev, u8 port, struct vlan_group *grp)
+-{
+-	struct mlx4_cmd_mailbox *mailbox;
+-	struct mlx4_set_vlan_fltr_mbox *filter;
+-	int i;
+-	int j;
+-	int index = 0;
+-	u32 entry;
+-	int err = 0;
+-
+-	mailbox = mlx4_alloc_cmd_mailbox(dev);
+-	if (IS_ERR(mailbox))
+-		return PTR_ERR(mailbox);
+-
+-	filter = mailbox->buf;
+-	if (grp) {
+-		memset(filter, 0, sizeof *filter);
+-		for (i = VLAN_FLTR_SIZE - 1; i >= 0; i--) {
+-			entry = 0;
+-			for (j = 0; j < 32; j++)
+-				if (vlan_group_get_device(grp, index++))
+-					entry |= 1 << j;
+-			filter->entry[i] = cpu_to_be32(entry);
+-		}
+-	} else {
+-		/* When no vlans are configured we block all vlans */
+-		memset(filter, 0, sizeof(*filter));
+-	}
+-	err = mlx4_cmd(dev, mailbox->dma, port, 0, MLX4_CMD_SET_VLAN_FLTR,
+-		       MLX4_CMD_TIME_CLASS_B);
+-	mlx4_free_cmd_mailbox(dev, mailbox);
+-	return err;
+-}
+-
+-
+-int mlx4_SET_PORT_general(struct mlx4_dev *dev, u8 port, int mtu,
+-			  u8 pptx, u8 pfctx, u8 pprx, u8 pfcrx)
+-{
+-	struct mlx4_cmd_mailbox *mailbox;
+-	struct mlx4_set_port_general_context *context;
+-	int err;
+-	u32 in_mod;
+-
+-	mailbox = mlx4_alloc_cmd_mailbox(dev);
+-	if (IS_ERR(mailbox))
+-		return PTR_ERR(mailbox);
+-	context = mailbox->buf;
+-	memset(context, 0, sizeof *context);
+-
+-	context->flags = SET_PORT_GEN_ALL_VALID;
+-	context->mtu = cpu_to_be16(mtu);
+-	context->pptx = (pptx * (!pfctx)) << 7;
+-	context->pfctx = pfctx;
+-	context->pprx = (pprx * (!pfcrx)) << 7;
+-	context->pfcrx = pfcrx;
+-
+-	in_mod = MLX4_SET_PORT_GENERAL << 8 | port;
+-	err = mlx4_cmd(dev, mailbox->dma, in_mod, 1, MLX4_CMD_SET_PORT,
+-		       MLX4_CMD_TIME_CLASS_B);
+-
+-	mlx4_free_cmd_mailbox(dev, mailbox);
+-	return err;
+-}
+-
+-int mlx4_SET_PORT_qpn_calc(struct mlx4_dev *dev, u8 port, u32 base_qpn,
+-			   u8 promisc)
+-{
+-	struct mlx4_cmd_mailbox *mailbox;
+-	struct mlx4_set_port_rqp_calc_context *context;
+-	int err;
+-	u32 in_mod;
+-
+-	mailbox = mlx4_alloc_cmd_mailbox(dev);
+-	if (IS_ERR(mailbox))
+-		return PTR_ERR(mailbox);
+-	context = mailbox->buf;
+-	memset(context, 0, sizeof *context);
+-
+-	context->base_qpn = cpu_to_be32(base_qpn);
+-	context->promisc = cpu_to_be32(promisc << SET_PORT_PROMISC_EN_SHIFT | base_qpn);
+-	context->mcast = cpu_to_be32((dev->caps.mc_promisc_mode <<
+-				      SET_PORT_PROMISC_MODE_SHIFT) | base_qpn);
+-	context->intra_no_vlan = 0;
+-	context->no_vlan = MLX4_NO_VLAN_IDX;
+-	context->intra_vlan_miss = 0;
+-	context->vlan_miss = MLX4_VLAN_MISS_IDX;
+-
+-	in_mod = MLX4_SET_PORT_RQP_CALC << 8 | port;
+-	err = mlx4_cmd(dev, mailbox->dma, in_mod, 1, MLX4_CMD_SET_PORT,
+-		       MLX4_CMD_TIME_CLASS_B);
+-
+-	mlx4_free_cmd_mailbox(dev, mailbox);
+-	return err;
+-}
+-
+ int mlx4_en_QUERY_PORT(struct mlx4_en_dev *mdev, u8 port)
+ {
+ 	struct mlx4_en_query_port_context *qport_context;
+@@ -155,8 +53,7 @@ int mlx4_en_QUERY_PORT(struct mlx4_en_de
+ 	if (IS_ERR(mailbox))
+ 		return PTR_ERR(mailbox);
+ 	memset(mailbox->buf, 0, sizeof(*qport_context));
+-	err = mlx4_cmd_box(mdev->dev, 0, mailbox->dma, port, 0,
+-			   MLX4_CMD_QUERY_PORT, MLX4_CMD_TIME_CLASS_B);
++	err = mlx4_QUERY_PORT(mdev->dev, mailbox, port);
+ 	if (err)
+ 		goto out;
+ 	qport_context = mailbox->buf;
+Index: ofed_kernel-fixes/drivers/net/mlx4/en_port.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/en_port.h	2011-02-24 10:52:16.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/en_port.h	2011-02-24 10:52:20.000000000 +0200
+@@ -35,44 +35,6 @@
+ #define _MLX4_EN_PORT_H_
+ 
+ 
+-#define SET_PORT_GEN_ALL_VALID	0x7
+-#define SET_PORT_PROMISC_EN_SHIFT	31
+-#define SET_PORT_PROMISC_MODE_SHIFT	30
+-
+-enum {
+-	MLX4_CMD_SET_VLAN_FLTR  = 0x47,
+-	MLX4_CMD_SET_MCAST_FLTR = 0x48,
+-	MLX4_CMD_DUMP_ETH_STATS = 0x49,
+-};
+-
+-struct mlx4_set_port_general_context {
+-	u8 reserved[3];
+-	u8 flags;
+-	u16 reserved2;
+-	__be16 mtu;
+-	u8 pptx;
+-	u8 pfctx;
+-	u16 reserved3;
+-	u8 pprx;
+-	u8 pfcrx;
+-	u16 reserved4;
+-};
+-
+-struct mlx4_set_port_rqp_calc_context {
+-	__be32 base_qpn;
+-	__be32 flags;
+-	u8 reserved[3];
+-	u8 mac_miss;
+-	u8 intra_no_vlan;
+-	u8 no_vlan;
+-	u8 intra_vlan_miss;
+-	u8 vlan_miss;
+-	u8 reserved2[3];
+-	u8 no_vlan_prio;
+-	__be32 promisc;
+-	__be32 mcast;
+-};
+-
+ #define VLAN_FLTR_SIZE	128
+ struct mlx4_set_vlan_fltr_mbox {
+ 	__be32 entry[VLAN_FLTR_SIZE];
+@@ -586,5 +548,4 @@ struct mlx4_en_stat_out_mbox {
+ 	__be32 TDROP;
+ };
+ 
+-
+ #endif
+Index: ofed_kernel-fixes/drivers/net/mlx4/en_rx.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/en_rx.c	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/en_rx.c	2011-02-24 10:52:20.000000000 +0200
+@@ -1118,16 +1118,10 @@ int mlx4_en_config_rss_steer(struct mlx4
+ 	}
+ 
+ 	/* Configure RSS indirection qp */
+-	err = mlx4_qp_reserve_range(mdev->dev, 1, 1, &priv->base_qpn, 0);
+-	if (err) {
+-		en_err(priv, "Failed to reserve range for RSS "
+-			     "indirection qp\n");
+-		goto rss_err;
+-	}
+ 	err = mlx4_qp_alloc(mdev->dev, priv->base_qpn, &rss_map->indir_qp);
+ 	if (err) {
+ 		en_err(priv, "Failed to allocate RSS indirection QP\n");
+-		goto reserve_err;
++		goto rss_err;
+ 	}
+ 	rss_map->indir_qp.event = mlx4_en_sqp_event;
+ 	mlx4_en_fill_qp_context(priv, 0, 0, 0, 1, priv->base_qpn,
+@@ -1156,8 +1150,6 @@ indir_err:
+ 		       MLX4_QP_STATE_RST, NULL, 0, 0, &rss_map->indir_qp);
+ 	mlx4_qp_remove(mdev->dev, &rss_map->indir_qp);
+ 	mlx4_qp_free(mdev->dev, &rss_map->indir_qp);
+-reserve_err:
+-	mlx4_qp_release_range(mdev->dev, priv->base_qpn, 1);
+ rss_err:
+ 	for (i = 0; i < good_qps; i++) {
+ 		mlx4_qp_modify(mdev->dev, NULL, rss_map->state[i],
+@@ -1179,7 +1171,6 @@ void mlx4_en_release_rss_steer(struct ml
+ 		       MLX4_QP_STATE_RST, NULL, 0, 0, &rss_map->indir_qp);
+ 	mlx4_qp_remove(mdev->dev, &rss_map->indir_qp);
+ 	mlx4_qp_free(mdev->dev, &rss_map->indir_qp);
+-	mlx4_qp_release_range(mdev->dev, priv->base_qpn, 1);
+ 
+ 	for (i = 0; i < priv->rx_ring_num; i++) {
+ 		mlx4_qp_modify(mdev->dev, NULL, rss_map->state[i],
+Index: ofed_kernel-fixes/drivers/net/mlx4/fw.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/fw.c	2011-02-24 10:52:18.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/fw.c	2011-02-24 10:52:20.000000000 +0200
+@@ -32,6 +32,7 @@
+  * SOFTWARE.
+  */
+ 
++#include <linux/etherdevice.h>
+ #include <linux/mlx4/cmd.h>
+ 
+ #include "fw.h"
+@@ -141,6 +142,14 @@ int mlx4_MOD_STAT_CFG(struct mlx4_dev *d
+ 	return err;
+ }
+ 
++int mlx4_QUERY_PORT(struct mlx4_dev *dev, void *ptr, u8 port)
++{
++	struct mlx4_cmd_mailbox *outbox = ptr;
++	return mlx4_cmd_box(dev, 0, outbox->dma, port, 0,
++				    MLX4_CMD_QUERY_PORT, MLX4_CMD_TIME_CLASS_B);
++}
++EXPORT_SYMBOL_GPL(mlx4_QUERY_PORT);
++
+ int mlx4_QUERY_DEV_CAP(struct mlx4_dev *dev, struct mlx4_dev_cap *dev_cap)
+ {
+ 	struct mlx4_cmd_mailbox *mailbox;
+@@ -164,11 +173,12 @@ int mlx4_QUERY_DEV_CAP(struct mlx4_dev *
+ #define QUERY_DEV_CAP_MAX_SRQ_OFFSET		0x15
+ #define QUERY_DEV_CAP_RSVD_EEC_OFFSET		0x16
+ #define QUERY_DEV_CAP_MAX_EEC_OFFSET		0x17
++#define QUERY_DEV_CAP_RSVD_EQ_OFFSET		0x18
+ #define QUERY_DEV_CAP_MAX_CQ_SZ_OFFSET		0x19
+ #define QUERY_DEV_CAP_RSVD_CQ_OFFSET		0x1a
+ #define QUERY_DEV_CAP_MAX_CQ_OFFSET		0x1b
+ #define QUERY_DEV_CAP_MAX_MPT_OFFSET		0x1d
+-#define QUERY_DEV_CAP_RSVD_EQ_OFFSET		0x1e
++#define QUERY_DEV_CAP_LOG_RSVD_EQ_OFFSET	0x1e
+ #define QUERY_DEV_CAP_MAX_EQ_OFFSET		0x1f
+ #define QUERY_DEV_CAP_RSVD_MTT_OFFSET		0x20
+ #define QUERY_DEV_CAP_MAX_MRW_SZ_OFFSET		0x21
+@@ -253,7 +263,11 @@ int mlx4_QUERY_DEV_CAP(struct mlx4_dev *
+ 	MLX4_GET(field, outbox, QUERY_DEV_CAP_MAX_MPT_OFFSET);
+ 	dev_cap->max_mpts = 1 << (field & 0x3f);
+ 	MLX4_GET(field, outbox, QUERY_DEV_CAP_RSVD_EQ_OFFSET);
+-	dev_cap->reserved_eqs = 1 << (field & 0xf);
++	if (!field) {
++		MLX4_GET(field, outbox, QUERY_DEV_CAP_LOG_RSVD_EQ_OFFSET);
++		dev_cap->reserved_eqs = 1 << (field & 0xf);
++	} else
++		dev_cap->reserved_eqs = field;
+ 	MLX4_GET(field, outbox, QUERY_DEV_CAP_MAX_EQ_OFFSET);
+ 	dev_cap->max_eqs = 1 << (field & 0xf);
+ 	MLX4_GET(field, outbox, QUERY_DEV_CAP_RSVD_MTT_OFFSET);
+@@ -287,6 +301,8 @@ int mlx4_QUERY_DEV_CAP(struct mlx4_dev *
+ 	dev_cap->stat_rate_support = stat_rate;
+ 	MLX4_GET(field, outbox, QUERY_DEV_CAP_UDP_RSS_OFFSET);
+ 	dev_cap->udp_rss = field & 0x1;
++	dev_cap->vep_uc_steering = field & 0x2;
++	dev_cap->vep_mc_steering = field & 0x4;
+ 	MLX4_GET(field, outbox, QUERY_DEV_CAP_ETH_UC_LOOPBACK_OFFSET);
+ 	dev_cap->loopback_support = field & 0x1;
+ 	MLX4_GET(tmp1, outbox, QUERY_DEV_CAP_EXT_FLAGS_OFFSET);
+@@ -790,6 +806,7 @@ int mlx4_INIT_HCA(struct mlx4_dev *dev, 
+ #define	 INIT_HCA_MC_BASE_OFFSET	 (INIT_HCA_MCAST_OFFSET + 0x00)
+ #define	 INIT_HCA_LOG_MC_ENTRY_SZ_OFFSET (INIT_HCA_MCAST_OFFSET + 0x12)
+ #define	 INIT_HCA_LOG_MC_HASH_SZ_OFFSET	 (INIT_HCA_MCAST_OFFSET + 0x16)
++#define  INIT_HCA_UC_STEERING_OFFSET	 (INIT_HCA_MCAST_OFFSET + 0x18)
+ #define	 INIT_HCA_LOG_MC_TABLE_SZ_OFFSET (INIT_HCA_MCAST_OFFSET + 0x1b)
+ #define INIT_HCA_TPT_OFFSET		 0x0f0
+ #define	 INIT_HCA_DMPT_BASE_OFFSET	 (INIT_HCA_TPT_OFFSET + 0x00)
+@@ -854,6 +871,8 @@ int mlx4_INIT_HCA(struct mlx4_dev *dev, 
+ 	MLX4_PUT(inbox, param->mc_base,		INIT_HCA_MC_BASE_OFFSET);
+ 	MLX4_PUT(inbox, param->log_mc_entry_sz, INIT_HCA_LOG_MC_ENTRY_SZ_OFFSET);
+ 	MLX4_PUT(inbox, param->log_mc_hash_sz,  INIT_HCA_LOG_MC_HASH_SZ_OFFSET);
++	if (dev->caps.vep_mc_steering)
++		MLX4_PUT(inbox, (u8) (1 << 3),	INIT_HCA_UC_STEERING_OFFSET);
+ 	MLX4_PUT(inbox, param->log_mc_table_sz, INIT_HCA_LOG_MC_TABLE_SZ_OFFSET);
+ 
+ 	/* TPT attributes */
+Index: ofed_kernel-fixes/drivers/net/mlx4/fw.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/fw.h	2011-02-24 10:52:06.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/fw.h	2011-02-24 10:52:20.000000000 +0200
+@@ -80,6 +80,8 @@ struct mlx4_dev_cap {
+ 	u16 stat_rate_support;
+ 	int udp_rss;
+ 	int loopback_support;
++	int vep_uc_steering;
++	int vep_mc_steering;
+ 	u64 flags;
+ 	int reserved_uars;
+ 	int uar_size;
+Index: ofed_kernel-fixes/drivers/net/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/main.c	2011-02-24 10:52:10.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/main.c	2011-02-27 16:55:40.000000000 +0200
+@@ -225,7 +225,7 @@ int mlx4_check_port_params(struct mlx4_d
+ 	return 0;
+ }
+ 
+-static void mlx4_set_port_mask(struct mlx4_dev *dev)
++void mlx4_set_port_mask(struct mlx4_dev *dev)
+ {
+ 	int i;
+ 
+@@ -320,7 +320,9 @@ static int mlx4_dev_cap(struct mlx4_dev 
+ 	dev->caps.reserved_mtts	     = DIV_ROUND_UP(dev_cap->reserved_mtts,
+ 						    dev->caps.mtts_per_seg);
+ 	dev->caps.reserved_mrws	     = dev_cap->reserved_mrws;
+-	dev->caps.reserved_uars	     = dev_cap->reserved_uars;
++
++	/* The first 128 UARs are used for EQ doorbells */
++	dev->caps.reserved_uars	     = max_t(int, 128, dev_cap->reserved_uars);
+ 	dev->caps.reserved_pds	     = dev_cap->reserved_pds;
+ 	dev->caps.mtt_entry_sz	     = dev->caps.mtts_per_seg * dev_cap->mtt_entry_sz;
+ 	dev->caps.max_msg_sz         = dev_cap->max_msg_sz;
+@@ -331,6 +333,8 @@ static int mlx4_dev_cap(struct mlx4_dev 
+ 	dev->caps.stat_rate_support  = dev_cap->stat_rate_support;
+ 	dev->caps.udp_rss	     = dev_cap->udp_rss;
+ 	dev->caps.loopback_support   = dev_cap->loopback_support;
++	dev->caps.vep_uc_steering    = dev_cap->vep_uc_steering;
++	dev->caps.vep_mc_steering    = dev_cap->vep_mc_steering;
+ 	dev->caps.max_gso_sz	     = dev_cap->max_gso_sz;
+ 	dev->caps.reserved_xrcds     = (dev->caps.flags & MLX4_DEV_CAP_FLAG_XRC) ?
+ 		dev_cap->reserved_xrcds : 0;
+@@ -1120,17 +1124,24 @@ static int mlx4_setup_hca(struct mlx4_de
+ 		goto err_xrcd_table_free;
+ 	}
+ 
++	err = mlx4_init_mcg_table(dev);
++	if (err) {
++		mlx4_err(dev, "Failed to initialize "
++			 "multicast group table, aborting.\n");
++		goto err_mr_table_free;
++	}
++
+ 	err = mlx4_init_eq_table(dev);
+ 	if (err) {
+ 		mlx4_err(dev, "Failed to initialize "
+ 			 "event queue table, aborting.\n");
+-		goto err_mr_table_free;
++		goto err_mcg_table_free;
+ 	}
+ 
+ 	err = mlx4_cmd_use_events(dev);
+ 	if (err) {
+ 		mlx4_err(dev, "Failed to switch to event-driven "
+-			 "firmware commands, aborting.\n");
++			      "firmware commands, aborting.\n");
+ 		goto err_eq_table_free;
+ 	}
+ 
+@@ -1174,17 +1185,11 @@ static int mlx4_setup_hca(struct mlx4_de
+ 		goto err_srq_table_free;
+ 	}
+ 
+-	err = mlx4_init_mcg_table(dev);
+-	if (err) {
+-		mlx4_err(dev, "Failed to initialize "
+-			 "multicast group table, aborting.\n");
+-		goto err_qp_table_free;
+-	}
+ 
+ 	err = mlx4_init_counters_table(dev);
+ 	if (err && err != -ENOENT) {
+ 		mlx4_err(dev, "Failed to initialize counters table, aborting.\n");
+-		goto err_mcg_table_free;
++		goto err_qp_table_free;
+ 	}
+ 
+ 	for (port = 1; port <= dev->caps.num_ports; port++) {
+@@ -1208,9 +1213,6 @@ static int mlx4_setup_hca(struct mlx4_de
+ err_counters_table_free:
+ 	mlx4_cleanup_counters_table(dev);
+ 
+-err_mcg_table_free:
+-	mlx4_cleanup_mcg_table(dev);
+-
+ err_qp_table_free:
+ 	mlx4_cleanup_qp_table(dev);
+ 
+@@ -1226,6 +1228,9 @@ err_cmd_poll:
+ err_eq_table_free:
+ 	mlx4_cleanup_eq_table(dev);
+ 
++err_mcg_table_free:
++	mlx4_cleanup_mcg_table(dev);
++
+ err_mr_table_free:
+ 	mlx4_cleanup_mr_table(dev);
+ 
+@@ -1311,6 +1316,8 @@ static int mlx4_init_port_info(struct ml
+ 	info->port_attr.attr.mode = S_IRUGO | S_IWUSR;
+ 	info->port_attr.show      = show_port_type;
+ 	info->port_attr.store     = set_port_type;
++	info->base_qpn = dev->caps.reserved_qps_base[MLX4_QP_REGION_ETH_ADDR] +
++			 (port - 1) * (1 << log_num_mac);
+ 
+ 	err = device_create_file(&dev->pdev->dev, &info->port_attr);
+ 	if (err) {
+@@ -1336,6 +1343,58 @@ static int mlx4_init_trigger(struct mlx4
+         return device_create_file(&priv->dev.pdev->dev, &priv->trigger_attr);
+ }
+ 
++static int mlx4_init_steering(struct mlx4_dev *dev)
++{
++	struct mlx4_priv *priv = mlx4_priv(dev);
++	int num_entries = dev->caps.num_ports;
++	int i, j;
++
++	priv->steer = kzalloc(sizeof(struct mlx4_steer) * num_entries, GFP_KERNEL);
++	if (!priv->steer)
++		return -ENOMEM;
++
++	for (i = 0; i < num_entries; i++) {
++		for (j = 0; j < MLX4_NUM_STEERS; j++) {
++			INIT_LIST_HEAD(&priv->steer[i].promisc_qps[j]);
++			INIT_LIST_HEAD(&priv->steer[i].steer_entries[j]);
++		}
++	}
++	return 0;
++}
++
++static void mlx4_clear_steering(struct mlx4_dev *dev)
++{
++	struct mlx4_priv *priv = mlx4_priv(dev);
++	struct mlx4_steer_index *entry, *tmp_entry;
++	struct mlx4_promisc_qp *pqp, *tmp_pqp;
++	int num_entries = dev->caps.num_ports;
++	int i, j;
++
++	for (i = 0; i < num_entries; i++) {
++		for (j = 0; j < MLX4_NUM_STEERS; j++) {
++			list_for_each_entry_safe(pqp, tmp_pqp,
++						 &priv->steer[i].promisc_qps[j],
++						 list) {
++				list_del(&pqp->list);
++				kfree(pqp);
++			}
++			list_for_each_entry_safe(entry, tmp_entry,
++						 &priv->steer[i].steer_entries[j],
++						 list) {
++				list_del(&entry->list);
++				list_for_each_entry_safe(pqp, tmp_pqp,
++							 &entry->duplicates,
++							 list) {
++					list_del(&pqp->list);
++					kfree(pqp);
++				}
++				kfree(entry);
++			}
++		}
++	}
++	kfree(priv->steer);
++}
++
+ static int __mlx4_init_one(struct pci_dev *pdev, const struct pci_device_id *id)
+ {
+ 	struct mlx4_priv *priv;
+@@ -1453,6 +1512,10 @@ static int __mlx4_init_one(struct pci_de
+ 
+ 	mlx4_enable_msi_x(dev);
+ 
++	err = mlx4_init_steering(dev);
++	if (err)
++		goto err_free_eq;
++
+ 	err = mlx4_setup_hca(dev);
+ 	if (err == -EBUSY && (dev->flags & MLX4_FLAG_MSI_X)) {
+ 		dev->flags &= ~MLX4_FLAG_MSI_X;
+@@ -1461,7 +1524,7 @@ static int __mlx4_init_one(struct pci_de
+ 	}
+ 
+ 	if (err)
+-		goto err_free_eq;
++		goto err_steer;
+ 
+ 	for (port = 1; port <= dev->caps.num_ports; port++) {
+ 		err = mlx4_init_port_info(dev, port);
+@@ -1507,6 +1570,9 @@ err_port:
+ 	mlx4_cleanup_pd_table(dev);
+ 	mlx4_cleanup_uar_table(dev);
+ 
++err_steer:
++	mlx4_clear_steering(dev);
++
+ err_free_eq:
+ 	mlx4_free_eq_table(dev);
+ 
+@@ -1577,6 +1643,7 @@ static void mlx4_remove_one(struct pci_d
+ 		iounmap(priv->kar);
+ 		mlx4_uar_free(dev, &priv->driver_uar);
+ 		mlx4_cleanup_uar_table(dev);
++		mlx4_clear_steering(dev);
+ 		mlx4_free_eq_table(dev);
+ 		mlx4_close_hca(dev);
+ 		mlx4_cmd_cleanup(dev);
+Index: ofed_kernel-fixes/drivers/net/mlx4/mcg.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/mcg.c	2011-02-24 10:52:18.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/mcg.c	2011-02-27 16:53:47.000000000 +0200
+@@ -40,41 +40,39 @@
+ 
+ #include "mlx4.h"
+ 
+-#define MGM_QPN_MASK       0x00FFFFFF
+-#define MGM_BLCK_LB_BIT    30
+ 
+-struct mlx4_mgm {
+-	__be32			next_gid_index;
+-	__be32			members_count;
+-	u32			reserved[2];
+-	u8			gid[16];
+-	__be32			qp[MLX4_QP_PER_MGM];
+-};
+-
+-static const u8 zero_gid[16];	/* automatically initialized to 0 */
++static int mlx4_READ_ENTRY(struct mlx4_dev *dev, int index,
++			   struct mlx4_cmd_mailbox *mailbox)
++{
++	return mlx4_cmd_box(dev, 0, mailbox->dma, index, 0,
++			    MLX4_CMD_READ_MCG, MLX4_CMD_TIME_CLASS_A);
++}
+ 
+-static int mlx4_READ_MCG(struct mlx4_dev *dev, int index,
+-			 struct mlx4_cmd_mailbox *mailbox)
++static int mlx4_WRITE_ENTRY(struct mlx4_dev *dev, int index,
++			    struct mlx4_cmd_mailbox *mailbox)
+ {
+-	return mlx4_cmd_box(dev, 0, mailbox->dma, index, 0, MLX4_CMD_READ_MCG,
+-			    MLX4_CMD_TIME_CLASS_A);
++	return mlx4_cmd(dev, mailbox->dma, index, 0,
++			MLX4_CMD_WRITE_MCG, MLX4_CMD_TIME_CLASS_A);
+ }
+ 
+-static int mlx4_WRITE_MCG(struct mlx4_dev *dev, int index,
+-			  struct mlx4_cmd_mailbox *mailbox)
++static int mlx4_WRITE_PROMISC(struct mlx4_dev *dev, u8 vep_num, u8 port, u8 steer,
++			      struct mlx4_cmd_mailbox *mailbox)
+ {
+-	return mlx4_cmd(dev, mailbox->dma, index, 0, MLX4_CMD_WRITE_MCG,
+-			MLX4_CMD_TIME_CLASS_A);
++	u32 in_mod;
++
++	in_mod = (u32) vep_num << 24 | (u32) port << 16 | steer << 1;
++	return mlx4_cmd(dev, mailbox->dma, in_mod, 0x1,
++			MLX4_CMD_WRITE_MCG, MLX4_CMD_TIME_CLASS_A);
+ }
+ 
+-static int mlx4_MGID_HASH(struct mlx4_dev *dev, struct mlx4_cmd_mailbox *mailbox,
+-			  u16 *hash)
++static int mlx4_GID_HASH(struct mlx4_dev *dev, struct mlx4_cmd_mailbox *mailbox,
++			 u16 *hash, u8 op_mod)
+ {
+ 	u64 imm;
+ 	int err;
+ 
+-	err = mlx4_cmd_imm(dev, mailbox->dma, &imm, 0, 0, MLX4_CMD_MGID_HASH,
+-			   MLX4_CMD_TIME_CLASS_A);
++	err = mlx4_cmd_imm(dev, mailbox->dma, &imm, 0, op_mod,
++			   MLX4_CMD_MGID_HASH, MLX4_CMD_TIME_CLASS_A);
+ 
+ 	if (!err)
+ 		*hash = imm;
+@@ -83,6 +81,444 @@ static int mlx4_MGID_HASH(struct mlx4_de
+ }
+ 
+ /*
++ * Helper functions to manage multifunction steering data structures.
++ * Used only for Ethernet steering.
++ */
++
++static struct mlx4_promisc_qp *get_promisc_qp(struct mlx4_dev *dev, u8 pf_num,
++					      enum mlx4_steer_type steer,
++					      u32 qpn)
++{
++	struct mlx4_steer *s_steer = &mlx4_priv(dev)->steer[pf_num];
++	struct mlx4_promisc_qp *pqp;
++
++	list_for_each_entry(pqp, &s_steer->promisc_qps[steer], list) {
++		if (pqp->qpn == qpn)
++			return pqp;
++	}
++	/* not found */
++	return NULL;
++}
++
++/*
++ * Add new entry to steering data structure.
++ * All promisc QPs should be added as well
++ */
++static int new_steering_entry(struct mlx4_dev *dev, u8 vep_num, u8 port,
++			      enum mlx4_steer_type steer,
++			      unsigned int index, u32 qpn)
++{
++	struct mlx4_steer *s_steer;
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_mgm *mgm;
++	u32 members_count;
++	struct mlx4_steer_index *new_entry;
++	struct mlx4_promisc_qp *pqp;
++	struct mlx4_promisc_qp *dqp;
++	u32 prot;
++	int err;
++	u8 pf_num;
++
++	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
++	s_steer = &mlx4_priv(dev)->steer[pf_num];
++	new_entry = kzalloc(sizeof *new_entry, GFP_KERNEL);
++	if (!new_entry)
++		return -ENOMEM;
++
++	INIT_LIST_HEAD(&new_entry->duplicates);
++	new_entry->index = index;
++	list_add_tail(&new_entry->list, &s_steer->steer_entries[steer]);
++
++	/* If the given qpn is also a promisc qp,
++	 * it should be inserted to duplicates list
++	 */
++	pqp = get_promisc_qp(dev, pf_num, steer, qpn);
++	if (pqp) {
++		dqp = kmalloc(sizeof *dqp, GFP_KERNEL);
++		if (!dqp) {
++			err = -ENOMEM;
++			goto out_alloc;
++		}
++		dqp->qpn = qpn;
++		list_add_tail(&dqp->list, &new_entry->duplicates);
++	}
++
++	/* if no promisc qps for this vep, we are done */
++	if (list_empty(&s_steer->promisc_qps[steer]))
++		return 0;
++
++	/* now need to add all the promisc qps to the new
++	 * steering entry, as they should also receive the packets
++	 * destined to this address */
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox)) {
++		err = -ENOMEM;
++		goto out_alloc;
++	}
++	mgm = mailbox->buf;
++
++	err = mlx4_READ_ENTRY(dev, index, mailbox);
++	if (err)
++		goto out_mailbox;
++
++	members_count = be32_to_cpu(mgm->members_count) & 0xffffff;
++	prot = be32_to_cpu(mgm->members_count) >> 30;
++	list_for_each_entry(pqp, &s_steer->promisc_qps[steer], list) {
++		/* don't add already existing qpn */
++		if (pqp->qpn == qpn)
++			continue;
++		if (members_count == MLX4_QP_PER_MGM) {
++			/* out of space */
++			err = -ENOMEM;
++			goto out_mailbox;
++		}
++
++		/* add the qpn */
++		mgm->qp[members_count++] = cpu_to_be32(pqp->qpn & MGM_QPN_MASK);
++	}
++	/* update the qps count and update the entry with all the promisc qps*/
++	mgm->members_count = cpu_to_be32(members_count | (prot << 30));
++	err = mlx4_WRITE_ENTRY(dev, index, mailbox);
++
++out_mailbox:
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	if (!err)
++		return 0;
++out_alloc:
++	if (dqp) {
++		list_del(&dqp->list);
++		kfree(&dqp);
++	}
++	list_del(&new_entry->list);
++	kfree(new_entry);
++	return err;
++}
++
++/* update the data structures with existing steering entry */
++static int existing_steering_entry(struct mlx4_dev *dev, u8 vep_num, u8 port,
++				   enum mlx4_steer_type steer,
++				   unsigned int index, u32 qpn)
++{
++	struct mlx4_steer *s_steer;
++	struct mlx4_steer_index *tmp_entry, *entry = NULL;
++	struct mlx4_promisc_qp *pqp;
++	struct mlx4_promisc_qp *dqp;
++	u8 pf_num;
++
++	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
++	s_steer = &mlx4_priv(dev)->steer[pf_num];
++
++	pqp = get_promisc_qp(dev, pf_num, steer, qpn);
++	if (!pqp)
++		return 0; /* nothing to do */
++
++	list_for_each_entry(tmp_entry, &s_steer->steer_entries[steer], list) {
++		if (tmp_entry->index == index) {
++			entry = tmp_entry;
++			break;
++		}
++	}
++	if (unlikely(!entry)) {
++		mlx4_warn(dev, "Steering entry at index %x is not registered\n", index);
++		return -EINVAL;
++	}
++
++	/* the given qpn is listed as a promisc qpn
++	 * we need to add it as a duplicate to this entry
++	 * for future refernce */
++	list_for_each_entry(dqp, &entry->duplicates, list) {
++		if (qpn == pqp->qpn)
++			return 0; /* qp is already duplicated */
++	}
++
++	/* add the qp as a duplicate on this index */
++	dqp = kmalloc(sizeof *dqp, GFP_KERNEL);
++	if (!dqp)
++		return -ENOMEM;
++	dqp->qpn = qpn;
++	list_add_tail(&dqp->list, &entry->duplicates);
++
++	return 0;
++}
++
++/* Check whether a qpn is a duplicate on steering entry
++ * If so, it should not be removed from mgm */
++static bool check_duplicate_entry(struct mlx4_dev *dev, u8 vep_num, u8 port,
++				  enum mlx4_steer_type steer,
++				  unsigned int index, u32 qpn)
++{
++	struct mlx4_steer *s_steer;
++	struct mlx4_steer_index *tmp_entry, *entry = NULL;
++	struct mlx4_promisc_qp *dqp, *tmp_dqp;
++	u8 pf_num;
++
++	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
++	s_steer = &mlx4_priv(dev)->steer[pf_num];
++
++	/* if qp is not promisc, it cannot be duplicated */
++	if (!get_promisc_qp(dev, pf_num, steer, qpn))
++		return false;
++
++	/* The qp is promisc qp so it is a duplicate on this index
++	 * Find the index entry, and remove the duplicate */
++	list_for_each_entry(tmp_entry, &s_steer->steer_entries[steer], list) {
++		if (tmp_entry->index == index) {
++			entry = tmp_entry;
++			break;
++		}
++	}
++	if (unlikely(!entry)) {
++		mlx4_warn(dev, "Steering entry for index %x is not registered\n", index);
++		return false;
++	}
++	list_for_each_entry_safe(dqp, tmp_dqp, &entry->duplicates, list) {
++		if (dqp->qpn == qpn) {
++			list_del(&dqp->list);
++			kfree(dqp);
++		}
++	}
++	return true;
++}
++
++/* I a steering entry contains only promisc QPs, it can be removed. */
++static bool can_remove_steering_entry(struct mlx4_dev *dev, u8 vep_num, u8 port,
++				      enum mlx4_steer_type steer,
++				      unsigned int index, u32 tqpn)
++{
++	struct mlx4_steer *s_steer;
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_mgm *mgm;
++	struct mlx4_steer_index *entry = NULL, *tmp_entry;
++	u32 qpn;
++	u32 members_count;
++	bool ret = false;
++	int i;
++	u8 pf_num;
++
++	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
++	s_steer = &mlx4_priv(dev)->steer[pf_num];
++
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox))
++		return false;
++	mgm = mailbox->buf;
++
++	if (mlx4_READ_ENTRY(dev, index, mailbox))
++		goto out;
++	members_count = be32_to_cpu(mgm->members_count) & 0xffffff;
++	for (i = 0;  i < members_count; i++) {
++		qpn = be32_to_cpu(mgm->qp[i]) & MGM_QPN_MASK;
++		if (!get_promisc_qp(dev, pf_num, steer, qpn) && qpn != tqpn) {
++			/* the qp is not promisc, the entry can't be removed */
++			goto out;
++		}
++	}
++	 /* All the qps currently registered for this entry are promiscuous,
++	  * it can be removed */
++	ret = true;
++	list_for_each_entry_safe(entry, tmp_entry, &s_steer->steer_entries[steer], list) {
++		if (entry->index == index) {
++			list_del(&entry->list);
++			kfree(entry);
++		}
++	}
++
++out:
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	return ret;
++}
++
++
++static int add_promisc_qp(struct mlx4_dev *dev, u8 vep_num, u8 port,
++			  enum mlx4_steer_type steer, u32 qpn)
++{
++	struct mlx4_steer *s_steer;
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_mgm *mgm;
++	struct mlx4_steer_index *entry;
++	struct mlx4_promisc_qp *pqp;
++	struct mlx4_promisc_qp *dqp;
++	u32 members_count;
++	u32 prot;
++	int i;
++	bool found;
++	int last_index;
++	int err;
++	u8 pf_num;
++
++	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
++	s_steer = &mlx4_priv(dev)->steer[pf_num];
++
++	if (get_promisc_qp(dev, pf_num, steer, qpn))
++		return 0; /* Noting to do, already exists */
++
++	pqp = kmalloc(sizeof *pqp, GFP_KERNEL);
++	if (!pqp)
++		return -ENOMEM;
++	pqp->qpn = qpn;
++
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox)) {
++		err = -ENOMEM;
++		goto out_alloc;
++	}
++	mgm = mailbox->buf;
++
++	/* the promisc qp needs to be added for each one of the steering
++	 * entries, if it already exists, needs to be added as a duplicate
++	 * for this entry */
++	list_for_each_entry(entry, &s_steer->steer_entries[steer], list) {
++		err = mlx4_READ_ENTRY(dev, entry->index, mailbox);
++		if (err)
++			goto out_mailbox;
++
++		members_count = be32_to_cpu(mgm->members_count) & 0xffffff;
++		prot = be32_to_cpu(mgm->members_count) >> 30;
++		found = false;
++		for (i = 0; i < members_count; i++) {
++			if ((be32_to_cpu(mgm->qp[i]) & MGM_QPN_MASK) == qpn) {
++				/* Entry already exists, add to duplicates */
++				dqp = kmalloc(sizeof *dqp, GFP_KERNEL);
++				if (!dqp)
++					goto out_mailbox;
++				dqp->qpn = qpn;
++				list_add_tail(&dqp->list, &entry->duplicates);
++				found = true;
++			}
++		}
++		if (!found) {
++			/* Need to add the qpn to mgm */
++			if (members_count == MLX4_QP_PER_MGM) {
++				/* entry is full */
++				err = -ENOMEM;
++				goto out_mailbox;
++			}
++			mgm->qp[members_count++] = cpu_to_be32(qpn & MGM_QPN_MASK);
++			mgm->members_count = cpu_to_be32(members_count | (prot << 30));
++			err = mlx4_WRITE_ENTRY(dev, entry->index, mailbox);
++			if (err)
++				goto out_mailbox;
++		}
++		last_index = entry->index;
++	}
++
++	/* add the new qpn to list of promisc qps */
++	list_add_tail(&pqp->list, &s_steer->promisc_qps[steer]);
++	/* now need to add all the promisc qps to default entry */
++	memset(mgm, 0, sizeof *mgm);
++	members_count = 0;
++	list_for_each_entry(dqp, &s_steer->promisc_qps[steer], list)
++		mgm->qp[members_count++] = cpu_to_be32(dqp->qpn & MGM_QPN_MASK);
++	mgm->members_count = cpu_to_be32(members_count | MLX4_PROT_ETH << 30);
++
++	err = mlx4_WRITE_PROMISC(dev, vep_num, port, steer, mailbox);
++	if (err)
++		goto out_list;
++
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	return 0;
++
++out_list:
++	list_del(&pqp->list);
++out_mailbox:
++	/* TODO: undo partial addition of promisc qps */
++	mlx4_free_cmd_mailbox(dev, mailbox);
++out_alloc:
++	kfree(pqp);
++	return err;
++}
++
++static int remove_promisc_qp(struct mlx4_dev *dev, u8 vep_num, u8 port,
++			     enum mlx4_steer_type steer, u32 qpn)
++{
++	struct mlx4_steer *s_steer;
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_mgm *mgm;
++	struct mlx4_steer_index *entry;
++	struct mlx4_promisc_qp *pqp;
++	struct mlx4_promisc_qp *dqp;
++	u32 members_count;
++	bool found;
++	bool back_to_list = false;
++	int loc, i;
++	int err;
++	u8 pf_num;
++
++	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
++	s_steer = &mlx4_priv(dev)->steer[pf_num];
++
++	pqp = get_promisc_qp(dev, pf_num, steer, qpn);
++	if (unlikely(!pqp)) {
++		mlx4_warn(dev, "QP %x is not promiscuous QP\n", qpn);
++		/* nothing to do */
++		return 0;
++	}
++
++	/*remove from list of promisc qps */
++	list_del(&pqp->list);
++	kfree(pqp);
++
++	/* set the default entry not to include the removed one */
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox)) {
++		err = -ENOMEM;
++		back_to_list = true;
++		goto out_list;
++	}
++	mgm = mailbox->buf;
++	members_count = 0;
++	list_for_each_entry(dqp, &s_steer->promisc_qps[steer], list)
++		mgm->qp[members_count++] = cpu_to_be32(dqp->qpn & MGM_QPN_MASK);
++	mgm->members_count = cpu_to_be32(members_count | MLX4_PROT_ETH << 30);
++
++	err = mlx4_WRITE_PROMISC(dev, vep_num, port, steer, mailbox);
++	if (err)
++		goto out_mailbox;
++
++	/* remove the qp from all the steering entries*/
++	list_for_each_entry(entry, &s_steer->steer_entries[steer], list) {
++		found = false;
++		list_for_each_entry(dqp, &entry->duplicates, list) {
++			if (dqp->qpn == qpn) {
++				found = true;
++				break;
++			}
++		}
++		if (found) {
++			/* a duplicate, no need to change the mgm,
++			 * only update the duplicates list */
++			list_del(&dqp->list);
++			kfree(dqp);
++		} else {
++			err = mlx4_READ_ENTRY(dev, entry->index, mailbox);
++				if (err)
++					goto out_mailbox;
++			members_count = be32_to_cpu(mgm->members_count) & 0xffffff;
++			for (loc = -1, i = 0; i < members_count; ++i)
++				if ((be32_to_cpu(mgm->qp[i]) & MGM_QPN_MASK) == qpn)
++					loc = i;
++
++			mgm->members_count = cpu_to_be32(--members_count |
++							 (MLX4_PROT_ETH << 30));
++			mgm->qp[loc] = mgm->qp[i - 1];
++			mgm->qp[i - 1] = 0;
++
++			err = mlx4_WRITE_ENTRY(dev, entry->index, mailbox);
++				if (err)
++					goto out_mailbox;
++		}
++
++	}
++
++out_mailbox:
++	mlx4_free_cmd_mailbox(dev, mailbox);
++out_list:
++	if (back_to_list)
++		list_add_tail(&pqp->list, &s_steer->promisc_qps[steer]);
++	return err;
++}
++
++/*
+  * Caller must hold MCG table semaphore.  gid and mgm parameters must
+  * be properly aligned for command interface.
+  *
+@@ -97,15 +533,17 @@ static int mlx4_MGID_HASH(struct mlx4_de
+  * If no AMGM exists for given gid, *index = -1, *prev = index of last
+  * entry in hash chain and *mgm holds end of hash chain.
+  */
+-static int find_mgm(struct mlx4_dev *dev,
+-		    u8 *gid, enum mlx4_mcast_prot prot,
+-		    struct mlx4_cmd_mailbox *mgm_mailbox,
+-		    u16 *hash, int *prev, int *index)
++static int find_entry(struct mlx4_dev *dev,
++		      u8 *gid, enum mlx4_protocol prot,
++		      enum mlx4_steer_type steer,
++		      struct mlx4_cmd_mailbox *mgm_mailbox,
++		      u16 *hash, int *prev, int *index)
+ {
+ 	struct mlx4_cmd_mailbox *mailbox;
+ 	struct mlx4_mgm *mgm = mgm_mailbox->buf;
+ 	u8 *mgid;
+ 	int err;
++	u8 op_mod = (prot == MLX4_PROT_ETH) ? !!(dev->caps.vep_mc_steering) : 0;
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(dev);
+ 	if (IS_ERR(mailbox))
+@@ -114,7 +552,7 @@ static int find_mgm(struct mlx4_dev *dev
+ 
+ 	memcpy(mgid, gid, 16);
+ 
+-	err = mlx4_MGID_HASH(dev, mailbox, hash);
++	err = mlx4_GID_HASH(dev, mailbox, hash, op_mod);
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
+ 	if (err)
+ 		return err;
+@@ -126,11 +564,11 @@ static int find_mgm(struct mlx4_dev *dev
+ 	*prev  = -1;
+ 
+ 	do {
+-		err = mlx4_READ_MCG(dev, *index, mgm_mailbox);
++		err = mlx4_READ_ENTRY(dev, *index, mgm_mailbox);
+ 		if (err)
+ 			return err;
+ 
+-		if (!memcmp(mgm->gid, zero_gid, 16)) {
++		if (!(be32_to_cpu(mgm->members_count) & 0xffffff)) {
+ 			if (*index != *hash) {
+ 				mlx4_err(dev, "Found zero MGID in AMGM.\n");
+ 				err = -EINVAL;
+@@ -150,8 +588,9 @@ static int find_mgm(struct mlx4_dev *dev
+ 	return err;
+ }
+ 
+-int mlx4_multicast_attach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-			  int block_mcast_loopback, enum mlx4_mcast_prot prot)
++int mlx4_qp_attach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
++			  int block_mcast_loopback, enum mlx4_protocol prot,
++			  enum mlx4_steer_type steer)
+ {
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+ 	struct mlx4_cmd_mailbox *mailbox;
+@@ -162,6 +601,8 @@ int mlx4_multicast_attach(struct mlx4_de
+ 	int link = 0;
+ 	int i;
+ 	int err;
++	u8 port = gid[5];
++	u8 new_entry = 0;
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(dev);
+ 	if (IS_ERR(mailbox))
+@@ -170,13 +611,15 @@ int mlx4_multicast_attach(struct mlx4_de
+ 
+ 	mutex_lock(&priv->mcg_table.mutex);
+ 
+-	err = find_mgm(dev, gid, prot, mailbox, &hash, &prev, &index);
++	err = find_entry(dev, gid, prot, steer, mailbox, &hash, &prev, &index);
+ 	if (err)
+ 		goto out;
+ 
+ 	if (index != -1) {
+-		if (!memcmp(mgm->gid, zero_gid, 16))
++		if (!(be32_to_cpu(mgm->members_count) & 0xffffff)) {
++			new_entry = 1;
+ 			memcpy(mgm->gid, gid, 16);
++		}
+ 	} else {
+ 		link = 1;
+ 
+@@ -211,24 +654,32 @@ int mlx4_multicast_attach(struct mlx4_de
+ 
+ 	mgm->members_count = cpu_to_be32(members_count | ((u32) prot << 30));
+ 
+-	err = mlx4_WRITE_MCG(dev, index, mailbox);
++	err = mlx4_WRITE_ENTRY(dev, index, mailbox);
+ 	if (err)
+ 		goto out;
+ 
+ 	if (!link)
+ 		goto out;
+ 
+-	err = mlx4_READ_MCG(dev, prev, mailbox);
++	err = mlx4_READ_ENTRY(dev, prev, mailbox);
+ 	if (err)
+ 		goto out;
+ 
+ 	mgm->next_gid_index = cpu_to_be32(index << 6);
+ 
+-	err = mlx4_WRITE_MCG(dev, prev, mailbox);
++	err = mlx4_WRITE_ENTRY(dev, prev, mailbox);
+ 	if (err)
+ 		goto out;
+ 
+ out:
++	if (prot == MLX4_PROT_ETH) {
++		/* manage the steering entry for promisc mode */
++		if (new_entry)
++			err = new_steering_entry(dev, 0, port, steer, index, qp->qpn);
++		else
++			err = existing_steering_entry(dev, 0, port, steer, index, qp->qpn);
++		/* TODO handle an error flow here, need to clean the MGMS */
++	}
+ 	if (err && link && index != -1) {
+ 		if (index < dev->caps.num_mgms)
+ 			mlx4_warn(dev, "Got AMGM index %d < %d",
+@@ -242,10 +693,9 @@ out:
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
+ 	return err;
+ }
+-EXPORT_SYMBOL_GPL(mlx4_multicast_attach);
+ 
+-int mlx4_multicast_detach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-						enum mlx4_mcast_prot prot)
++int mlx4_qp_detach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
++			  enum mlx4_protocol prot, enum mlx4_steer_type steer)
+ {
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+ 	struct mlx4_cmd_mailbox *mailbox;
+@@ -255,6 +705,7 @@ int mlx4_multicast_detach(struct mlx4_de
+ 	int prev, index;
+ 	int i, loc;
+ 	int err;
++	u8 port = gid[5];
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(dev);
+ 	if (IS_ERR(mailbox))
+@@ -263,7 +714,7 @@ int mlx4_multicast_detach(struct mlx4_de
+ 
+ 	mutex_lock(&priv->mcg_table.mutex);
+ 
+-	err = find_mgm(dev, gid, prot, mailbox, &hash, &prev, &index);
++	err = find_entry(dev, gid, prot, steer, mailbox, &hash, &prev, &index);
+ 	if (err)
+ 		goto out;
+ 
+@@ -273,6 +724,11 @@ int mlx4_multicast_detach(struct mlx4_de
+ 		goto out;
+ 	}
+ 
++	/* if this pq is also a promisc qp, it shouldn't be removed */
++	if (prot == MLX4_PROT_ETH &&
++	    check_duplicate_entry(dev, 0, port, steer, index, qp->qpn))
++		goto out;
++
+ 	members_count = be32_to_cpu(mgm->members_count) & 0xffffff;
+ 	for (loc = -1, i = 0; i < members_count; ++i)
+ 		if ((be32_to_cpu(mgm->qp[i]) & MGM_QPN_MASK) == qp->qpn)
+@@ -289,22 +745,25 @@ int mlx4_multicast_detach(struct mlx4_de
+ 	mgm->qp[loc]       = mgm->qp[i - 1];
+ 	mgm->qp[i - 1]     = 0;
+ 
+-	if (i != 1) {
+-		err = mlx4_WRITE_MCG(dev, index, mailbox);
++	if (i != 1 && (prot != MLX4_PROT_ETH ||
++	    !can_remove_steering_entry(dev, 0, port, steer, index, qp->qpn))) {
++		err = mlx4_WRITE_ENTRY(dev, index, mailbox);
+ 		goto out;
+ 	}
++	/* We are going to delete the entry, members count should be 0 */
++	mgm->members_count = cpu_to_be32((u32) prot << 30);
+ 
+ 	if (prev == -1) {
+ 		/* Remove entry from MGM */
+ 		int amgm_index = be32_to_cpu(mgm->next_gid_index) >> 6;
+ 		if (amgm_index) {
+-			err = mlx4_READ_MCG(dev, amgm_index, mailbox);
++			err = mlx4_READ_ENTRY(dev, amgm_index, mailbox);
+ 			if (err)
+ 				goto out;
+ 		} else
+ 			memset(mgm->gid, 0, 16);
+ 
+-		err = mlx4_WRITE_MCG(dev, index, mailbox);
++		err = mlx4_WRITE_ENTRY(dev, index, mailbox);
+ 		if (err)
+ 			goto out;
+ 
+@@ -318,14 +777,14 @@ int mlx4_multicast_detach(struct mlx4_de
+ 		}
+ 	} else {
+ 		/* Remove entry from AMGM */
+-		int cur_next_index = be32_to_cpu(mgm->next_gid_index) >> 6;
+-		err = mlx4_READ_MCG(dev, prev, mailbox);
++		int cur_next_index = be32_to_cpu(mgm->next_gid_index);
++		err = mlx4_READ_ENTRY(dev, prev, mailbox);
+ 		if (err)
+ 			goto out;
+ 
+-		mgm->next_gid_index = cpu_to_be32(cur_next_index << 6);
++		mgm->next_gid_index = cpu_to_be32(cur_next_index);
+ 
+-		err = mlx4_WRITE_MCG(dev, prev, mailbox);
++		err = mlx4_WRITE_ENTRY(dev, prev, mailbox);
+ 		if (err)
+ 			goto out;
+ 
+@@ -343,8 +802,78 @@ out:
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
+ 	return err;
+ }
++
++
++
++int mlx4_multicast_attach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
++			  int block_mcast_loopback, enum mlx4_protocol prot)
++{
++	if (prot == MLX4_PROT_ETH && !dev->caps.vep_mc_steering)
++		return 0;
++
++	if (prot == MLX4_PROT_ETH)
++		gid[7] |= (MLX4_MC_STEER << 1);
++
++	return mlx4_qp_attach_common(dev, qp, gid,
++				     block_mcast_loopback, prot,
++				     MLX4_MC_STEER);
++}
++EXPORT_SYMBOL_GPL(mlx4_multicast_attach);
++
++int mlx4_multicast_detach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
++						enum mlx4_protocol prot)
++{
++	if (prot == MLX4_PROT_ETH && !dev->caps.vep_mc_steering)
++		return 0;
++
++	if (prot == MLX4_PROT_ETH) {
++		gid[7] |= (MLX4_MC_STEER << 1);
++	}
++
++	return mlx4_qp_detach_common(dev, qp, gid, prot, MLX4_MC_STEER);
++}
+ EXPORT_SYMBOL_GPL(mlx4_multicast_detach);
+ 
++
++int mlx4_multicast_promisc_add(struct mlx4_dev *dev, u32 qpn, u8 port)
++{
++	if (!dev->caps.vep_mc_steering)
++		return 0;
++
++
++	return add_promisc_qp(dev, 0, port, MLX4_MC_STEER, qpn);
++}
++EXPORT_SYMBOL_GPL(mlx4_multicast_promisc_add);
++
++int mlx4_multicast_promisc_remove(struct mlx4_dev *dev, u32 qpn, u8 port)
++{
++	if (!dev->caps.vep_mc_steering)
++		return 0;
++
++
++	return remove_promisc_qp(dev, 0, port, MLX4_MC_STEER, qpn);
++}
++EXPORT_SYMBOL_GPL(mlx4_multicast_promisc_remove);
++
++int mlx4_unicast_promisc_add(struct mlx4_dev *dev, u32 qpn, u8 port)
++{
++	if (!dev->caps.vep_mc_steering)
++		return 0;
++
++
++	return add_promisc_qp(dev, 0, port, MLX4_UC_STEER, qpn);
++}
++EXPORT_SYMBOL_GPL(mlx4_unicast_promisc_add);
++
++int mlx4_unicast_promisc_remove(struct mlx4_dev *dev, u32 qpn, u8 port)
++{
++	if (!dev->caps.vep_mc_steering)
++		return 0;
++
++	return remove_promisc_qp(dev, 0, port, MLX4_UC_STEER, qpn);
++}
++EXPORT_SYMBOL_GPL(mlx4_unicast_promisc_remove);
++
+ int mlx4_init_mcg_table(struct mlx4_dev *dev)
+ {
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+Index: ofed_kernel-fixes/drivers/net/mlx4/mlx4.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/mlx4.h	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/mlx4.h	2011-02-27 16:53:47.000000000 +0200
+@@ -58,7 +58,7 @@ enum {
+ };
+ 
+ enum {
+-	MLX4_MGM_ENTRY_SIZE	=  0x100,
++	MLX4_MGM_ENTRY_SIZE	=  0x200,
+ 	MLX4_QP_PER_MGM		= 4 * (MLX4_MGM_ENTRY_SIZE / 16 - 2),
+ 	MLX4_MTT_ENTRY_PER_SEG	= 8
+ };
+@@ -166,6 +166,28 @@ struct mlx4_fw {
+ 	u8			catas_bar;
+ };
+ 
++#define MGM_QPN_MASK       0x00FFFFFF
++#define MGM_BLCK_LB_BIT    30
++
++struct mlx4_promisc_qp {
++	struct list_head list;
++	u32 qpn;
++};
++
++struct mlx4_steer_index {
++	struct list_head list;
++	unsigned int index;
++	struct list_head duplicates;
++};
++
++struct mlx4_mgm {
++	__be32			next_gid_index;
++	__be32			members_count;
++	u32			reserved[2];
++	u8			gid[16];
++	__be32			qp[MLX4_QP_PER_MGM];
++};
++
+ struct mlx4_cmd {
+ 	struct pci_pool	       *pool;
+ 	void __iomem	       *hcr;
+@@ -268,6 +290,52 @@ struct mlx4_vlan_table {
+ 	int			max;
+ };
+ 
++
++#define SET_PORT_GEN_ALL_VALID		0x7
++#define SET_PORT_PROMISC_SHIFT		31
++#define SET_PORT_MC_PROMISC_SHIFT	30
++
++enum {
++	MCAST_DIRECT_ONLY	= 0,
++	MCAST_DIRECT		= 1,
++	MCAST_DEFAULT		= 2
++};
++
++struct mlx4_set_port_general_context {
++	u8 reserved[3];
++	u8 flags;
++	u16 reserved2;
++	__be16 mtu;
++	u8 pptx;
++	u8 pfctx;
++	u16 reserved3;
++	u8 pprx;
++	u8 pfcrx;
++	u16 reserved4;
++};
++
++struct mlx4_set_port_rqp_calc_context {
++	__be32 base_qpn;
++	u8 rererved;
++	u8 n_mac;
++	u8 n_vlan;
++	u8 n_prio;
++	u8 reserved2[3];
++	u8 mac_miss;
++	u8 intra_no_vlan;
++	u8 no_vlan;
++	u8 intra_vlan_miss;
++	u8 vlan_miss;
++	u8 reserved3[3];
++	u8 no_vlan_prio;
++	__be32 promisc;
++	__be32 mcast;
++};
++
++struct mlx4_mac_entry {
++	u64 mac;
++};
++
+ struct mlx4_port_info {
+ 	struct mlx4_dev	       *dev;
+ 	int			port;
+@@ -275,7 +343,9 @@ struct mlx4_port_info {
+ 	struct device_attribute port_attr;
+ 	enum mlx4_port_type	tmp_type;
+ 	struct mlx4_mac_table	mac_table;
++	struct radix_tree_root	mac_tree;
+ 	struct mlx4_vlan_table	vlan_table;
++	int			base_qpn;
+ };
+ 
+ struct mlx4_sense {
+@@ -289,6 +359,11 @@ struct mlx4_sense {
+ 
+ extern struct mutex drv_mutex;
+ 
++struct mlx4_steer {
++	struct list_head promisc_qps[MLX4_NUM_STEERS];
++	struct list_head steer_entries[MLX4_NUM_STEERS];
++};
++
+ struct mlx4_priv {
+ 	struct mlx4_dev		dev;
+ 
+@@ -329,6 +404,8 @@ struct mlx4_priv {
+ 	struct mutex		port_mutex;
+ 	int			iboe_counter_index[MLX4_MAX_PORTS];
+ 	struct io_mapping      *bf_mapping;
++ 	struct mlx4_steer	*steer;
++ 	bool			link_up[MLX4_MAX_PORTS + 1];
+ };
+ 
+ static inline struct mlx4_priv *mlx4_priv(struct mlx4_dev *dev)
+@@ -418,6 +495,7 @@ int mlx4_check_port_params(struct mlx4_d
+ 			   enum mlx4_port_type *port_type);
+ int mlx4_change_port_types(struct mlx4_dev *dev,
+ 			   enum mlx4_port_type *port_types);
++void mlx4_set_port_mask(struct mlx4_dev *dev);
+ 
+ void mlx4_init_mac_table(struct mlx4_dev *dev, struct mlx4_mac_table *table);
+ void mlx4_init_vlan_table(struct mlx4_dev *dev, struct mlx4_vlan_table *table);
+@@ -425,4 +503,9 @@ void mlx4_init_vlan_table(struct mlx4_de
+ int mlx4_SET_PORT(struct mlx4_dev *dev, u8 port);
+ int mlx4_get_port_ib_caps(struct mlx4_dev *dev, u8 port, __be32 *caps);
+ 
++int mlx4_qp_detach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
++			  enum mlx4_protocol prot, enum mlx4_steer_type steer);
++int mlx4_qp_attach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
++			  int block_mcast_loopback, enum mlx4_protocol prot,
++			  enum mlx4_steer_type steer);
+ #endif /* MLX4_H */
+Index: ofed_kernel-fixes/drivers/net/mlx4/mlx4_en.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/mlx4_en.h	2011-02-24 10:52:18.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/mlx4_en.h	2011-02-24 10:52:20.000000000 +0200
+@@ -95,6 +95,7 @@
+ #define MLX4_EN_PAGE_SIZE	(1 << MLX4_EN_PAGE_SHIFT)
+ #define MAX_TX_RINGS		(MLX4_EN_NUM_HASH_RINGS + 1 + MLX4_EN_NUM_PPP_RINGS)
+ #define MAX_RX_RINGS		16
++#define MIN_RX_RINGS		4
+ #define TXBB_SIZE		64
+ #define HEADROOM		(2048 / TXBB_SIZE + 1)
+ #define STAMP_STRIDE		64
+@@ -525,6 +526,7 @@ struct mlx4_en_priv {
+ 	u16 tx_prio_map[8];
+ 	u32 flags;
+ #define MLX4_EN_FLAG_PROMISC	0x1
++#define MLX4_EN_FLAG_MC_PROMISC	0x2
+ 	u32 tx_ring_num;
+ 	u32 rx_ring_num;
+ 	u32 udp_rings;
+@@ -616,7 +618,6 @@ void mlx4_en_release_rss_steer(struct ml
+ int mlx4_en_free_tx_buf(struct net_device *dev, struct mlx4_en_tx_ring *ring);
+ void mlx4_en_rx_irq(struct mlx4_cq *mcq);
+ 
+-int mlx4_SET_MCAST_FLTR(struct mlx4_dev *dev, u8 port, u64 mac, u64 clear, u8 mode);
+ int mlx4_SET_VLAN_FLTR(struct mlx4_dev *dev, u8 port, struct vlan_group *grp);
+ int mlx4_SET_PORT_general(struct mlx4_dev *dev, u8 port, int mtu,
+ 			  u8 pptx, u8 pfctx, u8 pprx, u8 pfcrx);
+Index: ofed_kernel-fixes/drivers/net/mlx4/port.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/port.c	2011-02-24 10:52:17.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/port.c	2011-02-24 10:52:20.000000000 +0200
+@@ -32,21 +32,68 @@
+ 
+ #include <linux/errno.h>
+ #include <linux/if_ether.h>
++#include <linux/if_vlan.h>
+ 
+ #include <linux/mlx4/cmd.h>
+ 
++#include <linux/mlx4/device.h>
++
+ #include "mlx4.h"
++#include "en_port.h"
+ 
+ int mlx4_ib_set_4k_mtu = 0;
+ module_param_named(set_4k_mtu, mlx4_ib_set_4k_mtu, int, 0444);
+ MODULE_PARM_DESC(set_4k_mtu, "attempt to set 4K MTU to all ConnectX ports");
+ 
+ #define MLX4_MAC_VALID		(1ull << 63)
+-#define MLX4_MAC_MASK		0xffffffffffffULL
++#define MLX4_MAC_MASK		0x7fffffffffffffffULL
+ 
+ #define MLX4_VLAN_VALID		(1u << 31)
+ #define MLX4_VLAN_MASK		0xfff
+ 
++int mlx4_SET_MCAST_FLTR(struct mlx4_dev *dev, u8 port,
++			u64 mac, u64 clear, u8 mode)
++{
++	return mlx4_cmd(dev, (mac | (clear << 63)), port, mode,
++			MLX4_CMD_SET_MCAST_FLTR, MLX4_CMD_TIME_CLASS_B);
++}
++EXPORT_SYMBOL_GPL(mlx4_SET_MCAST_FLTR);
++
++int mlx4_SET_VLAN_FLTR(struct mlx4_dev *dev, u8 port, struct vlan_group *grp)
++{
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_set_vlan_fltr_mbox *filter;
++	int i;
++	int j;
++	int index = 0;
++	u32 entry;
++	int err = 0;
++
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox))
++		return PTR_ERR(mailbox);
++
++	filter = mailbox->buf;
++	if (grp) {
++		memset(filter, 0, sizeof *filter);
++		for (i = VLAN_FLTR_SIZE - 1; i >= 0; i--) {
++			entry = 0;
++			for (j = 0; j < 32; j++)
++				if (vlan_group_get_device(grp, index++))
++					entry |= 1 << j;
++			filter->entry[i] = cpu_to_be32(entry);
++		}
++	} else {
++		/* When no vlans are configured we block all vlans */
++		memset(filter, 0, sizeof(*filter));
++	}
++	err = mlx4_cmd(dev, mailbox->dma, port, 0, MLX4_CMD_SET_VLAN_FLTR,
++		       MLX4_CMD_TIME_CLASS_B);
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	return err;
++}
++EXPORT_SYMBOL_GPL(mlx4_SET_VLAN_FLTR);
++
+ void mlx4_init_mac_table(struct mlx4_dev *dev, struct mlx4_mac_table *table)
+ {
+ 	int i;
+@@ -94,33 +141,95 @@ static int mlx4_set_port_mac_table(struc
+ 	return err;
+ }
+ 
+-int mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac, int *index)
++static int mlx4_uc_steer_add(struct mlx4_dev *dev, u8 port,
++			     u64 mac, int *qpn, u8 reserve)
+ {
+-	struct mlx4_mac_table *table = &mlx4_priv(dev)->port[port].mac_table;
++	struct mlx4_qp qp;
++	u8 gid[16] = {0};
++	int err;
++
++	if (reserve) {
++		err = mlx4_qp_reserve_range(dev, 1, 1, qpn, 0xC0);
++		if (err) {
++			mlx4_err(dev, "Failed to reserve qp for mac registration\n");
++			return err;
++		}
++	}
++	qp.qpn = *qpn;
++
++	mac &= 0xffffffffffffULL;
++	mac = cpu_to_be64(mac << 16);
++	memcpy(&gid[10], &mac, ETH_ALEN);
++	gid[5] = port;
++	gid[7] = MLX4_UC_STEER << 1;
++
++	err = mlx4_qp_attach_common(dev, &qp, gid, 0,
++				    MLX4_PROT_ETH, MLX4_UC_STEER);
++	if (err && reserve)
++		mlx4_qp_release_range(dev, *qpn, 1);
++
++	return err;
++}
++
++static void mlx4_uc_steer_release(struct mlx4_dev *dev, u8 port,
++				  u64 mac, int qpn, u8 free)
++{
++	struct mlx4_qp qp;
++	u8 gid[16] = {0};
++
++	qp.qpn = qpn;
++	mac &= 0xffffffffffffULL;
++	mac = cpu_to_be64(mac << 16);
++	memcpy(&gid[10], &mac, ETH_ALEN);
++	gid[5] = port;
++	gid[7] = MLX4_UC_STEER << 1;
++
++	mlx4_qp_detach_common(dev, &qp, gid, MLX4_PROT_ETH, MLX4_UC_STEER);
++	if (free)
++		mlx4_qp_release_range(dev, qpn, 1);
++}
++
++int mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac, int *qpn, u8 wrap)
++{
++	struct mlx4_port_info *info = &mlx4_priv(dev)->port[port];
++	struct mlx4_mac_table *table = &info->mac_table;
++	struct mlx4_mac_entry *entry;
+ 	int i, err = 0;
+ 	int free = -1;
+ 
++	if (dev->caps.vep_uc_steering) {
++		err = mlx4_uc_steer_add(dev, port, mac, qpn, 1);
++		if (!err) {
++			entry = kmalloc(sizeof *entry, GFP_KERNEL);
++			if (!entry) {
++				mlx4_uc_steer_release(dev, port, mac, *qpn, 1);
++				return -ENOMEM;
++			}
++			entry->mac = mac;
++			err = radix_tree_insert(&info->mac_tree, *qpn, entry);
++			if (err) {
++				mlx4_uc_steer_release(dev, port, mac, *qpn, 1);
++				return err;
++			}
++		} else
++			return err;
++	}
++
+ 	mlx4_dbg(dev, "Registering MAC: 0x%llx\n", (unsigned long long) mac);
+ 	mutex_lock(&table->mutex);
+-	for (i = 0; i < MLX4_MAX_MAC_NUM - 1; i++) {
+-		if (free < 0 && !table->refs[i]) {
++	for (i = 0; i < MLX4_MAX_MAC_NUM; i++) {
++		if (free < 0 && !table->entries[i]) {
+ 			free = i;
+ 			continue;
+ 		}
+ 
+ 		if (mac == (MLX4_MAC_MASK & be64_to_cpu(table->entries[i]))) {
+-			/* MAC already registered, increase refernce count */
+-			*index = i;
+-			++table->refs[i];
++			/* MAC already registered, Must not have duplicates */
++			err = -EEXIST;
+ 			goto out;
+ 		}
+ 	}
+ 
+-	if (free < 0) {
+-		err = -ENOMEM;
+-		goto out;
+-	}
+-
+ 	mlx4_dbg(dev, "Free MAC index is %d\n", free);
+ 
+ 	if (table->total == table->max) {
+@@ -130,18 +239,17 @@ int mlx4_register_mac(struct mlx4_dev *d
+ 	}
+ 
+ 	/* Register new MAC */
+-	table->refs[free] = 1;
+ 	table->entries[free] = cpu_to_be64(mac | MLX4_MAC_VALID);
+ 
+ 	err = mlx4_set_port_mac_table(dev, port, table->entries);
+ 	if (unlikely(err)) {
+ 		mlx4_err(dev, "Failed adding MAC: 0x%llx\n", (unsigned long long) mac);
+-		table->refs[free] = 0;
+ 		table->entries[free] = 0;
+ 		goto out;
+ 	}
+ 
+-	*index = free;
++	if (!dev->caps.vep_uc_steering)
++		*qpn = info->base_qpn + free;
+ 	++table->total;
+ out:
+ 	mutex_unlock(&table->mutex);
+@@ -149,20 +257,52 @@ out:
+ }
+ EXPORT_SYMBOL_GPL(mlx4_register_mac);
+ 
+-void mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, int index)
++static int validate_index(struct mlx4_dev *dev,
++			  struct mlx4_mac_table *table, int index)
+ {
+-	struct mlx4_mac_table *table = &mlx4_priv(dev)->port[port].mac_table;
++	int err = 0;
+ 
+-	mutex_lock(&table->mutex);
+-	if (!table->refs[index]) {
+-		mlx4_warn(dev, "No MAC entry for index %d\n", index);
+-		goto out;
++	if (index < 0 || index >= table->max || !table->entries[index]) {
++		mlx4_warn(dev, "No valid Mac entry for the given index\n");
++		err = -EINVAL;
+ 	}
+-	if (--table->refs[index]) {
+-		mlx4_warn(dev, "Have more references for index %d,"
+-			  "no need to modify MAC table\n", index);
+-		goto out;
++	return err;
++}
++
++static int find_index(struct mlx4_dev *dev,
++		      struct mlx4_mac_table *table, u64 mac)
++{
++	int i;
++	for (i = 0; i < MLX4_MAX_MAC_NUM; i++) {
++		if (mac == (MLX4_MAC_MASK & be64_to_cpu(table->entries[i])))
++			return i;
++	}
++	/* Mac not found */
++	return -EINVAL;
++}
++
++void mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, int qpn)
++{
++	struct mlx4_port_info *info = &mlx4_priv(dev)->port[port];
++	struct mlx4_mac_table *table = &info->mac_table;
++	int index = qpn - info->base_qpn;
++	struct mlx4_mac_entry *entry;
++
++	if (dev->caps.vep_uc_steering) {
++		entry = radix_tree_lookup(&info->mac_tree, qpn);
++		if (entry) {
++			mlx4_uc_steer_release(dev, port, entry->mac, qpn, 1);
++			radix_tree_delete(&info->mac_tree, qpn);
++			index = find_index(dev, table, entry->mac);
++			kfree(entry);
++		}
+ 	}
++
++	mutex_lock(&table->mutex);
++
++	if (validate_index(dev, table, index))
++		goto out;
++
+ 	table->entries[index] = 0;
+ 	mlx4_set_port_mac_table(dev, port, table->entries);
+ 	--table->total;
+@@ -171,6 +311,45 @@ out:
+ }
+ EXPORT_SYMBOL_GPL(mlx4_unregister_mac);
+ 
++int mlx4_replace_mac(struct mlx4_dev *dev, u8 port, int qpn, u64 new_mac, u8 wrap)
++{
++	struct mlx4_port_info *info = &mlx4_priv(dev)->port[port];
++	struct mlx4_mac_table *table = &info->mac_table;
++	int index = qpn - info->base_qpn;
++	struct mlx4_mac_entry *entry;
++	int err;
++
++	if (dev->caps.vep_uc_steering) {
++		entry = radix_tree_lookup(&info->mac_tree, qpn);
++		if (!entry)
++			return -EINVAL;
++		index = find_index(dev, table, entry->mac);
++		mlx4_uc_steer_release(dev, port, entry->mac, qpn, 0);
++		entry->mac = new_mac;
++		err = mlx4_uc_steer_add(dev, port, entry->mac, &qpn, 0);
++		if (err || index < 0)
++			return err;
++	}
++
++	mutex_lock(&table->mutex);
++
++	err = validate_index(dev, table, index);
++	if (err)
++		goto out;
++
++	table->entries[index] = cpu_to_be64(new_mac | MLX4_MAC_VALID);
++
++	err = mlx4_set_port_mac_table(dev, port, table->entries);
++	if (unlikely(err)) {
++		mlx4_err(dev, "Failed adding MAC: 0x%llx\n", (unsigned long long) new_mac);
++		table->entries[index] = 0;
++	}
++out:
++	mutex_unlock(&table->mutex);
++	return err;
++}
++EXPORT_SYMBOL_GPL(mlx4_replace_mac);
++
+ static int mlx4_set_port_vlan_table(struct mlx4_dev *dev, u8 port,
+ 				    __be32 *entries)
+ {
+@@ -234,11 +413,6 @@ int mlx4_register_vlan(struct mlx4_dev *
+ 		}
+ 	}
+ 
+-	if (free < 0) {
+-		err = -ENOMEM;
+-		goto out;
+-	}
+-
+ 	if (table->total == table->max) {
+ 		/* No free vlan entries */
+ 		err = -ENOSPC;
+@@ -352,3 +526,71 @@ int mlx4_SET_PORT(struct mlx4_dev *dev, 
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
+ 	return err;
+ }
++
++int mlx4_SET_PORT_general(struct mlx4_dev *dev, u8 port, int mtu,
++			  u8 pptx, u8 pfctx, u8 pprx, u8 pfcrx)
++{
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_set_port_general_context *context;
++	int err;
++	u32 in_mod;
++
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox))
++		return PTR_ERR(mailbox);
++	context = mailbox->buf;
++	memset(context, 0, sizeof *context);
++
++	context->flags = SET_PORT_GEN_ALL_VALID;
++	context->mtu = cpu_to_be16(mtu);
++	context->pptx = (pptx * (!pfctx)) << 7;
++	context->pfctx = pfctx;
++	context->pprx = (pprx * (!pfcrx)) << 7;
++	context->pfcrx = pfcrx;
++
++	in_mod = MLX4_SET_PORT_GENERAL << 8 | port;
++	err = mlx4_cmd(dev, mailbox->dma, in_mod, 1, MLX4_CMD_SET_PORT,
++		       MLX4_CMD_TIME_CLASS_B);
++
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	return err;
++}
++EXPORT_SYMBOL(mlx4_SET_PORT_general);
++
++int mlx4_SET_PORT_qpn_calc(struct mlx4_dev *dev, u8 port, u32 base_qpn,
++			   u8 promisc)
++{
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_set_port_rqp_calc_context *context;
++	int err;
++	u32 in_mod;
++	u32 m_promisc = (dev->caps.vep_mc_steering) ? MCAST_DIRECT : MCAST_DEFAULT;
++
++	if (dev->caps.vep_mc_steering && dev->caps.vep_uc_steering)
++		return 0;
++
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox))
++		return PTR_ERR(mailbox);
++	context = mailbox->buf;
++	memset(context, 0, sizeof *context);
++
++	context->base_qpn = cpu_to_be32(base_qpn);
++	context->n_mac = 0x7;
++	context->promisc = cpu_to_be32(promisc << SET_PORT_PROMISC_SHIFT |
++				       base_qpn);
++	context->mcast = cpu_to_be32(m_promisc << SET_PORT_MC_PROMISC_SHIFT |
++				     base_qpn);
++	context->intra_no_vlan = 0;
++	context->no_vlan = MLX4_NO_VLAN_IDX;
++	context->intra_vlan_miss = 0;
++	context->vlan_miss = MLX4_VLAN_MISS_IDX;
++
++	in_mod = MLX4_SET_PORT_RQP_CALC << 8 | port;
++	err = mlx4_cmd(dev, mailbox->dma, in_mod, 1, MLX4_CMD_SET_PORT,
++			       MLX4_CMD_TIME_CLASS_B);
++
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	return err;
++}
++EXPORT_SYMBOL(mlx4_SET_PORT_qpn_calc);
+Index: ofed_kernel-fixes/include/linux/mlx4/cmd.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/linux/mlx4/cmd.h	2011-02-24 10:52:18.000000000 +0200
++++ ofed_kernel-fixes/include/linux/mlx4/cmd.h	2011-02-24 10:52:20.000000000 +0200
+@@ -120,6 +120,16 @@ enum {
+ 	MLX4_CMD_DIAG_RPRT	 = 0x30,
+ 	MLX4_CMD_NOP		 = 0x31,
+ 
++	/* Ethernet specific commands */
++	MLX4_CMD_SET_VLAN_FLTR	 = 0x47,
++	MLX4_CMD_SET_MCAST_FLTR	 = 0x48,
++	MLX4_CMD_DUMP_ETH_STATS	 = 0x49,
++
++	/* virtual commands */
++	MLX4_CMD_MCAST_ATTACH	 = 0xf05,
++	MLX4_CMD_GET_SLAVE_SQP	 = 0xf06,
++	MLX4_CMD_PROMISC	 = 0xf08,
++
+ 	/* debug commands */
+ 	MLX4_CMD_QUERY_DEBUG_MSG = 0x2a,
+ 	MLX4_CMD_SET_DEBUG_MSG	 = 0x2b,
+@@ -136,7 +146,8 @@ enum {
+ };
+ 
+ enum {
+-	MLX4_MAILBOX_SIZE	=  4096
++	MLX4_MAILBOX_SIZE	= 4096,
++	MLX4_ACCESS_MEM_ALIGN	= 256,
+ };
+ 
+ enum {
+@@ -147,6 +158,12 @@ enum {
+ 	MLX4_SET_PORT_VLAN_TABLE = 0x3,
+ 	MLX4_SET_PORT_PRIO_MAP  = 0x4,
+ 	MLX4_SET_PORT_GID_TABLE = 0x5,
++	MLX4_SET_PORT_MODIFIERS
++};
++
++enum {
++	MLX4_DUMP_STATS_PORT_COUNTERS = 0x0,
++	MLX4_DUMP_STATS_FUNC_COUNTERS = 0x8,
+ };
+ 
+ struct mlx4_dev;
+Index: ofed_kernel-fixes/include/linux/mlx4/device.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/linux/mlx4/device.h	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/include/linux/mlx4/device.h	2011-02-27 16:53:47.000000000 +0200
+@@ -150,6 +150,13 @@ enum {
+ 	MLX4_STAT_RATE_OFFSET	= 5
+ };
+ 
++enum mlx4_protocol {
++	MLX4_PROT_IB_IPV6 = 0,
++	MLX4_PROT_ETH,
++	MLX4_PROT_IB_IPV4,
++	MLX4_PROT_FCOE
++};
++
+ enum {
+ 	MLX4_MTT_FLAG_PRESENT		= 1
+ };
+@@ -175,6 +182,12 @@ enum mlx4_special_vlan_idx {
+ };
+ #define MLX4_LEAST_ATTACHED_VECTOR	0xffffffff
+ 
++enum mlx4_steer_type {
++	MLX4_MC_STEER = 0,
++	MLX4_UC_STEER,
++	MLX4_NUM_STEERS
++};
++
+ enum {
+ 	MLX4_CUNTERS_DISABLED,
+ 	MLX4_CUNTERS_BASIC,
+@@ -192,82 +205,84 @@ static inline u64 mlx4_fw_ver(u64 major,
+ 
+ struct mlx4_caps {
+ 	u64			fw_ver;
+-	int			num_ports;
+-	int			vl_cap[MLX4_MAX_PORTS + 1];
+-	int			ib_mtu_cap[MLX4_MAX_PORTS + 1];
++	u32			num_ports;
++	u32			vl_cap[MLX4_MAX_PORTS + 1];
++	u32			ib_mtu_cap[MLX4_MAX_PORTS + 1];
+ 	__be32			ib_port_def_cap[MLX4_MAX_PORTS + 1];
+ 	u64			def_mac[MLX4_MAX_PORTS + 1];
+-	int			eth_mtu_cap[MLX4_MAX_PORTS + 1];
+-	int			gid_table_len[MLX4_MAX_PORTS + 1];
+-	int			pkey_table_len[MLX4_MAX_PORTS + 1];
+-	int			trans_type[MLX4_MAX_PORTS + 1];
+-	int			vendor_oui[MLX4_MAX_PORTS + 1];
+-	int			wavelength[MLX4_MAX_PORTS + 1];
++	u32			eth_mtu_cap[MLX4_MAX_PORTS + 1];
++	u32			gid_table_len[MLX4_MAX_PORTS + 1];
++	u32			pkey_table_len[MLX4_MAX_PORTS + 1];
++	u32			trans_type[MLX4_MAX_PORTS + 1];
++	u32			vendor_oui[MLX4_MAX_PORTS + 1];
++	u32			wavelength[MLX4_MAX_PORTS + 1];
+ 	u64			trans_code[MLX4_MAX_PORTS + 1];
+-	int			local_ca_ack_delay;
+-	int			num_uars;
+-	int			bf_reg_size;
+-	int			bf_regs_per_page;
+-	int			max_sq_sg;
+-	int			max_rq_sg;
+-	int			num_qps;
+-	int			max_wqes;
+-	int			max_sq_desc_sz;
+-	int			max_rq_desc_sz;
+-	int			max_qp_init_rdma;
+-	int			max_qp_dest_rdma;
+-	int			sqp_start;
+-	int			num_srqs;
+-	int			max_srq_wqes;
+-	int			max_srq_sge;
+-	int			reserved_srqs;
+-	int			num_cqs;
+-	int			max_cqes;
+-	int			reserved_cqs;
+-	int			num_eqs;
+-	int			reserved_eqs;
+-	int			num_comp_vectors;
+-	int			num_mpts;
+-	int			num_mtt_segs;
+-	int			mtts_per_seg;
+-	int			fmr_reserved_mtts;
+-	int			reserved_mtts;
+-	int			reserved_mrws;
+-	int			reserved_uars;
+-	int			num_mgms;
+-	int			num_amgms;
+-	int			reserved_mcgs;
+-	int			num_qp_per_mgm;
+-	int			num_pds;
+-	int			reserved_pds;
+-	int			mtt_entry_sz;
+-	int			reserved_xrcds;
+-	int			max_xrcds;
++	u32			local_ca_ack_delay;
++	u32			num_uars;
++	u32			bf_reg_size;
++	u32			bf_regs_per_page;
++	u32			max_sq_sg;
++	u32			max_rq_sg;
++	u32			num_qps;
++	u32			max_wqes;
++	u32			max_sq_desc_sz;
++	u32			max_rq_desc_sz;
++	u32			max_qp_init_rdma;
++	u32			max_qp_dest_rdma;
++	u32			sqp_start;
++	u32			num_srqs;
++	u32			max_srq_wqes;
++	u32			max_srq_sge;
++	u32			reserved_srqs;
++	u32			num_cqs;
++	u32			max_cqes;
++	u32			reserved_cqs;
++	u32			num_eqs;
++	u32			reserved_eqs;
++	u32			num_comp_vectors;
++	u32			num_mpts;
++	u32			num_mtt_segs;
++	u32			mtts_per_seg;
++	u32			fmr_reserved_mtts;
++	u32			reserved_mtts;
++	u32			reserved_mrws;
++	u32			reserved_uars;
++	u32			num_mgms;
++	u32			num_amgms;
++	u32			reserved_mcgs;
++	u32			num_qp_per_mgm;
++	u32			num_pds;
++	u32			reserved_pds;
++	u32			mtt_entry_sz;
++	u32			reserved_xrcds;
++	u32			max_xrcds;
+ 	u32			max_msg_sz;
+ 	u32			page_size_cap;
+ 	u64			flags;
+ 	u32			bmme_flags;
+ 	u32			reserved_lkey;
+ 	u16			stat_rate_support;
+-	int			udp_rss;
+-	int			loopback_support;
++	u32			udp_rss;
++	u32			loopback_support;
++	u32			vep_uc_steering;
++	u32			vep_mc_steering;
+ 	u8			port_width_cap[MLX4_MAX_PORTS + 1];
+-	int			max_gso_sz;
+-	int                     reserved_qps_cnt[MLX4_NUM_QP_REGION];
+-	int			reserved_qps;
+-	int                     reserved_qps_base[MLX4_NUM_QP_REGION];
+-	int                     log_num_macs;
+-	int                     log_num_vlans;
+-	int                     log_num_prios;
+-	enum mlx4_port_type	port_type[MLX4_MAX_PORTS + 1];
++	u32			max_gso_sz;
++	u32                     reserved_qps_cnt[MLX4_NUM_QP_REGION];
++	u32			reserved_qps;
++	u32                     reserved_qps_base[MLX4_NUM_QP_REGION];
++	u32                     log_num_macs;
++	u32                     log_num_vlans;
++	u32                     log_num_prios;
++	u32	port_type[MLX4_MAX_PORTS + 1];
+ 	u8			supported_type[MLX4_MAX_PORTS + 1];
+-	enum mlx4_port_type	port_mask[MLX4_MAX_PORTS + 1];
+-	enum mlx4_port_type	possible_type[MLX4_MAX_PORTS + 1];
++	u32	port_mask[MLX4_MAX_PORTS + 1];
++	u32	possible_type[MLX4_MAX_PORTS + 1];
+ 	u8			counters_mode;
+ 	u32			max_basic_counters;
+ 	u32			max_ext_counters;
+ 	u32			mc_promisc_mode;
+-};
++} __attribute__((packed));
+ 
+ struct mlx4_buf_list {
+ 	void		       *buf;
+@@ -499,6 +514,27 @@ static inline void mlx4_query_steer_cap(
+ 	*log_prio = dev->caps.log_num_prios;
+ }
+ 
++
++
++struct mlx4_eth_common_counters {
++	/* bad packets received		*/
++	unsigned long	rx_errors;
++	/* packet transmit problems	*/
++	unsigned long	tx_errors;
++	/* multicast packets received	*/
++	unsigned long	multicast;
++	unsigned long	rx_length_errors;
++	/* receiver ring buff overflow	*/
++	unsigned long	rx_over_errors;
++	/* recved pkt with crc error	*/
++	unsigned long	rx_crc_errors;
++	/* recv'r fifo overrun		*/
++	unsigned long	rx_fifo_errors;
++	/* receiver missed packet	*/
++	unsigned long	rx_missed_errors;
++	unsigned long	broadcast;
++};
++
+ #define mlx4_foreach_port(port, dev, type)				\
+ 	for ((port) = 1; (port) <= (dev)->caps.num_ports; (port)++)	\
+ 		if ((type) == (dev)->caps.port_mask[(port)])
+@@ -577,16 +613,25 @@ void mlx4_srq_free(struct mlx4_dev *dev,
+ int mlx4_srq_arm(struct mlx4_dev *dev, struct mlx4_srq *srq, int limit_watermark);
+ int mlx4_srq_query(struct mlx4_dev *dev, struct mlx4_srq *srq, int *limit_watermark);
+ 
++int mlx4_SET_PORT_qpn_calc(struct mlx4_dev *dev, u8 port, u32 base_qpn,
++			   u8 promisc);
++
+ int mlx4_INIT_PORT(struct mlx4_dev *dev, int port);
+ int mlx4_CLOSE_PORT(struct mlx4_dev *dev, int port);
+ 
+ int mlx4_multicast_attach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-			  int block_mcast_loopback, enum mlx4_mcast_prot prot);
++			  int block_mcast_loopback, enum mlx4_protocol prot);
+ int mlx4_multicast_detach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-				enum mlx4_mcast_prot prot);
+-
+-int mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac, int *index);
+-void mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, int index);
++				enum mlx4_protocol prot);
++int mlx4_multicast_promisc_add(struct mlx4_dev *dev, u32 qpn, u8 port);
++int mlx4_multicast_promisc_remove(struct mlx4_dev *dev, u32 qpn, u8 port);
++int mlx4_unicast_promisc_add(struct mlx4_dev *dev, u32 qpn, u8 port);
++int mlx4_unicast_promisc_remove(struct mlx4_dev *dev, u32 qpn, u8 port);
++int mlx4_SET_MCAST_FLTR(struct mlx4_dev *dev, u8 port, u64 mac, u64 clear, u8 mode);
++
++int mlx4_register_mac(struct mlx4_dev *dev, u8 port, u64 mac, int *qpn, u8 wrap);
++void mlx4_unregister_mac(struct mlx4_dev *dev, u8 port, int qpn);
++int mlx4_replace_mac(struct mlx4_dev *dev, u8 port, int qpn, u64 new_mac, u8 wrap);
+ 
+ int mlx4_find_cached_vlan(struct mlx4_dev *dev, u8 port, u16 vid, int *idx);
+ int mlx4_register_vlan(struct mlx4_dev *dev, u8 port, u16 vlan, int *index);
+@@ -611,6 +656,7 @@ int mlx4_SYNC_TPT(struct mlx4_dev *dev);
+ int mlx4_query_diag_counters(struct mlx4_dev *mlx4_dev, int array_length,
+ 			     u8 op_modifier, u32 in_offset[], u32 counter_out[]);
+ int mlx4_test_interrupts(struct mlx4_dev *dev);
++int mlx4_QUERY_PORT(struct mlx4_dev *dev, void *outbox, u8 port);
+ 
+ void mlx4_get_fc_t11_settings(struct mlx4_dev *dev, int *enable_pre_t11, int *t11_supported);
+ 
+Index: ofed_kernel-fixes/include/linux/mlx4/driver.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/linux/mlx4/driver.h	2011-02-24 10:52:18.000000000 +0200
++++ ofed_kernel-fixes/include/linux/mlx4/driver.h	2011-02-24 10:52:20.000000000 +0200
+@@ -54,11 +54,6 @@ enum mlx4_prot {
+ 	MLX4_PROT_EN,
+ };
+ 
+-enum mlx4_mcast_prot {
+-	MLX4_MCAST_PROT_IB = 0,
+-	MLX4_MCAST_PROT_EN = 1,
+-};
+-
+ struct mlx4_interface {
+ 	void *			(*add)	 (struct mlx4_dev *dev);
+ 	void			(*remove)(struct mlx4_dev *dev, void *context);

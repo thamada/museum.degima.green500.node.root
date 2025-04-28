@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EComponentListener</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="up" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="prev" href="libedataserver-e-categories.html" title="e-categories">
+<link rel="next" href="libedataserver-EFlag.html" title="EFlag">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libedataserver-e-categories.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution-Data-Server Manual: Utilities (libedataserver)</th>
+<td><a accesskey="n" href="libedataserver-EFlag.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#EComponentListener.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#EComponentListener.description" class="shortcut">Description</a>
+                 | 
+                <a href="#EComponentListener.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#EComponentListener.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="EComponentListener">
+<a name="EComponentListener"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="EComponentListener.top_of_page"></a>EComponentListener</span></h2>
+<p>EComponentListener</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="EComponentListener.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="EComponentListener.html#EComponentListener-struct" title="EComponentListener">EComponentListener</a>;
+<a class="link" href="EComponentListener.html" title="EComponentListener">EComponentListener</a> * <a class="link" href="EComponentListener.html#e-component-listener-new" title="e_component_listener_new ()">e_component_listener_new</a>           (Bonobo_Unknown comp);
+Bonobo_Unknown      <a class="link" href="EComponentListener.html#e-component-listener-get-component" title="e_component_listener_get_component ()">e_component_listener_get_component</a>  (<a class="link" href="EComponentListener.html" title="EComponentListener">EComponentListener</a> *cl);
+void                <a class="link" href="EComponentListener.html#e-component-listener-set-component" title="e_component_listener_set_component ()">e_component_listener_set_component</a>  (<a class="link" href="EComponentListener.html" title="EComponentListener">EComponentListener</a> *cl,
+                                                         Bonobo_Unknown comp);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="EComponentListener.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="../gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----EComponentListener
+</pre>
+</div>
+<div class="refsect1" title="Signals">
+<a name="EComponentListener.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="EComponentListener.html#EComponentListener-component-died" title='The "component-died" signal'>component-died</a>"                                 : Run First
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="EComponentListener.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="EComponentListener.details"></a><h2>Details</h2>
+<div class="refsect2" title="EComponentListener">
+<a name="EComponentListener-struct"></a><h3>EComponentListener</h3>
+<pre class="programlisting">typedef struct _EComponentListener EComponentListener;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="e_component_listener_new ()">
+<a name="e-component-listener-new"></a><h3>e_component_listener_new ()</h3>
+<pre class="programlisting"><a class="link" href="EComponentListener.html" title="EComponentListener">EComponentListener</a> * e_component_listener_new           (Bonobo_Unknown comp);</pre>
+<p>
+Create a new <a class="link" href="EComponentListener.html" title="EComponentListener"><span class="type">EComponentListener</span></a> object, which allows to listen
+for a given component and get notified when that component dies.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>comp</code></em> :</span></p></td>
+<td> Component to listen for.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a component listener object.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_component_listener_get_component ()">
+<a name="e-component-listener-get-component"></a><h3>e_component_listener_get_component ()</h3>
+<pre class="programlisting">Bonobo_Unknown      e_component_listener_get_component  (<a class="link" href="EComponentListener.html" title="EComponentListener">EComponentListener</a> *cl);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cl</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_component_listener_set_component ()">
+<a name="e-component-listener-set-component"></a><h3>e_component_listener_set_component ()</h3>
+<pre class="programlisting">void                e_component_listener_set_component  (<a class="link" href="EComponentListener.html" title="EComponentListener">EComponentListener</a> *cl,
+                                                         Bonobo_Unknown comp);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cl</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>comp</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="EComponentListener.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "component-died" signal'>
+<a name="EComponentListener-component-died"></a><h3>The <code class="literal">"component-died"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EComponentListener.html" title="EComponentListener">EComponentListener</a> *ecomponentlistener,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            user_data)               : Run First</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ecomponentlistener</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+.TH MPI_Init_thread 3 "3/8/2011" " " "MPI"
+.SH NAME
+MPI_Init_thread \-  Initialize the MPI execution environment 
+.SH SYNOPSIS
+.nf
+#if defined(_OSU_MVAPICH_)
+extern int split_comm;
+int enable_shmem_collectives = 1;
+int disable_shmem_allreduce=0;
+int disable_shmem_reduce=0;
+int disable_shmem_barrier=0;
+int use_two_level_gather=1;
+int use_direct_gather=1; 
+int use_two_level_scatter=1;
+int use_direct_scatter=1; 
+int g_shmem_bcast_leaders = DEFAULT_SHMEM_BCAST_LEADERS;
+int g_shmem_bcast_flags = DEFAULT_SHMEM_BCAST_LEADERS;
+int gather_direct_system_size_small = GATHER_DIRECT_SYSTEM_SIZE_SMALL;
+int gather_direct_system_size_medium = GATHER_DIRECT_SYSTEM_SIZE_MEDIUM;
+extern int g_shmem_coll_blocks;
+extern int g_shmem_coll_max_msg_size;
+extern int shmem_bcast_threshold;
+extern int bcast_short_msg_threshold; 
+extern int enable_shmem_bcast;
+void MV2_Read_env_vars(void);
+void init_thread_reg();
+
+extern int check_split_comm(pthread_t);
+extern int disable_split_comm(pthread_t);
+extern void create_2level_comm (MPI_Comm, int, int);
+extern int enable_split_comm(pthread_t);
+
+int tune_parameter=0;
+/* Runtime threshold for scatter */
+int user_scatter_small_msg = 0;
+int user_scatter_medium_msg = 0;
+
+/* Runtime threshold for scatter */
+int user_gather_switch_point = 0;
+
+struct coll_runtime coll_param =.fi
+.SH INPUT PARAMETERS
+.PD 0
+.TP
+.B argc 
+- Pointer to the number of arguments 
+.PD 1
+.PD 0
+.TP
+.B argv 
+- Pointer to the argument vector
+.PD 1
+.PD 0
+.TP
+.B required 
+- Level of desired thread support
+.PD 1
+
+.SH OUTPUT PARAMETER
+.PD 0
+.TP
+.B provided 
+- Level of provided thread support
+.PD 1
+
+.SH COMMAND LINE ARGUMENTS
+MPI specifies no command-line arguments but does allow an MPI
+implementation to make use of them.  See 
+.I MPI_INIT
+for a description of
+the command line arguments supported by 
+.I MPI_INIT
+and 
+.I MPI_INIT_THREAD
+\&.
+
+
+.SH NOTES
+The valid values for the level of thread support are:
+.PD 0
+.TP
+.B MPI_THREAD_SINGLE 
+- Only one thread will execute. 
+.PD 1
+.PD 0
+.TP
+.B MPI_THREAD_FUNNELED 
+- The process may be multi-threaded, but only the main 
+thread will make MPI calls (all MPI calls are funneled to the 
+main thread). 
+.PD 1
+.PD 0
+.TP
+.B MPI_THREAD_SERIALIZED 
+- The process may be multi-threaded, and multiple 
+threads may make MPI calls, but only one at a time: MPI calls are not 
+made concurrently from two distinct threads (all MPI calls are serialized). 
+.PD 1
+.PD 0
+.TP
+.B MPI_THREAD_MULTIPLE 
+- Multiple threads may call MPI, with no restrictions. 
+.PD 1
+
+.SH NOTES FOR FORTRAN
+Note that the Fortran binding for this routine does not have the 
+.I argc
+and
+.I argv
+arguments. (
+.I MPI_INIT_THREAD(required, provided, ierror)
+)
+
+
+.SH ERRORS
+
+All MPI routines (except 
+.I MPI_Wtime
+and 
+.I MPI_Wtick
+) return an error value;
+C routines as the value of the function and Fortran routines in the last
+argument.  Before the value is returned, the current MPI error handler is
+called.  By default, this error handler aborts the MPI job.  The error handler
+may be changed with 
+.I MPI_Comm_set_errhandler
+(for communicators),
+.I MPI_File_set_errhandler
+(for files), and 
+.I MPI_Win_set_errhandler
+(for
+RMA windows).  The MPI-1 routine 
+.I MPI_Errhandler_set
+may be used but
+its use is deprecated.  The predefined error handler
+.I MPI_ERRORS_RETURN
+may be used to cause error values to be returned.
+Note that MPI does 
+.B not
+guarentee that an MPI program can continue past
+an error; however, MPI implementations will attempt to continue whenever
+possible.
+
+.PD 0
+.TP
+.B MPI_SUCCESS 
+- No error; MPI routine completed successfully.
+.PD 1
+.PD 0
+.TP
+.B MPI_ERR_OTHER 
+- Other error; use 
+.I MPI_Error_string
+to get more information
+about this error code. 
+.PD 1
+
+.SH SEE ALSO
+MPI_Init, MPI_Finalize
+.br
+.SH LOCATION
+initthread.c

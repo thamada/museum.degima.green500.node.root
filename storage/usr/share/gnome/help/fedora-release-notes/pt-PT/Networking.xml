@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Networking" lang="pt-PT">
+	<title>Rede</title>
+	<remark>Este bocado encontra-se em: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Networking">https://fedoraproject.org/wiki/Docs/Beats/Networking</ulink></remark>
+	<section id="sect-Release_Notes-Networking-System_wide">
+		<title><application>NetworkManager</application> com gestão de ligações gerais do sistema e suporte melhorado a Internet móvel de banda larga</title>
+		<para>
+			O <application>NetworkManager</application> agora pode criar e editar ligações de rede do sistema em <filename>/etc/sysconfig</filename>. O <application>NetworkManager</application> já conseguia ler informação acerca de ligações de rede do sistema a partir de <filename>/etc/sysconfig</filename>. Agora foi adicionada a capacidade total de leitura e escrita das ligações do sistema. A capacidade de criar ou modificar novas ligações de rede do sistema será controlada pelas politicas do <application>PolicyKit</application>. Inicialmente, apenas ligações com fios e sem fios serão suportadas. Mais tarde, seguirão ligações vpn. Para ligações que exijam segredos, estes serão gravados em ficheiros <filename>.keys</filename> em <filename>/etc/sysconfig</filename>.
+		</para>
+		<para>
+			Ao fornecer uma base de dados de fornecedores pré-configurados de Internet móvel de banda larga, ao suportar mais hardware, ao permitir a detecção de redes GSM, O <application>NetworkManager</application> torna a utilização de Internet móvel de banda larga muito mais facilitada. O seu fornecedor de Internet móvel de banda larga será automaticamente reconhecido pelo <application>NetworkManager</application> e tornará fácil a tarefa de ligar o dispositivo USB e ficar ligado à Internet, em minutos.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-IPv6">
+		<title>Foi melhorado o suporte a IPv6 no <application>NetworkManager</application></title>
+		<para>
+			Para utilizadores em consola, e para aqueles que utilizam os ficheiros <filename>ifcfg</filename> directamente, o <application>NetworkManager</application> deve levantar correctamente o interface com conectividade IPv6 no arranque. Não devem ser necessárias modificações nos ficheiros <filename>ifcfg</filename>.
+		</para>
+		<para>
+			Para os utilizadores em modo gráfico (GUI), um novo separador IPv6 irá aparecer no editor de ligações que vai permitir controlar as configurações IPv6 de modo similar ao que já era feito para as configurações IPv4. Depois de seleccionar o método de configuração (<literal>auto</literal> é o valor pré-definido, o qual honra configurações publicadas pelo router ("router-advertisements") e tenta obter informação de DNS com DHCPv6 em modo exclusivo) e inserir configurações adicionais que pretendam utilizar, e depois gravando a ligação, activando essa ligação deve configurar o interface totalmente com IPv6 tal como pedido pelo utilizador.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Network_Interface_Management">
+		<title>Gestão do Interface de Rede</title>
+		<para>
+			Configurar os interfaces de rede numa máquina para cenários moderadamente complicados, mas comuns, geralmente só está acessível a utilizadores avançados, e muito mal suportados pelas ferramentas existentes. Esses cenários incluem criar uma bridge e associar "(enslaving") um NIC físico a esta, ou configurar dois interfaces NIC em "bonding", adicionar um interface VLAN ao "bond" e associar este a uma bridge.
+		</para>
+		<para>
+			Configurações complicadas de bridge são normalmente necessárias em servidores de virtualização, e muitas vezes são executadas remotamente por ferramentas de gestão de alto nível, ao invés de um utilizador humano.
+		</para>
+		<para>
+			Esta funcionalidade atente a estas necessidades, fornecendo uma biblioteca de configuração de rede generalista (<application>netcf</application>) e adições à API <application>libvirt</application> para expor a API local <application>netcf</application> através das facilidades remotas do <application>libvirt</application>.
+		</para>
+		<para>
+			Com o <application>netcf</application>, uma interface de rede lógica (por exemplo, uma bridge e seus slaves) é descrita como uma unidade, e o <application>netcf</application> assume a tradução dessa descrição num ficheiro de configuração <filename>ifcfg-*</filename> apropriado. Para garantir a feliz coexistência do <application>netcf</application> com outros utilitários de configuração de rede, incluindo o <application>vi</application>, o <application>netcf</application> é bidireccional: ele modifica os ficheiros de configuração <filename>ifcfg-*</filename> baseado na descrição do interface <application>netcf</application>, man também lê os ficheiros <filename>ifcfg-*</filename> para gerar essa descrição. É, portanto, possível utilizar o <application>netcf</application> lado a lado com outro método qualquer de alteração da configuração de rede, e evitam-se muitas das desvantagens de tentativas anteriores de conseguir isto &mdash; por exemplo, os scripts de rede do Xen.
+		</para>
+		<para>
+			Está planeado mudar o <application>NetworkManager</application> para o <application>netcf</application> num futuro lançamento, como o backend para configuração da rede do sistema; embora não seja parte desta característica, vai unificar ainda mais a experiência do utilizador em torno da configuração de rede. Do mesmo modo, está previsto expor a funcionalidade de configuração da rede numa versão futura do <application>virt-manager</application>.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Networking-Bluetooth">
+		<title>Serviço Bluetooth Quando Necessário</title>
+		<para>
+			A fim de oferecer suporte a dispositivos Bluetooth, o serviço de background do Bluetooth foi iniciado por omissão em versões anteriores do Fedora. Neste lançamento, o serviço de Bluetooth é iniciado sob pedido quando necessário e pára automaticamente 30 segundos após a utilização do último dispositivo. Isto reduz o tempo de arranque e poupa recursos.
+		</para>
+	</section>
+	
+	<!-- 
+<section id="sect-Release_Notes-Networking-NFS">
+	<title
+>NFS V4 Default</title>
+
+	<para>
+		The latest version of the NFS protocol is version 4, which was first introduced in Fedora&nbsp;Core&nbsp;2 (the first distro to have such support). Previously, the default NFS version was version 3. Therefore, when an simple NFS mount was done (<command
+>mount server:/export /mnt</command
+>) version 3 is the first protocol version that was tried.
+	</para>
+
+	<para>
+		In Fedora&nbsp;12, version 4 is tried first. If the server does not support version 4, the mount then tries version 3.
+	</para
+> 
+</section>
+ -->
+</section>
+
+

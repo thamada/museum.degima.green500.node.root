@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Logging</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="UP"
+TITLE="Default Settings"
+HREF="httpd-default-settings.html"><LINK
+REL="PREVIOUS"
+TITLE="Default Settings"
+HREF="httpd-default-settings.html"><LINK
+REL="NEXT"
+TITLE="Environment Variables"
+HREF="httpd-environment-variables.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="httpd-default-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Default Settings</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-environment-variables.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="HTTPD-LOGGING"
+></A
+>Logging</H1
+><P
+>	  By default, the server writes the transfer log to the file
+	  <TT
+CLASS="FILENAME"
+>/var/log/httpd/access_log</TT
+> and the error log to
+	  the <TT
+CLASS="FILENAME"
+>/var/log/httpd/error_log</TT
+> file.
+	</P
+><P
+>	  The transfer log contains a list of all attempts to access the Web
+	  server. It records the IP address of the client that is attempting to
+	  connect, the date and time of the attempt, and the file on the Web
+	  server that it is trying to retrieve. Enter the name of the path and
+	  file in which to store this information. If the path and filename does
+	  not start with a slash (/), the path is relative to the server root
+	  directory as configured.  This option corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mod_log_config.html#transferlog"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>TransferLog</TT
+></A
+>
+	  directive.
+	</P
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-LOGGING-SCREEN"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-logging.png"></P
+></DIV
+><P
+><B
+>Figure 3-2. Logging</B
+></P
+></DIV
+><P
+>	  You can configure a custom log format by checking <B
+CLASS="GUILABEL"
+>Use custom
+	    logging facilities</B
+> and entering a custom log string in
+	    the <B
+CLASS="GUILABEL"
+>Custom Log String</B
+> field. This configures
+	    the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mod_log_config.html#logformat"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>LogFormat</TT
+></A
+>
+	    directive. Refer to <A
+HREF="http://httpd.apache.org/docs-2.0/mod/mod_log_config.html#formats"
+TARGET="_top"
+>	    http://httpd.apache.org/docs-2.0/mod/mod_log_config.html#formats</A
+>
+	    for details on the format of this directive.
+	</P
+><P
+>	  The error log contains a list of any server errors that occur. Enter
+	  the name of the path and file in which to store this information. If
+	  the path and filename does not start with a slash (/), the path is
+	  relative to the server root directory as configured.  This option
+	  corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#errorlog"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>ErrorLog</TT
+></A
+>
+	  directive.
+	</P
+><P
+>	  Use the <B
+CLASS="GUILABEL"
+>Log Level</B
+> menu to set how verbose the
+	  error messages in the error logs will be. It can be set (from least
+	  verbose to most verbose) to emerg, alert, crit, error, warn, notice,
+	  info or debug. This option corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#loglevel"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>LogLevel</TT
+></A
+>
+	  directive.
+	</P
+><P
+>	  The value chosen with the <B
+CLASS="GUILABEL"
+>Reverse DNS Lookup</B
+> menu
+	  defines the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#hostnamelookups"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>HostnameLookups</TT
+></A
+>
+	  directive.  Choosing <B
+CLASS="GUILABEL"
+>No Reverse Lookup</B
+> sets the
+	  value to off.  Choosing <B
+CLASS="GUILABEL"
+>Reverse Lookup</B
+> sets the
+	  value to on.  Choosing <B
+CLASS="GUILABEL"
+>Double Reverse Lookup</B
+> sets
+	  the value to double.
+	</P
+><P
+>	  If you choose <B
+CLASS="GUILABEL"
+>Reverse Lookup</B
+>, your server will
+	  automatically resolve the IP address for each connection which
+	  requests a document from your Web server.  Resolving the IP address
+	  means that your server will make one or more connections to the DNS in
+	  order to find out the hostname that corresponds to a particular IP
+	  address.
+	</P
+><P
+>	  If you choose <B
+CLASS="GUILABEL"
+>Double Reverse Lookup</B
+>, your server
+	  will perform a double-reverse DNS. In other words, after a reverse
+	  lookup is performed, a forward lookup is performed on the result.  At
+	  least one of the IP addresses in the forward lookup must match the
+	  address from the first reverse lookup.
+	</P
+><P
+>	  Generally, you should leave this option set to <B
+CLASS="GUILABEL"
+>No Reverse
+	  Lookup</B
+>, because the DNS requests add a load to your server
+	  and may slow it down.  If your server is busy, the effects of trying
+	  to perform these reverse lookups or double reverse lookups may be
+	  quite noticeable.
+	</P
+><P
+>	  Reverse lookups and double reverse lookups are also an issue for the
+	  Internet as a whole.  All of the individual connections made to look
+	  up each hostname add up.  Therefore, for your own Web server's
+	  benefit, as well as for the Internet's benefit, you should leave this
+	  option set to <B
+CLASS="GUILABEL"
+>No Reverse Lookup</B
+>.
+	</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="httpd-default-settings.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-environment-variables.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Default Settings</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="httpd-default-settings.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Environment Variables</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

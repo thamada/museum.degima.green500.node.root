@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.3.5. Tracking Most Frequently Used System Calls</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="mainsect-profiling.html" title="4.3. Profiling" /><link rel="prev" href="timeoutssect.html" title="4.3.4. Monitoring Polling Applications" /><link rel="next" href="syscallsbyprocpidsect.html" title="4.3.6. Tracking System Call Volume Per Process" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="timeoutssect.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="syscallsbyprocpidsect.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="4.3.5. Tracking Most Frequently Used System Calls" id="topsyssect" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="topsyssect">4.3.5. Tracking Most Frequently Used System Calls</h3></div></div></div><a id="id677531" class="indexterm"></a><a id="id800786" class="indexterm"></a><a id="id2133848" class="indexterm"></a><a id="id695796" class="indexterm"></a><div class="para">
+		<a class="xref" href="timeoutssect.html#timeouts" title="timeout.stp">timeout.stp</a> from <a class="xref" href="timeoutssect.html" title="4.3.4. Monitoring Polling Applications">Section 4.3.4, “Monitoring Polling Applications”</a> helps you identify which applications are polling by pointing out which ones used the following system calls most frequently:
+	</div><div class="itemizedlist"><ul><li class="listitem"><div class="para">
+				<code class="command">poll</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">select</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">epoll</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">itimer</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">futex</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">nanosleep</code>
+			</div></li><li class="listitem"><div class="para">
+				<code class="command">signal</code>
+			</div></li></ul></div><div class="para">
+		However, in some systems, a different system call might be responsible for excessive polling. If you suspect that a polling application is using a different system call to poll, you need to identify first the top system calls used by the system. To do this, use <a class="xref" href="topsyssect.html#topsys" title="topsys.stp">topsys.stp</a>.
+	</div><div class="formalpara" id="topsys"><h5 class="formalpara">topsys.stp</h5>
+			
+<pre class="programlisting">
+#! /usr/bin/env stap
+#
+# This script continuously lists the top 20 systemcalls in the interval 
+# 5 seconds
+#
+
+global syscalls_count
+
+probe syscall.* {
+  syscalls_count[name]++
+}
+
+function print_systop () {
+  printf ("%25s %10s\n", "SYSCALL", "COUNT")
+  foreach (syscall in syscalls_count- limit 20) {
+    printf("%25s %10d\n", syscall, syscalls_count[syscall])
+  }
+  delete syscalls_count
+}
+
+probe timer.s(5) {
+  print_systop ()
+  printf("--------------------------------------------------------------\n")
+}
+
+</pre>
+		</div><div class="para">
+		<a class="xref" href="topsyssect.html#topsys" title="topsys.stp">topsys.stp</a> lists the top 20 system calls used by the system per 5-second interval. It also lists how many times each system call was used during that period. Refer to <a class="xref" href="topsyssect.html#topsysoutput" title="Example 4.17. topsys.stp Sample Output">Example 4.17, “topsys.stp Sample Output”</a> for a sample output.
+	</div><a id="id2211649" class="indexterm"></a><a id="id1006712" class="indexterm"></a><a id="id666785" class="indexterm"></a><div class="example" title="Example 4.17. topsys.stp Sample Output" id="topsysoutput"><h6>Example 4.17. <a class="xref" href="topsyssect.html#topsys" title="topsys.stp">topsys.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+--------------------------------------------------------------
+                  SYSCALL      COUNT
+             gettimeofday       1857
+                     read       1821
+                    ioctl       1568
+                     poll       1033
+                    close        638
+                     open        503
+                   select        455
+                    write        391
+                   writev        335
+                    futex        303
+                  recvmsg        251
+                   socket        137
+            clock_gettime        124
+           rt_sigprocmask        121
+                   sendto        120
+                setitimer        106
+                     stat         90
+                     time         81
+                sigreturn         72
+                    fstat         66
+--------------------------------------------------------------
+</pre></div></div><br class="example-break" /></div><ul class="docnav"><li class="previous"><a accesskey="p" href="timeoutssect.html"><strong>Prev</strong>4.3.4. Monitoring Polling Applications</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="syscallsbyprocpidsect.html"><strong>Next</strong>4.3.6. Tracking System Call Volume Per Process</a></li></ul></body></html>

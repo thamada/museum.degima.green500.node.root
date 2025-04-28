@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Circuit_Design" lang="es-ES">
+	<title>Diseño de Circuitos</title>
+	<indexterm>
+		<primary>Diseño de Circuitos</primary>
+		<secondary>Sección</secondary>
+	</indexterm>
+	<para>
+		Fedora &PRODVER; ofrece un conjunto muy completo de aplicaciones para capturas esquemáticas, simulaciones de circuito y esquemas PCB. A continuación se detallan los cambios más destacados en estas aplicaciones. Una lista completa de modificaciones puede encontrarla al final de este documento.
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>geda</term>
+			<listitem>
+				<indexterm>
+					<primary>geda</primary>
+				</indexterm>
+				<para>
+					En Fedora 12, la suite <package>geda</package>, que antes se ofrecía mediante una cantidad de aplicaciones indivicuales, se ofrece ahora en un sólo paquete.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>gspiceui</term>
+			<listitem>
+				<indexterm>
+					<primary>gspiceui</primary>
+				</indexterm>
+				<para>
+					Ahora, el paquete <package>gspiceui</package> de Fedora ha sido compilado con <package>wxgtk</package> 2.8, en lugar del antiguo <package>wxgtk</package> 2.6. Esto mejora la interfaz gráfica de GSpiceUI, que incluye, además, opamp-3.sym faltantes en /usr/share/gEDA/sym/misc/ (el directorio de símbolos geda). 
+					<note>
+						<title>PPC64</title>
+						<para>
+							GSpiceUI no está disponible en la arquitectura PPC64 soportada por Fedora como resultado de la inexistencia de un gwave para esa arquitectura.
+						</para>
+					</note>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>kicad</term>
+			<listitem>
+				<indexterm>
+					<primary>kicad</primary>
+				</indexterm>
+				<para>
+					Fedora 12 ofrece la última versión de <package>kicad</package>package &gt; que incorpora una gran cantidad de correcciones menores, y mejorías a la hora de su utilización. Para una descripción completa de las numerosas modificaciones realizadas, vea el registro de ellas en <ulink type="http" url="http://www.lis.inpg.fr/realise_au_lis/kicad/"></ulink>.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>ngspice</term>
+			<listitem>
+				<indexterm>
+					<primary>ngspice</primary>
+				</indexterm>
+				<para>
+					<package>ngspice</package> se actualizó a la versión 19. 
+					<itemizedlist>
+						<listitem>
+							<para>
+								Administración de memoria: se corrigieron errores de memoria (Error 514484 - Un mensaje de advertencia largo)
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Integración de las correcciones de errores y mejoras de espice
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Correcciones de errores en punteados y la interfase cli.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Retrabajado del modelo BSim, integración del modelo EPFL-EKV V2.63, ADMS modelos mextram, hicum0, hicum2.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								ngspice de Fedora fue parchado para aceptar llamados desde la interfase TCL de Xcircuit.
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>tclspice</term>
+			<listitem>
+				<indexterm>
+					<primary>tclspice</primary>
+				</indexterm>
+				<para>
+					<package>tclspice</package> es nuevo en Fedora &PRODVER;.
+				</para>
+				<para>
+					Antes de ngspice-rework-19, Fedora ha considerado que la estabilidad de <package>tclspice</package> es demasiado precaria. Ejemplos de <package>tclspice</package> pueden ser encontrados mediante el comando <command>rpm -qd tclspice</command>.
+				</para>
+				<para>
+					Tclspice ofrece capacidades mejoradas a los usuarios de Fedora para diseñar señales mixtas a través de una estructura TCL de bajo nivel. Dado que Fedora además ofrece herramientas para manipulación booleana (lo que se explica en la sección siguiente), los usuarios poseen materiales adecuados para crear su propio complemento EDA de señal mixta.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>xcircuit</term>
+			<listitem>
+				<indexterm>
+					<primary>xcircuit</primary>
+				</indexterm>
+				<para>
+					<package>xcircuit</package> se actualizó a la versión 3.6.161. Lo más sobresaliente fue: 
+					<itemizedlist>
+						<listitem>
+							<para>
+								Soporte para ventanas de diseño esquemáticos múltiples.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Se ha realizado una revisión completa de las rutinas de asociación de las funciones de teclas, y de los mecanismos de función de despacho.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Ha sido necesario realizar algunas correcciones y agregados para hacer que la implementación de ventanas múltiples funcione correctamente.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								La forma en que se manejan las bibliotecas haciendo distinción entre páginas de bibliotecas y archivos usando el concepto de "tecnología de espacio de nombres". Cada objeto tiene un nombre conformado por un "prefijo tecnológico", dos puntos dobles ("::"), y el nombre del objeto. Cada archivo de biblioteca declara un nombre tecnológico, que es utilizado como el prefijo para todos los objetos en ese archivo. Los prefijos son utilizados por XCircuit para rastrear qué objetos provienen de cual archivo, sin importar la página de biblioteca sobre la que hayan sido cargados. Se ha añadido soporte para cables conectadas con pins de símbolo, que permanecen conectadas mientras el símbolo es movido. También se expande sobre la función "Asociar-a", permitiendo que los cables puedan ser asociadas (semi-) automáticamente a etiquetas o pins de símbolo. La tecla macro para "asociar-a" (la tecla "A") puede también ser utilizada como la función "cable" (tecla "w"), para iniciar un cable con su punto de inicio asociado a un pin de símbolo, o etiqueta de pin.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								La forma en que se manejan las etiquetas de información para PCB se cambió como en la versión 3.6.66.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								El tiempo de ejecución fue mejorado.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								ngspice de Fedora fue parchado para aceptar llamados desde la interfase TCL de Xcircuit.
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>
+
+

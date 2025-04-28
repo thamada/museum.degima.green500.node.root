@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>proclist</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libgtop Reference Manual">
+<link rel="up" href="libgtop-lib.html" title="Libgtop Library Reference">
+<link rel="prev" href="libgtop-version.html" title="version">
+<link rel="next" href="libgtop-sem-limits.html" title="sem_limits">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="libgtop-white-paper.html" title="White paper">
+<link rel="chapter" href="libgtop-lib.html" title="Libgtop Library Reference">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgtop-version.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="libgtop-lib.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libgtop Reference Manual</th>
+<td><a accesskey="n" href="libgtop-sem-limits.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgtop-proclist.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgtop-proclist.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="proclist">
+<a name="libgtop-proclist"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgtop-proclist.top_of_page"></a>proclist</span></h2>
+<p>proclist</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgtop-proclist.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;glibtop/proclist.h&gt;
+
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-PROCLIST-NUMBER--CAPS" title="GLIBTOP_PROCLIST_NUMBER">GLIBTOP_PROCLIST_NUMBER</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-PROCLIST-TOTAL--CAPS" title="GLIBTOP_PROCLIST_TOTAL">GLIBTOP_PROCLIST_TOTAL</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-PROCLIST-SIZE--CAPS" title="GLIBTOP_PROCLIST_SIZE">GLIBTOP_PROCLIST_SIZE</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-MAX-PROCLIST--CAPS" title="GLIBTOP_MAX_PROCLIST">GLIBTOP_MAX_PROCLIST</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-ALL--CAPS" title="GLIBTOP_KERN_PROC_ALL">GLIBTOP_KERN_PROC_ALL</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-PID--CAPS" title="GLIBTOP_KERN_PROC_PID">GLIBTOP_KERN_PROC_PID</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-PGRP--CAPS" title="GLIBTOP_KERN_PROC_PGRP">GLIBTOP_KERN_PROC_PGRP</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-SESSION--CAPS" title="GLIBTOP_KERN_PROC_SESSION">GLIBTOP_KERN_PROC_SESSION</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-TTY--CAPS" title="GLIBTOP_KERN_PROC_TTY">GLIBTOP_KERN_PROC_TTY</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-UID--CAPS" title="GLIBTOP_KERN_PROC_UID">GLIBTOP_KERN_PROC_UID</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-RUID--CAPS" title="GLIBTOP_KERN_PROC_RUID">GLIBTOP_KERN_PROC_RUID</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-KERN-PROC-MASK--CAPS" title="GLIBTOP_KERN_PROC_MASK">GLIBTOP_KERN_PROC_MASK</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-EXCLUDE-IDLE--CAPS" title="GLIBTOP_EXCLUDE_IDLE">GLIBTOP_EXCLUDE_IDLE</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-EXCLUDE-SYSTEM--CAPS" title="GLIBTOP_EXCLUDE_SYSTEM">GLIBTOP_EXCLUDE_SYSTEM</a>
+#define             <a class="link" href="libgtop-proclist.html#GLIBTOP-EXCLUDE-NOTTY--CAPS" title="GLIBTOP_EXCLUDE_NOTTY">GLIBTOP_EXCLUDE_NOTTY</a>
+                    <a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a>;
+pid_t *             <a class="link" href="libgtop-proclist.html#glibtop-get-proclist" title="glibtop_get_proclist ()">glibtop_get_proclist</a>                (<a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);
+#define             <a class="link" href="libgtop-proclist.html#glibtop-get-proclist-r" title="glibtop_get_proclist_r">glibtop_get_proclist_r</a>
+pid_t *             <a class="link" href="libgtop-proclist.html#glibtop-get-proclist-l" title="glibtop_get_proclist_l ()">glibtop_get_proclist_l</a>              (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);
+pid_t *             <a class="link" href="libgtop-proclist.html#glibtop-get-proclist-p" title="glibtop_get_proclist_p ()">glibtop_get_proclist_p</a>              (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);
+pid_t *             <a class="link" href="libgtop-proclist.html#glibtop-get-proclist-s" title="glibtop_get_proclist_s ()">glibtop_get_proclist_s</a>              (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgtop-proclist.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgtop-proclist.details"></a><h2>Details</h2>
+<div class="refsect2" title="GLIBTOP_PROCLIST_NUMBER">
+<a name="GLIBTOP-PROCLIST-NUMBER--CAPS"></a><h3>GLIBTOP_PROCLIST_NUMBER</h3>
+<pre class="programlisting">#define GLIBTOP_PROCLIST_NUMBER	0
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROCLIST_TOTAL">
+<a name="GLIBTOP-PROCLIST-TOTAL--CAPS"></a><h3>GLIBTOP_PROCLIST_TOTAL</h3>
+<pre class="programlisting">#define GLIBTOP_PROCLIST_TOTAL	1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_PROCLIST_SIZE">
+<a name="GLIBTOP-PROCLIST-SIZE--CAPS"></a><h3>GLIBTOP_PROCLIST_SIZE</h3>
+<pre class="programlisting">#define GLIBTOP_PROCLIST_SIZE	2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_MAX_PROCLIST">
+<a name="GLIBTOP-MAX-PROCLIST--CAPS"></a><h3>GLIBTOP_MAX_PROCLIST</h3>
+<pre class="programlisting">#define GLIBTOP_MAX_PROCLIST	3
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_ALL">
+<a name="GLIBTOP-KERN-PROC-ALL--CAPS"></a><h3>GLIBTOP_KERN_PROC_ALL</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_ALL		0	/* all processes */
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_PID">
+<a name="GLIBTOP-KERN-PROC-PID--CAPS"></a><h3>GLIBTOP_KERN_PROC_PID</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_PID		1
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_PGRP">
+<a name="GLIBTOP-KERN-PROC-PGRP--CAPS"></a><h3>GLIBTOP_KERN_PROC_PGRP</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_PGRP		2
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_SESSION">
+<a name="GLIBTOP-KERN-PROC-SESSION--CAPS"></a><h3>GLIBTOP_KERN_PROC_SESSION</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_SESSION	3
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_TTY">
+<a name="GLIBTOP-KERN-PROC-TTY--CAPS"></a><h3>GLIBTOP_KERN_PROC_TTY</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_TTY		4
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_UID">
+<a name="GLIBTOP-KERN-PROC-UID--CAPS"></a><h3>GLIBTOP_KERN_PROC_UID</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_UID		5
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_RUID">
+<a name="GLIBTOP-KERN-PROC-RUID--CAPS"></a><h3>GLIBTOP_KERN_PROC_RUID</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_RUID		6
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_KERN_PROC_MASK">
+<a name="GLIBTOP-KERN-PROC-MASK--CAPS"></a><h3>GLIBTOP_KERN_PROC_MASK</h3>
+<pre class="programlisting">#define GLIBTOP_KERN_PROC_MASK		15
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_EXCLUDE_IDLE">
+<a name="GLIBTOP-EXCLUDE-IDLE--CAPS"></a><h3>GLIBTOP_EXCLUDE_IDLE</h3>
+<pre class="programlisting">#define GLIBTOP_EXCLUDE_IDLE		0x1000
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_EXCLUDE_SYSTEM">
+<a name="GLIBTOP-EXCLUDE-SYSTEM--CAPS"></a><h3>GLIBTOP_EXCLUDE_SYSTEM</h3>
+<pre class="programlisting">#define GLIBTOP_EXCLUDE_SYSTEM		0x2000
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GLIBTOP_EXCLUDE_NOTTY">
+<a name="GLIBTOP-EXCLUDE-NOTTY--CAPS"></a><h3>GLIBTOP_EXCLUDE_NOTTY</h3>
+<pre class="programlisting">#define GLIBTOP_EXCLUDE_NOTTY		0x4000
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_proclist">
+<a name="glibtop-proclist"></a><h3>glibtop_proclist</h3>
+<pre class="programlisting">typedef struct {
+	guint64	flags;
+	guint64 number;			/* GLIBTOP_PROCLIST_NUMBER	*/
+	guint64 total;			/* GLIBTOP_PROCLIST_TOTAL	*/
+	guint64 size;			/* GLIBTOP_PROCLIST_SIZE	*/
+} glibtop_proclist;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proclist ()">
+<a name="glibtop-get-proclist"></a><h3>glibtop_get_proclist ()</h3>
+<pre class="programlisting">pid_t *             glibtop_get_proclist                (<a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>which</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proclist_r">
+<a name="glibtop-get-proclist-r"></a><h3>glibtop_get_proclist_r</h3>
+<pre class="programlisting">#define             glibtop_get_proclist_r</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proclist_l ()">
+<a name="glibtop-get-proclist-l"></a><h3>glibtop_get_proclist_l ()</h3>
+<pre class="programlisting">pid_t *             glibtop_get_proclist_l              (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>which</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proclist_p ()">
+<a name="glibtop-get-proclist-p"></a><h3>glibtop_get_proclist_p ()</h3>
+<pre class="programlisting">pid_t *             glibtop_get_proclist_p              (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>which</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="glibtop_get_proclist_s ()">
+<a name="glibtop-get-proclist-s"></a><h3>glibtop_get_proclist_s ()</h3>
+<pre class="programlisting">pid_t *             glibtop_get_proclist_s              (<a class="link" href="libgtop-GlibTop.html#glibtop" title="glibtop">glibtop</a> *server,
+                                                         <a class="link" href="libgtop-proclist.html#glibtop-proclist" title="glibtop_proclist">glibtop_proclist</a> *buf,
+                                                         gint64 which,
+                                                         gint64 arg);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>server</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>which</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Architecture_Specific_Notes" lang="sv-SE">
+	<title>Arkitekturspecifika noteringar</title>
+	<remark>Denna nyhet finns här: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific">https://fedoraproject.org/wiki/Docs/Beats/ArchSpecific</ulink></remark>
+	<para>
+		Denna sektion innehåller noteringar som är specifika för de hårdvaruarkitekturer som stöds av Fedora.
+	</para>
+	<section id="sect-Release_Notes-Architecture_Specific_Notes_686">
+		<title>32-bitarsbas ändrad till i686</title>
+		<para>
+			Fedora 11 hade i586 som basen för 32-bitars x86-arkitekturen.
+		</para>
+		<para>
+			I Fedora 12 byter vi till i686 som basarkitektur (inkluderar CMOV), och optimerar för Atomprocessorer.
+		</para>
+		<para>
+			Detta betyder att vi förlorar stöd för följande CPU-familjer: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Intel i586 (alla)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						National Semiconductor Geode-processorer
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						VIA C3 (Ezra- och Samuelkärnor)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						AMD Geode GX
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>
+			AMD Geode LX (som används i den bärbara OLPC XO) och senare Geode NX-processorer skall fortfarande fungera. De som är intresserade får, naturligtvis, gärna sätta upp en sekundär arkitektur för äldre processorer.
+		</para>
+		<para>
+			Fördelar: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Snabbara binärer på vanliga arkitekturer (Pentium M, Via C7, alla 64-bitars arkitekturer, Atom)
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Sanningen att säga stödjer vi inte i586 i praktiken. Att framtvinga det är mer logiskt.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Färre kärnbyggen
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<!-- 	<xi:include href="ArchSpecific-PPC.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+	<xi:include href="ArchSpecific-x86.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+	<xi:include href="ArchSpecific-x86_64.xml" xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include>
+ -->
+</section>
+
+

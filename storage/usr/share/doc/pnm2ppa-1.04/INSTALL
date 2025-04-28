@@ -1,0 +1,146 @@
+Overview
+--------
+This file contains some quick notes on installation in general.  
+
+Compilation
+-----------
+To build pnm2ppa, simply cd to the source directory, and type:
+
+make 
+
+If you have NetBSD or FreeBSD, you'll need to edit the Makefile to include
+an additional library (libgnugetopt) which pnm2ppa requires.
+Also edit the Makefile to select compilation for BeOS.
+
+There is some internationalization (i18n) of the system log messages.
+Edit the Makefile to choose a language other than English.
+
+Installation
+------------
+
+Two binaries are created: calibrate_ppa and pnm2ppa.  
+
+calibrate_ppa is used to calibrate your printer (center the printed page, 
+adjust the offset between black and color ink cartridges after changing them, 
+etc.)  See the CALIBRATION.*  file for details.
+
+The other binary created, pnm2ppa, is a converter from a PNM
+image to a stream of PPA data that can be sent directly to the printer.
+The PNM image *must* have a resolution of 600 dpi.  These files can be
+generated with ghostscript.  The binary-output pbmraw, pgmraw, ppmraw devices
+are supported (the text-output pbm, pgm, ppm devices are also supported, but
+the raw devices are MUCH faster!).   
+
+The pnmraw and pgnmraw devices are switches that will try to select among 
+the raw formats, as appropriate for the document, but do not always make 
+the correct choice.
+
+You should now type 
+
+make install
+
+to install the binaries (by default, in /usr/local/bin/) , 
+the manpage (in /usr/local/man/man1), and the sample
+configuration file (/etc/pnm2ppa.conf).  You may change these locations
+by editing the Makefile.
+
+    *** IMPORTANT ***
+
+You **MUST** now edit /etc/pnm2ppa.conf to  at least remove the line
+"version ERROR", and choose the correct printer version (720, 820, 1000, etc)
+before you can do anything with pnm2ppa.
+
+Other things you can do are docunented in the sample configuration
+file /etc/pnm2ppa.conf
+
+
+Usage
+-----
+To print a postscript file with this program, You may use a simple
+shell script:
+
+#!/bin/sh
+cat $1 | \
+gs -sDEVICE=ppmraw -sPAPERSIZE=letter -q -dNOPAUSE -r600 -sOutputFile=- - | \
+pnm2ppa $2 $3 $4 $5 $6 $7 -i - -o - | lpr -l
+
+Any valid ghostscript papersize like "legal", "a4", etc.
+can be substituted for "letter"
+(in fact, "letter" is the default, so the "-sPAPERSIZE=letter" is
+not really needed.)
+
+
+If this script is placed in /usr/local/bin/ppaprint ,
+
+ppaprint file.ps
+
+will print the postscript file file.ps in high quality color.   Other
+options are:
+
+ppapprint file.ps --eco          // economy color ink mode
+ppaprint  file.ps --bw           //  black and white
+ppaprint  file.ps --bw --eco     //  black and white economy mode
+
+etc.  In the example, up to six pnm2ppa options can be added (see
+"man pnm2ppa" to list  options, or "pnm2ppa --h" ).
+
+You may wish to replace the ghostscript output device "ppmraw" with 
+"pbmraw" for only black and white printing - it is somewhat faster - 
+or "pgmraw" for greyscale images.
+
+an ascii file could be printed in black and white with the script
+
+#!/bin/sh
+enscript -2rj  $1 | \
+gs -sDEVICE=pbmraw -sPAPERSIZE=letter -q -dNOPAUSE -r600 -sOutputFile=- - | \
+pnm2ppa --bw $2 $3 $4 $5 $6 $7 -i - -o - | lpr -l
+
+Integration into  Printing Systems
+-----------------------------------
+
+(A) lpr, LPRng systems
+
+You can  set up printer filters.  See the documentation for
+your print spooler for information on how to do that.
+The subdirectory lpd of the pnm2ppa distribution contains a 
+printer description file "printcap" and so filters to go with it.
+See the README.lpd file there.
+
+
+On some Linux distributions, (RedHat, Mandrake, ...  etc.), packages
+that install pnm2ppa and appropriate printer filters will be available
+to do all this for you.  On others, you must do this manually, for
+example using the files in our lpd subdirectory.  See lpd/README.lpd
+in the  pnm2ppa source distribution.
+
+
+Recent versions of printtool/rhs-printfilters support pnm2ppa.
+
+               ---------------
+
+(B) PDQ ("Print, Don't Queue")
+
+PDQ is an alternative, spooler-free printing system
+available from http://pdq.sourceforge.net
+
+The pdq subdirectory of the pnm2ppa source  provides a pdq driver, gs-pnm2ppa
+ 
+               ----------------
+
+(C) CUPS ("Common Unix Printing System")
+An experimental system for generating a CUPS driver is online at
+http://www.linuxprinting.org
+
+See  http;//sourceforge.net/projects/CUPS
+We do need a CUPS driver for pnm2ppa.  If you figure it out,
+please contribute it!
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,185 @@
+mlx4: enable raw eth QPs to work with inline and blueflame.
+
+When using blueflame, an assigned qp number cannot contain "1" bits
+in positions 6 and 7 (which become the CS and SV bits in the second
+dword of the CTL segment when using blueflame).
+
+To solve this, we add a "skip_mask" dword to resource range allocation.
+The acquired resource is skipped if its number "and'ed" with the
+skip_mask is non_zero.
+
+For RAW_ETH qp's, we use a skip_mask of 0xC0, corresponding to bits
+6 and 7 of the QP number.
+
+Signed-off-by: Jack Morgenstein <jackm@dev.mellanox.co.il>
+
+Index: ofed_kernel/drivers/net/mlx4/mlx4.h
+===================================================================
+--- ofed_kernel.orig/drivers/net/mlx4/mlx4.h	2010-12-19 16:47:43.000000000 +0200
++++ ofed_kernel/drivers/net/mlx4/mlx4.h	2010-12-19 16:58:40.711896000 +0200
+@@ -342,7 +342,8 @@ extern struct workqueue_struct *mlx4_wq;
+ 
+ u32 mlx4_bitmap_alloc(struct mlx4_bitmap *bitmap);
+ void mlx4_bitmap_free(struct mlx4_bitmap *bitmap, u32 obj);
+-u32 mlx4_bitmap_alloc_range(struct mlx4_bitmap *bitmap, int cnt, int align);
++u32 mlx4_bitmap_alloc_range(struct mlx4_bitmap *bitmap, int cnt, int align,
++			    u32 skip_mask);
+ void mlx4_bitmap_free_range(struct mlx4_bitmap *bitmap, u32 obj, int cnt);
+ u32 mlx4_bitmap_avail(struct mlx4_bitmap *bitmap);
+ int mlx4_bitmap_init(struct mlx4_bitmap *bitmap, u32 num, u32 mask,
+Index: ofed_kernel/drivers/net/mlx4/qp.c
+===================================================================
+--- ofed_kernel.orig/drivers/net/mlx4/qp.c	2010-12-19 16:47:41.000000000 +0200
++++ ofed_kernel/drivers/net/mlx4/qp.c	2010-12-19 16:58:50.792924000 +0200
+@@ -147,13 +147,14 @@ int mlx4_qp_modify(struct mlx4_dev *dev,
+ }
+ EXPORT_SYMBOL_GPL(mlx4_qp_modify);
+ 
+-int mlx4_qp_reserve_range(struct mlx4_dev *dev, int cnt, int align, int *base)
++int mlx4_qp_reserve_range(struct mlx4_dev *dev, int cnt, int align, int *base,
++			  u32 skip_mask)
+ {
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+ 	struct mlx4_qp_table *qp_table = &priv->qp_table;
+ 	int qpn;
+ 
+-	qpn = mlx4_bitmap_alloc_range(&qp_table->bitmap, cnt, align);
++	qpn = mlx4_bitmap_alloc_range(&qp_table->bitmap, cnt, align, skip_mask);
+ 	if (qpn == -1)
+ 		return -ENOMEM;
+ 
+Index: ofed_kernel/include/linux/mlx4/device.h
+===================================================================
+--- ofed_kernel.orig/include/linux/mlx4/device.h	2010-12-19 16:47:54.000000000 +0200
++++ ofed_kernel/include/linux/mlx4/device.h	2010-12-19 16:57:56.088109000 +0200
+@@ -564,7 +564,8 @@ int mlx4_cq_alloc(struct mlx4_dev *dev, 
+ 		  unsigned vector, int collapsed);
+ void mlx4_cq_free(struct mlx4_dev *dev, struct mlx4_cq *cq);
+ 
+-int mlx4_qp_reserve_range(struct mlx4_dev *dev, int cnt, int align, int *base);
++int mlx4_qp_reserve_range(struct mlx4_dev *dev, int cnt, int align, int *base,
++			  u32 skip_mask);
+ void mlx4_qp_release_range(struct mlx4_dev *dev, int base_qpn, int cnt);
+ 
+ int mlx4_qp_alloc(struct mlx4_dev *dev, int qpn, struct mlx4_qp *qp);
+Index: ofed_kernel/drivers/net/mlx4/alloc.c
+===================================================================
+--- ofed_kernel.orig/drivers/net/mlx4/alloc.c	2010-12-19 16:47:54.000000000 +0200
++++ ofed_kernel/drivers/net/mlx4/alloc.c	2010-12-19 18:42:58.831418000 +0200
+@@ -77,14 +77,14 @@ void mlx4_bitmap_free(struct mlx4_bitmap
+ 
+ static unsigned long find_aligned_range(unsigned long *bitmap,
+ 					u32 start, u32 nbits,
+-					int len, int align)
++					int len, int align, u32 skip_mask)
+ {
+ 	unsigned long end, i;
+ 
+ again:
+ 	start = ALIGN(start, align);
+ 
+-	while ((start < nbits) && test_bit(start, bitmap))
++	while ((start < nbits) && (test_bit(start, bitmap) || (start & skip_mask)))
+ 		start += align;
+ 
+ 	if (start >= nbits)
+@@ -95,7 +95,7 @@ again:
+ 		return -1;
+ 
+ 	for (i = start + 1; i < end; i++) {
+-		if (test_bit(i, bitmap)) {
++		if (test_bit(i, bitmap) || ((u32)i & skip_mask)) {
+ 			start = i + 1;
+ 			goto again;
+ 		}
+@@ -104,22 +104,23 @@ again:
+ 	return start;
+ }
+ 
+-u32 mlx4_bitmap_alloc_range(struct mlx4_bitmap *bitmap, int cnt, int align)
++u32 mlx4_bitmap_alloc_range(struct mlx4_bitmap *bitmap, int cnt, int align,
++			    u32 skip_mask)
+ {
+ 	u32 obj, i;
+ 
+-	if (likely(cnt == 1 && align == 1))
++	if (likely(cnt == 1 && align == 1 && !skip_mask))
+ 		return mlx4_bitmap_alloc(bitmap);
+ 
+ 	spin_lock(&bitmap->lock);
+ 
+ 	obj = find_aligned_range(bitmap->table, bitmap->last,
+-				 bitmap->max, cnt, align);
++				 bitmap->max, cnt, align, skip_mask);
+ 	if (obj >= bitmap->max) {
+ 		bitmap->top = (bitmap->top + bitmap->max + bitmap->reserved_top)
+ 				& bitmap->mask;
+ 		obj = find_aligned_range(bitmap->table, 0, bitmap->max,
+-					 cnt, align);
++					 cnt, align, skip_mask);
+ 	}
+ 
+ 	if (obj < bitmap->max) {
+Index: ofed_kernel/drivers/net/mlx4/en_rx.c
+===================================================================
+--- ofed_kernel.orig/drivers/net/mlx4/en_rx.c	2010-12-19 16:47:52.000000000 +0200
++++ ofed_kernel/drivers/net/mlx4/en_rx.c	2010-12-19 17:08:29.130850000 +0200
+@@ -1099,7 +1099,7 @@ int mlx4_en_config_rss_steer(struct mlx4
+ 	en_dbg(DRV, priv, "Configuring rss steering\n");
+ 	err = mlx4_qp_reserve_range(mdev->dev, priv->rx_ring_num,
+ 				    roundup_pow_of_two(priv->rx_ring_num),
+-				    &rss_map->base_qpn);
++				    &rss_map->base_qpn, 0);
+ 	if (err) {
+ 		en_err(priv, "Failed reserving %d qps\n", priv->rx_ring_num);
+ 		return err;
+@@ -1118,7 +1118,7 @@ int mlx4_en_config_rss_steer(struct mlx4
+ 	}
+ 
+ 	/* Configure RSS indirection qp */
+-	err = mlx4_qp_reserve_range(mdev->dev, 1, 1, &priv->base_qpn);
++	err = mlx4_qp_reserve_range(mdev->dev, 1, 1, &priv->base_qpn, 0);
+ 	if (err) {
+ 		en_err(priv, "Failed to reserve range for RSS "
+ 			     "indirection qp\n");
+Index: ofed_kernel/drivers/net/mlx4/en_tx.c
+===================================================================
+--- ofed_kernel.orig/drivers/net/mlx4/en_tx.c	2010-12-19 16:47:53.000000000 +0200
++++ ofed_kernel/drivers/net/mlx4/en_tx.c	2010-12-19 17:08:42.808509000 +0200
+@@ -102,7 +102,7 @@ int mlx4_en_create_tx_ring(struct mlx4_e
+ 	       "buf_size:%d dma:%llx\n", ring, ring->buf, ring->size,
+ 	       ring->buf_size, (unsigned long long) ring->wqres.buf.direct.map);
+ 
+-	err = mlx4_qp_reserve_range(mdev->dev, 1, 256, &ring->qpn);
++	err = mlx4_qp_reserve_range(mdev->dev, 1, 1, &ring->qpn, 0xC0);
+ 	if (err) {
+ 		en_err(priv, "Failed reserving qp for tx ring.\n");
+ 		goto err_map;
+Index: ofed_kernel/drivers/net/mlx4/mr.c
+===================================================================
+--- ofed_kernel.orig/drivers/net/mlx4/mr.c	2010-12-19 16:47:33.000000000 +0200
++++ ofed_kernel/drivers/net/mlx4/mr.c	2010-12-19 17:06:15.690614000 +0200
+@@ -272,7 +272,7 @@ int mlx4_mr_reserve_range(struct mlx4_de
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+ 	u32 mridx;
+ 
+-	mridx = mlx4_bitmap_alloc_range(&priv->mr_table.mpt_bitmap, cnt, align);
++	mridx = mlx4_bitmap_alloc_range(&priv->mr_table.mpt_bitmap, cnt, align, 0);
+ 	if (mridx == -1)
+ 		return -ENOMEM;
+ 
+Index: ofed_kernel/drivers/infiniband/hw/mlx4/qp.c
+===================================================================
+--- ofed_kernel.orig/drivers/infiniband/hw/mlx4/qp.c	2010-12-19 17:20:29.000000000 +0200
++++ ofed_kernel/drivers/infiniband/hw/mlx4/qp.c	2010-12-19 17:23:35.651871000 +0200
+@@ -656,7 +656,9 @@ static int create_qp_common(struct mlx4_
+ 	if (sqpn) {
+ 		qpn = sqpn;
+ 	} else {
+-		err = mlx4_qp_reserve_range(dev->dev, 1, 1, &qpn);
++		err = mlx4_qp_reserve_range(dev->dev, 1, 1, &qpn,
++					    init_attr->qp_type == IB_QPT_RAW_ETH ?
++					    0xC0 : 0);
+ 		if (err)
+ 			goto err_wrid;
+ 	}

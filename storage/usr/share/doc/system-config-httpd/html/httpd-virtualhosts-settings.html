@@ -1,0 +1,625 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Virtual Hosts Settings</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Directories"
+HREF="httpd-directories.html"><LINK
+REL="NEXT"
+TITLE="Server Settings"
+HREF="httpd-server-settings.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="httpd-directories.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-server-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="HTTPD-VIRTUALHOSTS-SETTINGS"
+></A
+>Chapter 4. Virtual Hosts Settings</H1
+><P
+>	You can use the <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+> to configure
+	virtual hosts. Virtual hosts allow you to run different servers for
+	different IP addresses, different host names, or different ports on the
+	same machine.  For example, you can run the website for
+	http://www.example.com and http://www.anotherexample.com on the same Web
+	server using virtual hosts. This option corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#virtualhost"
+TARGET="_top"
+>&#60;VirtualHost&#62;</A
+>
+	directive for the default virtual host and IP based virtual hosts. It
+	corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#namevirtualhost"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>&#60;NameVirtualHost&#62;</TT
+></A
+>
+	directive for a name based virtual host.
+      </P
+><P
+>	The directives set for a virtual host only apply to that
+	particular virtual host. If a directive is set server-wide using the
+	<B
+CLASS="GUIBUTTON"
+>Edit Default Settings</B
+> button and not defined
+	within the virtual host settings, the default setting is used. For
+	example, you can define a <B
+CLASS="GUILABEL"
+>Webmaster email address</B
+>
+	in the <B
+CLASS="GUILABEL"
+>Main</B
+> tab and not define individual email
+	addresses for each virtual host.
+      </P
+><P
+>	<B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+> includes a default
+	virtual host as shown in <A
+HREF="httpd-virtualhosts-settings.html#HTTPD-VIRTUALHOSTS"
+>Figure 4-1</A
+>.
+      </P
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-VIRTUALHOSTS"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-virtualhosts.png"></P
+></DIV
+><P
+><B
+>Figure 4-1. Virtual Hosts</B
+></P
+></DIV
+><P
+>	<A
+HREF="http://httpd.apache.org/docs-2.0/vhosts/"
+TARGET="_top"
+>http://httpd.apache.org/docs-2.0/vhosts/</A
+>
+	and the Apache HTTP Server documentation on your machine provides more information
+	about virtual hosts.
+      </P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="HTTPD-ADD-VIRTUALHOST"
+></A
+>Adding and Editing a Virtual Host</H1
+><P
+>	  To add a virtual host, click the <B
+CLASS="GUILABEL"
+>Virtual Hosts</B
+>
+	  tab and then click the <B
+CLASS="GUIBUTTON"
+>Add</B
+> button. You can also
+	  edit a virtual host by selecting it in the list and clicking the
+	  <B
+CLASS="GUIBUTTON"
+>Edit</B
+> button.
+	</P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="S3-HTTPD-VIRTUALHOSTS-ADD-GENERAL"
+></A
+>General Options</H2
+><P
+>	    The <B
+CLASS="GUILABEL"
+>General Options</B
+> settings only apply to the
+	    virtual host that you are configuring. Set the name of the virtual
+	    host in the <B
+CLASS="GUILABEL"
+>Virtual Host Name</B
+> text area. This
+	    name is used by <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+>
+	    to distinguish between virtual hosts.
+	  </P
+><P
+>	    Set the <B
+CLASS="GUILABEL"
+>Document Root Directory</B
+> value to the
+	    directory that contains the root document (such as index.html) for
+	    the virtual host. This option corresponds to the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#documentroot"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>DocumentRoot</TT
+></A
+>
+	    directive within the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#virtualhost"
+TARGET="_top"
+>	    <TT
+CLASS="COMMAND"
+>VirtualHost</TT
+></A
+> directive.  Before Red Hat Linux 7,
+	    the Apache HTTP Server provided with Red Hat Linux used
+	    <TT
+CLASS="FILENAME"
+>/home/httpd/html</TT
+> as the
+	    <TT
+CLASS="COMMAND"
+>DocumentRoot</TT
+>.  In Red Hat Linux 8.0.93, however, the
+	    default <TT
+CLASS="COMMAND"
+>DocumentRoot</TT
+> is
+	    <TT
+CLASS="FILENAME"
+>/var/www/html</TT
+>.
+	  </P
+><P
+>	    The <B
+CLASS="GUILABEL"
+>Webmaster email address</B
+> corresponds to the
+	<A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#serveradmin"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>ServerAdmin</TT
+></A
+>
+	directive within the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#virtualhost"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>VirtualHost</TT
+></A
+>
+	directive.  This email address is used in the footer of error pages if
+	you choose to show a footer with an email address on the error pages.
+	  </P
+><P
+>	    In the <B
+CLASS="GUILABEL"
+>Host Information</B
+> section, choose
+	    <B
+CLASS="GUILABEL"
+>Default Virtual Host</B
+>, <B
+CLASS="GUILABEL"
+>IP based
+	    Virtual Host</B
+>, or <B
+CLASS="GUILABEL"
+>Name based Virtual
+	    Host</B
+>.
+	  </P
+><P
+></P
+><DIV
+CLASS="VARIABLELIST"
+><DL
+><DT
+><B
+CLASS="GUILABEL"
+>Default Virtual Host</B
+></DT
+><DD
+><P
+>You should only configure one default virtual host
+		  (remember that there is one setup by default).  The default
+		  virtual host settings are used when the requested IP address
+		  is not explicitly listed in another virtual host. If there is
+		  no default virtual host defined, the main server settings are
+		  used.
+		</P
+></DD
+><DT
+><B
+CLASS="GUILABEL"
+>IP based Virtual Host</B
+></DT
+><DD
+><P
+>If you choose <B
+CLASS="GUILABEL"
+>IP based Virtual Host</B
+>,
+		  a window appears to configure the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#virtualhost"
+TARGET="_top"
+>&#60;VirtualHost&#62;</A
+>
+		  directive based on the IP address of the
+		  server. Specify this IP address in the <B
+CLASS="GUILABEL"
+>IP
+		  address</B
+> field. To specify more than one IP address,
+		  separate each IP address with spaces. To specify a port, use
+		  the syntax <TT
+CLASS="REPLACEABLE"
+><I
+>IP Address:Port</I
+></TT
+>. Use :*
+		  to configure all ports for the IP address.  Specify the host
+		  name for the virtual host in the <B
+CLASS="GUILABEL"
+>Server Host
+		  Name</B
+> field.
+		</P
+></DD
+><DT
+><B
+CLASS="GUILABEL"
+>Name based Virtual Host</B
+></DT
+><DD
+><P
+>If you choose <B
+CLASS="GUILABEL"
+>Name based Virtual
+		    Host</B
+>, a window appears to configure the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#namevirtualhost"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>NameVirtualHost</TT
+></A
+>
+		    directive based on the host name of the server. Specify the
+		    IP address in the <B
+CLASS="GUILABEL"
+>IP address</B
+> field. To
+		    specify more than one IP address, separate each IP address
+		    with spaces. To specify a port, use the syntax
+		    <TT
+CLASS="REPLACEABLE"
+><I
+>IP Address:Port</I
+></TT
+>. Use :* to
+		    configure all ports for the IP address. Specify the host
+		    name for the virtual host in the <B
+CLASS="GUILABEL"
+>Server Host
+		    Name</B
+> field. In the <B
+CLASS="GUILABEL"
+>Aliases</B
+>
+		    section, click <B
+CLASS="GUIBUTTON"
+>Add</B
+> to add a host name
+		    alias. Adding an alias here adds a <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#serveralias"
+TARGET="_top"
+><TT
+CLASS="COMMAND"
+>ServerAlias</TT
+></A
+>
+		    directive within the <A
+HREF="http://httpd.apache.org/docs-2.0/mod/core.html#namevirtualhost"
+TARGET="_top"
+>		    <TT
+CLASS="COMMAND"
+>NameVirtualHost</TT
+></A
+> directive.
+		</P
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="S3-HTTPD-VIRTUALHOSTS-ADD-SSL"
+></A
+>SSL</H2
+><DIV
+CLASS="NOTE"
+><P
+></P
+><TABLE
+CLASS="NOTE"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="./stylesheet-images/note.png"
+HSPACE="5"
+ALT="Note"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="CENTER"
+><B
+>Note</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>	      You can not use name based virtual hosts with SSL, because the SSL
+	      handshake (when the browser accepts the secure Web server's
+	      certificate) occurs before the HTTP request which identifies the
+	      appropriate name based virtual host. If you want to use name-based
+	      virtual hosts, they will only work with your non-secure Web
+	      server.
+	    </P
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="FIGURE"
+><A
+NAME="HTTPD-VIRTUALHOSTS-SSL-SCREEN"
+></A
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="./figs/httpd-virtualhosts-ssl.png"></P
+></DIV
+><P
+><B
+>Figure 4-2. SSL Support</B
+></P
+></DIV
+><P
+>	    If an Apache HTTP Server is not configured with SSL support,
+	    communications between an Apache HTTP Server and its clients are not
+	    encrypted. This is appropriate for websites without personal or
+	    confidential information. For example, an open source website that
+	    distributes open source software and documentation has no need for
+	    secure communications. However, an ecommerce website that requires
+	    credit card information should use the Apache SSL support to encrypt
+	    its communications. Enabling Apache SSL support enables the use of
+	    the <TT
+CLASS="COMMAND"
+>mod_ssl</TT
+> security module. To enable it through
+	    <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+> you must allow
+	    access through port 443 under the <B
+CLASS="GUILABEL"
+>Main</B
+> tab =&#62;
+	    <B
+CLASS="GUILABEL"
+>Available Addresses</B
+>. Refer to <A
+HREF="httpd-basic-settings.html"
+>Chapter 2</A
+> for details.  Then, select the
+	    virtual host name in the <B
+CLASS="GUILABEL"
+>Virtual Hosts</B
+> tab,
+	    click the <B
+CLASS="GUIBUTTON"
+>Edit</B
+> button, choose
+	    <B
+CLASS="GUILABEL"
+>SSL</B
+> from the left-hand menu, and check the
+	    <B
+CLASS="GUILABEL"
+>Enable SSL Support</B
+> option as shown in <A
+HREF="httpd-virtualhosts-settings.html#HTTPD-VIRTUALHOSTS-SSL-SCREEN"
+>Figure 4-2</A
+>. The <B
+CLASS="GUILABEL"
+>SSL
+	    Configuration</B
+> section is pre-configured with the dummy
+	    digital certificate. The digital certificate provides
+	    authentication for your secure Web server and identifies the secure
+	    server to client Web browsers. You must purchase your own digital
+	    certificate. Do not use the dummy one provided in Red Hat Linux for your
+	    website.
+	  </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="S3-HTTPD-ADD-OTHER-OPTIONS"
+></A
+>Additional Virtual Host Options</H2
+><P
+>	    The <B
+CLASS="GUILABEL"
+>Site Configuration</B
+>, <B
+CLASS="GUILABEL"
+>Environment
+	      Variables</B
+>, and <B
+CLASS="GUILABEL"
+>Directories</B
+> options
+	      for the virtual hosts are the same directives that you set when
+	      you clicked the <B
+CLASS="GUILABEL"
+>Edit Default Settings</B
+> button,
+	      except the options set here are for the individual virtual hosts
+	      that you are configuring. Refer to <A
+HREF="httpd-default-settings.html"
+>Chapter 3</A
+> for details on these
+	      options.
+	  </P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="httpd-directories.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-server-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Directories</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Server Settings</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

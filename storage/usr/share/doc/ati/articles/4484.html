@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Installing the ATI Proprietary Linux Driver</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20031216;10043800">
+	<META NAME="CHANGED" CONTENT="20031216;10431200">
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+	</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<table bgcolor="#FFFFFF"><tr><td>
+
+<FONT SIZE=+1>
+<P><B>How do I build and install a kernel module for the ATI Proprietary Linux Driver?</B></P>
+</FONT>
+
+<P>A special driver file (or "kernel module") is necessary for the ATI driver to provide hardware graphics acceleration. For this kernel module to work properly, it must be tailored to your specific system configuration.</P>
+
+<P>The ATI driver package attempts to build and install this module at install time. If installation was completely successful, then a kernel module should already be installed for you and manual installation should not be necessary.</P>
+
+<P>However, in order for acceleration to work properly, it will be necessary to manually rebuild and reinstall the kernel module under the following circumstances:</P>
+<UL>
+	<LI><a href="../tips-linux.html#issues">Errors occurred during initial driver install</a></LI>
+	<LI>Whenever a new kernel has been installed since installing the driver</LI>
+</UL>
+
+<P>If any <a href="../tips-linux.html#issues">errors occurred during install</a>, then it may be necessary to resolve those issues before proceeding further.</P>
+
+<P>Before attempting to run these scripts, it will be necessary to have the bash (or sh) shell installed, which is standard on most Linux systems. Enter the command &quot;<CODE>which&nbsp;sh</CODE>&quot; to make  sure it is installed.</P>
+
+<P>Building the fglrx kernel module</P>
+
+<OL>
+	<LI><code>cd /lib/modules/fglrx/build_mod</code></LI>
+	<LI><code>sh make.sh</code></LI>
+</OL>
+
+<P>Installing the fglrx kernel module</P>
+
+<OL start="3">
+	<LI><code>cd /lib/modules/fglrx</code></LI>
+	<LI><code>sh make_install.sh</code></LI>
+</OL>
+
+<P>Note any <a href="../tips-linux.html#issues">error messages</a> that appear during this process.</P>
+
+<P>The following message (or similar) should appear when the ATI kernel module has been installed successfully:</P>
+
+<BLOCKQUOTE>
+<P><CODE>==============================<BR>
+- creating symlink<BR>
+- recreating module dependency list<BR>
+- trying a sample load of the kernel module<BR>
+Warning: loading /lib/modules/x.x.xx-x/kernel/drivers/char/drm/fglrx.o will taint the kernel: non-GPL license - Proprietary. (C) 20XX - ATI Technologies, Starnberg, GERMANY<BR>
+  See http://www.tux.org/lkml/#export-tainted for information about tainted modules<BR>
+Module fglrx loaded, with warnings<BR>
+done.</CODE></p>
+</BLOCKQUOTE>
+
+<P>The "<a href="4478.html">with warnings</a>" part is expected, and should not affect functionality.</P>
+
+<p>INFO-BASE#4484</p>
+
+<P>&nbsp;</P>
+</td></tr></table>
+</BODY>
+</HTML>
+		

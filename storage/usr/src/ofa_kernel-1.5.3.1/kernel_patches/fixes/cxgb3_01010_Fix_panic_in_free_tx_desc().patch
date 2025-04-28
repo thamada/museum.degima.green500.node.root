@@ -1,0 +1,104 @@
+commit b1424ed91076db0b19ba4141856150df9b717dde
+Author: Krishna Kumar <krkumar2@in.ibm.com>
+Date:   Wed Oct 27 19:10:31 2010 +0000
+
+    cxgb3: Fix panic in free_tx_desc()
+    
+    I got a few of these panics (on 2.6.36-rc7) when running high
+    number of netperf sessions:
+    
+    BUG: unable to handle kernel paging request at 0000100000000000
+    IP: [<ffffffff813125f0>] skb_release_data+0xa0/0xd0
+    Oops: 0000 [#1] SMP
+    Pid: 2155, comm: vhost-2115 Not tainted 2.6.36-rc7-ORG #1 49Y6512     /System x3650 M2 -[7947AC1]-
+    RIP: 0010:[<ffffffff813125f0>]  [<ffffffff813125f0>] skb_release_data+0xa0/0xd0
+    RSP: 0018:ffff880001803738  EFLAGS: 00010206
+    RAX: ffff880179b0fc00 RBX: ffff880178b441c0 RCX: 0000000000000000
+    RSP: 0018:ffff880001803738  EFLAGS: 00010206
+    RAX: ffff880179b0fc00 RBX: ffff880178b441c0 RCX: 0000000000000000
+    RDX: ffff880179b0fd40 RSI: 0000000000000000 RDI: 0000100000000000
+    RBP: ffff880001803748 R08: 0000000000000001 R09: ffff88017f117000
+    R10: ffff88017b990608 R11: ffff88017f117090 R12: ffff880178b441c0
+    R13: ffff88017f117090 R14: 0000000000000000 R15: ffff880178b441c0
+    FS:  0000000000000000(0000) GS:ffff880001800000(0000) knlGS:0000000000000000
+    CS:  0010 DS: 0000 ES: 0000 CR0: 000000008005003b
+    CR2: 0000100000000000 CR3: 000000017ea64000 CR4: 00000000000026e0
+    DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+    DR3: 0000000000000000 DR6: 00000000ffff0ff0 DR7: 0000000000000400
+    Process vhost-2115 (pid: 2155, threadinfo ffff88017d872000, task ffff88017e954680)
+    Stack:
+    ffff880178b441c0 0000000000000007 ffff880001803768 ffffffff81312119
+    <0> 0000000000000000 0000000000000002 ffff880001803778 ffffffff813121f9
+    <0> ffff880001803818 ffffffffa012d14c ffffffffa02de076 ffff880001803700
+    Call Trace:
+    <IRQ>
+    [<ffffffff81312119>] __kfree_skb+0x19/0xa0
+    [<ffffffff813121f9>] kfree_skb+0x19/0x40
+    [<ffffffffa012d14c>] free_tx_desc+0x2fc/0x350 [cxgb3]
+    [<ffffffffa02de076>] ? vhost_poll_wakeup+0x16/0x20 [vhost_net]
+    [<ffffffffa01323db>] t3_eth_xmit+0x28b/0x380 [cxgb3]
+    [<ffffffff8131ce47>] dev_hard_start_xmit+0x377/0x5a0
+    [<ffffffff81335a4a>] sch_direct_xmit+0xfa/0x1d0
+    [<ffffffff8131d1a9>] dev_queue_xmit+0x139/0x450
+    [<ffffffff81326225>] neigh_resolve_output+0x125/0x340
+    [<ffffffff8135a77c>] ip_finish_output+0x14c/0x320
+    [<ffffffff8135a9fe>] ip_output+0xae/0xc0
+    [<ffffffff8135620f>] ip_forward_finish+0x3f/0x50
+    [<ffffffff8135641f>] ip_forward+0x1ff/0x400
+    [<ffffffff81354789>] ip_rcv_finish+0x119/0x3e0
+    [<ffffffff81354c7d>] ip_rcv+0x22d/0x300
+    [<ffffffff8131a95b>] __netif_receive_skb+0x29b/0x570
+    [<ffffffff8131ba70>] ? netif_receive_skb+0x0/0x80
+    [<ffffffff8131bae8>] netif_receive_skb+0x78/0x80
+    [<ffffffffa02a96d8>] br_handle_frame_finish+0x198/0x260 [bridge]
+    [<ffffffffa02aebc8>] br_nf_pre_routing_finish+0x238/0x380 [bridge]
+    [<ffffffff813424bc>] ? nf_hook_slow+0x6c/0x100
+    [<ffffffffa02ae990>] ? br_nf_pre_routing_finish+0x0/0x380 [bridge]
+    [<ffffffffa02afb08>] br_nf_pre_routing+0x698/0x7a0 [bridge]
+    [<ffffffff81342414>] nf_iterate+0x64/0xa0
+    [<ffffffffa02a9540>] ? br_handle_frame_finish+0x0/0x260 [bridge]
+    [<ffffffff813424bc>] nf_hook_slow+0x6c/0x100
+    [<ffffffffa02a9540>] ? br_handle_frame_finish+0x0/0x260 [bridge]
+    [<ffffffffa02a9931>] br_handle_frame+0x191/0x240 [bridge]
+    [<ffffffffa02a97a0>] ? br_handle_frame+0x0/0x240 [bridge]
+    [<ffffffff8131a863>] __netif_receive_skb+0x1a3/0x570
+    [<ffffffff812ef3f6>] ? dma_issue_pending_all+0x76/0xa0
+    [<ffffffff8131ad32>] process_backlog+0x102/0x200
+    [<ffffffff8131c2d0>] net_rx_action+0x100/0x220
+    [<ffffffff810548ef>] __do_softirq+0xaf/0x140
+    [<ffffffff8100bcdc>] call_softirq+0x1c/0x30
+    [<ffffffff8100dfc5>] ? do_softirq+0x65/0xa0
+    [<ffffffff8131c6b8>] netif_rx_ni+0x28/0x30
+    [<ffffffffa02c305d>] tun_sendmsg+0x2cd/0x4b0 [tun]
+    [<ffffffffa02e01af>] handle_tx+0x1df/0x340 [vhost_net]
+    [<ffffffffa02e0340>] handle_tx_kick+0x10/0x20 [vhost_net]
+    [<ffffffffa02de29b>] vhost_worker+0xbb/0x130 [vhost_net]
+    [<ffffffffa02de1e0>] ? vhost_worker+0x0/0x130 [vhost_net]
+    [<ffffffffa02de1e0>] ? vhost_worker+0x0/0x130 [vhost_net]
+    [<ffffffff81069686>] kthread+0x96/0xa0
+    [<ffffffff8100bbe4>] kernel_thread_helper+0x4/0x10
+    [<ffffffff810695f0>] ? kthread+0x0/0xa0
+    [<ffffffff8100bbe0>] ? kernel_thread_helper+0x0/0x10
+    Code: 8b 94 24 d0 00 00 00 49 8b 84 24 d8 00 00 00 48 8d 14 10 0f b7 0a 39 d9 7f d1 48 8b 7a 10 48 85 ff 74 20 48 c7 42 10 00 00 00 00 <48> 8b 1f e8 e8 fb ff ff 48 85 db 48 89 df 75 f0 49 8b 84 24 d8
+    
+    Patch below fixes the panic. cxgb4 and cxgb4vf already have this fix.
+    
+    Signed-off-by: Krishna Kumar <krkumar2@in.ibm.com>
+    Signed-off-by: David S. Miller <davem@davemloft.net>
+
+diff --git a/drivers/net/cxgb3/sge.c b/drivers/net/cxgb3/sge.c
+index 5d72bda..f9f6645 100644
+--- a/drivers/net/cxgb3/sge.c
++++ b/drivers/net/cxgb3/sge.c
+@@ -296,8 +296,10 @@ static void free_tx_desc(struct adapter *adapter, struct sge_txq *q,
+ 		if (d->skb) {	/* an SGL is present */
+ 			if (need_unmap)
+ 				unmap_skb(d->skb, q, cidx, pdev);
+-			if (d->eop)
++			if (d->eop) {
+ 				kfree_skb(d->skb);
++				d->skb = NULL;
++			}
+ 		}
+ 		++d;
+ 		if (++cidx == q->size) {

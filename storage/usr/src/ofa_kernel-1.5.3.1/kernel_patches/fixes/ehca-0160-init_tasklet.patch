@@ -1,0 +1,42 @@
+commit bd5d0ccbef9f2565e76dba4ff291da6a2cb8b1b4
+Author: Alexander Schmidt <alexs@linux.vnet.ibm.com>
+Date:   Mon Jul 5 11:41:56 2010 +0000
+
+    IB/ehca: Init irq tasklet before irq can happen
+    
+    Initialize tasklet before interrupts are requested to prevent
+    scheduling of an uninitialized tasklet.
+    
+    Signed-off-by: Alexander Schmidt <alexs@linux.vnet.ibm.com>
+    Signed-off-by: Roland Dreier <rolandd@cisco.com>
+
+diff --git a/drivers/infiniband/hw/ehca/ehca_eq.c b/drivers/infiniband/hw/ehca/ehca_eq.c
+index 3b87589..d9b1bb4 100644
+--- a/drivers/infiniband/hw/ehca/ehca_eq.c
++++ b/drivers/infiniband/hw/ehca/ehca_eq.c
+@@ -122,21 +122,21 @@ int ehca_create_eq(struct ehca_shca *shca,
+ 
+ 	/* register interrupt handlers and initialize work queues */
+ 	if (type == EHCA_EQ) {
++		tasklet_init(&eq->interrupt_task, ehca_tasklet_eq, (long)shca);
++
+ 		ret = ibmebus_request_irq(eq->ist, ehca_interrupt_eq,
+ 					  IRQF_DISABLED, "ehca_eq",
+ 					  (void *)shca);
+ 		if (ret < 0)
+ 			ehca_err(ib_dev, "Can't map interrupt handler.");
+-
+-		tasklet_init(&eq->interrupt_task, ehca_tasklet_eq, (long)shca);
+ 	} else if (type == EHCA_NEQ) {
++		tasklet_init(&eq->interrupt_task, ehca_tasklet_neq, (long)shca);
++
+ 		ret = ibmebus_request_irq(eq->ist, ehca_interrupt_neq,
+ 					  IRQF_DISABLED, "ehca_neq",
+ 					  (void *)shca);
+ 		if (ret < 0)
+ 			ehca_err(ib_dev, "Can't map interrupt handler.");
+-
+-		tasklet_init(&eq->interrupt_task, ehca_tasklet_neq, (long)shca);
+ 	}
+ 
+ 	eq->is_initialized = 1;

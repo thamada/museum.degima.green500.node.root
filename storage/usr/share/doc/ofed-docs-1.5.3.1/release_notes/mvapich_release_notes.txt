@@ -1,0 +1,102 @@
+             Open Fabrics Enterprise Distribution (OFED)
+          OSU MPI MVAPICH-1.2.0, in OFED 1.5 Release Notes
+
+                          December 2009
+
+
+===============================================================================
+Table of Contents
+===============================================================================
+1. Overview
+2. Software Dependencies
+3. New Features
+4. Bug Fixes
+5. Known Issues
+6. Main Verification Flows
+
+
+===============================================================================
+1. Overview
+===============================================================================
+These are the release notes for OSU MPI MVAPICH-1.2.0.
+OSU MPI is an MPI channel implementation over InfiniBand 
+by Ohio State University (OSU).
+
+See http://mvapich.cse.ohio-state.edu
+
+
+===============================================================================
+2. Software Dependencies
+===============================================================================
+OSU MPI depends on the installation of the OFED stack with OpenSM running.
+The MPI module also requires an established network interface (either
+InfiniBand IPoIB or Ethernet).
+
+
+===============================================================================
+3. New Features ( Compared to mvapich 1.1.0 )
+===============================================================================
+MVAPICH-1.2.0 has the following additional features:
+- Advanced network recovery support
+- mpirun launcher improvements
+- Efficient intra-node shared memory communication
+  support for diskless clusters
+- RoCEE (RDMAoE) networks support
+
+===============================================================================
+4. Bug Fixes  ( Compared to mvapich 1.1.0 )
+===============================================================================
+- Multiple fixes for mpirun_rsh launcher
+
+===============================================================================
+5. Known Issues
+===============================================================================
+- Shared memory broadcast optimization is disabled by default.
+
+- MVAPICH MPI compiled on AMD x86_64 does not work with MVAPICH MPI compiled
+  on Intel X86_64 (EM64t).
+  Workaround:
+  Use "VIADEV_USE_COMPAT_MODE=1" run time option in order to enable compatibility
+  mode that works for AMD and Intel platform.
+
+- A process running MPI cannot fork after MPI_Init unless the environment 
+  variable IBV_FORK_SAFE=1 is set to enable fork support. This support also 
+  requires a kernel version of 2.6.16 or higher.
+
+- For users of Mellanox Technologies firmware fw-23108 or fw-25208 only:
+  MVAPICH might fail in its default configuration if your HCA is burnt with an
+  fw-23108 version that is earlier than 3.4.000, or with an fw-25208 version
+  4.7.400 or earlier.
+
+  NOTE: There is no issue if you chose to update firmware during Mellanox
+        OFED installation as newer firmware versions were burnt.
+
+  Workaround:
+  Option 1 - Update the firmware. For instructions, see Mellanox Firmware Tools
+             (MFT) User's Manual under the docs/ folder.
+  Option 2 - In mvapich.conf, set VIADEV_SRQ_ENABLE=0
+
+- MVAPICH may fail to run on some SLES 10 machines due to problems in resolving
+  the host name.
+  Workaround: Edit /etc/hosts and comment-out/remove the line that maps 
+  IP address 127.0.0.2 to the system's fully qualified hostname.
+
+
+===============================================================================
+6. Main Verification Flows
+===============================================================================
+In order to verify the correctness of MVAPICH, the following tests and
+parameters were run.
+
+Test 				Description
+-------------------------------------------------------------------
+Intel's 			Test suite - 1400 Intel tests
+BW/LT 				OSU's test for bandwidth latency
+IMB 		       	Intel's MPI Benchmark test
+mpitest 			b_eff test
+Presta 				Presta multicast test
+Linpack 			Linpack benchmark
+NAS2.3 				NAS NPB2.3 tests
+SuperLU 			SuperLU benchmark (NERSC edition)
+NAMD 				NAMD application
+CAM 				CAM application

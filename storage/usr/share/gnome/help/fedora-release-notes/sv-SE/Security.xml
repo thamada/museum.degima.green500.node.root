@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Security" lang="sv-SE">
+	<title>Säkerhet</title>
+	<remark>Denna nyhet finns här: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Security">https://fedoraproject.org/wiki/Docs/Beats/Security</ulink></remark>
+	<para>
+		Detta avsnitt pekar ut diverse säkerhetsdetaljer för Fedora.
+	</para>
+	<section id="sect-Release_Notes-Security-Lower_process_capabilities">
+		<title>Lägre processkapabiliteter</title>
+		<para>
+			Demoner som kör som root har gåtts igenom och ändrats för att kära med lägre processkapabiliteter. Detta begränsar begäret att använda dessa demoner för privilegiehöjning. Dessutom har filrättigheterna på skuggfilen ändrats till <literal>000</literal> och flera kataloger i <filename>$PATH</filename> har satts till <literal>555</literal> för att förhindra demoner utan <literal>DAC_OVERRIDE</literal> från att kunna komma åt skuggfilen eller skriva till katalogerna i <filename>$PATH</filename>.
+		</para>
+		<para>
+			När någon attackerar ett system kan de normalt inte göra så mycket om de inte kan höja sina privilegier. Denna funktion reducerar antalet attackmål som kan användas för att höja privilegier. Om root-processer inte har alla kapabiliteter blir de svårare att använda för att underminera systemet.
+		</para>
+		<para>
+			Processer med root-uid kan fortfarande skada ett system, eftersom de kan skriva till nästan vilken fil som helst och naturligtvis läsa filen <filename>/etc/shadow</filename>. Dock, om systemet härdas så att root behöver kapabiliteten <literal>DAC_OVERRIDE</literal> kan endast ett begränsat antal processer skada systemet. Detta kommer inte påverka några administrativa möjligheter eftersom de alltid får fullständiga priviligier vilka inkluderar <literal>DAC_OVERRIDE</literal>. Därför är det nu, även om någon lyckas attackera en root-process, svårare för dem att dra nytta av denna attack.
+		</para>
+		<para>
+			Ett härdat system skall ha rättigheter som: <literal>555</literal> <filename>/bin</filename>, <literal>555</literal> <filename>/lib</filename>, <literal>000</literal> <filename>/etc/shadow</filename> och så vidare. Den aktuella ambitionsnivån är att täcka katalogerna i variabeln <filename>$PATH</filename>, bibliotekskataloger, <filename>/boot</filename> och <filename>/root</filename>. Detta schema påverkar inte SELinux på något sätt och utgör ett komplement till det eftersom kapabiliteter DAC-styrning och de har första ordet när det gäller att tillåta en åtkomst.
+		</para>
+	</section>
+
+</section>
+
+

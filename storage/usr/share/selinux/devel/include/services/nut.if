@@ -1,0 +1,58 @@
+## <summary>SELinux policy for NUT - Network UPS Tools </summary>
+
+#####################################
+## <summary>
+##      Execute a domain transition to run upsd.
+## </summary>
+## <param name="domain">
+## <summary>
+##      Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`nut_upsd_domtrans',`
+	gen_require(`
+		type nut_upsd_t, nut_upsd_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, nut_upsd_exec_t, nut_upsd_t)
+')
+
+####################################
+## <summary>
+##      Execute a domain transition to run upsmon.
+## </summary>
+## <param name="domain">
+## <summary>
+##      Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`nut_upsmon_domtrans',`
+	gen_require(`
+		type nut_upsmon_t, nut_upsmon_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, nut_upsmon_exec_t, nut_upsmon_t)
+')
+
+####################################
+## <summary>
+##      Execute a domain transition to run upsdrvctl.
+## </summary>
+## <param name="domain">
+## <summary>
+##      Domain allowed to transition.
+## </summary>
+## </param>
+#
+interface(`nut_upsdrvctl_domtrans',`
+	gen_require(`
+		type nut_upsdrvctl_t, nut_upsdrvctl_exec_t;
+	')
+
+	corecmd_search_bin($1)
+	domtrans_pattern($1, nut_upsdrvctl_exec_t, nut_upsdrvctl_t)
+')

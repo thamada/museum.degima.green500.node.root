@@ -1,0 +1,56 @@
+commit 7cd072fac6573e9f60d0a7532d4b3f63459e0d46
+Author: Mike Marciniszyn <mike.marciniszyn@qlogic.com>
+Date:   Tue Nov 23 09:50:29 2010 -0500
+
+    IB/qib: fix RDMA write with immediate
+    
+    The immediate word for RDMA_WRITE_ONLY_WITH_IMMEDIATE was being extracted
+    from the wrong location in the header.  Thanks to
+    Jason Gunthorpe <jgunthorpe@obsidianresearch.com> for finding this.
+    
+    INTERNAL: bug 118215
+    
+    Signed-off-by: Mike Marciniszyn <mike.marciniszyn@qlogic.com>
+
+diff --git a/drivers/infiniband/hw/qib/qib_rc.c b/drivers/infiniband/hw/qib/qib_rc.c
+index c0d8ded..6a55365 100644
+--- a/drivers/infiniband/hw/qib/qib_rc.c
++++ b/drivers/infiniband/hw/qib/qib_rc.c
+@@ -2077,7 +2077,10 @@ send_last:
+ 			goto nack_op_err;
+ 		if (!ret)
+ 			goto rnr_nak;
+-		goto send_last_imm;
++		wc.ex.imm_data = ohdr->u.rc.imm_data;
++		hdrsize += 4;
++		wc.wc_flags |= IB_WC_WITH_IMM;
++		goto send_last;
+ 
+ 	case OP(RDMA_READ_REQUEST): {
+ 		struct qib_ack_entry *e;
+diff --git a/drivers/infiniband/hw/qib/qib_uc.c b/drivers/infiniband/hw/qib/qib_uc.c
+index 0e71de8..5fc0fb0 100644
+--- a/drivers/infiniband/hw/qib/qib_uc.c
++++ b/drivers/infiniband/hw/qib/qib_uc.c
+@@ -455,8 +455,10 @@ rdma_first:
+ 		}
+ 		if (opcode == OP(RDMA_WRITE_ONLY))
+ 			goto rdma_last;
+-		else if (opcode == OP(RDMA_WRITE_ONLY_WITH_IMMEDIATE))
++		if (opcode == OP(RDMA_WRITE_ONLY_WITH_IMMEDIATE)) {
++			wc.ex.imm_data = ohdr->u.rc.imm_data;
+ 			goto rdma_last_imm;
++		}
+ 		/* FALLTHROUGH */
+ 	case OP(RDMA_WRITE_MIDDLE):
+ 		/* Check for invalid length PMTU or posted rwqe len. */
+@@ -469,8 +471,8 @@ rdma_first:
+ 		break;
+ 
+ 	case OP(RDMA_WRITE_LAST_WITH_IMMEDIATE):
+-rdma_last_imm:
+ 		wc.ex.imm_data = ohdr->u.imm_data;
++rdma_last_imm:
+ 		hdrsize += 4;
+ 		wc.wc_flags = IB_WC_WITH_IMM;
+ 

@@ -1,0 +1,538 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GnomeEntry</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="GNOME UI Library Reference Manual">
+<link rel="up" href="deprecated.html" title="Deprecated Modules">
+<link rel="prev" href="libgnomeui-gnome-dialog-util.html" title="gnome-dialog-util">
+<link rel="next" href="GnomeFileEntry.html" title="GnomeFileEntry">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GNOME UI Library (libgnomeui)">
+<link rel="chapter" href="initialization.html" title="Initialization and Session Management">
+<link rel="chapter" href="application-mgmt.html" title="Application Management">
+<link rel="chapter" href="druids.html" title="Druids">
+<link rel="chapter" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="chapter" href="miscellaneous.html" title="Miscellaneous Utility Functions and Macros">
+<link rel="chapter" href="deprecated.html" title="Deprecated Modules">
+<link rel="chapter" href="libgnomeui-objects.html" title="Object Hierarchy">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgnomeui-gnome-dialog-util.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="deprecated.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME UI Library Reference Manual</th>
+<td><a accesskey="n" href="GnomeFileEntry.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GnomeEntry.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#GnomeEntry.description" class="shortcut">Description</a>
+                 | 
+                <a href="#GnomeEntry.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#GnomeEntry.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                 | 
+                <a href="#GnomeEntry.properties" class="shortcut">Properties</a>
+                 | 
+                <a href="#GnomeEntry.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="GnomeEntry"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GnomeEntry.top_of_page"></a>GnomeEntry</span></h2>
+<p>GnomeEntry</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="GnomeEntry.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnomeui/libgnomeui.h&gt;
+
+                    <a class="link" href="GnomeEntry.html#GnomeEntryPrivate" title="GnomeEntryPrivate">GnomeEntryPrivate</a>;
+                    <a class="link" href="GnomeEntry.html#GnomeEntry-struct" title="GnomeEntry">GnomeEntry</a>;
+GtkWidget *         <a class="link" href="GnomeEntry.html#gnome-entry-new" title="gnome_entry_new ()">gnome_entry_new</a>                     (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *history_id);
+GtkWidget *         <a class="link" href="GnomeEntry.html#gnome-entry-gtk-entry" title="gnome_entry_gtk_entry ()">gnome_entry_gtk_entry</a>               (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="GnomeEntry.html#gnome-entry-get-history-id" title="gnome_entry_get_history_id ()">gnome_entry_get_history_id</a>          (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);
+void                <a class="link" href="GnomeEntry.html#gnome-entry-set-history-id" title="gnome_entry_set_history_id ()">gnome_entry_set_history_id</a>          (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *history_id);
+void                <a class="link" href="GnomeEntry.html#gnome-entry-set-max-saved" title="gnome_entry_set_max_saved ()">gnome_entry_set_max_saved</a>           (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> max_saved);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="GnomeEntry.html#gnome-entry-get-max-saved" title="gnome_entry_get_max_saved ()">gnome_entry_get_max_saved</a>           (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);
+void                <a class="link" href="GnomeEntry.html#gnome-entry-prepend-history" title="gnome_entry_prepend_history ()">gnome_entry_prepend_history</a>         (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> save,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *text);
+void                <a class="link" href="GnomeEntry.html#gnome-entry-append-history" title="gnome_entry_append_history ()">gnome_entry_append_history</a>          (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> save,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *text);
+void                <a class="link" href="GnomeEntry.html#gnome-entry-clear-history" title="gnome_entry_clear_history ()">gnome_entry_clear_history</a>           (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned"
+>GInitiallyUnowned</a>
+         +----GtkObject
+               +----GtkWidget
+                     +----GtkContainer
+                           +----GtkBox
+                                 +----GtkHBox
+                                       +----GtkCombo
+                                             +----GnomeEntry
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GnomeEntry implements
+ GtkBuildable,  AtkImplementorIface,  GtkOrientable and  GtkEditable.</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GnomeEntry.html#GnomeEntry--gtk-entry" title='The "gtk-entry" property'>gtk-entry</a>"                GtkEntry*             : Read
+  "<a class="link" href="GnomeEntry.html#GnomeEntry--history-id" title='The "history-id" property'>history-id</a>"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="GnomeEntry.html#GnomeEntry-activate" title='The "activate" signal'>activate</a>"                                       : Run Last
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeEntryPrivate"></a><h3>GnomeEntryPrivate</h3>
+<pre class="programlisting">typedef struct _GnomeEntryPrivate GnomeEntryPrivate;</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeEntryPrivate</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeEntry-struct"></a><h3>GnomeEntry</h3>
+<pre class="programlisting">typedef struct _GnomeEntry GnomeEntry;</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeEntry</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-new"></a><h3>gnome_entry_new ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_entry_new                     (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *history_id);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Creates a new GnomeEntry widget.  If  <em class="parameter"><code>history_id</code></em> is
+not <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>, then the history list will be saved and restored between
+uses under the given id.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>history_id</code></em> :</span></p></td>
+<td> If not <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>, the text id under which history data is stored
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> Newly-created GnomeEntry widget.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-gtk-entry"></a><h3>gnome_entry_gtk_entry ()</h3>
+<pre class="programlisting">GtkWidget *         gnome_entry_gtk_entry               (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_gtk_entry</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Obtain pointer to GnomeEntry's internal text entry</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> Pointer to GtkEntry widget.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-get-history-id"></a><h3>gnome_entry_get_history_id ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       gnome_entry_get_history_id          (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_get_history_id</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Returns the current history id of the GnomeEntry widget.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The current history id.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-set-history-id"></a><h3>gnome_entry_set_history_id ()</h3>
+<pre class="programlisting">void                gnome_entry_set_history_id          (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *history_id);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_set_history_id</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Set the id of the history list. This function cannot be
+used to change and already existing id.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>history_id</code></em> :</span></p></td>
+<td> the text id under which history data is stored
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-set-max-saved"></a><h3>gnome_entry_set_max_saved ()</h3>
+<pre class="programlisting">void                gnome_entry_set_max_saved           (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> max_saved);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_set_max_saved</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Set internal limit on number of history items saved
+to the config file.
+Zero is an acceptable value for <em class="parameter"><code>max_saved</code></em>, but the same thing is
+accomplished by setting the history id of <em class="parameter"><code>gentry</code></em> to <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_saved</code></em> :</span></p></td>
+<td> Maximum number of history items to save
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-get-max-saved"></a><h3>gnome_entry_get_max_saved ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               gnome_entry_get_max_saved           (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_get_max_saved</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Get internal limit on number of history items saved
+to the config file
+See #<a class="link" href="GnomeEntry.html#gnome-entry-set-max-saved" title="gnome_entry_set_max_saved ()"><code class="function">gnome_entry_set_max_saved()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> An unsigned integer
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-prepend-history"></a><h3>gnome_entry_prepend_history ()</h3>
+<pre class="programlisting">void                gnome_entry_prepend_history         (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> save,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *text);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_prepend_history</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Adds a history item of the given <em class="parameter"><code>text</code></em> to the head of
+the history list inside <em class="parameter"><code>gentry</code></em>.  If <em class="parameter"><code>save</code></em> is <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a>, the history
+item will be saved in the config file (assuming that <em class="parameter"><code>gentry</code></em>'s
+history id is not <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+Duplicates are automatically removed from the history list.
+The history list is automatically saved if needed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>save</code></em> :</span></p></td>
+<td> If <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a>, history entry will be saved to config file
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td> Text to add
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-append-history"></a><h3>gnome_entry_append_history ()</h3>
+<pre class="programlisting">void                gnome_entry_append_history          (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> save,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *text);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_append_history</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Adds a history item of the given <em class="parameter"><code>text</code></em> to the tail
+of the history list inside <em class="parameter"><code>gentry</code></em>.  If <em class="parameter"><code>save</code></em> is <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a>, the
+history item will be saved in the config file (assuming that
+<em class="parameter"><code>gentry</code></em>'s history id is not <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+Duplicates are automatically removed from the history list.
+The history list is automatically saved if needed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>save</code></em> :</span></p></td>
+<td> If <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a>, history entry will be saved to config file
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td> Text to add
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-entry-clear-history"></a><h3>gnome_entry_clear_history ()</h3>
+<pre class="programlisting">void                gnome_entry_clear_history           (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *gentry);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_entry_clear_history</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Clears the history.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>gentry</code></em> :</span></p></td>
+<td> Pointer to GnomeEntry object.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeEntry--gtk-entry"></a><h3>The <code class="literal">"gtk-entry"</code> property</h3>
+<pre class="programlisting">  "gtk-entry"                GtkEntry*             : Read</pre>
+<p>The GTK entry.</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeEntry--history-id"></a><h3>The <code class="literal">"history-id"</code> property</h3>
+<pre class="programlisting">  "history-id"               <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a>*                : Read / Write</pre>
+<p>History ID.</p>
+<p>Default value: NULL</p>
+</div>
+</div>
+<div class="refsect1" lang="en">
+<a name="GnomeEntry.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeEntry-activate"></a><h3>The <code class="literal">"activate"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="GnomeEntry.html" title="GnomeEntry">GnomeEntry</a> *entry,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>    user_data)      : Run Last</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>entry</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

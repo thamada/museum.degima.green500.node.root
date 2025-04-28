@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=iso-8859-1">
+	<TITLE>Installing the ATI Proprietary Linux Driver</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20031216;10043800">
+	<META NAME="CHANGED" CONTENT="20031216;10431200">
+	<style type="text/css"><!--
+	.readthis { background-color: #ECECEC; }
+	--></style>
+	</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<table bgcolor="#FFFFFF"><tr><td>
+
+<FONT SIZE=+1>
+<P><B>File conflict error message during rpm install</B></P>
+</FONT>
+
+<P>This information applies to the ATI Proprietary Linux Driver.</P>
+
+<P>The following error message may appear while trying to install the RPM package:</P>
+
+<BLOCKQUOTE>
+<P><CODE>file /usr/X11R6/lib/libGL.so.1.2 from install of fglrx-4.x.x-x.x.x conflicts with file from package XFree86-Mesa-libGL-4.x.x-x</CODE></P>
+</BLOCKQUOTE>
+
+<P>This error (or similar) occurs when a third party OpenGL solution is already installed in the system. XFree86-Mesa-libGL is a common example.</P>
+
+<P>The ATI Proprietary Linux Driver is meant to replace other &quot;software only&quot; OpenGL solutions in order to provide hardware 3D acceleration. The ATI libGL is backward compatible to the default XFree86-Mesa.</P>
+
+<P>This issue can be resolved in either of two ways:</P>
+<UL>
+	<LI>Force the ATI driver install to overwrite existing files</LI>
+	<LI>Remove the other OpenGL software BEFORE installing ATI drivers</LI>
+</UL>
+
+<P><B>Force the ATI driver install to overwrite existing files</B></P>
+
+<blockquote>
+<P>We recommend using the <CODE>--force</CODE> rpm option to install the ATI Proprietary Linux driver as follows:</P>
+<BLOCKQUOTE>
+<P><CODE>rpm -Uh --force &lt;ati_package_name&gt;.rpm</CODE></P>
+</BLOCKQUOTE>
+
+<P>This will force the installer to overwrite any existing files including the conflicting libGL, which should allow the ATI driver to install properly.
+
+<P>If for some reason you do not wish to use the <CODE>--force</CODE> rpm option, then you may still work around this error message by removing the other (non-ATI) OpenGL software first, as explained below.</P>
+
+</blockquote>
+
+<P><B>Remove existing OpenGL software BEFORE installing ATI drivers</B></P>
+
+<blockquote>
+
+<OL>
+	<LI><P>Ensure that no 3D OpenGL programs are running</P></LI>
+	<LI><P>Remove the existing libGL installation using the following command:</P>
+		<P><CODE>rpm -e --nodeps XFree86-Mesa-libGL</CODE></P></LI>
+		<P>(You need the <CODE>--nodeps</CODE> option because some screen savers, qt-3, and some parts of XFree86 might depend on libGL. Installing the ATI package afterwards will restore these dependencies.)</P>
+	<LI><P>Reinstall the ATI Proprietary Linux driver<P>
+		<P><CODE>rpm -Uh &lt;ati_package_name&gt;.rpm</CODE></P>
+		<P>(you may ignore the <CODE>--force</CODE> option in this case, since the conflicting libGL has been removed already)</P></LI>
+</OL>
+
+</blockquote>
+
+<p>INFO-BASE#4479</p>
+
+<P>&nbsp;</P>
+</td></tr></table>
+</BODY>
+</HTML>
+
+

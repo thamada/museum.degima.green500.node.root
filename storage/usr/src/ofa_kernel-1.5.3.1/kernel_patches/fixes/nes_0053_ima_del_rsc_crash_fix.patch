@@ -1,0 +1,20 @@
+diff --git a/drivers/infiniband/hw/nes/nes_ud.c b/drivers/infiniband/hw/nes/nes_ud.c
+index c784fad..0ceb9a2 100644
+--- a/drivers/infiniband/hw/nes/nes_ud.c
++++ b/drivers/infiniband/hw/nes/nes_ud.c
+@@ -371,12 +371,14 @@ static inline int  del_rsc_list(struct nes_ud_file *file)
+ 			"adapter  is NULL\n", __func__, __LINE__);
+ 		return -EFAULT;
+ 	}
++	if (pRsc->num_allocated_nics == 0)
++		return 0;
++
+ 	if (--pRsc->num_allocated_nics == 0) {
+ 		nes_write_indexed(nesdev, 0x60b8, pRsc->original_60b8);
+ 		nes_write_indexed(nesdev, 0x6000, pRsc->original_6000);
+ 		pRsc->num_logport_confed = 0;
+ 	}
+-	BUG_ON(pRsc->num_allocated_nics < 0);
+ 	BUG_ON(file->rsc_idx >= NES_UD_MAX_NIC_CNT);
+ 
+ 	for (i = 0; i < NES_UD_MAX_NIC_CNT; i++) {

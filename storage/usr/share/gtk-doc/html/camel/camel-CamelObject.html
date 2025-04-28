@@ -1,0 +1,2448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CamelObject</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Camel Reference Manual">
+<link rel="up" href="Fundamentals.html" title="Fundamentals">
+<link rel="prev" href="camel-camel-exception.html" title="camel-exception">
+<link rel="next" href="camel-camel-operation.html" title="camel-operation">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="classes.html" title="Part I. Camel Classes">
+<link rel="chapter" href="ClassTree.html" title="Class Hierarchy">
+<link rel="chapter" href="Fundamentals.html" title="Fundamentals">
+<link rel="chapter" href="Streams.html" title="Streams">
+<link rel="chapter" href="StreamFilters.html" title="Stream Filters">
+<link rel="chapter" href="Services.html" title="Services">
+<link rel="chapter" href="Filters.html" title="Filters">
+<link rel="chapter" href="Folders.html" title="Folders">
+<link rel="chapter" href="SearchFolders.html" title="Search Folders">
+<link rel="chapter" href="Addresses.html" title="Addresses">
+<link rel="chapter" href="Crypto.html" title="Crypto Contexts">
+<link rel="chapter" href="MIME.html" title="MIME Objects">
+<link rel="chapter" href="Storage.html" title="Metadata Storage">
+<link rel="chapter" href="Utilities.html" title="Utilities">
+<link rel="chapter" href="Deprecated.html" title="Deprecated Objects">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="camel-camel-exception.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="Fundamentals.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Camel Reference Manual</th>
+<td><a accesskey="n" href="camel-camel-operation.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#camel-CamelObject.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#camel-CamelObject.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="CamelObject">
+<a name="camel-CamelObject"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="camel-CamelObject.top_of_page"></a>CamelObject</span></h2>
+<p>CamelObject</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="camel-CamelObject.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-OBJECT-TRACK-INSTANCES--CAPS" title="CAMEL_OBJECT_TRACK_INSTANCES">CAMEL_OBJECT_TRACK_INSTANCES</a>
+typedef             <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a>;
+                    <a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a>;
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-CHECK-CAST--CAPS" title="CAMEL_CHECK_CAST()">CAMEL_CHECK_CAST</a>                    (obj, ctype, ptype)
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-CHECK-CLASS-CAST--CAPS" title="CAMEL_CHECK_CLASS_CAST()">CAMEL_CHECK_CLASS_CAST</a>              (klass, ctype, ptype)
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-CHECK-TYPE--CAPS" title="CAMEL_CHECK_TYPE()">CAMEL_CHECK_TYPE</a>                    (obj, ctype)
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-CHECK-CLASS-TYPE--CAPS" title="CAMEL_CHECK_CLASS_TYPE()">CAMEL_CHECK_CLASS_TYPE</a>              (klass, ctype)
+extern              CamelType <a class="link" href="camel-CamelObject.html#camel-object-type" title="camel_object_type">camel_object_type</a>;
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-OBJECT-TYPE--CAPS" title="CAMEL_OBJECT_TYPE">CAMEL_OBJECT_TYPE</a>
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-OBJECT-GET-TYPE--CAPS" title="CAMEL_OBJECT_GET_TYPE()">CAMEL_OBJECT_GET_TYPE</a>               (o)
+typedef             <a class="link" href="camel-CamelObject.html#CamelObjectHookID" title="CamelObjectHookID">CamelObjectHookID</a>;
+                    <a class="link" href="camel-CamelObject.html#CamelObjectMeta" title="CamelObjectMeta">CamelObjectMeta</a>;
+extern              CamelType <a class="link" href="camel-CamelObject.html#camel-interface-type" title="camel_interface_type">camel_interface_type</a>;
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-INTERFACE-TYPE--CAPS" title="CAMEL_INTERFACE_TYPE">CAMEL_INTERFACE_TYPE</a>
+                    <a class="link" href="camel-CamelObject.html#CamelInterface" title="CamelInterface">CamelInterface</a>;
+void                (<a class="link" href="camel-CamelObject.html#CamelObjectClassInitFunc" title="CamelObjectClassInitFunc ()">*CamelObjectClassInitFunc</a>)         (CamelObjectClass *);
+void                (<a class="link" href="camel-CamelObject.html#CamelObjectClassFinalizeFunc" title="CamelObjectClassFinalizeFunc ()">*CamelObjectClassFinalizeFunc</a>)     (CamelObjectClass *);
+void                (<a class="link" href="camel-CamelObject.html#CamelObjectInitFunc" title="CamelObjectInitFunc ()">*CamelObjectInitFunc</a>)              (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *,
+                                                         CamelObjectClass *);
+void                (<a class="link" href="camel-CamelObject.html#CamelObjectFinalizeFunc" title="CamelObjectFinalizeFunc ()">*CamelObjectFinalizeFunc</a>)          (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (<a class="link" href="camel-CamelObject.html#CamelObjectEventPrepFunc" title="CamelObjectEventPrepFunc ()">*CamelObjectEventPrepFunc</a>)         (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );
+void                (<a class="link" href="camel-CamelObject.html#CamelObjectEventHookFunc" title="CamelObjectEventHookFunc ()">*CamelObjectEventHookFunc</a>)         (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-INVALID-TYPE--CAPS" title="CAMEL_INVALID_TYPE">CAMEL_INVALID_TYPE</a>
+enum                <a class="link" href="camel-CamelObject.html#CamelObjectFlags" title="enum CamelObjectFlags">CamelObjectFlags</a>;
+void                <a class="link" href="camel-CamelObject.html#camel-type-init" title="camel_type_init ()">camel_type_init</a>                     (void);
+<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a>           <a class="link" href="camel-CamelObject.html#camel-type-register" title="camel_type_register ()">camel_type_register</a>                 (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> parent,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> instance_size,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> classfuncs_size,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassInitFunc" title="CamelObjectClassInitFunc ()">CamelObjectClassInitFunc</a> class_init,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassFinalizeFunc" title="CamelObjectClassFinalizeFunc ()">CamelObjectClassFinalizeFunc</a> class_finalize,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectInitFunc" title="CamelObjectInitFunc ()">CamelObjectInitFunc</a> instance_init,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectFinalizeFunc" title="CamelObjectFinalizeFunc ()">CamelObjectFinalizeFunc</a> instance_finalize);
+<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a>           <a class="link" href="camel-CamelObject.html#camel-interface-register" title="camel_interface_register ()">camel_interface_register</a>            (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> parent,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> classfuncs_size,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassInitFunc" title="CamelObjectClassInitFunc ()">CamelObjectClassInitFunc</a> class_init,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassFinalizeFunc" title="CamelObjectClassFinalizeFunc ()">CamelObjectClassFinalizeFunc</a> class_finalize);
+#define             <a class="link" href="camel-CamelObject.html#camel-type-get-global-classfuncs" title="camel_type_get_global_classfuncs()">camel_type_get_global_classfuncs</a>    (x)
+const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="camel-CamelObject.html#camel-type-to-name" title="camel_type_to_name ()">camel_type_to_name</a>                  (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> type);
+<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a>           <a class="link" href="camel-CamelObject.html#camel-name-to-type" title="camel_name_to_type ()">camel_name_to_type</a>                  (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+void                <a class="link" href="camel-CamelObject.html#camel-object-class-add-event" title="camel_object_class_add_event ()">camel_object_class_add_event</a>        (CamelObjectClass *klass,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectEventPrepFunc" title="CamelObjectEventPrepFunc ()">CamelObjectEventPrepFunc</a> prep);
+void                <a class="link" href="camel-CamelObject.html#camel-object-class-add-interface" title="camel_object_class_add_interface ()">camel_object_class_add_interface</a>    (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> itype);
+void                <a class="link" href="camel-CamelObject.html#camel-object-class-dump-tree" title="camel_object_class_dump_tree ()">camel_object_class_dump_tree</a>        (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> root);
+<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *       <a class="link" href="camel-CamelObject.html#camel-object-cast" title="camel_object_cast ()">camel_object_cast</a>                   (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *obj,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelObject.html#camel-object-is" title="camel_object_is ()">camel_object_is</a>                     (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *obj,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);
+CamelObjectClass *  <a class="link" href="camel-CamelObject.html#camel-object-class-cast" title="camel_object_class_cast ()">camel_object_class_cast</a>             (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelObject.html#camel-object-class-is" title="camel_object_class_is ()">camel_object_class_is</a>               (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);
+CamelObjectClass *  <a class="link" href="camel-CamelObject.html#camel-interface-cast" title="camel_interface_cast ()">camel_interface_cast</a>                (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelObject.html#camel-interface-is" title="camel_interface_is ()">camel_interface_is</a>                  (CamelObjectClass *k,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);
+<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *       <a class="link" href="camel-CamelObject.html#camel-object-new" title="camel_object_new ()">camel_object_new</a>                    (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> type);
+void                <a class="link" href="camel-CamelObject.html#camel-object-ref" title="camel_object_ref ()">camel_object_ref</a>                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );
+void                <a class="link" href="camel-CamelObject.html#camel-object-unref" title="camel_object_unref ()">camel_object_unref</a>                  (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );
+<a class="link" href="camel-CamelObject.html#CamelObjectHookID" title="CamelObjectHookID">CamelObjectHookID</a>   <a class="link" href="camel-CamelObject.html#camel-object-hook-event" title="camel_object_hook_event ()">camel_object_hook_event</a>             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectEventHookFunc" title="CamelObjectEventHookFunc ()">CamelObjectEventHookFunc</a> hook,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="camel-CamelObject.html#camel-object-remove-event" title="camel_object_remove_event ()">camel_object_remove_event</a>           (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectHookID" title="CamelObjectHookID">CamelObjectHookID</a> id);
+void                <a class="link" href="camel-CamelObject.html#camel-object-unhook-event" title="camel_object_unhook_event ()">camel_object_unhook_event</a>           (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectEventHookFunc" title="CamelObjectEventHookFunc ()">CamelObjectEventHookFunc</a> hook,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="camel-CamelObject.html#camel-object-trigger-event" title="camel_object_trigger_event ()">camel_object_trigger_event</a>          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> event_data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="camel-CamelObject.html#camel-object-get-interface" title="camel_object_get_interface ()">camel_object_get_interface</a>          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> itype);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-object-set" title="camel_object_set ()">camel_object_set</a>                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         ...);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-object-setv" title="camel_object_setv ()">camel_object_setv</a>                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         <a class="link" href="camel-camel-arg.html#CamelArgV" title="CamelArgV">CamelArgV</a> *);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-object-get" title="camel_object_get ()">camel_object_get</a>                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         ...);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-object-getv" title="camel_object_getv ()">camel_object_getv</a>                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         <a class="link" href="camel-camel-arg.html#CamelArgGetV" title="CamelArgGetV">CamelArgGetV</a> *);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="camel-CamelObject.html#camel-object-get-ptr" title="camel_object_get_ptr ()">camel_object_get_ptr</a>                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> tag);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-object-get-int" title="camel_object_get_int ()">camel_object_get_int</a>                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> tag);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="camel-CamelObject.html#camel-object-meta-get" title="camel_object_meta_get ()">camel_object_meta_get</a>               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="camel-CamelObject.html#camel-object-meta-set" title="camel_object_meta_set ()">camel_object_meta_set</a>               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *value);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-object-state-read" title="camel_object_state_read ()">camel_object_state_read</a>             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-object-state-write" title="camel_object_state_write ()">camel_object_state_write</a>            (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo);
+void                <a class="link" href="camel-CamelObject.html#camel-object-free" title="camel_object_free ()">camel_object_free</a>                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> tag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> value);
+                    <a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (<a class="link" href="camel-CamelObject.html#CamelCopyFunc" title="CamelCopyFunc ()">*CamelCopyFunc</a>)                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> vo);
+<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *    <a class="link" href="camel-CamelObject.html#camel-object-bag-new" title="camel_object_bag_new ()">camel_object_bag_new</a>                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GHashFunc"
+>GHashFunc</a> hash,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GEqualFunc"
+>GEqualFunc</a> equal,
+                                                         <a class="link" href="camel-CamelObject.html#CamelCopyFunc" title="CamelCopyFunc ()">CamelCopyFunc</a> keycopy,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Miscellaneous-Utility-Functions.html#GFreeFunc"
+>GFreeFunc</a> keyfree);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="camel-CamelObject.html#camel-object-bag-get" title="camel_object_bag_get ()">camel_object_bag_get</a>                (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="camel-CamelObject.html#camel-object-bag-peek" title="camel_object_bag_peek ()">camel_object_bag_peek</a>               (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="camel-CamelObject.html#camel-object-bag-reserve" title="camel_object_bag_reserve ()">camel_object_bag_reserve</a>            (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);
+void                <a class="link" href="camel-CamelObject.html#camel-object-bag-add" title="camel_object_bag_add ()">camel_object_bag_add</a>                (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo);
+void                <a class="link" href="camel-CamelObject.html#camel-object-bag-abort" title="camel_object_bag_abort ()">camel_object_bag_abort</a>              (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);
+void                <a class="link" href="camel-CamelObject.html#camel-object-bag-rekey" title="camel_object_bag_rekey ()">camel_object_bag_rekey</a>              (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> o,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> newkey);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Pointer-Arrays.html#GPtrArray"
+>GPtrArray</a> *         <a class="link" href="camel-CamelObject.html#camel-object-bag-list" title="camel_object_bag_list ()">camel_object_bag_list</a>               (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag);
+void                <a class="link" href="camel-CamelObject.html#camel-object-bag-remove" title="camel_object_bag_remove ()">camel_object_bag_remove</a>             (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> o);
+void                <a class="link" href="camel-CamelObject.html#camel-object-bag-destroy" title="camel_object_bag_destroy ()">camel_object_bag_destroy</a>            (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag);
+#define             <a class="link" href="camel-CamelObject.html#CAMEL-MAKE-CLASS--CAPS" title="CAMEL_MAKE_CLASS()">CAMEL_MAKE_CLASS</a>                    (type, tname, parent, pname)
+                    <a class="link" href="camel-CamelObject.html#CamelIteratorVTable" title="CamelIteratorVTable">CamelIteratorVTable</a>;
+                    <a class="link" href="camel-CamelObject.html#CamelIterator" title="CamelIterator">CamelIterator</a>;
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            <a class="link" href="camel-CamelObject.html#camel-iterator-new" title="camel_iterator_new ()">camel_iterator_new</a>                  (<a class="link" href="camel-CamelObject.html#CamelIteratorVTable" title="CamelIteratorVTable">CamelIteratorVTable</a> *klass,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> size);
+void                <a class="link" href="camel-CamelObject.html#camel-iterator-free" title="camel_iterator_free ()">camel_iterator_free</a>                 (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a>       <a class="link" href="camel-CamelObject.html#camel-iterator-next" title="camel_iterator_next ()">camel_iterator_next</a>                 (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);
+void                <a class="link" href="camel-CamelObject.html#camel-iterator-reset" title="camel_iterator_reset ()">camel_iterator_reset</a>                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="camel-CamelObject.html#camel-iterator-length" title="camel_iterator_length ()">camel_iterator_length</a>               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="camel-CamelObject.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="camel-CamelObject.details"></a><h2>Details</h2>
+<div class="refsect2" title="CAMEL_OBJECT_TRACK_INSTANCES">
+<a name="CAMEL-OBJECT-TRACK-INSTANCES--CAPS"></a><h3>CAMEL_OBJECT_TRACK_INSTANCES</h3>
+<pre class="programlisting">#define CAMEL_OBJECT_TRACK_INSTANCES
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelType">
+<a name="CamelType"></a><h3>CamelType</h3>
+<pre class="programlisting">typedef struct _CamelObjectClass *CamelType;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelObject">
+<a name="CamelObject"></a><h3>CamelObject</h3>
+<pre class="programlisting">typedef struct {
+	struct _CamelObjectClass *klass;
+
+	guint32 magic;		/* only really needed for debugging ... */
+
+	/* current hooks on this object */
+	struct _CamelHookList *hooks;
+
+	guint32 ref_count:24;
+	guint32 flags:8;
+
+#ifdef CAMEL_OBJECT_TRACK_INSTANCES
+	struct _CamelObject *next, *prev;
+#endif
+} CamelObject;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_CHECK_CAST()">
+<a name="CAMEL-CHECK-CAST--CAPS"></a><h3>CAMEL_CHECK_CAST()</h3>
+<pre class="programlisting">#define             CAMEL_CHECK_CAST(obj, ctype, ptype)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ptype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_CHECK_CLASS_CAST()">
+<a name="CAMEL-CHECK-CLASS-CAST--CAPS"></a><h3>CAMEL_CHECK_CLASS_CAST()</h3>
+<pre class="programlisting">#define             CAMEL_CHECK_CLASS_CAST(klass, ctype, ptype)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ptype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_CHECK_TYPE()">
+<a name="CAMEL-CHECK-TYPE--CAPS"></a><h3>CAMEL_CHECK_TYPE()</h3>
+<pre class="programlisting">#define CAMEL_CHECK_TYPE(obj, ctype)                (camel_object_is ((CamelObject *)(obj), (CamelType)(ctype) ))
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_CHECK_CLASS_TYPE()">
+<a name="CAMEL-CHECK-CLASS-TYPE--CAPS"></a><h3>CAMEL_CHECK_CLASS_TYPE()</h3>
+<pre class="programlisting">#define CAMEL_CHECK_CLASS_TYPE(klass, ctype)        (camel_object_class_is ((CamelObjectClass *)(klass), (CamelType)(ctype)))
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_type">
+<a name="camel-object-type"></a><h3>camel_object_type</h3>
+<pre class="programlisting">extern CamelType camel_object_type;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_OBJECT_TYPE">
+<a name="CAMEL-OBJECT-TYPE--CAPS"></a><h3>CAMEL_OBJECT_TYPE</h3>
+<pre class="programlisting">#define CAMEL_OBJECT_TYPE        (camel_object_type)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_OBJECT_GET_TYPE()">
+<a name="CAMEL-OBJECT-GET-TYPE--CAPS"></a><h3>CAMEL_OBJECT_GET_TYPE()</h3>
+<pre class="programlisting">#define CAMEL_OBJECT_GET_TYPE(o)  ((CamelType)(CAMEL_OBJECT(o))-&gt;klass)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>o</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectHookID">
+<a name="CamelObjectHookID"></a><h3>CamelObjectHookID</h3>
+<pre class="programlisting">typedef guint CamelObjectHookID;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectMeta">
+<a name="CamelObjectMeta"></a><h3>CamelObjectMeta</h3>
+<pre class="programlisting">typedef struct {
+	struct _CamelObjectMeta *next;
+
+	gchar *value;
+	gchar name[1];		/* allocated as part of structure */
+} CamelObjectMeta;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">CamelObjectMeta</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_interface_type">
+<a name="camel-interface-type"></a><h3>camel_interface_type</h3>
+<pre class="programlisting">extern CamelType camel_interface_type;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_interface_type</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_INTERFACE_TYPE">
+<a name="CAMEL-INTERFACE-TYPE--CAPS"></a><h3>CAMEL_INTERFACE_TYPE</h3>
+<pre class="programlisting">#define CAMEL_INTERFACE_TYPE (camel_interface_type)
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">CAMEL_INTERFACE_TYPE</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelInterface">
+<a name="CamelInterface"></a><h3>CamelInterface</h3>
+<pre class="programlisting">typedef struct {
+	struct _CamelObjectClass type;
+} CamelInterface;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">CamelInterface</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectClassInitFunc ()">
+<a name="CamelObjectClassInitFunc"></a><h3>CamelObjectClassInitFunc ()</h3>
+<pre class="programlisting">void                (*CamelObjectClassInitFunc)         (CamelObjectClass *);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectClassFinalizeFunc ()">
+<a name="CamelObjectClassFinalizeFunc"></a><h3>CamelObjectClassFinalizeFunc ()</h3>
+<pre class="programlisting">void                (*CamelObjectClassFinalizeFunc)     (CamelObjectClass *);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectInitFunc ()">
+<a name="CamelObjectInitFunc"></a><h3>CamelObjectInitFunc ()</h3>
+<pre class="programlisting">void                (*CamelObjectInitFunc)              (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *,
+                                                         CamelObjectClass *);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectFinalizeFunc ()">
+<a name="CamelObjectFinalizeFunc"></a><h3>CamelObjectFinalizeFunc ()</h3>
+<pre class="programlisting">void                (*CamelObjectFinalizeFunc)          (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectEventPrepFunc ()">
+<a name="CamelObjectEventPrepFunc"></a><h3>CamelObjectEventPrepFunc ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            (*CamelObjectEventPrepFunc)         (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectEventHookFunc ()">
+<a name="CamelObjectEventHookFunc"></a><h3>CamelObjectEventHookFunc ()</h3>
+<pre class="programlisting">void                (*CamelObjectEventHookFunc)         (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> ,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param2</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param3</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_INVALID_TYPE">
+<a name="CAMEL-INVALID-TYPE--CAPS"></a><h3>CAMEL_INVALID_TYPE</h3>
+<pre class="programlisting">#define CAMEL_INVALID_TYPE (NULL)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum CamelObjectFlags">
+<a name="CamelObjectFlags"></a><h3>enum CamelObjectFlags</h3>
+<pre class="programlisting">typedef enum _CamelObjectFlags {
+	CAMEL_OBJECT_DESTROY = (1&lt;&lt;0)
+} CamelObjectFlags;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_type_init ()">
+<a name="camel-type-init"></a><h3>camel_type_init ()</h3>
+<pre class="programlisting">void                camel_type_init                     (void);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_type_register ()">
+<a name="camel-type-register"></a><h3>camel_type_register ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a>           camel_type_register                 (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> parent,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> instance_size,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> classfuncs_size,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassInitFunc" title="CamelObjectClassInitFunc ()">CamelObjectClassInitFunc</a> class_init,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassFinalizeFunc" title="CamelObjectClassFinalizeFunc ()">CamelObjectClassFinalizeFunc</a> class_finalize,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectInitFunc" title="CamelObjectInitFunc ()">CamelObjectInitFunc</a> instance_init,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectFinalizeFunc" title="CamelObjectFinalizeFunc ()">CamelObjectFinalizeFunc</a> instance_finalize);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>classfuncs_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_finalize</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_init</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>instance_finalize</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_interface_register ()">
+<a name="camel-interface-register"></a><h3>camel_interface_register ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a>           camel_interface_register            (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> parent,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> classfuncs_size,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassInitFunc" title="CamelObjectClassInitFunc ()">CamelObjectClassInitFunc</a> class_init,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectClassFinalizeFunc" title="CamelObjectClassFinalizeFunc ()">CamelObjectClassFinalizeFunc</a> class_finalize);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_interface_register</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>classfuncs_size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_init</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>class_finalize</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_type_get_global_classfuncs()">
+<a name="camel-type-get-global-classfuncs"></a><h3>camel_type_get_global_classfuncs()</h3>
+<pre class="programlisting">#define camel_type_get_global_classfuncs(x) ((CamelObjectClass *)(x))
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>x</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_type_to_name ()">
+<a name="camel-type-to-name"></a><h3>camel_type_to_name ()</h3>
+<pre class="programlisting">const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       camel_type_to_name                  (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> type);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_name_to_type ()">
+<a name="camel-name-to-type"></a><h3>camel_name_to_type ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a>           camel_name_to_type                  (const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_class_add_event ()">
+<a name="camel-object-class-add-event"></a><h3>camel_object_class_add_event ()</h3>
+<pre class="programlisting">void                camel_object_class_add_event        (CamelObjectClass *klass,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectEventPrepFunc" title="CamelObjectEventPrepFunc ()">CamelObjectEventPrepFunc</a> prep);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prep</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_class_add_interface ()">
+<a name="camel-object-class-add-interface"></a><h3>camel_object_class_add_interface ()</h3>
+<pre class="programlisting">void                camel_object_class_add_interface    (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> itype);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_object_class_add_interface</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>itype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_class_dump_tree ()">
+<a name="camel-object-class-dump-tree"></a><h3>camel_object_class_dump_tree ()</h3>
+<pre class="programlisting">void                camel_object_class_dump_tree        (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> root);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>root</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_cast ()">
+<a name="camel-object-cast"></a><h3>camel_object_cast ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *       camel_object_cast                   (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *obj,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_is ()">
+<a name="camel-object-is"></a><h3>camel_object_is ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_object_is                     (<a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *obj,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_class_cast ()">
+<a name="camel-object-class-cast"></a><h3>camel_object_class_cast ()</h3>
+<pre class="programlisting">CamelObjectClass *  camel_object_class_cast             (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_class_is ()">
+<a name="camel-object-class-is"></a><h3>camel_object_class_is ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_object_class_is               (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_interface_cast ()">
+<a name="camel-interface-cast"></a><h3>camel_interface_cast ()</h3>
+<pre class="programlisting">CamelObjectClass *  camel_interface_cast                (CamelObjectClass *klass,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_interface_cast</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_interface_is ()">
+<a name="camel-interface-is"></a><h3>camel_interface_is ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_interface_is                  (CamelObjectClass *k,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> ctype);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_interface_is</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>k</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_new ()">
+<a name="camel-object-new"></a><h3>camel_object_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelObject.html#CamelObject" title="CamelObject">CamelObject</a> *       camel_object_new                    (<a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> type);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_ref ()">
+<a name="camel-object-ref"></a><h3>camel_object_ref ()</h3>
+<pre class="programlisting">void                camel_object_ref                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_unref ()">
+<a name="camel-object-unref"></a><h3>camel_object_unref ()</h3>
+<pre class="programlisting">void                camel_object_unref                  (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> );</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_hook_event ()">
+<a name="camel-object-hook-event"></a><h3>camel_object_hook_event ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelObject.html#CamelObjectHookID" title="CamelObjectHookID">CamelObjectHookID</a>   camel_object_hook_event             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectEventHookFunc" title="CamelObjectEventHookFunc ()">CamelObjectEventHookFunc</a> hook,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hook</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_remove_event ()">
+<a name="camel-object-remove-event"></a><h3>camel_object_remove_event ()</h3>
+<pre class="programlisting">void                camel_object_remove_event           (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectHookID" title="CamelObjectHookID">CamelObjectHookID</a> id);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_unhook_event ()">
+<a name="camel-object-unhook-event"></a><h3>camel_object_unhook_event ()</h3>
+<pre class="programlisting">void                camel_object_unhook_event           (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="camel-CamelObject.html#CamelObjectEventHookFunc" title="CamelObjectEventHookFunc ()">CamelObjectEventHookFunc</a> hook,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hook</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_trigger_event ()">
+<a name="camel-object-trigger-event"></a><h3>camel_object_trigger_event ()</h3>
+<pre class="programlisting">void                camel_object_trigger_event          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> event_data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>event_data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_get_interface ()">
+<a name="camel-object-get-interface"></a><h3>camel_object_get_interface ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            camel_object_get_interface          (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a class="link" href="camel-CamelObject.html#CamelType" title="CamelType">CamelType</a> itype);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_object_get_interface</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>itype</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_set ()">
+<a name="camel-object-set"></a><h3>camel_object_set ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_object_set                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         ...);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_setv ()">
+<a name="camel-object-setv"></a><h3>camel_object_setv ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_object_setv                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         <a class="link" href="camel-camel-arg.html#CamelArgV" title="CamelArgV">CamelArgV</a> *);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param3</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_get ()">
+<a name="camel-object-get"></a><h3>camel_object_get ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_object_get                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         ...);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_getv ()">
+<a name="camel-object-getv"></a><h3>camel_object_getv ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_object_getv                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> obj,
+                                                         struct _CamelException *ex,
+                                                         <a class="link" href="camel-camel-arg.html#CamelArgGetV" title="CamelArgGetV">CamelArgGetV</a> *);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>obj</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param3</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_get_ptr ()">
+<a name="camel-object-get-ptr"></a><h3>camel_object_get_ptr ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            camel_object_get_ptr                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> tag);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_get_int ()">
+<a name="camel-object-get-int"></a><h3>camel_object_get_int ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_object_get_int                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a> tag);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_meta_get ()">
+<a name="camel-object-meta-get"></a><h3>camel_object_meta_get ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             camel_object_meta_get               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+Get a meta-data on an object.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> NULL if the meta-data is not set.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_meta_set ()">
+<a name="camel-object-meta-set"></a><h3>camel_object_meta_set ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            camel_object_meta_set               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *value);</pre>
+<p>
+Set a meta-data item on an object.  If the object supports persistent
+data, then the meta-data will be persistent across sessions.
+</p>
+<p>
+If the meta-data changes, is added, or removed, then a
+"meta_changed" event will be triggered with the name of the changed
+data.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td> Name of meta-data.  Should be prefixed with class of setter.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> Value to set.  If NULL, then the meta-data is removed.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE if the setting caused a change to the object's
+metadata.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_state_read ()">
+<a name="camel-object-state-read"></a><h3>camel_object_state_read ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_object_state_read             (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo);</pre>
+<p>
+Read persistent object state from object_set(CAMEL_OBJECT_STATE_FILE).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> -1 on error.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_state_write ()">
+<a name="camel-object-state-write"></a><h3>camel_object_state_write ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_object_state_write            (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo);</pre>
+<p>
+Write persistent state to the file as set by object_set(CAMEL_OBJECT_STATE_FILE).</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> -1 on error.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_free ()">
+<a name="camel-object-free"></a><h3>camel_object_free ()</h3>
+<pre class="programlisting">void                camel_object_free                   (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> tag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> value);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelObjectBag">
+<a name="CamelObjectBag"></a><h3>CamelObjectBag</h3>
+<pre class="programlisting">typedef struct _CamelObjectBag CamelObjectBag;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelCopyFunc ()">
+<a name="CamelCopyFunc"></a><h3>CamelCopyFunc ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            (*CamelCopyFunc)                    (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> vo);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_new ()">
+<a name="camel-object-bag-new"></a><h3>camel_object_bag_new ()</h3>
+<pre class="programlisting"><a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *    camel_object_bag_new                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GHashFunc"
+>GHashFunc</a> hash,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Hash-Tables.html#GEqualFunc"
+>GEqualFunc</a> equal,
+                                                         <a class="link" href="camel-CamelObject.html#CamelCopyFunc" title="CamelCopyFunc ()">CamelCopyFunc</a> keycopy,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Miscellaneous-Utility-Functions.html#GFreeFunc"
+>GFreeFunc</a> keyfree);</pre>
+<p>
+Allocate a new object bag.  Object bag's are key'd hash tables of
+camel-objects which can be updated atomically using transaction
+semantics.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>hash</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>equal</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keycopy</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyfree</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_get ()">
+<a name="camel-object-bag-get"></a><h3>camel_object_bag_get ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            camel_object_bag_get                (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);</pre>
+<p>
+Lookup an object by <em class="parameter"><code>key</code></em>.  If the key is currently reserved, then
+wait until the key has been committed before continuing.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> NULL if the object corresponding to <em class="parameter"><code>key</code></em> is not
+in the bag.  Otherwise a ref'd object pointer which the caller owns
+the ref to.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_peek ()">
+<a name="camel-object-bag-peek"></a><h3>camel_object_bag_peek ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            camel_object_bag_peek               (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);</pre>
+<p>
+Lookup the object <em class="parameter"><code>key</code></em> in <em class="parameter"><code>bag</code></em>, ignoring any reservations.  If it
+isn't committed, then it isn't considered.  This should only be
+used where reliable transactional-based state is not required.
+</p>
+<p>
+Unlike other 'peek' operations, the object is still reffed if
+found.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A referenced object, or NULL if <em class="parameter"><code>key</code></em> is not
+present in the bag.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_reserve ()">
+<a name="camel-object-bag-reserve"></a><h3>camel_object_bag_reserve ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            camel_object_bag_reserve            (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);</pre>
+<p>
+Reserve a key in the object bag.  If the key is already reserved in
+another thread, then wait until the reservation has been committed.
+</p>
+<p>
+After reserving a key, you either get a reffed pointer to the
+object corresponding to the key, similar to object_bag_get, or you
+get NULL, signifying that you then MIST call either object_bag_add
+or object_bag_abort.
+</p>
+<p>
+You may reserve multiple keys from the same thread, but they should
+always be reserved in the same order, to avoid deadlocks.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_add ()">
+<a name="camel-object-bag-add"></a><h3>camel_object_bag_add ()</h3>
+<pre class="programlisting">void                camel_object_bag_add                (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> vo);</pre>
+<p>
+Add an object <em class="parameter"><code>vo</code></em> to the object bag <em class="parameter"><code>bag</code></em>.  The <em class="parameter"><code>key</code></em> MUST have
+previously been reserved using <a class="link" href="camel-CamelObject.html#camel-object-bag-reserve" title="camel_object_bag_reserve ()"><code class="function">camel_object_bag_reserve()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>vo</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_abort ()">
+<a name="camel-object-bag-abort"></a><h3>camel_object_bag_abort ()</h3>
+<pre class="programlisting">void                camel_object_bag_abort              (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> key);</pre>
+<p>
+Abort a key reservation.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_rekey ()">
+<a name="camel-object-bag-rekey"></a><h3>camel_object_bag_rekey ()</h3>
+<pre class="programlisting">void                camel_object_bag_rekey              (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> o,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a> newkey);</pre>
+<p>
+Re-key an object, atomically.  The key for object <em class="parameter"><code>o</code></em> is set to
+<em class="parameter"><code>newkey</code></em>, in an atomic manner.
+</p>
+<p>
+It is an api (fatal) error if <em class="parameter"><code>o</code></em> is not currently in the bag.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>o</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>newkey</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_list ()">
+<a name="camel-object-bag-list"></a><h3>camel_object_bag_list ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Pointer-Arrays.html#GPtrArray"
+>GPtrArray</a> *         camel_object_bag_list               (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_remove ()">
+<a name="camel-object-bag-remove"></a><h3>camel_object_bag_remove ()</h3>
+<pre class="programlisting">void                camel_object_bag_remove             (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> o);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>o</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_object_bag_destroy ()">
+<a name="camel-object-bag-destroy"></a><h3>camel_object_bag_destroy ()</h3>
+<pre class="programlisting">void                camel_object_bag_destroy            (<a class="link" href="camel-CamelObject.html#CamelObjectBag" title="CamelObjectBag">CamelObjectBag</a> *bag);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>bag</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CAMEL_MAKE_CLASS()">
+<a name="CAMEL-MAKE-CLASS--CAPS"></a><h3>CAMEL_MAKE_CLASS()</h3>
+<pre class="programlisting">#define             CAMEL_MAKE_CLASS(type, tname, parent, pname)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tname</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pname</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="CamelIteratorVTable">
+<a name="CamelIteratorVTable"></a><h3>CamelIteratorVTable</h3>
+<pre class="programlisting">typedef struct {
+	/* free fields, dont free base object */
+	void (*free)(gpointer it);
+	/* go to the next messageinfo */
+	gconstpointer (*next)(gpointer it, CamelException *ex);
+	/* go back to the start */
+	void (*reset)(gpointer it);
+	/* *ESTIMATE* how many results are in the iterator */
+	gint (*length)(gpointer it);
+} CamelIteratorVTable;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">CamelIteratorVTable</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="CamelIterator">
+<a name="CamelIterator"></a><h3>CamelIterator</h3>
+<pre class="programlisting">typedef struct {
+	CamelIteratorVTable *klass;
+
+	/* subclasses adds new fields afterwards */
+} CamelIterator;
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">CamelIterator</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="camel_iterator_new ()">
+<a name="camel-iterator-new"></a><h3>camel_iterator_new ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>            camel_iterator_new                  (<a class="link" href="camel-CamelObject.html#CamelIteratorVTable" title="CamelIteratorVTable">CamelIteratorVTable</a> *klass,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"
+>gsize</a> size);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_iterator_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_iterator_free ()">
+<a name="camel-iterator-free"></a><h3>camel_iterator_free ()</h3>
+<pre class="programlisting">void                camel_iterator_free                 (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_iterator_free</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>it</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_iterator_next ()">
+<a name="camel-iterator-next"></a><h3>camel_iterator_next ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gconstpointer"
+>gconstpointer</a>       camel_iterator_next                 (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it,
+                                                         <a class="link" href="camel-camel-exception.html#CamelException" title="struct CamelException">CamelException</a> *ex);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_iterator_next</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>it</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ex</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_iterator_reset ()">
+<a name="camel-iterator-reset"></a><h3>camel_iterator_reset ()</h3>
+<pre class="programlisting">void                camel_iterator_reset                (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_iterator_reset</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>it</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="camel_iterator_length ()">
+<a name="camel-iterator-length"></a><h3>camel_iterator_length ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"
+>gint</a>                camel_iterator_length               (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> it);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">camel_iterator_length</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>it</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

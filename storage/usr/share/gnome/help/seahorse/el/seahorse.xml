@@ -1,0 +1,911 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY legal SYSTEM "legal.xml">
+<!ENTITY appversion "2.28.x">
+<!ENTITY manrevision "3.1">
+<!ENTITY date "July 2005">
+<!ENTITY app "Passwords and Encryption Keys">
+<!ENTITY daemon "<application>seahorse-daemon</application>">
+<!ENTITY project "Seahorse">
+<!ENTITY key "<glossterm>key</glossterm>">
+<!ENTITY website "http://www.gnome.org/projects/seahorse/">
+]>
+<article id="index" lang="el">
+	<articleinfo>
+		<title>Εγχειρίδιο του Κωδικοί και κλειδιά κρυπτογράφησης</title>
+		<copyright>
+			<year>2005, 2006, 2007, 2008, 2009</year>
+			<holder>Jacob Perkins και Adam Schreiber</holder>
+		</copyright>
+		<publisher role="maintainer">
+			<publishername>Έργο Seahorse</publishername>
+		</publisher>
+		<!-- link to document containig the legal notice of GNU FDL  -->
+		  <legalnotice id="legalnotice">
+	<para>Σας παρέχεται άδεια να αντιγράψετε, διανείμετε ή/και να τροποποιήσετε το υπάρχον κείμενο υπό τους όρους της άδειας GNU Free Documentation License (GFDL), έκδοση 1.1, ή οποιαδήποτε μεταγενέστερη έκδοση που να έχει εκδοθεί από το Free Software Foundation υπό τις προϋποθέσεις no Invariant Sections, no Front-Cover Texts, και no Back-Cover Texts. Μπορείτε να βρείτε αντίγραφο του GFDL σε αυτόν το <ulink type="help" url="ghelp:fdl">σύνδεσμο</ulink> ή στο αρχείο COPYING-DOCS όπως διανέμεται με αυτή την τεκμηρίωση.</para>
+         <para>Αυτό το εγχειρίδιο αποτελεί μέρος της συλλογής εγχειριδίων του GNOME που διανέμονται υπό τους όρους της GFDL. Αν επιθυμείτε να διανείμετε το παρόν εγχειρίδιο ξεχωριστά από τη συλλογή, οφείλετε να προσθέσετε στο εγχειρίδιο αντίγραφο της άδειας χρήσης, όπως προβλέπεται στο άρθρο 6 της άδειας.</para>
+
+	<para>Πολλά από τα ονόματα που χρησιμοποιούνται από εταιρείες για να διακρίνουν τα προϊόντα και τις υπηρεσίες τους είναι κατατεθέντα σήματα. Όπου εμφανίζονται τέτοια ονόματα σε οποιαδήποτε τεκμηρίωση του GNOME. και τα μέλη του Έργου Τεκμηρίωσης του GNOME το γνωρίζουν, τότε αυτά τα ονόματα γράφονται με κεφαλαία γράμματα ή ξεκινούν με κεφαλαίο γράμμα.</para>
+
+	<para>ΤΟ ΈΓΓΡΑΦΟ ΚΑΙ ΤΡΟΠΟΠΟΙΗΜΕΝΕΣ ΕΚΔΟΣΕΙΣ ΑΥΤΟΥ ΠΑΡΕΧΟΝΤΑΙ ΥΠΟ ΤΟΥΣ ΟΡΟΥΣ ΤΗΣ ΑΔΕΙΑΣ GNU FREE DOCUMENTATION ΜΕ ΤΗΝ ΠΕΡΑΙΤΕΡΩ ΔΙΕΥΚΡΙΝΙΣΗ ΟΤΙ: <orderedlist>
+		<listitem>
+		  <para>ΤΟ ΠΑΡΟΝ ΕΓΓΡΑΦΟ ΠΑΡΕΧΕΤΑΙ "ΩΣ ΕΧΕΙ", ΧΩΡΙΣ ΟΠΟΙΑΔΗΠΟΤΕ ΕΓΓΥΗΣΗ, ΕΚΠΕΦΡΑΣΜΕΝΗ Ή ΥΠΑΙΝΙΣΣΟΜΕΝΗ, ΣΥΜΠΕΡΙΛΑΜΒΑΝΟΜΕΝΩΝ, ΧΩΡΙΣ ΠΕΡΙΟΡΙΣΜΟΥΣ, ΕΓΓΥΗΣΕΩΝ ΟΤΙ ΤΟ ΕΓΓΡΑΦΟ Ή Η ΤΡΟΠΟΠΟΙΗΜΕΝΗ ΕΚΔΟΣΗ ΤΟΥ ΕΙΝΑΙ ΑΠΑΛΑΓΜΕΝΟ ΑΤΕΛΕΙΩΝ, ΕΜΠΟΡΕΥΣΙΜΟ, ΚΑΤΑΛΛΗΛΟ ΓΙΑ ΣΥΓΚΕΚΡΙΜΕΝΗ ΧΡΗΣΗ Ή ΑΠΑΡΑΒΙΑΣΤΟ. Ο ΧΡΗΣΤΗΣ ΑΝΑΛΑΜΒΑΝΕΙ ΚΑΘΕ ΚΙΝΔΥΝΟ ΠΟΥ ΜΠΟΡΕΙ ΝΑ ΠΡΟΚΥΨΕΙ ΩΣ ΠΡΟΣ ΤΗΝ ΠΟΙΟΤΗΤΑ, ΑΚΡΙΒΕΙΑ ΚΑΙ ΛΕΙΤΟΥΡΓΙΑ ΤΟΥ ΕΓΓΡΑΦΟΥ Ή ΤΩΝ ΤΡΟΠΟΠΟΙΗΜΕΝΩΝ ΕΚΔΟΣΕΩΝ ΤΟΥ. ΑΝ ΟΠΟΙΟΔΗΠΟΤΕ ΕΓΓΡΑΦΟ Ή ΤΡΟΠΟΠΟΙΗΜΕΝΗ ΕΚΔΟΣΗ ΤΟΥ ΑΠΟΔΕΙΧΘΟΥΝ ΕΛΛΑΤΩΜΑΤΙΚΑ ΜΕ ΟΠΟΙΟΝΔΗΠΟΤΕ ΤΡΟΠΟ, Ο ΤΕΛΙΚΟΣ ΧΡΗΣΤΗΣ (ΚΑΙ ΟΧΙ Ο ΑΡΧΙΚΟΣ ΣΥΓΓΡΑΦΕΑΣ, ΣΥΝΤΑΚΤΗΣ Ή ΟΠΟΙΟΣΔΗΠΟΤΕ ΤΟ ΔΙΕΝΗΜΕ) ΑΝΑΛΑΜΒΑΝΕΙ ΤΟ ΚΟΣΤΟΣ ΟΠΟΙΑΣΔΗΠΟΤΕ ΕΠΙΣΚΕΥΗΣ Ή ΔΙΟΡΘΩΣΗΣ. ΑΥΤΗ Η ΠΑΡΑΙΤΗΣΗ ΑΠΟ ΕΓΓΥΗΤΙΚΕΣ ΕΥΘΥΝΕΣ ΣΥΝΙΣΤΑ ΟΥΣΙΑΣΤΙΚΟ ΜΕΡΟΣ ΤΗΣ ΑΔΕΙΑΣ. ΟΥΔΕΜΙΑ ΧΡΗΣΗ ΟΙΟΥΔΗΠΟΤΕ ΕΓΓΡΑΦΟΥ Ή ΤΡΟΠΟΠΟΙΗΜΕΝΟΥ ΕΓΓΡΑΦΟΥ ΕΞΟΥΣΙΟΔΟΤΕΙΤΑΙ ΕΦΕΞΗΣ, ΠΑΡΑ ΥΠΟ ΤΟΝ ΟΡΟ ΤΗΣ ΩΣ ΑΝΩ ΠΑΡΑΙΤΗΣΗΣ ΚΑΙ</para>
+		</listitem>
+		<listitem>
+		  <para>ΣΕ ΚΑΜΙΑ ΠΕΡΙΠΤΩΣΗ ΚΑΙ ΥΠΟ ΚΑΜΙΑ ΝΟΜΙΚΗ ΣΥΝΘΗΚΗ, ΕΙΤΕ ΜΕΣΩ ΣΥΜΒΟΛΑΙΩΝ Ή ΑΛΛΙΩΣ, ΔΕΝ ΕΥΘΥΝΟΝΤΑΙ Ο ΣΥΓΓΡΑΦΕΑΣ, Ο ΔΙΑΝΟΜΕΑΣ, Η ΑΛΛΟΣ ΣΥΝΥΠΕΥΘΥΝΟΣ ΓΙΑ ΤΗΝ ΣΥΓΓΡΑΦΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ, ΓΙΑ ΕΜΜΕΣΕΣ Η ΑΜΕΣΕΣ, ΤΥΧΑΙΕΣ Ή ΜΗ ΖΗΜΙΕΣ ΠΑΝΤΩΣ ΦΥΣΕΩΣ ΠΟΥ ΠΡΟΕΡΧΟΝΤΑΙ ΑΠΟ ΤΗΝ ΧΡΗΣΗ ΤΗΣ ΤΕΚΜΗΡΙΩΣΗΣ ΚΑΙ/Ή ΠΑΡΑΛΛΑΓΩΝ ΑΥΤΗΣ ΑΚΟΜΑ ΚΑΙ ΕΑΝ ΕΧΕΙ ΥΠΑΡΞΕΙ ΠΡΟΕΙΔΟΠΟΙΗΣΗ ΓΙΑ ΤΗΝ ΠΙΘΑΝΟΤΗΤΑ ΥΠΑΡΞΗΣ ΤΕΤΟΙΩΝ ΖΗΜΙΩΝ.</para>
+		</listitem>
+	  </orderedlist></para>
+  </legalnotice>
+
+
+		<authorgroup>
+			<author>
+				<firstname>Jacob</firstname>
+				<surname>Perkins</surname>
+				<affiliation>
+					<orgname>Έργο Seahorse</orgname>
+					<!--
+					<address>
+						<email>jap1@users.sourceforge.net</email>
+					</address>
+					-->
+				</affiliation>
+			</author>
+			<author>
+				<firstname>Adam</firstname>
+				<surname>Schreiber</surname>
+				<affiliation>
+					<orgname>Έργο Seahorse</orgname>
+					<address>
+						<email>sadam@clemson.edu</email>
+					</address>
+				</affiliation>
+			</author>
+			<author>
+				<firstname>Paul</firstname>
+				<surname>Cutler</surname>
+				<affiliation>
+					<orgname>Έργο τεκμηρίωσης του GNOME</orgname>
+					<address>
+						<email>pcutler@foresightlinux.org</email>
+					</address>
+				</affiliation>
+			</author>
+		</authorgroup>
+		<releaseinfo revision="2.28" role="draft">
+		</releaseinfo>
+		<publisher role="maintainer">
+			<publishername>Έργο Seahorse</publishername>
+		</publisher>
+		<publisher role="maintainer">
+			<publishername>Έργο τεκμηρίωσης του GNOME</publishername>
+		</publisher>
+		<revhistory>
+			<revision>
+				<revnumber>Εγχειρίδιο του Κωδικοί και κλειδιά κρυπτογράφησης, έκδοση 2.11.0</revnumber>
+				<date>Μάιος 2009</date>
+				<revdescription>
+					<para role="author">Paul Cutler <email>pcutler@foresightlinux.org</email></para>
+				</revdescription>	
+			</revision>
+			<revision>
+				<revnumber>Εγχειρίδιο του Κωδικοί και κλειδιά κρυπτογράφησης V0.10.1</revnumber>
+				<date>Αύγουστος 2008</date>
+				<revdescription>
+					<para role="author">Adam Schreiber <email>sadam@clemson.edu</email></para>
+				</revdescription>	
+			</revision>
+			<revision>
+				<revnumber>Κωδικοί και κλειδιά κρυπτογράφησης V0.9.1</revnumber>
+				<date>Νοέμβριος 2006</date>
+				<revdescription>
+					<para role="author">Milo Casagrande <email>milo_casagrande@yahoo.it</email></para>
+				</revdescription>	
+			</revision>
+			<revision>
+				<revnumber>Κωδικοί και κλειδιά κρυπτογράφησης V0.9.0</revnumber>
+				<date>Ιούλιος 2005</date>
+				<revdescription>
+					<para role="author">Adam Schreiber <email>sadam@clemson.edu</email></para>
+					<para role="publisher">Έργο Seahorse</para>
+				</revdescription>
+			</revision>
+			<revision>
+				<revnumber>Κωδικοί και κλειδιά κρυπτογράφησης V0.7.0</revnumber>
+				<date>Φεβρουάριος 2003</date>
+				<revdescription>
+					<para role="author">Jacob Perkins</para>
+					<para role="publisher">Έργο Seahorse</para>
+				</revdescription>
+			</revision>
+		</revhistory>
+		<releaseinfo>Αυτό το εγχειρίδιο περιγράφει την έκδοση 2.28.x του Κωδικοί και κλειδιά κρυπτογράφησης</releaseinfo>
+		<legalnotice>
+			<title>Ανάδραση</title>
+			<para>Για να αναφέρετε ένα σφάλμα ή να κάνετε μια πρόταση σχετικά με το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> ή αυτό το εγχειρίδιο, ακολουθήστε τις οδηγίες στη <ulink url="ghelp:gnome-feedback" type="help">Σελίδα ανάδρασης GNOME</ulink>.</para>
+		</legalnotice>
+
+		<abstract role="description">
+			<para>Το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> είναι η εφαρμογή που διαχειρίζεται κλειδιά κρυπτογράφησης για την επιφάνεια εργασίας του GNOME</para>
+		</abstract> 		
+
+	</articleinfo>
+
+	<indexterm zone="index">
+		<primary>Seahorse</primary>
+	</indexterm>
+
+	<indexterm zone="index">
+		<primary>seahorse</primary>	
+	</indexterm>
+
+	<indexterm zone="index">
+		<primary>Κλειδιά κρυπτογράφησης</primary>
+	</indexterm>
+	
+	<!-- ============= Introduction ============================== -->
+
+  <sect1 id="introduction">
+    <title>Εισαγωγή</title>
+    <para>Μπορείτε να χρησιμοποιήσετε το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> για να δημιουργήσετε και να διαχειρίζεστε κλειδιά <acronym>PGP</acronym> και <acronym>SSH</acronym>.</para>
+    <para>Η εφαρμογή <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> παρέχει ένα γραφικό περιβάλλον για πολλές από τις λειτουργίες του <ulink url="http://www.gnupg.org" type="http">Gnu Privacy Guard (GPG)</ulink> και ενσωματώνει πολλές από τις δυνατότητες που προσφέρει η επιφάνεια εργασίας <ulink url="http://www.gnome.org">GNOME</ulink>.</para>
+			<para>Με το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> μπορείτε: <itemizedlist>
+				
+				<listitem>
+					<para>Δημιουργία και διαχείριση κλειδιών PGP και SSH,</para>
+				</listitem>
+				<listitem>
+					<para>Εξαγωγή και εισαγωγή κλειδιών PGP και SSH,</para>
+				</listitem>
+				<listitem>
+					<para>Κοινή χρήση των κλειδιών σας με άλλους,</para>
+				</listitem>
+				</itemizedlist></para>
+	</sect1>
+
+	<!-- ============= Getting Started ============================== -->
+	  
+	<sect1 id="seahorse-getting-started">
+		<title>Ξεκινώντας</title>
+		<sect2 id="seahorse-start">
+			<title>Εκκίνηση του <application>Κωδικοί και κλειδιά κρυπτογράφησης</application></title>
+			<para>Μπορείτε να ξεκινήσετε το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> με τους ακόλουθους τρόπους:</para>
+			<variablelist>
+				<varlistentry>
+					<term>Μενού <guimenu>Εφαρμογές</guimenu></term>
+					<listitem>
+						<para>Επιλέξτε <menuchoice><guimenu>Βοηθήματα</guimenu><guimenuitem>Κωδικοί και κλειδιά κρυπτογράφησης</guimenuitem></menuchoice>.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>Γραμμή εντολών</term>
+					<listitem>
+						<para>Πληκτρολογήστε <command>seahorse</command>, μετά πατήστε <keycap>Return</keycap>.</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+		</sect2>
+
+		<sect2 id="seahorse-when-start">
+			<title>Όταν εκκινείτε το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application></title>
+			<para>Όταν εκκινείτε το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application>, το παράθυρο <guilabel>Κωδικοί και κλειδιά κρυπτογράφησης</guilabel> εμφανίζεται.</para>
+			
+			<figure id="seahorse-window">
+			<title>Το παράθυρο <application>Κωδικοί και κλειδιά κρυπτογράφησης</application></title>
+			<screenshot>
+				<mediaobject>
+					<imageobject>
+					<imagedata fileref="figures/seahorse-window.png" format="PNG"/>
+					</imageobject>
+					<textobject>
+						<phrase>Εμφάνιση του παραθύρου <application>Κωδικοί και κλειδιά κρυπτογράφησης</application>.</phrase>
+					</textobject>
+				</mediaobject>
+			</screenshot>
+			</figure>
+			
+			<para>Το παράθυρο του <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> περιλαμβάνει τα παρακάτω στοιχεία:</para>
+			
+	    <variablelist>
+		<varlistentry><term>Γραμμή μενού</term>
+		    <listitem>
+			<para>Τα μενού στη γραμμή μενού περιέχουν όλες τις εντολές που θα χρειαστείτε για να δουλέψετε με το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application>.</para>
+		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Εργαλειοθήκη</term>
+		    <listitem>
+			<para>Χρησιμοποιήστε την εργαλειοθήκη για να έχετε γρήγορη πρόσβαση σε συχνά χρησιμοποιούμενες εντολές.</para>
+		    </listitem>	
+		</varlistentry> 		
+		<varlistentry><term>Στήλες κλειδιών και κωδικών</term>
+  		    <listitem>
+			<para>Παρέχει πρόσβαση στα κλειδιά και στους κωδικούς πρόσβασης στην κλειδοθήκη.</para>
+  		    </listitem>
+		</varlistentry>
+		<varlistentry><term>Επιλογές πρώτης φοράς</term>
+  		    <listitem>
+			<para>Παρέχει γρήγορη πρόσβαση σε χρήσιμες ενέργειες για αρχάριους χρήστες. Εδώ μπορείτε να κάνετε:</para>
+			<itemizedlist>
+			    <listitem>
+				<para>Περιήγηση στο σύστημα βοήθειας,</para>
+			    </listitem>
+			    <listitem>
+				<para>Εισαγωγή κλειδιών στην κλειδοθήκη,</para>
+			    </listitem>
+			    <listitem>
+				<para>Δημιουργία νέων κλειδιών.</para>
+			    </listitem>
+			</itemizedlist>
+		    </listitem>
+		</varlistentry>
+	    </variablelist>
+	</sect2>
+    </sect1>
+	
+	<!-- ============= Creating OpenPGP Keys ============================== -->	
+
+  <sect1 id="pgp-generate">
+    <title>Δημιουργία κλειδιών OpenPGP</title>
+    <para>Το OpenPGP είναι ένα ανοιχτό πρωτόκολλο για την κρυπτογράφηση αλληλογραφίας με τη χρήση κρυπτογραφίας δημοσίου κλειδιού, βασιζόμενο στο <acronym>PGP</acronym>. Καθορίζει πρότυπα για κρυπτογραφημένα μηνύματα, υπογραφές, ιδιωτικά κλειδιά και πιστοποιητικά για τη συναλλαγή δημοσίων κλειδιών.</para>
+    <para>Η κρυπτογράφηση δημοσίου κλειδιού απαιτεί τη χρήση δύο κλειδιών: ένα <emphasis>δημόσιο κλειδί</emphasis>, που μπορείτε να δώσετε σε οποιονδήποτε θέλετε να επικοινωνήσετε, και ένα <emphasis>ιδιωτικό κλειδί</emphasis> που είναι ιδιωτικό και πρέπει να διατηρήσετε μυστικό.</para>
+    <para>Για να δημιουργήσετε κλειδιά OpenPGP: <orderedlist>
+	<listitem>
+	  <para>Επιλέξτε <menuchoice><guimenu>Αρχείο</guimenu><guimenuitem>Νέο...</guimenuitem></menuchoice></para>
+	</listitem>
+	<listitem>
+	  <para>Επιλέξτε <guilabel>Κλειδί PGP</guilabel> και κάντε κλικ στο <guibutton>Συνέχεια</guibutton></para>
+	</listitem>
+	<listitem>
+	  <para>Εισάγετε το πλήρες όνομα σας, την διεύθυνση e-mail σας και οποιαδήποτε επιπρόσθετη πληροφορία. Μπορείτε επίσης να ορίσετε προχωρημένες ρυθμίσεις για το κλειδί: δείτε παρακάτω.</para>
+	</listitem>
+	<listitem>
+	  <para>Κάντε κλικ στο <guibutton>Δημιουργία</guibutton> για να δημιουργήσετε το νέο ζευγάρι κλειδιών.</para>
+	</listitem>
+	<listitem>
+	  <para>Ο διάλγος <guilabel>Συνθηματικό για νέο κλειδί PGP</guilabel> θα ανοίξει. Εισάγετε το συνθηματικό δύο φορές για το νέο σας κλειδί.</para>
+	</listitem>
+      </orderedlist></para>
+    <tip>
+      <para>Χρησιμοποιήστε παρόμοιες πρακτικές για να δημιουργήσετε έναν ισχυρό κωδικό πρόσβασης όταν επιλέγετε ένα συνθηματικό. Η βασική διαφορά ανάμεσα σε έναν κωδικό πρόσβασης και ένα συνθηματικό, είναι πως, σε ένα συνθηματικό, τα κενά είναι έγκυροι χαρακτήρες.</para>				
+    </tip>
+    
+    <sect2 id="seahorse-pgp-advanced-mode">
+      <title>Επιλογές για προχωρημένους</title>
+      <para>Αναπτύξτε την κατηγορία <guibutton>Προχωρημένες επιλογές κλειδιού</guibutton> για να ορίσετε τις ακόλουθες επιλογές για ένα νέο κλειδί:</para>
+      <variablelist>
+	<varlistentry>
+	  <term><guilabel>Τύπος κρυπτογράφησης</guilabel></term>
+	  <listitem>
+	    <para>Αυτό το πεδίο καθορίζει τους αλγόριθμους κρυπτογράφησης που χρησιμοποιούνται για την δημιουργία των κλειδιών σας.</para>
+	    <variablelist>
+	      <varlistentry>
+		<term><acronym>DSA</acronym> ElGamal</term>
+		<listitem>
+		  <para>Αυτή είναι η προτεινόμενη επιλογή καθώς σας επιτρέπει να κρυπτογραφείτε, να αποκρυπτογραφείτε, να υπογράφετε και να επιβεβαιώνετε όπως χρειάζεται.</para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term><acronym>DSA</acronym></term>
+		<listitem>
+		  <para>Σας επιτρέπει μόνο να υπογράφετε.</para>
+		</listitem>
+	      </varlistentry>
+	      <varlistentry>
+		<term><acronym>RSA</acronym></term>
+		<listitem>
+		  <para>Σας επιτρέπει μόνο να υπογράφετε.</para>
+		</listitem>
+	      </varlistentry>
+	    </variablelist>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Ισχύς κλειδιού (ψηφία)</guilabel></term>
+	  <listitem>
+	    <para>Αυτό είναι το μήκος του κλειδιού σε ψηφία. Όσο πιο μεγάλο το κλειδί, τόσο πιο μεγάλη ασφάλεια θα υπάρχει, δεδομένου πως χρησιμοποιείται ένα δυνατό συνθηματικό. Αντιστρόφως, η εκτέλεση οποιαδήποτε ενέργειας με ένα μεγάλο κλειδί θα απαιτεί περισσότερο χρόνο από ό,τι με ένα μικρότερο κλειδί. Οι αποδεκτές τιμές είναι ανάμεσα στα 1024 και στα 4096 ψηφία. Τουλάχιστον 2048 ψηφία προτείνονται.</para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term><guilabel>Ημερομηνία λήξης</guilabel></term>
+	  <listitem>
+	    <para>Αυτή είναι η ημερομηνία όπου το κλειδί θα παύσει να είναι χρησιμοποιήσιμο για λειτουργίες κρυπτογράφησης ή ψηφιακής υπογραφής. Έξι μήνες είναι ένας τυπικός χρόνος που μπορείτε να καθορίσετε. Μετά το πέρας του χρονικού διαστήματος αυτού, θα χρειαστείτε είτε να αλλάξετε την ημερομηνία λήξης ή να δημιουργήσετε ένα νέο κλειδί ή υπο-κλειδί. <note>
+		<para>Υπογράψτε το νέο σας κλειδί με το παλιό σας πριν λήξει για να διατηρήσετε την κατάσταση εμπιστοσύνης σας.</para>
+	      </note></para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+	
+	<!-- ============= Creating SSH Keys ============================== -->	
+	
+	<sect1 id="ssh-generate">
+	<title>Δημιουργία κλειδιών ασφαλούς κελύφους</title>
+	<para>Το ασφαλές κέλυφος (<acronym>SSH</acronym>) είναι ένας τρόπος σύνδεσης σε απομακρυσμένο υπολογιστή για εκτέλεση εντολών σε αυτό το μηχάνημα. Τα κλειδιά SSH χρησιμοποιούνται στο σύστημα πιστοποίησης που βασίζεται στα κλειδιά, ως εναλλακτική στο προεπιλεγμένο σύστημα πιστοποίησης βασισμένο στους κωδικούς πρόσβασης. Με την πιστοποίηση που βασίζεται σε κλειδιά, δεν χρειάζεται να πληκτρολογείτε χειρωνακτικά έναν κωδικό πρόσβασης για να γίνει πιστοποίηση.</para>
+	<para>Τα κλειδιά ασφαλούς κελύφους αποτελούνται από δύο κλειδιά: ένα <emphasis>ιδιωτικό κλειδί</emphasis>, που πρέπει να είναι μυστικό, και ένα <emphasis>δημόσιο κλειδί</emphasis> που μπορεί να τοποθετηθεί σε οποιονδήποτε υπολογιστή που θέλετε να έχετε πρόσβαση.</para>
+    <para>Για να δημιουργήσετε ένα κλειδί ασφαλούς κελύφους:</para>
+    <orderedlist>
+      <listitem>
+        <para>Επιλέξτε <menuchoice><guimenu>Αρχείο</guimenu><guimenuitem>Νέο...</guimenuitem></menuchoice></para>
+      </listitem>
+      <listitem>
+        <para>Επιλέξτε <guilabel>Κλειδί Secure Shell (SSH)</guilabel> και κάντε κλικ στο <guibutton>Συνέχεια</guibutton></para>
+      </listitem>
+      <listitem>
+        <para>Εισάγετε μια περιγραφή της χρήσης αυτού του κλειδιού. Μπορείτε να χρησιμοποιήσετε την διεύθυνση e-mail σας ή οποιαδήποτε άλλη υπενθύμιση. Μπορείτε επίσης να ορίσετε προχωρημένες επιλογές για το κλειδί: δείτε παρακάτω.</para>
+      </listitem>
+      <listitem>
+        <para>Κάντε κλικ στο <guibutton>Μόνο δημιουργία κλειδιού</guibutton> για να δημιουργήσετε το νέο κλειδί, ή στο <guibutton>Δημιουργία και ρύθμιση</guibutton> για να δημιουργήσετε το κλειδί και να ρυθμίσετε έναν άλλον υπολογιστή να το χρησιμοποιεί για πιστοποίηση.</para>
+      </listitem>
+      <listitem>
+        <para>Ο διάλογος <guilabel>Συνθηματικό για νέο κλειδί Secure Shell (SSH)</guilabel> ανοίγει. Εισάγετε το συνθηματικό δύο φορές για το νέο σας κλειδί.</para>
+			<tip>
+				<para>Χρησιμοποιήστε παρόμοιες πρακτικές για να δημιουργήσετε έναν ισχυρό κωδικό πρόσβασης όταν επιλέγετε ένα συνθηματικό. Η βασική διαφορά ανάμεσα σε έναν κωδικό πρόσβασης και ένα συνθηματικό, είναι πως, σε ένα συνθηματικό, τα κενά είναι έγκυροι χαρακτήρες.</para>				
+			</tip>
+      </listitem>
+    </orderedlist>
+    
+
+		
+		<sect2 id="seahorse-ssh-advanced-options">
+		<title>Επιλογές για προχωρημένους</title>
+			<para>Αναπτύξτε την κατηγορία <guilabel>Προχωρημένες επιλογές κλειδιού</guilabel> για να ορίσετε τις ακόλουθες επιλογές για ένα νέο κλειδί:</para>
+		
+			<variablelist>
+			<varlistentry>
+				<term><guilabel>Τύπος κρυπτογράφησης</guilabel></term>
+				<listitem>
+				<para>Αυτό το πεδίο καθορίζει τους αλγόριθμους κρυπτογράφησης που χρησιμοποιούνται για την δημιουργία του κλειδιού σας.</para>
+				<variablelist>
+					<varlistentry>
+						<term><acronym>RSA</acronym></term>
+						<listitem>
+							<para>Χρησιμοποιήστε τον αλγόριθμο <emphasis>Rivest-ShamirAdleman</emphasis> (<acronym>RSA</acronym>) για να δημιουργήσετε το κλειδί SSH. Αυτό προτιμάται και είναι πιο ασφαλής επιλογή.</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><acronym>DSA</acronym></term>
+						<listitem>
+							<para>Χρησιμοποιήστε τον <emphasis>Αλγόριθμο ψηφιακής υπογραφής</emphasis> (<acronym>DSA</acronym>) για να δημιουργήσετε το κλειδί SSH.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Ισχύς κλειδιού (ψηφία)</guilabel></term>
+				<listitem>
+				<para>Αυτό είναι το μήκος του κλειδιού σε ψηφία. Όσο πιο μεγάλο το κλειδί, τόσο πιο μεγάλη ασφάλεια θα υπάρχει, δεδομένου πως χρησιμοποιείται ένα δυνατό συνθηματικό. Αντιστρόφως, η εκτέλεση οποιαδήποτε ενέργειας με ένα μεγάλο κλειδί θα απαιτεί περισσότερο χρόνο από ό,τι με ένα μικρότερο κλειδί. Οι αποδεκτές τιμές είναι ανάμεσα στα 1024 και στα 4096 ψηφία. Τουλάχιστον 2048 ψηφία προτείνονται.</para>
+				</listitem>
+			</varlistentry>
+			</variablelist>
+		</sect2>
+	</sect1>
+	
+	<!-- ============= OpenPGP Key Properties ============================== -->	
+
+	<sect1 id="seahorse-key-properties">
+		<title>Ιδιότητες κλειδιού OpenPGP</title>
+		<para>Οι περιγραφές σε αυτή την ενότητα εφαρμόζονται σε όλα τα κλειδιά OpenPGP.</para>
+		
+		<para>Για να εμφανίσετε τις ιδιότητες ενός κλειδιού <acronym>PGP</acronym>: <itemizedlist>
+			<listitem>
+				<para>Επιλέξτε το κλειδί <acronym>PGP</acronym> από το κεντρικό παράθυρο.</para>
+			</listitem>
+			<listitem>
+				<para>Κάντε διπλό κλικ πάνω του ή επιλέξτε <guilabel>Ιδιότητες</guilabel> από την εργαλειοθήκη,</para> 
+			</listitem>
+			<listitem>
+				<para>Επιλέξτε την καρτέλα <guilabel>Λεπτομέρειες</guilabel>.</para>
+			</listitem>
+		</itemizedlist></para>
+
+	<sect2 id="pgp-public-key-properties">
+		<title id="pgp-private-key-properties">Ιδιότητες</title>
+		<para>
+		<variablelist>
+			<varlistentry>
+				<term><guilabel>Δαχτυλικό αποτύπωμα</guilabel></term>
+				<listitem>
+					<para>Το αποτύπωμα είναι μια μοναδική συμβολοσειρά χαρακτήρων που αναγνωρίζει ακριβώς ένα κλειδί.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Ταυτότητα κλειδιού</guilabel></term>
+				<listitem>
+					<para>Η ταυτότητα κλειδιού είναι παρόμοια με το αποτύπωμα. Εντούτοις, η ταυτότητα κλειδιού περιέχει μόνο τους τελευταίους 8 χαρακτήρες του αποτυπώματος. Τις περισσότερες φορές θα μπορείτε να αναγνωρίσετε ένα κλειδί μόνο με την ταυτότητα κλειδιού, αλλά σε κάποιες περιπτώσεις, δύο κλειδιά μπορεί να έχουν την ίδια ταυτότητα.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Τύπος</guilabel></term>
+				<listitem>
+					<para>Ορίζει τον αλγόριθμο κρυπτογράφησης που χρησιμοποιείται για να δημιουργηθεί το κλειδί. Τα κλειδιά DSA μπορούν μόνο να χρησιμοποιηθούν σε υπογραφές. Τα κλειδιά ELGamal χρησιμοποιούνται για κρυπτογράφηση.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Δημιουργήθηκε</guilabel></term>
+				<listitem>
+					<para>Δείχνει την ημερομηνία που το κλειδί δημιουργήθηκε.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Λήγει</guilabel></term>
+				<listitem>
+				<para>Δείχνει την ημερομηνία που το κλειδί δεν θα μπορεί πλέον να χρησιμοποιηθεί.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><guilabel>Ισχύς</guilabel></term>
+				<listitem>
+					<para>Δείχνει το μήκος σε ψηφία ενός κλειδιού. Γενικά, όσο πιο μεγάλο είναι ένα κλειδί, τόσο πιο ασφαλές είναι. <note>
+							<para>Ένα μεγάλο κλειδί δε προσφέρει σημαντικό επίπεδο ασφάλειας αν το συνθηματικό του είναι μικρό</para>
+						</note></para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		</para>
+	</sect2>
+
+	<sect2 id="change-owner-trust">
+		<title>Εμπιστοσύνη</title>
+		<para>Η εμπιστοσύνη είναι ένα δείκτης του πόσο είσαι σίγουρος για την ικανότητα ενός ατόμου για να επεκτείνει ορθά το διαδικτυακό ιστό εμπιστοσύνης (web of trust). Όταν αντιμετωπίζεται ένα κλειδί που δεν έχετε υπογράψει, η εγκυρότητα του κλειδιού αυτού του ατόμου θα αποφασιστεί από τις υπογραφές που έχει συγκεντρώσει καθώς και το πόσο καλά ή όχι εμπιστεύεστε τα άτομα που έχουν κάνει αυτές τις ψηφιακές υπογραφές. Από προεπιλογή, ένα άγνωστο κλειδί θα χρειάζεται 3 υπογραφές με οριακή τιμή εμπιστοσύνης ή μια πλήρη εμπιστευόμενη υπογραφή.</para>
+		<itemizedlist>
+			<listitem><para><guilabel>Άγνωστη</guilabel>: Δεν γνωρίζετε την ικανότητα του ατόμου να υπογράφει σωστά τα κλειδιά.</para></listitem>
+			<listitem><para><guilabel>Ποτέ</guilabel>: Αυτό το άτομο δεν μπορεί να υπογράψει σωστά τα κλειδιά.</para></listitem>
+			<listitem><para><guilabel>Οριακή</guilabel>: Αυτό το άτομο ελέγχει για φωτογραφική ταυτότητα πριν υπογράψει ένα κλειδί, αλλά δε διερευνά εξονυχιστικά τις ταυτότητες.</para></listitem>
+			<listitem><para><guilabel>Πλήρης</guilabel>:  Αυτό το άτομο διερευνά κάθε μία φωτογραφική ταυτότητα πριν να τις υπογράψει ψηφιακά (π.χ. υπογράφουν μόνο κλειδιά που πραγματικά ανήκουν στο άτομο που ζητά την υπογραφή).</para></listitem>
+			<listitem><para><guilabel>Μέγιστη</guilabel>: Αυτό το επίπεδο εμπιστοσύνης πρέπει να ορίζεται στα δικά σας κλειδιά.</para></listitem>
+		</itemizedlist>
+	</sect2>
+
+	<sect2 id="disable-key">
+		<title>Ενεργοποίηση και απενεργοποίηση κλειδιών</title>
+		<para>Όταν ένα κλειδί είναι ενεργοποιημένο, μπορεί να χρησιμοποιηθεί για την εκτέλεση ενεργειών κρυπτογράφησης. Όταν ένα κλειδί είναι απενεργοποιημένο, δεν μπορεί να χρησιμοποιηθεί για την κρυπτογράφηση ή την επιβεβαίωση υπογραφών που δημιουργήθηκαν με αυτό.</para>
+	</sect2>
+
+	<sect2 id="change-expires">
+		<title>Ημερομηνία λήξης</title>
+		<para>Ένα κλειδί δεν μπορεί να χρησιμοποιηθεί για την εκτέλεση ενεργειών κλειδιού μετά την λήξη του. Η αλλαγή της ημερομηνίας λήξης ενός κλειδιού σε ένα σημείο στο μέλλον, το ενεργοποιεί ξανά. Μια καλή πρακτική είναι να έχετε ένα κύριο κλειδί που δεν λήγει ποτέ και πολλά υπο-κλειδιά που λήγουν και είναι υπογεγραμμένα από το κύριο κλειδί.</para>
+	</sect2>
+
+	<sect2 id="userid-properties">
+		<title>Ταυτότητες χρήστη</title>
+		<para>Οι ταυτότητες χρήστη (User ID) επιτρέπουν να χρησιμοποιηθούν πολλαπλές ταυτότητες και διευθύνσεις e-mail με το ίδιο κλειδί.</para>
+		<para>Συνήθως έχουν τη μορφή: <programlisting>Όνομα (σχόλιο) &lt;διεύθυνση ηλ. αλληλογραφίας&gt;</programlisting></para>
+			
+		<sect3 id="add-uid">
+			<title>Προσθήκη μιας ταυτότητας χρήστη</title>
+				<para>Η προσθήκη μιας ταυτότητας χρήστη είναι χρήσιμη όταν θέλετε να έχετε μια ταυτότητα για την δουλειά σας και μια για τους φίλους σας.</para>
+				<para>Για να προσθέσετε μια ταυτότητα χρήστη σε ένα κλειδί: <itemizedlist>
+						<listitem>
+							<para>Επιλέξτε το κλειδί από το κυρίως παράθυρο,</para>
+						</listitem>
+						<listitem>
+							<para>Κάντε διπλό κλικ πάνω του ή επιλέξτε <guibutton>Ιδιότητες</guibutton> από την εργαλειοθήκη,</para>
+						</listitem>
+						<listitem>
+							<para>Επιλέξτε την καρτέλα <guilabel>Ονόματα και υπογραφές</guilabel>,</para>
+						</listitem>
+						<listitem>
+							<para>Κάντε κλικ στο <guibutton>Προσθήκη ονόματος</guibutton>.</para>
+						</listitem>
+					</itemizedlist></para>
+				<para>Αφού ακολουθήσετε τις παραπάνω οδηγίες, θα σας εμφανιστεί ένας διάλογος για να συμπληρώσετε. Τα πεδία αναλύονται παρακάτω.</para>
+				<variablelist>
+					<varlistentry>
+						<term><guilabel>Πλήρες όνομα</guilabel></term>
+						<listitem>
+							<para>Εισάγετε το ονοματεπώνυμο σας στη φόρμα <programlisting>&lt;όνομα&gt; &lt;επώνυμο&gt;</programlisting> Το μεσαίο όνομα ή αρχικά είναι προαιρετικά.</para>
+							<para>
+								<note>
+									<para>Πρέπει να εισάγετε τουλάχιστον 5 χαρακτήρες σε αυτό το πεδίο.</para>
+								</note> 
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Ηλεκτρονική διεύθυνση</guilabel></term>
+						<listitem>
+							<para>Η διεύθυνση ηλ. αλληλογραφίας είναι ο τρόπος που οι περισσότεροι θα χρησιμοποιήσουν για να εντοπίσουν το κλειδί σας σε ένα εξυπηρετητή κλειδιών ή άλλο πάροχο κλειδιών. Επιβεβαιώστε ότι είναι ορθό πριν συνεχίσετε. </para>
+							<para>
+								<note>
+									<para>Πρέπει να είναι της μορφής <programlisting><replaceable>&lt;username&gt;</replaceable>@<replaceable>&lt;domainname&gt;</replaceable></programlisting></para>
+								</note>
+							</para>
+						</listitem>
+					</varlistentry>
+					<varlistentry>
+						<term><guilabel>Σχόλιο κλειδιού</guilabel></term>
+						<listitem>
+							<para>Το πεδίο σχολίου μπορεί να χρησιμοποιηθεί για να τοποθετηθεί οποιαδήποτε πρόσθετη πληροφορία στο εμφανιζόμενο όνομα της νέας σας ταυτότητας (ID). Αυτές οι πληροφορίες μπορούν να αναζητηθούν στους εξυπηρετητές κλειδιών.</para>
+						</listitem>
+					</varlistentry>
+				</variablelist>
+			</sect3>
+		</sect2>
+
+    <sect2 id="photoid-properties">
+      <title>Φωτογραφική ταυτότητα</title>
+      <para>Οι φωτογραφικές ταυτότητες επιτρέπουν σε ένα ιδιοκτήτη κλειδιού να ενσωματώσει μία ή περισσότερες εικόνες του σε ένα κλειδί. Αυτές οι ταυτότητες μπορούν να υπογραφούν σαν να ήταν κανονικές ταυτότητες χρήστη. Μια φωτογραφική ταυτότητα πρέπει να είναι σε μορφή JPEG και προτείνεται να μην είναι μεγαλύτερες από 240x288 εικονοστοιχεία.</para>
+      <para>Αν η επιλεγμένη εικόνα δεν είναι του απαιτούμενου τύπου αρχείου ή μεγέθους, το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> μπορεί να αλλάξει το μέγεθος της και να την μετατρέψει επιτόπου από οποιονδήποτε τύπο αρχείου που υποστηρίζεται από την βιβλιοθήκη <acronym>GDK</acronym>.</para>
+    </sect2>
+		
+		<sect2 id="change-passphrase">
+			<title>Αλλαγή του συνθηματικού</title>
+			<para>Για να αλλάξετε το συνθηματικό που έχει ορισθεί για ένα κλειδί: <itemizedlist>
+					<listitem>
+						<para>Επιλέξτε το κλειδί από το κυρίως παράθυρο,</para>
+					</listitem>
+					<listitem>
+						<para>Κάντε διπλό κλικ πάνω του ή επιλέξτε <guilabel>Ιδιότητες</guilabel> από την εργαλειοθήκη,</para>
+					</listitem>
+					<listitem>
+						<para>Κάντε κλικ στο <guibutton>Αλλαγή συνθηματικού</guibutton>.</para>
+					</listitem>
+				</itemizedlist></para>
+			<para>Εισάγετε το νέο συνθηματικό και κάντε κλικ στο <guibutton>OK</guibutton>.</para>
+		</sect2>
+
+		<sect2 id="delete">
+			<title>Διαγραφή ενός κλειδιού</title>
+			<para>Για να διαγράψετε ένα κλειδί από την κλειδοθήκη σας: <itemizedlist>
+				<listitem>
+					<para>Επιλέξτε το κλειδί από το κυρίως παράθυρο,</para>
+				</listitem>
+				<listitem>
+					<para>Κάντε δεξί κλικ πάνω του και επιλέξτε <guilabel>Διαγραφή κλειδιού</guilabel> ή επιλέξτε <menuchoice><guimenu>Επεξεργασία</guimenu><guimenuitem>Διαγραφή κλειδιού</guimenuitem></menuchoice>.</para>
+				</listitem>
+				</itemizedlist></para>
+			<note>
+				<para>Μπορείτε να διαγράψετε τα κλειδιά σας, τα έμπιστα κλειδιά και τα συλλεγμένα κλειδιά.</para>		
+			</note> 
+		</sect2>
+	</sect1>
+	
+	<!-- ============= OpenPGP Properties ============================== -->	
+		
+	<sect1 id="subkey-properties">
+		<title>Ιδιότητες υποκλειδιού OpenPGP</title>
+		<para>Κάθε κλειδί OpenPGP έχει ένα γενικό κλειδί (master key) που χρησιμοποιείται για υπογραφές μόνο. Τα υπο-κλειδιά χρησιμοποιούνται και για να υπογράφουν και να κρυπτογράφουν.  Με αυτό το τρόπο, αν ένα υπο-κλειδί παραβιαστεί, δε χρειάζεται να αναιρέσετε το γενικό σας κλειδί.</para>
+		<variablelist>
+		<varlistentry>
+			<term><guilabel>Ταυτότητα</guilabel></term>
+			<listitem>
+				<para>Αυτό είναι το αναγνωριστικό του υποκλειδιού.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Τύπος</guilabel></term>
+			<listitem>
+				<para>Ορίζει τον αλγόριθμο κρυπτογράφησης που θα χρησιμοποιηθεί για την δημιουργία ενός υποκλειδιού. Τα κλειδιά <acronym>DSA</acronym> μπορούν μόνο να υπογράψουν, τα κλειδιά ElGamal χρησιμοποιούνται για να κρυπτογραφήσουν ενώ τα κλειδιά <acronym>RSA</acronym> χρησιμοποιούνται για να υπογράψουν ή για να κρυπτογραφήσουν.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Δημιουργήθηκε</guilabel></term>
+			<listitem>
+				<para>Δείχνει την ημερομηνία που το κλειδί δημιουργήθηκε.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Λήγει</guilabel></term>
+			<listitem>
+				<para>Δείχνει την ημερομηνία που το κλειδί δεν θα μπορεί πλέον να χρησιμοποιηθεί.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Κατάσταση</guilabel></term>
+			<listitem>
+				<para>Δείχνει την κατάσταση του κλειδιού.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Ισχύς</guilabel></term>
+			<listitem>
+				<para>Δείχνει το μήκος του κλειδιού σε ψηφία. Γενικά, όσο πιο μεγάλο το κλειδί, τόσο πιο μεγάλη ασφάλεια παρέχει. <note>
+						<para>Ένα μεγάλο κλειδί δε προσφέρει σημαντικό επίπεδο ασφάλειας αν το συνθηματικό του είναι μικρό</para>
+					</note></para>
+			</listitem>
+		</varlistentry>
+		</variablelist>
+		
+		<sect2 id="add-subkey">
+			<title>Προσθήκη ενός υποκλειδιού</title>
+			<para>Για να κάνετε προσθήκη ενός υποκλειδιού σε ένα κλειδί, από την ενότητα <guilabel>Υποκλειδιά</guilabel> κάντε κλικ στο κουμπί <guibutton>Προσθήκη</guibutton>.</para>
+			<para>Αφού ακολουθήσετε τις παραπάνω οδηγίες, θα σας εμφανιστεί ένας διάλογος για να συμπληρώσετε. Τα πεδία αναλύονται παρακάτω.</para>
+			<variablelist>
+			<varlistentry>
+				<term>Τύπος κλειδιού</term>
+				<listitem>
+					<para>Ορίζει τον αλγόριθμο κρυπτογράφησης που χρησιμοποιείται για την δημιουργία ενός υποκλειδιού.</para>
+				<variablelist>
+				<varlistentry>
+					<term><acronym>DSA</acronym></term>
+					<listitem>
+						<para>Χρησιμοποιήστε τον <emphasis>Digital Signature Algorithm</emphasis> (<acronym>DSA</acronym>) για να δημιουργήσετε το υποκλειδί. Αυτό το υποκλειδί θα μπορεί μόνο να υπογράψει.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>ElGamal</term>
+					<listitem>
+						<para>Χρησιμοποιήστε τον αλγόριθμο <emphasis>ElGamal</emphasis> για να δημιουργήσετε το υποκλειδί. Αυτό το υποκλειδί θα μπορεί μόνο να κρυπτογραφήσει.</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>RSA</term>
+					<listitem>
+						<para>Χρσιμοποιήστε τον αλγόριθμο <emphasis>Rivest-Shamir Adleman</emphasis> (<acronym>RSA</acronym>) για να δημιουργήσετε το υποκλειδί. Αυτό το υποκλειδί μπορεί να χρησιμοποιηθεί για υπογραφή ή κρυπτογράφηση, αλλά θα πρέπει να δημιουργήσετε δύο διαφορετικά υποκλειδιά.</para>
+					</listitem>
+				</varlistentry>
+				</variablelist>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Μήκος κλειδιού</term>
+				<listitem>
+					<para>Δείχνει το μήκος του υποκλειδιού σε ψηφία. Γενικά, όσο πιο μεγάλο είναι το κλειδί, τόσο περισσότερη ασφάλεια παρέχει.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Ημερομηνία λήξης</term>
+				<listitem>
+					<para>Δείχνει την ημερομηνία που το υποκλειδί δεν θα μπορεί πλέον να χρησιμοποιηθεί.</para>
+				</listitem>
+			</varlistentry>
+			</variablelist>
+		</sect2>
+
+		<sect2 id="change-subkey-expires">
+			<title>Αλλαγή της ημερομηνίας λήξης ενός κλειδιού</title>
+			<para>Για να αλλάξετε την ημερομηνία λήξης ενός υποκλειδιού, επιλέξτε το υποκλειδί από την ενότητα <guilabel>Υποκλειδιά</guilabel>, και μετά: <itemizedlist>
+				<listitem>
+					<para>Κάντε κλικ στο κουμπί <guibutton>Λήξη</guibutton> στα αριστερά,</para>
+				</listitem>
+				<listitem>
+					<para>Από τον διάλογο επιλογής ημερομηνίας, επιλέξτε την νέα ημερομηνία λήξης ή επιλέξτε <guilabel>Δε λήγει ποτέ</guilabel> αν δεν θέλετε να υπάρχει ημερομηνία λήξης.</para>
+				</listitem>
+				</itemizedlist></para>
+		</sect2>
+
+		<sect2 id="revoke-subkey">
+			<title>Ανάκληση ενός υποκλειδιού</title>
+			<para>Για να ανακαλέσετε ένα υποκλειδί, επιλέξτε το υποκλειδί από την ενότητα <guilabel>Υποκλειδιά</guilabel>, και μετά: <itemizedlist>
+				<listitem>
+					<para>Κάντε κλικ στο κουμπί <guibutton>Ανακάλεσε</guibutton> στα αριστερά,</para>
+				</listitem>
+				<listitem>
+					<para>Επιλέξτε μια αιτία για την ανάκληση του κλειδιού:</para>
+					<para>
+					<variablelist>
+						<varlistentry>
+							<term>Χωρίς αιτία</term>
+							<listitem>
+								<para>Δεν υπάρχει κάποια αιτία για την ανάκληση του κλειδιού.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Έχει διαρρεύσει</term>
+							<listitem>
+								<para>Το κλειδί έχει διαρρεύσει.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Έχει ξεπεραστεί</term>
+							<listitem>
+								<para>Το κλειδί έχει ξεπεραστεί από κάποιο άλλο.</para>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term>Εκτός χρήσης</term>
+							<listitem>
+								<para>Το κλειδί δεν χρησιμοποιείται πλέον.</para>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+					</para>
+				</listitem>
+				<listitem>
+					<para>Εισάγετε μια περιγραφή της αιτίας που ανακαλείτε το κλειδί,</para>
+				</listitem>
+				<listitem>
+					<para>Κάντε κλικ στο <guibutton>Ανακάλεσε</guibutton>.</para>
+				</listitem>
+				</itemizedlist></para>
+			<note>
+				<para>Η ανάκληση ενός υποκλειδιού είναι άμεση.</para>
+			</note>
+		</sect2>
+
+		<sect2 id="delete-subkey">
+			<title>Διαγραφή ενός υποκλειδιού</title>
+			<para>Για να διαγράψετε ένα υποκλειδί, επιλέξτε το υποκλειδί από την ενότητα <guilabel>Υποκλειδιά</guilabel>, και μετά: <itemizedlist>
+				<listitem>
+					<para>Κάντε κλικ στο κουμπί <guibutton>Διαγραφή</guibutton> στα αριστερά.</para>
+				</listitem>
+				</itemizedlist></para>
+		</sect2>
+	</sect1>
+
+	<!-- ============= SSH Key Properties ============================== -->
+
+	<sect1 id="ssh-key-properties">
+	    <title>Ιδιότητες κλειδιού ασφαλούς κελύφους (SSH)</title>
+	    <para>Οι περιγραφές σε αυτή την ενότητα ισχύουν για όλα τα κλειδιά <acronym>SSH</acronym>.</para>
+	    <para>Για να προβάλετε τις ιδιότητες ενός κλειδιού <acronym>SSH</acronym>: <itemizedlist>
+			<listitem>
+				<para>Επιλέξτε το κλειδί Secure Shell από το κύριο παράθυρο,</para>
+			</listitem>
+			<listitem>
+				<para>Κάντε διπλό κλικ πάνω του ή επιλέξτε <guilabel>Ιδιότητες</guilabel> από την εργαλειοθήκη,</para> 
+			</listitem>
+			<listitem>
+				<para>Επιλέξτε την καρτέλα <guilabel>Λεπτομέρειες</guilabel>.</para>
+			</listitem>
+		</itemizedlist></para>
+
+	<sect2 id="properties">
+		<title>Ιδιότητες</title>
+		<para>
+		<variablelist>
+		<varlistentry>
+			<term><guilabel>Δαχτυλικό αποτύπωμα</guilabel></term>
+			<listitem>
+				<para>Το αποτύπωμα είναι μια μοναδική συμβολοσειρά χαρακτήρων που αναγνωρίζει ακριβώς ένα κλειδί.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Αλγόριθμος</guilabel></term>
+			<listitem>
+				<para>Ορίζει τον αλγόριθμο κρυπτογράφησης που χρησιμοποιείται για την δημιουργία ενός κλειδιού.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Τοποθεσία</guilabel></term>
+			<listitem>
+				<para>Αυτή είναι η τοποθεσία που έχει αποθηκευτεί το <emphasis>ιδιωτικό κλειδί</emphasis>.</para>
+		</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term><guilabel>Ισχύς</guilabel></term>
+			<listitem>
+				<para>Δείχνει το μήκος σε ψηφία ενός κλειδιού. Γενικά, όσο πιο μεγάλο είναι ένα κλειδί, τόσο πιο ασφαλές είναι. <note>
+					<para>Ένα μεγάλο κλειδί δε προσφέρει σημαντικό επίπεδο ασφάλειας αν το συνθηματικό του είναι μικρό</para>
+				</note></para>
+			</listitem>
+		</varlistentry>
+		</variablelist>
+		</para>
+	</sect2>
+
+	<sect2 id="delete-ssh-key">
+		<title>Διαγραφή ενός κλειδιού ασφαλούς κελύφους (Secure Shell)</title>
+		<para>Για να διαγράψετε ένα κλειδί ασφαλούς κελύφους: <itemizedlist>
+				<listitem>
+				<para>Επιλέξτε το κλειδί <acronym>SSH</acronym> από το κυρίως παράθυρο,</para>
+			</listitem>
+			<listitem>
+				<para>Κάντε δεξί κλικ πάνω του και επιλέξτε <guilabel>Διαγραφή κλειδιού</guilabel> ή επιλέξτε <menuchoice><guimenu>Επεξεργασία</guimenu><guimenuitem>Διαγραφή κλειδιού</guimenuitem></menuchoice>.</para>
+			</listitem>
+			</itemizedlist></para>
+	</sect2>
+	</sect1>
+	
+	<!-- ============= Importing Keys ============================== -->	
+
+        <sect1 id="import">
+		<title>Εισαγωγή κλειδιών</title>
+		<para>Για να εισάγετε κλειδιά, επιλέξτε <menuchoice><guimenu>Αρχείο</guimenu><guimenuitem>Εισαγωγή</guimenuitem></menuchoice> και επιλέξτε, από τον επιλογέα αρχείων, ένα αρχείο που περιέχει τουλάχιστον ένα θωρακισμένο δημόσιο κλειδί ASCII.</para>
+		<para>Η εισαγωγή μπορεί επίσης να επιτευχθεί με την επικόλληση των κλειδιών μέσα στο <application>Κωδικοί και κλειδιά κρυπτογράφησης</application>: <itemizedlist>
+		<listitem>
+			<para>Επιλέξτε ένα θωρακισμένο δημόσιο μπλοκ κειμένου ASCII,</para>
+		</listitem>
+		<listitem>
+			<para>Αντιγράψτε το στο πρόχειρο,</para>
+		</listitem>
+		<listitem>
+			<para>Επιλέξτε <menuchoice><guimenu>Επεξεργασία</guimenu><guimenuitem>Επικόλληση κλειδιών</guimenuitem></menuchoice>.</para>
+		</listitem>
+		</itemizedlist></para>
+	</sect1>
+	
+	<!-- ============= Exporting Keys ============================== -->	
+
+	<sect1 id="export">
+		<title>Εξαγωγή κλειδιών</title>
+		<para>Για να κάνετε εξαγωγή κλειδιών, επιλέξτε τα κλειδιά στο κεντρικό παράθυρο και επιλέξτε <menuchoice><guimenu>Αρχείο</guimenu><guimenuitem>Εξαγωγή</guimenuitem></menuchoice>.</para>
+		<para>Μπορείτε ακόμα να εξάγετε κλειδιά στο πρόχειρο ως ένα θωρακισμένο μπλοκ κειμένου ASCII: <itemizedlist>
+			<listitem>
+				<para>Επιλέξτε τα κλειδιά στο κυρίως παράθυρο,</para>
+			</listitem>
+			<listitem>
+				<para>Επιλέξτε <menuchoice><guimenu>Επεξεργασία</guimenu><guimenuitem>Αντιγραφή κλειδιών</guimenuitem></menuchoice>.</para>
+			</listitem>
+		</itemizedlist></para>
+	</sect1>
+
+	
+	<!-- ============= Signing a Key ============================== -->	
+
+	<sect1 id="sign">
+		<title>Υπογραφή ενός κλειδιού</title>
+		<para>Η υπογραφή του κλειδιού ενός ατόμου σημαίνει πως δείχνετε εμπιστοσύνη σε αυτό το άτομο. Πριν υπογράψετε ένα κλειδί, πρέπει να ελέγξετε προσεκτικά το αποτύπωμα του κλειδιού για να είστε σίγουρος πως το κλειδί ανήκει πραγματικά σε αυτό το άτομο.</para>
+		<para>Για να υπογράψετε ένα κλειδί στην κλειδοθήκη σας: <itemizedlist>
+				<listitem>
+				<para>Επιλέξτε το κλειδί που θέλετε να υπογράψετε από της καρτέλες <guilabel>Έμπιστα κλειδιά</guilabel> ή <guilabel>Άλλα συλλεγμένα κλειδιά</guilabel></para>
+				</listitem>
+				<listitem>
+				<para>Επιλέξτε <guibutton>Υπογραφή</guibutton> από την εργαλειοθήκη ή <menuchoice><guimenu>Αρχείο</guimenu><guimenuitem>Υπογραφή</guimenuitem></menuchoice>,</para>
+				</listitem>
+				<listitem>
+				<para>Επιλέξτε πόσο προσεκτικά έχει ελεγχθεί το κλειδί,</para>
+				</listitem>
+				<listitem>
+				<para>Καθορίστε αν η ψηφιακή υπογραφή να είναι τοπική στην κλειδοθήκη σας και αν η ψηφιακή υπογραφή να μπορεί να αναιρεθεί.</para>
+				</listitem>
+				<listitem>
+				<para>Κάντε κλικ στο <guibutton>Υπογραφή</guibutton>.</para>
+				</listitem>
+			</itemizedlist></para>
+	</sect1>
+	
+	<!-- ============= Preferences ============================== -->	
+  
+  <sect1 id="prefs">
+    <title>Προτιμήσεις</title>
+    <para>Αυτό το τμήμα περιγράφει τις προτιμήσεις που μπορούν να καθοριστούν στην εφαρμογή <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> με επιλογή του <menuchoice><guimenu>Επεξεργασία</guimenu><guimenuitem>Προτιμήσεις</guimenuitem></menuchoice> μέσα από την <application>Κωδικοί και κλειδιά κρυπτογράφησης</application>.</para>
+
+        <sect2 id="keyring">
+        	<title>Κλειδοθήκες κωδικών</title>
+        	<sect3>
+        	    <title>Δημιουργία κλειδοθηκών</title>
+            	<para>
+            	    To create a new keyring, from the menu choose <menuchoice><guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice> and choose <guibutton>Password Keyring</guibutton>.  Enter a name for the new keyring, and press enter. 
+            	</para>
+        	</sect3>
+        	<sect3>
+        	    <title>Αλλαγή κωδικών πρόσβασης κλειδοθηκών</title>
+            	<para>Για να αλλάξετε τον κωδικό ξεκλειδώματος της κλειδοθήκης, πρώτα επιλέξτε την κατάλληλη κλειδοθήκη και μετά πατήστε το κουμπί <guibutton>Αλλαγή κωδικού ξεκλειδώματος</guibutton>. Τότε θα σας ζητηθεί να εισάγετε τον παλιό κωδικό στο πεδίο κειμένου <guilabel>Παλιός κωδικός</guilabel>, τον νέο κωδικό στο πεδίο κειμένου <guilabel>Νέος κωδικός</guilabel> και να τον επιβεβαιώσετε στο πεδίο κειμένου <guilabel>Επιβεβαίωση κωδικού</guilabel>. Για να εφαρμόσετε τις αλλαγές, πατήστε <guibutton>Αλλαγή</guibutton>. Αν ο παλιός κωδικός είναι σωστός, θα λάβετε ένα μήνυμα κατάστασης που θα επιβεβαιώνει την επιτυχία της ενέργειας. Αν ο παλιός κωδικός είναι λανθασμένος, θα σας ζητηθεί να ελέγξετε την ορθότητα του.</para>
+        	</sect3>
+        	<sect3>
+        	    <title>Διαγραφή κλειδοθηκών</title>
+        	    <para>
+        	        To remove a keyring, first select the appropriate keyring and then 
+            	  from the menu choose <menuchoice><guimenu>Edit</guimenu> <guimenuitem>Delete</guimenuitem></menuchoice>.
+        	    </para>
+        	</sect3>
+        </sect2>
+
+    <sect2 id="key-servers">
+	<title>Εξυπηρετητές κλειδιών</title>
+	<para>Διατηρήστε τα κλειδιά σας καθώς και των άλλων ενημερωμένα με τον περιοδικό συγχρονισμό τους με απομακρυσμένους εξυπηρετητές κλειδιών. Ο συγχρονισμός σάς επιτρέπει να έχετε τις πιο πρόσφατες ψηφιακές υπογραφές σε όλα τα κλειδιά σας οπότε ο δικτυακός ιστός εμπιστοσύνης (web of trust) θα είναι πιο χρήσιμος.</para>
+	<para>Το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> υποστηρίζει τους εξυπηρετητές κλειδιών HKP και LDAP.</para>
+	<variablelist>
+	  <varlistentry>
+	    <term><emphasis>Εξυπηρετητές HKP</emphasis></term>
+	    <listitem>
+	      <para>Οι εξυπηρετητές κλειδιών HKP είναι τυπικοί εξυπηρετητές κλειδιών δικτυακού ιστού, όπως το δημοφιλές <ulink url="hkp://pgp.mit.edu:11371" type="hkp">hkp://pgp.mit.edu:11371</ulink>, που είναι και προσβάσιμο από το <ulink url="http://pgp.mit.edu" type="http">http://pgp.mit.edu</ulink>.</para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><emphasis><acronym>LDAP</acronym> Εξυπηρετητές κλειδιών</emphasis></term>
+	    <listitem>
+	      <para>Οι εξυπηρετητές κλειδιών <acronym>LDAP</acronym> είναι λιγότερο κοινοί, αλλά χρησιμοποιούν το πρότυπο πρωτόκολλο LDAP για να παρέχουν κλειδιά. Ένας καλός εξυπηρετητής LDAP: <ulink url="ldap://keyserver.pgp.com" type="ldap">ldap://keyserver.pgp.com</ulink>.</para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+      </sect2>
+
+      <sect2 id="key-sharing">
+	<title>Κοινή χρήση κλειδιών</title>
+	<para>Η διαμοίραση κλειδιών παρέχεται από το DNS-DS, γνωστό και ως Bonjour ή Rendevous. Η ενεργοποίηση του διαμοιρασμού κλειδιών προσθέτει τις τοπικές δημόσιες κλειδοθήκες του χρήστη από το <application>Κωδικοί και κλειδιά κρυπτογράφησης</application> στον απομακρυσμένο διάλογο αναζήτησης. Η χρήση αυτών των τοπικών «εξυπηρετητών κλειδιών» είναι κατά πάσα πιθανότητα πιο γρήγορη από την προσπέλαση απομακρυσμένων εξυπηρετητών.</para>
+      </sect2>
+  </sect1>
+  
+	<!-- ============= About ============================== -->  
+      
+    <sect1 id="about">
+    <title>Περί του προγράμματος Κωδικοί και κλειδιά κρυπτογράφησης</title>
+    <para>Η εφαρμογή <application>Κωδικοί και κλειδιά κρυπτογράφησης</application>, τα πρόσθετα που παρέχει, η μικροεφαρμογή προτιμήσεων και η μικροεφαρμογή του πίνακα εφαρμογών είναι, ως σύνολο, γνωστά σαν Seahorse. Το Seahorse δημιουργήθηκε από τον Jacob Perkins. Οι τρέχοντες δημιουργοί είναι οι Stef Walter και Adam Schreiber. Ο δικτυακός τόπος του έργου σχεδιάστηκε από τον Jim Pharis. Για περισσότερες πληροφορίες για το Seahorse, το έργο, παρακαλούμε επισκεφθείτε την <ulink url="http://www.gnome.org/projects/seahorse/" type="http">Ιστοσελίδα του Seahorse</ulink>.</para>
+    <para>Για να αναφέρετε κάποιο πρόβλημα ή να κάνετε μια πρόταση σχετικά με αυτήν την εφαρμογή ή αυτό το εγχειρίδιο, ακολουθήστε τις οδηγίες στην <ulink url="ghelp:user-guide?feedback-bugs" type="help">Ενότητα ανάδρασης του οδηγού χρήστη GNOME</ulink>.</para>
+    <para>Αυτό το πρόγραμμα διανέμεται υπό τους όρους της Γενικής Δημόσιας Άδειας GNU όπως δημοσιεύεται από το Ίδρυμα Ελεύθερου Λογισμικού, είτε με την έκδοση 2 της Άδειας, είτε (σαν επιλογή σας) με κάθε μεταγενέστερη έκδοση. Με αυτήν την τεκμηρίωση συμπεριλαμβάνεται ένα <ulink url="ghelp:gpl" type="help">αντίγραφο της άδειας</ulink>, ένα άλλο μπορεί να βρεθεί στο αρχείο COPYING, με τον πηγαίο κώδικα του προγράμματος.</para>
+  </sect1>
+</article>

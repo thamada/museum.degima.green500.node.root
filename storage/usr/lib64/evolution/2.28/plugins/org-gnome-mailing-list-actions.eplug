@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e-plugin-list>
+	<e-plugin type="shlib" location="/usr/lib64/evolution/2.28/plugins/liborg-gnome-mailing-list-actions.so" id="org.gnome.plugin.mailing-list.actions" domain="evolution-2.28" name="Mailing List Actions">
+	    	<author name="Meilof Veeningen" email="meilof@wanadoo.nl"/>
+		<description>Perform common mailing list actions (subscribe, unsubscribe, etc.).</description>
+		<hook class="org.gnome.evolution.mail.bonobomenu:1.0">
+			<menu target="select" id="org.gnome.evolution.mail.browser">
+				<ui file="/usr/lib64/evolution/2.28/plugins/org-gnome-mailing-list-actions.xml"/>
+				<item verb="ListHelp" type="item" path="/commands/ListHelp" enable="mailing_list" activate="emla_list_help"/>
+				<item verb="ListSubscribe" type="item" path="/commands/ListSubscribe" enable="mailing_list" activate="emla_list_subscribe"/>
+				<item verb="ListUnsubscribe" type="item" path="/commands/ListUnsubscribe" enable="mailing_list" activate="emla_list_unsubscribe"/>
+				<item verb="ListPost" type="item" path="/commands/ListPost" enable="mailing_list" activate="emla_list_post"/>
+				<item verb="ListOwner" type="item" path="/commands/ListOwner" enable="mailing_list" activate="emla_list_owner"/>
+				<item verb="ListArchive" type="item" path="/commands/ListArchive" enable="mailing_list" activate="emla_list_archive"/>
+			</menu>
+			<menu target="select" id="org.gnome.evolution.mail.messagebrowser">
+				<ui file="/usr/lib64/evolution/2.28/plugins/org-gnome-mailing-list-actions.xml"/>
+				<item verb="ListHelp" type="item" path="/commands/ListHelp" enable="mailing_list" activate="emla_list_help"/>
+				<item verb="ListSubscribe" type="item" path="/commands/ListSubscribe" enable="mailing_list" activate="emla_list_subscribe"/>
+				<item verb="ListUnsubscribe" type="item" path="/commands/ListUnsubscribe" enable="mailing_list" activate="emla_list_unsubscribe"/>
+				<item verb="ListPost" type="item" path="/commands/ListPost" enable="mailing_list" activate="emla_list_post"/>
+				<item verb="ListOwner" type="item" path="/commands/ListOwner" enable="mailing_list" activate="emla_list_owner"/>
+				<item verb="ListArchive" type="item" path="/commands/ListArchive" enable="mailing_list" activate="emla_list_archive"/>
+			</menu>
+		</hook>
+		<hook class="org.gnome.evolution.mail.popup:1.0">
+			<menu target="select" id="org.gnome.mail.folderview.popup.select">
+				<item visible="mailing_list" type="bar" path="96.list" activate=""/>
+				<item visible="mailing_list" type="submenu" path="96.list.00" activate="" label="Mailing _List"></item>
+				<item visible="mailing_list" verb="ListHelp" type="item" path="96.list.00/00.help" activate="emla_list_help" label="Get list _usage information"></item>
+				<item visible="mailing_list" verb="ListSubscribe" type="item" path="96.list.00/10.subscribe" activate="emla_list_subscribe" label="_Subscribe to list"></item>
+				<item visible="mailing_list" verb="ListUnsubscribe" type="item" path="96.list.00/20.unsubscribe" activate="emla_list_unsubscribe" label="_Un-subscribe to list"></item>
+				<item visible="mailing_list" verb="ListPost" type="item" path="96.list.00/30.post" activate="emla_list_post" label="_Post message to list"></item>
+				<item visible="mailing_list" verb="ListOwner" type="item" path="96.list.00/40.owner" activate="emla_list_owner" label="Contact list _owner"></item>
+				<item visible="mailing_list" verb="ListArchive" type="item" path="96.list.00/50.archive" activate="emla_list_archive" label="Get list _archive"></item>
+			</menu>
+		</hook>
+  	</e-plugin>
+</e-plugin-list>

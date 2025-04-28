@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.2.7. Periodically Print I/O Block Time</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="mainsect-disk.html" title="4.2. Disk" /><link rel="prev" href="inodewatch2sect.html" title="4.2.6. Monitoring Changes to File Attributes" /><link rel="next" href="mainsect-profiling.html" title="4.3. Profiling" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="inodewatch2sect.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="mainsect-profiling.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="4.2.7. Periodically Print I/O Block Time" id="ioblktimesect" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="ioblktimesect">4.2.7. Periodically Print I/O Block Time</h3></div></div></div><a id="id2157380" class="indexterm"></a><a id="id912723" class="indexterm"></a><a id="id674342" class="indexterm"></a><a id="id787486" class="indexterm"></a><a id="id734507" class="indexterm"></a><div class="para">
+		This section describes how to track the amount of time each block I/O requests spends waiting for completion. This is useful in determining whether there are too many outstanding block I/O operations at any given time.
+	</div><div class="formalpara" id="ioblktime"><h5 class="formalpara">ioblktime.stp</h5>
+			
+<pre class="programlisting">
+#! /usr/bin/env stap
+
+global req_time, etimes
+
+probe ioblock.request
+{
+  req_time[$bio] = gettimeofday_us()
+}
+
+probe ioblock.end
+{
+  t = gettimeofday_us()
+  s =  req_time[$bio]
+  delete req_time[$bio]
+  if (s) {
+    etimes[devname, bio_rw_str(rw)] &lt;&lt;&lt; t - s
+  }
+}
+
+probe timer.s(10), end {
+  ansi_clear_screen()
+  printf("%10s %3s %10s %10s %10s\n",
+         "device", "rw", "total (us)", "count", "avg (us)")
+  foreach ([dev,rw] in etimes - limit 20) {
+    printf("%10s %3s %10d %10d %10d\n", dev, rw,
+           @sum(etimes[dev,rw]), @count(etimes[dev,rw]), @avg(etimes[dev,rw]))
+  }
+  delete etimes
+}
+
+</pre>
+		</div><div class="para">
+		<a class="xref" href="ioblktimesect.html#ioblktime" title="ioblktime.stp">ioblktime.stp</a> computes the average waiting time for block I/O per device, and prints a list every 10 seconds. As always, you can revise this refresh rate by editing the specified value in <code class="command">probe timer.s(10), end {</code>.
+	</div><div class="para">
+		In some cases, there can be too many outstanding block I/O operations, at which point the script can exceed the default number of <code class="command">MAXMAPENTRIES</code>. <code class="command">MAXMAPENTRIES</code> is the maximum number of rows in an array if the array size is not specified explicitly when declared. If the script exceeds the default <code class="command">MAXMAPENTRIES</code> value of 2048, run the script again with the <code class="command">stap</code> option <code class="command">-DMAXMAPENTRIES=10000</code>.
+	</div><div class="example" title="Example 4.12. ioblktime.stp Sample Output" id="ioblktimeoutput"><h6>Example 4.12. <a class="xref" href="ioblktimesect.html#ioblktime" title="ioblktime.stp">ioblktime.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+    device  rw total (us)      count   avg (us)
+       sda   W       9659          6       1609
+      dm-0   W      20278          6       3379
+      dm-0   R      20524          5       4104
+       sda   R      19277          5       3855
+</pre></div></div><br class="example-break" /><div class="para">
+		<a class="xref" href="ioblktimesect.html#ioblktimeoutput" title="Example 4.12. ioblktime.stp Sample Output">Example 4.12, “ioblktime.stp Sample Output”</a> displays the device name, operations performed (<code class="command">rw</code>), total wait time of all operations (<code class="command">total(us)</code>), number of operations (<code class="command">count</code>), and average wait time for all those operations (<code class="command">avg (us)</code>). The times tallied by the script are in microseconds.
+	</div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="inodewatch2sect.html"><strong>Prev</strong>4.2.6. Monitoring Changes to File Attributes</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="mainsect-profiling.html"><strong>Next</strong>4.3. Profiling</a></li></ul></body></html>

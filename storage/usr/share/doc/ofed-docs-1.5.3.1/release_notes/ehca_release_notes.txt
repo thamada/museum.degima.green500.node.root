@@ -1,0 +1,117 @@
+
+             Open Fabrics Enterprise Distribution (OFED)
+                    ehca in OFED 1.5.3 Release Notes
+
+                            February 2011
+
+
+Overview
+--------
+ehca is the low level driver implementation for all IBM GX-based HCAs.
+
+Supported HCAs
+--------------
+- GX Dual-port SDR 4x IB HCA
+- GX Dual-port SDR 12x IB HCA
+- GX Dual-port DDR 4x IB HCA
+- GX Dual-port DDR 12x IB HCA
+
+Available Parameters
+--------------------
+In order to set ehca parameters, add the following line(s) to /etc/modprobe.conf:
+
+        options ib_ehca <parameter>=<value>
+
+whereby <parameter> is one of the following items:
+- debug_level     debug level (0: no debug traces (default), 1: with debug traces)
+- port_act_time   time to wait for port activation (default: 30 sec)
+- scaling_code    scaling code (0: disable (default), 1: enable)
+- open_aqp1       Open AQP1 on startup (default: no) (bool)
+- hw_level        Hardware level (0: autosensing (default), 0x10..0x14: eHCA, 0x20..0x23: eHCA2) (int)
+- nr_ports        number of connected ports (-1: autodetect (default), 1: port one only, 2: two ports) (int)
+- use_hp_mr       Use high performance MRs (default: no) (bool)
+- poll_all_eqs    Poll all event queues periodically (default: yes) (bool)
+- static_rate     Set permanent static rate (default: no static rate) (int)
+- lock_hcalls     Serialize all hCalls made by the driver (default: autodetect) (bool)
+- number_of_cqs   Max number of CQs which can be allocated (default: autodetect) (int)
+- number_of_qps   Max number of QPs which can be allocated (default: autodetect) (int)
+
+New Features
+------------
+- None
+
+Fixed Bugs ofed-1.5.3
+---------------------
+- Fixed initialization of IRQ tasklet
+- Catch fails in ioremap()
+
+Fixed Bugs ofed-1.5.2
+---------------------
+- Fixed automatic detection if hcall locks should be enabled or not
+
+Fixed Bugs ofed-1.5.1
+---------------------
+- Fixed crash when reading sysfs performance counters
+- Do not disable IRQs when processing EQs
+- Allow query of max_dest_rd_atomic and max_qp_rd_atomic values
+
+Fixed Bugs ofed-1.5
+---------------------
+- SRQ overflow prevention
+- Performance improvements for QP creation
+- MAD redirection fix
+
+Fixed Bugs ofed-1.4.1
+---------------------
+- none
+
+Fixed Bugs ofed-1.4
+---------------------
+- Reject send work requests only for RESET, INIT and RTR state
+- Reject receive work requests if QP is in RESET state
+- In case of lost interrupts, trigger EOI to reenable interrupts
+- Filter PATH_MIG events if QP was never armed
+- Release mutex in error path of alloc_small_queue_page()
+- Check idr_find() return value
+- Discard double CQE for one WR
+- Generate flush status CQ entries
+- Don't allow creating UC QP with SRQ
+- Fix reported max number of QPs and CQs in systems with >1 adapter
+- Reject dynamic memory add/remove when ehca adapter is present
+- Remove reference to special QP in case of port activation failure
+- Fix locking for shca_list_lock
+
+Fixed Bugs ofed-1.3.1
+---------------------
+- Support all ibv_devinfo values in query_device() and query_port()
+- Prevent posting of SQ WQEs if QP not in RTS
+- Remove mr_largepage parameter, ie always enable large page support
+- Allocate event queue size depending on max number of CQs and QPs
+- Protect QP against destroying until all async events for it are handled
+
+Fixed Bugs ofed-1.3
+-------------------
+- Serialize HCA-related hCalls if necessary
+- Fix static rate if path faster than link
+- Return physical link information in query_port()
+- Fix clipping of device limits to INT_MAX
+- Fix issues related to path migration support
+- Support more than 4k QPs for userspace and kernelspace
+- Prevent sending UD packets to QP0
+- Prevent RDMA-related connection failures on some eHCA2 hardware
+
+Available backports
+-------------------
+- RedHat EL5 up5: 2.6.18-194.ELsmp
+- RedHat EL6: 2.6.32-71.el6
+- SLES11SP1: 2.6.32.12-0.7-default
+- SLES10SP3: 2.6.16.60-0.54.5
+- kernel.org: 2.6.30-36
+
+Known Issues
+------------
+1. The port(s) needs to be connected to an active switch port while
+loading the ehca device driver.
+
+2. Dynamic memory operations are tolerated by ehca, but are prevented by
+the driver while it is loaded.

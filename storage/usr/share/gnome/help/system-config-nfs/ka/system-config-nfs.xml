@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_NFS_DISTRO_SPECIFICS SYSTEM "system-config-nfs-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_NFS_TOOL "NFS Server Configuration Tool">
+<!ENTITY SYSTEM_CONFIG_NFS_INVOCATION '
+    <indexterm significance="normal">
+        <primary><command>system-config-nfs</command>
+        </primary>
+        <see>&SYSTEM_CONFIG_NFS_TOOL;</see>
+    </indexterm>
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_NFS_TOOL;. To start the application on the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guisubmenu>Server Settings</guisubmenu><guimenuitem>NFS</guimenuitem></menuchoice>.
+    </para>
+'>
+<!ENTITY SYSTEM_CONFIG_NFS_ABSTRACT SYSTEM "system-config-nfs-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_NFS_CONTENT SYSTEM "system-config-nfs-content.xml">
+<!ENTITY SYSTEM_CONFIG_NFS_HOSTNAME_FORMATS SYSTEM "system-config-nfs-hostname-formats.xml">
+]>
+<article lang="ka"><title>NFS Server Configuration</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2008-01-17</date></revision><revision><revnumber>1.0.1</revnumber><date>2008-03-12</date></revision></revhistory><abstract role="description"><para>
+     Network File System (NFS) is a way to share files between machines on a network as if the files were located on the client's local hard drive. Your machine can be both an NFS server and an NFS client, which means that it can export file systems to other systems and mount file systems exported from other machines.
+</para><para>
+    Sharing files from an NFS server is done on the level of directories which contain them, this is known as "exporting" these directories. The <application>NFS Server Configuration Tool</application> can be used to configure a system as an NFS server.
+</para>
+</abstract><authorgroup><corpauthor role="maintainer">
+                <trademark class="registered">Red Hat</trademark>, Inc.
+            </corpauthor></authorgroup></articleinfo>    <para>
+     Network File System (NFS) is a way to share files between machines on a network as if the files were located on the client's local hard drive. Your machine can be both an NFS server and an NFS client, which means that it can export file systems to other systems and mount file systems exported from other machines.
+</para><para>
+    Sharing files from an NFS server is done on the level of directories which contain them, this is known as "exporting" these directories. The <application>NFS Server Configuration Tool</application> can be used to configure a system as an NFS server.
+</para>
+
+
+    <indexterm significance="normal"><primary><command>system-config-nfs</command>
+        </primary><see>NFS Server Configuration Tool</see></indexterm><para>
+        You must be running the <application>X</application> Window System and have root privileges to use the NFS Server Configuration Tool. To start the application on the desktop, go to <menuchoice><guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu><guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guisubmenu>Server Settings</guisubmenu><guimenuitem>NFS</guimenuitem></menuchoice>.
+    </para>
+
+	
+	<figure float="0" id="fig-system-config-nfs"><title><application>NFS Server Configuration Tool</application></title><mediaobject><imageobject><imagedata fileref="images/system-config-nfs.png" format="PNG"/></imageobject><textobject><para>
+					NFS Configuration Tool
+				</para></textobject></mediaobject></figure>
+
+	<para>
+		Based on certain firewall settings, you may need to configure the NFS daemon processes to use specific networking ports. The NFS server settings allows you to specify the ports for each process instead of using the random ports assigned by the portmapper. You can set the NFS Server settings by clicking on the <guibutton>Server Settings</guibutton> button. The figure below illustrates the NFS Server Settings window.
+	</para>
+	<figure float="0" id="fig-nfs-server-settings"><title><application>NFS Server Settings</application></title><mediaobject><imageobject><imagedata fileref="images/system-config-nfs-server-settings.png" format="PNG"/></imageobject><textobject><para>
+					NFS Server Settings
+				</para></textobject></mediaobject></figure>
+	<section id="s2-nfs-export"><title>Exporting or Sharing NFS File Systems</title><indexterm significance="normal"><primary>NFS</primary><secondary>exporting</secondary></indexterm><indexterm significance="normal"><primary>exporting NFS file Systems</primary></indexterm><indexterm significance="normal"><primary>file systems</primary><secondary>NFS</secondary><see>NFS</see></indexterm><indexterm significance="normal"><primary><application>NFS Server Configuration Tool</application></primary></indexterm><para>
+			Sharing or serving files from an NFS server is known as "exporting" the directories which contain the files. The <application>NFS Server Configuration Tool</application> can be used to configure a system as an NFS server.
+		</para><para>
+			To add an NFS share, click the <guibutton>Add</guibutton> button. The dialog box shown in <xref linkend="fig-add-share"/> appears.
+		</para><para>
+			The <guilabel>Basic</guilabel> tab requires the following information:
+		</para><itemizedlist><listitem><para>
+					<guilabel>Directory</guilabel> — Specify the directory to share, such as <filename>/tmp</filename>.
+				</para></listitem><listitem><para>
+					<guilabel>Host(s)</guilabel> — Specify the host(s) with which to share the directory. Refer to <xref linkend="s2-nfs-hostname-formats"/> for an explanation of possible formats.
+				</para></listitem><listitem><para>
+					<guilabel>Basic permissions</guilabel> — Specify whether the directory should have read-only or read/write permissions.
+				</para></listitem></itemizedlist><figure float="0" id="fig-add-share"><title>Add Share</title><mediaobject><imageobject><imagedata fileref="images/system-config-nfs-add-basic.png" format="PNG"/></imageobject><textobject><para>
+						Add NFS Share
+					</para></textobject></mediaobject></figure><para>
+			The <guilabel>General Options</guilabel> tab allows the following options to be configured:
+		</para><figure float="0" id="fig-nfs-general-options"><title>NFS General Options</title><mediaobject><imageobject><imagedata fileref="images/system-config-nfs-add-general-options.png" format="PNG"/></imageobject><textobject><para>
+						General Options
+					</para></textobject></mediaobject></figure><itemizedlist><listitem><para>
+					<guilabel>Allow connections from port 1024 and higher</guilabel> — Services started on port numbers less than 1024 must be started as root. Select this option to allow the NFS service to be started by a user other than root. This option corresponds to <command>insecure</command>.
+				</para></listitem><listitem><para>
+					<guilabel>Allow insecure file locking</guilabel> — Do not require a lock request. This option corresponds to <command>insecure_locks</command>.
+				</para></listitem><listitem><para>
+					<guilabel>Disable subtree checking</guilabel> — If a subdirectory of a file system is exported, but the entire file system is not exported, the server checks to see if the requested file is in the subdirectory exported. This check is called <firstterm>subtree checking</firstterm>. Select this option to disable subtree checking. If the entire file system is exported, selecting to disable subtree checking can increase the transfer rate. This option corresponds to <command>no_subtree_check</command>.
+				</para></listitem><listitem><para>
+					<guilabel>Sync write operations on request</guilabel> — Enabled by default, this option does not allow the server to reply to requests before the changes made by the request are written to the disk. This option corresponds to <command>sync</command>. If this is not selected, the <command>async</command> option is used.
+				</para><itemizedlist><listitem><para>
+							<guilabel>Force sync of write operations immediately</guilabel> — Do not delay writing to disk. This option corresponds to <command>no_wdelay</command>.
+						</para></listitem></itemizedlist></listitem><listitem><para>
+					<guilabel>Hide filesystems beneath</guilabel> turns the <command>nohide</command> option on or off. When the <command>nohide</command> option is off, nested directories are revealed. The clients can therefore navigate through a filesystem from the parent without noticing any changes.
+				</para></listitem><listitem><para>
+					<guilabel>Export only if mounted</guilabel> sets the <command>mountpoint</command> option which allows a directory to be exported only if it has been mounted.
+				</para></listitem><listitem><para>
+					<guilabel>Optional Mount Point</guilabel> specifies the path to an optional mount point. Click on the <guibutton>Browse</guibutton> to navigate to the preferred mount point or type the path if known.
+				</para></listitem><listitem><para>
+					<guilabel>Set explicit Filesystem ID:</guilabel> sets the <command>fsid=X</command> option. This is mainly used in a clustered setup. Using a consistent filesystem ID in all clusters avoids having stale NFS filehandles.
+				</para></listitem></itemizedlist><figure float="0" id="fig-nfs-user-access"><title>NFS User Access</title><mediaobject><imageobject><imagedata fileref="images/system-config-nfs-add-user-access.png" format="PNG"/></imageobject><textobject><para>
+						User Access
+					</para></textobject></mediaobject></figure><para>
+			The <guilabel>User Access</guilabel> tab allows the following options to be configured:
+		</para><itemizedlist><listitem><para>
+					<guilabel>Treat remote root user as local root</guilabel> — By default, the user and group IDs of the root user are both 0. Root squashing maps the user ID 0 and the group ID 0 to the user and group IDs of anonymous so that root on the client does not have root privileges on the NFS server. If this option is selected, root is not mapped to anonymous, and root on a client has root privileges to exported directories. Selecting this option can greatly decrease the security of the system. Do not select it unless it is absolutely necessary. This option corresponds to <command>no_root_squash</command>.
+				</para></listitem><listitem><para>
+					<guilabel>Treat all client users as anonymous users</guilabel> — If this option is selected, all user and group IDs are mapped to the anonymous user. This option corresponds to <command>all_squash</command>.
+				</para><itemizedlist><listitem><para>
+							<guilabel>Specify local user ID for anonymous users</guilabel> — If <guilabel>Treat all client users as anonymous users</guilabel> is selected, this option lets you specify a user ID for the anonymous user. This option corresponds to <command>anonuid</command>.
+						</para></listitem><listitem><para>
+							<guilabel>Specify local group ID for anonymous users</guilabel> — If <guilabel>Treat all client users as anonymous users</guilabel> is selected, this option lets you specify a group ID for the anonymous user. This option corresponds to <command>anongid</command>.
+						</para></listitem></itemizedlist></listitem></itemizedlist><para>
+			To edit an existing NFS share, select the share from the list, and click the <guibutton>Properties</guibutton> button. To delete an existing NFS share, select the share from the list, and click the <guibutton>Delete</guibutton> button.
+		</para><indexterm significance="normal"><primary><filename>/etc/exports</filename></primary></indexterm><indexterm significance="normal"><primary><filename>exports</filename></primary></indexterm><para>
+			After clicking <guibutton>OK</guibutton> to add, edit, or delete an NFS share from the list, the changes take place immediately — the server daemon is restarted and the old configuration file is saved as <filename>/etc/exports.bak</filename>. The new configuration is written to <filename>/etc/exports</filename>.
+		</para><para>
+			The <application>NFS Server Configuration Tool</application> reads and writes directly to the <filename>/etc/exports</filename> configuration file. Thus, the file can be modified manually after using the tool, and the tool can be used after modifying the file manually (provided the file was modified with correct syntax).
+		</para></section>
+<appendix><title>Appendix</title><section id="s2-nfs-hostname-formats"><title>Hostname Formats</title><indexterm significance="normal"><primary>NFS</primary><secondary>hostname formats</secondary></indexterm><para>
+		The host(s) can be in the following forms:
+	</para><itemizedlist><listitem><para>
+				Single machine — A fully qualified domain name (that can be resolved by the server), hostname (that can be resolved by the server), or an IP address.
+			</para></listitem><listitem><para>
+				Series of machines specified with wildcards — Use the * or ? character to specify a string match. Wildcards are not to be used with IP addresses; however, they may accidentally work if reverse DNS lookups fail. When specifying wildcards in fully qualified domain names, dots (.) are not included in the wildcard. For example, <computeroutput>*.example.com</computeroutput> includes one.example.com but does not include one.two.example.com.
+			</para></listitem><listitem><para>
+				IP networks — Use <replaceable>a.b.c.d/z</replaceable>, where <replaceable>a.b.c.d</replaceable> is the network and <replaceable>z</replaceable> is the number of bits in the netmask (for example 192.168.0.0/24). Another acceptable format is <replaceable>a.b.c.d/netmask</replaceable>, where <replaceable>a.b.c.d</replaceable> is the network and <replaceable>netmask</replaceable> is the netmask (for example, 192.168.100.8/255.255.255.0).
+			</para></listitem><listitem><para>
+				Netgroups — In the format <replaceable>@group-name</replaceable>, where <replaceable>group-name</replaceable> is the NIS netgroup name.
+			</para></listitem></itemizedlist></section>
+</appendix></article>

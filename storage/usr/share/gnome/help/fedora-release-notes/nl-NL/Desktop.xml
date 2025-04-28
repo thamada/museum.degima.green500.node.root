@@ -1,0 +1,332 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Fedora_Desktop" lang="nl-NL">
+	<title>Fedora desktop</title>
+	<remark>Deze tekst komt van <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Desktop">https://fedoraproject.org/wiki/Docs/Beats/Desktop</ulink></remark>
+	<section id="sect-Release_Notes-Fedora_Desktop-Spanning_Desktop">
+		<title>Overspannende desktop</title>
+		<para>
+			In de laatste versie van &#39;&#39;&#39;Xorg&#39;&#39;&#39; toegevoegd aan deze vrijgave, zal jouw desktop display, indien je een twee-monitoren opstelling hebt, deze monitoren standaard overspannen in plaats van het kopiëren van een display. Dit komt overeen met het gedrag van andere operating systemen.
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-Webcam">
+		<title>Betere ondersteuning voor webcam</title>
+		<para>
+			De betere webcam ondersteuning in Fedora&nbsp;10 heeft veel gedaan om de webcam ondersteuning in Linux te verbeteren. We hebben nu een bibliotheek (<application>libv4l</application>) voor de decompressie van verscheidene eigendomsmatige video formaten in de gebruikersruimte, en bijna alle toepassingen die webcams gebruiken zijn aangepast om deze bibliotheek te gebruiken.
+		</para>
+		<para>
+			Fedora&nbsp;12 bevat een tweede aanzet voor betere webcam ondersteuning, opgebouwd met drie onderdelen: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Veel testen, fouten reparaties, en verbeteren van bestaande drivers in de kernel.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Toevoegen van videobewerking aan <application>libv4l</application> voor een betere video kwaliteit voor webcams die een of meer van de volgende eigenschappen missen in de hardware: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									Wit balans
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Gamma correctie
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Automatische aanpassing van belichting (versterking)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Herkennen van laptop webcams waarvan bekend is dat ze omgekeerd geplaatst zijn en hun beeld in de software 180 graden te draaien.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Opschonen van bestaande drivers buiten de boom, door het verplaatsen van de decompressie naar <application>libv4l</application> waar nodig en ze in te voegen in de hoofdlijn, meer specifiek de volgende: 
+						<itemizedlist>
+							<listitem>
+								<para>
+									qc-usb: op stv0600 (en vergelijkbare) gebaseerde webcams, voornamelijk Logitech QuickCam Express (gedaan vanaf kernel 2.6.29)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									ov51x-jpeg: ov511(+) en ov518(+) driver (gedaan vanaf kernel 2.6.31rc1, libv4l-0.6.0)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									qc-usb-messenger: op st6422 gebaseerde webcams, voornamelijk Logitech QuickCam Messenger modellen (gedaan vanaf kernel 2.6.31rc1)
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									sn9c20x: op sn9c20x gebaseerde webcams, vele nieuwere goedkope webcams (gedaan vanaf kernel 2.6.31rc2)
+								</para>
+							</listitem>
+						</itemizedlist>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-ABRT">
+		<title>ABRT</title>
+		<para>
+			Het <application>ABRT</application> automatische fout rapportering gereedschap vervangt <application>bug-buddy</application> en <application>kerneloops</application> in de Fedora&nbsp;12 desktop. <application>ABRT</application> heeft een uitbreidbare architectuur en kan niet alleen segmentatie fouten en kernels oops afvangen en rapporteren, maar ook python backtraces. In tegenstelling tot <application>bug-buddy</application> kan het segmentatie fouten afvangen in elk programma, niet alleen in GTK+ toepassingen.
+		</para>
+		<para>
+			Als je de <application>GConf</application> instellingen voor de <application>bug-buddy</application> GTK+ module eerder handmatig hebt veranderd, kun je misschien waarschuwingen van GTK+ toepassingen krijgen lijkend op de volgende:
+		</para>
+		
+<screen><computeroutput>Gtk-Message: Failed to load module "gnomebreakpad":</computeroutput>
+<computeroutput>libgnomebreakpad.so: cannot open shared object file: No such file or directory</computeroutput>
+</screen>
+		<para>
+			Om deze boodschappen te laten stoppen, voer je het volgende commando uit in een terminal:
+		</para>
+		
+<screen><command>gconftool-2 --type bool --set /apps/gnome_settings_daemon/gtk-modules/gnomebreakpad false</command>
+</screen>
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-GNOME">
+		<title>GNOME 2.28</title>
+		<para>
+			Het <application>GNOME 2.28.1</application> bureaublad is onderdeel van deze vrijgave, en het is de standaard omgeving die gebruikt wordt in de Fedora Desktop Live image. De Desktop Live image is een CD die je kunt downloaden en gebruiken om de nieuwe GNOME omgeving te testen met of zonder het te installeren. De image kan naar een CD geschreven worden, of naar een USB flash stick; voor instructies refereer je naar <ulink url="https://fedoraproject.org/wiki/FedoraLiveCD/USBHowTo"></ulink>.
+		</para>
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Icons">
+			<title>Iconen in menu&#39;s en knoppen</title>
+			<para>
+				Iconen in menu&#39;s en knoppen worden standaard niet getoond in <application>GNOME 2.28</application>. Om de oude verschijning met veel iconen terug te krijgen, selecteer je <menuchoice><guimenu>Systeem</guimenu><guimenuitem>Voorkeuren</guimenuitem><guimenuitem>Uiterlijk</guimenuitem></menuchoice>, en je klikt op de <guilabel>Interface</guilabel> tab en je zet <guilabel>Show icons in menus</guilabel> aan. Er is echter geen menu interface om de iconen voor de knoppen aan te zetten. Om in plaats hiervan de corresponderende GConf sleutels in te stellen voor het aanzetten van zowel de menu als knop iconen: 
+<screen><command>gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true</command>
+<command>gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true</command>
+</screen>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Changes">
+			<title>Extra verbeteringen in GNOME 2.28</title>
+			<para>
+				Vergeleken met vorige Fedora vrijgaves zijn er een aantal andere veranderingen in de standaard instelling van het GNOME bureaublad: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							De &#39;Vensters&#39; voorkeuren dialoog wordt standaard niet meer geïnstalleerd. Het is nog beschikbaar in het control-center-extra pakket
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							De &#39;Hoofdmenu&#39; voorkeuren dialoog wordt standaard niet meer geïnstalleerd. Het is nog beschikbaar in het alacarte pakket
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							De Gebruikers wisselen-applet is in het bovenste paneel geheel naar rechts verhuisd
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							De &#39;Bureaublad tonen&#39; knop is standaard verwijderd. Als je wilt kun je deze knop weer toevoegen door rechts te klikken in het paneel, "Toevoegen aan paneel..." selecteren en dan "Bureaublad tonen" selecteren
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Het aantal werkbladen in de &#39;Werkbladwisselaar&#39; is verminderd naar 2
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Het paneel voegt ruimte toe tussen de applets en tussen de iconen in het mededelingengebied. Deze ruimte kan verwijderd worden met de volgende commando&#39;s: 
+<screen>gconftool-2 --type int --set /apps/panel/toplevels/top_panel/padding 0
+gconftool-2 --type int --set /apps/panel/toplevels/bottom_panel/padding 0
+gconftool-2 --type int --set /apps/panel/applets/systray/prefs/padding 0
+</screen>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Gnote">
+			<title>Gnote</title>
+			<para>
+				<application>Gnote</application> wordt standaard geïnstalleerd in deze vrijgave en vervangt <application>Tomboy</application>. <application>Gnote</application> is een overzetting van <application>Tomboy</application> van Mono naar C++ en gebruikt minder hulpbronnen. <application>Gnote</application> is zowel een applet op je GNOME paneel als een individuele toepassing die je kunt uitvoeren in andere bureaublad omgevingen. Fedora Desktop Live CD heeft sinds de Fedora 10 vrijgave wegens ruimte gebrek Mono uitgesloten, en dus ook op Mono gebaseerde toepassingen zoals <application>Tomboy</application>. <application>Gnote</application> zal ook in deze vrijgave standaard geïnstalleerd worden. <application>Tomboy</application> is wel beschikbaar als een optioneel alternatief. Als je gaat upgraden van de vorige vrijgave zul je niet overgaan naar <application>Gnote</application> en zul je <application>Tomboy</application> blijven gebruiken. <application>Tomboy</application> gebruikers kunnen eenvoudig overgaan naar <application>Gnote</application> omdat het hetzelfde bestandsformaat gebruikt en er is een plugin beschikbaar in <application>Gnote</application> die automatisch <application>Tomboy</application> opmerkingen importeert als het voor de eerste keer uitgevoerd wordt. Veel van de <application>Tomboy</application> plugins zijn overgezet naar <application>Gnote</application>. De volgende plugins zijn beschikbaar als onderdeel van <application>Gnote</application>: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							Bugzilla Links - sleep Bugzilla URL van browser in Gnote
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Tomboy Importer - importeer opmerkingen vanuit Tomboy
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Fixed Width - vaste-breedte lettertype
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Insert Timestamp - voeg datum en tijd in
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Export to HTML - exporteer opmerkingen naar HTML
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Printing Support - opmerkingen afdrukken
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Sticky Notes Importer - importeer opmerkingen van applet
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Backlinks - zie welke opmerkingen naar deze opmerking verwijzen
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+			<para>
+				Je kunt opmerkingen van <application>Tomboy</application> naar <application>Gnote</application> kopiëren met gebruik van het volgende commando in je persoonlijke map: 
+<screen><command>cp -r .tomboy .gnote</command>
+</screen>
+			</para>
+			<para>
+				De sticky note applet wordt niet meer aangeboden omdat <application>Gnote</application> een beter opmerkingen noteren programma standaard in deze vrijgave aanbiedt.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Sound_preferences">
+			<title>Geluidsvoorkeuren</title>
+			<para>
+				De GNOME geluidsvoorkeuren ondersteunt nu profiel omschakelen.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Empathy">
+			<title>Empathy</title>
+			<para>
+				<application>Empathy</application> vervangt <application>Pidgin</application> als de standaard instant messenger in GNOME. <application>Empathy</application> is beter geïntegreerd in GNOME en biedt audio en video functionaliteit voor gebruikers van het Extensible Messaging and Presence Protocol (XMPP, vroeger Jabber) en meer verbeteringen zijn gepland. <application>Empathy</application> ondersteunt het importeren van accounts van <application>Pidgin</application> als het voor de eerste keer uitgevoerd wordt, dus je kunt eenvoudig overgaan. Als je een upgrade uitvoert van een vorige vrijgave, zul je standaard <application>Pidgin</application> blijven gebruiken. <application>Pidgin</application> blijft beschikbaar in de repository en wordt actief onderhouden.
+			</para>
+			<para>
+				De belangrijkste voor- en nadelen van <application>Empathy</application> zijn: 
+				<itemizedlist>
+					<title>Voordelen</title>
+					<listitem>
+						<para>
+							Betere GNOME integratie. Wachtwoorden worden opgeslagen in de sleutelbos in plaats van met leesbare tekst zoals in <application>Pidgin</application>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Voice chat met <application>GoogleTalk</application>. Voice chat vereist extra <application>gstreamer</application> codecs en handmatig herconfigureren van de firewall en <application>Pidgin</application> gebruikt nu ook hetzelfde raamwerk
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Ondersteuning van account overzetten van <application>Pidgin</application> is toegevoegd aan <application>Empathy</application>.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Ondersteuning voor samenwerking met <application>Abiword</application> en andere programma&#39;s
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Geo locatie (een recente eigenschap)
+						</para>
+					</listitem>
+				</itemizedlist>
+				<itemizedlist>
+					<title>Nadelen</title>
+					<listitem>
+						<para>
+							Plugin systeem ontbreekt, dus vele van de toegevoegde kenmerken beschikbaar voor <application>Pidgin</application> (zoals versleuteling) zijn niet beschikbaar voor <application>Empathy</application>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Geen proxy ondersteuning
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Totem">
+			<title>Totem</title>
+			<para>
+				<application>Totem</application> ondersteunt nu alleen een <application>gstreamer</application> back-end. De <application>totem-xine</application> back-end is geheel verwijderd.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME-Epiphany">
+			<title>Epiphany</title>
+			<para>
+				<application>Epiphany</application> gebruikt in deze vrijgave de WebKit engine in plaats van de Gecko engine van <application>Firefox</application>.
+			</para>
+		</section>
+		
+		<section id="sect-Release_Notes-Fedora_Desktop-GNOME_Shell">
+			<title>GNOME Shell &mdash; een vooruitblik van GNOME 3</title>
+			<para>
+				Een heel vroege versie van GNOME Shell is nu beschikbaar in de repository. GNOME Shell is een sleutel onderdeel van GNOME 3 en wordt actief ontwikkeld met de aanzienlijke deelname van Fedora ontwikkelaars en interactie ontwerpers. Een eenvoudige manier om GNOME Shell uit te proberen is om het <package>desktop-effects</package> pakket te installeren: 
+<screen><command>yum install desktop-effects gnome-shell</command>
+</screen>
+			</para>
+			<para>
+				Klik daarna op <menuchoice><guimenu>Systeem</guimenu><guimenuitem>Voorkeuren</guimenuitem><guimenuitem>Bureaublad effecten</guimenuitem></menuchoice>
+			</para>
+			<para>
+				Als je het handmatig wilt instellen, voer je de volgende commando&#39;s uit: 
+<screen><command>mkdir ~/.config/autostart</command>
+<command>ln -s /usr/share/applications/gnome-shell.desktop ~/.config/autostart</command>
+</screen>
+			</para>
+			<para>
+				Je kunt ook het volgende uitvoeren om het direct aan te roepen. 
+<screen><command>gnome-shell --replace &amp;</command>
+</screen>
+			</para>
+		</section>
+
+	</section>
+	
+	<section id="sect-Release_Notes-Fedora_Desktop-KDE">
+		<title>KDE 4.3</title>
+		<para>
+			<application>KDE 4.3</application> is onderdeel van deze vrijgave en is de standaard omgeving in de Fedora KDE Desktop Live image. De KDE Desktop Live image is een CD die je kunt downloaden en gebruiken om de nieuwe KDE omgeving te testen met of zonder het te installeren. De image kan naar een CD geschreven worden, of naar een USB flash stick.
+		</para>
+		<para>
+			<application>KDE 4.3</application> is de laatste vrijgave van KDE 4, met vele verbeteringen en nieuwe kenmerken. <application>Plasma</application> heeft een nieuw <citetitle>Air</citetitle> uiterlijk, verbeterde taak en berichtgeving beheer en volledig instelbare toestenbord sneltoetsen. Er zijn ook nieuwe <application>Plasma</application> widgets en bestaande zijn verbeterd. <application>KWin</application> is geoptimaliseerd voor prestaties en brengt nieuwe bureaublad effecten naar KDE. KDE bevat nu een nieuw fout rapportering gereedschap, wat het gemakkelijker maakt om fouten te rapporteren aan de KDE ontwikkelaars.
+		</para>
+	</section>
+
+</section>
+
+

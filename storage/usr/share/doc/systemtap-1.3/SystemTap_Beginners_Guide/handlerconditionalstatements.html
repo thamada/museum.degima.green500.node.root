@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>3.3.2. Conditional Statements</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="scriptconstructions.html" title="3.3. Basic SystemTap Handler Constructs" /><link rel="prev" href="scriptconstructions.html" title="3.3. Basic SystemTap Handler Constructs" /><link rel="next" href="commandlineargssect.html" title="3.3.3. Command-Line Arguments" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="scriptconstructions.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="commandlineargssect.html"><strong>Next</strong></a></li></ul><div class="section" title="3.3.2. Conditional Statements" id="handlerconditionalstatements"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="handlerconditionalstatements">3.3.2. Conditional Statements</h3></div></div></div><a id="id2157895" class="indexterm"></a><a id="id674750" class="indexterm"></a><div class="para">
+			In some cases, the output of a SystemTap script may be too big. To address this, you need to further refine the script's logic in order to delimit the output into something more relevant or useful to your probe.
+		</div><div class="para">
+			You can do this by using <span class="emphasis"><em>conditionals</em></span> in handlers. SystemTap accepts the following types of conditional statements:
+		</div><div class="variablelist"><dl><dt class="varlistentry"><span class="term">If/Else Statements</span></dt><dd><a id="id795580" class="indexterm"></a><a id="id653289" class="indexterm"></a><a id="id742525" class="indexterm"></a><div class="para">
+						Format:
+					</div><pre class="programlisting">
+if (<em class="replaceable"><code>condition</code></em>)
+  <em class="replaceable"><code>statement1</code></em>
+else
+  <em class="replaceable"><code>statement2</code></em></pre><div class="para">
+						The <code class="command"><em class="replaceable"><code>statement1</code></em></code> is executed if the <code class="command"><em class="replaceable"><code>condition</code></em></code> expression is non-zero. The <code class="command"><em class="replaceable"><code>statement2</code></em></code> is executed if the <code class="command"><em class="replaceable"><code>condition</code></em></code> expression is zero. The <code class="command">else</code> clause (<code class="command">else</code> <em class="replaceable"><code>statement2</code></em>) is optional. Both <code class="command"><em class="replaceable"><code>statement1</code></em></code> and <code class="command"><em class="replaceable"><code>statement2</code></em></code> can be statement blocks.
+					</div><div class="example" title="Example 3.9. ifelse.stp" id="simpleifelseexample"><h6>Example 3.9. ifelse.stp</h6><div class="example-contents"><pre class="programlisting">
+global countread, countnonread
+probe kernel.function("vfs_read"),kernel.function("vfs_write")
+{
+  if (probefunc()=="vfs_read") 
+    countread ++ 
+  else 
+    countnonread ++
+}
+probe timer.s(5) { exit() }
+probe end 
+{
+  printf("VFS reads total %d\n VFS writes total %d\n", countread, countnonread)
+}
+</pre></div></div><br class="example-break" /><div class="para">
+						<a class="xref" href="handlerconditionalstatements.html#simpleifelseexample" title="Example 3.9. ifelse.stp">Example 3.9, “ifelse.stp”</a> is a script that counts how many virtual file system reads (<code class="command">vfs_read</code>) and writes (<code class="command">vfs_write</code>) the system performs within a 5-second span. When run, the script increments the value of the variable <code class="command">countread</code> by 1 if the name of the function it probed matches <code class="command">vfs_read</code> (as noted by the condition <code class="command">if (probefunc()=="vfs_read")</code>); otherwise, it increments <code class="command">countnonread</code> (<code class="command">else {countnonread ++}</code>).
+					</div></dd><dt class="varlistentry"><span class="term">While Loops</span></dt><dd><a id="id675627" class="indexterm"></a><a id="id655956" class="indexterm"></a><a id="id646798" class="indexterm"></a><div class="para">
+						Format:
+					</div><pre class="programlisting">
+while (<em class="replaceable"><code>condition</code></em>)
+  <em class="replaceable"><code>statement</code></em></pre><div class="para">
+						So long as <code class="command"><em class="replaceable"><code>condition</code></em></code> is non-zero the block of statements in <code class="command"><em class="replaceable"><code>statement</code></em></code> are executed. The <code class="command"><em class="replaceable"><code>statement</code></em></code> is often a statement block and it must change a value so <code class="command"><em class="replaceable"><code>condition</code></em></code> will eventually be zero.
+					</div></dd><dt class="varlistentry"><span class="term">For Loops</span></dt><dd><a id="id740434" class="indexterm"></a><a id="id671486" class="indexterm"></a><a id="id795523" class="indexterm"></a><div class="para">
+						Format:
+					</div><pre class="programlisting">
+for (<em class="replaceable"><code>initialization</code></em>; <em class="replaceable"><code>conditional</code></em>; <em class="replaceable"><code>increment</code></em>) <em class="replaceable"><code>statement</code></em></pre><div class="para">
+						The <code class="command">for</code> loop is simply shorthand for a while loop. The following is the equivalent <code class="command">while</code> loop:
+					</div><pre class="programlisting">
+<em class="replaceable"><code>initialization</code></em>
+while (<em class="replaceable"><code>conditional</code></em>) {
+   <em class="replaceable"><code>statement</code></em>
+   <em class="replaceable"><code>increment</code></em>
+}
+</pre></dd></dl></div><div class="formalpara"><h5 class="formalpara" id="id735302">Conditional Operators</h5><a id="id708695" class="indexterm"></a><a id="id666848" class="indexterm"></a><a id="id2158520" class="indexterm"></a>
+				Aside from <code class="command">==</code> ("is equal to"), you can also use the following operators in your conditional statements:
+			</div><div class="variablelist"><dl><dt class="varlistentry"><span class="term">&gt;=</span></dt><dd><div class="para">
+						Greater than or equal to
+					</div></dd><dt class="varlistentry"><span class="term">&lt;=</span></dt><dd><div class="para">
+						Less than or equal to
+					</div></dd><dt class="varlistentry"><span class="term">!=</span></dt><dd><div class="para">
+						Is not equal to
+					</div></dd></dl></div></div><ul class="docnav"><li class="previous"><a accesskey="p" href="scriptconstructions.html"><strong>Prev</strong>3.3. Basic SystemTap Handler Constructs</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="commandlineargssect.html"><strong>Next</strong>3.3.3. Command-Line Arguments</a></li></ul></body></html>

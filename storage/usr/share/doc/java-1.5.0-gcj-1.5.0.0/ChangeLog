@@ -1,0 +1,795 @@
+2008-12-17  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile: Don't fail when run by rpm.
+	* configure.ac: Bump release number to 1.0.79.
+
+2008-04-03  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number to 1.0.78.
+
+2008-04-03  Gary Benson  <gbenson@redhat.com>
+
+	* aotcompile.py.in: Fail gracefully when nothing to do.
+
+2007-11-27  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number to 1.0.77.
+	* aot-compile-rpm: Compile from source list.
+
+2007-11-27  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* aot-compile-rpm: Do not run inside the buildroot.
+
+2007-07-04  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* generate-cacerts.pl: Add copyright notice to
+	generate-cacerts.pl.
+
+2007-04-16  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number to 1.0.76.
+	* generate-cacerts.pl: Set blank password on generated cacerts
+	keystore.
+
+2007-04-10  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (EXTRA_DIST): Include generate-cacerts.pl.
+	* configure.ac: Bump release number to 1.0.75.
+	* generate-cacerts.pl: New file.
+
+2007-03-26  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac (MAKE): Add substitution.
+	Bump release number to 1.0.74.
+
+2007-03-24  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* autogen.sh: Add support for automake-1.10.  Use aot-compile file
+	for top-level directory check.
+	* configure.ac: Bump release number to 1.0.73.
+	(JAR_INST_DIR): Remove substitution.
+	(JAR): Likewise.
+	(JAVAC): Likewise.
+	(classpath-security): Remove option.
+	(security-directory): Likewise.
+	(SUN_BOOT_CLASS_PATH): Remove substitution.
+	(GJDOC): Likewise.
+	(MAKE): Likewise.
+	(GCJ_JAR_DIR): Likewise.
+	(JAVA_EXT_DIRS): Likewise.
+	(AC_CONFIG_FILES): Remove Config.java.
+	* Makefile.am: Remove logic to build tools.jar.  Fix python build
+	logic for builddir != srcdir builds and update to python 2.5.
+	(EXTRA_DIST): Remove tools.jar sources.
+	* com/sun/javadoc/ClassDoc.java,
+	com/sun/javadoc/ConstructorDoc.java, com/sun/javadoc/Doc.java,
+	com/sun/javadoc/DocErrorReporter.java,
+	com/sun/javadoc/Doclet.java,
+	com/sun/javadoc/ExecutableMemberDoc.java,
+	com/sun/javadoc/FieldDoc.java, com/sun/javadoc/MemberDoc.java,
+	com/sun/javadoc/MethodDoc.java, com/sun/javadoc/PackageDoc.java,
+	com/sun/javadoc/ParamTag.java, com/sun/javadoc/Parameter.java,
+	com/sun/javadoc/ProgramElementDoc.java,
+	com/sun/javadoc/RootDoc.java, com/sun/javadoc/SeeTag.java,
+	com/sun/javadoc/SerialFieldTag.java,
+	com/sun/javadoc/SourcePosition.java, com/sun/javadoc/Tag.java,
+	com/sun/javadoc/ThrowsTag.java, com/sun/javadoc/Type.java,
+	com/sun/javadoc/TypeVariable.java,
+	com/sun/tools/doclets/Taglet.java,
+	com/sun/tools/javac/Config.java.in, com/sun/tools/javac/Main.java,
+	sun/rmi/rmic/Main.java: Merge files into GNU Classpath tools.jar.
+
+2007-03-16  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number to 1.0.72.
+	* Makefile.am: Include com.sun.javadoc and com.sun.tools.doclets
+	packages in tools.jar.
+	* com/sun/javadoc/ClassDoc.java,
+	com/sun/javadoc/ConstructorDoc.java, com/sun/javadoc/Doc.java,
+	com/sun/javadoc/DocErrorReporter.java,
+	com/sun/javadoc/Doclet.java,
+	com/sun/javadoc/ExecutableMemberDoc.java,
+	com/sun/javadoc/FieldDoc.java, com/sun/javadoc/MemberDoc.java,
+	com/sun/javadoc/MethodDoc.java, com/sun/javadoc/PackageDoc.java,
+	com/sun/javadoc/ParamTag.java, com/sun/javadoc/Parameter.java,
+	com/sun/javadoc/ProgramElementDoc.java,
+	com/sun/javadoc/RootDoc.java, com/sun/javadoc/SeeTag.java,
+	com/sun/javadoc/SerialFieldTag.java,
+	com/sun/javadoc/SourcePosition.java, com/sun/javadoc/Tag.java,
+	com/sun/javadoc/ThrowsTag.java, com/sun/javadoc/Type.java,
+	com/sun/javadoc/TypeVariable.java,
+	com/sun/tools/doclets/Taglet.java: New files.
+
+2007-03-14  Gary Benson  <gbenson@redhat.com>
+
+	* sun/rmi/rmic/Main.java: Use java.vm.version system property
+	to locate libgcj-tools.jar.
+	* configure.ac: Bump release number to 1.0.71.
+
+2007-03-11  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Add --with-arch-suffix option.
+	Bump release number to 1.0.70.
+	* Makefile.am (tools.jar): Include manifest.
+	(install-data-local): Make tools symbolic links relative.
+	Fix python install line for make distcheck.
+	(uninstall-local): Fix aotcompile uninstall for make distcheck.
+	(DISTCLEANFILES): Add build/lib/aotcompile.py.
+
+2007-02-15  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* LICENSE: New file.
+	* Makefile.am (EXTRA_DIST): Add LICENSE.
+	* configure.ac (JAVAC): Check for ecj.
+	Bump release number to 1.0.69.
+	(JAVA_VERSION): Set to 1.5.0.
+	* com/sun/tools/javac/Config.java.in: Update copyright data and
+	FSF address.
+	* com/sun/tools/javac/Main.java: Update copyright data and FSF
+	address.
+	* sun/rmi/rmic/Main.java: Load classes from libgcj-tools.jar.
+	Update copyright data and FSF address.
+
+2006-09-07  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* rebuild-gcj-db.in: Remove check for libdir argument.
+	* configure.ac: Bump release number to 1.0.68.
+
+2006-09-06  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile: Add missing make-control options.
+	* configure.ac: Bump release number to 1.0.67.
+
+2006-09-05  Gary Benson  <gbenson@redhat.com>
+
+	* aotcompile.py.in: Change Compiler constructor's arguments.
+	* aot-compile-rpm: Create Compiler with the above.
+	* aot-compile: Remove now-unnecessary note in usage.
+	* configure.ac: Bump release number to 1.0.66.
+
+2006-08-30  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (install-data-local): Do not double-install
+	$(mkinstalldirs) $(DESTDIR)$(JRE_BIN_DIR).
+	* configure.ac: Bump release number to 1.0.65.
+
+2006-08-30  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm: Fix paths of generated files.
+	* configure.ac: Bump release number to 1.0.64.
+
+2006-08-29  Gary Benson  <gbenson@redhat.com>
+
+	* aotcompile.py.in: Fix split jarfiles bug.
+	* configure.ac: Bump release number to 1.0.63.
+
+2006-08-23  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile.in: Rename as...
+	* aot-compile: New file.
+	* aot-compile-rpm.in: Rename as...
+	* aot-compile-rpm: New file.
+	* Makefile.am (EXTRA_DIST): add aot-compile and aot-compile-rpm.
+	* configure.ac: Don't generate aot-compile or aot-compile-rpm.
+	Bump release number to 1.0.62.
+
+2006-08-23  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in: Use gcj-dbtool to determine libdir.
+
+2006-08-22  Gary Benson  <gbenson@redhat.com>
+
+	* classfile.py: Update copyright notice.
+	* aotcompile.py.in: Add copyright notice.
+	* aot-compile.in: Likewise.
+	* aot-compile-rpm.in: Likewise.
+
+2006-07-24  Gary Benson  <gbenson@redhat.com>
+
+	* aotcompile.py.in (Job.__targetName): Use basename.
+	* configure.ac: Bump release number to 1.0.61.
+
+2006-07-21  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (install-data-local): Install appletviewer,
+	jarsigner and keytool symlinks.
+	* configure.ac: Bump release number to 1.0.60.
+
+2006-07-20  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* com/sun/tools/javac/Main.java (compile): Make static.
+	Improve error reporting.
+	* configure.ac: Bump release number to 1.0.59.
+
+2006-06-16  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (install-data-local): Create jre/bin/java symlink to
+	gij.  Thanks to VMilkos <vmiklos@frugalware.org> for reporting
+	this.
+	* README: Add note about libjawt.so and gij -rpath work.
+	* configure.ac: Bump release number to 1.0.58.
+
+2006-06-13  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* java.c: Remove file.
+
+2006-06-07  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (libjawt.so): Remove target.
+	(java): Likewise.
+	* configure.ac: Bump release number to 1.0.57.
+
+2006-05-26  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* jar.in: Remove.
+	* java.in: Likewise.
+	* javac.in: Likewise.
+	* javadoc.in: Likewise.
+	* javah.in: Likewise.
+	* pr13212.c: Likewise.
+	* rmic.in: Likewise.
+	* rmiregistry.in: Likewise.
+
+2006-04-18  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile.in: Fix usage message bug.
+	* configure.ac: Bump release number to 1.0.56.
+
+2006-03-29  Bryce McKinlay  <mckinlay@redhat.com>
+
+	* Makefile.am (pr13212.so): Remove target.
+	* java.c (main): Remove LD_PRELOAD code.
+	* pr13212.c: Deleted.
+	* configure.ac: Bump release number to 1.0.55.
+
+2006-03-15  Gary Benson  <gbenson@redhat.com>
+
+	* Makefile.am (install-data-local): Fix python module installation.
+	* configure.ac: Bump release number to 1.0.54.
+
+2006-03-07  Gary Benson  <gbenson@redhat.com>
+
+	* configure.ac: Bump release number to 1.0.53.
+
+2006-03-07  Gary Benson  <gbenson@redhat.com>
+
+	* aotcompile.py.in: Rewrite the build stages to use make.
+	* aot-compile.in: Add options, etc to control make.
+	* configure.ac: Add a make substitution for aotcompile.py.in.
+
+2006-03-07  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile.in: Replace with a front-end to aotcompile.py.
+	* configure.ac: Build the new script.
+	* Makefile.am: Install the new script.
+
+	* find-and-aot-compile.in: Remove old file.
+
+2006-03-07  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in: Move everything except rpm-specifics into...
+	* aotcompile.py.in: New file.
+	* classfile.py: Likewise.
+
+	* setup.py.in: New file to install Python modules.
+	* configure.ac: Build the new files.
+	* Makefile.am: Distribute and install the new files.
+
+2006-01-25  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number to 1.0.52.
+
+2006-01-24  Tom Tromey  <tromey@redhat.com>
+
+	* rebuild-gcj-db.in: Loop over /usr/lib*.
+
+2006-01-16  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number.
+
+2006-01-16  Anthony Green  <green@redhat.com>
+
+	* java.c (set_java_ext_dir): New function.
+	(main): Use set_java_ext_dir.
+
+2006-01-06  Archit Shah  <ashah@redhat.com>
+
+	* configure.ac: Bump release number.
+	* java.c: comment out LD_PRELOAD hack because of problems
+
+2006-01-06  Anthony Green  <green@redhat.com>
+
+	* configure.ac: Bump release number.
+	* Makefile.am (javadoc_jarfile, taglet_jarfile,
+	javadoc_class_files): Extract javadoc classes and add them to
+	tools.jar.
+
+2006-01-06  Archit Shah  <ashah@redhat.com>
+
+	* configure.ac: Bump release number.
+	* aot-compile-rpm.in: Lower MAX_BYTES_PER_JAR to 1M because of problems
+	building jacorb on ppc64
+
+2006-01-04  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number.
+	* Makefile.am (pr13212.so): Add -fPIC.
+	(libjawt.so): Change -fpic to -fPIC.
+
+2006-01-04  Anthony Green  <green@redhat.com>
+
+	* Makefile.am (pr13212.so): Build pr13212.so.
+	* pr13212.c: New file.
+	* java.c (main): Set LD_PRELOAD.
+	* configure.ac: Bump release number to 1.0.46.
+
+2005-11-15  Archit Shah  <ashah@redhat.com>
+
+	* rebuild-gcj-db.in: Fix syntax for find.
+	* configure.ac: Bump release number to 1.0.45.
+
+2005-11-14  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (bin_SCRIPTS): Move rebuild-gcj-db and
+	aot-compile-rpm here from jrebin_SCRIPTS and sdkbin_SCRIPTS.
+	(install-data-local): Remove aot-compile-rpm and rebuild-gcj-db
+	installation lines.
+	* configure.ac: Bump release number to 1.0.44.
+
+2005-11-14  Gary Benson  <gbenson@redhat.com>
+
+	* rebuild-gcj-db.in: Add -follow to find (from Andrew Haley).
+
+2005-09-21  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in: Cope with unjarred classes, fix database
+	with jars in jars, and lots of general refactoring and tidying.
+
+	* configure.ac: Bump release number to 1.0.43.
+
+2005-09-20  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in: Cope with jars in jars (in jars in jars...)
+	and with incorrectly named classes.  This allows us to handle
+	wars, ears and rars.  Also split jarfiles on bytes of classes as
+	well as number of classes, to avoid machine-crushing compilations.
+
+	* configure.ac: Bump release number to 1.0.42.
+
+2005-09-16  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in (find_jars, strip_exclusions): Move the
+	exclusion handling logic from its own function into find_jars.
+
+	* aot-compile-rpm.in (find_jars): More correctly identify jars.
+
+2005-09-06  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* java.c: New file.
+	* Makefile.am (java): New target.
+	(all-local): Add java.
+	(install-exec-local): Install java binary in JRE and SDK bin
+	directories.
+	* configure.ac: Bump release number to 1.0.41.
+
+2005-08-31  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Treat gjdoc location as a special case.  Bump
+	release number to 1.0.40.
+	* Makefile.am (install-data-local): Treat gjdoc location as a
+	special case.
+
+2005-08-30  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (libjawt.so): Use gcc in gcj's installed prefix.
+	* configure.ac: Bump release number to 1.0.39.
+
+2005-08-30  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release number to 1.0.38.
+	* Makefile.am (libjawt.so): New library.
+
+2005-08-29  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (jrebin_SCRIPTS): Remove find-and-aot-compile,
+	aot-compile and rebuild-gcj-db.
+	(sdkbin_SCRIPTS): Add rebuild-gcj-db and aot-compile-rpm.
+	(install-data-local): Install symlinks for rebuild-gcj-db and
+	aot-compile-rpm.
+	(uninstall-local): Remove target.
+
+	* configure.ac: Bump release number to 1.0.37.
+	(AC_CONFIG_FILES): Remove find-and-aot-compile and aot-compile
+	scripts.
+
+2005-07-28  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in (GCJFLAGS): Added -fjni.
+
+	* configure.ac: Bump release number to 1.0.36.
+
+2005-07-20  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in (check_paths): Replace with...
+	* aot-compile-rpm.in (set_basenames): New function to give
+	each jarfile a unique basename with which to generate solib
+	and database filenames from.
+
+	* configure.ac: Bump release number to 1.0.35.
+
+2005-07-19  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in (aot_compile_jar): Split jarfiles harder.
+
+	* configure.ac: Bump release number to 1.0.34.
+
+2005-07-14  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in (find_jars): Ignore jars that contain no
+	classes, ignoring (for now) classes in WEB-INF directories.
+
+	* configure.ac: Bump release number to 1.0.33.
+
+2005-07-13  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in (split_jarfile): Always split, not just
+	on ppc, since that way we avoid huge assembler files.
+
+	* aot-compile-rpm.in (system): Fix error messages.
+
+	* aot-compile-rpm.in (find_jars, aot_compile_rpm): Move the bit
+	that ensures different basenames from before to after weed_jars.
+	* aot-compile-rpm.in (weed_jars): Warn if a subset works both
+	ways, to alert of possible identical copies of the same jar.
+
+	* aot-compile-rpm.in (split_jarfile): Change semantics.
+	* aot-compile-rpm.in (symlink_jarfile): New function.
+	* aot-compile-rpm.in (aot_compile_rpm): Refactor.
+
+	* configure.ac: Bump release number to 1.0.32.
+
+2005-07-07  Gary Benson  <gbenson@redhat.com>
+
+	* aot-compile-rpm.in: New file.
+	* configure.ac: Generate aot-compile-rpm.
+	* Makefile.am (gcjbin_SCRIPTS): Add aot-compile-rpm.
+	* rebuild-gcj-db.in: Also look in new database dir.
+	* configure.ac: Bump release number to 1.0.31.
+
+2005-07-06  Gary Benson  <gbenson@redhat.com>
+
+	* rebuild-gcj-db.in: Recursively look for databases anywhere in
+	the specified directory.  With bulletproofing by Andrew Haley.
+
+	* configure.ac: Make a new AC_SUBST variable, LIBDIR, a
+	fully-expanded version of libdir.
+	* rebuild-gcj-db.in: Use the above.
+
+2005-05-25  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* com/sun/tools/javac/Main.java (Main): Look for
+	/usr/share/java/eclipse-ecj.jar.
+	* configure.ac: Bump release number to 1.0.30.
+
+2005-05-19  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* com/sun/tools/javac/Main.java: Remove option munging.
+	* Makefile.am (bin_SCRIPTS): Remove.
+	(bindir): Likewise.
+	(install-data-local): Create symlinks from javah to gjnih and from
+	javac to ecj.
+	* configure.ac: Don't generate javah or javac wrappers.  Bump
+	release number to 1.0.29.
+
+2005-04-13  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (bin_SCRIPTS): Don't install java wrapper script.
+	(install-data-local): Symlink java command directly to gij.
+
+	* find-and-nativify.in: Rename ...
+	* find-and-aot-compile.in: New file.
+	* nativify.in: Rename ...
+	* aot-compile.in: New file.
+	* rebuild-security-providers.in: Remove.
+	* configure.ac: Don't generate rebuild-security-providers.
+	Generate aot-compile and find-and-aot-compile.  Bump release
+	number to 1.0.28.
+	Don't generate java wrapper.
+
+	* Makefile.am (gcjbin_SCRIPTS): Remove rebuild-security-providers.
+	Remove nativify and find-and-nativify.  Add aot-compile and
+	find-and-aot-compile.
+
+2005-04-04  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* java.in: Remove all logic, except define java.home and
+	sun.boot.class.path system properties.
+	* Makefile.am (bin_SCRIPTS): Add java.
+	* configure.ac: Generate java wrapper.  Bump release number to
+	1.0.27.
+
+	* rebuild-gcj-db.in (dbLocation): Fix gcj-dbtool invocation.
+	* configure.ac: Bump release number to 1.0.26.
+
+	* Makefile.am (install-data-local): Append gcc_suffix to gcj tool
+	names.
+	* configure.ac: Bump release number to 1.0.25.
+
+	* configure.ac: Don't generate wrapper scripts for jar, javadoc,
+	rmic, java or rmiregistry.
+	Bump release number to 1.0.24.
+	* Makefile.am (bin_SCRIPTS): Remove jar, javadoc, rmic, java or
+	rmiregistry.
+	(install-data-local): Install symlinks for jar, javadoc, rmic,
+	java or rmiregistry to equivalent gcj tools.
+
+2005-03-31  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* rebuild-gcj-db.in: New file.
+	* find-and-nativify.in: Likewise.
+	* nativify.in: Likewise.
+	* Makefile.am (gcjbin_SCRIPTS): Add rebuild-gcj-db,
+	find-and-nativify and nativify.
+	* configure.ac: Generate rebuild-gcj-db, find-and-nativify and
+	nativify.  Bump release number to 1.0.23.
+
+2005-03-08  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* rebuild-security-providers.in: New file.
+	* javac.in: Define java.ext.dirs when running ecj.
+	* Makefile.am: Install rebuild-security-providers.
+	* configure.ac: Add --with-classpath-security and
+	--with-security-directory options.  Bump release number to 1.0.22.
+
+2005-03-06  Anthony Green  <green@redhat.com>
+
+	* javac.in: Set gnu.gcj.precompiled.db.path in order to pick up
+	AOT-compiled Eclipse compiler.
+
+	* com/sun/tools/javac/Main.java (compile): Append the extensions
+	directory to the bootclasspath.
+	(expandExtDirs): New method.
+
+2005-03-06  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Revert gcjlib patch.
+	* com/sun/tools/javac/Config.java.in: Likewise.
+	* com/sun/tools/javac/Main.java: Likewise.
+
+2005-03-05  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* java.in: Add -D options to vm_params not params.
+	* configure.ac: Bumpe release number to 1.0.21.
+
+	* java.in: Preserve zero-length-string application arguments in a
+	cleaner way.  Define default protocol handler to use JESSIE.
+	* Makefile.am: Add -I . to bytecode compile line.
+	* configure.ac: Bump release number to 1.0.20.
+
+	* java.in: Preserve zero-length-string application arguments.
+	* configure.ac: Bump release number to 1.0.19.
+
+2005-03-03  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* javah.in: Ignore -force option.
+	* java.in: Ignore -X options without issuing a warning message.
+	* configure.ac: Bump release number to 1.0.18.
+
+2005-03-02  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Add --with-arch-directory and --with-os-directory
+	options.  Bump release to 1.0.17.
+
+2005-03-02  Andrew Overholt  <overholt@redhat.com>
+
+	* com/sun/tools/javac/Main.java: Check for native library before
+	jdtcore.jar.
+	* com/sun/tools/javac/Config.java.in: Pass through
+	ECJLIB_INST_DIR.
+	* configure.ac: Likewise.  Bump release to 1.0.16.
+
+2005-03-01  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am: Install CPU sub-directory in JRE_LIB_DIR.  Install
+	SDK_INCLUDE_DIR and OS sub-directory in SDK_INCLUDE_DIR.
+	* configure.ac (SDK_INCLUDE_DIR): New AC_SUBST variable.
+	(OS): New AC_SUBST variable.
+	Calculate OS include sub-directory based on host_os.
+
+2005-02-17  Anthony Green  <green@redhat.com>
+
+	* configure.ac: Bump release to 1.0.15.  Find cpu value.
+	* Makefile.am: Create cpu directory under $JAVA_HOME/jre/lib.
+
+2005-02-09  Andrew Overholt  <overholt@redhat.com>
+
+	* configure.ac: Bump release to 1.0.14.
+	* java.in: Use GCJ_BIN_DIR and gcc_suffix.
+
+2005-02-08  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release to 1.0.13.  Set SUN_BOOT_CLASS_PATH
+	and JAVA_EXT_DIRS variables.
+	* java.in: Define sun.boot.class.path and java.ext.dirs
+	properties.
+
+2005-02-07  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release to 1.0.12.
+
+2005-02-07  Ulrich Drepper  <drepper@redhat.com>
+
+	* java.in: Don't create temporary command file.
+
+2005-02-01  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release to 1.0.11.
+
+	* Makefile.am (uninstall-local): Remove java and rmiregistry
+	copies.
+
+	* configure.ac: Bump release to 1.0.10.
+	* Makefile.am (install-data-local): Prefix symlinks with
+	$(DESTDIR).
+	(CLEANFILES): Remove class files and tools.jar.
+
+2005-01-31  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release to 1.0.9.
+	* javadoc.in: Replace hack with call to gjdoc.
+
+2005-01-24  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release to 1.0.8.
+	* java.in: Handle -jar, -help and -? options.
+
+2005-01-12  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release to 1.0.7.  Add --with-gcc-suffix and
+	--with-origin-name options.
+	* jar.in: Add gcc_suffix to tool name.
+	* java.in: Likewise.
+	* javac.in: Likewise.
+	* javah.in: Likewise.
+	* rmic.in: Likewise.
+	* rmiregistry.in: Likewise.
+
+	* configure.ac: Bump release to 1.0.6.
+
+	* com/sun/tools/javac/Config.java.in: New file.
+	* com/sun/tools/javac/Main.java (Main): Use JAR_INST_DIR
+	substitution to locate jdtcore.jar.
+	* Makefile.am: Build Config.java.
+	* configure.ac: Generate Config.java.in.
+	Add JAR_INST_DIR substitution.
+
+2005-01-11  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* configure.ac: Bump release to 1.0.5.
+	* com/sun/tools/javac/Main.java (Main): Load jdtcore.jar instead
+	of ecj.jar.
+
+2004-12-21  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile.am (install-data-local): Copy java and rmiregistry
+	scripts rather than creating symlinks.
+	* configure.ac: Bump release to 1.0.4.
+
+	* Makfile.am (install-data-local): Remove SDK_INCLUDE_DIR and
+	JRE_LIB_DIR references.
+	* configure.ac: Remove JRE_LIB_DIR substitution.
+
+	* configure.ac: Remove SDK_INCLUDE_DIR substitution.
+
+	* Makefile.am (install-data-local): Don't create jni.h symlink.
+	* configure.ac: Remove GCJ_JNI_H substitution.
+
+	* configure.ac: Bump release to 1.0.2.
+
+2004-12-21  Gary Benson  <gbenson@redhat.com>
+
+	* configure.ac: Replace GCJ_RT_JAR substitution with GCJ_JAR_DIR.
+	* java.in: Figure out libgcj.jar path at runtime.
+	* javac.in: Don't add a bootclasspath.
+	* Makefile.am (install-data-local): Don't create rt.jar symlink.
+
+2004-12-13  Anthony Green  <green@redhat.com>
+
+	* java.in: Don't parse standard java options after we've seen
+	the main class name.
+
+2004-12-13  Anthony Green  <green@redhat.com>
+
+	* configure.ac: Set gcj_prefix based on `which gcj`.
+
+2004-12-13  Anthony Green  <green@redhat.com>
+
+	* Makefile.am (install-data-local): Force all symlinks.
+	* configure.ac: Handle the jhbuild case of the gcj binaries
+	being installed in gcj-bin.
+
+2004-12-06  Gary Benson  <gbenson@redhat.com>
+
+	* com/sun/tools/javac/Main.java (Main): Instantiate ecj compiler
+	through a URLClassLoader.
+
+2004-11-09  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* _jpp/bin/java: Remove upstream reference.
+	* _jpp/jre/bin/java: Likewise.
+
+	* _jpp/bin/java: Define java.version.
+	* _jpp/jre/bin/java: Likewise.
+
+2004-10-06  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* _jpp/bin/javac: Use %{gccver} instead of hard-coding gcc
+	version in classpath. (Fix #133898)
+
+2004-10-01  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* _jpp/bin/java: Run with sh, not bash.
+	* _jpp/jre/bin/java: Likewise.
+
+2004-08-10  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile: Run fastjar, not gjar.
+	* _jpp/bin/jar: Run fastjar, not gjar.
+
+2004-07-14  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* _jpp/bin/java: Define java.home property.
+	* _jpp/jre/bin/java: Likewise.
+
+2004-07-13  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* _jpp/bin/javadoc: Create placeholder script suitable only for
+	building jpackages.
+
+	* _jpp/bin/javac: Revert last change.  Point -bootclasspath at
+	libgcj.jar.
+	* Makefile: Run gjar, not jar.
+
+	* _jpp/bin/javac: Call ecj binary directly.
+
+2004-07-13  Anthony Green  <green@redhat.com>
+
+	* com/sun/tools/javac/Main.java: Set bootclasspath if
+	necessary.  Add sourcepath to classpath.
+
+2004-07-13  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* _jpp/bin/javadoc: New wrapper.
+
+2004-07-02  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* _jpp/include/jni.h: Remove.
+	* _jpp/bin/javah: Run gcjh -jni.
+
+2004-06-30  Gary Benson  <gbenson@redhat.com>
+
+	* Makefile: Use ecj.jar rather than jdtcore.jar.
+
+2004-06-29  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* com/sun/tools/javac/Main.java: Instantiate ecj classes
+	directly rather than using reflection.
+	* Makefile: Compile tools.jar with jdtcore.jar in the classpath.
+
+2004-06-28  Thomas Fitzsimmons  <fitzsim@redhat.com>
+
+	* Makefile: Add .class files to tools.jar.
+
+	* _jpp/bin/java: Use jdkgcj script.
+	* _jpp/jre/bin/java: Likewise.
+	* _jpp/bin/javac: Add libgcj.jar to ecj's bootclasspath.
+
+	* ChangeLog: New file.
+	* Makefile: New file.
+	* README: New file.
+	* com/sun/tools/javac/Main.java: New file.
+	* _jpp/bin/jar: Run gjar.
+	* _jpp/bin/java: Run gij.
+	* _jpp/bin/javac: Run ecj with gij.
+	* _jpp/bin/rmic: Run grmic.
+	* _jpp/bin/rmiregistry: Run grmiregistry.

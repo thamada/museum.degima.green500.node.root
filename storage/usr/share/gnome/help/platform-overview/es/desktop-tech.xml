@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- indent-tabs-mode: nil -*- -->
+<chapter id="desktop-tech">
+  <title>Tecnologías del escritorio</title>
+
+<section id="applications-mime">
+  <title>Registros de aplicación y tipos de archivo</title>
+  <para>Para que las aplicaciones sean útiles, los usuarios deben ser capaces de encontrarlas y ejecutarlas. Los usuarios del Escritorio GNOME pueden ejecutar aplicaciones usando el menú de aplicaciones o pueden ejecutarlas accediendo a los archivos en el gestor de archivos. El Escritorio GNOME le permite añadir aplicaciones y tipos de archivo al instalar su aplicación. El mecanismo para ello está especificado por <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink>, de tal forma que los mismos datos permitirán que su aplicación funcione en otros entornos de escritorio.</para>
+
+  <para>Añadir su aplicación es tan simple como proporcionar un archivo de entrada de escritorio con la información necesaria. Los archivos de entrada de escritorio usan una sintaxis de clave-valor simple, con elementos adicionales para proporcionar un contenido traducido para valores particulares. El archivo de entrada de escritorio de su aplicación deberá contener la siguiente información:</para>
+
+  <itemizedlist>
+    <listitem><para>Un nombre y un comentario, ambos traducidos a tantos idiomas como soporte su aplicación,</para></listitem>
+    <listitem><para>Una lista de categorías desde una lista fija, que se usan para ubicar su aplicación en el menú de aplicaciones,</para></listitem>
+    <listitem><para>Un icono, pudiendo ser una ruta completa o simplemente un nombre para el tema de iconos del sistema,</para></listitem>
+    <listitem><para>Una lista de tipos de archivo que soportan sus aplicaciones, y</para></listitem>
+    <listitem><para>El comando para ejecutar su aplicación.</para></listitem>
+  </itemizedlist>
+
+  <para>Si su aplicación maneja tipos de archivo personalizados que el sistema no conoce, deberá añadir ese tipo de archivos al registro de tipos de archivo. A todos los tipos de archivo se accede a través de los tipos MIME. Por ejemplo, los archivos de sonido Ogg Vorbis tienen un tipo MIME <literal>application/ogg</literal>. Para añadir un tipo MIME debe proporcionar una descripción del tipo usando un archivo XML de información MIME. Estos archivos proporcionan un nombre traducido para el tipo así como información sobre cómo determinar qué archivos son de ese tipo, ya sea coincidiendo con el nombre de archivo o inspeccionando el contenido del archivo.</para>
+
+  <para>Para obtener más información acerca de las aplicaciones, consulte <ulink url="http://standards.freedesktop.org/desktop-entry-spec/latest/">La especificación de entradas del escritorio</ulink> y <ulink url="http://standards.freedesktop.org/menu-spec/latest/">La especificación del menú del escritorio</ulink>. Para obtener más información acerca de los tipos de archivo, consulte <ulink url="http://standards.freedesktop.org/shared-mime-info-spec/latest/">La especificación de la información MIME compartida</ulink>.</para>
+</section>
+
+<section id="panel-applets">
+  <title>Miniaplicaciones del panel</title>
+  <para>El Escritorio GNOME posee paneles potentes y flexibles en los que los usuarios pueden añadir cualquier número de pequeñas aplicaciones, llamadas miniaplicaciones del panel. Las miniaplicaciones pueden proporcionar todo tipo de accesos rápidos a cualquier tipo de información útil y funcional. Por ejemplo, el Escritorio GNOME posee miniaplicaciones del panel para cambiar entre ventanas y áreas de trabajo, mostrar las condiciones climáticas actuales y la actividad de la red entre otras muchas.</para>
+
+  <para>Puede proporcionar una miniaplicación del panel para aumentar la funcionalidad de su aplicación o simplemente puede proporcionar una miniaplicación del panel individual. Si simplemente necesita mostrar notificaciones rápidas, debería considerar usar el área de notificación en su lugar, que también se muestra en el panel del usuario. Las miniaplicaciones del panel se deberían usar cuando se necesita proporcionar más funcionalidad de la que proporcionan los iconos de notificación.</para>
+
+  <para>Las miniaplicaciones del panel son procesos independientes que usan Bonobo para comunicarse con el panel. Bonobo permite a las miniaplicaciones integrarse con el panel para proporcionar una experiencia de usuario consistente. Por ejemplo, el menú contextual para cada miniaplicación del panel contiene elementos estándar para quitar, mover y bloquear la miniaplicación. Cada miniaplicación del panel puede añadir elementos al menú contextual para realizar otras acciones. La miniaplicación del panel <application>Informe meteorológico</application>, por ejemplo, tiene menús contextuales para mostrar un informe detallado y para actualizar la información mostrada.</para>
+
+  <para>Para obtener más información acerca de las miniaplicaciones del panel, consulte <ulink url="http://library.gnome.org/devel/panel-applet/stable/">La biblioteca de miniaplicaciones del panel</ulink>.</para>
+</section>
+
+<section id="nofication-area">
+  <title>Área de notificación</title>
+  <para>Además de los lanzadores y las miniaplicaciones del panel, el panel de GNOME también dispone de un área de notificación que las aplicaciones pueden usar para notificar eventos a los usuarios. Las notificaciones se pueden usar para alertar al usuario de nuevos correos electrónicos, actualizaciones disponibles, próximas reuniones o cualquier otro acontecimiento.</para>
+
+  <para>Las notificaciones son iconos simples que su aplicación puede ubicar en el área de notificación del panel del usuario. Su aplicación puede realizar alguna acción si el usuario pulsa sobre el icono. Actualmente, el sistema de notificaciones está implementado en la biblioteca experimental Egg; no obstante, la nueva versión de GTK+ tendrá soporte para los iconos de notificación.</para>
+
+  <para>El área de notificación es una especificación de <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink>, de tal forma que sus iconos de notificación también aparecerán en otros entornos de escritorio. Para obtener más información acerca del área de notificación, consulte <ulink url="http://standards.freedesktop.org/systemtray-spec/latest/">La especificación del protocolo del área de notificación del sistema</ulink>.</para>
+</section>
+
+<section id="nautilus">
+  <title>Gestor de archivos</title>
+
+  <para>GNOME posee <application>Nautilus</application>, un gestor de archivos intuitivo y potente. Al usar la avanzada tecnología GVFS, <application>Nautilus</application> es capaz de mostrar carpetas remotas como si fuesen carpetas del sistema de archivos local, proporcionando a los usuarios acceso a todos sus archivos en cualquier lugar con un interfaz consistente y único.</para>
+
+  <para><application>Nautilus</application> proporciona un interfaz de complementos que permite a los desarrolladores extender sus funcionalidades para proporcionar más información acerca de los archivos del usuario. Esto proporciona una experiencia más rica y coherente a los usuarios, eliminando la necesidad de separar aplicaciones para gestionar los diversos tipos de archivos.</para>
+
+  <para>Los complementos de <application>Nautilus</application> puede extender las funcionalidades del gestor de archivos en numerosas formas. Los complementos puede añadir información adicional a los diálogos de propiedades de los archivos, proporcionando a los usuarios todo lo que necesitan saber acerca de sus archivos. Por ejemplo, GNOME posee un complemento para mostrar información adicional acerca de los archivos de sonido y vídeo, tal como el códec usado, las dimensiones del vídeo y el artista y álbum de los archivos de música extraídos de un CD.</para>
+
+  <para>Los complementos también pueden añadir columnas a la vista de lista y emplazar emblemas en archivos automáticamente. Esto se puede usar para proporcionar información pertinente al usuario. Por ejemplo, un complemento de <application>Nautilus</application> podría proporcionar información sobre el control de versión sobre carpetas que se descarguen de un sistema de control de versiones (CVS/SVN). Los usuarios podrían ver en el gestor de archivos directamente si el archivo está totalmente actualizado o si se han realizado cambios localmente.</para>
+
+  <para><application>Nautilus</application> también permite a los desarrolladores añadir elementos a los menús contextuales para los archivos y carpetas. Los elementos de los menús contextuales se pueden especificar para qué tipo de archivos deben mostrarse, de tal forma que el menú contextual sólo proporcionará acciones relevantes para los archivos seleccionados. Por ejemplo, <application>Gestor de archivadores</application>, el gestor de archivadores de GNOME, añade un elemento al menú contextual para extraer los archivos de un archivador directamente. Los elementos del menú adicionales proporcionan acceso fácil a operaciones comunes sobre diferentes tipos de archivos.</para>
+
+  <para>Además de la arquitectura de complementos flexible, <application>Nautilus</application> también puede mostrar una miniatura para cualquier tipo de archivo para el que se haya proporcionado un miniaturizador. Las miniaturas muestran una vista preliminar del archivo ayudando a los usuarios a encontrar los archivos que quieren. GNOME puede crear automáticamente las miniaturas para la mayoría de imágenes y archivos de películas y permite a las aplicaciones instalar programas miniaturizadores adicionales para crear miniaturas de los archivos específicos de la aplicación. La gestión de las miniaturas está completamente especificada por <ulink url="http://www.freedesktop.org/">freedesktop.org</ulink> de tal forma que cualquier miniaturizador que proporcione podrá ser usado por todas las aplicaciones.</para>
+</section>
+
+<section id="window-manager">
+  <title>Gestor de ventanas</title>
+
+  <para>El gestor de ventanas es un programa especial responsable de dibujar los bordes y títulos de las ventanas. El gestor de ventanas también es el responsable de manejar todas las operaciones realizadas sobre las ventanas, tales como mover, redimensionar, minimizar y mover entre áreas de trabajo. Las ventanas se gestionan de forma consistente con poco o ningún trabajo por parte de los desarrolladores de aplicaciones. Cuando las aplicaciones necesitan influenciar al gestor de ventanas, puede proporcionar sugerencias sobre sus ventanas usando llamadas a funciones en GTK+.</para>
+
+  <para>No obstante, los programas externos pueden interactuar directamente con el gestor de ventanas e incluso controlar su comportamiento. Al usar la biblioteca de GNOME libwnck, las aplicaciones pueden obtener información acerca de la ubicación y estado de todas las ventanas y instruir al gestor de ventanas para realizar diversas acciones sobre esas ventanas.</para>
+
+  <para>La biblioteca libwnck no es específica del gestor de ventanas de GNOME. Todas sus funcionalidades usan los consejos extendidos sobre gestores de ventanas (Extended Window Manager Hints, EWMH por sus siglas). EWMH se desarrolló de forma conjunta con <ulink url="http://www.freedesktop.org">freedesktop.org</ulink> para proporcionar una interacción unificada sobre la gestión de ventanas en los escritorios.</para>
+
+  <para>La interacción del gestor de ventanas con la biblioteca libwnck se puede usar para tareas simples, tales como mostrar áreas de trabajo y las miniaplicaciones de listas de ventanas en el panel del usuario, así como para aplicaciones complejas tales como realizar acciones automáticas sobre nuevas ventanas basándose en ciertas propiedades de las ventanas.</para>
+</section>
+
+<section id="control-center">
+  <title>Centro de control</title>
+  <para>El Escritorio GNOME proporciona un sólo menú para todas las preferencias del escritorio así como para los ajustes de administración del sistema. Los diálogos de preferencias y ajustes se pueden emplazar en este menú para hacerlos más fácilmente accesibles. Los diálogos se pueden emplazar en el menú de preferencias añadiéndolos al registro de aplicaciones con la categoría <literal>Setting</literal>. Los diálogos se pueden emplazar en el menú de administración usando tanto la categoría <literal>Settings</literal> como <literal>System</literal>.</para>
+
+  <para>Si proporciona un diálogo que permite a los administradores configurar los sistemas del escritorio, entonces debería añadir su diálogo al menú de administración. Si proporciona un diálogo que permite a los usuarios ajustar las preferencias que afectan a cierto número de aplicaciones, entonces debería añadir su diálogo al menú de preferencias. No debería usar estos menús globales para las preferencias de una aplicación individual.</para>
+</section>
+
+<section id="keyring">
+  <title>Almacenar contraseñas</title>
+
+  <para>GNOME proporciona un gestor del depósito de claves moderno y seguro para almacenar las contraseñas y otros datos sensibles del usuario. Las aplicaciones pueden usar la biblioteca del gestor del depósito de claves para almacenar y acceder a las contraseñas, mientras que los usuarios pueden gestionar sus contraseñas usando la aplicación <application>Gestor del depósito de claves</application> de GNOME.</para>
+
+  <para>El gestor del depósito de claves proporciona cualquier número de depósitos donde cada depósito puede contener cualquier número de elementos. Los elementos en un depósito almacenan una información, generalmente una contraseña. Cada depósito está bloqueado individualmente y los usuarios deben proporcionar una clave para desbloquear el depósito. Una vez que el depósito está desbloqueado, el usuario tiene acceso a todos los elementos de ese depósito.</para>
+
+  <para>El gestor del depósito de claves proporciona una lista de control para cada elemento del depósito, controlando a qué aplicaciones se permite el acceso a ese elemento. Si una aplicación desconocida trata de acceder a un elemento del depósito, el gestor del depósito preguntará al usuario si desea permitir o denegar el acceso de esa aplicación. Esto ayuda a prevenir que programas maliciosos o pobremente escritos accedan a información sensible del usuario.</para>
+
+  <para>Los datos del depósito de claves almacenados en el sistema de archivos están cifrados con el cifrado de bloques AES, mientras que el SHA1 se usa para el «hash» de los atributos del elemento. Usando atributos «hash», el gestor del depósito de claves es capaz de mirar elementos que piden las aplicaciones sin necesidad de desbloquear el depósito. El depósito se desbloquea cuando se encuentra un elemento coincidente y se accede a él.</para>
+
+  <para>El gestor del depósito de claves también proporciona un depósito de claves para la sesión. Los elementos en el depósito de la sesión nunca se almacenan en el disco y se pierden cuando termina la sesión del usuario. El depósito de la sesión se puede usar para almacenar contraseñas que sólo van a usarse en la sesión actual.</para>
+
+  <para>Si usa GIO para acceder a servidores remotos, automáticamente obtiene los beneficios del gestor del depósito de claves. Siempre que GVFS necesite autenticar al usuario, proporciona la opción para almacenar la contraseña, ya sea en el depósito de claves predeterminado o en el depósito de claves de la sesión.</para>
+
+  <para>Debería usar el gestor del depósito de claves siempre que su aplicación necesite almacenar contraseñas u otros datos sensibles de los usuarios. Al usar el gestor del depósito de claves se proporciona una mejor experiencia al usuario a la vez que se mantienen seguros los datos del mismo.</para>
+</section>
+
+<section id="session">
+  <title>Gestión de sesiones</title>
+  <para>GNOME proporciona herramientas para permitir a su aplicación ejecutarse suavemente entre una sesión y otra. Los usuarios pueden salir de la sesión mientras se ejecutan aplicaciones y tener esas aplicaciones completamente restauradas al iniciar de nuevo una sesión. Para proporcionar esta funcionalidad, su aplicación debe conectarse con el gestor de sesiones y guardar su estado cuando el usuario cierra la sesión.</para>
+
+  <para>GNOME proporciona una API simple para la gestión de sesiones en la biblioteca del Interfaz de Usuario de GNOME. Para obtener más información acerca de cómo trabajar con el gestor de sesiones de GNOME, consulte la sección <ulink url="http://library.gnome.org/devel/libgnomeui/stable/GnomeClient.html">GnomeClient</ulink> del <ulink url="http://library.gnome.org/devel/libgnomeui/stable/">Manual de referencia de la biblioteca IU de GNOME</ulink>.</para>
+</section>
+
+<section id="address-book-calendar">
+  <title>Libreta de direcciones y calendario</title>
+  <para>El servidor de datos de Evolution (Evolution Data Server) proporciona una única libreta de direcciones y un calendario que todas las aplicaciones pueden usar para almacenar y recuperar información. Usar el servidor de datos de Evolution significa que los usuarios no tendrán que mantener listas de contactos separadas para cada aplicación o copiar manualmente acontecimientos entre los calendarios.</para>
+
+  <para>La gente cada vez utiliza más los equipos para interactuar con sus amigos y colegas. Las aplicaciones tales como clientes de correo electrónico, mensajería instantánea y las aplicaciones de telefonía y videoconferencia se usan para comunicarse unos con otros. Estas aplicaciones a menudo proporcionan listas de contactos para ayudar a los usuarios. Al usar el servidor de datos de Evolution, las aplicaciones pueden almacenar la información de los contactos en una sola ubicación, permitiendo a todas las aplicaciones ver todos los datos pertinentes acerca de los contactos del usuario.</para>
+
+  <para>Las aplicaciones también pueden usar el servidor de datos de Evolution para almacenar y recuperar citas del calendario del usuario. Por ejemplo, el reloj del panel muestra un calendario simple cuando se pulsa sobre él. Si el usuario tiene una cita planificada se mostrará en éste calendario. Esto hace más fácil ver las citas próximas sin tener que abrir una completa aplicación de calendario.</para>
+
+  <para>Para obtener más información acerca de la libreta de direcciones, consulte <ulink url="http://gnome.org/projects/evolution/developer-doc/libebook/ch01.html">La referencia del API de Evolution: libebook</ulink>. Para obtener más información acerca del calendario, consulte <ulink url="http://gnome.org/projects/evolution/developer-doc/libecal/index.html">La referencia del API de Evolution: libecal</ulink>.</para>
+</section>
+
+<section id="usability">
+  <title>Usabilidad</title>
+  <para>El Escritorio GNOME está diseñado alrededor de la usabilidad y procura proporcionar una experiencia al usuario simple y consistente. Las personas usan los equipos para realizar algún trabajo (o para jugar) no para imaginarse cómo interactuar con interfaces de usuario complicados. Cuando diseñe su aplicación, debería considerar con qué facilidad reconocerán los usuarios los comunes paradigmas de los interfaces de usuario, con qué rapidez aprenderán los elementos únicos de su aplicación y con qué eficiencia ejecutarán tareas una vez que hayan aprendido a usarlos.</para>
+
+  <para>GNOME proporciona unas directrices de interfaz humano extensas (HIG) para ayudarle a escribir aplicaciones que sean atractivas y usables. Mientras que no hay directrices que puedan proporcionar una respuesta única para todo lo relacionado con la usabilidad, entender las directrices de interfaz humano puede hacer más fácil crear una aplicación usable. Para obtener más información, consulte <ulink url="http://library.gnome.org/devel/hig-book/stable/">Las directrices de interfaz humano de GNOME</ulink>.</para>
+</section>
+
+<section id="documentation">
+  <title>Documentación</title>
+  <para>Toda aplicación debería proporcionar documentación para ayudar a los usuarios a entender la aplicación así como problemas de uso que puedan surgir. Mientras que una aplicación bien diseñada no debería necesitar de la lectura de una documentación antes de su uso, la documentación no deja de ser una herramienta importante para los usuarios, particularmente para aplicaciones complejas.</para>
+
+  <para>GNOME proporciona un entorno de trabajo unificado para proporcionar la documentación del usuario. Puede proporcionar la documentación usando el formato estándar de la industria DocBook. Usar DocBook significa que no tendrá que preocuparse por los detalles de formateo. En su lugar, su documentación se formateará automáticamente con la misma convención y consistencia que el resto de la documentación del sistema.</para>
+
+  <para>El visor de ayuda de GNOME, <application>Yelp</application>, muestra e imprime documentación, proporciona una lista de toda la documentación en el sistema y permite al usuario buscar el texto completo de toda la documentación. Usar el sistema de ayuda de GNOME le proporciona todas estas características.</para>
+
+  <para>Para obtener más información acerca de escribir documentación para su documentación, consulte <ulink url="http://library.gnome.org/devel/gdp-handbook/stable/">El libro de mano de GNOME para escribir documentación de software</ulink>, <ulink url="http://www.docbook.org/tdg/en/html/docbook.html">DocBook: La guía definitiva</ulink> y <ulink url="http://library.gnome.org/devel/gdp-style-guide/stable/">La guía de estilo de la documentación en GNOME</ulink>.</para>
+</section>
+
+</chapter>

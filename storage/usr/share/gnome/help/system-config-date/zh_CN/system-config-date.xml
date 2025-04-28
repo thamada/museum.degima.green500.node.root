@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % DISTRO_SPECIFICS SYSTEM "distro-specifics.ent">
+<!ENTITY DISTRO_MAINMENU '<guimenu>the main menu on the panel (the menu with the "f" icon)</guimenu>'>
+<!ENTITY % SYSTEM_CONFIG_DATE_DISTRO_SPECIFICS SYSTEM "system-config-date-distro-specifics.ent">
+<!ENTITY SYSTEM_CONFIG_DATE_TOOL "Time and Date Properties Tool">
+<!ENTITY SYSTEM_CONFIG_DATE_INVOCATION '
+    <indexterm significance="normal"> 
+        <primary><command>system-config-date</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>system-config-time</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+    <indexterm significance="normal"> 
+        <primary><command>dateconfig</command> 
+        </primary> 
+        <see>&SYSTEM_CONFIG_DATE_TOOL;</see> 
+    </indexterm> 
+
+    <para>
+        You must be running the <application>X</application> Window System and have root privileges to use the &SYSTEM_CONFIG_DATE_TOOL;. There are three ways to start the application:
+    </para>
+    <itemizedlist>
+        <listitem>
+            <para>
+                From the desktop, go to <menuchoice>&DISTRO_MAINMENU;<guisubmenu>System</guisubmenu><guisubmenu>Administration</guisubmenu><guimenuitem>Date &amp; Time</guimenuitem></menuchoice>
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                From the desktop, right-click on the time in the toolbar and select <guimenuitem>Adjust Date and Time</guimenuitem>.
+            </para>
+        </listitem>
+
+        <listitem>
+            <para>
+                Type the command <command>system-config-date</command>, <command>system-config-time</command>, or <command>dateconfig</command> at a shell prompt (for example, in an <application>XTerm</application> or a <application>GNOME</application> terminal).
+            </para>
+        </listitem>
+    </itemizedlist>
+'>
+<!ENTITY SYSTEM_CONFIG_DATE_ABSTRACT SYSTEM "system-config-date-abstract.xml">
+<!ENTITY SYSTEM_CONFIG_DATE_CONTENT SYSTEM "system-config-date-content.xml">
+]>
+<article lang="zh_CN"><title>时间和日期属性工具</title><articleinfo><revhistory><revision><revnumber>1.0</revnumber><date>2007-11-22</date><revremark>初始修订</revremark></revision><revision><revnumber>1.0.1</revnumber><date>2008-01-17</date><revremark>使DocBook XML正常验证</revremark></revision><revision><revnumber>1.0.2</revnumber><date>2008-01-18</date><revremark>Make document abstract external</revremark></revision><revision><revnumber>1.0.3</revnumber><date>2008-03-12</date><revremark>Use menuchoice elements where applicable</revremark></revision></revhistory><abstract role="description"><para><application>时间和日期设置工具</application>允许用户更改系统日期和时间，系统使用的时区，并设置网络时间协议(NTP)进程让系统时间与时间服务器同步。</para>
+</abstract><authorgroup><corpauthor role="maintainer"><trademark class="registered">Red Hat</trademark>, Inc.</corpauthor></authorgroup></articleinfo><indexterm significance="normal"><primary><command>时间工具</command>
+		</primary><see>时间和日期属性工具</see></indexterm><para><application>时间和日期设置工具</application>允许用户更改系统日期和时间，系统使用的时区，并设置网络时间协议(NTP)进程让系统时间与时间服务器同步。</para>
+
+    <indexterm significance="normal"><primary><command>system-config-date</command> 
+        </primary><see>时间和日期属性工具</see></indexterm><indexterm significance="normal"><primary><command>system-config-time</command> 
+        </primary><see>时间和日期属性工具</see></indexterm><indexterm significance="normal"><primary><command>日期设置</command> 
+        </primary><see>时间和日期属性工具</see></indexterm><para>您必须运行<application>X</application>窗口系统并具有root权限才能使用时间和日期设置工具。有三种方式来开启该程序：</para><itemizedlist><listitem><para>从桌面上，点<menuchoice><guimenu>面板主菜单(带"f" 图标的那个)</guimenu><guisubmenu>系统</guisubmenu><guisubmenu>管理</guisubmenu><guimenuitem>日期 &amp; 时间</guimenuitem></menuchoice></para></listitem><listitem><para>桌面上，在时间工具条上点右键，选择<guimenuitem>调整日期和时间</guimenuitem>。</para></listitem><listitem><para>在shell(例如在<application>XTerm</application>或<application>GNOME</application>终端)中输入<command>system-config-date</command>，<command>system-config-time</command>或<command>dateconfig</command>命令。</para></listitem></itemizedlist>
+
+
+	<section id="s1-dateconfig-time-date"><title>时间日期属性</title><indexterm significance="normal"><primary>时间设置</primary></indexterm><indexterm significance="normal"><primary>日期设置</primary></indexterm><para>像<xref linkend="dateconfig-time-date"/>显示的一样，出现的第一个选项窗口就是配置系统日期和时间的。</para><figure float="0" id="dateconfig-time-date"><title>时间日期属性</title><mediaobject><imageobject><imagedata fileref="images/date-time.png" format="PNG"/></imageobject><textobject><para>时间日期属性</para></textobject></mediaobject></figure><para>要更改日期，用月左右两边的箭头调整月份，年左右两边的箭头调整年，然后点对应的日和周来修改天和星期。</para><para>使用<guilabel>时间</guilabel>框中<guilabel>小时</guilabel>，<guilabel>分钟</guilabel>和<guilabel>秒</guilabel>的上下箭头来调整时间。</para><para>另外您可使用键盘更改日期和时间。使用 <keycap>Tab</keycap> 和 <keycombo><keycap>Shift</keycap><keycap>Tab</keycap></keycombo> 组合在附件间移动。在日历附件中，您可以使用 <keycombo><keycap>Ctrl</keycap><keycap>Up</keycap></keycombo> 组合及 <keycombo><keycap>Ctrl</keycap><keycap>Down</keycap></keycombo> 组合更改年份，使用 <keycombo><keycap>Ctrl</keycap><keycap>Left</keycap></keycombo> 组合和 <keycombo><keycap>Ctrl</keycap><keycap>Right</keycap></keycombo> 组合更改月份，并使用箭头键和 <keycap>Space</keycap> 选择并设定日期。在小时、分钟和秒附件中，使用 <keycap>Up</keycap> 和 <keycap>Down</keycap> 更改数值。</para><para>点<guibutton>OK</guibutton>按钮来应用对日期和时间，NTP守护进程设置和时区所做的更改。同时将退出该程序。</para></section>
+	<section id="s1-dateconfig-ntp"><title>网络时间协议(NTP)属性</title><indexterm significance="normal"><primary>时间设置</primary><secondary>与NTP服务器同步</secondary></indexterm><indexterm significance="normal"><primary>网络时间协议</primary><see>NTP</see></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary>设置</secondary></indexterm><indexterm significance="normal"><primary>NTP</primary><secondary><command>ntpd</command>
+			</secondary></indexterm><indexterm significance="normal"><primary><command>ntpd</command>
+			</primary></indexterm><para>像<xref linkend="dateconfig-ntp"/>中显示的一样，出现的第二个标签窗口用来配置NTP。</para><figure float="0" id="dateconfig-ntp"><title>NTP属性</title><mediaobject><imageobject><imagedata fileref="images/date-time-ntp.png" format="PNG"/></imageobject><textobject><para>NTP属性</para></textobject></mediaobject></figure><para>网络时间协议 (NTP)进程用远程时间服务器或时间源来同步系统时钟。该程序允许您配置一个NTP守护进程来让您的系统时钟与远程服务器同步。要使用该特性，选择<guibutton>启用网络时间协议</guibutton>。这会启用<guilabel>NTP服务器</guilabel>列表和其它选项。您可以使用预定义的服务器，也可以点<guibutton>编辑</guibutton>来编辑它，或者点<guibutton>添加</guibutton>来添加一个新时间服务器。在点<guibutton>OK</guibutton>之前，系统是不会与NTP服务器同步的。点<guibutton>OK</guibutton>按钮后，配置被保存并启动(或者重启，如果已经在运行的话)NTP守护进程。</para><para>点<guibutton>OK</guibutton>按钮来应用对日期和时间，NTP守护进程设置和时区所做的更改。同时将退出该程序。</para></section>
+	<section id="s1-dateconfig-time-zone"><title>时区设置</title><indexterm significance="normal"><primary>时区设置</primary></indexterm><para>像<xref linkend="dateconfig-timezone"/>显示的一样，出现的第三个标签窗口用来设置系统时区。</para><para>点<guilabel>时区</guilabel>标签来设置系统所在时区。可以通过使用交互式地图或从地图下面的列表中选择来修改时区。要使用地图，在地图中单击并选择对应于您时区的城市。一个红色的<guilabel>X</guilabel>将出现，并且地图下方的选择列表将发生变化。您可以使用地图左边的滑块来调整地图大小。</para><para>另外，您也可以使用地图下方的列表。同样从地图中选择一个区域，时区列表就会成为树形列表，以城市和国家为组别分类。科学组织需要的非地理性时区也添加到了地址中。</para><para>点<guibutton>OK</guibutton>来应用修改并退出程序。</para><figure float="0" id="dateconfig-timezone"><title>时区属性</title><mediaobject><imageobject><imagedata fileref="images/timezone.png" format="PNG"/></imageobject><textobject><para>时区属性</para></textobject></mediaobject></figure><para>如果要让系统时钟使用UTC，请选择<guibutton>系统时钟使用UTC</guibutton>选项。UTC是<firstterm>世界协调时</firstterm>的缩写，也叫做格林威治标准时间 (GMT)。其它时区的时间均由UTC时间加或减确定。</para></section>
+</article>

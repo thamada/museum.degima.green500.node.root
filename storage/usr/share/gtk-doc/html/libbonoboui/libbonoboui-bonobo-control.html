@@ -1,0 +1,1320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BonoboControl</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="LibBonoboUI API Reference Manual">
+<link rel="up" href="bonobo-controls.html" title="Controls">
+<link rel="prev" href="bonobo-controls.html" title="Controls">
+<link rel="next" href="libbonoboui-bonobo-control-frame.html" title="BonoboControlFrame">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Object Hierarchy">
+<link rel="chapter" href="bonobo-controls.html" title="Controls">
+<link rel="chapter" href="bonobo-ui.html" title="Bonobo UI">
+<link rel="chapter" href="bonobo-support-utilities.html" title="Supporting Classes">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="bonobo-controls.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="bonobo-controls.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">LibBonoboUI API Reference Manual</th>
+<td><a accesskey="n" href="libbonoboui-bonobo-control-frame.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbonoboui-bonobo-control.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libbonoboui-bonobo-control.description" class="shortcut">Description</a>
+                 | 
+                <a href="#libbonoboui-bonobo-control.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#libbonoboui-bonobo-control.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="BonoboControl">
+<a name="libbonoboui-bonobo-control"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbonoboui-bonobo-control.top_of_page"></a>BonoboControl</span></h2>
+<p>BonoboControl — An implementation of the control interface for GtkWidgets</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbonoboui-bonobo-control.synopsis"></a><h2>Synopsis</h2>
+<a name="BonoboControl"></a><pre class="synopsis">
+                    <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl-struct" title="BonoboControl">BonoboControl</a>;
+                    <a class="link" href="libbonoboui-bonobo-control.html#BonoboControlPrivate" title="BonoboControlPrivate">BonoboControlPrivate</a>;
+                    <a class="link" href="libbonoboui-bonobo-control.html#BonoboControlClass" title="BonoboControlClass">BonoboControlClass</a>;
+<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *     <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-new" title="bonobo_control_new ()">bonobo_control_new</a>                  (<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *widget);
+<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-widget" title="bonobo_control_get_widget ()">bonobo_control_get_widget</a>           (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-automerge" title="bonobo_control_set_automerge ()">bonobo_control_set_automerge</a>        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> automerge);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-automerge" title="bonobo_control_get_automerge ()">bonobo_control_get_automerge</a>        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-property" title="bonobo_control_set_property ()">bonobo_control_set_property</a>         (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev,
+                                                         const char *first_prop,
+                                                         ...);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-property" title="bonobo_control_get_property ()">bonobo_control_get_property</a>         (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev,
+                                                         const char *first_prop,
+                                                         ...);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-transient-for" title="bonobo_control_set_transient_for ()">bonobo_control_set_transient_for</a>    (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"
+>GtkWindow</a> *window,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-unset-transient-for" title="bonobo_control_unset_transient_for ()">bonobo_control_unset_transient_for</a>  (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"
+>GtkWindow</a> *window,
+                                                         CORBA_Environment *opt_ev);
+<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *     <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-construct" title="bonobo_control_construct ()">bonobo_control_construct</a>            (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *widget);
+<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-ui-component" title="bonobo_control_get_ui_component ()">bonobo_control_get_ui_component</a>     (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-ui-component" title="bonobo_control_set_ui_component ()">bonobo_control_set_ui_component</a>     (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component);
+Bonobo_UIContainer  <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-remote-ui-container" title="bonobo_control_get_remote_ui_container ()">bonobo_control_get_remote_ui_container</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-control-frame" title="bonobo_control_set_control_frame ()">bonobo_control_set_control_frame</a>    (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         Bonobo_ControlFrame control_frame,
+                                                         CORBA_Environment *opt_ev);
+Bonobo_ControlFrame  <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-control-frame" title="bonobo_control_get_control_frame ()">bonobo_control_get_control_frame</a>   (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-properties" title="bonobo_control_set_properties ()">bonobo_control_set_properties</a>       (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         Bonobo_PropertyBag pb,
+                                                         CORBA_Environment *opt_ev);
+Bonobo_PropertyBag  <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-properties" title="bonobo_control_get_properties ()">bonobo_control_get_properties</a>       (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);
+Bonobo_PropertyBag  <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-ambient-properties" title="bonobo_control_get_ambient_properties ()">bonobo_control_get_ambient_properties</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-activate-notify" title="bonobo_control_activate_notify ()">bonobo_control_activate_notify</a>      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> activated,
+                                                         CORBA_Environment *opt_ev);
+Bonobo_Gdk_WindowId  <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-window-id-from-x11" title="bonobo_control_window_id_from_x11 ()">bonobo_control_window_id_from_x11</a>  (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> x11_id);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a>             <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-x11-from-window-id" title="bonobo_control_x11_from_window_id ()">bonobo_control_x11_from_window_id</a>   (const CORBA_char *id);
+#define             <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-windowid-from-x11" title="bonobo_control_windowid_from_x11()">bonobo_control_windowid_from_x11</a>    (a)
+#define             <a class="link" href="libbonoboui-bonobo-control.html#BONOBO-CONTROL-POPUP-BUTTON1--CAPS" title="BONOBO_CONTROL_POPUP_BUTTON1">BONOBO_CONTROL_POPUP_BUTTON1</a>
+#define             <a class="link" href="libbonoboui-bonobo-control.html#BONOBO-CONTROL-POPUP-BUTTON2--CAPS" title="BONOBO_CONTROL_POPUP_BUTTON2">BONOBO_CONTROL_POPUP_BUTTON2</a>
+#define             <a class="link" href="libbonoboui-bonobo-control.html#BONOBO-CONTROL-POPUP-BUTTON3--CAPS" title="BONOBO_CONTROL_POPUP_BUTTON3">BONOBO_CONTROL_POPUP_BUTTON3</a>
+<a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer">BonoboUIContainer</a> * <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-popup-ui-container" title="bonobo_control_get_popup_ui_container ()">bonobo_control_get_popup_ui_container</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);
+<a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-get-popup-ui-component" title="bonobo_control_get_popup_ui_component ()">bonobo_control_get_popup_ui_component</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-popup-ui-container" title="bonobo_control_set_popup_ui_container ()">bonobo_control_set_popup_ui_container</a>
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer">BonoboUIContainer</a> *ui_container);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-do-popup" title="bonobo_control_do_popup ()">bonobo_control_do_popup</a>             (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> button,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> activate_time);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-do-popup-full" title="bonobo_control_do_popup_full ()">bonobo_control_do_popup_full</a>        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *parent_menu_shell,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *parent_menu_item,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkMenu.html#GtkMenuPositionFunc"
+>GtkMenuPositionFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> button,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> activate_time);
+void                (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControlLifeCallback" title="BonoboControlLifeCallback ()">*BonoboControlLifeCallback</a>)        (void);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-life-set-purge" title="bonobo_control_life_set_purge ()">bonobo_control_life_set_purge</a>       (long ms );
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-life-set-callback" title="bonobo_control_life_set_callback ()">bonobo_control_life_set_callback</a>    (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControlLifeCallback" title="BonoboControlLifeCallback ()">BonoboControlLifeCallback</a> all_dead_callback);
+void                <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-life-instrument" title="bonobo_control_life_instrument ()">bonobo_control_life_instrument</a>      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);
+int                 <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-life-get-count" title="bonobo_control_life_get_count ()">bonobo_control_life_get_count</a>       (void);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="libbonoboui-bonobo-control.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----<a
+href="/usr/share/gtk-doc/html/libbonobo/libbonobo-bonobo-object.html#BonoboObject"
+>BonoboObject</a>
+         +----BonoboControl
+</pre>
+</div>
+<div class="refsect1" title="Signals">
+<a name="libbonoboui-bonobo-control.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl-activate" title='The "activate" signal'>activate</a>"                                       : Run Last
+  "<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl-disconnected" title='The "disconnected" signal'>disconnected</a>"                                   : Run Last
+  "<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl-plug-created" title='The "plug-created" signal'>plug-created</a>"                                   : Run Last
+  "<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl-set-frame" title='The "set-frame" signal'>set-frame</a>"                                      : Run Last
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbonoboui-bonobo-control.description"></a><h2>Description</h2>
+<p>
+The BonoboControl object implements the CORBA interface for
+handling remote embeddable components. A Control is a light
+weight, single view, arbitrarily complex 'widget'. Controls
+typicaly expose much of their functionality through a
+property bag.
+</p>
+<div class="figure">
+<a name="control-img"></a><p class="title"><b>Figure 1. The Bonobo::Control interface</b></p>
+<div class="figure-contents"><div class="mediaobject"><img src="control.png" alt="The Bonobo::Control interface"></div></div>
+</div>
+<br class="figure-break"><p>
+A BonoboControl provides the server ( or component ) side
+implementation of a Control. The client that uses this
+control will probably use a <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget"><span class="type">BonoboWidget</span></a> to use the control
+in their program.
+</p>
+<p>
+</p>
+<p>
+If you want to expose your widget as a control it is very simple
+  </p>
+<div class="example">
+<a name="id2715633"></a><p class="title"><b>Example 1. CORBA-ifying your GtkWidget</b></p>
+<div class="example-contents"><pre class="programlisting">
+BonoboControl *control;
+GtkWidget     *widget;
+Bonobo_Unknown corba_object;
+widget = make_my_widget ();
+gtk_widget_show (widget);
+control = bonobo_control_new (widget);
+corba_object = BONOBO_OBJREF (control);
+    </pre></div>
+</div>
+<p><br class="example-break">
+  The corba_object can then be passed off down the wire to anyone
+and the control popped into a <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget"><span class="type">BonoboWidget</span></a> or <a class="link" href="libbonoboui-bonobo-control-frame.html#BonoboControlFrame"><span class="type">BonoboControlFrame</span></a>
+at the other end. Here is an even less useful example
+  </p>
+<div class="example">
+<a name="id2715664"></a><p class="title"><b>Example 2. A pretty useless Control</b></p>
+<div class="example-contents"><pre class="programlisting">
+GtkWidget *widget;
+widget = gtk_button_new_with_label ("My Control");
+gtk_widget_show (widget);
+return bonobo_control_new (widget);
+    </pre></div>
+</div>
+<p><br class="example-break">
+  If you learn only one thing from this example, it should be that
+you need to do a gtk_widget_show on your control. It is not
+sufficient to do a gtk_widget_show_all on the top level of the
+client side, since this will not ( and should not ) propagate
+over to the Control.
+</p>
+<p>
+One final thing worth thinking about is activation. When a control
+is embedded inside a <a class="link" href="libbonoboui-bonobo-control-frame.html#BonoboControlFrame"><span class="type">BonoboControlFrame</span></a>, it is initialy inactive.
+In order for the control to recieve interactive input it is neccessary
+to use bonobo_control_frame_activate. This signals to the control
+that it is activated, at which point the Control should merge any
+UI elements it has with the associated <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent"><span class="type">BonoboUIComponent</span></a>. This
+needs to be done every time the control is activated.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbonoboui-bonobo-control.details"></a><h2>Details</h2>
+<div class="refsect2" title="BonoboControl">
+<a name="BonoboControl-struct"></a><h3>BonoboControl</h3>
+<pre class="programlisting">typedef struct _BonoboControl BonoboControl;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BonoboControlPrivate">
+<a name="BonoboControlPrivate"></a><h3>BonoboControlPrivate</h3>
+<pre class="programlisting">typedef struct _BonoboControlPrivate BonoboControlPrivate;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BonoboControlClass">
+<a name="BonoboControlClass"></a><h3>BonoboControlClass</h3>
+<pre class="programlisting">typedef struct {
+	BonoboObjectClass      parent_class;
+
+	POA_Bonobo_Control__epv epv;
+
+	gpointer dummy[2];
+
+	/* Signals. */
+	void (*plug_created)   (BonoboControl *control);
+	void (*disconnected)   (BonoboControl *control);
+	void (*set_frame)      (BonoboControl *control);
+	void (*activate)       (BonoboControl *control, gboolean state);
+} BonoboControlClass;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_new ()">
+<a name="bonobo-control-new"></a><h3>bonobo_control_new ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *     bonobo_control_new                  (<a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *widget);</pre>
+<p>
+This function creates a new BonoboControl object for <em class="parameter"><code>widget</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
+<td> a GTK widget that contains the control and will be passed to the
+container process.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a BonoboControl object that implements the Bonobo::Control CORBA
+service that will transfer the <em class="parameter"><code>widget</code></em> to the container process.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_widget ()">
+<a name="bonobo-control-get-widget"></a><h3>bonobo_control_get_widget ()</h3>
+<pre class="programlisting"><a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *         bonobo_control_get_widget           (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);</pre>
+<p>
+Returns the GtkWidget associated with a BonoboControl.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> a BonoboControl
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the BonoboControl's widget
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_set_automerge ()">
+<a name="bonobo-control-set-automerge"></a><h3>bonobo_control_set_automerge ()</h3>
+<pre class="programlisting">void                bonobo_control_set_automerge        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> automerge);</pre>
+<p>
+Sets whether or not the control handles menu/toolbar merging
+automatically.  If automerge is on, the control will automatically
+register its BonoboUIComponent with the remote BonoboUIContainer
+when it is activated.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>automerge</code></em> :</span></p></td>
+<td> Whether or not menus and toolbars should be
+automatically merged when the control is activated.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_automerge ()">
+<a name="bonobo-control-get-automerge"></a><h3>bonobo_control_get_automerge ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            bonobo_control_get_automerge        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> Whether or not the control is set to automerge its
+menus/toolbars.  See <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-set-automerge" title="bonobo_control_set_automerge ()"><code class="function">bonobo_control_set_automerge()</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_set_property ()">
+<a name="bonobo-control-set-property"></a><h3>bonobo_control_set_property ()</h3>
+<pre class="programlisting">void                bonobo_control_set_property         (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev,
+                                                         const char *first_prop,
+                                                         ...);</pre>
+<p>
+This method takes a NULL terminated list of name, type, value
+triplicates, and sets the corresponding values on the control's
+associated property bag.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> the control with associated property bag
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> optional corba exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_prop</code></em> :</span></p></td>
+<td> the first property's name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_property ()">
+<a name="bonobo-control-get-property"></a><h3>bonobo_control_get_property ()</h3>
+<pre class="programlisting">void                bonobo_control_get_property         (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev,
+                                                         const char *first_prop,
+                                                         ...);</pre>
+<p>
+This method takes a NULL terminated list of name, type, value
+triplicates, and fetches the corresponding values on the control's
+associated property bag.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> the control with associated property bag
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> optional corba exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_prop</code></em> :</span></p></td>
+<td> the first property's name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_set_transient_for ()">
+<a name="bonobo-control-set-transient-for"></a><h3>bonobo_control_set_transient_for ()</h3>
+<pre class="programlisting">void                bonobo_control_set_transient_for    (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"
+>GtkWindow</a> *window,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+Attempts to make the <em class="parameter"><code>window</code></em> transient for the toplevel
+of any associated controlframe the BonoboControl may have.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> a control with associated control frame
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>window</code></em> :</span></p></td>
+<td> a window upon which to set the transient window.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_unset_transient_for ()">
+<a name="bonobo-control-unset-transient-for"></a><h3>bonobo_control_unset_transient_for ()</h3>
+<pre class="programlisting">void                bonobo_control_unset_transient_for  (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"
+>GtkWindow</a> *window,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> a control with associated control frame
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>window</code></em> :</span></p></td>
+<td> a window upon which to unset the transient window.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_construct ()">
+<a name="bonobo-control-construct"></a><h3>bonobo_control_construct ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *     bonobo_control_construct            (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *widget);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>widget</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_ui_component ()">
+<a name="bonobo-control-get-ui-component"></a><h3>bonobo_control_get_ui_component ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * bonobo_control_get_ui_component     (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> The control
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the associated UI component
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_set_ui_component ()">
+<a name="bonobo-control-set-ui-component"></a><h3>bonobo_control_set_ui_component ()</h3>
+<pre class="programlisting">void                bonobo_control_set_ui_component     (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> *component);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>component</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_remote_ui_container ()">
+<a name="bonobo-control-get-remote-ui-container"></a><h3>bonobo_control_get_remote_ui_container ()</h3>
+<pre class="programlisting">Bonobo_UIContainer  bonobo_control_get_remote_ui_container
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A BonoboControl object which is associated with a remote
+ControlFrame.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> an optional exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The Bonobo_UIContainer CORBA server for the remote BonoboControlFrame.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_set_control_frame ()">
+<a name="bonobo-control-set-control-frame"></a><h3>bonobo_control_set_control_frame ()</h3>
+<pre class="programlisting">void                bonobo_control_set_control_frame    (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         Bonobo_ControlFrame control_frame,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control_frame</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_control_frame ()">
+<a name="bonobo-control-get-control-frame"></a><h3>bonobo_control_get_control_frame ()</h3>
+<pre class="programlisting">Bonobo_ControlFrame  bonobo_control_get_control_frame   (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A BonoboControl object whose Bonobo_ControlFrame CORBA interface is
+being retrieved.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> an optional exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The Bonobo_ControlFrame CORBA object associated with <em class="parameter"><code>control</code></em>, this is
+a CORBA_Object_duplicated object.  You need to CORBA_Object_release it when you are
+done with it.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_set_properties ()">
+<a name="bonobo-control-set-properties"></a><h3>bonobo_control_set_properties ()</h3>
+<pre class="programlisting">void                bonobo_control_set_properties       (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         Bonobo_PropertyBag pb,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+Binds <em class="parameter"><code>pb</code></em> to <em class="parameter"><code>control</code></em>.  When a remote object queries <em class="parameter"><code>control</code></em>
+for its property bag, <em class="parameter"><code>pb</code></em> will be used in the responses.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a> object.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pb</code></em> :</span></p></td>
+<td> A <span class="type">Bonobo_PropertyBag</span>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> An optional exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_properties ()">
+<a name="bonobo-control-get-properties"></a><h3>bonobo_control_get_properties ()</h3>
+<pre class="programlisting">Bonobo_PropertyBag  bonobo_control_get_properties       (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a> whose PropertyBag has already been set.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The <span class="type">Bonobo_PropertyBag</span> bound to <em class="parameter"><code>control</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_ambient_properties ()">
+<a name="bonobo-control-get-ambient-properties"></a><h3>bonobo_control_get_ambient_properties ()</h3>
+<pre class="programlisting">Bonobo_PropertyBag  bonobo_control_get_ambient_properties
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a> which is bound to a remote
+<a class="link" href="libbonoboui-bonobo-control-frame.html#BonoboControlFrame"><span class="type">BonoboControlFrame</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> an optional exception environment
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A <span class="type">Bonobo_PropertyBag</span> bound to the bag of ambient
+properties associated with this <span class="type">Control</span>'s <span class="type">ControlFrame</span>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_activate_notify ()">
+<a name="bonobo-control-activate-notify"></a><h3>bonobo_control_activate_notify ()</h3>
+<pre class="programlisting">void                bonobo_control_activate_notify      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> activated,
+                                                         CORBA_Environment *opt_ev);</pre>
+<p>
+Notifies the remote ControlFrame which is associated with
+<em class="parameter"><code>control</code></em> that <em class="parameter"><code>control</code></em> has been activated/deactivated.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> A <a class="link" href="libbonoboui-bonobo-control.html#BonoboControl"><span class="type">BonoboControl</span></a> object which is bound
+to a remote ControlFrame.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>activated</code></em> :</span></p></td>
+<td> Whether or not <em class="parameter"><code>control</code></em> has been activated.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_ev</code></em> :</span></p></td>
+<td> An optional exception environment
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_window_id_from_x11 ()">
+<a name="bonobo-control-window-id-from-x11"></a><h3>bonobo_control_window_id_from_x11 ()</h3>
+<pre class="programlisting">Bonobo_Gdk_WindowId  bonobo_control_window_id_from_x11  (<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> x11_id);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>x11_id</code></em> :</span></p></td>
+<td> the x11 window id or Windows HWND.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the window id or handle as a string; free after use.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_x11_from_window_id ()">
+<a name="bonobo-control-x11-from-window-id"></a><h3>bonobo_control_x11_from_window_id ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a>             bonobo_control_x11_from_window_id   (const CORBA_char *id);</pre>
+<p>
+De-mangle a window id string,
+fields are separated by ':' character,
+currently only the first field is used.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> CORBA_char *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the native window id.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_windowid_from_x11()">
+<a name="bonobo-control-windowid-from-x11"></a><h3>bonobo_control_windowid_from_x11()</h3>
+<pre class="programlisting">#define             bonobo_control_windowid_from_x11(a)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_CONTROL_POPUP_BUTTON1">
+<a name="BONOBO-CONTROL-POPUP-BUTTON1--CAPS"></a><h3>BONOBO_CONTROL_POPUP_BUTTON1</h3>
+<pre class="programlisting">#define                     BONOBO_CONTROL_POPUP_BUTTON1           "/popups/button1"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_CONTROL_POPUP_BUTTON2">
+<a name="BONOBO-CONTROL-POPUP-BUTTON2--CAPS"></a><h3>BONOBO_CONTROL_POPUP_BUTTON2</h3>
+<pre class="programlisting">#define                     BONOBO_CONTROL_POPUP_BUTTON2           "/popups/button2"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BONOBO_CONTROL_POPUP_BUTTON3">
+<a name="BONOBO-CONTROL-POPUP-BUTTON3--CAPS"></a><h3>BONOBO_CONTROL_POPUP_BUTTON3</h3>
+<pre class="programlisting">#define                     BONOBO_CONTROL_POPUP_BUTTON3           "/popups/button3"
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_popup_ui_container ()">
+<a name="bonobo-control-get-popup-ui-container"></a><h3>bonobo_control_get_popup_ui_container ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer">BonoboUIContainer</a> * bonobo_control_get_popup_ui_container
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_get_popup_ui_component ()">
+<a name="bonobo-control-get-popup-ui-component"></a><h3>bonobo_control_get_popup_ui_component ()</h3>
+<pre class="programlisting"><a class="link" href="libbonoboui-bonobo-ui-component.html#BonoboUIComponent">BonoboUIComponent</a> * bonobo_control_get_popup_ui_component
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_set_popup_ui_container ()">
+<a name="bonobo-control-set-popup-ui-container"></a><h3>bonobo_control_set_popup_ui_container ()</h3>
+<pre class="programlisting">void                bonobo_control_set_popup_ui_container
+                                                        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a class="link" href="libbonoboui-bonobo-ui-container.html#BonoboUIContainer">BonoboUIContainer</a> *ui_container);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ui_container</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_do_popup ()">
+<a name="bonobo-control-do-popup"></a><h3>bonobo_control_do_popup ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            bonobo_control_do_popup             (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> button,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> activate_time);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>button</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>activate_time</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_do_popup_full ()">
+<a name="bonobo-control-do-popup-full"></a><h3>bonobo_control_do_popup_full ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            bonobo_control_do_popup_full        (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *parent_menu_shell,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"
+>GtkWidget</a> *parent_menu_item,
+                                                         <a
+href="http://library.gnome.org/devel/gtk/unstable/GtkMenu.html#GtkMenuPositionFunc"
+>GtkMenuPositionFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a> button,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint32"
+>guint32</a> activate_time);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent_menu_shell</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent_menu_item</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>button</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>activate_time</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BonoboControlLifeCallback ()">
+<a name="BonoboControlLifeCallback"></a><h3>BonoboControlLifeCallback ()</h3>
+<pre class="programlisting">void                (*BonoboControlLifeCallback)        (void);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_life_set_purge ()">
+<a name="bonobo-control-life-set-purge"></a><h3>bonobo_control_life_set_purge ()</h3>
+<pre class="programlisting">void                bonobo_control_life_set_purge       (long ms );</pre>
+<p>
+Set time we're prepared to wait without a ControlFrame
+before terminating the Control. This can happen if the
+panel activates us but crashes before the set_frame.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_life_set_callback ()">
+<a name="bonobo-control-life-set-callback"></a><h3>bonobo_control_life_set_callback ()</h3>
+<pre class="programlisting">void                bonobo_control_life_set_callback    (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControlLifeCallback" title="BonoboControlLifeCallback ()">BonoboControlLifeCallback</a> all_dead_callback);</pre>
+<p>
+See <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-life-instrument" title="bonobo_control_life_instrument ()"><span class="type">bonobo_control_life_instrument</span></a></p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>all_dead_callback</code></em> :</span></p></td>
+<td> method to call at idle when no controls remain
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_life_instrument ()">
+<a name="bonobo-control-life-instrument"></a><h3>bonobo_control_life_instrument ()</h3>
+<pre class="programlisting">void                bonobo_control_life_instrument      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *control);</pre>
+<p>
+Request that <em class="parameter"><code>control</code></em> is lifecycle managed by this code;
+when it (and all other registerees are dead, the
+all_dead_callback set by <a class="link" href="libbonoboui-bonobo-control.html#bonobo-control-life-set-callback" title="bonobo_control_life_set_callback ()"><span class="type">bonobo_control_life_set_callback</span></a>
+will be called at idle.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>control</code></em> :</span></p></td>
+<td> control to manage.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="bonobo_control_life_get_count ()">
+<a name="bonobo-control-life-get-count"></a><h3>bonobo_control_life_get_count ()</h3>
+<pre class="programlisting">int                 bonobo_control_life_get_count       (void);</pre>
+<p>
+calculates the number of live controls under management.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the number of live controls.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="libbonoboui-bonobo-control.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "activate" signal'>
+<a name="BonoboControl-activate"></a><h3>The <code class="literal">"activate"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *bonobocontrol,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>       arg1,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)          : Run Last</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bonobocontrol</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "disconnected" signal'>
+<a name="BonoboControl-disconnected"></a><h3>The <code class="literal">"disconnected"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *bonobocontrol,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)          : Run Last</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bonobocontrol</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "plug-created" signal'>
+<a name="BonoboControl-plug-created"></a><h3>The <code class="literal">"plug-created"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *bonobocontrol,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)          : Run Last</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bonobocontrol</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "set-frame" signal'>
+<a name="BonoboControl-set-frame"></a><h3>The <code class="literal">"set-frame"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="libbonoboui-bonobo-control.html#BonoboControl">BonoboControl</a> *bonobocontrol,
+                                                        <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a>       user_data)          : Run Last</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bonobocontrol</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="See Also">
+<a name="libbonoboui-bonobo-control.see-also"></a><h2>See Also</h2>
+<p>
+  <a class="link" href="libbonoboui-bonobo-widget.html#BonoboWidget"><span class="type">BonoboWidget</span></a>, <code class="function">bonobo_widget_new()</code>
+</p>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

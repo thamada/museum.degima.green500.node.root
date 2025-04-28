@@ -1,0 +1,51 @@
+Introduction.
+
+The Fedora hardware profiler is a server-client system that does a hardware
+scan against a machine and sends those results to a server so the Fedora
+Project server.  The sends are anonymous and should not contain any private
+information other than the physical hardware information and basic OS info
+
+https://hosted.fedoraproject.org/projects/smolt
+
+Smoon: Smolt Satellite Server, for private inventory
+
+The server is a turbogears instance.  It and the client could very easily be
+modified to be used as an inventory system for an enterprise environment.
+Anyone interested in doing this please contact me.
+
+
+Client
+
+The client portion uses the RHN client to create a hardware object that then
+gets sent to the server.  The server then generates a public UUID and admin
+password and sends it back to the client.
+
+Submitting your profile is important but it should be done monthly.  Smolt's
+implementation in Fedora is such that, when enabled, it submits randomly
+every month.  It is up to the packager of your distribution to come up with
+a method to generate this random time frame.  In RPM's post section it looks
+like:
+
+TMPFILE=$(/bin/mktemp /tmp/smolt.XXXXX)
+/bin/awk '{ srand(); if($2 == 1 && $3 == 1) print $1,int((rand() * 100) % 22 + 1),int((rand() * 100) % 27 + 1),substr($0,index($0,$4)); else print $0}' /etc/cron.d/smolt > $TMPFILE
+/bin/cp $TMPFILE /etc/cron.d/smolt
+/bin/rm -f $TMPFILE
+
+Configuration:
+Note to Smolt Devs: I'm not sure where to put this info, so i'm putting it here
+Note to Package Maintainers: the file client/config.py should really be a symlink. Included is a sample config.py.  To use it in a distro, please copy it to /etc/smolt.cfg.sample or even just /etc/smolt.cfg .  It is this author's preference to have the actual config file be /etc/smolt.cfg .  Furthermore, right now Smolt expects there to be a client/config.py for this to all work, so above all, make sure there is a symlink to wherever you *do* place the config.  If this presents a problem for your distro, please email us :).
+
+Configuration (REDUX):
+To configure smolt, it currently looks in one place, /etc/smolt.cfg or /path/to/client/config.py.  Yes it really counts as one place.  It is a standard python file, with constants declared directly in the file.  Please see the sample config provided for... well... a sample.  It currently recognizes only one option.
+
+Options:
+
+SMOON_URL: a str (that is a string) that is a url to your local smoon server.  (Default: 
+http://smolt.fedoraproject.org/)
+
+
+Usage:
+     -h,--help           Display this help menu
+     -d,--debug          Enable debug information
+     -p,--printOnly      Print Information only, do not send
+     -s,--server=        serverUrl (http://yourSmoonServer/

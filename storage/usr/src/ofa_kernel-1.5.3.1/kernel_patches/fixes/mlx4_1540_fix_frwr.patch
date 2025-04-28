@@ -1,0 +1,59 @@
+From 000ad0a76dff3b9fcd124331c6b441cd061c6d42 Mon Sep 17 00:00:00 2001
+From: Eli Cohen <eli@mellanox.co.il>
+Date: Thu, 7 Oct 2010 16:03:39 +0200
+Subject: [PATCH] mlx4: Limit num of fast reg WRs
+
+Fix the limit of max fast regisreation WRs that can be posted to CX to match
+hardware capabilities.
+
+Signed-off-by: Eli Cohen <eli@mellanox.co.il>
+---
+ drivers/infiniband/hw/mlx4/main.c |    2 +-
+ drivers/infiniband/hw/mlx4/mr.c   |    2 +-
+ include/linux/mlx4/device.h       |    4 ++++
+ 3 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/infiniband/hw/mlx4/main.c b/drivers/infiniband/hw/mlx4/main.c
+index 925f373..123aa30 100644
+--- a/drivers/infiniband/hw/mlx4/main.c
++++ b/drivers/infiniband/hw/mlx4/main.c
+@@ -169,7 +169,7 @@ static int mlx4_ib_query_device(struct ib_device *ibdev,
+ 	props->max_srq		   = dev->dev->caps.num_srqs - dev->dev->caps.reserved_srqs;
+ 	props->max_srq_wr	   = dev->dev->caps.max_srq_wqes - 1;
+ 	props->max_srq_sge	   = dev->dev->caps.max_srq_sge;
+-	props->max_fast_reg_page_list_len = PAGE_SIZE / sizeof (u64);
++	props->max_fast_reg_page_list_len = MAX_FAST_REG_PAGES;
+ 	props->local_ca_ack_delay  = dev->dev->caps.local_ca_ack_delay;
+ 	props->atomic_cap	   = dev->dev->caps.flags & MLX4_DEV_CAP_FLAG_ATOMIC ?
+ 		IB_ATOMIC_HCA : IB_ATOMIC_NONE;
+diff --git a/drivers/infiniband/hw/mlx4/mr.c b/drivers/infiniband/hw/mlx4/mr.c
+index d291785..817d954 100644
+--- a/drivers/infiniband/hw/mlx4/mr.c
++++ b/drivers/infiniband/hw/mlx4/mr.c
+@@ -291,7 +291,7 @@ struct ib_fast_reg_page_list *mlx4_ib_alloc_fast_reg_page_list(struct ib_device
+ 	struct mlx4_ib_fast_reg_page_list *mfrpl;
+ 	int size = page_list_len * sizeof (u64);
+ 
+-	if (size > PAGE_SIZE)
++	if (page_list_len > MAX_FAST_REG_PAGES)
+ 		return ERR_PTR(-EINVAL);
+ 
+ 	mfrpl = kmalloc(sizeof *mfrpl, GFP_KERNEL);
+diff --git a/include/linux/mlx4/device.h b/include/linux/mlx4/device.h
+index b57c0ac..e0ff7ac 100644
+--- a/include/linux/mlx4/device.h
++++ b/include/linux/mlx4/device.h
+@@ -181,6 +181,10 @@ enum {
+ 	MLX4_CUNTERS_EXT
+ };
+ 
++enum {
++	MAX_FAST_REG_PAGES = 511,
++};
++
+ static inline u64 mlx4_fw_ver(u64 major, u64 minor, u64 subminor)
+ {
+ 	return (major << 32) | (minor << 16) | subminor;
+-- 
+1.7.3.1
+

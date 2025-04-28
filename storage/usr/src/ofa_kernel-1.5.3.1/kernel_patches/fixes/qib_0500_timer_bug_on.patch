@@ -1,0 +1,14 @@
+diff --git a/drivers/infiniband/hw/qib/qib_rc.c b/drivers/infiniband/hw/qib/qib_rc.c
+index 8245237..25ddb5b 100644
+--- a/drivers/infiniband/hw/qib/qib_rc.c
++++ b/drivers/infiniband/hw/qib/qib_rc.c
+@@ -1439,6 +1439,9 @@ static void qib_rc_rcv_resp(struct qib_ibport *ibp,
+ 	}
+ 
+ 	spin_lock_irqsave(&qp->s_lock, flags);
++	if (!(ib_qib_state_ops[qp->state] & QIB_PROCESS_RECV_OK))
++		goto ack_done;
++
+ 
+ 	/* Ignore invalid responses. */
+ 	if (qib_cmp24(psn, qp->s_next_psn) >= 0)

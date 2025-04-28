@@ -1,0 +1,33 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>probe::ioblock_trace.bounce</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title="SystemTap Tapset Reference Manual"><link rel="up" href="ch07.html" title="Chapter&#160;7.&#160;IO Scheduler and block IO Tapset"><link rel="prev" href="re129.html" title="probe::ioblock.end"><link rel="next" href="re131.html" title="probe::ioblock_trace.request"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center"><span>probe::ioblock_trace.bounce</span></th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re129.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;7.&#160;IO Scheduler and block IO Tapset</th><td width="20%" align="right">&#160;<a accesskey="n" href="re131.html">Next</a></td></tr></table><hr></div><div class="refentry" title="probe::ioblock_trace.bounce"><a name="API-ioblock-trace-bounce"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>probe::ioblock_trace.bounce &#8212; 
+     Fires whenever a buffer bounce is needed for at least one page of a block IO request.
+ </p></div><div class="refsynopsisdiv" title="Synopsis"><h2>Synopsis</h2><pre class="synopsis">ioblock_trace.bounce </pre></div><div class="refsect1" title="Values"><a name="id567739"></a><h2>Values</h2><p>
+  None
+ </p></div><div class="refsect1" title="Description"><a name="id567749"></a><h2>Description</h2><p>
+   </p><p>
+
+   <em class="parameter"><code>name</code></em>      - name of the probe point
+   <em class="parameter"><code>q</code></em>         - request queue on which this bio was queued.
+   <em class="parameter"><code>devname</code></em>   - device for which a buffer bounce was needed.
+   <em class="parameter"><code>ino</code></em>       - i-node number of the mapped file
+   <em class="parameter"><code>bytes_done</code></em> - number of bytes transferred
+   <em class="parameter"><code>sector</code></em>    - beginning sector for the entire bio
+   <em class="parameter"><code>flags</code></em>     - see below
+   BIO_UPTODATE    0       ok after I/O completion
+   BIO_RW_BLOCK    1       RW_AHEAD set, and read/write would block
+   BIO_EOF         2       out-out-bounds error
+   BIO_SEG_VALID   3       nr_hw_seg valid
+   BIO_CLONED      4       doesn't own data
+   BIO_BOUNCED     5       bio is a bounce bio
+   BIO_USER_MAPPED 6       contains user pages
+   BIO_EOPNOTSUPP  7       not supported
+   <em class="parameter"><code>rw</code></em>        - binary trace for read/write request
+   <em class="parameter"><code>vcnt</code></em>      - bio vector count which represents number of array element (page, offset, length) which makes up this I/O request
+   <em class="parameter"><code>idx</code></em>       - offset into the bio vector array
+   <em class="parameter"><code>phys_segments</code></em> - number of segments in this bio after physical address coalescing is performed.
+   <em class="parameter"><code>size</code></em>      - total size in bytes
+   <em class="parameter"><code>bdev</code></em>      - target block device
+   <em class="parameter"><code>bdev_contains</code></em> - points to the device object which contains the partition (when bio structure represents a partition)
+   <em class="parameter"><code>p_start_sect</code></em> -  points to the start sector of the partition structure of the device
+</p></div><div class="refsect1" title="Context"><a name="id567858"></a><h2>Context </h2><p>
+   The process creating a block IO request.
+</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re129.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="ch07.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="re131.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top"><span>probe::ioblock.end</span>&#160;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&#160;<span>probe::ioblock_trace.request</span></td></tr></table></div></body></html>

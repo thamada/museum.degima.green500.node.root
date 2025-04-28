@@ -1,0 +1,869 @@
+mlx4_en: Add an ability to attach to QPs to GIDS by priority.
+
+Add an ability to attach to QPs to GIDS by priority.
+The basic flow: Upon receiving a high priority attach request,
+Make sure that it is put before all other low priority entries in the same 
+MGM hash bucket. if a low priority entry already exists for the given GID,
+we'll have two entries with the same GID, which means that the low priority
+entry will be ignored.
+
+Signed-off-by: Nir Muchtar <nirm@voltaire.com>
+---
+ drivers/infiniband/core/verbs.c   |   14 +-
+ drivers/infiniband/hw/mlx4/main.c |   16 ++-
+ drivers/net/mlx4/main.c           |    1 +
+ drivers/net/mlx4/mcg.c            |  327 ++++++++++++++++++++++++++++++++----
+ drivers/net/mlx4/mlx4.h           |    1 +
+ include/linux/mlx4/device.h       |    9 +
+ 6 files changed, 318 insertions(+), 50 deletions(-)
+
+Index: ofed_kernel-fixes/drivers/infiniband/core/verbs.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/core/verbs.c	2011-02-24 10:51:41.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/core/verbs.c	2011-02-24 10:52:20.000000000 +0200
+@@ -1005,11 +1005,8 @@ int ib_attach_mcast(struct ib_qp *qp, un
+ 
+ 	switch (rdma_node_get_transport(qp->device->node_type)) {
+ 	case RDMA_TRANSPORT_IB:
+-		if (qp->qp_type == IB_QPT_RAW_ETH) {
+-			/* In raw Etherent mgids the 63 msb's should be 0 */
+-			if (gid->global.subnet_prefix & cpu_to_be64(~1ULL))
+-				return -EINVAL;
+-		} else if (gid->raw[0] != 0xff || qp->qp_type != IB_QPT_UD)
++		if ((gid->raw[0] != 0xff || qp->qp_type != IB_QPT_UD) &&
++		    qp->qp_type != IB_QPT_RAW_ETH)
+ 			return -EINVAL;
+ 		break;
+ 	case RDMA_TRANSPORT_IWARP:
+@@ -1028,11 +1025,8 @@ int ib_detach_mcast(struct ib_qp *qp, un
+ 
+ 	switch (rdma_node_get_transport(qp->device->node_type)) {
+ 	case RDMA_TRANSPORT_IB:
+-		if (qp->qp_type == IB_QPT_RAW_ETH) {
+-			/* In raw Etherent mgids the 63 msb's should be 0 */
+-			if (gid->global.subnet_prefix & cpu_to_be64(~1ULL))
+-				return -EINVAL;
+-		} else if (gid->raw[0] != 0xff || qp->qp_type != IB_QPT_UD)
++		if ((gid->raw[0] != 0xff || qp->qp_type != IB_QPT_UD) &&
++		    qp->qp_type != IB_QPT_RAW_ETH)
+ 			return -EINVAL;
+ 		break;
+ 	case RDMA_TRANSPORT_IWARP:
+Index: ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/infiniband/hw/mlx4/main.c	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/drivers/infiniband/hw/mlx4/main.c	2011-02-24 11:00:17.000000000 +0200
+@@ -675,14 +675,30 @@ static int mlx4_ib_mcg_attach(struct ib_
+ 	int err;
+ 	struct mlx4_ib_dev *mdev = to_mdev(ibqp->device);
+ 	struct mlx4_ib_qp *mqp = to_mqp(ibqp);
++	u32 *eth_gid_flags = (u32 *)(gid->raw);
++	u8 high_prio = 0;
+ 
+-	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH)
++	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH) {
+ 		gid->raw[5] = mqp->port;
+ 
++		if (!gid->raw[5]) {
++			printk(KERN_WARNING "0 port num for raw_eth attach\n");
++			return -EINVAL;
++		}
++		/* currently the only supported flag is high priority steer */
++		if (*eth_gid_flags & ~IB_RAW_ETH_GID_HIGH_PRIO)
++			return -EINVAL;
++		high_prio = !!(*eth_gid_flags & IB_RAW_ETH_GID_HIGH_PRIO);
++		*eth_gid_flags &= ~IB_RAW_ETH_GID_HIGH_PRIO;
++	}
++
+ 	err = mlx4_multicast_attach(mdev->dev, &mqp->mqp, gid->raw, !!(mqp->flags &
+ 				MLX4_IB_QP_BLOCK_MULTICAST_LOOPBACK),
+ 				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+-				MLX4_PROT_EN : MLX4_PROT_IB_IPV6);
++				    MLX4_PROT_EN : MLX4_PROT_IB_IPV6,
++				    high_prio);
++	if (high_prio)
++		*eth_gid_flags |= IB_RAW_ETH_GID_HIGH_PRIO;
+ 	if (err)
+ 		return err;
+ 
+@@ -693,9 +709,14 @@ static int mlx4_ib_mcg_attach(struct ib_
+ 	return 0;
+ 
+ err_add:
++	if (high_prio)
++		*eth_gid_flags &= ~IB_RAW_ETH_GID_HIGH_PRIO;
+ 	mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
+-				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+-				MLX4_PROT_EN : MLX4_PROT_IB_IPV6);
++			      (ibqp->qp_type == IB_QPT_RAW_ETH) ?
++			      MLX4_PROT_EN : MLX4_PROT_IB_IPV6,
++			      high_prio);
++	if (high_prio)
++		*eth_gid_flags |= IB_RAW_ETH_GID_HIGH_PRIO;
+ 	return err;
+ }
+ 
+@@ -723,13 +744,26 @@ static int mlx4_ib_mcg_detach(struct ib_
+ 	u8 mac[6];
+ 	struct net_device *ndev;
+ 	struct gid_entry *ge;
++	u32 *eth_gid_flags = (u32 *)(gid->raw);
++	u8 high_prio = 0;
+ 
+-	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH)
++	if (mdev->dev->caps.vep_mc_steering && ibqp->qp_type == IB_QPT_RAW_ETH) {
+ 		gid->raw[5] = mqp->port;
+-
++		if (!gid->raw[5]) {
++			printk(KERN_WARNING "0 port num for raw_eth detach\n");
++			return -EINVAL;
++		}
++		if (*eth_gid_flags & ~IB_RAW_ETH_GID_HIGH_PRIO)
++			return -EINVAL;
++		high_prio = !!(*eth_gid_flags & IB_RAW_ETH_GID_HIGH_PRIO);
++		*eth_gid_flags &= ~IB_RAW_ETH_GID_HIGH_PRIO;
++	}
+ 	err = mlx4_multicast_detach(mdev->dev, &mqp->mqp, gid->raw,
+-				(ibqp->qp_type == IB_QPT_RAW_ETH) ?
+-				MLX4_PROT_EN : MLX4_PROT_IB_IPV6);
++				    (ibqp->qp_type == IB_QPT_RAW_ETH) ?
++				    MLX4_PROT_EN : MLX4_PROT_IB_IPV6,
++				    high_prio);
++	if (high_prio)
++		*eth_gid_flags |= IB_RAW_ETH_GID_HIGH_PRIO;
+ 	if (err)
+ 		return err;
+ 
+Index: ofed_kernel-fixes/drivers/net/mlx4/main.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/main.c	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/main.c	2011-02-24 10:52:20.000000000 +0200
+@@ -1356,6 +1356,7 @@ static int mlx4_init_steering(struct mlx
+ 			INIT_LIST_HEAD(&priv->steer[i].promisc_qps[j]);
+ 			INIT_LIST_HEAD(&priv->steer[i].steer_entries[j]);
+ 		}
++		INIT_LIST_HEAD(&priv->steer[i].high_prios);
+ 	}
+ 	return 0;
+ }
+Index: ofed_kernel-fixes/drivers/net/mlx4/mcg.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/mcg.c	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/mcg.c	2011-02-24 11:00:17.000000000 +0200
+@@ -34,12 +34,18 @@
+ #include <linux/init.h>
+ #include <linux/string.h>
+ #include <linux/slab.h>
++#include <linux/etherdevice.h>
+ 
+ #include <linux/mlx4/cmd.h>
+ #include <linux/mlx4/driver.h>
+ 
+ #include "mlx4.h"
+ 
++struct mlx4_steer_prio {
++	struct list_head list;
++	int hash;
++	u32 num_high_prio;
++};
+ 
+ static int mlx4_READ_ENTRY(struct mlx4_dev *dev, int index,
+ 			   struct mlx4_cmd_mailbox *mailbox)
+@@ -227,7 +233,7 @@ static int existing_steering_entry(struc
+ 	 * we need to add it as a duplicate to this entry
+ 	 * for future refernce */
+ 	list_for_each_entry(dqp, &entry->duplicates, list) {
+-		if (qpn == pqp->qpn)
++		if (qpn == dqp->qpn)
+ 			return 0; /* qp is already duplicated */
+ 	}
+ 
+@@ -314,12 +320,18 @@ static bool can_remove_steering_entry(st
+ 		}
+ 	}
+ 	 /* All the qps currently registered for this entry are promiscuous,
+-	  * it can be removed */
++	  * Checking for duplicates */
+ 	ret = true;
+ 	list_for_each_entry_safe(entry, tmp_entry, &s_steer->steer_entries[steer], list) {
+ 		if (entry->index == index) {
+-			list_del(&entry->list);
+-			kfree(entry);
++			if (list_empty(&entry->duplicates)) {
++				list_del(&entry->list);
++				kfree(entry);
++			} else {
++				/* This entry contains duplicates so it shouldn't be removed */
++				ret = false;
++				goto out;
++			}
+ 		}
+ 	}
+ 
+@@ -328,6 +340,24 @@ out:
+ 	return ret;
+ }
+ 
++/* Adjust the index of an existing steering entry*/
++static void adjust_steering_entry(struct mlx4_dev *dev, u8 vep_num, u8 port,
++                                  enum mlx4_steer_type steer,
++                                  unsigned int old_index, unsigned int new_index)
++{
++	struct mlx4_steer *s_steer;
++	u8 pf_num;
++	struct mlx4_steer_index *entry;
++
++	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
++	s_steer = &mlx4_priv(dev)->steer[pf_num];
++	list_for_each_entry(entry, &s_steer->steer_entries[steer], list) {
++		if (entry->index == old_index) {
++			entry->index = new_index;
++			return;
++		}
++	}
++}
+ 
+ static int add_promisc_qp(struct mlx4_dev *dev, u8 vep_num, u8 port,
+ 			  enum mlx4_steer_type steer, u32 qpn)
+@@ -345,16 +375,22 @@ static int add_promisc_qp(struct mlx4_de
+ 	int last_index;
+ 	int err;
+ 	u8 pf_num;
+-
++	struct mlx4_priv *priv = mlx4_priv(dev);
+ 	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
+ 	s_steer = &mlx4_priv(dev)->steer[pf_num];
+ 
+-	if (get_promisc_qp(dev, pf_num, steer, qpn))
+-		return 0; /* Noting to do, already exists */
++	mutex_lock(&priv->mcg_table.mutex);
++
++	if (get_promisc_qp(dev, pf_num, steer, qpn)){
++		err = 0;  /* Noting to do, already exists */
++		goto out_mutex;
++	}
+ 
+ 	pqp = kmalloc(sizeof *pqp, GFP_KERNEL);
+-	if (!pqp)
+-		return -ENOMEM;
++	if (!pqp) {
++		err = -ENOMEM;
++    	goto out_mutex;
++	}
+ 	pqp->qpn = qpn;
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(dev);
+@@ -416,6 +452,7 @@ static int add_promisc_qp(struct mlx4_de
+ 		goto out_list;
+ 
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
++	mutex_unlock(&priv->mcg_table.mutex);
+ 	return 0;
+ 
+ out_list:
+@@ -425,12 +462,15 @@ out_mailbox:
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
+ out_alloc:
+ 	kfree(pqp);
+-	return err;
++out_mutex:
++    mutex_unlock(&priv->mcg_table.mutex);
++    return err;
+ }
+ 
+ static int remove_promisc_qp(struct mlx4_dev *dev, u8 vep_num, u8 port,
+ 			     enum mlx4_steer_type steer, u32 qpn)
+ {
++	struct mlx4_priv *priv = mlx4_priv(dev);
+ 	struct mlx4_steer *s_steer;
+ 	struct mlx4_cmd_mailbox *mailbox;
+ 	struct mlx4_mgm *mgm;
+@@ -446,12 +486,14 @@ static int remove_promisc_qp(struct mlx4
+ 
+ 	pf_num = (dev->caps.num_ports == 1) ? vep_num : (vep_num << 1) | (port - 1);
+ 	s_steer = &mlx4_priv(dev)->steer[pf_num];
++	mutex_lock(&priv->mcg_table.mutex);
+ 
+ 	pqp = get_promisc_qp(dev, pf_num, steer, qpn);
+ 	if (unlikely(!pqp)) {
+ 		mlx4_warn(dev, "QP %x is not promiscuous QP\n", qpn);
+ 		/* nothing to do */
+-		return 0;
++		err = 0;
++		goto out_mutex;
+ 	}
+ 
+ 	/*remove from list of promisc qps */
+@@ -515,6 +557,127 @@ out_mailbox:
+ out_list:
+ 	if (back_to_list)
+ 		list_add_tail(&pqp->list, &s_steer->promisc_qps[steer]);
++out_mutex:
++	mutex_unlock(&priv->mcg_table.mutex);
++	return err;
++}
++
++static int set_num_high_prio(struct mlx4_dev *dev, u8 port, int hash, int val,
++			      enum mlx4_protocol prot)
++{
++	struct mlx4_steer_prio *high_prio, *prev_high_prio;
++	struct list_head *high_prios;
++
++	if (prot != MLX4_PROT_ETH || port > dev->caps.num_ports)
++		return -EINVAL;
++
++	high_prios = &mlx4_priv(dev)->steer[port - 1].high_prios;
++	list_for_each_entry_safe(high_prio, prev_high_prio, high_prios, list) {
++		if (high_prio->hash == hash) {
++			high_prio->num_high_prio += val;
++			if (!high_prio->num_high_prio) {
++				list_del(&high_prio->list);
++				kfree(high_prio);
++			}
++			return 0;
++		}
++	}
++	high_prio = kmalloc(sizeof *high_prio, GFP_KERNEL);
++	if (!high_prio)
++		return -ENOMEM;
++	high_prio->hash = hash;
++	high_prio->num_high_prio = val;
++	list_add_tail(&high_prio->list, high_prios);
++	return 0;
++}
++
++static int inc_num_high_prio(struct mlx4_dev *dev, u8 port, int hash,
++			      enum mlx4_protocol prot)
++{
++	return set_num_high_prio(dev, port, hash, 1, prot);
++}
++
++static int dec_num_high_prio(struct mlx4_dev *dev, u8 port, int hash,
++			      enum mlx4_protocol prot)
++{
++	return set_num_high_prio(dev, port, hash, -1, prot);
++}
++
++static u32 get_num_high_prio(struct mlx4_dev *dev, u8 port, int hash,
++			     enum mlx4_protocol prot)
++{
++	struct mlx4_steer_prio *high_prio;
++	struct list_head *high_prios;
++
++	if (prot != MLX4_PROT_ETH || port > dev->caps.num_ports)
++		return 0;
++	high_prios = &mlx4_priv(dev)->steer[port - 1].high_prios;
++	list_for_each_entry(high_prio, high_prios, list) {
++		if (high_prio->hash == hash)
++			return high_prio->num_high_prio;
++	}
++	return 0;
++}
++
++/* Find and return the first MGM/AMGM entry which is not of high priority */
++/* TODO merge with find_entry */
++static int find_first_low_entry(struct mlx4_dev *dev, u8 port,
++				u8 *gid, enum mlx4_protocol prot,
++				struct mlx4_cmd_mailbox *mgm_mailbox,
++				u16 *hash, int *prev, int *index)
++{
++	struct mlx4_cmd_mailbox *mailbox;
++	struct mlx4_mgm *mgm = mgm_mailbox->buf;
++	u8 *mgid;
++	int err;
++	u8 op_mod = (prot == MLX4_PROT_ETH) ? !!(dev->caps.vep_mc_steering) : 0;
++	int high_prio_left;
++
++	mailbox = mlx4_alloc_cmd_mailbox(dev);
++	if (IS_ERR(mailbox))
++		return -ENOMEM;
++	mgid = mailbox->buf;
++
++	memcpy(mgid, gid, 16);
++
++	err = mlx4_GID_HASH(dev, mailbox, hash, op_mod);
++	mlx4_free_cmd_mailbox(dev, mailbox);
++	if (err)
++		return err;
++
++	*index = *hash;
++	*prev  = -1;
++
++	high_prio_left = get_num_high_prio(dev, port, *index, prot);
++
++	do {
++		err = mlx4_READ_ENTRY(dev, *index, mgm_mailbox);
++		if (err)
++			return err;
++
++		if (!(be32_to_cpu(mgm->members_count) & 0xffffff)) {
++			if (*index != *hash) {
++				mlx4_err(dev, "Found zero MGID in AMGM.\n");
++				err = -EINVAL;
++			} else if (high_prio_left) {
++				mlx4_err(dev, "Invalid high prio entries.\n");
++				err = -EINVAL;
++			}
++			return err;
++		}
++
++		if (!high_prio_left)
++			return err;
++
++		*prev = *index;
++		*index = be32_to_cpu(mgm->next_gid_index) >> 6;
++		high_prio_left--;
++	} while (*index);
++	if (high_prio_left) {
++		mlx4_err(dev, "Not enough high prio MGIDs in MGM.\n");
++		return -EINVAL;
++	}
++	*index = -1;
+ 	return err;
+ }
+ 
+@@ -533,9 +696,9 @@ out_list:
+  * If no AMGM exists for given gid, *index = -1, *prev = index of last
+  * entry in hash chain and *mgm holds end of hash chain.
+  */
+-static int find_entry(struct mlx4_dev *dev,
++static int find_entry(struct mlx4_dev *dev, u8 port,
+ 		      u8 *gid, enum mlx4_protocol prot,
+-		      enum mlx4_steer_type steer,
++		      enum mlx4_steer_type steer, u8 high_prio,
+ 		      struct mlx4_cmd_mailbox *mgm_mailbox,
+ 		      u16 *hash, int *prev, int *index)
+ {
+@@ -544,6 +707,7 @@ static int find_entry(struct mlx4_dev *d
+ 	u8 *mgid;
+ 	int err;
+ 	u8 op_mod = (prot == MLX4_PROT_ETH) ? !!(dev->caps.vep_mc_steering) : 0;
++	int high_prio_left = 0;
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(dev);
+ 	if (IS_ERR(mailbox))
+@@ -563,6 +727,11 @@ static int find_entry(struct mlx4_dev *d
+ 	*index = *hash;
+ 	*prev  = -1;
+ 
++	/* We distinguish low from high priority entries by keeping the high
++	   entries before the low entries and saving their number */
++
++	high_prio_left = get_num_high_prio(dev, port, *hash, prot);
++
+ 	do {
+ 		err = mlx4_READ_ENTRY(dev, *index, mgm_mailbox);
+ 		if (err)
+@@ -577,11 +746,14 @@ static int find_entry(struct mlx4_dev *d
+ 		}
+ 
+ 		if (!memcmp(mgm->gid, gid, 16) &&
+-				(prot == be32_to_cpu(mgm->members_count) >> 30))
++		    (prot == be32_to_cpu(mgm->members_count) >> 30) &&
++		    ((high_prio && high_prio_left > 0) ||
++		     (!high_prio && high_prio_left <= 0)))
+ 			return err;
+ 
+ 		*prev = *index;
+ 		*index = be32_to_cpu(mgm->next_gid_index) >> 6;
++		high_prio_left--;
+ 	} while (*index);
+ 
+ 	*index = -1;
+@@ -590,19 +762,21 @@ static int find_entry(struct mlx4_dev *d
+ 
+ int mlx4_qp_attach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+ 			  int block_mcast_loopback, enum mlx4_protocol prot,
+-			  enum mlx4_steer_type steer)
++			  enum mlx4_steer_type steer, u8 high_prio)
+ {
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+-	struct mlx4_cmd_mailbox *mailbox;
+-	struct mlx4_mgm *mgm;
++	struct mlx4_cmd_mailbox *mailbox, *low_mailbox = NULL;
++	struct mlx4_mgm *mgm, *low_mgm;
+ 	u32 members_count;
+ 	u16 hash;
+ 	int index, prev;
++	int low_index = -1, low_prev;
+ 	int link = 0;
+ 	int i;
+ 	int err;
+ 	u8 port = gid[5];
+ 	u8 new_entry = 0;
++	u8 low_to_high = 0;
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(dev);
+ 	if (IS_ERR(mailbox))
+@@ -610,11 +784,10 @@ int mlx4_qp_attach_common(struct mlx4_de
+ 	mgm = mailbox->buf;
+ 
+ 	mutex_lock(&priv->mcg_table.mutex);
+-
+-	err = find_entry(dev, gid, prot, steer, mailbox, &hash, &prev, &index);
++	err = find_entry(dev, port, gid, prot, steer, high_prio,
++			 mailbox, &hash, &prev, &index);
+ 	if (err)
+ 		goto out;
+-
+ 	if (index != -1) {
+ 		if (!(be32_to_cpu(mgm->members_count) & 0xffffff)) {
+ 			new_entry = 1;
+@@ -622,10 +795,11 @@ int mlx4_qp_attach_common(struct mlx4_de
+ 		}
+ 	} else {
+ 		link = 1;
++		new_entry = 1;
+ 
+ 		index = mlx4_bitmap_alloc(&priv->mcg_table.bitmap);
+ 		if (index == -1) {
+-			mlx4_err(dev, "No AMGM entries left\n");
++			mlx4_warn(dev, "No AMGM entries left\n");
+ 			err = -ENOMEM;
+ 			goto out;
+ 		}
+@@ -633,28 +807,65 @@ int mlx4_qp_attach_common(struct mlx4_de
+ 
+ 		memset(mgm, 0, sizeof *mgm);
+ 		memcpy(mgm->gid, gid, 16);
++
++		/* if High priority attach was requested, we want to keep it
++		   before low entries, so we take the first low priority entry
++		   and swap it for our newly created entry (which is last) */
++		if (high_prio) {
++			mlx4_dbg(dev, "High priority steer was requested\n");
++			low_mailbox = mlx4_alloc_cmd_mailbox(dev);
++			if (IS_ERR(low_mailbox)) {
++				err = PTR_ERR(low_mailbox);
++				low_mailbox = NULL;
++				goto out;
++			}
++			err = find_first_low_entry(dev, port, gid, prot,
++						   low_mailbox, &hash,
++						   &low_prev, &low_index);
++			if (!err && low_index != -1) {
++				low_to_high = 1;
++				low_mgm = low_mailbox->buf;
++				mlx4_dbg(dev, "Found a low prio steering entry. Switching entries\n");
++				memcpy(mgm->gid, low_mgm->gid, 16);
++				mgm->members_count = low_mgm->members_count;
++				memcpy(mgm->qp, low_mgm->qp,
++				       (be32_to_cpu(mgm->members_count) & 0xffffff) * sizeof low_mgm->qp[0]);
++				low_mgm->members_count = 0;
++				memcpy(low_mgm->gid, gid, 16);
++				err = mlx4_WRITE_ENTRY(dev, index, mailbox);
++				if (err)
++					goto out;
++				adjust_steering_entry(dev, 0, port, steer, low_index, index);
++			}
++		}
+ 	}
+ 
+-	members_count = be32_to_cpu(mgm->members_count) & 0xffffff;
++	if (!low_to_high) {
++		low_mgm = mgm;
++		low_index = index;
++		low_mailbox = mailbox;
++	}
++
++	members_count = be32_to_cpu(low_mgm->members_count) & 0xffffff;
+ 	if (members_count == MLX4_QP_PER_MGM) {
+-		mlx4_err(dev, "MGM at index %x is full.\n", index);
++		mlx4_err(dev, "MGM at index %x is full.\n", low_index);
+ 		err = -ENOMEM;
+ 		goto out;
+ 	}
+ 
+ 	for (i = 0; i < members_count; ++i)
+-		if ((be32_to_cpu(mgm->qp[i]) & MGM_QPN_MASK) == qp->qpn) {
++		if ((be32_to_cpu(low_mgm->qp[i]) & MGM_QPN_MASK) == qp->qpn) {
+ 			mlx4_dbg(dev, "QP %06x already a member of MGM\n", qp->qpn);
+ 			err = 0;
+ 			goto out;
+ 		}
+ 
+-	mgm->qp[members_count++] = cpu_to_be32((qp->qpn & MGM_QPN_MASK) |
+-					       (!!mlx4_blck_lb << MGM_BLCK_LB_BIT));
++	low_mgm->qp[members_count++] = cpu_to_be32((qp->qpn & MGM_QPN_MASK) |
++						   (!!mlx4_blck_lb << MGM_BLCK_LB_BIT));
+ 
+-	mgm->members_count = cpu_to_be32(members_count | ((u32) prot << 30));
++	low_mgm->members_count = cpu_to_be32(members_count | ((u32) prot << 30));
+ 
+-	err = mlx4_WRITE_ENTRY(dev, index, mailbox);
++	err = mlx4_WRITE_ENTRY(dev, low_index, low_mailbox);
+ 	if (err)
+ 		goto out;
+ 
+@@ -670,14 +881,19 @@ int mlx4_qp_attach_common(struct mlx4_de
+ 	err = mlx4_WRITE_ENTRY(dev, prev, mailbox);
+ 	if (err)
+ 		goto out;
++	if (high_prio)
++		err = inc_num_high_prio(dev, port, hash, prot);
++	if (err)
++		goto out;
+ 
+ out:
+ 	if (prot == MLX4_PROT_ETH) {
+ 		/* manage the steering entry for promisc mode */
+ 		if (new_entry)
+-			err = new_steering_entry(dev, 0, port, steer, index, qp->qpn);
++			new_steering_entry(dev, 0, port, steer, low_index, qp->qpn);
+ 		else
+-			err = existing_steering_entry(dev, 0, port, steer, index, qp->qpn);
++			existing_steering_entry(dev, 0, port, steer,
++						low_index, qp->qpn);
+ 		/* TODO handle an error flow here, need to clean the MGMS */
+ 	}
+ 	if (err && link && index != -1) {
+@@ -691,11 +907,14 @@ out:
+ 	mutex_unlock(&priv->mcg_table.mutex);
+ 
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
++	if (low_to_high && low_mailbox)
++		mlx4_free_cmd_mailbox(dev, low_mailbox);
+ 	return err;
+ }
+ 
+ int mlx4_qp_detach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-			  enum mlx4_protocol prot, enum mlx4_steer_type steer)
++			  enum mlx4_protocol prot, enum mlx4_steer_type steer,
++			  u8 high_prio)
+ {
+ 	struct mlx4_priv *priv = mlx4_priv(dev);
+ 	struct mlx4_cmd_mailbox *mailbox;
+@@ -706,6 +925,7 @@ int mlx4_qp_detach_common(struct mlx4_de
+ 	int i, loc;
+ 	int err;
+ 	u8 port = gid[5];
++	bool removed_entry = false;
+ 
+ 	mailbox = mlx4_alloc_cmd_mailbox(dev);
+ 	if (IS_ERR(mailbox))
+@@ -714,7 +934,8 @@ int mlx4_qp_detach_common(struct mlx4_de
+ 
+ 	mutex_lock(&priv->mcg_table.mutex);
+ 
+-	err = find_entry(dev, gid, prot, steer, mailbox, &hash, &prev, &index);
++	err = find_entry(dev, port, gid, prot, steer, high_prio,
++			 mailbox, &hash, &prev, &index);
+ 	if (err)
+ 		goto out;
+ 
+@@ -745,11 +966,14 @@ int mlx4_qp_detach_common(struct mlx4_de
+ 	mgm->qp[loc]       = mgm->qp[i - 1];
+ 	mgm->qp[i - 1]     = 0;
+ 
+-	if (i != 1 && (prot != MLX4_PROT_ETH ||
+-	    !can_remove_steering_entry(dev, 0, port, steer, index, qp->qpn))) {
++	
++	if (prot == MLX4_PROT_ETH)
++		removed_entry = can_remove_steering_entry(dev, 0, port, steer, index, qp->qpn);
++	if (i != 1 && (prot != MLX4_PROT_ETH || !removed_entry)) {
+ 		err = mlx4_WRITE_ENTRY(dev, index, mailbox);
+ 		goto out;
+ 	}
++
+ 	/* We are going to delete the entry, members count should be 0 */
+ 	mgm->members_count = cpu_to_be32((u32) prot << 30);
+ 
+@@ -758,6 +982,8 @@ int mlx4_qp_detach_common(struct mlx4_de
+ 		int amgm_index = be32_to_cpu(mgm->next_gid_index) >> 6;
+ 		if (amgm_index) {
+ 			err = mlx4_READ_ENTRY(dev, amgm_index, mailbox);
++			if (!memcmp(mgm->gid, gid, 16))
++				adjust_steering_entry(dev, 0, port, steer, amgm_index, index);
+ 			if (err)
+ 				goto out;
+ 		} else
+@@ -795,42 +1021,53 @@ int mlx4_qp_detach_common(struct mlx4_de
+ 			mlx4_bitmap_free(&priv->mcg_table.bitmap,
+ 					 index - dev->caps.num_mgms);
+ 	}
+-
++	if (high_prio)
++		dec_num_high_prio(dev, port, hash, prot);
+ out:
+ 	mutex_unlock(&priv->mcg_table.mutex);
+ 
+ 	mlx4_free_cmd_mailbox(dev, mailbox);
++
+ 	return err;
+ }
+ 
+ 
+ 
+ int mlx4_multicast_attach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-			  int block_mcast_loopback, enum mlx4_protocol prot)
++			  int block_mcast_loopback, enum mlx4_protocol prot,
++			  u8 high_prio)
+ {
++	enum mlx4_steer_type steer;
++
++	steer = (is_valid_ether_addr(&gid[10])) ? MLX4_UC_STEER : MLX4_MC_STEER;
++
+ 	if (prot == MLX4_PROT_ETH && !dev->caps.vep_mc_steering)
+ 		return 0;
+ 
+ 	if (prot == MLX4_PROT_ETH)
+-		gid[7] |= (MLX4_MC_STEER << 1);
++		gid[7] |= (steer << 1);
+ 
+ 	return mlx4_qp_attach_common(dev, qp, gid,
+ 				     block_mcast_loopback, prot,
+-				     MLX4_MC_STEER);
++				     steer, high_prio);
+ }
+ EXPORT_SYMBOL_GPL(mlx4_multicast_attach);
+ 
+ int mlx4_multicast_detach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-						enum mlx4_protocol prot)
++			  enum mlx4_protocol prot, u8 high_prio)
+ {
++	enum mlx4_steer_type steer;
++
++	steer = (is_valid_ether_addr(&gid[10])) ? MLX4_UC_STEER : MLX4_MC_STEER;
++
+ 	if (prot == MLX4_PROT_ETH && !dev->caps.vep_mc_steering)
+ 		return 0;
+ 
+ 	if (prot == MLX4_PROT_ETH) {
+-		gid[7] |= (MLX4_MC_STEER << 1);
++		gid[7] |= (steer << 1);
+ 	}
+ 
+-	return mlx4_qp_detach_common(dev, qp, gid, prot, MLX4_MC_STEER);
++	return mlx4_qp_detach_common(dev, qp, gid, prot, steer, high_prio);
+ }
+ EXPORT_SYMBOL_GPL(mlx4_multicast_detach);
+ 
+Index: ofed_kernel-fixes/drivers/net/mlx4/mlx4.h
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/mlx4.h	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/mlx4.h	2011-02-24 11:00:17.000000000 +0200
+@@ -362,6 +362,7 @@ extern struct mutex drv_mutex;
+ struct mlx4_steer {
+ 	struct list_head promisc_qps[MLX4_NUM_STEERS];
+ 	struct list_head steer_entries[MLX4_NUM_STEERS];
++	struct list_head high_prios;
+ };
+ 
+ struct mlx4_priv {
+@@ -504,8 +505,9 @@ int mlx4_SET_PORT(struct mlx4_dev *dev, 
+ int mlx4_get_port_ib_caps(struct mlx4_dev *dev, u8 port, __be32 *caps);
+ 
+ int mlx4_qp_detach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-			  enum mlx4_protocol prot, enum mlx4_steer_type steer);
++			  enum mlx4_protocol prot, enum mlx4_steer_type steer,
++			  u8 high_prio);
+ int mlx4_qp_attach_common(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+ 			  int block_mcast_loopback, enum mlx4_protocol prot,
+-			  enum mlx4_steer_type steer);
++			  enum mlx4_steer_type steer, u8 high_prio);
+ #endif /* MLX4_H */
+Index: ofed_kernel-fixes/include/linux/mlx4/device.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/linux/mlx4/device.h	2011-02-24 10:52:20.000000000 +0200
++++ ofed_kernel-fixes/include/linux/mlx4/device.h	2011-02-24 11:00:17.000000000 +0200
+@@ -620,9 +620,10 @@ int mlx4_INIT_PORT(struct mlx4_dev *dev,
+ int mlx4_CLOSE_PORT(struct mlx4_dev *dev, int port);
+ 
+ int mlx4_multicast_attach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-			  int block_mcast_loopback, enum mlx4_protocol prot);
++			  int block_mcast_loopback, enum mlx4_protocol prot,
++			  u8 high_prio);
+ int mlx4_multicast_detach(struct mlx4_dev *dev, struct mlx4_qp *qp, u8 gid[16],
+-				enum mlx4_protocol prot);
++				enum mlx4_protocol prot, u8 high_prio);
+ int mlx4_multicast_promisc_add(struct mlx4_dev *dev, u32 qpn, u8 port);
+ int mlx4_multicast_promisc_remove(struct mlx4_dev *dev, u32 qpn, u8 port);
+ int mlx4_unicast_promisc_add(struct mlx4_dev *dev, u32 qpn, u8 port);
+Index: ofed_kernel-fixes/drivers/net/mlx4/en_netdev.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/en_netdev.c	2011-02-24 11:00:04.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/en_netdev.c	2011-02-24 11:00:17.000000000 +0200
+@@ -362,7 +362,7 @@ static void mlx4_en_do_set_multicast(str
+ 			memcpy(&mc_list[10], mclist->dmi_addr, ETH_ALEN);
+ 			mc_list[5] = priv->port;
+ 			mlx4_multicast_detach(mdev->dev, &priv->rss_map.indir_qp,
+-					      mc_list, MLX4_PROT_ETH);
++					      mc_list, MLX4_PROT_ETH, 0);
+ 		}
+ 		/* Flush mcast filter and init it with broadcast address */
+ 		mlx4_SET_MCAST_FLTR(mdev->dev, priv->port, ETH_BCAST,
+@@ -377,7 +377,7 @@ static void mlx4_en_do_set_multicast(str
+ 			memcpy(&mc_list[10], mclist->dmi_addr, ETH_ALEN);
+ 			mc_list[5] = priv->port;
+ 			mlx4_multicast_attach(mdev->dev, &priv->rss_map.indir_qp,
+-					      mc_list, 0, MLX4_PROT_ETH);
++					      mc_list, 0, MLX4_PROT_ETH, 0);
+ 			mcast_addr = mlx4_en_mac_to_u64(mclist->dmi_addr);
+ 			mlx4_SET_MCAST_FLTR(mdev->dev, priv->port,
+ 					    mcast_addr, 0, MLX4_MCAST_CONFIG);
+@@ -798,7 +798,7 @@ int mlx4_en_start_port(struct net_device
+ 	memset(&mc_list[10], 0xff, ETH_ALEN);
+ 	mc_list[5] = priv->port;
+ 	if (mlx4_multicast_attach(mdev->dev, &priv->rss_map.indir_qp, mc_list,
+-				  0, MLX4_PROT_ETH))
++				  0, MLX4_PROT_ETH, 0))
+ 		mlx4_warn(mdev, "Failed Attaching Broadcast\n");
+ 
+ 	/* Schedule multicast task to populate multicast list */
+@@ -852,12 +852,12 @@ void mlx4_en_stop_port(struct net_device
+ 	memset(&mc_list[10], 0xff, ETH_ALEN);
+ 	mc_list[5] = priv->port;
+ 	mlx4_multicast_detach(mdev->dev, &priv->rss_map.indir_qp, mc_list,
+-			      MLX4_PROT_ETH);
++			      MLX4_PROT_ETH, 0);
+ 	for (mclist = priv->mc_list; mclist; mclist = mclist->next) {
+ 		memcpy(&mc_list[10], mclist->dmi_addr, ETH_ALEN);
+ 		mc_list[5] = priv->port;
+ 		mlx4_multicast_detach(mdev->dev, &priv->rss_map.indir_qp,
+-				      mc_list, MLX4_PROT_ETH);
++				      mc_list, MLX4_PROT_ETH, 0);
+ 	}
+ 	mlx4_en_clear_list(dev);
+ 	/* Flush multicast filter */
+Index: ofed_kernel-fixes/drivers/net/mlx4/port.c
+===================================================================
+--- ofed_kernel-fixes.orig/drivers/net/mlx4/port.c	2011-02-24 11:00:04.000000000 +0200
++++ ofed_kernel-fixes/drivers/net/mlx4/port.c	2011-02-24 11:00:17.000000000 +0200
+@@ -164,7 +164,7 @@ static int mlx4_uc_steer_add(struct mlx4
+ 	gid[7] = MLX4_UC_STEER << 1;
+ 
+ 	err = mlx4_qp_attach_common(dev, &qp, gid, 0,
+-				    MLX4_PROT_ETH, MLX4_UC_STEER);
++				    MLX4_PROT_ETH, MLX4_UC_STEER, 0);
+ 	if (err && reserve)
+ 		mlx4_qp_release_range(dev, *qpn, 1);
+ 
+@@ -184,7 +184,7 @@ static void mlx4_uc_steer_release(struct
+ 	gid[5] = port;
+ 	gid[7] = MLX4_UC_STEER << 1;
+ 
+-	mlx4_qp_detach_common(dev, &qp, gid, MLX4_PROT_ETH, MLX4_UC_STEER);
++	mlx4_qp_detach_common(dev, &qp, gid, MLX4_PROT_ETH, MLX4_UC_STEER, 0);
+ 	if (free)
+ 		mlx4_qp_release_range(dev, qpn, 1);
+ }
+Index: ofed_kernel-fixes/include/rdma/ib_verbs.h
+===================================================================
+--- ofed_kernel-fixes.orig/include/rdma/ib_verbs.h	2011-02-24 11:00:04.000000000 +0200
++++ ofed_kernel-fixes/include/rdma/ib_verbs.h	2011-02-24 11:00:17.000000000 +0200
+@@ -576,6 +576,15 @@ enum ib_qp_type {
+ 	IB_QPT_RAW_ETH
+ };
+ 
++enum ib_raw_eth_flags {
++	IB_RAW_ETH_GID_PROMISC_MAC	= 1,
++	IB_RAW_ETH_GID_MATCH_VLAN	= 1 << 1,
++	IB_RAW_ETH_GID_VLAN_PRESENT	= 1 << 2,
++	IB_RAW_ETH_GID_MATCH_UNICAST	= 1 << 3,
++	IB_RAW_ETH_GID_MATCH_ETHERTYPE	= 1 << 4,
++	IB_RAW_ETH_GID_HIGH_PRIO	= 1 << 31
++};
++
+ enum ib_qp_create_flags {
+ 	IB_QP_CREATE_IPOIB_UD_LSO		= 1 << 0,
+ 	IB_QP_CREATE_BLOCK_MULTICAST_LOOPBACK	= 1 << 1,

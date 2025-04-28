@@ -1,0 +1,1434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>gnome-program</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GNOME Library Reference Manual">
+<link rel="up" href="ch01.html" title="Initializing Applications and Starting Programs">
+<link rel="prev" href="ch01.html" title="Initializing Applications and Starting Programs">
+<link rel="next" href="libgnome-gnome-init.html" title="gnome-init">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="libgnome.html" title="Part I. GNOME Library (libgnome)">
+<link rel="chapter" href="ch01.html" title="Initializing Applications and Starting Programs">
+<link rel="chapter" href="ch02.html" title="Configuration">
+<link rel="chapter" href="ch03.html" title="Displaying Help and External Info">
+<link rel="chapter" href="ch04.html" title="Miscellaneous">
+<link rel="chapter" href="ch05.html" title="Lower Level Interactions">
+<link rel="chapter" href="ch06.html" title="Deprecated Modules">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME Library Reference Manual</th>
+<td><a accesskey="n" href="libgnome-gnome-init.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgnome-gnome-program.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgnome-gnome-program.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="gnome-program">
+<a name="libgnome-gnome-program"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgnome-gnome-program.top_of_page"></a>gnome-program</span></h2>
+<p>gnome-program — Initialize and retrieve information about a GNOME application.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgnome-gnome-program.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnome/libgnome.h&gt;
+
+enum                <a class="link" href="libgnome-gnome-program.html#GnomeFileDomain" title="enum GnomeFileDomain">GnomeFileDomain</a>;
+                    <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a>;
+                    <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a>;
+                    <a class="link" href="libgnome-gnome-program.html#GnomeModuleRequirement" title="GnomeModuleRequirement">GnomeModuleRequirement</a>;
+void                (<a class="link" href="libgnome-gnome-program.html#GnomeModuleInitHook" title="GnomeModuleInitHook ()">*GnomeModuleInitHook</a>)              (const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *mod_info);
+void                (<a class="link" href="libgnome-gnome-program.html#GnomeModuleClassInitHook" title="GnomeModuleClassInitHook ()">*GnomeModuleClassInitHook</a>)         (GnomeProgramClass *klass,
+                                                         const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *mod_info);
+void                (<a class="link" href="libgnome-gnome-program.html#GnomeModuleHook" title="GnomeModuleHook ()">*GnomeModuleHook</a>)                  (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *mod_info);
+<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *      <a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()">gnome_program_init</a>                  (const char *app_id,
+                                                         const char *app_version,
+                                                         const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info,
+                                                         int argc,
+                                                         char **argv,
+                                                         const char *first_property_name,
+                                                         ...);
+<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *      <a class="link" href="libgnome-gnome-program.html#gnome-program-initv" title="gnome_program_initv ()">gnome_program_initv</a>                 (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         const char *app_id,
+                                                         const char *app_version,
+                                                         const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info,
+                                                         int argc,
+                                                         char **argv,
+                                                         const char *first_property_name,
+                                                         va_list args);
+
+<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *      <a class="link" href="libgnome-gnome-program.html#gnome-program-get" title="gnome_program_get ()">gnome_program_get</a>                   (void);
+const char *        <a class="link" href="libgnome-gnome-program.html#gnome-program-get-human-readable-name" title="gnome_program_get_human_readable_name ()">gnome_program_get_human_readable_name</a>
+                                                        (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);
+const char *        <a class="link" href="libgnome-gnome-program.html#gnome-program-get-app-id" title="gnome_program_get_app_id ()">gnome_program_get_app_id</a>            (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);
+const char *        <a class="link" href="libgnome-gnome-program.html#gnome-program-get-app-version" title="gnome_program_get_app_version ()">gnome_program_get_app_version</a>       (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             <a class="link" href="libgnome-gnome-program.html#gnome-program-locate-file" title="gnome_program_locate_file ()">gnome_program_locate_file</a>           (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         <a class="link" href="libgnome-gnome-program.html#GnomeFileDomain" title="enum GnomeFileDomain">GnomeFileDomain</a> domain,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *file_name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Singly-Linked-Lists.html#GSList"
+>GSList</a> **ret_locations);
+
+void                <a class="link" href="libgnome-gnome-program.html#gnome-program-module-register" title="gnome_program_module_register ()">gnome_program_module_register</a>       (const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnome-gnome-program.html#gnome-program-module-registered" title="gnome_program_module_registered ()">gnome_program_module_registered</a>     (const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info);
+const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> * <a class="link" href="libgnome-gnome-program.html#gnome-program-module-load" title="gnome_program_module_load ()">gnome_program_module_load</a>       (const char *mod_name);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="libgnome-gnome-program.html#gnome-program-install-property" title="gnome_program_install_property ()">gnome_program_install_property</a>      (GnomeProgramClass *pclass,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObjectGetPropertyFunc"
+>GObjectGetPropertyFunc</a> get_fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObjectSetPropertyFunc"
+>GObjectSetPropertyFunc</a> set_fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-GParamSpec.html#GParamSpec"
+>GParamSpec</a> *pspec);
+poptContext         <a class="link" href="libgnome-gnome-program.html#gnome-program-preinit" title="gnome_program_preinit ()">gnome_program_preinit</a>               (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *app_id,
+                                                         const char *app_version,
+                                                         int argc,
+                                                         char **argv);
+void                <a class="link" href="libgnome-gnome-program.html#gnome-program-parse-args" title="gnome_program_parse_args ()">gnome_program_parse_args</a>            (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);
+void                <a class="link" href="libgnome-gnome-program.html#gnome-program-postinit" title="gnome_program_postinit ()">gnome_program_postinit</a>              (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);
+
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-POPT-TABLE--CAPS" title="GNOME_PARAM_POPT_TABLE">GNOME_PARAM_POPT_TABLE</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-POPT-FLAGS--CAPS" title="GNOME_PARAM_POPT_FLAGS">GNOME_PARAM_POPT_FLAGS</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-POPT-CONTEXT--CAPS" title="GNOME_PARAM_POPT_CONTEXT">GNOME_PARAM_POPT_CONTEXT</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GOPTION-CONTEXT--CAPS" title="GNOME_PARAM_GOPTION_CONTEXT">GNOME_PARAM_GOPTION_CONTEXT</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-CREATE-DIRECTORIES--CAPS" title="GNOME_PARAM_CREATE_DIRECTORIES">GNOME_PARAM_CREATE_DIRECTORIES</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-ENABLE-SOUND--CAPS" title="GNOME_PARAM_ENABLE_SOUND">GNOME_PARAM_ENABLE_SOUND</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-ESPEAKER--CAPS" title="GNOME_PARAM_ESPEAKER">GNOME_PARAM_ESPEAKER</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-ID--CAPS" title="GNOME_PARAM_APP_ID">GNOME_PARAM_APP_ID</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-VERSION--CAPS" title="GNOME_PARAM_APP_VERSION">GNOME_PARAM_APP_VERSION</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GNOME-PREFIX--CAPS" title="GNOME_PARAM_GNOME_PREFIX">GNOME_PARAM_GNOME_PREFIX</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GNOME-SYSCONFDIR--CAPS" title="GNOME_PARAM_GNOME_SYSCONFDIR">GNOME_PARAM_GNOME_SYSCONFDIR</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GNOME-DATADIR--CAPS" title="GNOME_PARAM_GNOME_DATADIR">GNOME_PARAM_GNOME_DATADIR</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GNOME-LIBDIR--CAPS" title="GNOME_PARAM_GNOME_LIBDIR">GNOME_PARAM_GNOME_LIBDIR</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-PREFIX--CAPS" title="GNOME_PARAM_APP_PREFIX">GNOME_PARAM_APP_PREFIX</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-SYSCONFDIR--CAPS" title="GNOME_PARAM_APP_SYSCONFDIR">GNOME_PARAM_APP_SYSCONFDIR</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-DATADIR--CAPS" title="GNOME_PARAM_APP_DATADIR">GNOME_PARAM_APP_DATADIR</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-LIBDIR--CAPS" title="GNOME_PARAM_APP_LIBDIR">GNOME_PARAM_APP_LIBDIR</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-HUMAN-READABLE-NAME--CAPS" title="GNOME_PARAM_HUMAN_READABLE_NAME">GNOME_PARAM_HUMAN_READABLE_NAME</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GNOME-PATH--CAPS" title="GNOME_PARAM_GNOME_PATH">GNOME_PARAM_GNOME_PATH</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-NONE--CAPS" title="GNOME_PARAM_NONE">GNOME_PARAM_NONE</a>
+#define             <a class="link" href="libgnome-gnome-program.html#GNOME-PROGRAM-STANDARD-PROPERTIES--CAPS" title="GNOME_PROGRAM_STANDARD_PROPERTIES">GNOME_PROGRAM_STANDARD_PROPERTIES</a>
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgnome-gnome-program.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgnome-gnome-program.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum GnomeFileDomain">
+<a name="GnomeFileDomain"></a><h3>enum GnomeFileDomain</h3>
+<pre class="programlisting">typedef enum {
+    GNOME_FILE_DOMAIN_UNKNOWN = 0,
+
+    /* Gnome installed files */
+    GNOME_FILE_DOMAIN_LIBDIR,
+    GNOME_FILE_DOMAIN_DATADIR,
+    GNOME_FILE_DOMAIN_SOUND,
+    GNOME_FILE_DOMAIN_PIXMAP,
+    GNOME_FILE_DOMAIN_CONFIG,
+    GNOME_FILE_DOMAIN_HELP,
+
+    /* Application files */
+    GNOME_FILE_DOMAIN_APP_LIBDIR,
+    GNOME_FILE_DOMAIN_APP_DATADIR,
+    GNOME_FILE_DOMAIN_APP_SOUND,
+    GNOME_FILE_DOMAIN_APP_PIXMAP,
+    GNOME_FILE_DOMAIN_APP_CONFIG,
+    GNOME_FILE_DOMAIN_APP_HELP
+} GnomeFileDomain;
+</pre>
+<p>
+Many of the files that a GNOME application needs to access will be installed in
+standard locations. For example, GNOME help files will be in one location,
+while help files specific to the current application might be in another
+location.
+</p>
+<p>
+The different types of files are given in this enum. User applications make use
+of the <em class="structfield"><code>GNOME_FILE_DOMAIN_APP_*</code></em> types, which specify
+locations relative to <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-DATADIR--CAPS" title="GNOME_PARAM_APP_DATADIR"><span class="type">GNOME_PARAM_APP_DATADIR</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-UNKNOWN--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_UNKNOWN</code></span></p></td>
+<td>An unknown file domain (should never be used).
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-LIBDIR--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_LIBDIR</code></span></p></td>
+<td>Libraries in the main GNOME installation.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-DATADIR--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_DATADIR</code></span></p></td>
+<td>Data files in the main GNOME installation.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-SOUND--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_SOUND</code></span></p></td>
+<td>Sound files in the main GNOME installation.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-PIXMAP--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_PIXMAP</code></span></p></td>
+<td>Pixmap files in the main GNOME installation.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-CONFIG--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_CONFIG</code></span></p></td>
+<td>Config files in the main GNOME installation.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-HELP--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_HELP</code></span></p></td>
+<td>Help files in the main GNOME installation.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-APP-LIBDIR--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_APP_LIBDIR</code></span></p></td>
+<td>Application specific libraries.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-APP-DATADIR--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_APP_DATADIR</code></span></p></td>
+<td>Application specific data files.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-APP-SOUND--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_APP_SOUND</code></span></p></td>
+<td>Application specific sound files.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-APP-PIXMAP--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_APP_PIXMAP</code></span></p></td>
+<td>Application specific pixmap files.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-APP-CONFIG--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_APP_CONFIG</code></span></p></td>
+<td>Application specific config files.
+</td>
+</tr>
+<tr>
+<td><p><a name="GNOME-FILE-DOMAIN-APP-HELP--CAPS"></a><span class="term"><code class="literal">GNOME_FILE_DOMAIN_APP_HELP</code></span></p></td>
+<td>Application specific help files.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GnomeProgram">
+<a name="GnomeProgram"></a><h3>GnomeProgram</h3>
+<pre class="programlisting">typedef struct {
+    GObject object;
+
+    GnomeProgramPrivate *_priv;
+} GnomeProgram;
+</pre>
+<p>
+A structure containing information about the current application. Initialised
+during a call to <a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()"><code class="function">gnome_program_init()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a> <em class="structfield"><code>object</code></em>;</span></p></td>
+<td>A <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"
+><span class="type">GObject</span></a> containing the parameters and their values which were set
+dring initialisation.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">GnomeProgramPrivate *<em class="structfield"><code>_priv</code></em>;</span></p></td>
+<td>Private data about the program instance.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GnomeModuleInfo">
+<a name="GnomeModuleInfo"></a><h3>GnomeModuleInfo</h3>
+<pre class="programlisting">typedef struct {
+    const char *name;
+    const char *version;
+    const char *description;
+    GnomeModuleRequirement *requirements; /* last element has NULL version */
+
+    GnomeModuleHook instance_init;
+    GnomeModuleHook pre_args_parse, post_args_parse;
+
+#ifdef GNOME_DISABLE_DEPRECATED
+    void *_options;
+#else
+    struct poptOption *options;
+#endif
+
+    GnomeModuleInitHook init_pass;
+
+    GnomeModuleClassInitHook class_init;
+
+    const char *opt_prefix;
+    GnomeModuleGetGOptionGroupFunc get_goption_group_func;
+} GnomeModuleInfo;
+</pre>
+<p>
+A structure containing information about a module. This contains descriptive
+information about the module, as well as how to initialise it and what its
+dependencies are (chained via the <em class="parameter"><code>requirements</code></em> parameter).
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term">const char *<em class="structfield"><code>name</code></em>;</span></p></td>
+<td>The module name.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const char *<em class="structfield"><code>version</code></em>;</span></p></td>
+<td>The module's version string.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const char *<em class="structfield"><code>description</code></em>;</span></p></td>
+<td>A string describing the module (can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a class="link" href="libgnome-gnome-program.html#GnomeModuleRequirement" title="GnomeModuleRequirement">GnomeModuleRequirement</a> *<em class="structfield"><code>requirements</code></em>;</span></p></td>
+<td>A pointer to an array of modules that are required by this
+module. The last module in the array should have its required_version field set
+to <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a class="link" href="libgnome-gnome-program.html#GnomeModuleHook" title="GnomeModuleHook ()">GnomeModuleHook</a> <em class="structfield"><code>instance_init</code></em>;</span></p></td>
+<td>A function to call to initialise an instance of this module
+(can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a class="link" href="libgnome-gnome-program.html#GnomeModuleHook" title="GnomeModuleHook ()">GnomeModuleHook</a> <em class="structfield"><code>pre_args_parse</code></em>;</span></p></td>
+<td>A function to call before parsing the arguments for this
+module (can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a class="link" href="libgnome-gnome-program.html#GnomeModuleHook" title="GnomeModuleHook ()">GnomeModuleHook</a> <em class="structfield"><code>post_args_parse</code></em>;</span></p></td>
+<td>A function to call after parsing the arguments for this
+module (can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term">void *<em class="structfield"><code>_options</code></em>;</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term">struct poptOption *<em class="structfield"><code>options</code></em>;</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a class="link" href="libgnome-gnome-program.html#GnomeModuleInitHook" title="GnomeModuleInitHook ()">GnomeModuleInitHook</a> <em class="structfield"><code>init_pass</code></em>;</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><a class="link" href="libgnome-gnome-program.html#GnomeModuleClassInitHook" title="GnomeModuleClassInitHook ()">GnomeModuleClassInitHook</a> <em class="structfield"><code>class_init</code></em>;</span></p></td>
+<td>A function to call to initialise this module prior to creating any
+instances (can be <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const char *<em class="structfield"><code>opt_prefix</code></em>;</span></p></td>
+<td>Unused.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">GnomeModuleGetGOptionGroupFunc <em class="structfield"><code>get_goption_group_func</code></em>;</span></p></td>
+<td>A function which must return a non-<a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> <a
+href="/usr/share/gtk-doc/html/glib/glib-Commandline-option-parser.html#GOptionGroup"
+><span class="type">GOptionGroup</span></a>,
+which will be added to the <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> s <a
+href="/usr/share/gtk-doc/html/glib/glib-Commandline-option-parser.html#GOptionContext"
+><span class="type">GOptionContext</span></a> during
+#<a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()"><code class="function">gnome_program_init()</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GnomeModuleRequirement">
+<a name="GnomeModuleRequirement"></a><h3>GnomeModuleRequirement</h3>
+<pre class="programlisting">typedef struct {
+    const char *required_version;
+    const GnomeModuleInfo *module_info;
+} GnomeModuleRequirement;
+</pre>
+<p>
+A structure which allows a module to specify the minimum required versions of
+modules it depends upon.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term">const char *<em class="structfield"><code>required_version</code></em>;</span></p></td>
+<td>The version required by the parent module.
+</td>
+</tr>
+<tr>
+<td><p><span class="term">const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *<em class="structfield"><code>module_info</code></em>;</span></p></td>
+<td>A <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo"><span class="type">GnomeModuleInfo</span></a> structure detailing the required module.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GnomeModuleInitHook ()">
+<a name="GnomeModuleInitHook"></a><h3>GnomeModuleInitHook ()</h3>
+<pre class="programlisting">void                (*GnomeModuleInitHook)              (const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *mod_info);</pre>
+<p>
+A function that will be called to allow a module to do any pre-initialisation
+it might need to do prior to having arguments parsed by the controlling parent
+module (the parent will do the argument parsing for all modules in the
+hierarchy).
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>mod_info</code></em> :</span></p></td>
+<td>The current module.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GnomeModuleClassInitHook ()">
+<a name="GnomeModuleClassInitHook"></a><h3>GnomeModuleClassInitHook ()</h3>
+<pre class="programlisting">void                (*GnomeModuleClassInitHook)         (GnomeProgramClass *klass,
+                                                         const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *mod_info);</pre>
+<p>
+A function called to perform any class specific setup that is required by each
+module.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>The class of the parent module (which could be this module's class).
+This will usually be <span class="type">GnomeProgramClass</span>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mod_info</code></em> :</span></p></td>
+<td>The current module.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GnomeModuleHook ()">
+<a name="GnomeModuleHook"></a><h3>GnomeModuleHook ()</h3>
+<pre class="programlisting">void                (*GnomeModuleHook)                  (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *mod_info);</pre>
+<p>
+A function that is called to perform some intialisation in a module (which
+could be either the main init function or the pre or post argument parsing
+phase).
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td>The <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> instance which is being initialised.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mod_info</code></em> :</span></p></td>
+<td>The current module's <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo"><span class="type">GnomeModuleInfo</span></a> structure.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_init ()">
+<a name="gnome-program-init"></a><h3>gnome_program_init ()</h3>
+<pre class="programlisting"><a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *      gnome_program_init                  (const char *app_id,
+                                                         const char *app_version,
+                                                         const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info,
+                                                         int argc,
+                                                         char **argv,
+                                                         const char *first_property_name,
+                                                         ...);</pre>
+<p>
+Initialises the current GNOME libraries for use by the application.
+<em class="parameter"><code>app_id</code></em> is used for the following purposes:
+- to find the programme's help files by gnome_help_*()
+- to load the app-specific gtkrc file from ~/.gnome2/$(APPID)rc
+- to load/save the app's accelerators map from ~/.gnome2/accelerators/$(APPID)
+- to load/save a GnomeEntry's history from gconf/apps/gnome-settings/$(APPID)/history-$(ENTRYID)</p>
+<p>
+Every GNOME application will need to call this function (or
+<a class="link" href="libgnome-gnome-program.html#gnome-program-initv" title="gnome_program_initv ()"><code class="function">gnome_program_initv()</code></a>) early in its lifetime to initialize the various GNOME
+libraries in a consistent fashion. This function is very flexible in allowing
+the user to specify which modules should be initialised and any special
+paramter values that should be passed to these modules (along with processing
+commandline options).
+</p>
+<p>
+It loads the specified <em class="parameter"><code>module_info</code></em>, which is normally <a class="link" href="libgnome-gnome-init.html#LIBGNOME-MODULE--CAPS" title="LIBGNOME_MODULE"><span class="type">LIBGNOME_MODULE</span></a> or
+<a
+href="/usr/share/gtk-doc/html/libgnomeui/libgnomeui-gnome-ui-init.html#LIBGNOMEUI-MODULE--CAPS"
+><span class="type">LIBGNOMEUI_MODULE</span></a> and pulls in all the dependencies.  Programs that are not
+running in setuid or setgid mode will also load modules specified in the
+<em class="parameter"><code>--load-modules</code></em> and also in the <em class="parameter"><code>GNOME_MODULES</code></em> environment variable.
+</p>
+<p>The following example shows how one might initialise a typical program
+using a goption table that is defined elsewhere.
+</p>
+<div class="example">
+<a name="id3033463"></a><p class="title"><b>Example 1. Initializing a GNOME application (deprecated, using popt)</b></p>
+<div class="example-contents"><pre class="programlisting">
+int main(int argc, char **argv) {
+	GnomeProgram *my_app;
+	GOptionContext *option_context;
+	/* We assume PACKAGE and VERSION are set to the program name and version
+	 * number respectively. Also, assume that 'options' is a global array of
+	 * poptOptions.
+	 */
+	option_context = g_option_context_new (PACKAGE);
+	g_option_context_add_main_entries (option_context, options, NULL);
+	my_app = gnome_program_init(PACKAGE, VERSION, LIBGNOMEUI_MODULE,
+	                            argc, argv,
+				    GNOME_PARAM_GOPTION_CONTEXT, option_context,
+				    GNOME_PARAM_NONE);
+	/* Now process any extra args, etc ... */
+}
+</pre></div>
+</div>
+<br class="example-break"><p>
+Even though many applications still use popt for command-line option parsing,
+it has been deprecated in Gnome-2.14 and its use is discouraged for
+newly-written code. GNOME applications should aim to use the new
+<span class="type">GOption</span> API. Here an example that shows how one might initialize a typical
+program using a GOptionEntry table (see the GLib documentation for a more
+elaborate example of an option entry table):
+</p>
+<div class="example">
+<a name="id3033501"></a><p class="title"><b>Example 2. Initializing a GNOME application (new, using GOption)</b></p>
+<div class="example-contents"><pre class="programlisting">
+int main(int argc, char **argv) {
+	gchar **remaining_args = NULL;
+	GOptionEntry option_entries[] = {
+		/* ... your application's command line options go here ... */
+		/* last but not least a special option that collects filenames */
+		{ G_OPTION_REMAINING, 0, 0, G_OPTION_ARG_FILENAME_ARRAY,
+		  &amp;remaining_args,
+		  "Special option that collects any remaining arguments for us" },
+		{ NULL }
+	};
+	GOptionContext *option_context;
+	GnomeProgram *my_app;
+	option_context = g_option_context_new ("my-app");
+	/* if you are using any libraries that have command line options
+	 * of their own and provide a GOptionGroup with them, you can
+	 * add them here as well using g_option_context_add_group()
+	 */
+	/* now add our own application's command-line options. If you
+	 * are using gettext for translations, you should be using
+	 * GETTEXT_PACKAGE here instead of NULL
+	 */
+	g_option_context_add_main_entries (option_context, option_entries, NULL);
+	/* We assume PACKAGE and VERSION are set to the program name and version
+	 * number respectively. Also, assume that 'option_entries' is a global
+	 * array of GOptionEntry structures.
+	 */
+	my_app = gnome_program_init(PACKAGE, VERSION,
+	                            LIBGNOMEUI_MODULE, argc, argv,
+	                            GNOME_PARAM_GOPTION_CONTEXT, option_context,
+	                            GNOME_PARAM_NONE);
+	/* parse remaining command-line arguments that are not
+	 * options (e.g. filenames or URIs or whatever), if any
+	 */
+	if (remaining_args != NULL) {
+	    gint i, num_args;
+		num_args = g_strv_length (remaining_args);
+		for (i = 0; i &lt; num_args; ++i) {
+			/* process remaining_args[i] here */
+		}
+		g_strfreev (remaining_args);
+		remaining_args = NULL;
+	}
+</pre></div>
+</div>
+<p><br class="example-break">
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>app_id</code></em> :</span></p></td>
+<td> Application ID string.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>app_version</code></em> :</span></p></td>
+<td> Application version string.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>module_info</code></em> :</span></p></td>
+<td> The module to init with this program.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argc</code></em> :</span></p></td>
+<td> The number of commmand line arguments contained in <em class="parameter"><code>argv</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argv</code></em> :</span></p></td>
+<td> A string array of command line arguments.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em> :</span></p></td>
+<td> The first item in a <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>-terminated list of attribute
+name and value pairs (so this will be an attribute name or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td> The continuation of a <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>-terminated list of attribute name/value
+pairs.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A new <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> instance representing the current application.
+Unref the returned reference right before exiting your application.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_initv ()">
+<a name="gnome-program-initv"></a><h3>gnome_program_initv ()</h3>
+<pre class="programlisting"><a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *      gnome_program_initv                 (<a
+href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"
+>GType</a> type,
+                                                         const char *app_id,
+                                                         const char *app_version,
+                                                         const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info,
+                                                         int argc,
+                                                         char **argv,
+                                                         const char *first_property_name,
+                                                         va_list args);</pre>
+<p>
+Provides a non-varargs form of <a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()"><code class="function">gnome_program_init()</code></a>. Users will rarely need
+to call this function directly.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> The type of application to be initialized (usually
+<span class="type">GNOME_TYPE_PROGRAM</span>).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>app_id</code></em> :</span></p></td>
+<td> Application ID string.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>app_version</code></em> :</span></p></td>
+<td> Application version string.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>module_info</code></em> :</span></p></td>
+<td> The modules to init with the application.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argc</code></em> :</span></p></td>
+<td> The number of command line arguments contained in <em class="parameter"><code>argv</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argv</code></em> :</span></p></td>
+<td> A string array of command line arguments.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>first_property_name</code></em> :</span></p></td>
+<td> The first item in a <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>-terminated list of attribute
+name/value.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
+<td> The remaining elements in the <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> terminated list (of which
+<em class="parameter"><code>first_property_name</code></em> is the first element).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> instance representing the current application.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_get ()">
+<a name="gnome-program-get"></a><h3>gnome_program_get ()</h3>
+<pre class="programlisting"><a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *      gnome_program_get                   (void);</pre>
+<p>
+Retrieves an object that stored information about the application's state.
+Other functions assume this will always return a <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> object which
+(if not <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>) has already been initialized.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The application's <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> instance, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> if it does not
+exist.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_get_human_readable_name ()">
+<a name="gnome-program-get-human-readable-name"></a><h3>gnome_program_get_human_readable_name ()</h3>
+<pre class="programlisting">const char *        gnome_program_get_human_readable_name
+                                                        (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);</pre>
+<p>
+This function returns a pointer to a static string that the
+application has provided as a human readable name. The app
+should provide the name with the <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-HUMAN-READABLE-NAME--CAPS" title="GNOME_PARAM_HUMAN_READABLE_NAME"><span class="type">GNOME_PARAM_HUMAN_READABLE_NAME</span></a>
+init argument. Returns <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> if no name was set.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> The application object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> Application human-readable name string.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_get_app_id ()">
+<a name="gnome-program-get-app-id"></a><h3>gnome_program_get_app_id ()</h3>
+<pre class="programlisting">const char *        gnome_program_get_app_id            (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);</pre>
+<p>
+This function returns a pointer to a static string that the
+application has provided as an identifier. This is not meant as a
+human-readable identifier so much as a unique identifier for
+programs and libraries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> The program object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> Application ID string.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_get_app_version ()">
+<a name="gnome-program-get-app-version"></a><h3>gnome_program_get_app_version ()</h3>
+<pre class="programlisting">const char *        gnome_program_get_app_version       (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);</pre>
+<p>
+This function returns a pointer to a static string that the
+application has provided as a version number. This is not meant as a
+human-readable identifier so much as a unique identifier for
+programs and libraries.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> The application object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> Application version string.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_locate_file ()">
+<a name="gnome-program-locate-file"></a><h3>gnome_program_locate_file ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *             gnome_program_locate_file           (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         <a class="link" href="libgnome-gnome-program.html#GnomeFileDomain" title="enum GnomeFileDomain">GnomeFileDomain</a> domain,
+                                                         const <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"
+>gchar</a> *file_name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Singly-Linked-Lists.html#GSList"
+>GSList</a> **ret_locations);</pre>
+<p>
+This function finds a full path to the <em class="parameter"><code>file_name</code></em> located in the specified
+"domain". A domain is a name for a collection of related files.
+For example, common domains are "libdir", "pixmap", and "config".
+</p>
+<p>
+If <em class="parameter"><code>ret_locations</code></em> is <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>, only one pathname is returned. Otherwise,
+alternative paths are returned in <em class="parameter"><code>ret_locations</code></em>.
+</p>
+<p>
+User applications should store files in the GNOME_FILE_DOMAIN_APP_*
+domains. However you MUST set the correct attributes for <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> for
+the APP specific prefixes (during the initialization part of the
+application).
+</p>
+<p>
+The <em class="parameter"><code>ret_locations</code></em> list and its contents should be freed by the caller, as
+should the returned string.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> A valid <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> object or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> (in which case the current
+application is used).
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
+<td> A <a class="link" href="libgnome-gnome-program.html#GnomeFileDomain" title="enum GnomeFileDomain"><span class="type">GnomeFileDomain</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
+<td> A file name or path inside the 'domain' to find.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>only_if_exists</code></em> :</span></p></td>
+<td> Only return a full pathname if the specified file
+                 actually exists
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ret_locations</code></em> :</span></p></td>
+<td> If this is not <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>, a list of all the possible locations
+                of the file will be returned.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The full path to the file (if it exists or only_if_exists is
+         <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a>) or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_module_register ()">
+<a name="gnome-program-module-register"></a><h3>gnome_program_module_register ()</h3>
+<pre class="programlisting">void                gnome_program_module_register       (const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info);</pre>
+<p>
+This function is used to register a module to be initialized by the
+GNOME library framework. The memory pointed to by <em class="parameter"><code>module_info</code></em> must be
+valid during the whole application initialization process, and the module
+described by <em class="parameter"><code>module_info</code></em> must only use the <em class="parameter"><code>module_info</code></em> pointer to
+register itself.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>module_info</code></em> :</span></p></td>
+<td> A pointer to a GnomeModuleInfo structure describing the module
+              to be initialized
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_module_registered ()">
+<a name="gnome-program-module-registered"></a><h3>gnome_program_module_registered ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_program_module_registered     (const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> *module_info);</pre>
+<p>
+This method checks to see whether a specific module has been
+             initialized in the specified program.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>module_info</code></em> :</span></p></td>
+<td> A pointer to a GnomeModuleInfo structure describing the module
+              to be queried
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A value indicating whether the specified module has been
+         registered/initialized in the current program
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_module_load ()">
+<a name="gnome-program-module-load"></a><h3>gnome_program_module_load ()</h3>
+<pre class="programlisting">const <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo">GnomeModuleInfo</a> * gnome_program_module_load       (const char *mod_name);</pre>
+<p>
+Loads a shared library that contains a
+<a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo"><span class="type">GnomeModuleInfo</span></a> dynamic_module_info structure.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mod_name</code></em> :</span></p></td>
+<td> module name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The <a class="link" href="libgnome-gnome-program.html#GnomeModuleInfo" title="GnomeModuleInfo"><span class="type">GnomeModuleInfo</span></a> structure that was loaded, or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> if the
+module could not be loaded.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_install_property ()">
+<a name="gnome-program-install-property"></a><h3>gnome_program_install_property ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"
+>guint</a>               gnome_program_install_property      (GnomeProgramClass *pclass,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObjectGetPropertyFunc"
+>GObjectGetPropertyFunc</a> get_fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObjectSetPropertyFunc"
+>GObjectSetPropertyFunc</a> set_fn,
+                                                         <a
+href="/usr/share/gtk-doc/html/gobject/gobject-GParamSpec.html#GParamSpec"
+>GParamSpec</a> *pspec);</pre>
+<p>
+Install a collection of available properties, their default values and the
+functions to set and retrieve these properties.
+</p>
+<p>
+Normal applications will never need to call this function, it is mostly for
+use by other platform library authors.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pclass</code></em> :</span></p></td>
+<td> A <span class="type">GnomeProgramClass</span>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>get_fn</code></em> :</span></p></td>
+<td> A function to get property values.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>set_fn</code></em> :</span></p></td>
+<td> A function to set property values.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pspec</code></em> :</span></p></td>
+<td> A collection of properties.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The number of properties installed.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_preinit ()">
+<a name="gnome-program-preinit"></a><h3>gnome_program_preinit ()</h3>
+<pre class="programlisting">poptContext         gnome_program_preinit               (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program,
+                                                         const char *app_id,
+                                                         const char *app_version,
+                                                         int argc,
+                                                         char **argv);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_program_preinit</code> has been deprecated since version 2.18 and should not be used in newly-written code. Use <a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()"><code class="function">gnome_program_init()</code></a> instead.</p>
+</div>
+<p>
+This function performs the portion of application initialization that
+needs to be done prior to command line argument parsing. The poptContext
+returned can be used for <code class="function">getopt()</code>-style option processing.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> Application object
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>app_id</code></em> :</span></p></td>
+<td> application ID string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>app_version</code></em> :</span></p></td>
+<td> application version string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argc</code></em> :</span></p></td>
+<td> The number of commmand line arguments contained in 'argv'
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argv</code></em> :</span></p></td>
+<td> A string array of command line arguments
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> A poptContext representing the argument parsing state,
+or <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL--CAPS"
+><code class="literal">NULL</code></a> if using GOption argument parsing.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_parse_args ()">
+<a name="gnome-program-parse-args"></a><h3>gnome_program_parse_args ()</h3>
+<pre class="programlisting">void                gnome_program_parse_args            (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_program_parse_args</code> has been deprecated since version 2.18 and should not be used in newly-written code. Use <a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()"><code class="function">gnome_program_init()</code></a> instead.</p>
+</div>
+<p>
+Parses the command line arguments for the application</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> Application object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gnome_program_postinit ()">
+<a name="gnome-program-postinit"></a><h3>gnome_program_postinit ()</h3>
+<pre class="programlisting">void                gnome_program_postinit              (<a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram">GnomeProgram</a> *program);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_program_postinit</code> has been deprecated since version 2.18 and should not be used in newly-written code. Use <a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()"><code class="function">gnome_program_init()</code></a> instead.</p>
+</div>
+<p>
+Called after <a class="link" href="libgnome-gnome-program.html#gnome-program-parse-args" title="gnome_program_parse_args ()"><code class="function">gnome_program_parse_args()</code></a>, this function
+takes care of post-parse initialization and cleanup</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td> Application object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_POPT_TABLE">
+<a name="GNOME-PARAM-POPT-TABLE--CAPS"></a><h3>GNOME_PARAM_POPT_TABLE</h3>
+<pre class="programlisting">#define GNOME_PARAM_POPT_TABLE          "popt-table"
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GNOME_PARAM_POPT_TABLE</code> is deprecated and should not be used in newly-written code. 2.14. Use GOption argument parsing instead,
+with <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GOPTION-CONTEXT--CAPS" title="GNOME_PARAM_GOPTION_CONTEXT"><span class="type">GNOME_PARAM_GOPTION_CONTEXT</span></a>.</p>
+</div>
+<p>
+This parameter contains the table of options to be passed to popt (write on
+init only). Mutually exclusive with using <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-GOPTION-CONTEXT--CAPS" title="GNOME_PARAM_GOPTION_CONTEXT"><span class="type">GNOME_PARAM_GOPTION_CONTEXT</span></a>
+parameter.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_POPT_FLAGS">
+<a name="GNOME-PARAM-POPT-FLAGS--CAPS"></a><h3>GNOME_PARAM_POPT_FLAGS</h3>
+<pre class="programlisting">#define GNOME_PARAM_POPT_FLAGS          "popt-flags"
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GNOME_PARAM_POPT_FLAGS</code> is deprecated and should not be used in newly-written code. 2.14. Use GOption argument parsing instead.</p>
+</div>
+<p>
+This parameter contains the flags to use for popt (write on init only).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_POPT_CONTEXT">
+<a name="GNOME-PARAM-POPT-CONTEXT--CAPS"></a><h3>GNOME_PARAM_POPT_CONTEXT</h3>
+<pre class="programlisting">#define GNOME_PARAM_POPT_CONTEXT        "popt-context"
+</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GNOME_PARAM_POPT_CONTEXT</code> is deprecated and should not be used in newly-written code. 2.14. Use GOption argument parsing instead.</p>
+</div>
+<p>
+This parameter contains the context pointer that <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> is using for
+popt parsing (readable).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_GOPTION_CONTEXT">
+<a name="GNOME-PARAM-GOPTION-CONTEXT--CAPS"></a><h3>GNOME_PARAM_GOPTION_CONTEXT</h3>
+<pre class="programlisting">#define GNOME_PARAM_GOPTION_CONTEXT     "goption-context"
+</pre>
+<p>
+This parameter contains the GOptionContext pointer that <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> is using for
+GOption parsing (write on init only). The <a class="link" href="libgnome-gnome-program.html#GnomeProgram" title="GnomeProgram"><span class="type">GnomeProgram</span></a> will assume ownership of the
+passed <a
+href="/usr/share/gtk-doc/html/glib/glib-Commandline-option-parser.html#GOptionContext"
+><span class="type">GOptionContext</span></a>.
+Mutually exclusive with using the <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-POPT-TABLE--CAPS" title="GNOME_PARAM_POPT_TABLE"><span class="type">GNOME_PARAM_POPT_TABLE</span></a> parameter.
+</p>
+<p class="since">Since 2.14</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_CREATE_DIRECTORIES">
+<a name="GNOME-PARAM-CREATE-DIRECTORIES--CAPS"></a><h3>GNOME_PARAM_CREATE_DIRECTORIES</h3>
+<pre class="programlisting">#define GNOME_PARAM_CREATE_DIRECTORIES  "create-directories"
+</pre>
+<p>
+This parameter contains <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> if the standard GNOME directories should be
+created on startup.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_ENABLE_SOUND">
+<a name="GNOME-PARAM-ENABLE-SOUND--CAPS"></a><h3>GNOME_PARAM_ENABLE_SOUND</h3>
+<pre class="programlisting">#define GNOME_PARAM_ENABLE_SOUND        "enable-sound"
+</pre>
+<p>
+This parameter determines whether or not to enable sound on startup.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_ESPEAKER">
+<a name="GNOME-PARAM-ESPEAKER--CAPS"></a><h3>GNOME_PARAM_ESPEAKER</h3>
+<pre class="programlisting">#define GNOME_PARAM_ESPEAKER            "espeaker"
+</pre>
+<p>
+This parameter describes how to connect to esd.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_APP_ID">
+<a name="GNOME-PARAM-APP-ID--CAPS"></a><h3>GNOME_PARAM_APP_ID</h3>
+<pre class="programlisting">#define GNOME_PARAM_APP_ID              "app-id"
+</pre>
+<p>
+This parameter contains the ID string to use for the application (readable).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_APP_VERSION">
+<a name="GNOME-PARAM-APP-VERSION--CAPS"></a><h3>GNOME_PARAM_APP_VERSION</h3>
+<pre class="programlisting">#define GNOME_PARAM_APP_VERSION         "app-version"
+</pre>
+<p>
+This parameter contains the application version (readable).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_GNOME_PREFIX">
+<a name="GNOME-PARAM-GNOME-PREFIX--CAPS"></a><h3>GNOME_PARAM_GNOME_PREFIX</h3>
+<pre class="programlisting">#define GNOME_PARAM_GNOME_PREFIX        "gnome-prefix"
+</pre>
+<p>
+This parameter contains the prefix where the main GNOME system is installed
+(readable, writable on init only).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_GNOME_SYSCONFDIR">
+<a name="GNOME-PARAM-GNOME-SYSCONFDIR--CAPS"></a><h3>GNOME_PARAM_GNOME_SYSCONFDIR</h3>
+<pre class="programlisting">#define GNOME_PARAM_GNOME_SYSCONFDIR    "gnome-sysconfdir"
+</pre>
+<p>
+This parameter contains the prefix where the GNOME configuration files
+are installed (readable, writable on init only).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_GNOME_DATADIR">
+<a name="GNOME-PARAM-GNOME-DATADIR--CAPS"></a><h3>GNOME_PARAM_GNOME_DATADIR</h3>
+<pre class="programlisting">#define GNOME_PARAM_GNOME_DATADIR       "gnome-datadir"
+</pre>
+<p>
+This parameter contains the prefix where the GNOME data files are installed
+(readable, writable on init only).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_GNOME_LIBDIR">
+<a name="GNOME-PARAM-GNOME-LIBDIR--CAPS"></a><h3>GNOME_PARAM_GNOME_LIBDIR</h3>
+<pre class="programlisting">#define GNOME_PARAM_GNOME_LIBDIR        "gnome-libdir"
+</pre>
+<p>
+This parameter contains the prefix where the GNOME library files are installed
+(readable, writable on init only).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_APP_PREFIX">
+<a name="GNOME-PARAM-APP-PREFIX--CAPS"></a><h3>GNOME_PARAM_APP_PREFIX</h3>
+<pre class="programlisting">#define GNOME_PARAM_APP_PREFIX          "app-prefix"
+</pre>
+<p>
+This parameter contains the prefix where this application was installed
+(read / write).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_APP_SYSCONFDIR">
+<a name="GNOME-PARAM-APP-SYSCONFDIR--CAPS"></a><h3>GNOME_PARAM_APP_SYSCONFDIR</h3>
+<pre class="programlisting">#define GNOME_PARAM_APP_SYSCONFDIR      "app-sysconfdir"
+</pre>
+<p>
+This parameter contains the prefix where this application's configuration files
+are installed (read / write).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_APP_DATADIR">
+<a name="GNOME-PARAM-APP-DATADIR--CAPS"></a><h3>GNOME_PARAM_APP_DATADIR</h3>
+<pre class="programlisting">#define GNOME_PARAM_APP_DATADIR         "app-datadir"
+</pre>
+<p>
+This parameter contains the prefix where this application's data files are
+installed (read / write).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_APP_LIBDIR">
+<a name="GNOME-PARAM-APP-LIBDIR--CAPS"></a><h3>GNOME_PARAM_APP_LIBDIR</h3>
+<pre class="programlisting">#define GNOME_PARAM_APP_LIBDIR          "app-libdir"
+</pre>
+<p>
+This parameter contains the prefix where this application's library files are
+installed (read / write).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_HUMAN_READABLE_NAME">
+<a name="GNOME-PARAM-HUMAN-READABLE-NAME--CAPS"></a><h3>GNOME_PARAM_HUMAN_READABLE_NAME</h3>
+<pre class="programlisting">#define GNOME_PARAM_HUMAN_READABLE_NAME "human-readable-name"
+</pre>
+<p>
+This parameter contains the human readable name of the application (readable).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_GNOME_PATH">
+<a name="GNOME-PARAM-GNOME-PATH--CAPS"></a><h3>GNOME_PARAM_GNOME_PATH</h3>
+<pre class="programlisting">#define GNOME_PARAM_GNOME_PATH          "gnome-path"
+</pre>
+<p>
+This parameter contains the path in which to look for installed files (taken
+from the GNOME2_PATH environment variable).
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PARAM_NONE">
+<a name="GNOME-PARAM-NONE--CAPS"></a><h3>GNOME_PARAM_NONE</h3>
+<pre class="programlisting">#define GNOME_PARAM_NONE                NULL
+</pre>
+<p>
+Used to terminate a list of parameters and their values.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="GNOME_PROGRAM_STANDARD_PROPERTIES">
+<a name="GNOME-PROGRAM-STANDARD-PROPERTIES--CAPS"></a><h3>GNOME_PROGRAM_STANDARD_PROPERTIES</h3>
+<pre class="programlisting">#define             GNOME_PROGRAM_STANDARD_PROPERTIES</pre>
+<p>
+When PREFIX, SYSCONFDIR, DATADIR and LIBDIR are defined during the build
+process, this macro can be used to assign these values to
+<a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-PREFIX--CAPS" title="GNOME_PARAM_APP_PREFIX"><span class="type">GNOME_PARAM_APP_PREFIX</span></a>, <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-SYSCONFDIR--CAPS" title="GNOME_PARAM_APP_SYSCONFDIR"><span class="type">GNOME_PARAM_APP_SYSCONFDIR</span></a>, <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-DATADIR--CAPS" title="GNOME_PARAM_APP_DATADIR"><span class="type">GNOME_PARAM_APP_DATADIR</span></a>
+and <a class="link" href="libgnome-gnome-program.html#GNOME-PARAM-APP-LIBDIR--CAPS" title="GNOME_PARAM_APP_LIBDIR"><span class="type">GNOME_PARAM_APP_LIBDIR</span></a> respectively so that the GNOME libraries
+automatically know where to fetch application specific data from.  </p>
+<p>
+Every respectable GNOME application should set these variables and use
+GNOME_PROGRAM_STANDARD_PROPERTIES in the call to <a class="link" href="libgnome-gnome-program.html#gnome-program-init" title="gnome_program_init ()"><code class="function">gnome_program_init()</code></a>.
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

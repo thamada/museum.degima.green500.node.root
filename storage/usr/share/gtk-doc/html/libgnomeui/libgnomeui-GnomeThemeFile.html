@@ -1,0 +1,693 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GnomeThemeFile</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.74.2">
+<link rel="home" href="index.html" title="GNOME UI Library Reference Manual">
+<link rel="up" href="deprecated.html" title="Deprecated Modules">
+<link rel="prev" href="GnomeScores.html" title="GnomeScores">
+<link rel="next" href="libgnomeui-gnome-window.html" title="gnome-window">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GNOME UI Library (libgnomeui)">
+<link rel="chapter" href="initialization.html" title="Initialization and Session Management">
+<link rel="chapter" href="application-mgmt.html" title="Application Management">
+<link rel="chapter" href="druids.html" title="Druids">
+<link rel="chapter" href="fixme.html" title="Miscellaneous Widgets">
+<link rel="chapter" href="miscellaneous.html" title="Miscellaneous Utility Functions and Macros">
+<link rel="chapter" href="deprecated.html" title="Deprecated Modules">
+<link rel="chapter" href="libgnomeui-objects.html" title="Object Hierarchy">
+<link rel="index" href="ix01.html" title="Index">
+<link rel="index" href="ix02.html" title="Index of deprecated symbols">
+<link rel="index" href="ix03.html" title="Index of new symbols in 2.2">
+<link rel="index" href="ix04.html" title="Index of new symbols in 2.4">
+<link rel="index" href="ix05.html" title="Index of new symbols in 2.6">
+<link rel="index" href="ix06.html" title="Index of new symbols in 2.8">
+<link rel="index" href="ix07.html" title="Index of new symbols in 2.10">
+<link rel="index" href="ix08.html" title="Index of new symbols in 2.12">
+<link rel="index" href="ix09.html" title="Index of new symbols in 2.14">
+<link rel="index" href="ix10.html" title="Index of new symbols in 2.16">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GnomeScores.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="deprecated.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GNOME UI Library Reference Manual</th>
+<td><a accesskey="n" href="libgnomeui-gnome-window.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgnomeui-GnomeThemeFile.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libgnomeui-GnomeThemeFile.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" lang="en">
+<a name="libgnomeui-GnomeThemeFile"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgnomeui-GnomeThemeFile.top_of_page"></a>GnomeThemeFile</span></h2>
+<p>GnomeThemeFile — APIs to  parse icon theme files.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="libgnomeui-GnomeThemeFile.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+
+#include &lt;libgnomeui/libgnomeui.h&gt;
+
+                    <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a>;
+void                (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileSectionFunc" title="GnomeThemeFileSectionFunc ()">*GnomeThemeFileSectionFunc</a>)        (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+enum                <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileParseError" title="enum GnomeThemeFileParseError">GnomeThemeFileParseError</a>;
+void                (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileLineFunc" title="GnomeThemeFileLineFunc ()">*GnomeThemeFileLineFunc</a>)           (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *key,
+                                                         const char *locale,
+                                                         const char *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *    <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-new-from-string" title="gnome_theme_file_new_from_string ()">gnome_theme_file_new_from_string</a>    (char *data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+char *              <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-to-string" title="gnome_theme_file_to_string ()">gnome_theme_file_to_string</a>          (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df);
+void                <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-free" title="gnome_theme_file_free ()">gnome_theme_file_free</a>               (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df);
+void                <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-foreach-section" title="gnome_theme_file_foreach_section ()">gnome_theme_file_foreach_section</a>    (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileSectionFunc" title="GnomeThemeFileSectionFunc ()">GnomeThemeFileSectionFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+void                <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-foreach-key" title="gnome_theme_file_foreach_key ()">gnome_theme_file_foreach_key</a>        (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> include_localized,
+                                                         <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileLineFunc" title="GnomeThemeFileLineFunc ()">GnomeThemeFileLineFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-get-raw" title="gnome_theme_file_get_raw ()">gnome_theme_file_get_raw</a>            (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         const char *locale,
+                                                         char **val);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-get-integer" title="gnome_theme_file_get_integer ()">gnome_theme_file_get_integer</a>        (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         int *val);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-get-string" title="gnome_theme_file_get_string ()">gnome_theme_file_get_string</a>         (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         char **val);
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-get-locale-string" title="gnome_theme_file_get_locale_string ()">gnome_theme_file_get_locale_string</a>  (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         char **val);
+#define             <a class="link" href="libgnomeui-GnomeThemeFile.html#GNOME-THEME-FILE-PARSE-ERROR--CAPS" title="GNOME_THEME_FILE_PARSE_ERROR">GNOME_THEME_FILE_PARSE_ERROR</a>
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"
+>GQuark</a>              <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-parse-error-quark" title="gnome_theme_file_parse_error_quark ()">gnome_theme_file_parse_error_quark</a>  (void);
+</pre>
+</div>
+<div class="refsect1" lang="en">
+<a name="libgnomeui-GnomeThemeFile.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" lang="en">
+<a name="libgnomeui-GnomeThemeFile.details"></a><h2>Details</h2>
+<div class="refsect2" lang="en">
+<a name="GnomeThemeFile"></a><h3>GnomeThemeFile</h3>
+<pre class="programlisting">typedef struct _GnomeThemeFile GnomeThemeFile;</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeThemeFile</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+A GnomeThemeFile contains information about the number of sections, pointers to the sections
+and information about the current locale.
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeThemeFileSectionFunc"></a><h3>GnomeThemeFileSectionFunc ()</h3>
+<pre class="programlisting">void                (*GnomeThemeFileSectionFunc)        (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *name,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeThemeFileSectionFunc</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeThemeFileParseError"></a><h3>enum GnomeThemeFileParseError</h3>
+<pre class="programlisting">typedef enum 
+{
+  GNOME_THEME_FILE_PARSE_ERROR_INVALID_SYNTAX,
+  GNOME_THEME_FILE_PARSE_ERROR_INVALID_ESCAPES,
+  GNOME_THEME_FILE_PARSE_ERROR_INVALID_CHARS
+} GnomeThemeFileParseError;
+</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeThemeFileParseError</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GnomeThemeFileLineFunc"></a><h3>GnomeThemeFileLineFunc ()</h3>
+<pre class="programlisting">void                (*GnomeThemeFileLineFunc)           (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *key,
+                                                         const char *locale,
+                                                         const char *value,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GnomeThemeFileLineFunc</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>locale</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-new-from-string"></a><h3>gnome_theme_file_new_from_string ()</h3>
+<pre class="programlisting"><a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *    gnome_theme_file_new_from_string    (char *data,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_new_from_string</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Creates a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a> from the data string passed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>  the string used to create a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> location to store the error occuring, or NULL to ignore errors 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-to-string"></a><h3>gnome_theme_file_to_string ()</h3>
+<pre class="programlisting">char *              gnome_theme_file_to_string          (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_to_string</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+This function retrieves the string representing the <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> A <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a char *.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-free"></a><h3>gnome_theme_file_free ()</h3>
+<pre class="programlisting">void                gnome_theme_file_free               (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_free</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Frees the <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a> structure.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-foreach-section"></a><h3>gnome_theme_file_foreach_section ()</h3>
+<pre class="programlisting">void                gnome_theme_file_foreach_section    (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileSectionFunc" title="GnomeThemeFileSectionFunc ()">GnomeThemeFileSectionFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_foreach_section</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Calls <em class="parameter"><code>func</code></em> for each section in the <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a> with <em class="parameter"><code>user_data</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td> a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileSectionFunc" title="GnomeThemeFileSectionFunc ()"><span class="type">GnomeThemeFileSectionFunc</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> a pointer to the user data.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-foreach-key"></a><h3>gnome_theme_file_foreach_key ()</h3>
+<pre class="programlisting">void                gnome_theme_file_foreach_key        (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> include_localized,
+                                                         <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileLineFunc" title="GnomeThemeFileLineFunc ()">GnomeThemeFileLineFunc</a> func,
+                                                         <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_foreach_key</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Looks for the section <em class="parameter"><code>section_name</code></em>. If found, this function calls <em class="parameter"><code>func</code></em> for each line 
+in the section with fields of line and <em class="parameter"><code>user_data</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>section</code></em> :</span></p></td>
+<td> name of the section
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>include_localized</code></em> :</span></p></td>
+<td> a boolean value
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td> a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFileLineFunc" title="GnomeThemeFileLineFunc ()"><span class="type">GnomeThemeFileLineFunc</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td> a pointer to user_data.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-get-raw"></a><h3>gnome_theme_file_get_raw ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_theme_file_get_raw            (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         const char *locale,
+                                                         char **val);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_get_raw</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Searches section name and line in the <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a> data structure.
+If found, sets the <em class="parameter"><code>val</code></em> to value field in GnomeThemeFileLine and returns a boolean value.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> A <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>. 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>section</code></em> :</span></p></td>
+<td> the string representing the section name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyname</code></em> :</span></p></td>
+<td> the string representing the key name.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>locale</code></em> :</span></p></td>
+<td> the string representing the locale. 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td> a char**. 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE if section and line were found in the <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>, FALSE otherwise.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-get-integer"></a><h3>gnome_theme_file_get_integer ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_theme_file_get_integer        (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         int *val);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_get_integer</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+This function calls <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-get-raw" title="gnome_theme_file_get_raw ()"><code class="function">gnome_theme_file_get_raw()</code></a> with the parameters. If gnome_theme_file_get_raw returns
+<a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a>, then converts the value string filled in by the function to an integer and writes it in <em class="parameter"><code>val</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> a <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>section</code></em> :</span></p></td>
+<td> the section name.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyname</code></em> :</span></p></td>
+<td> the key name.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td> an int*.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a> if gnome_theme_file_get_raw returns <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE--CAPS"
+><code class="literal">TRUE</code></a>, <a
+href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE--CAPS"
+><code class="literal">FALSE</code></a> otherwise. 
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-get-string"></a><h3>gnome_theme_file_get_string ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_theme_file_get_string         (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         char **val);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_get_string</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+This function calls <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-get-raw" title="gnome_theme_file_get_raw ()"><code class="function">gnome_theme_file_get_raw()</code></a> with the parameters and returns the 
+boolean value.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> A <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>section</code></em> :</span></p></td>
+<td> the section name. 
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyname</code></em> :</span></p></td>
+<td> the key name.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td> a char**.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+><span class="type">gboolean</span></a> value.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-get-locale-string"></a><h3>gnome_theme_file_get_locale_string ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            gnome_theme_file_get_locale_string  (<a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile">GnomeThemeFile</a> *df,
+                                                         const char *section,
+                                                         const char *keyname,
+                                                         char **val);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_get_locale_string</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+Calculates the locale if the current_locale field of <em class="parameter"><code>df</code></em> is NULL. Then calls <a class="link" href="libgnomeui-GnomeThemeFile.html#gnome-theme-file-get-raw" title="gnome_theme_file_get_raw ()"><code class="function">gnome_theme_file_get_raw()</code></a> with the 
+parameters and returns the boolean value obtained.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>df</code></em> :</span></p></td>
+<td> A <a class="link" href="libgnomeui-GnomeThemeFile.html#GnomeThemeFile" title="GnomeThemeFile"><span class="type">GnomeThemeFile</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>section</code></em> :</span></p></td>
+<td> the section name.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>keyname</code></em> :</span></p></td>
+<td> the keyname.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>val</code></em> :</span></p></td>
+<td> a char **.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a gboolean value.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="GNOME-THEME-FILE-PARSE-ERROR--CAPS"></a><h3>GNOME_THEME_FILE_PARSE_ERROR</h3>
+<pre class="programlisting">#define GNOME_THEME_FILE_PARSE_ERROR gnome_theme_file_parse_error_quark()
+</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GNOME_THEME_FILE_PARSE_ERROR</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="gnome-theme-file-parse-error-quark"></a><h3>gnome_theme_file_parse_error_quark ()</h3>
+<pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"
+>GQuark</a>              gnome_theme_file_parse_error_quark  (void);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">gnome_theme_file_parse_error_quark</code> is deprecated and should not be used in newly-written code.</p>
+</div>
+<p>
+This function gets  a <a
+href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"
+><span class="type">GQuark</span></a> representing the error string.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a
+href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"
+><span class="type">GQuark</span></a>.
+
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.2</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

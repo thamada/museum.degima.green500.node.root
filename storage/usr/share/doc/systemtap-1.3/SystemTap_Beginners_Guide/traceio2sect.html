@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>4.2.4. I/O Monitoring (By Device)</title><link rel="stylesheet" href="Common_Content/css/default.css" type="text/css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican 2.3" /><meta name="package" content="Systemtap-SystemTap_Beginners_Guide-1.0-en-US-2.0-2" /><link rel="home" href="index.html" title="SystemTap Beginners Guide" /><link rel="up" href="mainsect-disk.html" title="4.2. Disk" /><link rel="prev" href="traceiosect.html" title="4.2.3. Track Cumulative IO" /><link rel="next" href="inodewatchsect.html" title="4.2.5. Monitoring Reads and Writes to a File" /></head><body><p id="title"><a class="left" href="http://www.fedoraproject.org"><img src="Common_Content/images/image_left.png" alt="Product Site" /></a><a class="right" href="http://docs.fedoraproject.org"><img src="Common_Content/images/image_right.png" alt="Documentation Site" /></a></p><ul class="docnav"><li class="previous"><a accesskey="p" href="traceiosect.html"><strong>Prev</strong></a></li><li class="next"><a accesskey="n" href="inodewatchsect.html"><strong>Next</strong></a></li></ul><div xml:lang="en-US" class="section" title="4.2.4. I/O Monitoring (By Device)" id="traceio2sect" lang="en-US"><div class="titlepage"><div><div keep-together.within-column="always"><h3 class="title" id="traceio2sect">4.2.4. I/O Monitoring (By Device)</h3></div></div></div><a id="id2188881" class="indexterm"></a><a id="id711093" class="indexterm"></a><a id="id684911" class="indexterm"></a><a id="id695662" class="indexterm"></a><a id="id2221556" class="indexterm"></a><div class="para">
+		This section describes how to monitor I/O activity on a specific device.
+	</div><div class="formalpara" id="traceio2"><h5 class="formalpara">traceio2.stp</h5>
+			
+<pre class="programlisting">
+#! /usr/bin/env stap
+
+global device_of_interest
+
+probe begin {
+  /* The following is not the most efficient way to do this.
+      One could directly put the result of usrdev2kerndev()
+      into device_of_interest.  However, want to test out
+      the other device functions */
+  dev = usrdev2kerndev($1)
+  device_of_interest = MKDEV(MAJOR(dev), MINOR(dev))
+}
+
+probe vfs.write, vfs.read
+{
+  if (dev == device_of_interest)
+    printf ("%s(%d) %s 0x%x\n",
+            execname(), pid(), probefunc(), dev)
+}
+
+</pre>
+		</div><a id="id2157953" class="indexterm"></a><a id="id698201" class="indexterm"></a><a id="id785133" class="indexterm"></a><a id="id728308" class="indexterm"></a><a id="id698659" class="indexterm"></a><a id="id657544" class="indexterm"></a><div class="para">
+		<a class="xref" href="traceio2sect.html#traceio2" title="traceio2.stp">traceio2.stp</a> takes 1 argument: the whole device number. To get this number, use <code class="command">stat -c "0x%D" <em class="replaceable"><code>directory</code></em></code>, where <code class="command"><em class="replaceable"><code>directory</code></em></code> is located in the device you wish to monitor.
+	</div><a id="id741914" class="indexterm"></a><a id="id677860" class="indexterm"></a><a id="id2222251" class="indexterm"></a><div class="para">
+		The <code class="command">usrdev2kerndev()</code> function converts the whole device number into the format understood by the kernel. The output produced by <code class="command">usrdev2kerndev()</code> is used in conjunction with the <code class="command">MKDEV()</code>, <code class="command">MINOR()</code>, and <code class="command">MAJOR()</code> functions to determine the major and minor numbers of a specific device.
+	</div><div class="para">
+		The output of <a class="xref" href="traceio2sect.html#traceio2" title="traceio2.stp">traceio2.stp</a> includes the name and ID of any process performing a read/write, the function it is performing (i.e. <code class="command">vfs_read</code> or <code class="command">vfs_write</code>), and the kernel device number.
+	</div><div class="para">
+		The following example is an excerpt from the full output of <code class="command">stap traceio2.stp 0x805</code>, where <code class="literal">0x805</code> is the whole device number of <code class="filename">/home</code>. <code class="filename">/home</code> resides in <code class="filename">/dev/sda5</code>, which is the device we wish to monitor.
+	</div><div class="example" title="Example 4.9. traceio2.stp Sample Output" id="traceio2output"><h6>Example 4.9. <a class="xref" href="traceio2sect.html#traceio2" title="traceio2.stp">traceio2.stp</a> Sample Output</h6><div class="example-contents"><pre class="screen">
+[...]
+synergyc(3722) vfs_read 0x800005
+synergyc(3722) vfs_read 0x800005
+cupsd(2889) vfs_write 0x800005
+cupsd(2889) vfs_write 0x800005
+cupsd(2889) vfs_write 0x800005
+[...]
+</pre></div></div><br class="example-break" /></div><ul class="docnav"><li class="previous"><a accesskey="p" href="traceiosect.html"><strong>Prev</strong>4.2.3. Track Cumulative IO</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="inodewatchsect.html"><strong>Next</strong>4.2.5. Monitoring Reads and Writes to a File</a></li></ul></body></html>

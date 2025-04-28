@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Introduction</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="HTTP Configuration Tool"
+HREF="index.html"><LINK
+REL="NEXT"
+TITLE="Basic Settings"
+HREF="httpd-basic-settings.html"></HEAD><link rel="stylesheet" type="text/css" href="rhdocs-man.css"
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>HTTP Configuration Tool</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="index.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="httpd-basic-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="INTRO"
+></A
+>Chapter 1. Introduction</H1
+><P
+>      In Red Hat Linux 7.3, the Apache HTTP Server was updated to version 2.0, which uses different
+      configuration options. Also starting with Red Hat Linux 7.3, the RPM package was
+      renamed <TT
+CLASS="FILENAME"
+>httpd</TT
+>. If you want to migrate an existing
+      configuration file by hand, refer to the migration guide at
+      <TT
+CLASS="FILENAME"
+>/usr/share/doc/httpd-<TT
+CLASS="REPLACEABLE"
+><I
+>&#60;ver&#62;</I
+></TT
+>/migration.html</TT
+>
+      or the <I
+CLASS="CITETITLE"
+>Red Hat Linux Reference Guide</I
+> for details.
+    </P
+><P
+>      If you configured the Apache HTTP Server with the <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+>
+      in previous versions of Red Hat Linux and then performed an upgrade, you can use
+      the application to migrate the configuration file to the new format for
+      version 2.0. Start the <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+>, make any
+      changes to the configuration, and save it. The configuration file saved
+      will be compatible with version 2.0.
+    </P
+><P
+>      The <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+> allows you to
+      configure the <TT
+CLASS="FILENAME"
+>/etc/httpd/conf/httpd.conf</TT
+>
+      configuration file for the Apache HTTP Server. It does not use the old
+      <TT
+CLASS="FILENAME"
+>srm.conf</TT
+> or <TT
+CLASS="FILENAME"
+>access.conf</TT
+>
+      configuration files; leave them empty.  Through the graphical interface,
+      you can configure directives such as virtual hosts, logging
+      attributes, and maximum number of connections.
+    </P
+><P
+>      Only modules that are shipped with Red Hat Linux can be configured with
+      <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+>. If additional
+      modules are installed, they can not be configured using this tool.
+    </P
+><P
+>      The <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+> requires the X Window System
+      and root access.  To start the application, go to the <B
+CLASS="GUIMENU"
+>Main Menu
+      Button</B
+> =&#62; <B
+CLASS="GUIMENU"
+>System Settings</B
+> =&#62;
+      <B
+CLASS="GUIMENU"
+>Server Settings</B
+> =&#62;
+      <B
+CLASS="GUIMENUITEM"
+>HTTP</B
+> or type the command
+      <TT
+CLASS="COMMAND"
+>system-config-httpd</TT
+> at a shell prompt (for example, in
+      an XTerm or GNOME Terminal).</P
+><DIV
+CLASS="CAUTION"
+><P
+></P
+><TABLE
+CLASS="CAUTION"
+WIDTH="100%"
+BORDER="0"
+><TR
+><TD
+WIDTH="25"
+ALIGN="CENTER"
+VALIGN="TOP"
+><IMG
+SRC="./stylesheet-images/caution.png"
+HSPACE="5"
+ALT="Caution"></TD
+><TH
+ALIGN="LEFT"
+VALIGN="CENTER"
+><B
+>Caution</B
+></TH
+></TR
+><TR
+><TD
+>&nbsp;</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+><P
+>	Do not edit the <TT
+CLASS="FILENAME"
+>/etc/httpd/conf/httpd.conf</TT
+>
+	configuration file by hand if you wish to use this tool.   The
+	<B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+> generates this file after you save your
+	changes and exit the program. If you want to add additional modules or
+	configuration options that are not available in <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+>,
+	you cannot use this tool.
+      </P
+></TD
+></TR
+></TABLE
+></DIV
+><P
+>      The general steps for configuring the Apache HTTP Server using the
+      <B
+CLASS="APPLICATION"
+>HTTP Configuration Tool</B
+> are as following:
+    </P
+><P
+></P
+><OL
+TYPE="1"
+><LI
+><P
+>Configure the basic settings under the <B
+CLASS="GUILABEL"
+>Main</B
+>
+	tab.</P
+></LI
+><LI
+><P
+>Click on the <B
+CLASS="GUILABEL"
+>Virtual Hosts</B
+> tab and configure
+	  the default settings.</P
+></LI
+><LI
+><P
+>Under the <B
+CLASS="GUILABEL"
+>Virtual Hosts</B
+> tab, configure the
+	  Default Virtual Host.</P
+></LI
+><LI
+><P
+>If you want to serve more than one URL or virtual host, add the
+	  additional virtual hosts.</P
+></LI
+><LI
+><P
+>Configure the server settings under the
+	<B
+CLASS="GUILABEL"
+>Server</B
+> tab.</P
+></LI
+><LI
+><P
+>Configure the connections settings under the <B
+CLASS="GUILABEL"
+>Performance
+	    Tuning</B
+> tab.</P
+></LI
+><LI
+><P
+>Copy all necessary files to the <TT
+CLASS="FILENAME"
+>DocumentRoot</TT
+>
+	  and <TT
+CLASS="FILENAME"
+>cgi-bin</TT
+> directories.</P
+></LI
+><LI
+><P
+>Exit the application and select to save your settings.</P
+></LI
+></OL
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="httpd-basic-settings.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>HTTP Configuration Tool</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Basic Settings</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

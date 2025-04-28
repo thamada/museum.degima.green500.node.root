@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+
+<section id="sect-Release_Notes-Virtualization" lang="pt-PT">
+	<title>Virtualização</title>
+	<remark>Este bocado encontra-se em: <ulink type="http" url="https://fedoraproject.org/wiki/Docs/Beats/Virtualization">https://fedoraproject.org/wiki/Docs/Beats/Virtualization</ulink></remark>
+	<para>
+		<indexterm>
+			<primary>Virtualização</primary>
+		</indexterm>
+		<indexterm>
+			<primary>KVM</primary>
+		</indexterm>
+		<indexterm>
+			<primary>Xen</primary>
+		</indexterm>
+		<indexterm>
+			<primary>qemu</primary>
+		</indexterm>
+		<indexterm>
+			<primary>gPXE</primary>
+		</indexterm>
+		<indexterm>
+			<primary>libvirt</primary>
+		</indexterm>
+		<indexterm>
+			<primary>libguestfs</primary>
+		</indexterm>
+		<indexterm>
+			<primary>guestfish</primary>
+		</indexterm>
+		 A virtualização no Fedora&nbsp;12 inclui grandes mudanças e novas funcionalidades, que continuará a suportar KVM, Xen e muitas outras plataformas de máquinas virtuais.
+	</para>
+	<para>
+		O KVM e o QEMU ganharam imensas novas funcionalidades neste lançamento. A utilização e performance da memória em máquinas virtuais KVM foi melhorada pela adição do KSM e Memória KVM "Huge Page Backed". A performance do formato de imagem qcow2 foi grandemente melhorada. Foi adicionado suporte, tanto para SR-IOV, como para "hotplug" de NICs. Finalmente, o gPXE é agora utilizado em vez do etherboot para arranque de máquinas virtuais PXE.
+	</para>
+	<para>
+		Quanto à libvirt, foram adicionadas APIs para gestão de armazenamento e gestão da interface de rede. A libvirt agora também executa os processos QEMU sem privilégios.
+	</para>
+	<para>
+		A nova biblioteca (<application>libguestfs</application>) e uma ferramenta interactiva (<application>guestfish</application>) já está disponível para aceder e modificar imagens de disco de máquinas virtuais.
+	</para>
+	<section>
+		<title>"Kernel Same Page Merging" e Utilização Reduzida de Memória nas Máquinas Virtuais (Guest)</title>
+		<para>
+			<indexterm>
+				<primary>KSM</primary>
+			</indexterm>
+			<indexterm>
+				<primary>KVM</primary>
+			</indexterm>
+			<indexterm>
+				<primary>kernel</primary>
+			</indexterm>
+			 <firstterm>"Kernel SamePage Merging"</firstterm> (KSM) permite que páginas idênticas de memória sejam empacotadas pelo kernel numa única página partilhada por um ou mais processos. Esta funcionalidade é potenciada pelo KVM para permitir que múltiplas, similares, máquinas virtuais tenham uma utilização de memória reduzida. Como a memória é partilhada, a utilização combinada desta pelas máquinas virtuais é reduzida.
+		</para>
+		<para>
+			Para mais detalhes consulte <ulink url="http://fedoraproject.org/wiki/Features/KSM"></ulink> e <ulink url="http://lwn.net/Articles/306704/"></ulink>
+		</para>
+	</section>
+	
+	<section>
+		<title>Memória KVM "Huge Page Backed"</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>Memória "Huge Page Backed"</secondary>
+			</indexterm>
+			 Configure as máquinas virtuais KVM para utilizar memória "huge page backed" de modo a reduzir o consumo de memória e melhorar a performance reduzindo a pressão sobre a cache. Utilizadores de máquinas virtuais utilizando memória "huge page backed" devem notar performance melhorada com alguma poupança no consumo de memória do servidor. O benefício na performance está dependente do carga da máquina. Utilizar memória "huge page backed" tem, contudo, uma desvantagem - nunca mais pode trocar nem dimensionar a memória das máquinas virtuais.
+		</para>
+		<para>
+			Para mais detalhes consulte: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_Huge_Page_Backed_Memory"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>NIC Hotplug em KVM</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>NIC Hotplug - Tirar/Colocar placas de rede com o sistema ligado</secondary>
+			</indexterm>
+			 Interfaces de rede podem agora ser adicionados a uma máquina virtual KVM utilizando <package>libvirt</package>/<package>virt-manager</package> sem a necessidade de ter de reiniciar a máquina virtual.
+		</para>
+		<para>
+			Para mais detalhes consulte: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_NIC_Hotplug"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>Performance KVM qcow2</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>Performance qcow2</secondary>
+			</indexterm>
+			 O formato nativo das imagens de disco do <package>qemu</package> é <command>qcow2</command>. O qcow2 tem funcionalidades melhoradas, quando comparado com imagens raw, incluindo: imagens base, snapshots, compressão, e cifra.
+		</para>
+		<para>
+			Utilizadores querendo proteger as suas máquinas virtuais contra crashes do servidor, normalmente desactivam a cache de escrita no servidor. Antes, isto provocava uma pobre performance para as máquinas virtuais em imagens qcow2.
+		</para>
+		<para>
+			A performance de I/O das imagens de disco qcow2 foi grandemente melhorada. Utilizadores que não utilizavam qcow2 por causa da fraca performance devem reconsiderar e tirar partido das funcionalidades adicionais que o formato apresenta sobre imagens de disco raw.
+		</para>
+		<para>
+			Para mais detalhes consulte: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_qcow2_Performance"></ulink> e <ulink type="http" url="http://www.gnome.org/~markmc/qcow-image-format.html"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>KVM Guest ABI Estável</title>
+		<para>
+			<indexterm>
+				<primary>KVM</primary>
+				<secondary>ABI Estável para Convidados</secondary>
+			</indexterm>
+			 Para as máquinas virtuais KVM é apresentado um plataforma de hardware emulada ou um interface binário aplicacional (ABI) que inclui, por exemplo, um modelo de CPU, APIC, PIT, tabelas ACPI, IDE/USB/controladores VGA, NICs, etc. Quando o QEMU é actualizado para uma nova versão, alguns aspectos desta plataforma podem mudar, quando novas capacidades de hardware são adicionadas. Isto é problemático para máquinas virtuais Windows onde uma mudança de ABI pode requerer uma reinstalação.
+		</para>
+		<para>
+			As máquinas virtuais a partir de agora terão acesso sempre à mesma ABI entre actualizações do QEMU.
+		</para>
+		<para>
+			For further details refer to: <ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_Stable_Guest_ABI"></ulink> e <ulink type="http" url="http://fedoraproject.org/wiki/KVM_Stable_Guest_ABI_Design_Notes"></ulink>.
+		</para>
+	</section>
+	
+	<section>
+		<title>Biblioteca libguestfs para Manipulação de Máquinas Virtuais</title>
+		<para>
+			<indexterm>
+				<primary>libguestfs</primary>
+			</indexterm>
+			<indexterm>
+				<primary>guestfish</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-df</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-inspector</primary>
+			</indexterm>
+			<indexterm>
+				<primary>virt-cat</primary>
+			</indexterm>
+			 Adicionado tardiamente ao ciclo de desenvolvimento do Fedora 11, <package>libguestfs</package> é agora uma característica oficial no Fedora 12. <package>libguestfs</package> é uma biblioteca para aceder e modificar imagens de máquinas virtuais. Usando o kernel do Linux e código <package>qemu</package>, <package>libguestfs</package> consegue aceder aos mesmos tipos de sistema de ficheiros de máquinas virtuais que o Linux e o QEMU.
+		</para>
+		<para>
+			As seguintes ferramentas são disponibilizadas ou aumentadas pela libguestfs: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						Bindings para as linguagens de programação OCaml, Perl, Python, Ruby, e Java.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>guestfish</package> - Fornece uma shell interactiva para edição de sistemas de ficheiros de máquinas virtuais e execução de comandos no contexto da máquina virtual.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-df</package> - Mostra espaço livre nos sistemas de ficheiros de máquinas virtuais
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-inspector</package> - Mostra a versão do SO, kernel, drivers, pontos de montagem, aplicações, etc. de uma máquina virtual.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<package>virt-cat</package> - Mostra qualquer ficheiro do interior de uma máquina virtual.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>
+			Para mais detalhes consulte: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/libguestfs"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://libguestfs.org/"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Gestão do Interface de Rede</title>
+		<para>
+			<indexterm>
+				<primary>libvirt</primary>
+			</indexterm>
+			<indexterm>
+				<primary>Virtualização</primary>
+				<secondary>Gestão do Interface de Rede</secondary>
+			</indexterm>
+			 As normais configurações de rede de equipamentos, como bridges, bonds, VLANs e combinações menos usuais, podem agora ser criadas utilizando a biblioteca de configuracão de rede de uso geral, netcf. As melhorias da API do <package>libvirt</package> expoem esta nova funcionalidade a equipamentos de administração remota com o<package>libvirtd</package>
+		</para>
+		<para>
+			Para mais detalhes consulte: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/Network_Interface_Management"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedorahosted.org/netcf/"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://www.libvirt.org/remote.html"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Raiz Única de Virtualização de I/O</title>
+		<para>
+			<indexterm>
+				<primary>Raiz Única de Virtualização de I/O</primary>
+			</indexterm>
+			 Raiz Única de Virtualização de I/O é uma funcionalidade PCI que permite a criação de funções virtuais (VF) que partilham os recursos de uma função física (PF). Os dispositivos VF são atribuídos a máquinas virtuais e aparecem internamente como dispositivos físicos. Porque a máquina virtual está na realidade a gerir directamente o hardware, a performance do I/O equipara-se à performance do equipamento físico.
+		</para>
+		<para>
+			Para mais detalhes consulte: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/SR-IOV"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://www.pcisig.com/specifications/iov/"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/KVM_PCI_Device_Assignment"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Standard gPXE para Máquinas Virtuais</title>
+		<para>
+			<indexterm>
+				<primary>gPXE</primary>
+			</indexterm>
+			<indexterm>
+				<primary>qemu</primary>
+			</indexterm>
+			 As máquinas virtuais QEMU utilizam agora o <package>gpxe</package> que é mais moderno e actualmente mantido, em vez da obsoleta ferramenta ethertool para o arranque PXE.
+		</para>
+		<para>
+			Para mais detalhes consulte: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtgPXE"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://etherboot.org/wiki/index.php"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Privilégios Virt</title>
+		<para>
+			Foram feitas alterações às máquinas virtuais QEMU/KVM para melhorar a segurança do servidor no evento de uma falha no binário do QEMU.
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					As permissões em /dev/kvm foram actualizadas para permitir que utilizadores não privilegiados possam utilizar hardware de aceleração.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Os processos QEMU criados pelo virt-manager num ambiente de trabalho local corre agora com os privilégios do utilizador.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Os processos QEMU criados pelo serviço privilegiado libvirtd corre agora como uma conta sem privilégios, utilizador &#39;qemu&#39;, grupo &#39;qemu&#39;.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					libvirtd irá alterar no arranque o proprietário de qualquer disco atribuído a uma máquina virtual, para utilizador &#39;qemu&#39; e grupo &#39;qemu&#39;. Excepção para discos apenas de leitura ou partilhados.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Para reverter ao comportamento anterior do Fedora de executar todas as instancias do QEMU como &#39;root&#39;, foram introduzidos dois parametros de configuracão em /etc/libvirt/qemu.conf. Não é recomendado que se alterem.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			Para mais detalhes consulte:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtPrivileges"></ulink>
+				</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+	
+	<section>
+		<title>Gestão de Armazenamento Virt</title>
+		<para>
+			A Virtualização de ID N_Port do Canal de Fibra ou NPIV permite a criação de múltiplos N_Ports virtuais num único adaptador de bus do equipamento físico. As APIs dos nós do libvirt foram extendidos para criar e destruir adaptadores virtuais utilizando o NPIV.
+		</para>
+		<para>
+			As APIs que permitem a descoberta de armazenamento e a criação de grupos foram extendidas para descobrir e re-examinar armazenamento por servidor SCSI. Os administradores podem agora descobrir, configurar e aprovisionar armazenamento para máquinas virtuais sem a necessidade de multiplas ferramentas.
+		</para>
+		<para>
+			Para mais detalhes consulte: 
+			<itemizedlist>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtStorageManagement"></ulink>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						<ulink type="http" url="http://libvirt.org/storage.html"></ulink>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</section>
+	
+	<section>
+		<title>Outros Melhoramentos</title>
+		<section>
+			<title>Kit de Compatibilidade da Tecnologia Libvirt</title>
+			<para>
+				O Fedora inclui agora o kit de compatibilidade tecnológica libvirt (TCK). O TCK é uma suite de testes funcionais que providencia informações detalhadas das funcionalidades disponíveis em cada driver libvirt e pode ser utilizada para identificar falhas ou regressões no desenvolvimento de funcionalidades de virtualização do Fedora.
+			</para>
+			<para>
+				Para mais detalhes consulte: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/VirtTCK"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://libvirt.org/drivers.html"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section>
+			<title>Repositório de Ante-Visão de Tecnologia de Virtualização</title>
+			<para>
+				O Repositório de Ante-Visão de Tecnologia de Virtualização foi criado para pessoas que gostariam de testar os pacotes mais recentes relacionados com virtualização. Este repositório tem como objectivo principal ajudar a testar e permitir novas experimentações. Não é destinado a ambientes de produção.
+			</para>
+			<para>
+				Para mais detalhes consulte: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Virtualization_Preview_Repository"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+		
+		<section>
+			<title>Suporte Kernel Xen</title>
+			<para>
+				O pacote kernel no Fedora 12 suporta o arranque como domU (máquina virtual), mas não irá funcionar como dom0 (máquina física) até que esse suporte seja disponibilizado "upstream". Os trabalhos estão em curso e espera-se que esse suporte seja incluído no kernel 2.6.33 e Fedora 13.
+			</para>
+			<para>
+				O lançamento mais recente do Fedora com suporte para dom0 é o Fedora 8.
+			</para>
+			<para>
+				Arrancar uma máquina virtual Xen domU dentro do Fedora 12 requer o xenner baseado no KVM. O xenner executa o kernel da máquina virtual e um pequeno emulador Xen em conjunto com a máquina virtual KVM.
+			</para>
+			<important>
+				<title>O KVM requer funcionalidades de virtualização de hardware no servidor físico.</title>
+				<para>
+					Sistemas sem virtualização em hardware não suporta neste momento máquinas virtuais Xen.
+				</para>
+			</important>
+			<para>
+				Para mais detalhes consulte: 
+				<itemizedlist>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://sourceforge.net/projects/kvm"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://kraxel.fedorapeople.org/xenner/"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/XenPvops"></ulink>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<ulink type="http" url="http://fedoraproject.org/wiki/Features/XenPvopsDom0"></ulink>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</section>
+
+	</section>
+
+</section>
+
+

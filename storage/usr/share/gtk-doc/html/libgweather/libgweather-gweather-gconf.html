@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>gweather-gconf</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="libgweather Reference Manual">
+<link rel="up" href="ch01.html" title="[Insert title here]">
+<link rel="prev" href="libgweather-gweather-xml.html" title="gweather-xml">
+<link rel="next" href="libgweather-gweather-prefs.html" title="gweather-prefs">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="[Insert title here]">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libgweather-gweather-xml.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">libgweather Reference Manual</th>
+<td><a accesskey="n" href="libgweather-gweather-prefs.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libgweather-gweather-gconf.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libgweather-gweather-gconf.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="gweather-gconf">
+<a name="libgweather-gweather-gconf"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libgweather-gweather-gconf.top_of_page"></a>gweather-gconf</span></h2>
+<p>gweather-gconf</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libgweather-gweather-gconf.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a>;
+<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *     <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-new" title="gweather_gconf_new ()">gweather_gconf_new</a>                  (const char *prefix);
+void                <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-free" title="gweather_gconf_free ()">gweather_gconf_free</a>                 (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);
+GConfClient *       <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-get-client" title="gweather_gconf_get_client ()">gweather_gconf_get_client</a>           (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);
+<a class="link" href="libgweather-weather.html#WeatherLocation" title="WeatherLocation">WeatherLocation</a> *   <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-get-location" title="gweather_gconf_get_location ()">gweather_gconf_get_location</a>         (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);
+gchar *             <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-get-full-key" title="gweather_gconf_get_full_key ()">gweather_gconf_get_full_key</a>         (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key);
+void                <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-set-bool" title="gweather_gconf_set_bool ()">gweather_gconf_set_bool</a>             (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         gboolean the_bool,
+                                                         GError **opt_error);
+void                <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-set-int" title="gweather_gconf_set_int ()">gweather_gconf_set_int</a>              (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         gint the_int,
+                                                         GError **opt_error);
+void                <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-set-string" title="gweather_gconf_set_string ()">gweather_gconf_set_string</a>           (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         const gchar *the_string,
+                                                         GError **opt_error);
+gboolean            <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-get-bool" title="gweather_gconf_get_bool ()">gweather_gconf_get_bool</a>             (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         GError **opt_error);
+gint                <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-get-int" title="gweather_gconf_get_int ()">gweather_gconf_get_int</a>              (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         GError **opt_error);
+gchar *             <a class="link" href="libgweather-gweather-gconf.html#gweather-gconf-get-string" title="gweather_gconf_get_string ()">gweather_gconf_get_string</a>           (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         GError **opt_error);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libgweather-gweather-gconf.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libgweather-gweather-gconf.details"></a><h2>Details</h2>
+<div class="refsect2" title="GWeatherGConf">
+<a name="GWeatherGConf"></a><h3>GWeatherGConf</h3>
+<pre class="programlisting">typedef struct _GWeatherGConf GWeatherGConf;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_new ()">
+<a name="gweather-gconf-new"></a><h3>gweather_gconf_new ()</h3>
+<pre class="programlisting"><a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *     gweather_gconf_new                  (const char *prefix);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>prefix</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_free ()">
+<a name="gweather-gconf-free"></a><h3>gweather_gconf_free ()</h3>
+<pre class="programlisting">void                gweather_gconf_free                 (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_get_client ()">
+<a name="gweather-gconf-get-client"></a><h3>gweather_gconf_get_client ()</h3>
+<pre class="programlisting">GConfClient *       gweather_gconf_get_client           (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_get_location ()">
+<a name="gweather-gconf-get-location"></a><h3>gweather_gconf_get_location ()</h3>
+<pre class="programlisting"><a class="link" href="libgweather-weather.html#WeatherLocation" title="WeatherLocation">WeatherLocation</a> *   gweather_gconf_get_location         (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_get_full_key ()">
+<a name="gweather-gconf-get-full-key"></a><h3>gweather_gconf_get_full_key ()</h3>
+<pre class="programlisting">gchar *             gweather_gconf_get_full_key         (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_set_bool ()">
+<a name="gweather-gconf-set-bool"></a><h3>gweather_gconf_set_bool ()</h3>
+<pre class="programlisting">void                gweather_gconf_set_bool             (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         gboolean the_bool,
+                                                         GError **opt_error);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>the_bool</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_set_int ()">
+<a name="gweather-gconf-set-int"></a><h3>gweather_gconf_set_int ()</h3>
+<pre class="programlisting">void                gweather_gconf_set_int              (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         gint the_int,
+                                                         GError **opt_error);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>the_int</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_set_string ()">
+<a name="gweather-gconf-set-string"></a><h3>gweather_gconf_set_string ()</h3>
+<pre class="programlisting">void                gweather_gconf_set_string           (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         const gchar *the_string,
+                                                         GError **opt_error);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>the_string</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_get_bool ()">
+<a name="gweather-gconf-get-bool"></a><h3>gweather_gconf_get_bool ()</h3>
+<pre class="programlisting">gboolean            gweather_gconf_get_bool             (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         GError **opt_error);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_get_int ()">
+<a name="gweather-gconf-get-int"></a><h3>gweather_gconf_get_int ()</h3>
+<pre class="programlisting">gint                gweather_gconf_get_int              (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         GError **opt_error);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="gweather_gconf_get_string ()">
+<a name="gweather-gconf-get-string"></a><h3>gweather_gconf_get_string ()</h3>
+<pre class="programlisting">gchar *             gweather_gconf_get_string           (<a class="link" href="libgweather-gweather-gconf.html#GWeatherGConf" title="GWeatherGConf">GWeatherGConf</a> *ctx,
+                                                         const gchar *key,
+                                                         GError **opt_error);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ctx</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>opt_error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

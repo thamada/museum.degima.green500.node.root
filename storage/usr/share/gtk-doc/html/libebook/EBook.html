@@ -1,0 +1,2971 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EBook</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Evolution-Data-Server Manual: Address Book Client (libebook)">
+<link rel="up" href="ch01.html" title="Evolution-Data-Server Manual: Address Book Client (libebook)">
+<link rel="prev" href="ch01.html" title="Evolution-Data-Server Manual: Address Book Client (libebook)">
+<link rel="next" href="EBookListener.html" title="EBookListener">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution-Data-Server Manual: Address Book Client (libebook)">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution-Data-Server Manual: Address Book Client (libebook)</th>
+<td><a accesskey="n" href="EBookListener.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#EBook.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#EBook.description" class="shortcut">Description</a>
+                 | 
+                <a href="#EBook.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                 | 
+                <a href="#EBook.signals" class="shortcut">Signals</a>
+</td></tr>
+</table>
+<div class="refentry" title="EBook">
+<a name="EBook"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="EBook.top_of_page"></a>EBook</span></h2>
+<p>EBook — The primary Evolution addressbook client object.</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="EBook.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="EBook.html#EBook-struct" title="EBook">EBook</a>;
+<a class="link" href="EBook.html" title="EBook">EBook</a> *             <a class="link" href="EBook.html#e-book-new" title="e_book_new ()">e_book_new</a>                          (ESource *source,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a class="link" href="EBook.html" title="EBook">EBook</a> *             <a class="link" href="EBook.html#e-book-new-default-addressbook" title="e_book_new_default_addressbook ()">e_book_new_default_addressbook</a>      (<a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a class="link" href="EBook.html" title="EBook">EBook</a> *             <a class="link" href="EBook.html#e-book-new-from-uri" title="e_book_new_from_uri ()">e_book_new_from_uri</a>                 (const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *uri,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a class="link" href="EBook.html" title="EBook">EBook</a> *             <a class="link" href="EBook.html#e-book-new-system-addressbook" title="e_book_new_system_addressbook ()">e_book_new_system_addressbook</a>       (<a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-set-default-addressbook" title="e_book_set_default_addressbook ()">e_book_set_default_addressbook</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-set-default-source" title="e_book_set_default_source ()">e_book_set_default_source</a>           (ESource *source,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-remove" title="e_book_remove ()">e_book_remove</a>                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-open" title="e_book_open ()">e_book_open</a>                         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-supported-fields" title="e_book_get_supported_fields ()">e_book_get_supported_fields</a>         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-supported-auth-methods" title="e_book_get_supported_auth_methods ()">e_book_get_supported_auth_methods</a>   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **auth_methods,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-required-fields" title="e_book_get_required_fields ()">e_book_get_required_fields</a>          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+ESource *           <a class="link" href="EBook.html#e-book-get-source" title="e_book_get_source ()">e_book_get_source</a>                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-online" title="e_book_is_online ()">e_book_is_online</a>                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-opened" title="e_book_is_opened ()">e_book_is_opened</a>                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-authenticate-user" title="e_book_authenticate_user ()">e_book_authenticate_user</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *user,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *passwd,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *auth_method,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-contact" title="e_book_get_contact ()">e_book_get_contact</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-remove-contact" title="e_book_remove_contact ()">e_book_remove_contact</a>               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-remove-contacts" title="e_book_remove_contacts ()">e_book_remove_contacts</a>              (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-add-contact" title="e_book_add_contact ()">e_book_add_contact</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-commit-contact" title="e_book_commit_contact ()">e_book_commit_contact</a>               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-book-view" title="e_book_get_book_view ()">e_book_get_book_view</a>                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> max_results,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> **book_view,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-contacts" title="e_book_get_contacts ()">e_book_get_contacts</a>                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **contacts,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-changes" title="e_book_get_changes ()">e_book_get_changes</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *changeid,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **changes,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+void                <a class="link" href="EBook.html#e-book-free-change-list" title="e_book_free_change_list ()">e_book_free_change_list</a>             (<a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *change_list);
+const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="EBook.html#e-book-get-uri" title="e_book_get_uri ()">e_book_get_uri</a>                      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="EBook.html#e-book-get-static-capabilities" title="e_book_get_static_capabilities ()">e_book_get_static_capabilities</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-check-static-capability" title="e_book_check_static_capability ()">e_book_check_static_capability</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *cap);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-writable" title="e_book_is_writable ()">e_book_is_writable</a>                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-cancel" title="e_book_cancel ()">e_book_cancel</a>                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-cancel-async-op" title="e_book_cancel_async_op ()">e_book_cancel_async_op</a>              (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-self" title="e_book_get_self ()">e_book_get_self</a>                     (<a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a class="link" href="EBook.html" title="EBook">EBook</a> **book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-set-self" title="e_book_set_self ()">e_book_set_self</a>                     (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-is-self" title="e_book_is_self ()">e_book_is_self</a>                      (<a class="link" href="EContact.html" title="EContact">EContact</a> *contact);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-get-addressbooks" title="e_book_get_addressbooks ()">e_book_get_addressbooks</a>             (ESourceList **addressbook_sources,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);
+void                (<a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">*EBookCallback</a>)                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookOpenProgressCallback" title="EBookOpenProgressCallback ()">*EBookOpenProgressCallback</a>)        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *status_message,
+                                                         short percent ,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookIdCallback" title="EBookIdCallback ()">*EBookIdCallback</a>)                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookEListCallback" title="EBookEListCallback ()">*EBookEListCallback</a>)               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         EList *list,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookListCallback" title="EBookListCallback ()">*EBookListCallback</a>)                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *list,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookContactCallback" title="EBookContactCallback ()">*EBookContactCallback</a>)             (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+void                (<a class="link" href="EBook.html#EBookBookViewCallback" title="EBookBookViewCallback ()">*EBookBookViewCallback</a>)            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> *book_view,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-open" title="e_book_async_open ()">e_book_async_open</a>                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> open_response,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove" title="e_book_async_remove ()">e_book_async_remove</a>                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-supported-fields" title="e_book_async_get_supported_fields ()">e_book_async_get_supported_fields</a>   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback" title="EBookEListCallback ()">EBookEListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-supported-auth-methods" title="e_book_async_get_supported_auth_methods ()">e_book_async_get_supported_auth_methods</a>
+                                                        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback" title="EBookEListCallback ()">EBookEListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-authenticate-user" title="e_book_async_authenticate_user ()">e_book_async_authenticate_user</a>      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *user,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *passwd,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *auth_method,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-contact" title="e_book_async_get_contact ()">e_book_async_get_contact</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a class="link" href="EBook.html#EBookContactCallback" title="EBookContactCallback ()">EBookContactCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-contacts" title="e_book_async_get_contacts ()">e_book_async_get_contacts</a>           (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a class="link" href="EBook.html#EBookListCallback" title="EBookListCallback ()">EBookListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove-contact" title="e_book_async_remove_contact ()">e_book_async_remove_contact</a>         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove-contact-by-id" title="e_book_async_remove_contact_by_id ()">e_book_async_remove_contact_by_id</a>   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-remove-contacts" title="e_book_async_remove_contacts ()">e_book_async_remove_contacts</a>        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            <a class="link" href="EBook.html#e-book-async-add-contact" title="e_book_async_add_contact ()">e_book_async_add_contact</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookIdCallback" title="EBookIdCallback ()">EBookIdCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-commit-contact" title="e_book_async_commit_contact ()">e_book_async_commit_contact</a>         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-book-view" title="e_book_async_get_book_view ()">e_book_async_get_book_view</a>          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> max_results,
+                                                         <a class="link" href="EBook.html#EBookBookViewCallback" title="EBookBookViewCallback ()">EBookBookViewCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-changes" title="e_book_async_get_changes ()">e_book_async_get_changes</a>            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *changeid,
+                                                         <a class="link" href="EBook.html#EBookListCallback" title="EBookListCallback ()">EBookListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+<a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               <a class="link" href="EBook.html#e-book-async-get-required-fields" title="e_book_async_get_required_fields ()">e_book_async_get_required_fields</a>    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback" title="EBookEListCallback ()">EBookEListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="EBook.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a
+href="../gobject/gobject-The-Base-Object-Type.html#GObject"
+>GObject</a>
+   +----EBook
+</pre>
+</div>
+<div class="refsect1" title="Signals">
+<a name="EBook.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="EBook.html#EBook-auth-required" title='The "auth-required" signal'>auth-required</a>"                                  : Run Last
+  "<a class="link" href="EBook.html#EBook-backend-died" title='The "backend-died" signal'>backend-died</a>"                                   : Run Last
+  "<a class="link" href="EBook.html#EBook-connection-status" title='The "connection-status" signal'>connection-status</a>"                              : Run Last
+  "<a class="link" href="EBook.html#EBook-writable-status" title='The "writable-status" signal'>writable-status</a>"                                : Run Last
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="EBook.description"></a><h2>Description</h2>
+<p>
+Represents a complete addressbook. Event notifications and callbacks go to the
+<a class="link" href="EBookListener.html" title="EBookListener"><span class="type">EBookListener</span></a>. Contrast with <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a>, which represents a search of the addressbook.
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="EBook.details"></a><h2>Details</h2>
+<div class="refsect2" title="EBook">
+<a name="EBook-struct"></a><h3>EBook</h3>
+<pre class="programlisting">typedef struct _EBook EBook;</pre>
+<p>
+<a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> has no publicly available members.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="e_book_new ()">
+<a name="e-book-new"></a><h3>e_book_new ()</h3>
+<pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a> *             e_book_new                          (ESource *source,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the given source.  There are
+only two operations that are valid on this book at this point:
+<a class="link" href="EBook.html#e-book-open" title="e_book_open ()"><code class="function">e_book_open()</code></a>, and <a class="link" href="EBook.html#e-book-remove" title="e_book_remove ()"><code class="function">e_book_remove()</code></a>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
+<td> An <span class="type">ESource</span> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_new_default_addressbook ()">
+<a name="e-book-new-default-addressbook"></a><h3>e_book_new_default_addressbook ()</h3>
+<pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a> *             e_book_new_default_addressbook      (<a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the user's default
+addressbook.  See the documentation for e_book_new for further
+information.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_new_from_uri ()">
+<a name="e-book-new-from-uri"></a><h3>e_book_new_from_uri ()</h3>
+<pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a> *             e_book_new_from_uri                 (const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *uri,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the given uri.  See the
+documentation for e_book_new for further information.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>uri</code></em> :</span></p></td>
+<td> the URI to load
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_new_system_addressbook ()">
+<a name="e-book-new-system-addressbook"></a><h3>e_book_new_system_addressbook ()</h3>
+<pre class="programlisting"><a class="link" href="EBook.html" title="EBook">EBook</a> *             e_book_new_system_addressbook       (<a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Creates a new <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> corresponding to the user's system
+addressbook.  See the documentation for e_book_new for further
+information.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new but unopened <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_set_default_addressbook ()">
+<a name="e-book-set-default-addressbook"></a><h3>e_book_set_default_addressbook ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_set_default_addressbook      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+sets the <span class="type">ESource</span> of the <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> as the "default" addressbook.  This is the source
+that will be loaded in the e_book_get_default_addressbook call.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> An <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the setting was stored in libebook's ESourceList, otherwise <code class="literal">FALSE</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_set_default_source ()">
+<a name="e-book-set-default-source"></a><h3>e_book_set_default_source ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_set_default_source           (ESource *source,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+sets <em class="parameter"><code>source</code></em> as the "default" addressbook.  This is the source that
+will be loaded in the e_book_get_default_addressbook call.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
+<td> An <span class="type">ESource</span> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> pointer
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the setting was stored in libebook's ESourceList, otherwise <code class="literal">FALSE</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_remove ()">
+<a name="e-book-remove"></a><h3>e_book_remove ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_remove                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Removes the backing data for this <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>. For example, with the file backend this
+deletes the database file. You cannot get it back!</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> on success, <code class="literal">FALSE</code> on failure.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_open ()">
+<a name="e-book-open"></a><h3>e_book_open ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_open                         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Opens the addressbook, making it ready for queries and other operations.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>only_if_exists</code></em> :</span></p></td>
+<td> if <code class="literal">TRUE</code>, fail if this book doesn't already exist, otherwise create it first
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the book was successfully opened, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_supported_fields ()">
+<a name="e-book-get-supported-fields"></a><h3>e_book_get_supported_fields ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_supported_fields         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Gets a list of fields that can be stored for contacts
+in this <em class="parameter"><code>book</code></em>. Other fields may be discarded. The list
+will contain pointers to allocated strings, and both the
+<a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> and the strings must be freed by the caller.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fields</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of fields to set on success
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_supported_auth_methods ()">
+<a name="e-book-get-supported-auth-methods"></a><h3>e_book_get_supported_auth_methods ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_supported_auth_methods   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **auth_methods,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Queries <em class="parameter"><code>book</code></em> for the list of authentication methods it supports.
+The list will contain pointers to allocated strings, and both the
+<a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> and the strings must be freed by the caller.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>auth_methods</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of auth methods to set on success
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_required_fields ()">
+<a name="e-book-get-required-fields"></a><h3>e_book_get_required_fields ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_required_fields          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **fields,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Gets a list of fields that are required to be filled in for
+all contacts in this <em class="parameter"><code>book</code></em>. The list will contain pointers
+to allocated strings, and both the <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> and the strings
+must be freed by the caller.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fields</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of fields to set on success
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_source ()">
+<a name="e-book-get-source"></a><h3>e_book_get_source ()</h3>
+<pre class="programlisting">ESource *           e_book_get_source                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Get the <span class="type">ESource</span> that this book has loaded.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The source.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_is_online ()">
+<a name="e-book-is-online"></a><h3>e_book_is_online ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_online                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Check if this book is connected.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if this book is connected, otherwise <code class="literal">FALSE</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_is_opened ()">
+<a name="e-book-is-opened"></a><h3>e_book_is_opened ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_opened                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Check if this book has been opened.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> and <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if this book has been opened, otherwise <code class="literal">FALSE</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_authenticate_user ()">
+<a name="e-book-authenticate-user"></a><h3>e_book_authenticate_user ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_authenticate_user            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *user,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *passwd,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *auth_method,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Authenticates <em class="parameter"><code>user</code></em> with <em class="parameter"><code>passwd</code></em>, using the auth method
+<em class="parameter"><code>auth_method</code></em>.  <em class="parameter"><code>auth_method</code></em> must be one of the authentication
+methods returned using e_book_get_supported_auth_methods.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user</code></em> :</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>passwd</code></em> :</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>auth_method</code></em> :</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_contact ()">
+<a name="e-book-get-contact"></a><h3>e_book_get_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_contact                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Fills in <em class="parameter"><code>contact</code></em> with the contents of the vcard in <em class="parameter"><code>book</code></em>
+corresponding to <em class="parameter"><code>id</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> a unique string ID specifying the contact
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_remove_contact ()">
+<a name="e-book-remove-contact"></a><h3>e_book_remove_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_remove_contact               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Removes the contact with id <em class="parameter"><code>id</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> a string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_remove_contacts ()">
+<a name="e-book-remove-contacts"></a><h3>e_book_remove_contacts ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_remove_contacts              (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Removes the contacts with ids from the list <em class="parameter"><code>ids</code></em> from <em class="parameter"><code>book</code></em>.  This is
+always more efficient than calling e_book_remove_contact_by_id if you
+have more than one id to remove, as some backends can implement it
+as a batch request.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ids</code></em> :</span></p></td>
+<td> an <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of const gchar *id's
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_add_contact ()">
+<a name="e-book-add-contact"></a><h3>e_book_add_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_add_contact                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Adds <em class="parameter"><code>contact</code></em> to <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_commit_contact ()">
+<a name="e-book-commit-contact"></a><h3>e_book_commit_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_commit_contact               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Applies the changes made to <em class="parameter"><code>contact</code></em> to the stored version in
+<em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_book_view ()">
+<a name="e-book-get-book-view"></a><h3>e_book_get_book_view ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_book_view                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> max_results,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> **book_view,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>, creating a <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> in <em class="parameter"><code>book_view</code></em> with the fields
+specified by <em class="parameter"><code>requested_fields</code></em> and limited at <em class="parameter"><code>max_results</code></em> records. On an
+error, <em class="parameter"><code>error</code></em> is set and <code class="literal">FALSE</code> returned.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em> :</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>requested_fields</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> containing the names of fields to return, or NULL for all
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_results</code></em> :</span></p></td>
+<td> the maximum number of contacts to show (or 0 for all)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book_view</code></em> :</span></p></td>
+<td> A <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> pointer, will be set to the view
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_contacts ()">
+<a name="e-book-get-contacts"></a><h3>e_book_get_contacts ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_contacts                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **contacts,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>, setting <em class="parameter"><code>contacts</code></em> to the list of contacts which
+matched. On failed, <em class="parameter"><code>error</code></em> will be set and <code class="literal">FALSE</code> returned.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em> :</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contacts</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> pointer, will be set to the list of contacts
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> on success, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_changes ()">
+<a name="e-book-get-changes"></a><h3>e_book_get_changes ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_changes                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *changeid,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> **changes,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Get the set of changes since the previous call to <a class="link" href="EBook.html#e-book-get-changes" title="e_book_get_changes ()"><span class="type">e_book_get_changes</span></a> for a
+given change ID.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>changeid</code></em> :</span></p></td>
+<td>  the change ID
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>changes</code></em> :</span></p></td>
+<td> return location for a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of <a class="link" href="libebook-e-book-types.html#EBookChange" title="EBookChange"><span class="type">EBookChange</span></a> items
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE on success, FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_free_change_list ()">
+<a name="e-book-free-change-list"></a><h3>e_book_free_change_list ()</h3>
+<pre class="programlisting">void                e_book_free_change_list             (<a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *change_list);</pre>
+<p>
+Free the contents of <span class="type">change_list</span>, and the list itself.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>change_list</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of <a class="link" href="libebook-e-book-types.html#EBookChange" title="EBookChange"><span class="type">EBookChange</span></a> items
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_uri ()">
+<a name="e-book-get-uri"></a><h3>e_book_get_uri ()</h3>
+<pre class="programlisting">const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       e_book_get_uri                      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Get the URI that this book has loaded. This string should not be freed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The URI.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_static_capabilities ()">
+<a name="e-book-get-static-capabilities"></a><h3>e_book_get_static_capabilities ()</h3>
+<pre class="programlisting">const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       e_book_get_static_capabilities      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Get the list of capabilities which the backend for this address book
+supports. This string should not be freed.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> an <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> The capabilities list
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_check_static_capability ()">
+<a name="e-book-check-static-capability"></a><h3>e_book_check_static_capability ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_check_static_capability      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *cap);</pre>
+<p>
+Check to see if the backend for this address book supports the capability
+<em class="parameter"><code>cap</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cap</code></em> :</span></p></td>
+<td> A capability string
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the backend supports <em class="parameter"><code>cap</code></em>, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_is_writable ()">
+<a name="e-book-is-writable"></a><h3>e_book_is_writable ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_writable                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book);</pre>
+<p>
+Check if this book is writable.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if this book is writable, otherwise <code class="literal">FALSE</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_cancel ()">
+<a name="e-book-cancel"></a><h3>e_book_cancel ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_cancel                       (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Used to cancel an already running operation on <em class="parameter"><code>book</code></em>.  This
+function makes a synchronous CORBA to the backend telling it to
+cancel the operation.  If the operation wasn't cancellable (either
+transiently or permanently) or had already comopleted on the server
+side, this function will return E_BOOK_STATUS_COULD_NOT_CANCEL, and
+the operation will continue uncancelled.  If the operation could be
+cancelled, this function will return E_BOOK_ERROR_OK, and the
+blocked e_book function corresponding to current operation will
+return with a status of E_BOOK_STATUS_CANCELLED.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> on success, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_cancel_async_op ()">
+<a name="e-book-cancel-async-op"></a><h3>e_book_cancel_async_op ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_cancel_async_op              (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_self ()">
+<a name="e-book-get-self"></a><h3>e_book_get_self ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_self                     (<a class="link" href="EContact.html" title="EContact">EContact</a> **contact,
+                                                         <a class="link" href="EBook.html" title="EBook">EBook</a> **book,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Get the <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a> referring to the user of the address book
+and set it in <em class="parameter"><code>contact</code></em> and <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a> pointer to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a> pointer to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, otherwise <code class="literal">FALSE</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_set_self ()">
+<a name="e-book-set-self"></a><h3>e_book_set_self ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_set_self                     (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Specify that <em class="parameter"><code>contact</code></em> residing in <em class="parameter"><code>book</code></em> is the <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a> that
+refers to the user of the address book.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Error-Reporting.html#GError"
+><span class="type">GError</span></a> to set on failure
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_is_self ()">
+<a name="e-book-is-self"></a><h3>e_book_is_self ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_is_self                      (<a class="link" href="EContact.html" title="EContact">EContact</a> *contact);</pre>
+<p>
+Check if <em class="parameter"><code>contact</code></em> is the user of the address book.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if <em class="parameter"><code>contact</code></em> is the user, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_get_addressbooks ()">
+<a name="e-book-get-addressbooks"></a><h3>e_book_get_addressbooks ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_get_addressbooks             (ESourceList **addressbook_sources,
+                                                         <a
+href="../glib/glib-Error-Reporting.html#GError"
+>GError</a> **error);</pre>
+<p>
+Populate *addressbook_sources with the list of all sources which have been
+added to Evolution.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>addressbook_sources</code></em> :</span></p></td>
+<td> A pointer to a ESourceList* to set
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> A pointer to a GError* to set on error
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if <em class="parameter"><code>addressbook_sources</code></em> was set, otherwise <code class="literal">FALSE</code>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EBookCallback ()">
+<a name="EBookCallback"></a><h3>EBookCallback ()</h3>
+<pre class="programlisting">void                (*EBookCallback)                    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EBookOpenProgressCallback ()">
+<a name="EBookOpenProgressCallback"></a><h3>EBookOpenProgressCallback ()</h3>
+<pre class="programlisting">void                (*EBookOpenProgressCallback)        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *status_message,
+                                                         short percent ,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status_message</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>Param3</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EBookIdCallback ()">
+<a name="EBookIdCallback"></a><h3>EBookIdCallback ()</h3>
+<pre class="programlisting">void                (*EBookIdCallback)                  (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EBookEListCallback ()">
+<a name="EBookEListCallback"></a><h3>EBookEListCallback ()</h3>
+<pre class="programlisting">void                (*EBookEListCallback)               (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         EList *list,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EBookListCallback ()">
+<a name="EBookListCallback"></a><h3>EBookListCallback ()</h3>
+<pre class="programlisting">void                (*EBookListCallback)                (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *list,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EBookContactCallback ()">
+<a name="EBookContactCallback"></a><h3>EBookContactCallback ()</h3>
+<pre class="programlisting">void                (*EBookContactCallback)             (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="EBookBookViewCallback ()">
+<a name="EBookBookViewCallback"></a><h3>EBookBookViewCallback ()</h3>
+<pre class="programlisting">void                (*EBookBookViewCallback)            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-types.html#EBookStatus" title="enum EBookStatus">EBookStatus</a> status,
+                                                         <a class="link" href="EBookView.html" title="EBookView">EBookView</a> *book_view,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book_view</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_open ()">
+<a name="e-book-async-open"></a><h3>e_book_async_open ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_open                   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> only_if_exists,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> open_response,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Opens the addressbook, making it ready for queries and other operations.
+This function does not block.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>only_if_exists</code></em> :</span></p></td>
+<td> if <code class="literal">TRUE</code>, fail if this book doesn't already exist, otherwise create it first
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>open_response</code></em> :</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">FALSE</code> if successful, <code class="literal">TRUE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_remove ()">
+<a name="e-book-async-remove"></a><h3>e_book_async_remove ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove                 (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Remove the backing data for this <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>. For example, with the file backend this
+deletes the database file. You cannot get it back!</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">FALSE</code> if successful, <code class="literal">TRUE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_get_supported_fields ()">
+<a name="e-book-async-get-supported-fields"></a><h3>e_book_async_get_supported_fields ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_supported_fields   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback" title="EBookEListCallback ()">EBookEListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Gets a list of fields that can be stored for contacts
+in this <em class="parameter"><code>book</code></em>. Other fields may be discarded. This
+function does not block.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_get_supported_auth_methods ()">
+<a name="e-book-async-get-supported-auth-methods"></a><h3>e_book_async_get_supported_auth_methods ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_supported_auth_methods
+                                                        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback" title="EBookEListCallback ()">EBookEListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Queries <em class="parameter"><code>book</code></em> for the list of authentication methods it supports.
+This function does not block.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_authenticate_user ()">
+<a name="e-book-async-authenticate-user"></a><h3>e_book_async_authenticate_user ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_authenticate_user      (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *user,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *passwd,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *auth_method,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Authenticate <em class="parameter"><code>user</code></em> with <em class="parameter"><code>passwd</code></em>, using the auth method
+<em class="parameter"><code>auth_method</code></em>. <em class="parameter"><code>auth_method</code></em> must be one of the authentication
+methods returned using e_book_get_supported_auth_methods.
+This function does not block.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user</code></em> :</span></p></td>
+<td> user name
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>passwd</code></em> :</span></p></td>
+<td> password
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>auth_method</code></em> :</span></p></td>
+<td> string indicating authentication method
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">FALSE</code> if successful, <code class="literal">TRUE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_get_contact ()">
+<a name="e-book-async-get-contact"></a><h3>e_book_async_get_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_contact            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a class="link" href="EBook.html#EBookContactCallback" title="EBookContactCallback ()">EBookContactCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Retrieves a contact specified by <em class="parameter"><code>id</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> a unique string ID specifying the contact
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">FALSE</code> if successful, <code class="literal">TRUE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_get_contacts ()">
+<a name="e-book-async-get-contacts"></a><h3>e_book_async_get_contacts ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_contacts           (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a class="link" href="EBook.html#EBookListCallback" title="EBookListCallback ()">EBookListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em> :</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">FALSE</code> on success, <code class="literal">TRUE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_remove_contact ()">
+<a name="e-book-async-remove-contact"></a><h3>e_book_async_remove_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove_contact         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Removes <em class="parameter"><code>contact</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_remove_contact_by_id ()">
+<a name="e-book-async-remove-contact-by-id"></a><h3>e_book_async_remove_contact_by_id ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove_contact_by_id   (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *id,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Removes the contact with id <em class="parameter"><code>id</code></em> from <em class="parameter"><code>book</code></em>.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>id</code></em> :</span></p></td>
+<td> a unique ID string specifying the contact
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_remove_contacts ()">
+<a name="e-book-async-remove-contacts"></a><h3>e_book_async_remove_contacts ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_remove_contacts        (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *ids,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Removes the contacts with ids from the list <em class="parameter"><code>ids</code></em> from <em class="parameter"><code>book</code></em>.  This is
+always more efficient than calling <code class="function">e_book_remove_contact_by_id()</code> if you
+have more than one id to remove, as some backends can implement it
+as a batch request.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ids</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> of const gchar *id's
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if successful, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_add_contact ()">
+<a name="e-book-async-add-contact"></a><h3>e_book_async_add_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a>            e_book_async_add_contact            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookIdCallback" title="EBookIdCallback ()">EBookIdCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Adds <em class="parameter"><code>contact</code></em> to <em class="parameter"><code>book</code></em> without blocking.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the operation was started, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_commit_contact ()">
+<a name="e-book-async-commit-contact"></a><h3>e_book_async_commit_contact ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_commit_contact         (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EContact.html" title="EContact">EContact</a> *contact,
+                                                         <a class="link" href="EBook.html#EBookCallback" title="EBookCallback ()">EBookCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Applies the changes made to <em class="parameter"><code>contact</code></em> to the stored version in
+<em class="parameter"><code>book</code></em> without blocking.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>contact</code></em> :</span></p></td>
+<td> an <a class="link" href="EContact.html" title="EContact"><span class="type">EContact</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the operation was started, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_get_book_view ()">
+<a name="e-book-async-get-book-view"></a><h3>e_book_async_get_book_view ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_book_view          (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery">EBookQuery</a> *query,
+                                                         <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+>GList</a> *requested_fields,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> max_results,
+                                                         <a class="link" href="EBook.html#EBookBookViewCallback" title="EBookBookViewCallback ()">EBookBookViewCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Query <em class="parameter"><code>book</code></em> with <em class="parameter"><code>query</code></em>, creating a <a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a> with the fields
+specified by <em class="parameter"><code>requested_fields</code></em> and limited at <em class="parameter"><code>max_results</code></em> records.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>query</code></em> :</span></p></td>
+<td> an <a class="link" href="libebook-e-book-query.html#EBookQuery" title="EBookQuery"><span class="type">EBookQuery</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>requested_fields</code></em> :</span></p></td>
+<td> a <a
+href="../glib/glib-Doubly-Linked-Lists.html#GList"
+><span class="type">GList</span></a> containing the names of fields to return, or NULL for all
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>max_results</code></em> :</span></p></td>
+<td> the maximum number of contacts to show (or 0 for all)
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> a function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">FALSE</code> if successful, <code class="literal">TRUE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_get_changes ()">
+<a name="e-book-async-get-changes"></a><h3>e_book_async_get_changes ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_changes            (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *changeid,
+                                                         <a class="link" href="EBook.html#EBookListCallback" title="EBookListCallback ()">EBookListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Get the set of changes since the previous call to <a class="link" href="EBook.html#e-book-async-get-changes" title="e_book_async_get_changes ()"><span class="type">e_book_async_get_changes</span></a>
+for a given change ID.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>changeid</code></em> :</span></p></td>
+<td>  the change ID
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> TRUE on success, FALSE otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_book_async_get_required_fields ()">
+<a name="e-book-async-get-required-fields"></a><h3>e_book_async_get_required_fields ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#guint"
+>guint</a>               e_book_async_get_required_fields    (<a class="link" href="EBook.html" title="EBook">EBook</a> *book,
+                                                         <a class="link" href="EBook.html#EBookEListCallback" title="EBookEListCallback ()">EBookEListCallback</a> cb,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> closure);</pre>
+<p>
+Gets a list of fields that are required to be filled in for
+all contacts in this <em class="parameter"><code>book</code></em>. This function does not block.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>book</code></em> :</span></p></td>
+<td> an <a class="link" href="EBook.html" title="EBook"><span class="type">EBook</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cb</code></em> :</span></p></td>
+<td> function to call when the operation finishes
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
+<td> data to pass to callback function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> <code class="literal">TRUE</code> if the operation was started, <code class="literal">FALSE</code> otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="Signal Details">
+<a name="EBook.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2" title='The "auth-required" signal'>
+<a name="EBook-auth-required"></a><h3>The <code class="literal">"auth-required"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+Authentication is required to access this source.  You should call
+<a class="link" href="EBook.html#e-book-authenticate-user" title="e_book_authenticate_user ()"><span class="type">e_book_authenticate_user</span></a> or <a class="link" href="EBook.html#e-book-async-authenticate-user" title="e_book_async_authenticate_user ()"><span class="type">e_book_async_authenticate_user</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "backend-died" signal'>
+<a name="EBook-backend-died"></a><h3>The <code class="literal">"backend-died"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+The backend for this address book has died.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "connection-status" signal'>
+<a name="EBook-connection-status"></a><h3>The <code class="literal">"connection-status"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> arg1,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+The connection status for this book is being reported.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>#TRUE if the connection is online, <span class="type">FALSE</span> otherwise.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title='The "writable-status" signal'>
+<a name="EBook-writable-status"></a><h3>The <code class="literal">"writable-status"</code> signal</h3>
+<pre class="programlisting">void                user_function                      (<a class="link" href="EBook.html" title="EBook">EBook</a>   *ebook,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> arg1,
+                                                        <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> user_data)      : Run Last</pre>
+<p>
+The writable status for this book is being reported.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ebook</code></em> :</span></p></td>
+<td>the object which received the signal.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>arg1</code></em> :</span></p></td>
+<td>#TRUE if the book is writable, <span class="type">FALSE</span> otherwise.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1" title="See Also">
+<a name="EBook.see-also"></a><h2>See Also</h2>
+<p>
+<a class="link" href="EBookView.html" title="EBookView"><span class="type">EBookView</span></a>
+</p>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

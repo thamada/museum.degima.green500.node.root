@@ -1,0 +1,97 @@
+diff --git a/drivers/infiniband/hw/qib/qib.h b/drivers/infiniband/hw/qib/qib.h
+index 5578d57..305f9b6 100644
+--- a/drivers/infiniband/hw/qib/qib.h
++++ b/drivers/infiniband/hw/qib/qib.h
+@@ -763,7 +763,7 @@ struct qib_devdata {
+ 	void (*f_sdma_hw_start_up)(struct qib_pportdata *);
+ 	void (*f_sdma_init_early)(struct qib_pportdata *);
+ 	void (*f_set_cntr_sample)(struct qib_pportdata *, u32, u32);
+-	void (*f_update_usrhead)(struct qib_ctxtdata *, u64, u32, u32);
++	void (*f_update_usrhead)(struct qib_ctxtdata *, u64, u32, u32, u32);
+ 	u32 (*f_hdrqempty)(struct qib_ctxtdata *);
+ 	u64 (*f_portcntr)(struct qib_pportdata *, u32);
+ 	u32 (*f_read_cntrs)(struct qib_devdata *, loff_t, char **,
+diff --git a/drivers/infiniband/hw/qib/qib_driver.c b/drivers/infiniband/hw/qib/qib_driver.c
+index 3a7d209..5831961 100644
+--- a/drivers/infiniband/hw/qib/qib_driver.c
++++ b/drivers/infiniband/hw/qib/qib_driver.c
+@@ -516,7 +516,7 @@ move_along:
+ 		 */
+ 		lval = l;
+ 		if (!last && !(i & 0xf)) {
+-			dd->f_update_usrhead(rcd, lval, updegr, etail);
++			dd->f_update_usrhead(rcd, lval, updegr, etail, i);
+ 			updegr = 0;
+ 		}
+ 	}
+@@ -560,7 +560,7 @@ bail:
+ 	 * if no packets were processed.
+ 	 */
+ 	lval = (u64)rcd->head | dd->rhdrhead_intr_off;
+-	dd->f_update_usrhead(rcd, lval, updegr, etail);
++	dd->f_update_usrhead(rcd, lval, updegr, etail, i);
+ 	return crcs;
+ }
+ 
+diff --git a/drivers/infiniband/hw/qib/qib_iba6120.c b/drivers/infiniband/hw/qib/qib_iba6120.c
+index 340259d..d846e99 100644
+--- a/drivers/infiniband/hw/qib/qib_iba6120.c
++++ b/drivers/infiniband/hw/qib/qib_iba6120.c
+@@ -2174,7 +2174,7 @@ static void qib_6120_config_ctxts(struct qib_devdata *dd)
+ }
+ 
+ static void qib_update_6120_usrhead(struct qib_ctxtdata *rcd, u64 hd,
+-				    u32 updegr, u32 egrhd)
++				    u32 updegr, u32 egrhd, u32 npkts)
+ {
+ 	qib_write_ureg(rcd->dd, ur_rcvhdrhead, hd, rcd->ctxt);
+ 	if (updegr)
+diff --git a/drivers/infiniband/hw/qib/qib_iba7220.c b/drivers/infiniband/hw/qib/qib_iba7220.c
+index 1ee7838..f7b8e78 100644
+--- a/drivers/infiniband/hw/qib/qib_iba7220.c
++++ b/drivers/infiniband/hw/qib/qib_iba7220.c
+@@ -2827,7 +2827,7 @@ static int qib_7220_set_loopback(struct qib_pportdata *ppd, const char *what)
+ }
+ 
+ static void qib_update_7220_usrhead(struct qib_ctxtdata *rcd, u64 hd,
+-				    u32 updegr, u32 egrhd)
++				    u32 updegr, u32 egrhd, u32 npkts)
+ {
+ 	qib_write_ureg(rcd->dd, ur_rcvhdrhead, hd, rcd->ctxt);
+ 	if (updegr)
+diff --git a/drivers/infiniband/hw/qib/qib_iba7322.c b/drivers/infiniband/hw/qib/qib_iba7322.c
+index 690b6fc..15abcb7 100644
+--- a/drivers/infiniband/hw/qib/qib_iba7322.c
++++ b/drivers/infiniband/hw/qib/qib_iba7322.c
+@@ -3132,7 +3132,6 @@ static irqreturn_t qib_7322intr(int irq, void *data)
+ 				ctxtrbits &= ~rmask;
+ 				if (dd->rcd[i]) {
+ 					qib_kreceive(dd->rcd[i], NULL, &npkts);
+-					adjust_rcv_timeout(dd->rcd[i], npkts);
+ 				}
+ 			}
+ 			rmask <<= 1;
+@@ -3191,7 +3190,6 @@ static irqreturn_t qib_7322pintr(int irq, void *data)
+ 		       (1ULL << QIB_I_RCVURG_LSB)) << rcd->ctxt);
+ 
+ 	qib_kreceive(rcd, NULL, &npkts);
+-	adjust_rcv_timeout(rcd, npkts);
+ 
+ 	return IRQ_HANDLED;
+ }
+@@ -4413,8 +4411,14 @@ static int qib_7322_set_ib_table(struct qib_pportdata *ppd, int which, void *t)
+ }
+ 
+ static void qib_update_7322_usrhead(struct qib_ctxtdata *rcd, u64 hd,
+-				    u32 updegr, u32 egrhd)
++				    u32 updegr, u32 egrhd, u32 npkts)
+ {
++	/*
++ 	 * Need to write timeout register before updating rcvhdrhead to ensure
++ 	 * that the timer is enabled on reception of a packet.
++ 	 */
++	if (hd >> IBA7322_HDRHEAD_PKTINT_SHIFT)
++		adjust_rcv_timeout(rcd, npkts);
+ 	qib_write_ureg(rcd->dd, ur_rcvhdrhead, hd, rcd->ctxt);
+ 	qib_write_ureg(rcd->dd, ur_rcvhdrhead, hd, rcd->ctxt);
+ 	if (updegr)

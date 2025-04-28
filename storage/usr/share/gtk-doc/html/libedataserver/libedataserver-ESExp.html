@@ -1,0 +1,834 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ESExp</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="up" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="prev" href="libedataserver-EProxy.html" title="EProxy">
+<link rel="next" href="ESource.html" title="ESource">
+<meta name="generator" content="GTK-Doc V1.11 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="Evolution-Data-Server Manual: Utilities (libedataserver)">
+<link rel="index" href="ix01.html" title="Index">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libedataserver-EProxy.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Evolution-Data-Server Manual: Utilities (libedataserver)</th>
+<td><a accesskey="n" href="ESource.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libedataserver-ESExp.synopsis" class="shortcut">Top</a>
+                 | 
+                <a href="#libedataserver-ESExp.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="ESExp">
+<a name="libedataserver-ESExp"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libedataserver-ESExp.top_of_page"></a>ESExp</span></h2>
+<p>ESExp</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libedataserver-ESExp.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+                    <a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a>;
+                    <a class="link" href="libedataserver-ESExp.html#ESExpSymbol" title="ESExpSymbol">ESExpSymbol</a>;
+                    <a class="link" href="libedataserver-ESExp.html#ESExpResult" title="ESExpResult">ESExpResult</a>;
+                    <a class="link" href="libedataserver-ESExp.html#ESExpTerm" title="ESExpTerm">ESExpTerm</a>;
+<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *             <a class="link" href="libedataserver-ESExp.html#e-sexp-new" title="e_sexp_new ()">e_sexp_new</a>                          (void);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-ref" title="e_sexp_ref ()">e_sexp_ref</a>                          (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-unref" title="e_sexp_unref ()">e_sexp_unref</a>                        (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-add-function" title="e_sexp_add_function ()">e_sexp_add_function</a>                 (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         ESExpFunc *func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-add-ifunction" title="e_sexp_add_ifunction ()">e_sexp_add_ifunction</a>                (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         ESExpIFunc *func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-add-variable" title="e_sexp_add_variable ()">e_sexp_add_variable</a>                 (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="libedataserver-ESExp.html#ESExpTerm" title="ESExpTerm">ESExpTerm</a> *value);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-remove-symbol" title="e_sexp_remove_symbol ()">e_sexp_remove_symbol</a>                (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-ESExp.html#e-sexp-set-scope" title="e_sexp_set_scope ()">e_sexp_set_scope</a>                    (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-input-text" title="e_sexp_input_text ()">e_sexp_input_text</a>                   (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *text,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> len);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-input-file" title="e_sexp_input_file ()">e_sexp_input_file</a>                   (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> fd);
+<a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                <a class="link" href="libedataserver-ESExp.html#e-sexp-parse" title="e_sexp_parse ()">e_sexp_parse</a>                        (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);
+<a class="link" href="libedataserver-ESExp.html#ESExpResult" title="ESExpResult">ESExpResult</a> *       <a class="link" href="libedataserver-ESExp.html#e-sexp-eval" title="e_sexp_eval ()">e_sexp_eval</a>                         (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);
+<a class="link" href="libedataserver-ESExp.html#ESExpResult" title="ESExpResult">ESExpResult</a> *       <a class="link" href="libedataserver-ESExp.html#e-sexp-term-eval" title="e_sexp_term_eval ()">e_sexp_term_eval</a>                    (struct _ESExp *f,
+                                                         struct _ESExpTerm *t);
+<a class="link" href="libedataserver-ESExp.html#ESExpResult" title="ESExpResult">ESExpResult</a> *       <a class="link" href="libedataserver-ESExp.html#e-sexp-result-new" title="e_sexp_result_new ()">e_sexp_result_new</a>                   (struct _ESExp *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> type);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-result-free" title="e_sexp_result_free ()">e_sexp_result_free</a>                  (struct _ESExp *f,
+                                                         struct _ESExpResult *t);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-resultv-free" title="e_sexp_resultv_free ()">e_sexp_resultv_free</a>                 (struct _ESExp *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> argc,
+                                                         struct _ESExpResult **argv);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-encode-bool" title="e_sexp_encode_bool ()">e_sexp_encode_bool</a>                  (<a
+href="../glib/glib-Strings.html#GString"
+>GString</a> *s,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> state);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-encode-string" title="e_sexp_encode_string ()">e_sexp_encode_string</a>                (<a
+href="../glib/glib-Strings.html#GString"
+>GString</a> *s,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *string);
+void                <a class="link" href="libedataserver-ESExp.html#e-sexp-fatal-error" title="e_sexp_fatal_error ()">e_sexp_fatal_error</a>                  (struct _ESExp *f,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *why,
+                                                         ...);
+const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       <a class="link" href="libedataserver-ESExp.html#e-sexp-error" title="e_sexp_error ()">e_sexp_error</a>                        (struct _ESExp *f);
+<a class="link" href="libedataserver-ESExp.html#ESExpTerm" title="ESExpTerm">ESExpTerm</a> *         <a class="link" href="libedataserver-ESExp.html#e-sexp-parse-value" title="e_sexp_parse_value ()">e_sexp_parse_value</a>                  (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libedataserver-ESExp.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libedataserver-ESExp.details"></a><h2>Details</h2>
+<div class="refsect2" title="ESExp">
+<a name="ESExp"></a><h3>ESExp</h3>
+<pre class="programlisting">typedef struct {
+#ifdef E_SEXP_IS_G_OBJECT
+	GObject parent_object;
+#else
+	gint refcount;
+#endif
+	GScanner *scanner;	/* for parsing text version */
+	ESExpTerm *tree;	/* root of expression tree */
+
+	/* private stuff */
+	jmp_buf failenv;
+	gchar *error;
+	GSList *operators;
+
+	/* TODO: may also need a pool allocator for term strings, so we dont lose them
+	   in error conditions? */
+	struct _EMemChunk *term_chunks;
+	struct _EMemChunk *result_chunks;
+} ESExp;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="ESExpSymbol">
+<a name="ESExpSymbol"></a><h3>ESExpSymbol</h3>
+<pre class="programlisting">typedef struct {
+	gint type;		/* ESEXP_TERM_FUNC or ESEXP_TERM_VAR */
+	gchar *name;
+	gpointer data;
+	union {
+		ESExpFunc *func;
+		ESExpIFunc *ifunc;
+	} f;
+} ESExpSymbol;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="ESExpResult">
+<a name="ESExpResult"></a><h3>ESExpResult</h3>
+<pre class="programlisting">typedef struct {
+	enum _ESExpResultType type;
+	union {
+		GPtrArray *ptrarray;
+		gint number;
+		gchar *string;
+		gint bool;
+		time_t time;
+	} value;
+} ESExpResult;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="ESExpTerm">
+<a name="ESExpTerm"></a><h3>ESExpTerm</h3>
+<pre class="programlisting">typedef struct {
+	enum _ESExpTermType type;
+	union {
+		gchar *string;
+		gint number;
+		gint bool;
+		time_t time;
+		struct {
+			struct _ESExpSymbol *sym;
+			struct _ESExpTerm **terms;
+			gint termcount;
+		} func;
+		struct _ESExpSymbol *var;
+	} value;
+} ESExpTerm;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_new ()">
+<a name="e-sexp-new"></a><h3>e_sexp_new ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *             e_sexp_new                          (void);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_ref ()">
+<a name="e-sexp-ref"></a><h3>e_sexp_ref ()</h3>
+<pre class="programlisting">void                e_sexp_ref                          (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_unref ()">
+<a name="e-sexp-unref"></a><h3>e_sexp_unref ()</h3>
+<pre class="programlisting">void                e_sexp_unref                        (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_add_function ()">
+<a name="e-sexp-add-function"></a><h3>e_sexp_add_function ()</h3>
+<pre class="programlisting">void                e_sexp_add_function                 (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         ESExpFunc *func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scope</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_add_ifunction ()">
+<a name="e-sexp-add-ifunction"></a><h3>e_sexp_add_ifunction ()</h3>
+<pre class="programlisting">void                e_sexp_add_ifunction                (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         ESExpIFunc *func,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gpointer"
+>gpointer</a> data);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scope</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_add_variable ()">
+<a name="e-sexp-add-variable"></a><h3>e_sexp_add_variable ()</h3>
+<pre class="programlisting">void                e_sexp_add_variable                 (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name,
+                                                         <a class="link" href="libedataserver-ESExp.html#ESExpTerm" title="ESExpTerm">ESExpTerm</a> *value);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scope</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_remove_symbol ()">
+<a name="e-sexp-remove-symbol"></a><h3>e_sexp_remove_symbol ()</h3>
+<pre class="programlisting">void                e_sexp_remove_symbol                (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *name);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scope</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_set_scope ()">
+<a name="e-sexp-set-scope"></a><h3>e_sexp_set_scope ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_sexp_set_scope                    (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> scope);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>scope</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_input_text ()">
+<a name="e-sexp-input-text"></a><h3>e_sexp_input_text ()</h3>
+<pre class="programlisting">void                e_sexp_input_text                   (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *text,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> len);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_input_file ()">
+<a name="e-sexp-input-file"></a><h3>e_sexp_input_file ()</h3>
+<pre class="programlisting">void                e_sexp_input_file                   (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> fd);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fd</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_parse ()">
+<a name="e-sexp-parse"></a><h3>e_sexp_parse ()</h3>
+<pre class="programlisting"><a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a>                e_sexp_parse                        (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_eval ()">
+<a name="e-sexp-eval"></a><h3>e_sexp_eval ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-ESExp.html#ESExpResult" title="ESExpResult">ESExpResult</a> *       e_sexp_eval                         (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_term_eval ()">
+<a name="e-sexp-term-eval"></a><h3>e_sexp_term_eval ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-ESExp.html#ESExpResult" title="ESExpResult">ESExpResult</a> *       e_sexp_term_eval                    (struct _ESExp *f,
+                                                         struct _ESExpTerm *t);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>t</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_result_new ()">
+<a name="e-sexp-result-new"></a><h3>e_sexp_result_new ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-ESExp.html#ESExpResult" title="ESExpResult">ESExpResult</a> *       e_sexp_result_new                   (struct _ESExp *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> type);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_result_free ()">
+<a name="e-sexp-result-free"></a><h3>e_sexp_result_free ()</h3>
+<pre class="programlisting">void                e_sexp_result_free                  (struct _ESExp *f,
+                                                         struct _ESExpResult *t);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>t</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_resultv_free ()">
+<a name="e-sexp-resultv-free"></a><h3>e_sexp_resultv_free ()</h3>
+<pre class="programlisting">void                e_sexp_resultv_free                 (struct _ESExp *f,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gint"
+>gint</a> argc,
+                                                         struct _ESExpResult **argv);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argv</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_encode_bool ()">
+<a name="e-sexp-encode-bool"></a><h3>e_sexp_encode_bool ()</h3>
+<pre class="programlisting">void                e_sexp_encode_bool                  (<a
+href="../glib/glib-Strings.html#GString"
+>GString</a> *s,
+                                                         <a
+href="../glib/glib-Basic-Types.html#gboolean"
+>gboolean</a> state);</pre>
+<p>
+Encode a bool into an s-expression <em class="parameter"><code>s</code></em>.  Bools are
+encoded using <span class="type">t</span> <span class="type">f</span> syntax.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>s</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>state</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_encode_string ()">
+<a name="e-sexp-encode-string"></a><h3>e_sexp_encode_string ()</h3>
+<pre class="programlisting">void                e_sexp_encode_string                (<a
+href="../glib/glib-Strings.html#GString"
+>GString</a> *s,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *string);</pre>
+<p>
+Add a c string <em class="parameter"><code>string</code></em> to the s-expression stored in
+the gstring <em class="parameter"><code>s</code></em>.  Quotes are added, and special characters
+are escaped appropriately.</p>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>s</code></em> :</span></p></td>
+<td> Destination string.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
+<td> String expression.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_fatal_error ()">
+<a name="e-sexp-fatal-error"></a><h3>e_sexp_fatal_error ()</h3>
+<pre class="programlisting">void                e_sexp_fatal_error                  (struct _ESExp *f,
+                                                         const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *why,
+                                                         ...);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>why</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_error ()">
+<a name="e-sexp-error"></a><h3>e_sexp_error ()</h3>
+<pre class="programlisting">const <a
+href="../glib/glib-Basic-Types.html#gchar"
+>gchar</a> *       e_sexp_error                        (struct _ESExp *f);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="e_sexp_parse_value ()">
+<a name="e-sexp-parse-value"></a><h3>e_sexp_parse_value ()</h3>
+<pre class="programlisting"><a class="link" href="libedataserver-ESExp.html#ESExpTerm" title="ESExpTerm">ESExpTerm</a> *         e_sexp_parse_value                  (<a class="link" href="libedataserver-ESExp.html#ESExp" title="ESExp">ESExp</a> *f);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.11</div>
+</body>
+</html>

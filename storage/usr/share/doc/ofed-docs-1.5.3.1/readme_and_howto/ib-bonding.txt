@@ -1,0 +1,191 @@
+IB Bonding
+===============================================================================
+
+1. Introduction
+2. How to work with interface configuration scripts
+2.1 Configuration with initscripts support
+2.1.1 Writing network scripts under Redhat-AS4 (Update 6, 7 or 8)
+2.1.2 Writing network scripts under Redhhat-EL5
+2.2 Configuration with sysconfig support
+2.2.1 Writing network scripts under SLES-10
+2.3 Configuring Ethernet slaves
+
+1. Introduction
+-------------------------------------------------------------------------------
+ib-bonding is a High Availability solution for IPoIB interfaces. It is based
+on the Linux Ethernet Bonding Driver and was adopted to work with IPoIB.
+However, the support for for IPoIB interfaces is only for the active-backup
+mode, other modes should not be used.
+
+2. How to work with interface configuration scripts
+-------------------------------------------------------------------------------
+To create an interface configuration script for the ibX and bondX interfaces,
+you should use the standard syntax (depending on your OS).
+
+2.1 Configuration with initscripts support
+------------------------------------------
+Note: This feature is available only for Redhat-AS4 (Update 4, Update 5,
+Update 6 or Update 7) and for Redhat-EL5 and above.
+
+2.1.1 Writing network scripts under Redhat-AS4 (Update 4, 5, 6 or 7)
+-----------------------------------------------------------------
+* In the master (bond) interface script add the line:
+TYPE=Bonding
+MTU=<according to the slave's MTU>
+
+Example: for bond0 (master) the file is named /etc/sysconfig/network-scripts/ifcfg-bond0
+with the following text in the file:
+
+DEVICE=bond0
+IPADDR=192.168.1.1
+NETMASK=255.255.255.0
+NETWORK=192.168.1.0
+BROADCAST=192.168.1.255
+ONBOOT=yes
+BOOTPROTO=none
+USERCTL=no
+TYPE=Bonding
+MTU=65520
+
+Note: 65520 is a valid mtu value only if all IPoIB slaves operate in connected
+mode and are configured with the same value. For IPoIB slaves that work in
+datagram mode, use MTU=2044. If you don't set correct mtu or don't set mtu at
+all (and letting it to be set to the default value), performance of the
+interface might decrease.
+
+* In the slave (ib) interface script put the following lines:
+SLAVE=yes
+MASTER=<bond name>
+TYPE=InfiniBand
+PRIMARY=<yes|no>
+
+Example: the script for ib0 (slave) would be named /etc/sysconfig/network-scripts/ifcfg-ib0
+with the following text in the file:
+
+DEVICE=ib0
+USERCTL=no
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+BOOTPROTO=none
+TYPE=InfiniBand
+PRIMARY=yes
+
+Note: If the slave interface is not primary then the line PRIMARY= is not
+required and can be omitted.
+
+After the configuration is saved, restart the network service by running:
+/etc/init.d/network restart
+
+2.1.2 Writing network scripts under Redhhat-EL5
+-----------------------------------------------
+Follow the instructions in 3.1.1 (Writing network scripts under Redhat-AS4)
+with the following changes:
+* In the bondX (master) script - the line TYPE=Bonding is not needed.
+* In the bondX (master) script - you may add to the configuration more options
+with the following line
+BONDING_OPTS=" primary=ib0 updelay=0 downdelay=0"
+* in the ibX (slave) script - the line TYPE=InfiniBand necessary when using 
+  bonding over devices configured with partitions ( p_key)
+Example:
+  ifcfg-ibX.8003 and ifcfg-ibY.8003 must include TYPE=InfiniBand line in 
+  their configuration files, when using as slaves for bondX device
+* in /etc/modprobe.conf add the following lines
+alias bond0 bonding
+options bond0 miimon=100 mode=1 max_bonds=1
+
+If you want more than one bonding interface, name them bond1, bond2... and 
+just add the necessary lines in /etc/modprobe.conf and change max_bonds=1 to
+max_bonds=N where N=number_of_bonding_interfaces
+
+Note: restarting OFED doesn't keep the bonding configuration via initscripts.
+You have to restart the network service in order to recreate the bonding
+interface.
+
+2.2 Configuration with sysconfig support
+----------------------------------------
+Note: This feature is available only for SLES-10 and above.
+
+2.2.1 Writing network scripts under SLES-10 
+-----------------------------------------------
+* In the master (bond) interface script add the lins:
+
+BONDING_MASTER=yes
+BONDING_MODULE_OPTS="mode=active-backup miimon=<value>"
+BONDING_SLAVE0=slave0
+BONDING_SLAVE1=slave1
+MTU=<according to the slave's MTU>
+
+Example: for bond0 (master) the file is named /etc/sysconfig/network/ifcfg-bond0
+with the following text in the file:
+
+BOOTPROTO="static"
+BROADCAST="10.0.2.255"
+IPADDR="10.0.2.10"
+NETMASK="255.255.0.0"
+NETWORK="10.0.2.0"
+REMOTE_IPADDR=""
+STARTMODE="onboot"
+BONDING_MASTER="yes"
+BONDING_MODULE_OPTS="mode=active-backup miimon=100 primary=ib0 updelay=0 downdelay=0"
+BONDING_SLAVE0=ib0
+BONDING_SLAVE1=ib1
+MTU=65520
+
+Note: 65520 is a valid mtu value only if all IPoIB slaves operate in connected
+mode and are configured with the same value. For IPoIB slaves that work in
+datagram mode, use MTU=2044. If you don't set correct mtu or don't set mtu at
+all (and letting it to be set to the default value), performance of the
+interface might decrease.
+
+Note: primary, downdelay and updelay is an optional bonding interface
+configuration. You may choose to use them, change them or delete them from the
+configuration script (by editing the line that starts with BONDING_OPTS)
+
+* The slave (ib) interace script should look like this:
+
+BOOTPROTO='none'
+STARTMODE='off'
+PRE_DOWN_SCRIPT=/etc/sysconfig/network/unenslave.sh
+
+After the configuration is saved, restart the network service by running:
+/etc/init.d/network restart
+
+2.3 Configuring Ethernet slaves
+-------------------------------
+It is not possible to have a mix of Ethernet slaves and IPoIB slaves under the
+same bonding master. It is possible however that a bonding master of Ethernet
+slaves and a bonding master of IPoIB slaves will co-exist in one machine.
+To configure Ethernet slaves under a bonding master use the following
+instructions (depending  on the OS)
+
+* Under Redhat-AS4
+
+Use the same instructions as for IPoIB slaves with the following exceptions
+
+- In the master configuration file add the line
+SLAVEDEV=1
+- In the slave configuration file leave the line
+TYPE=InfiniBand
+- For Ethernet, it is possible to set parameters of the bonding module in /etc/modprobe.conf
+with the following line for example
+options bonding miimon=100 mode=1 primary=eth0
+Note that alias names for the bonding module (such as bond0) may not work.
+
+* Under Redhat-AS5
+
+No special instructions are required.
+
+* Under SLES10
+
+When using both type of bonding under, it is necessary to update the
+MANDATORY_DEVICES  environment variable in /etc/sysconfig/network/config with the names
+of the InfiniBand devices ( ib0, ib1, etc. ). Otherwise, bonding devices will be created 
+before InfiniBand devices at boot time.
+
+Note: If there is more than one Ethernet NIC installed then there might be a
+race for the interface name eth0, eth1 etc. This may lead to unexpected
+relation between logical and physical devices which may lead to wrong bonding
+configuration. This issue may be solved by binding a logical device name (e.g.
+eth0) to a physical (hardware) device by specifying the MAC address in the
+ethN configuration file.
