@@ -1,6 +1,8 @@
 # museum.degima.green500.node.root
 Historical data for DEGIMA GREEN500(Jun/Nov 2011): the storage data for linpack nodes on DEGIMA.
 
+<img src="./Green500-Jun2011.png" alt="Green500 certificate from June 2011" width="70%"/>
+
 ## ChangeLog
 
 2011-10-24  root  <root@g248>
